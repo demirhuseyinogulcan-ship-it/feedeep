@@ -139,12 +139,6 @@ export function Footer() {
             >
               Hakkımızda
             </Link>
-            <Link
-              href="/llms.txt"
-              className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
-            >
-              llms.txt
-            </Link>
           </div>
         </div>
       </div>

@@ -20,6 +20,13 @@ export function PwaInstallBanner() {
   const [isIos, setIsIos] = useState(false);
 
   useEffect(() => {
+    // Service Worker'ı kaydet (PWA install prompt için şart)
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {
+        // SW kayıt hatası — sessizce devam et
+      });
+    }
+
     // iOS kontrolü (Safari'de beforeinstallprompt yok)
     const ua = window.navigator.userAgent;
     const isIosDevice = /iPad|iPhone|iPod/.test(ua);
