@@ -8,7 +8,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/seo/json-ld";
 import { websiteJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
-import { YAZI_CATEGORIES } from "@/lib/constants";
+import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import { yazilar, haberler, promptlar, kartlar, haftalik } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
@@ -19,16 +19,72 @@ const publishedYazilar = yazilar
   .filter((y) => y.published)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-const featuredPost = publishedYazilar[0];
-// Eğer sadece 1 yazı varsa, featured'da göster ama Son Yazılar'da da listele
-const recentPosts = publishedYazilar.length > 1
+const publishedHaberler = haberler
+  .filter((h) => h.published)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// Hero: Siteye en son eklenen içerik (yazı veya haber — hangisi daha yeniyse)
+type HeroItem = {
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  category: string;
+  href: string;
+  type: "yazi" | "haber";
+  readingTime: number;
+};
+
+const latestYazi = publishedYazilar[0];
+const latestHaber = publishedHaberler[0];
+
+function getHeroItem(): HeroItem | null {
+  const candidates: HeroItem[] = [];
+
+  if (latestYazi) {
+    candidates.push({
+      title: latestYazi.title,
+      description: latestYazi.description,
+      slug: latestYazi.slug,
+      date: latestYazi.date,
+      category: latestYazi.category,
+      href: `/yazilar/${latestYazi.slug}`,
+      type: "yazi",
+      readingTime: latestYazi.metadata.readingTime,
+    });
+  }
+
+  if (latestHaber) {
+    candidates.push({
+      title: latestHaber.title,
+      description: latestHaber.description,
+      slug: latestHaber.slug,
+      date: latestHaber.date,
+      category: latestHaber.category,
+      href: `/haberler/${latestHaber.slug}`,
+      type: "haber",
+      readingTime: latestHaber.metadata.readingTime,
+    });
+  }
+
+  if (candidates.length === 0) return null;
+
+  // En yeni tarihe sahip olanı seç
+  candidates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return candidates[0];
+}
+
+const heroItem = getHeroItem();
+
+// Son Yazılar — hero'daki yazıyı çıkar
+const recentPosts = heroItem?.type === "yazi"
   ? publishedYazilar.slice(1, 4)
   : publishedYazilar.slice(0, 3);
 
-const latestNews = haberler
-  .filter((h) => h.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, 3);
+// Son Haberler — hero'daki haberi çıkar, en fazla 5 göster
+const latestNews = heroItem?.type === "haber"
+  ? publishedHaberler.slice(1, 5)
+  : publishedHaberler.slice(0, 5);
 
 const latestBrifing = haftalik
   .filter((h) => h.published)
@@ -56,8 +112,10 @@ const EXPLORE_SECTIONS = [
 ] as const;
 
 export default function HomePage() {
-  const categoryLabel = featuredPost
-    ? YAZI_CATEGORIES[featuredPost.category] ?? featuredPost.category
+  const heroCategory = heroItem
+    ? heroItem.type === "yazi"
+      ? YAZI_CATEGORIES[heroItem.category] ?? heroItem.category
+      : HABER_CATEGORIES[heroItem.category] ?? heroItem.category
     : "";
 
   return (
@@ -68,7 +126,7 @@ export default function HomePage() {
       <ContinueReadingBanner />
 
       {/* ─── Hero: Massive Typography ─── */}
-      {featuredPost && (
+      {heroItem && (
         <section className="relative mx-auto max-w-3xl px-4 sm:px-6 pt-16 sm:pt-24 pb-20">
           {/* Floating ambient orb */}
           <div
@@ -83,40 +141,48 @@ export default function HomePage() {
           <div className="animate-fade-up">
             <div className="flex items-center gap-3 mb-6">
               <span className="text-[11px] font-mono tracking-widest uppercase text-primary-400/80">
-                {categoryLabel}
+                {heroCategory}
               </span>
               <span className="text-[11px] text-gray-600">/</span>
               <span className="text-[11px] font-mono tracking-wider text-gray-600">
-                {featuredPost.metadata.readingTime} dk
+                {heroItem.readingTime} dk
               </span>
+              {heroItem.type === "haber" && (
+                <>
+                  <span className="text-[11px] text-gray-600">/</span>
+                  <span className="text-[10px] font-mono tracking-wider text-primary-500/60 uppercase">
+                    Haber
+                  </span>
+                </>
+              )}
             </div>
 
             <Link
-              href={`/yazilar/${featuredPost.slug}`}
+              href={heroItem.href}
               className="group block"
             >
               <h1
                 className="font-bold tracking-tight text-gray-100 leading-[0.95] text-glow"
                 style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
               >
-                {featuredPost.title}
+                {heroItem.title}
               </h1>
             </Link>
 
             <p className="mt-8 text-sm text-gray-500 leading-relaxed max-w-md animate-fade-up delay-200">
-              {featuredPost.description}
+              {heroItem.description}
             </p>
 
             <div className="mt-6 flex items-center gap-4 animate-fade-up delay-300">
               <Link
-                href={`/yazilar/${featuredPost.slug}`}
+                href={heroItem.href}
                 className="text-sm font-medium text-gray-200 hover:text-primary-400 transition-colors"
               >
-                Yazıyı oku
+                {heroItem.type === "haber" ? "Haberi oku" : "Yazıyı oku"}
               </Link>
               <span className="text-gray-800">—</span>
               <span className="text-[11px] text-gray-600">
-                {formatDate(featuredPost.date)}
+                {formatDate(heroItem.date)}
               </span>
             </div>
           </div>
