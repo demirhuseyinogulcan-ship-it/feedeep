@@ -122,6 +122,21 @@ h1, h2, h3, h4, h5, h6 {
     hover:decoration-primary-400 transition-colors;
 }
 
+/* Başlık linkleri — beyaz, altı çizgisiz */
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a {
+  @apply text-gray-100 no-underline decoration-transparent;
+}
+
+.prose h1 a:hover,
+.prose h2 a:hover,
+.prose h3 a:hover,
+.prose h4 a:hover {
+  @apply text-gray-100 no-underline decoration-transparent;
+}
+
 .prose blockquote {
   @apply border-l-4 border-primary-500 bg-surface-2 pl-4 py-2 rounded-r-lg
     not-italic text-gray-300;

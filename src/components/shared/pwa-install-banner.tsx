@@ -47,8 +47,8 @@ export function PwaInstallBanner() {
 
     if (isIosDevice) {
       setIsIos(true);
-      // iOS'ta 3 saniye sonra göster
-      const timer = setTimeout(() => setShowBanner(true), 3000);
+      // iOS'ta 1.5 saniye sonra göster
+      const timer = setTimeout(() => setShowBanner(true), 1500);
       return () => clearTimeout(timer);
     }
 
@@ -56,8 +56,8 @@ export function PwaInstallBanner() {
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      // 3 saniye sonra banner göster
-      setTimeout(() => setShowBanner(true), 3000);
+      // 1.5 saniye sonra banner göster
+      setTimeout(() => setShowBanner(true), 1500);
     };
 
     window.addEventListener("beforeinstallprompt", handler);
