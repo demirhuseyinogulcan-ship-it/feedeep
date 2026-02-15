@@ -82,12 +82,16 @@
 | `sources` | Min 1 kaynak, haberin kaynağı |
 | `confidence` | Haber ne kadar doğrulanmış |
 
-**Haber Yapısı (Body):**
-```
-## Ne Oldu?                     ← 1-2 cümle net özet
-## Neden Önemli?                ← Bağlam ve etki analizi  
-## Türkiye İçin Ne Anlama Geliyor?  ← Yerel perspektif (varsa)
-```
+**Haber Yazım Stili (Body):**
+
+> **KURAL:** Haber içerikleri sabit başlık şablonu KULLANMAZ.
+> Eski "Ne Oldu? / Neden Önemli? / Türkiye İçin" yapısı kaldırılmıştır.
+
+Haberler doğal, akıcı, gazetecilik diline uygun yazılır:
+- **Akıcı anlatım:** Paragraflar birbiriyle doğal geçişlerle bağlanır, maddeler yerine düz yazı tercih edilir
+- **Eğitici ama çaktırmadan:** Teknik kavramlar (prompt injection, reasoning, fine-tune vb.) anlatımın içinde doğal biçimde açıklanır, ders verir gibi değil
+- **Okuyucu bilmiyor varsayımı:** Konuyu ilk defa duyan biri için de anlaşılır olmalı, ama bunu belli etmeden
+- **Zor bağlam yapma:** Türkiye bağlantısı doğal geliyorsa yaz, değilse zorlama
 
 ### 2.3 Prompt Şablonları (`content/promptlar/`)
 
@@ -358,7 +362,7 @@ Haber toplayıcıdan içerik üretme adımları:
 1. node haberler.mjs --json     → JSON çıktı alır
 2. JSON'dan önemli haberleri seç
 3. npm run new:haber            → interaktif scaffold
-4. İçeriği yaz (Ne oldu / Neden önemli / TR için anlam)
+4. İçeriği yaz (doğal akıcı anlatım, şablon başlık kullanma)
 5. Kaynak doğrula (URL'ler çalışıyor mu?)
 6. npx next build --webpack     → build test
 7. npm run dev                  → görsel kontrol  

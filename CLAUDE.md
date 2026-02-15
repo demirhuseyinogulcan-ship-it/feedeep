@@ -53,6 +53,7 @@
 - Şema tanımı: `velite.config.ts` — tek kaynak (Single Source of Truth)
 - Editoryal kılavuz: `CONTENT_SYSTEM.md` — detaylı kurallar burada
 - MDX şablonları: `content/_templates/` — yeni içerik oluştururken bunları baz al
+- **Haber yazım stili:** Sabit başlık şablonu (Ne Oldu / Neden Önemli / Türkiye İçin) KULLANMA. Doğal, akıcı, eğitici ama çaktırmadan anlatan gazetecilik diliyle yaz. Teknik kavramları anlatımın içinde açıkla.
 - Frontmatter doğrulama: `npm run validate`
 - **Slug'da ASLA Türkçe karakter kullanma** (ş→s, ç→c, ğ→g, ı→i, ö→o, ü→u)
 - **title max 70 karakter, description max 160 karakter** — SEO zorunluluğu
