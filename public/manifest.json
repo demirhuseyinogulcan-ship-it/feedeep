@@ -1,0 +1,48 @@
+{
+  "name": "AI Rehber — Yapay Zeka Rehberiniz",
+  "short_name": "AI Rehber",
+  "description": "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "lang": "tr",
+  "dir": "ltr",
+  "categories": ["news", "education", "technology"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Haberler",
+      "short_name": "Haberler",
+      "url": "/haberler",
+      "icons": []
+    },
+    {
+      "name": "Yazılar",
+      "short_name": "Yazılar",
+      "url": "/yazilar",
+      "icons": []
+    },
+    {
+      "name": "Prompt Kütüphanesi",
+      "short_name": "Promptlar",
+      "url": "/prompt-kutuphanesi",
+      "icons": []
+    }
+  ]
+}

@@ -73,6 +73,15 @@ export default function RootLayout({
   return (
     <html lang="tr" dir="ltr" suppressHydrationWarning>
       <head>
+        {/* PWA Manifest & Theme */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#8b5cf6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="AI Rehber" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+
         {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

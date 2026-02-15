@@ -33,6 +33,12 @@
 
 /* ─── Base Styles ─────────────────────────────────────────── */
 
+html,
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -44,6 +50,8 @@ html {
 body {
   @apply bg-surface-0 text-gray-300;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  position: relative;
+  width: 100%;
 }
 
 /* Headings use Montserrat */

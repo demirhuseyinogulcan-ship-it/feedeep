@@ -138,12 +138,12 @@ export default function HomePage() {
         </div>
 
         {/* Mobile: horizontal scroll, Desktop: stacked */}
-        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
           {latestNews.map((news, i) => (
             <Link
               key={news.slug}
               href={`/haberler/${news.slug}`}
-              className="group flex-shrink-0 w-[280px] snap-start animate-fade-up"
+              className="group flex-shrink-0 w-[85vw] max-w-[300px] snap-start animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
               <div className="flex items-center gap-3 mb-2">
@@ -205,12 +205,12 @@ export default function HomePage() {
         </div>
 
         {/* Mobile: horizontal scroll, Desktop: stacked */}
-        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
           {recentPosts.map((post, i) => (
             <Link
               key={post.slug}
               href={`/yazilar/${post.slug}`}
-              className="group flex-shrink-0 w-[280px] snap-start animate-fade-up"
+              className="group flex-shrink-0 w-[85vw] max-w-[300px] snap-start animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
               <div className="flex items-center gap-3 mb-2">
@@ -269,12 +269,12 @@ export default function HomePage() {
         </h2>
 
         {/* Mobile: horizontal scroll, Desktop: rows */}
-        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
           {EXPLORE_SECTIONS.map((section, i) => (
             <Link
               key={section.href}
               href={section.href}
-              className="group flex-shrink-0 w-[240px] snap-start animate-fade-up"
+              className="group flex-shrink-0 w-[75vw] max-w-[260px] snap-start animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
               <span className="text-[11px] font-mono tracking-wider text-gray-700 group-hover:text-primary-400 transition-colors">
