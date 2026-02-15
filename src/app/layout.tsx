@@ -7,6 +7,9 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CursorGlow } from "@/components/layout/cursor-glow";
 import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
+import { NotificationPrompt } from "@/components/shared/notification-prompt";
+import { PrefetchManager } from "@/components/shared/prefetch-manager";
+import { WebVitalsReporter } from "@/components/shared/web-vitals-reporter";
 import "./globals.css";
 
 // ─── Analytics ID'leri (.env veya constants'tan) ────────────
@@ -126,6 +129,15 @@ export default function RootLayout({
 
         {/* PWA Install Banner */}
         <PwaInstallBanner />
+
+        {/* Bildirim İzni */}
+        <NotificationPrompt />
+
+        {/* Navigation Prefetch */}
+        <PrefetchManager />
+
+        {/* Web Vitals → GA4 */}
+        <WebVitalsReporter />
 
         {/* Vercel Web Analytics */}
         <Analytics />

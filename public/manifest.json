@@ -41,20 +41,35 @@
     {
       "name": "Haberler",
       "short_name": "Haberler",
-      "url": "/haberler",
-      "icons": []
+      "description": "Güncel AI haberleri",
+      "url": "/haberler"
     },
     {
       "name": "Yazılar",
       "short_name": "Yazılar",
-      "url": "/yazilar",
-      "icons": []
+      "description": "Derinlemesine analizler",
+      "url": "/yazilar"
     },
     {
       "name": "Prompt Kütüphanesi",
       "short_name": "Promptlar",
-      "url": "/prompt-kutuphanesi",
-      "icons": []
+      "description": "Hazır prompt şablonları",
+      "url": "/prompt-kutuphanesi"
+    },
+    {
+      "name": "AI Modeller",
+      "short_name": "Modeller",
+      "description": "Model karşılaştırma kartları",
+      "url": "/modeller"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }

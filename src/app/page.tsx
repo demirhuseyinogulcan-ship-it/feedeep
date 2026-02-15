@@ -11,6 +11,7 @@ import { formatDate } from "@/lib/utils";
 import { YAZI_CATEGORIES } from "@/lib/constants";
 import { yazilar, haberler, promptlar, kartlar, haftalik } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
+import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
 
 // ─── Velite verilerini hazırla ───
 
@@ -62,6 +63,9 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={websiteJsonLd()} />
+
+      {/* ─── Kaldığın Yerden Devam Et ─── */}
+      <ContinueReadingBanner />
 
       {/* ─── Hero: Massive Typography ─── */}
       {featuredPost && (

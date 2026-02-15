@@ -13,6 +13,7 @@ import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { ActionItems } from "@/components/content/action-items";
+import { ReadingTracker } from "@/components/shared/reading-tracker";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -70,6 +71,7 @@ export default async function YaziDetayPage({ params }: Props) {
         ]}
       />
 
+      <ReadingTracker title={post.title} />
       <article className="mx-auto max-w-3xl px-4 sm:px-6 py-12">
         <Breadcrumb
           items={[
