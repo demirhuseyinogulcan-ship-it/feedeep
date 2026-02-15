@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { fontHeading, fontSans, fontMono } from "@/lib/fonts";
 import { SITE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
@@ -112,6 +113,9 @@ export default function RootLayout({
         </main>
 
         <Footer />
+
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </body>
     </html>
   );

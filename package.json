@@ -16,6 +16,7 @@
     "prebuild": "node scripts/validate-content.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "feed": "^5.2.0",
     "gray-matter": "^4.0.3",
