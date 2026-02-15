@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CursorGlow } from "@/components/layout/cursor-glow";
+import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
 import "./globals.css";
 
 // ─── Analytics ID'leri (.env veya constants'tan) ────────────
@@ -122,6 +123,9 @@ export default function RootLayout({
         </main>
 
         <Footer />
+
+        {/* PWA Install Banner */}
+        <PwaInstallBanner />
 
         {/* Vercel Web Analytics */}
         <Analytics />
