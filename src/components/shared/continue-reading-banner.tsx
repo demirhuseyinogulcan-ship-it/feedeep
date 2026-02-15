@@ -8,7 +8,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { BookOpen, X } from "lucide-react";
-import { getLastReading, clearLastReading } from "./reading-tracker";
+import { getLastReading } from "./reading-tracker";
 
 export function ContinueReadingBanner() {
   const [reading, setReading] = useState<{
@@ -16,20 +16,36 @@ export function ContinueReadingBanner() {
     title: string;
     progress: number;
   } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Bir sonraki frame'de oku (hydration sorunlarını önler)
+    // Sadece mobilde göster (768px altı)
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
     requestAnimationFrame(() => {
+      // Daha önce kapatıldıysa gösterme
+      const dismissed = sessionStorage.getItem("continue-reading-dismissed");
+      if (dismissed) return;
+
       const data = getLastReading();
       // Sadece mevcut sayfa farklıysa göster
       if (data && data.path !== window.location.pathname) {
         setReading(data);
       }
     });
-  }, []);
+  }, [isMobile]);
 
   const handleDismiss = () => {
-    clearLastReading();
+    // Bu oturum boyunca bir daha gösterme
+    sessionStorage.setItem("continue-reading-dismissed", "1");
     setReading(null);
   };
 
