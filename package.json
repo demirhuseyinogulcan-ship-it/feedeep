@@ -1,0 +1,46 @@
+{
+  "name": "airehber",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint",
+    "new:yazi": "node scripts/new-content.mjs yazi",
+    "new:haber": "node scripts/new-content.mjs haber",
+    "new:prompt": "node scripts/new-content.mjs prompt",
+    "new:kart": "node scripts/new-content.mjs kart",
+    "new:haftalik": "node scripts/new-content.mjs haftalik",
+    "validate": "node scripts/validate-content.mjs",
+    "prebuild": "node scripts/validate-content.mjs"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "feed": "^5.2.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.564.0",
+    "next": "16.1.6",
+    "next-mdx-remote": "^6.0.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.14.1",
+    "rehype-slug": "^6.0.0",
+    "rss": "^1.2.2",
+    "shiki": "^3.22.0",
+    "tailwind-merge": "^3.4.0",
+    "velite": "^0.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

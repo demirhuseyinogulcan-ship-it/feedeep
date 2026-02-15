@@ -1,0 +1,51 @@
+# AI Rehber
+
+> Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.
+
+AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz yakalı profesyonellere, pazarlamacılara ve teknoloji meraklılarına yapay zeka araçlarını iş hayatlarında nasıl kullanabileceklerini gösteren pratik, güvenilir ve güncel içerikler sunar.
+
+## İçerik Türleri
+
+- **Yazılar**: Derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar (1000-5000 kelime, evergreen)
+- **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
+- **Prompt Kütüphanesi**: Model bazlı skorlanmış, değişkenli, hata senaryolu prompt şablonları
+- **Model Kartları**: AI model ve araç bilgi kartları (fiyat, benchmark, context window, durum)
+- **Haftalık Brifing**: Her hafta AI dünyasının 3 önemli gelişmesi + aksiyon önerisi
+
+## Sayfalar
+
+- [Yazılar](https://airehber.com/yazilar): Tüm rehberler, incelemeler ve analizler
+- [Haberler](https://airehber.com/haberler): Güncel AI haberleri
+- [Prompt Kütüphanesi](https://airehber.com/prompt-kutuphanesi): Kullanıma hazır prompt şablonları
+- [AI Modelleri](https://airehber.com/modeller): Model ve araç bilgi kartları
+- [Haftalık Brifing](https://airehber.com/haftalik): Haftalık AI özet bülteni
+- [AI Zaman Çizelgesi](https://airehber.com/zaman-cizelgesi): Kronolojik AI gelişmeleri
+- [Hakkımızda](https://airehber.com/hakkimizda): Ekip ve misyon
+
+## Güven Politikası
+
+Her içerikte kaynak güvenilirlik seviyesi belirtilir:
+- **Tier 1**: Resmi şirket blogu, akademik makale, resmi dokümantasyon
+- **Tier 2**: CEO/CTO sosyal medya, güvenilir medya (Reuters, Bloomberg)
+- **Tier 3**: Sızıntı, anonim kaynak, forum
+
+Her yazıda güncellik rozeti gösterilir:
+- Güncel (7 gün içinde kontrol edildi)
+- Kontrol Gerekli (30+ gün)
+- Eskimiş Olabilir (90+ gün)
+
+## İletişim
+
+- E-posta: info@airehber.com
+- LinkedIn: https://linkedin.com/in/ai-rehber
+- Instagram: https://instagram.com/airehberofficial
+
+## Dil & Bölge
+
+- Birincil dil: Türkçe (tr-TR)
+- Hedef bölge: Türkiye
+- Bazı teknik terimler İngilizce orijinal halleriyle kullanılır
+
+## Lisans & Atıf
+
+İçeriklerimiz orijinaldir. Atıf yapılarak paylaşılabilir. Tam metin kopyalama yasaktır. Kaynak belirtilerek kısa alıntı yapılabilir.

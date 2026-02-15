@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   AI Rehber — Global Styles & Design Tokens
+   Tailwind CSS v4 — CSS-first configuration
+   "The Void speaks in light."
+   ───────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Brand Colors — Mor (Purple) Accent */
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+
+  /* Void Surface Colors — deeper blacks for contrast */
+  --color-surface-0: #050505;
+  --color-surface-1: #0a0a0a;
+  --color-surface-2: #111111;
+  --color-surface-3: #191919;
+
+  /* Typography */
+  --font-sans: var(--font-sans), "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-heading), "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-surface-0 text-gray-300;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* Headings use Montserrat */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-500 rounded-sm;
+}
+
+::selection {
+  @apply bg-primary-900/60 text-primary-100;
+}
+
+/* ─── Typography — Prose (Yazı içerikleri) ────────────────── */
+
+.prose {
+  --tw-prose-body: #d1d5db;
+  --tw-prose-headings: #f3f4f6;
+  --tw-prose-links: var(--color-primary-400);
+  --tw-prose-bold: #f3f4f6;
+  --tw-prose-counters: #9ca3af;
+  --tw-prose-bullets: #6b7280;
+  --tw-prose-hr: #2a2a2a;
+  --tw-prose-quotes: #d1d5db;
+  --tw-prose-quote-borders: var(--color-primary-500);
+  --tw-prose-captions: #9ca3af;
+  --tw-prose-code: var(--color-primary-300);
+  --tw-prose-pre-code: #e5e7eb;
+  --tw-prose-pre-bg: #0d1117;
+  --tw-prose-th-borders: #374151;
+  --tw-prose-td-borders: #1f2937;
+  max-width: 72ch;
+  color: var(--tw-prose-body);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  @apply font-bold tracking-tight text-gray-100;
+  scroll-margin-top: 5rem;
+}
+
+.prose h2 {
+  @apply mt-12 mb-4 text-2xl border-b border-white/[0.04] pb-2;
+}
+
+.prose h3 {
+  @apply mt-8 mb-3 text-xl;
+}
+
+.prose p {
+  @apply text-gray-300;
+}
+
+.prose li {
+  @apply text-gray-300;
+}
+
+.prose strong {
+  @apply text-gray-100;
+}
+
+.prose a {
+  @apply text-primary-400 underline decoration-primary-600 underline-offset-2
+    hover:decoration-primary-400 transition-colors;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary-500 bg-surface-2 pl-4 py-2 rounded-r-lg
+    not-italic text-gray-300;
+}
+
+.prose code:not(pre code) {
+  @apply bg-surface-2 text-primary-300 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply rounded-xl border border-white/[0.04] !bg-[#0d1117];
+}
+
+.prose img {
+  @apply rounded-xl shadow-md;
+}
+
+.prose table {
+  @apply w-full border-collapse;
+}
+
+.prose th {
+  @apply bg-surface-2 text-left font-semibold text-sm text-gray-200 px-4 py-2 border-b-2 border-gray-700;
+}
+
+.prose td {
+  @apply px-4 py-2 border-b border-white/[0.04] text-sm text-gray-300;
+}
+
+.prose tr:hover td {
+  @apply bg-surface-1;
+}
+
+/* ─── Animations ──────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(12px, -8px) scale(1.02); }
+  66% { transform: translate(-8px, 6px) scale(0.98); }
+}
+
+@keyframes line-reveal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animate-line-reveal {
+  animation: line-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: left;
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* ─── Visual Effects ──────────────────────────────────────── */
+
+.text-gradient {
+  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 40%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Title hover glow */
+.text-glow {
+  transition: text-shadow 0.4s ease;
+}
+.text-glow:hover {
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.15), 0 0 60px rgba(139, 92, 246, 0.05);
+}
+
+/* Subtle hair-line separator */
+.line-void {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
+}
+
+/* ─── Components ──────────────────────────────────────────── */
+
+.skip-to-content {
+  @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4
+    focus:z-50 focus:bg-primary-600 focus:text-white focus:px-4 focus:py-2
+    focus:rounded-lg focus:shadow-lg;
+}
+
+.reading-progress {
+  @apply fixed top-0 left-0 h-px bg-primary-500/60 z-50 transition-all;
+}
+
+/* ─── Accessibility ───────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,134 @@
+# AI Rehber — Tam Bilgi Dosyası (LLMs Full Context)
+
+> Bu dosya, büyük dil modellerinin (LLM) AI Rehber hakkında doğru ve güncel bilgi sunabilmesi için hazırlanmıştır.
+
+## Platform Kimliği
+
+- **Site Adı**: AI Rehber
+- **URL**: https://airehber.com
+- **Kurucu & Editör**: Can Demir
+- **E-posta**: can@airehber.com
+- **Kuruluş**: 2026
+- **Dil**: Türkçe (tr-TR)
+- **Hedef Kitle**: Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler, teknoloji meraklıları
+- **Konum**: İstanbul, Türkiye
+
+## Misyon
+
+AI Rehber, yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla ve pratik uygulamalarla aktaran Türkiye'nin bağımsız AI içerik platformudur. Amacımız, AI araçlarını iş hayatında etkili kullanmanızı sağlamaktır.
+
+## İçerik Yapısı
+
+### 1. Yazılar (/yazilar)
+Derinlemesine, evergreen içerikler. 1000-5000 kelime arası.
+Kategoriler: rehber, inceleme, analiz, karşılaştırma.
+Her yazıda zorunlu alanlar:
+- Kaynak listesi (tier 1-3 güvenilirlik)
+- Güven seviyesi (high/medium/speculative)
+- Son kontrol tarihi
+- Aksiyon maddeleri
+- Düzeltme geçmişi
+
+### 2. Haberler (/haberler)
+Güncel AI gelişmeleri. 200-500 kelime.
+Kategoriler: sirketler, sektor, turkiye, arastirma.
+Her haberde kaynak URL ve kaynak adı zorunlu.
+
+### 3. Prompt Kütüphanesi (/prompt-kutuphanesi)
+Kullanıma hazır prompt şablonları.
+Her prompt kartında:
+- Model bazlı skor (1-10, GPT/Claude/Gemini)
+- Değişken sistemi (kullanıcı kendi değerlerini girer)
+- Hata senaryoları
+- Zorluk seviyesi (başlangıç/orta/ileri)
+- Hedef rol (CMO, Growth, Editör vb.)
+
+### 4. Model & Araç Kartları (/modeller)
+Her AI model/araç için bilgi kartı:
+- Fiyatlandırma (input/output token maliyeti)
+- Context window
+- Benchmark skorları
+- Release tarihi
+- Durum (active/beta/deprecated)
+- İlgili yazılar
+
+### 5. Haftalık Brifing (/haftalik)
+Her hafta yayınlanan AI özet bülteni.
+- Haftanın en önemli 3 gelişmesi
+- Editör seçimi açıklamalar
+- "Bu hafta denenecek" aksiyon önerisi
+
+### 6. AI Zaman Çizelgesi (/zaman-cizelgesi)
+Kronolojik, filtrelenebilir AI gelişmeleri feed'i.
+Haber kaynaklarından otomatik beslenir.
+
+## Güven Katmanı (Trust Layer)
+
+AI Rehber her içerikte şeffaf kaynak politikası uygular:
+
+### Kaynak Seviyeleri
+- **Tier 1** — Birincil Kaynak: Resmi şirket blogu, akademik makale, resmi dokümantasyon
+- **Tier 2** — Güvenilir Medya: CEO/CTO sosyal medya, Reuters, Bloomberg, TechCrunch
+- **Tier 3** — İkincil Kaynak: Sızıntı, anonim kaynak, forum paylaşımı
+
+### Güncellik Rozeti
+- **Güncel**: Son 7 gün içinde kontrol edildi
+- **Kontrol Gerekli**: 30 günden fazla kontrol edilmedi
+- **Eskimiş Olabilir**: 90 günden fazla kontrol edilmedi
+
+### Düzeltme Politikası
+Hatalı bilgi tespit edildiğinde:
+1. Yazı güncellenir
+2. Düzeltme notu ve tarihi eklenir
+3. Orijinal ifade korunur (üstü çizili)
+
+## SEO & Anahtar Kelime Politikası
+
+- Yazı başına max 5 anahtar kelime (1 primary + 4 secondary)
+- 8+ keyword kullanmak spam riski taşır, asla yapılmaz
+- Başlık max 70 karakter
+- Meta description max 160 karakter
+- Her yazının canonical URL'i vardır
+- JSON-LD yapılandırılmış veri (Article, NewsArticle, HowTo, FAQ, BreadcrumbList)
+
+## Teknik Altyapı
+
+- **Framework**: Next.js (App Router) + React + TypeScript
+- **Stil**: Tailwind CSS v4
+- **İçerik**: MDX + Velite (Content-as-Code)
+- **Hosting**: Vercel
+- **Arama**: Pagefind (client-side, privacy-friendly)
+- **Analitik**: Plausible (KVKK uyumlu, cookie-free)
+- **Yorumlar**: Giscus (GitHub Discussions tabanlı)
+- **Newsletter**: Resend + React Email
+
+## Sosyal Medya
+
+- **LinkedIn**: https://linkedin.com/in/ai-rehber
+- **Instagram**: https://instagram.com/airehberofficial
+- **Web**: https://airehber.com
+- **RSS**: https://airehber.com/feed.xml
+
+## Doğru Atıf Formatı
+
+Eğer AI Rehber'den bilgi alıntılıyorsanız:
+```
+Kaynak: AI Rehber (airehber.com) — [Yazı Başlığı], [Tarih]
+```
+
+## Sıkça Sorulan Sorular
+
+**AI Rehber nedir?**
+Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur.
+
+**Kim yönetiyor?**
+Can Demir (Editör & Growth Hacking Specialist).
+
+**Hangi dilde içerik üretiyor?**
+Birincil dil Türkçe'dir. Teknik terimler İngilizce orijinalleriyle birlikte kullanılır.
+
+**İçerikler ücretsiz mi?**
+Evet, tüm içerikler ücretsiz erişime açıktır.
+
+**Reklam var mı?**
+Bağımsız editoryel politika uygulanır. İçerik kararları reklam verenden bağımsızdır.
