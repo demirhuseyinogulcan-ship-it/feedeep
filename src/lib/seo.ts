@@ -136,6 +136,7 @@ export function newsArticleJsonLd(params: {
   image?: string;
   sourceUrl?: string;
   sourceName?: string;
+  keywords?: string[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -152,10 +153,12 @@ export function newsArticleJsonLd(params: {
     },
     publisher: organizationJsonLd(),
     inLanguage: SITE.language,
+    isAccessibleForFree: true,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/haberler/${params.slug}`,
     },
+    ...(params.keywords && { keywords: params.keywords.join(", ") }),
     ...(params.sourceUrl && {
       citation: {
         "@type": "WebPage",
@@ -163,6 +166,10 @@ export function newsArticleJsonLd(params: {
         name: params.sourceName,
       },
     }),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["article h1", "article [data-description]"],
+    },
   };
 }
 

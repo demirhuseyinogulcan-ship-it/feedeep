@@ -1,0 +1,36 @@
+---
+title: "Chrome'da 30 Sahte AI Uzantısı 260 Bin Kullanıcıyı Kandırdı"
+slug: chrome-sahte-ai-uzantilari-260-bin-kullanici
+description: "Chrome Web Store'daki 30 sahte yapay zeka uzantısı, gerçek AI gibi çalışarak 260 binden fazla kullanıcının verilerini çaldı. Kendinizi nasıl korursunuz?"
+date: 2026-02-16
+sourceUrl: https://www.darkreading.com/cyber-risk/chrome-fake-ai-browser-extensions
+sourceName: Dark Reading
+category: sektor
+keywords:
+  - sahte ai uzantısı chrome
+  - yapay zeka tarayıcı güvenliği
+  - chrome web store zararlı uzantı
+  - ai güvenlik tehdidi
+  - chatgpt sahte uzantı
+sources:
+  - url: https://www.darkreading.com/cyber-risk/chrome-fake-ai-browser-extensions
+    label: Dark Reading
+    tier: 2
+  - url: https://layerxsecurity.com/blog/aiframe-fake-ai-assistant-extensions-targeting-260000-chrome-users-via-injected-iframes/
+    label: LayerX Security
+    tier: 2
+confidence: high
+socialSnippet: "Chrome Web Store'da 30 sahte AI uzantısı tespit edildi. 260.000+ kullanıcı etkilendi. Gerçek AI gibi çalışan bu uzantılar arka planda tüm verilerinizi çalıyor."
+---
+
+Güvenlik firması LayerX, Chrome Web Store'da birbirinin kopyası **30 sahte yapay zeka uzantısı** tespit etti. "Gemini AI Sidebar", "ChatGPT Translate", "AI Assistant" gibi isimlerle yayınlanan bu uzantılar, toplam **260.000'den fazla indirme** aldı ve kullanıcıların kişisel verilerini sessizce sızdırdı.
+
+Bu uzantıların tehlikeli yanı, gerçekten çalışır gibi görünmeleri. Bir tanesini yüklediğinizde tarayıcınıza normal bir AI chat penceresi ekleniyor. Bir soru sorduğunuzda gayet mantıklı bir yanıt alıyorsunuz — çünkü arka planda gerçek bir dil modelinin API'sine bağlanıyor. Ama aynı anda, yazdığınız her şey saldırganın sunucusuna da gönderiliyor.
+
+Teknik olarak nasıl çalıştığını açıklamak gerekirse: uzantı, tarayıcınızda bir **iframe** açıyor — yani saldırganın kontrolündeki bir web sayfasını, sanki uzantının kendi arayüzüymüş gibi ekranınıza yerleştiriyor. Siz prompt yazıp gönderdiğinizde, metin önce saldırganın sunucusuna ulaşıyor. Sunucu, gerçek bir LLM API'sine (örneğin OpenAI) proxy görevi görüyor, size dönen yanıtı iletiyor, ama arada girdiğiniz her veriyi kaydediyor.
+
+LayerX araştırmacısı Natalie Zargarov'un dikkat çektiği bir nokta var: insanlar artık AI araçlarına son derece hassas bilgiler girmeye alıştı. API anahtarları, müşteri verileri, şirket içi belgeler — bunların hepsi bir "AI asistanı" penceresine kolayca yapıştırılıyor. Bir çalışanın CRM sistemindeki müşteri verilerini "özetle" diyerek uzantıya verdiğini düşünün — o veri artık şirketin kontrolü dışında.
+
+Daha da endişe verici olan, bu uzantıların çoğunun hâlâ Chrome Web Store'da erişilebilir durumda olması. Birçoğu 4 yıldızın üzerinde puana sahip ve bazıları Google tarafından "Featured" (öne çıkan) etiketi bile almış. Zargarov, Google'ı kısmen anlayışla karşılıyor: zararlı davranışın kendisi uzantının kodu içinde değil, uzaktan yüklenen bir web sayfasında gerçekleştiği için statik analizle tespit edilmesi zor.
+
+Kendinizi korumak için birkaç basit önlem alabilirsiniz. Bir AI uzantısı yüklemeden önce geliştiricisinin kim olduğunu kontrol edin — OpenAI'ın resmi uzantısı varsa, onu "ChatGPT for Chrome" diye arayan üçüncü parti bir uzantıya ihtiyacınız yok. İzin isteklerine dikkat edin — bir AI chat aracının "tüm web sitelerindeki verilerinizi okuma" iznine ihtiyacı olmamalı. Ve en önemlisi, AI araçlarına hassas bilgi girerken iki kez düşünün.

@@ -22,6 +22,21 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [AI Zaman Çizelgesi](https://airehber.com/zaman-cizelgesi): Kronolojik AI gelişmeleri
 - [Hakkımızda](https://airehber.com/hakkimizda): Ekip ve misyon
 
+## Son Haberler (Şubat 2026)
+
+- [Chrome'da Sahte AI Uzantıları 260 Bin Kullanıcıyı Kandırdı](https://airehber.com/haberler/chrome-sahte-ai-uzantilari-260-bin-kullanici): 30 zararlı Chrome uzantısı gerçek AI gibi çalışarak kullanıcı verilerini çaldı
+- [Google DeepMind AI Delegasyon Çerçevesi](https://airehber.com/haberler/google-deepmind-ai-delegasyon-cercevesi): AI ajanlarının birbirlerine güvenli görev devretmesi için 5 sütunlu çerçeve
+- [Visby AI Türk Yapay Zeka Görünürlük Platformu](https://airehber.com/haberler/visby-ai-turk-yapay-zeka-gorunurluk-platformu): Markaların ChatGPT ve Gemini'deki görünürlüğünü ölçen yerli GEO platformu
+- [ByteDance Seedance 2.0 Güvenlik Önlemleri](https://airehber.com/haberler/bytedance-seedance-2-guvenlik-onlemleri): Hollywood tepkilerinin ardından telif korumaları ekleniyor
+- [Hindistan'da 100 Milyon ChatGPT Kullanıcısı](https://airehber.com/haberler/hindistan-100-milyon-chatgpt-kullanici): Sam Altman açıkladı: Hindistan dünyada en fazla öğrenci ChatGPT kullanıcısına sahip
+- [OpenAI ChatGPT Lockdown Mode](https://airehber.com/haberler/openai-chatgpt-lockdown-modu-risk-etiketleri): Prompt injection saldırılarına karşı kurumsal güvenlik katmanı
+- [Google Gemini 3 Deep Think](https://airehber.com/haberler/google-gemini-3-deep-think-bilimsel-akil-yurutme): Bilimsel akıl yürütme için optimize edilmiş reasoning modu
+- [16 Claude AI Ajanı C Derleyicisi Yazdı](https://airehber.com/haberler/claude-ai-ajanlari-c-derleyicisi): Anthropic'in 16 otonom ajanı insan müdahalesi olmadan C derleyicisi oluşturdu
+- [Google WebMCP Protokolü](https://airehber.com/haberler/google-webmcp-ai-ajanlari-web-erisimi): AI ajanlarının web siteleriyle yapılandırılmış etkileşimi için yeni standart
+- [Hollywood Seedance 2.0'a Karşı](https://airehber.com/haberler/hollywood-seedance-2-ai-video-karsi): AI video üretiminde telif hakları tartışması
+- [Kani-TTS-2 Açık Kaynak Ses Klonlama](https://airehber.com/haberler/kani-tts-2-acik-kaynak-ses-klonlama): 3GB VRAM ile çalışan 400M parametreli TTS modeli
+- [OpenAI GPT-5.2 Fizik Keşfi](https://airehber.com/haberler/openai-gpt-5-2-fizik-kesif): Kuantum mekaniğinde yeni yaklaşım önerisi
+
 ## Güven Politikası
 
 Her içerikte kaynak güvenilirlik seviyesi belirtilir:
