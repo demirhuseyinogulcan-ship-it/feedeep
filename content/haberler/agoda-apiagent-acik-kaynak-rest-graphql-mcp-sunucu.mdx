@@ -26,30 +26,8 @@ published: true
 
 Agoda, seyahat ve otelcilik alanındaki teknoloji birikimini yapay zeka dünyasına taşıyan açık kaynak bir araç yayınladı. **APIAgent**, herhangi bir REST veya GraphQL API'yi **sıfır kod yazarak** Model Context Protocol (MCP) sunucusuna dönüştürüyor.
 
-## Ne Oldu?
+APIAgent, API'lerin AI ajanları tarafından kullanılabilir hale gelmesindeki en büyük sürtünme noktasını ortadan kaldırmayı hedefliyor: her API için ayrı entegrasyon kodu yazmak. Araç, bir API'nin OpenAPI veya GraphQL şemasını alıp otomatik olarak MCP uyumlu araçlara (tools) dönüştürüyor. Teknik altyapısı **FastMCP** üzerine inşa edilmiş uçtan uca MCP sunucu oluşturma, **OpenAI Agents SDK** ile doğal entegrasyon ve **DuckDB** destekli SQL sorguları ile sonuç üzerinde post-processing imkanı sunuyor. Dynamic Tool Discovery özelliğiyle API şemasından otomatik araç keşfi yapabiliyor, Recipe Learning özelliğiyle ise başarılı API çağrı kalıplarını önbelleğe alarak tekrarlanan isteklerde %40'a varan hız artışı sağlıyor. Güvenlik tarafında varsayılan olarak **salt okunur (read-only)** modda çalışıyor — yazma işlemleri için açık izin gerekiyor.
 
-APIAgent, API'lerin AI ajanları tarafından kullanılabilir hale gelmesindeki en büyük sürtünme noktasını ortadan kaldırmayı hedefliyor: her API için ayrı entegrasyon kodu yazmak. Araç, bir API'nin OpenAPI veya GraphQL şemasını alıp otomatik olarak MCP uyumlu araçlara (tools) dönüştürüyor.
+Model Context Protocol, AI ajanlarının dış dünyayla etkileşim kurmasının standart yolu haline geliyor. Ancak **her API için MCP sunucusu yazmak** hâlâ ciddi bir mühendislik yükü. APIAgent bu sorunu üç katmanda çözüyor: OpenAPI veya GraphQL şemasını verince gerisini hallediyor, DuckDB ile dönen verilere SQL sorguları atabiliyor ve Recipe Learning özelliğiyle benzer isteklerde önceki başarılı kalıpları yeniden kullanarak hem hız hem doğruluk artırıyor. Alternatiflerle karşılaştırıldığında APIAgent'ın farkı **universal** olması — tek bir framework ile binlerce farklı API'yi MCP'ye dönüştürebiliyorsunuz.
 
-Teknik altyapısı şöyle özetlenebilir:
-
-- **FastMCP** üzerine inşa edilmiş uçtan uca MCP sunucu oluşturma
-- **OpenAI Agents SDK** ile doğal entegrasyon
-- **DuckDB** destekli SQL sorguları ile sonuç üzerinde post-processing
-- **Dynamic Tool Discovery:** API şemasından otomatik araç keşfi
-- **Recipe Learning:** Başarılı API çağrı kalıplarını önbelleğe alarak tekrarlanan isteklerde %40'a varan hız artışı
-
-Güvenlik tarafında APIAgent varsayılan olarak **salt okunur (read-only)** modda çalışıyor. Yazma işlemleri için açık izin gerekiyor. Her API çağrısı, orijinal şema üzerinden doğrulanıyor.
-
-## Neden Önemli?
-
-Model Context Protocol (MCP), AI ajanlarının dış dünyayla etkileşim kurmasının standart yolu haline geliyor. Ancak **her API için MCP sunucusu yazmak** hâlâ ciddi bir mühendislik yükü. APIAgent bu sorunu üç katmanda çözüyor:
-
-1. **Sıfır kod:** OpenAPI veya GraphQL şemasını verin, gerisini APIAgent hallediyor
-2. **Akıllı sonuç işleme:** DuckDB ile dönen verilere SQL sorguları atabiliyorsunuz — LLM'in tüm veriyi parse etmesine gerek kalmıyor
-3. **Öğrenen sistem:** Recipe Learning özelliği, benzer isteklerde önceki başarılı kalıpları yeniden kullanarak hem hız hem doğruluk artırıyor
-
-Alternatiflerle karşılaştırıldığında APIAgent'ın farkı, **universal** olması: tek bir framework ile binlerce farklı API'yi MCP'ye dönüştürebiliyorsunuz. Bu, özellikle onlarca dahili API'si olan kurumsal şirketler için büyük bir zaman tasarrufu.
-
-## Türkiye İçin Ne Anlama Geliyor?
-
-Türkiye'deki yazılım ekipleri için APIAgent, mevcut API altyapılarını AI-ready hale getirmenin en düşük maliyetli yolu olabilir. Bir e-ticaret şirketi, ödeme API'sini; bir fintech, bankacılık API'lerini; bir lojistik firması, kargo takip sistemini — hepsini tek bir araçla MCP sunucusuna dönüştürebilir. Açık kaynak olması ve Python ekosisteminde çalışması, Türk geliştirici topluluğu için düşük giriş bariyeri anlamına geliyor.
+Açık kaynak olması ve Python ekosisteminde çalışması, geliştiriciler için düşük giriş bariyeri anlamına geliyor. Bir e-ticaret şirketi ödeme API'sini, bir fintech bankacılık API'lerini, bir lojistik firması kargo takip sistemini — hepsini tek bir araçla MCP sunucusuna dönüştürebilir.

@@ -25,25 +25,8 @@ socialSnippet: "Alibaba, 397B parametreli ama sadece 17B aktif parametreyle çal
 
 Alibaba Cloud'un Qwen ekibi, yeni nesil büyük dil modeli **Qwen 3.5**'i açık kaynak olarak yayınladı. En güçlü versiyonu olan **Qwen3.5-397B-A17B**, toplam 397 milyar parametreye sahip olmasına rağmen, Mixture-of-Experts (MoE) mimarisi sayesinde herhangi bir sorguda yalnızca **17 milyar parametreyi** aktif kullanıyor. Bu, devasa bir modelin zekasını, çok daha küçük bir modelin hızında sunmak demek.
 
-## Ne Oldu?
+Qwen 3.5, sektördeki "daha büyük model = daha yavaş" denklemini kırmayı hedefliyor. Model, klasik Transformer yerine **Gated Delta Networks** adlı hibrit bir mimari kullanıyor: 60 katmandan oluşan yapıda her 4 katmandan 3'ü lineer attention, 1'i standart attention kullanıyor. Sonuç olarak önceki nesle göre **8.6x ile 19x** arasında hız artışı sağlanıyor. Görsel verileri de işleyebilen model, Early Fusion yöntemiyle eğitilmiş multimodal bir yapıya sahip — bir UI ekran görüntüsünden HTML/CSS kodu üretebiliyor. Plus versiyonu **1 milyon token** bağlam penceresi destekliyor, 201 dil desteğiyle önceki versiyondaki 119 dilden büyük bir sıçrama yapıyor ve Model Context Protocol (MCP) ile araçlara bağlanarak fonksiyon çağrıları yapabiliyor. Her token için 512 uzmandan yalnızca 11'i devreye giriyor.
 
-Qwen 3.5, sektördeki "daha büyük model = daha yavaş" denklemini kırmayı hedefliyor. Model, klasik Transformer yerine **Gated Delta Networks** adlı hibrit bir mimari kullanıyor: 60 katmandan oluşan yapıda her 4 katmandan 3'ü lineer attention, 1'i standart attention kullanıyor. Sonuç olarak önceki nesle göre **8.6x ile 19x** arasında hız artışı sağlanıyor.
+Açık kaynak AI yarışında dengeleri yeniden kuran Qwen 3.5, Meta'nın Llama serisi, Mistral ve DeepSeek'in ardından hem performans hem verimlilik açısından rekabetçi bir konumda. MoE mimarisinin bu kadar agresif kullanımı — 397B toplam ama 17B aktif — kurumsal kullanım için maliyeti dramatik şekilde düşürüyor. Benchmark sonuçları da dikkat çekici: Humanity's Last Exam'da araçsız %48.4, ARC-AGI-2'de %84.6 ve Codeforces'ta 3455 Elo. Bu skorlar, kapalı kaynak rakiplerle aynı ligde oynamak anlamına geliyor.
 
-Modelin öne çıkan özellikleri:
-- **Multimodal:** Metin ve görsel verileri aynı anda işleyebiliyor (Early Fusion yöntemiyle eğitilmiş). Bir UI ekran görüntüsünden HTML/CSS kodu üretebiliyor.
-- **1 milyon token bağlam penceresi:** Plus versiyonu 1M token destekliyor — bu, bir projenin tüm kaynak kodunu tek seferde işleyebilmek anlamına geliyor.
-- **201 dil desteği:** Önceki versiyondaki 119 dilden büyük bir sıçrama.
-- **MCP desteği:** Model Context Protocol ile araçlara bağlanabiliyor, fonksiyon çağrıları yapabiliyor — bu da AI ajanları için kritik.
-- **512 uzman, 11 aktif:** Her token için 512 uzmandan yalnızca 11'i devreye giriyor (10 yönlendirmeli + 1 paylaşımlı).
-
-## Neden Önemli?
-
-Qwen 3.5, açık kaynak AI yarışında dengeleri yeniden kuruyor. Meta'nın Llama serisi, Mistral ve DeepSeek'in ardından Alibaba, hem performans hem de verimlilik açısından rekabetçi bir model çıkardı. Özellikle MoE mimarisinin bu kadar agresif kullanımı — 397B toplam ama 17B aktif — kurumsal kullanım için maliyeti dramatik şekilde düşürüyor.
-
-Benchmark sonuçları da dikkat çekici: Humanity's Last Exam'da araçsız %48.4, ARC-AGI-2'de %84.6 ve Codeforces'ta 3455 Elo. Bu skorlar, kapalı kaynak rakiplerle aynı ligde oynamak anlamına geliyor.
-
-## Türkiye İçin Ne Anlama Geliyor?
-
-Qwen 3.5, 201 dil desteğine sahip — bu, Türkçe için de ciddi iyileşme anlamına gelebilir. Açık kaynak olması, Türk geliştiricilerin ve şirketlerin modeli kendi sunucularında çalıştırmasını, fine-tune etmesini ve özelleştirmesini mümkün kılıyor. Özellikle veri gizliliği gereksinimleri olan sektörler (finans, sağlık, kamu) için kapalı API'lara bağımlı kalmadan kurumsal AI çözümleri geliştirme fırsatı sunuyor.
-
-Model ağırlıkları [Hugging Face](https://huggingface.co/collections/Qwen/qwen35) ve [GitHub](https://github.com/QwenLM/Qwen3.5) üzerinden erişilebilir.
+Açık kaynak olması ve 201 dil desteğine sahip olması, geliştiricilerin ve şirketlerin modeli kendi sunucularında çalıştırmasını, fine-tune etmesini ve özelleştirmesini mümkün kılıyor. Model ağırlıkları [Hugging Face](https://huggingface.co/collections/Qwen/qwen35) ve [GitHub](https://github.com/QwenLM/Qwen3.5) üzerinden erişilebilir.

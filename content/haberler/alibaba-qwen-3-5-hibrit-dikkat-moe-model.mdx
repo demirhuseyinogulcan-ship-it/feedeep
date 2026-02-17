@@ -29,17 +29,7 @@ published: true
 
 Alibaba'nın Qwen ekibi, yeni nesil açık kaynak modeli **Qwen 3.5-397B-A17B**'yi yayınladı. 397 milyar toplam parametre içinden her seferinde yalnızca **17 milyar aktif parametre** kullanan Mixture-of-Experts (MoE) modeli, dikkat mekanizması konusunda sektörde yeni bir sayfa açıyor.
 
-## Ne Oldu?
-
-Qwen 3.5, birkaç kritik yenilik sunuyor:
-
-**Hibrit Dikkat Mimarisi:** Model, standart "tam dikkat" (full attention) ile doğrusal dikkat (linear attention) katmanlarını **3:1 oranında** karıştırıyor. Her dört transformer bloğunun üçü doğrusal dikkat kullanan **Gated DeltaNet** katmanlarından oluşurken, dördüncü blok geleneksel tam dikkat kullanıyor. Sonuç: uzun bağlamlarda çok daha verimli işlem — işte **1 milyon token** bağlam penceresi buradan geliyor.
-
-**Doğal Multimodal:** Qwen 3'ten farklı olarak, Qwen 3.5 ayrı metin ve görsel modellere sahip değil. Görsel anlama yeteneği modelin temelinden başlayarak eğitilmiş. MMMU benchmark'ında 85.0 puan alarak önceki Qwen3-VL'nin 80.6'sını aşıyor.
-
-**201 Dil Desteği:** Qwen 3'ün 119 dilinden 201 dil ve lehçeye genişletilmiş — açık kaynak modeller arasında bilinen en geniş dil kapsamı.
-
-## Benchmark Karşılaştırması
+Modelin en dikkat çekici yeniliği **hibrit dikkat mimarisi**. Standart "tam dikkat" (full attention) ile doğrusal dikkat (linear attention) katmanlarını **3:1 oranında** karıştırıyor — her dört transformer bloğunun üçü doğrusal dikkat kullanan **Gated DeltaNet** katmanlarından oluşurken, dördüncü blok geleneksel tam dikkat kullanıyor. Sonuç: uzun bağlamlarda çok daha verimli işlem ve **1 milyon token** bağlam penceresi. Qwen 3'ten farklı olarak görsel anlama yeteneği modelin temelinden başlayarak eğitilmiş — MMMU benchmark'ında 85.0 puan alarak önceki Qwen3-VL'nin 80.6'sını aşıyor. Dil desteği de Qwen 3'ün 119 dilinden 201 dil ve lehçeye genişletilmiş.
 
 | Benchmark | Qwen 3.5 | GPT-5.2 | Claude Opus 4.6 |
 |-----------|----------|---------|-----------------|
@@ -51,12 +41,6 @@ Qwen 3.5, birkaç kritik yenilik sunuyor:
 
 Qwen 3.5 hiçbir kategoride mutlak birinci değil, ama **talimat takibinde (IFBench)** tüm modelleri geçiyor ve genel olarak en dengeli profili sunuyor.
 
-## Neden Önemli?
+Dikkat mekanizması, yapay zeka alanının yeni savaş alanına dönüştü. Bir yıl önce herkes "MoE mi yoksa Dense mi?" diye tartışıyordu — bu soru artık kapandı. Şimdi tartışma, dikkati nasıl yöneteceğinize kaydı: Qwen 3.5 ve Kimi K2.5 hibrit yaklaşımı tercih ederken, MiniMax tamamen doğrusal dikkate gidiyor, GLM-5 ise DeepSeek tarzı seyrek seçim kullanıyor. Benchmark dünyası da değişti — artık sohbet robotu benchmarkları yerine **ajansal iş yükleri** ön planda: SWE-bench, BrowseComp, TAU2-Bench, MCPMark. AI modellerinin bir chatbot olarak ne kadar iyi konuştuğu değil, gerçek dünyada ne kadar iyi iş çıkardığı ölçülüyor.
 
-Dikkat mekanizması, yapay zeka alanının yeni savaş alanına dönüştü. Bir yıl önce herkes "MoE mi yoksa Dense mi?" diye tartışıyordu — bu soru artık kapandı. Şimdi tartışma, dikkati nasıl yöneteceğinize kaydı: Qwen 3.5 ve Kimi K2.5 hibrit yaklaşımı tercih ederken, MiniMax tamamen doğrusal dikkate gidiyor, GLM-5 ise DeepSeek tarzı seyrek seçim kullanıyor.
-
-Ayrıca benchmark dünyası da değişti — artık sohbet robotu benchmarkları yerine **ajansal iş yükleri** ön planda: SWE-bench, BrowseComp, TAU2-Bench, MCPMark. AI modellerinin bir chatbot olarak ne kadar iyi konuştuğu değil, gerçek dünyada ne kadar iyi iş çıkardığı ölçülüyor.
-
-## Türkiye İçin Ne Anlama Geliyor?
-
-Açık ağırlıklı model olması, Qwen 3.5'i kendi altyapınızda çalıştırabilmeniz anlamına geliyor. 201 dil desteğiyle Türkçe performansı da umut vadediyor. 17B aktif parametre ile görece düşük hesaplama maliyeti, Türk startupları ve üniversiteleri için erişilebilir bir seçenek. Model ağırlıkları [Hugging Face'te](https://huggingface.co/Qwen/Qwen3.5-397B-A17B) açık erişimde, API ise [qwen.ai](https://qwen.ai/) üzerinden kullanılabilir.
+Açık ağırlıklı model olması, kendi altyapınızda çalıştırabilmeniz anlamına geliyor. 17B aktif parametre ile görece düşük hesaplama maliyeti, erişilebilir bir seçenek sunuyor. Model ağırlıkları [Hugging Face'te](https://huggingface.co/Qwen/Qwen3.5-397B-A17B) açık erişimde, API ise [qwen.ai](https://qwen.ai/) üzerinden kullanılabilir.

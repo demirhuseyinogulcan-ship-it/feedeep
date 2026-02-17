@@ -25,28 +25,10 @@ socialSnippet: "Moonshot AI'ın Kimi K2.5 modeli, 100 alt ajanlı Agent Swarm mo
 
 Çin merkezli yapay zeka şirketi **Moonshot AI**, yeni nesil açık ağırlıklı multimodal modeli **Kimi K2.5**'i duyurdu. Model, önceki Kimi K2'nin metin odaklı yapısına görsel anlama yeteneği eklemenin ötesinde, sektörde bir ilk olan **Agent Swarm** moduyla dikkat çekiyor — tek bir görev için 100'e kadar alt ajan paralel çalıştırabiliyor.
 
-## Ne Oldu?
+Kimi K2.5, dört farklı çalışma moduna sahip: hızlı yanıtlar için Instant, derin muhakeme için Thinking, belge ve tablo üretimi için Agent, ve en dikkat çekici olanı — görevleri alt görevlere ayırıp birden fazla ajanla paralel yürüten **Agent Swarm**. Bu son mod, bir görev aldığında onu otomatik olarak parçalıyor ve her bir parçayı ayrı bir alt ajana dağıtıyor. Andrew Ng'nin The Batch bülteninin ifadesiyle: *"Kimi K2.5, görev yürütmeyi sıralı düşünce zincirinden ajanlık takım çalışmasına taşıyor."*
 
-Kimi K2.5, dört farklı çalışma moduna sahip:
-- **Instant:** Hızlı, düşük gecikmeli yanıtlar
-- **Thinking:** Derin düşünme ve muhakeme
-- **Agent:** Belge, tablo gibi ofis çıktıları üretme
-- **Agent Swarm (araştırma önizlemesi):** Görevleri alt görevlere ayırıp birden fazla ajanla paralel yürütme
+Teknik olarak model, Kimi K2 mimarisi üzerine Moonshot'ın **MoonViT-3D** görsel kodlayıcısını ekleyerek oluşturulmuş. Eğitimde ek olarak 15 trilyon token daha kullanılmış, ardından supervised fine-tuning ve takviyeli öğrenme (RL) uygulanmış. Agent Swarm modu ise OpenAI'ın BrowseComp benchmark'ında **GPT-5.2 Pro'yu**, WideSearch'te **Claude Opus 4.5'i** geride bırakıyor — paralel çalışma sayesinde hem daha doğru sonuçlar hem de ciddi hız kazanımları sağlıyor.
 
-Agent Swarm modu, bir görev aldığında onu otomatik olarak parçalıyor ve her bir parçayı ayrı bir alt ajana dağıtıyor. Andrew Ng'nin The Batch bülteninin ifadesiyle: *"Kimi K2.5, görev yürütmeyi sıralı düşünce zincirinden ajanlık takım çalışmasına taşıyor."*
+Moonshot AI'ın bu özelliği eğitmek için geliştirdiği **PARL (Parallel Agent Reinforcement Learning)** tekniği de ayrıca dikkat çekici. PARL, alt ajanları dondurarak yalnızca orkestratörü eğitiyor ve alt ajan oluşturmayı ödüllendiriyor — bu da modelin tek bir ajan gibi sıralı çalışmaya geri dönmesini (serial collapse) engelliyor. Kodlama yetenekleri de güçlü: benchmark skorları GPT-5 ve Gemini ile karşılaştırılabilir seviyede ve görsel anlama yeteneğiyle birleştiğinde özellikle front-end geliştirme görevlerinde öne çıkıyor.
 
-Model teknik olarak Kimi K2 mimarisi üzerine Moonshot'ın **MoonViT-3D** görsel kodlayıcısını ekleyerek oluşturulmuş. Eğitimde ek olarak 15 trilyon token daha kullanılmış, ardından supervised fine-tuning ve takviyeli öğrenme (RL) uygulanmış.
-
-## Neden Önemli?
-
-Kimi K2.5'in Agent Swarm modu, OpenAI'ın BrowseComp benchmark'ında **GPT-5.2 Pro'yu**, WideSearch'te ise **Claude Opus 4.5'i** geride bırakıyor. Paralel çalışma sayesinde hem daha doğru sonuçlar hem de ciddi hız kazanımları sağlıyor.
-
-Moonshot AI'ın bu özelliği eğitmek için geliştirdiği **PARL (Parallel Agent Reinforcement Learning)** tekniği de ayrıca dikkat çekici. PARL, alt ajanları dondurarak yalnızca orkestratörü eğitiyor ve alt ajan oluşturmayı ödüllendiriyor — bu da modelin tek bir ajan gibi sıralı çalışmaya geri dönmesini (serial collapse) engelliyor.
-
-Kodlama yetenekleri de güçlü: Benchmark skorları GPT-5 ve Gemini ile karşılaştırılabilir seviyede. Görsel anlama yeteneğiyle birleştiğinde, özellikle front-end geliştirme görevlerinde öne çıkıyor.
-
-## Türkiye İçin Ne Anlama Geliyor?
-
-Kimi K2.5'in açık ağırlıklı olması, modelı indirip kendi sunucularınızda çalıştırabilmenizi mümkün kılıyor. Agent Swarm konsepti, Türk yazılım ekipleri için özellikle karmaşık araştırma, içerik üretimi ve veri analizi görevlerinde ciddi verimlilik kazanımları vaat ediyor. 100 alt ajanın aynı anda çalışması, bir kişinin yapacağı saatlerce araştırmayı dakikalara indirebilir.
-
-Model [kimi.com](https://www.kimi.com/) üzerinden web arayüzüyle veya [Moonshot API](https://platform.moonshot.ai/) ile kullanılabilir. Ağırlıklar [Hugging Face'te](https://huggingface.co/moonshotai/Kimi-K2.5) açık erişimde.
+Modelin açık ağırlıklı olması, indirip kendi sunucularınızda çalıştırabilmenizi mümkün kılıyor. Model [kimi.com](https://www.kimi.com/) üzerinden web arayüzüyle veya [Moonshot API](https://platform.moonshot.ai/) ile kullanılabilir. Ağırlıklar [Hugging Face'te](https://huggingface.co/moonshotai/Kimi-K2.5) açık erişimde.
