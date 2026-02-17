@@ -1,0 +1,55 @@
+---
+title: "Agoda APIAgent: REST ve GraphQL API'leri Tek Komutla MCP Sunucusuna Dönüştürün"
+slug: agoda-apiagent-acik-kaynak-rest-graphql-mcp-sunucu
+description: "Agoda'nın açık kaynak APIAgent aracı, herhangi bir REST veya GraphQL API'yi sıfır kod yazarak MCP sunucusuna dönüştürüyor. FastMCP, OpenAI Agents SDK ve DuckDB destekli araç, AI ajanlarının API'lere güvenli erişimini sağlıyor."
+date: 2026-02-16
+sourceUrl: https://github.com/agoda-com/APIAgent
+sourceName: GitHub
+category: sektor
+keywords:
+  - apiagent açık kaynak
+  - mcp server oluşturma
+  - model context protocol
+  - rest api yapay zeka
+  - graphql mcp entegrasyonu
+sources:
+  - url: https://github.com/agoda-com/APIAgent
+    label: GitHub Repository
+    tier: 1
+  - url: https://marktechpost.com/2026/02/16/agoda-open-sources-apiagent-a-universal-framework-that-converts-any-rest-or-graphql-api-into-a-functional-mcp-server-with-zero-code/
+    label: MarkTechPost
+    tier: 2
+confidence: high
+socialSnippet: "Agoda, REST ve GraphQL API'leri sıfır kodla MCP sunucusuna dönüştüren APIAgent'ı açık kaynak olarak yayınladı. FastMCP + DuckDB destekli araç, AI ajanlarının her API'ye güvenli erişimini sağlıyor."
+published: true
+---
+
+Agoda, seyahat ve otelcilik alanındaki teknoloji birikimini yapay zeka dünyasına taşıyan açık kaynak bir araç yayınladı. **APIAgent**, herhangi bir REST veya GraphQL API'yi **sıfır kod yazarak** Model Context Protocol (MCP) sunucusuna dönüştürüyor.
+
+## Ne Oldu?
+
+APIAgent, API'lerin AI ajanları tarafından kullanılabilir hale gelmesindeki en büyük sürtünme noktasını ortadan kaldırmayı hedefliyor: her API için ayrı entegrasyon kodu yazmak. Araç, bir API'nin OpenAPI veya GraphQL şemasını alıp otomatik olarak MCP uyumlu araçlara (tools) dönüştürüyor.
+
+Teknik altyapısı şöyle özetlenebilir:
+
+- **FastMCP** üzerine inşa edilmiş uçtan uca MCP sunucu oluşturma
+- **OpenAI Agents SDK** ile doğal entegrasyon
+- **DuckDB** destekli SQL sorguları ile sonuç üzerinde post-processing
+- **Dynamic Tool Discovery:** API şemasından otomatik araç keşfi
+- **Recipe Learning:** Başarılı API çağrı kalıplarını önbelleğe alarak tekrarlanan isteklerde %40'a varan hız artışı
+
+Güvenlik tarafında APIAgent varsayılan olarak **salt okunur (read-only)** modda çalışıyor. Yazma işlemleri için açık izin gerekiyor. Her API çağrısı, orijinal şema üzerinden doğrulanıyor.
+
+## Neden Önemli?
+
+Model Context Protocol (MCP), AI ajanlarının dış dünyayla etkileşim kurmasının standart yolu haline geliyor. Ancak **her API için MCP sunucusu yazmak** hâlâ ciddi bir mühendislik yükü. APIAgent bu sorunu üç katmanda çözüyor:
+
+1. **Sıfır kod:** OpenAPI veya GraphQL şemasını verin, gerisini APIAgent hallediyor
+2. **Akıllı sonuç işleme:** DuckDB ile dönen verilere SQL sorguları atabiliyorsunuz — LLM'in tüm veriyi parse etmesine gerek kalmıyor
+3. **Öğrenen sistem:** Recipe Learning özelliği, benzer isteklerde önceki başarılı kalıpları yeniden kullanarak hem hız hem doğruluk artırıyor
+
+Alternatiflerle karşılaştırıldığında APIAgent'ın farkı, **universal** olması: tek bir framework ile binlerce farklı API'yi MCP'ye dönüştürebiliyorsunuz. Bu, özellikle onlarca dahili API'si olan kurumsal şirketler için büyük bir zaman tasarrufu.
+
+## Türkiye İçin Ne Anlama Geliyor?
+
+Türkiye'deki yazılım ekipleri için APIAgent, mevcut API altyapılarını AI-ready hale getirmenin en düşük maliyetli yolu olabilir. Bir e-ticaret şirketi, ödeme API'sini; bir fintech, bankacılık API'lerini; bir lojistik firması, kargo takip sistemini — hepsini tek bir araçla MCP sunucusuna dönüştürebilir. Açık kaynak olması ve Python ekosisteminde çalışması, Türk geliştirici topluluğu için düşük giriş bariyeri anlamına geliyor.
