@@ -70,7 +70,7 @@ export function websiteJsonLd() {
     publisher: organizationJsonLd(),
     potentialAction: {
       "@type": "SearchAction",
-      target: `${SITE.url}/yazilar?q={search_term_string}`,
+      target: `${SITE.url}/arama?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };

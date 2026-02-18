@@ -1,0 +1,33 @@
+---
+title: "GitHub Agentic Workflows: AI Ajanlarla Repo Otomasyonu"
+slug: github-agentic-workflows-ai-repo-otomasyon
+description: "GitHub, AI ajanlarının doğal dilde tanımlanan görevleri GitHub Actions üzerinde yürüttüğü Agentic Workflows özelliğini teknik önizleme olarak duyurdu."
+date: 2026-02-18
+sourceUrl: https://github.blog/ai-and-ml/automate-repository-tasks-with-github-agentic-workflows/
+sourceName: GitHub Blog
+category: sektor
+keywords:
+  - github agentic workflows
+  - ai repo otomasyon
+  - github actions ai
+  - continuous ai
+  - ai kodlama ajanı
+sources:
+  - url: https://github.blog/ai-and-ml/automate-repository-tasks-with-github-agentic-workflows/
+    label: GitHub Blog
+    tier: 1
+  - url: https://www.infoq.com/news/2026/02/github-agentic-workflows/
+    label: InfoQ
+    tier: 2
+confidence: high
+socialSnippet: "GitHub Agentic Workflows teknik önizlemede. AI ajanları doğal dilde tanımlanan görevleri GitHub Actions üzerinde güvenli sandbox'larda çalıştırabiliyor."
+published: true
+---
+
+**GitHub**, teknik önizleme olarak sunduğu **Agentic Workflows** ile depo yönetiminde yeni bir otomasyon katmanı açıyor. Sistem, karmaşık ve tekrarlayan görevleri — issue sınıflandırma, dokümantasyon güncelleme, CI sorun giderme, test iyileştirme, durum raporlama gibi — AI kodlama ajanlarına devrediyor. GitHub'un ifadesiyle amaç, "güçlü koruma raylarıyla AI ajanlarıyla depo otomasyonu" sağlamak.
+
+Agentic Workflows'un en dikkat çekici yanı görev tanımlarının **Markdown dosyalarıyla** yapılması. Geliştiriciler ne yapılması gerektiğini doğal dilde yazıyor, ardından AI ajanı bu talimatları GitHub Actions altyapısı üzerinde yürütüyor. Bir workflow tanımı iki bölümden oluşuyor: YAML ile belirtilen yapılandırma detayları (ne zaman çalışacak, hangi izinler gerekli, hangi araçları kullanacak) ve görevin doğal dilde tarif edildiği açıklama bölümü. Örneğin "günlük repo durum raporu oluştur, son aktiviteleri ve bakımcılar için aksiyon öğelerini listele" gibi bir komut yeterli oluyor.
+
+Güvenlik mimarisi katmanlı tasarlanmış. Varsayılan olarak tüm workflow'lar **salt okunur izinlerle** çalışıyor. PR oluşturma veya issue açma gibi yazma işlemleri, "safe outputs" adı verilen incelenebilir ve kontrollü bir mekanizmadan geçmek zorunda. Ajanlar ve MCP sunucuları izole sandbox'larda çalışıyor — kompromize olan bir bileşen sisteme erişemiyor. GitHub, alternatif olarak Copilot veya Claude CLI'ı doğrudan YAML workflow'larına entegre etmenin mümkün olduğunu ancak bunun gereksiz yetki genişlemesine yol açacağını belirtiyor.
+
+GitHub bu vizyonu **Continuous AI** olarak adlandırıyor: mevcut CI/CD süreçlerini destekleyen, ancak onların yerine geçmeyen bir yaklaşım. Pull request onayları gibi kritik kararlarda insan müdahalesi zorunlu kalıyor. Hacker News'te bazı geliştiriciler konsepte temkinli yaklaşsa da — "repo'mu sürekli AI refactoring'lerle spam'leyen bir workflow istemem" gibi yorumlar yapıldı — YAML ve Markdown karışımı format ve LLM destekli iş akışı üretiminin değerli olabileceği konusunda bir fikir birliği oluşuyor. Özellik henüz üretim kullanımına hazır değil, ancak GitHub, örnek workflow'lar için geliştiricileri **Peli's Agent Factory** deposuna yönlendiriyor.
