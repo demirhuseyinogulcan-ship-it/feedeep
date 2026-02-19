@@ -25,6 +25,11 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 ## Son İçerikler (Şubat 2026)
 
 ### Haberler
+- [Google Gemini 3.1 Pro: Karmaşık Görevler İçin Güçlü Güncelleme](https://airehber.com/haberler/google-gemini-3-1-pro-guncelleme): ARC-AGI-2'de 3 Pro'nun iki katı performans, tüm platformlarda kullanımda
+- [OpenAI 100 Milyar Dolarlık Anlaşmayı Sonlandırıyor](https://airehber.com/haberler/openai-100-milyar-dolar-850-milyar-degerleme): 850 milyar dolar değerlemeyle AI tarihinin en büyük yatırım turu
+- [Trendyol Yerli LLM ve AI Agent Platformunu Tanıttı](https://airehber.com/haberler/trendyol-yerli-llm-ai-agent-platformu): Günde 60M mesaj, 500M karar, yazılım teslim süresi 9 kat hızlandı
+- [OpenAI AI Hizalama Araştırmasına 7.5 Milyon Dolar Ayırdı](https://airehber.com/haberler/openai-alignment-project-7-5-milyon-dolar): UK AI Güvenlik Enstitüsü'nün Alignment Project fonuna bağımsız araştırma desteği
+- [Cline AI Kodlama Aracı Prompt Injection ile Hacklendi](https://airehber.com/haberler/cline-openclaw-prompt-injection-ai-guvenlik): Prompt injection saldırısıyla OpenClaw ajanı kullanıcı cihazlarına yüklendi
 - [Figma ve Anthropic İş Birliği: Koddan Tasarıma Köprü](https://airehber.com/haberler/figma-anthropic-claude-code-to-figma): Claude Code'da üretilen kodları düzenlenebilir Figma tasarımlarına dönüştüren Code to Canvas
 - [Google Gemini Artık Müzik Üretiyor: Lyria 3 Duyuruldu](https://airehber.com/haberler/google-gemini-lyria-3-muzik-uretimi): DeepMind'ın Lyria 3 modeliyle metin veya görsellerden 30 saniyelik şarkılar
 - [Microsoft Copilot Hatası Gizli E-postaları Yapay Zekaya Açtı](https://airehber.com/haberler/microsoft-copilot-gizli-eposta-guvenlik-acigi): DLP politikalarını atlayan hata haftalarca gizli etiketli e-postaları Copilot'a açtı
