@@ -80,6 +80,7 @@ export default function RootLayout({
         {/* hreflang — uluslararası sinyal */}
         <link rel="alternate" hrefLang="tr" href="https://airehber.com" />
         <link rel="alternate" hrefLang="x-default" href="https://airehber.com" />
+        <link rel="alternate" type="application/rss+xml" title="AI Rehber RSS" href="https://airehber.com/feed.xml" />
 
         {/* PWA Manifest & Theme */}
         <link rel="manifest" href="/manifest.json" />

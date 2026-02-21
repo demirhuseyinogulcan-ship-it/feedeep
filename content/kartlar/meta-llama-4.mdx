@@ -1,0 +1,57 @@
+---
+title: "Meta Llama 4"
+slug: meta-llama-4
+description: "Meta'nın açık kaynak amiral gemisi. Ücretsiz, güçlü ve yerel çalıştırılabilir."
+date: 2026-02-15
+updated: 2026-02-21
+type: model
+company: Meta
+website: https://llama.meta.com
+status: active
+pricing:
+  free: true
+  input: "Ücretsiz (açık kaynak)"
+  output: "Ücretsiz (açık kaynak)"
+  note: "Bulut sağlayıcılarında API maliyeti değişken. Yerelde ücretsiz."
+contextWindow: 128000
+releaseDate: 2025-04-05
+benchmarks:
+  - name: MMLU
+    score: 88.7
+    maxScore: 100
+  - name: HumanEval
+    score: 84.2
+    maxScore: 100
+  - name: MATH
+    score: 73.8
+    maxScore: 100
+  - name: ARC-AGI
+    score: 55.3
+    maxScore: 100
+relatedYazilar:
+  - chatgpt-vs-claude-vs-gemini-2026
+published: true
+---
+
+## Genel Bakış
+
+Llama 4, Meta'nın Nisan 2025'te yayınladığı açık kaynak büyük dil modeli ailesidir. **405B**, **70B** ve **8B** parametreli versiyonlarıyla farklı kullanım senaryolarına hitap eder. En büyük avantajı tamamen açık ağırlıklı olması — kendi sunucunuzda, kendi kurallarınızla çalıştırabilirsiniz.
+
+## Güçlü Yönler
+
+- **Açık kaynak** — ağırlıklar serbestçe indirilebilir, ince ayar yapılabilir
+- **Farklı boyutlar** — 8B (hızlı), 70B (dengeli), 405B (en güçlü)
+- **Yerelde çalışır** — veri gizliliği garanti altında
+- **Geniş ekosistem** — Hugging Face, Ollama, vLLM, Together AI desteği
+- **Türkçe dahil 100+ dil** desteği
+
+## Zayıf Yönler
+
+- 405B modeli için güçlü donanım gerekli (en az 4x A100 GPU)
+- Bağlam penceresi rakiplere göre küçük (128K)
+- Multimodal yetenekler sınırlı (Llama 4V ile iyileşiyor)
+- Kutudan çıktığı haliyle güvenlik filtreleri zayıf
+
+## Kimler İçin Uygun?
+
+Geliştiriciler, araştırmacılar ve veri gizliliği kritik olan kurumlar. Kendi sunucusunda AI çalıştırmak isteyenler için bir numaralı seçenek. Fine-tuning ile sektöre özel (hukuk, sağlık, finans) uygulamalar oluşturulabilir.

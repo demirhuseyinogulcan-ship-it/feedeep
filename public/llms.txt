@@ -57,6 +57,14 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [Google Gemini 3 Deep Think](https://airehber.com/haberler/google-gemini-3-deep-think-bilimsel-akil-yurutme): Bilimsel akıl yürütme için optimize edilmiş reasoning modu
 - [Anthropic 30 Milyar Dolar Yatırım Aldı](https://airehber.com/haberler/anthropic-30-milyar-dolar-yatirim-series-g): 380 milyar dolar değerleme, yıllık 14 milyar dolar gelir
 
+### Model Kartları
+- [ChatGPT GPT-5](https://airehber.com/modeller/chatgpt-gpt-5): OpenAI'ın en güçlü modeli — 256K bağlam, multimodal, gelişmiş akıl yürütme
+- [Claude Opus 4](https://airehber.com/modeller/claude-opus-4): Anthropic'in amiral gemisi — 200K bağlam, derin analiz, Constitutional AI
+- [Google Gemini 3 Pro](https://airehber.com/modeller/google-gemini-3-pro): Google DeepMind — 1M bağlam, Deep Think modu, Google ekosistemi
+- [Meta Llama 4](https://airehber.com/modeller/meta-llama-4): Açık kaynak — 128K bağlam, yerelde çalıştırılabilir, fine-tuning uyumlu
+- [Mistral Large 3](https://airehber.com/modeller/mistral-large-3): Avrupa'nın en güçlü modeli — GDPR uyumlu, düşük maliyet
+- [Alibaba Qwen 3.5](https://airehber.com/modeller/qwen-3-5): 397B MoE açık kaynak — 1M bağlam, 201 dil, Agent yetenekleri
+
 ### Yazılar
 - [ChatGPT vs Claude vs Gemini: 2026 Karşılaştırması](https://airehber.com/yazilar/chatgpt-vs-claude-vs-gemini-2026): 2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık
 

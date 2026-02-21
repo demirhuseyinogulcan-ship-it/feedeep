@@ -78,14 +78,7 @@ export function Footer() {
                   Haftalık Brifing
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/feed.xml"
-                  className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
-                >
-                  RSS Feed
-                </Link>
-              </li>
+
             </ul>
           </div>
 

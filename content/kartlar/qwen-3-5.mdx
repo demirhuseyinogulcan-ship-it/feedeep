@@ -1,0 +1,56 @@
+---
+title: "Alibaba Qwen 3.5"
+slug: qwen-3-5
+description: "Alibaba'nın 397B parametreli açık kaynak MoE modeli. 1M bağlam, 201 dil desteği."
+date: 2026-02-17
+updated: 2026-02-21
+type: model
+company: Alibaba Cloud
+website: https://qwenlm.github.io
+status: active
+pricing:
+  free: true
+  input: "$0.50 / 1M token"
+  output: "$1.50 / 1M token"
+  note: "Açık ağırlıklı — yerelde ücretsiz. API DashScope üzerinden."
+contextWindow: 1000000
+releaseDate: 2026-02-17
+benchmarks:
+  - name: MMLU
+    score: 90.1
+    maxScore: 100
+  - name: HumanEval
+    score: 86.5
+    maxScore: 100
+  - name: MATH
+    score: 77.3
+    maxScore: 100
+  - name: ARC-AGI
+    score: 58.2
+    maxScore: 100
+relatedYazilar: []
+published: true
+---
+
+## Genel Bakış
+
+Qwen 3.5, Alibaba Cloud'un Şubat 2026'da yayınladığı devasa ölçekli açık kaynak AI modelidir. **397 milyar toplam parametre** içinden yalnızca **17 milyar** aktif parametre kullanan MoE (Mixture of Experts) mimarisi sayesinde hem güçlü hem de verimli çalışır. **1 milyon token bağlam penceresi** ve **201 dil** desteğiyle dikkat çekiyor.
+
+## Güçlü Yönler
+
+- **1M token bağlam** — Gemini 3 Pro ile birlikte en geniş bağlam penceresi
+- **Açık ağırlıklı** — Apache 2.0 lisansıyla tamamen özgür kullanım
+- **MoE mimarisi** — 397B parametrenin sadece 17B'sini kullanarak enerji tasarrufu
+- **201 dil desteği** — Türkçe dahil geniş çok dilli yetkinlik
+- **Agent yetenekleri** — araç kullanımı ve otonom görev tamamlama
+
+## Zayıf Yönler
+
+- Tam model için yüksek bellek gereksinimi
+- İngilizce ve Çince dışında performans düşüşü yaşanabiliyor
+- Güvenlik filtreleri Batılı rakipler kadar olgun değil
+- Ekosistem ve dokümantasyon İngilizce ağırlıklı
+
+## Kimler İçin Uygun?
+
+Açık kaynak AI çözümleri arayan geliştiriciler, çok dilli uygulamalar, büyük veri analizi ve araştırma projeleri. Özellikle maliyet bilincli ekipler için Llama 4'e güçlü bir alternatif.

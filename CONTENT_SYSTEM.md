@@ -246,7 +246,7 @@ Bu komutlar interaktif olarak sorar ve hazır MDX dosyası oluşturur.
 □ Frontmatter tüm zorunlu alanları içeriyor
 □ Title ≤ 70 karakter
 □ Description ≤ 160 karakter
-□ Keywords ≤ 5 adet
+□ Keywords = 6 adet (5 spesifik + "yapay zeka haberleri")
 □ En az 1 kaynak (sources) var ve URL'si çalışıyor
 □ confidence doğru ayarlanmış
 □ lastFactChecked bugünün tarihi (yazılarda)
@@ -319,18 +319,167 @@ node ai-haber-takip/haberler.mjs --limit 10
 
 ---
 
-## 6. SEO Kontrol Listesi
+## 6. YENİ YAZI YAYINLAMA — TAM PIPELINE
 
-Her içerik için:
+Bu bölüm bir editör + SEO + GEO mühendisinin her yeni içerik yayınlarken
+eksiksiz yapması gereken tüm adımları kapsar.
 
-- [ ] Title'da ana keyword var
-- [ ] Description'da ana keyword var
-- [ ] İlk paragrafta ana keyword geçiyor
-- [ ] Min 1 internal link var (başka yazıya/habere)
-- [ ] Min 1 external link var (kaynak)
-- [ ] H2 başlıklarda secondary keyword'ler kullanılmış
-- [ ] Image varsa alt text yazılmış
-- [ ] Slug SEO-uyumlu ve kısa
+### AŞAMA 1: İçerik Hazırlama (MDX Dosyası)
+
+#### Frontmatter Kontrol Listesi
+```
+□ title: Max 70 karakter, ana keyword başta
+         Google 60'ta keser → ilk 60 karaktere en önemli bilgiyi sığdır
+         Örnek: "OpenAI 100 Milyar Dolarlık Anlaşmayı Sonlandırıyor"
+
+□ slug:  Türkçe karakter YOK (ş→s, ç→c, ğ→g, ı→i, ö→o, ü→u)
+         Kısa ve SEO-uyumlu, max 60 karakter
+         Örnek: openai-100-milyar-dolar-850-milyar-degerleme
+
+□ description: 120-160 karakter arası (Google 155-160'ta keser)
+               Ana keyword + tamamlayıcı bilgi
+               Bu metin Google SERP'te görünür — her kelimesi önemli
+
+□ date: Bugünün tarihi (YYYY-MM-DD)
+
+□ sourceUrl: Orijinal haberin URL'si (çalıştığını kontrol et)
+
+□ sourceName: Kaynak adı (OpenAI Blog, TechCrunch, vb.)
+
+□ category: sirketler | sektor | turkiye | arastirma
+
+□ keywords (6 adet):
+   1. Ana keyword (en spesifik, long-tail)
+   2-5. İlgili secondary keyword'ler
+   6. "yapay zeka haberleri" (HER ZAMAN — generic TR SEO keyword)
+   
+   Keyword Seçim Kuralları:
+   - Türkçe düşün → Google'da Türk kullanıcı ne arar?
+   - Mümkünse İngilizce terim + Türkçe bağlam: "openai yatırım"
+   - Long-tail tercih et: "gemini 3.1 pro" > "google ai"
+   - Rakip analizi: O haberi Google'da ararsan ne yazarsın?
+
+□ sources: Min 1, ideal 2+ kaynak
+   - tier 1: Resmi blog, API docs, akademik makale
+   - tier 2: CEO/CTO paylaşımı, Reuters, Bloomberg, TechCrunch
+   - tier 3: Sızıntı, anonim kaynak, forum
+
+□ confidence: high | medium | speculative
+
+□ socialSnippet: Max 280 karakter (Twitter/X paylaşım metni)
+
+□ published: true (UNUTMA — false bırakırsan sayfada görünmez)
+```
+
+#### Body İçerik Kuralları
+```
+□ İlk cümle: Kim + ne yaptı + ne zaman (hook)
+□ İlk paragrafta ana keyword doğal şekilde geçmeli
+□ Teknik terimler anlatım içinde açıklanmalı
+   (ör: "büyük dil modeli (LLM)" veya "ince ayar (fine-tuning)")
+□ Türkiye bağlantısı doğal geliyorsa ekle, zorlama
+□ Min 300, ideal 500-800 kelime
+□ Bold (**) kullan: şirket adları, rakamlar, önemli kavramlar
+□ Sabit başlık şablonu KULLANMA (Ne Oldu / Neden Önemli / Türkiye İçin YOK)
+□ Paragraflar arası doğal geçiş, maddeler yerine düz yazı tercih et
+```
+
+### AŞAMA 2: SEO Doğrulama
+
+#### Google SERP Kontrolü
+```
+□ Title Google'da nasıl görünecek? (60 karakterde kesilmiyor mu?)
+□ Description snippet'te nasıl görünecek? (155-160 karakter sınırı)
+□ Slug kısa ve açık mı? URL'yi biri görünce konuyu anlar mı?
+□ OG Image oluşuyor mu? → /api/og?title=BASLIK_BURAYA
+```
+
+#### On-Page SEO
+```
+□ Title'da ana keyword var
+□ Description'da ana keyword var
+□ Body ilk paragrafında ana keyword geçiyor
+□ Bold ile vurgulanan önemli kavramlar var
+□ Min 1 internal link (başka bir habere/yazıya atıf)
+□ Min 1 external link (kaynak URL zaten var)
+□ "yapay zeka haberleri" keyword'ü 6. sırada ekli
+```
+
+#### Structured Data (Otomatik — Kod Kontrol)
+Bunlar otomatik üretiliyor ama bilmen gereken:
+- NewsArticle JSON-LD: title, description, dates, author, publisher, citation, speakable
+- BreadcrumbList JSON-LD: Ana Sayfa → Haberler → [Başlık]
+- OG tags: article:author, article:section, article:tags
+- Canonical URL: /haberler/{slug}
+- Twitter Card: summary_large_image
+
+### AŞAMA 3: GEO (Generative Engine Optimization)
+
+#### llms.txt Güncelleme
+```
+□ public/llms.txt dosyasına yeni haber eklendi mi?
+   Format:
+   - [Başlık](https://airehber.com/haberler/slug): Kısa açıklama
+   
+   Bu dosya ChatGPT, Claude, Gemini'nin siteyi tanıması için kritik.
+   Her yeni içerik yayınladığında bu dosyayı güncelle.
+```
+
+#### LLM Dostu İçerik
+```
+□ Haberin ilk cümlesi tam bir özet mi? (LLM'ler genellikle ilk paragrafı alır)
+□ Rakamlar ve veriler açıkça yazılmış mı? ("100 milyar dolar", "397B parametre")
+□ Şirket adları tam yazılmış mı? ("OpenAI", "Google DeepMind" — kısaltma değil)
+□ Tarih bağlamı var mı? ("Şubat 2026'da", "bu hafta")
+```
+
+### AŞAMA 4: Build & Test
+
+```bash
+# 1. Velite content build
+npx velite --clean
+# → Hata varsa frontmatter'ı kontrol et
+
+# 2. (Opsiyonel) Local dev server
+npm run dev
+# → Sayfayı tarayıcıda kontrol et: http://localhost:3000/haberler/SLUG
+
+# 3. Git commit & push
+git add -A
+git commit -m "feat(haberler): BASLIK"
+git push origin main
+# → Vercel otomatik deploy eder
+```
+
+### AŞAMA 5: Post-Publish Aksiyonlar
+
+```
+□ Google Search Console → "URL Denetleme" → URL yapıştır → "Dizine eklenmesini iste"
+  (Günde max 10 URL yapabilirsin, en önemli haberlere öncelik ver)
+
+□ Sosyal medya paylaşımı:
+  - LinkedIn: socialSnippet + haber linki
+  - Instagram: Story veya carousel
+  - (Opsiyonel) Twitter/X
+
+□ Site haritası otomatik güncellenir (sitemap.xml + news-sitemap.xml)
+□ İlgili Haberler bölümü otomatik güncellenir (aynı kategori/keyword)
+□ Ana sayfa hero/son haberler otomatik güncellenir
+```
+
+### HIZLI REFERANS KARTI
+
+| Alan | Limit | Kontrol |
+|------|-------|---------|
+| title | ≤ 70 karakter | Google 60'ta keser |
+| slug | ≤ 60 karakter | Türkçe karakter YOK |
+| description | 120-160 karakter | Google 155-160'ta keser |
+| keywords | 6 adet | Son sıra: "yapay zeka haberleri" |
+| sources | min 1 | URL çalışıyor mu? |
+| socialSnippet | ≤ 280 karakter | Twitter/X formatı |
+| body | 300-800 kelime | İlk cümle hook, ilk paragraf keyword |
+| published | true | false = sayfada görünmez |
+| llms.txt | güncelle | Her yeni içerikte |
 
 ---
 

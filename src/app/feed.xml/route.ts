@@ -35,7 +35,8 @@ export async function GET() {
         description: h.description,
         date: h.date,
       })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 50);
 
   const feedItems = entries
     .map(
