@@ -56,14 +56,6 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/modeller"
-                  className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
-                >
-                  AI Modelleri
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/zaman-cizelgesi"
                   className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
                 >

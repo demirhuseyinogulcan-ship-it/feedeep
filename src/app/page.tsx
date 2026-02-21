@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { websiteJsonLd, faqJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
-import { yazilar, haberler, promptlar, kartlar, haftalik } from "#site/content";
+import { yazilar, haberler, promptlar, haftalik } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
 
@@ -120,12 +120,6 @@ const EXPLORE_SECTIONS = [
     description: "Kullanıma hazır, model bazlı skorlanmış prompt şablonları",
     href: "/prompt-kutuphanesi",
     count: `${promptlar.filter((p) => p.published).length}+`,
-  },
-  {
-    title: "AI Model Kartları",
-    description: "Fiyat, benchmark ve karşılaştırma bilgi kartları",
-    href: "/modeller",
-    count: `${kartlar.filter((k) => k.published).length}+`,
   },
   {
     title: "Haftalık Brifing",

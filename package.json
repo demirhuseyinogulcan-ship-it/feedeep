@@ -10,7 +10,6 @@
     "new:yazi": "node scripts/new-content.mjs yazi",
     "new:haber": "node scripts/new-content.mjs haber",
     "new:prompt": "node scripts/new-content.mjs prompt",
-    "new:kart": "node scripts/new-content.mjs kart",
     "new:haftalik": "node scripts/new-content.mjs haftalik",
     "validate": "node scripts/validate-content.mjs",
     "prebuild": "node scripts/validate-content.mjs"

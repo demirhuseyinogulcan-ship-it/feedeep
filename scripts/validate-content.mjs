@@ -202,7 +202,6 @@ const VALIDATORS = {
   yazilar: { validate: validateYazi, label: "Yazılar" },
   haberler: { validate: validateHaber, label: "Haberler" },
   promptlar: { validate: validatePrompt, label: "Promptlar" },
-  kartlar: { validate: validateKart, label: "Kartlar" },
   haftalik: { validate: validateHaftalik, label: "Haftalık" },
 };
 

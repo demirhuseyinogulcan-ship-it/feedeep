@@ -4,7 +4,7 @@
 
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/constants";
-import { yazilar, haberler, promptlar, kartlar, haftalik } from "#site/content";
+import { yazilar, haberler, promptlar, haftalik } from "#site/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -31,12 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE.url}/prompt-kutuphanesi`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/modeller`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
@@ -95,15 +89,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }));
 
-  const kartlarPages: MetadataRoute.Sitemap = kartlar
-    .filter((k) => k.published)
-    .map((k) => ({
-      url: `${SITE.url}/modeller/${k.slug}`,
-      lastModified: k.updated ?? k.date,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }));
-
   const haftalikPages: MetadataRoute.Sitemap = haftalik
     .filter((h) => h.published)
     .map((h) => ({
@@ -118,7 +103,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...yazilarPages,
     ...haberlerPages,
     ...promptlarPages,
-    ...kartlarPages,
     ...haftalikPages,
   ];
 }

@@ -15,7 +15,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "GPTBot",
-        allow: ["/llms.txt", "/llms-full.txt", "/yazilar/", "/haberler/", "/prompt-kutuphanesi/", "/modeller/"],
+        allow: ["/llms.txt", "/llms-full.txt", "/yazilar/", "/haberler/", "/prompt-kutuphanesi/"],
       },
       {
         userAgent: "Google-Extended",

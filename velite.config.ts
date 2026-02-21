@@ -248,7 +248,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { yazilar, haberler, promptlar, kartlar, haftalik },
+  collections: { yazilar, haberler, promptlar, haftalik },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

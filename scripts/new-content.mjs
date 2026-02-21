@@ -305,75 +305,6 @@ published: true
   writeContent("promptlar", `${slug}.mdx`, content);
 }
 
-async function newKart(rl) {
-  console.log("\n🃏 Yeni Model Kartı Oluştur\n");
-
-  const title = await ask(rl, "Model/Araç adı");
-  const slug = await ask(rl, "Slug", slugify(title));
-  const description = await ask(rl, "Açıklama (max 160 karakter)");
-  const type = await choose(rl, "Tip:", ["model", "arac"]);
-  const company = await ask(rl, "Şirket adı");
-  const website = await ask(rl, "Resmi website URL");
-  const status = await choose(rl, "Durum:", ["active", "beta", "deprecated"]);
-  const contextWindow = await ask(rl, "Context window (token sayısı, ör: 200000)", "0");
-
-  const content = `---
-title: "${title}"
-slug: ${slug}
-description: "${description}"
-date: ${today()}
-updated: ${today()}
-type: ${type}
-company: "${company}"
-logo: ""
-website: "${website}"
-status: ${status}
-pricing:
-  free: false
-  input: ""
-  output: ""
-  note: ""
-contextWindow: ${parseInt(contextWindow) || 0}
-releaseDate: ${today()}
-benchmarks:
-  - name: "MMLU"
-    score: 0
-  - name: "HumanEval"
-    score: 0
-  - name: "MATH"
-    score: 0
-relatedYazilar: []
-published: true
----
-
-## Genel Bakış
-
-[Model/aracın ne olduğu, kim tarafından geliştirildiği.]
-
-## Temel Özellikler
-
-- **Mimari:** [Transformer, MoE, vb.]
-- **Multimodal:** [Evet/Hayır]
-- **Fine-tuning:** [Mümkün mü]
-
-## Güçlü Yanları
-
-- [Güçlü yan 1]
-- [Güçlü yan 2]
-
-## Zayıf Yanları
-
-- [Zayıf yan 1]
-
-## Kimler İçin Uygun?
-
-- **İdeal:** [Hedef kitle]
-- **Uygun değil:** [Kimin için değil]
-`;
-
-  writeContent("kartlar", `${slug}.mdx`, content);
-}
-
 async function newHaftalik(rl) {
   console.log("\n📅 Yeni Haftalık Brifing Oluştur\n");
 
@@ -443,7 +374,6 @@ const TYPES = {
   yazi: newYazi,
   haber: newHaber,
   prompt: newPrompt,
-  kart: newKart,
   haftalik: newHaftalik,
 };
 
@@ -457,7 +387,6 @@ if (!type || !TYPES[type]) {
 ║     npm run new:yazi                         ║
 ║     npm run new:haber                        ║
 ║     npm run new:prompt                       ║
-║     npm run new:kart                         ║
 ║     npm run new:haftalik                     ║
 ║                                              ║
 ╚══════════════════════════════════════════════╝

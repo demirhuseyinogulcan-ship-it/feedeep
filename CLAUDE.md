@@ -46,8 +46,7 @@
 1. **yazilar** → `/yazilar/[slug]` — Rehber, inceleme, analiz, karşılaştırma
 2. **haberler** → `/haberler/[slug]` — Güncel AI haberleri
 3. **promptlar** → `/prompt-kutuphanesi/[slug]` — Test edilmiş prompt şablonları
-4. **kartlar** → `/modeller/[slug]` — AI model/araç bilgi kartları
-5. **haftalik** → `/haftalik/[slug]` — Haftalık AI brifingleri
+4. **haftalik** → `/haftalik/[slug]` — Haftalık AI brifingleri
 
 ### İçerik Kuralları
 - Şema tanımı: `velite.config.ts` — tek kaynak (Single Source of Truth)
@@ -108,7 +107,7 @@ npm run dev            # Geliştirme sunucusu
 <tip>(<kapsam>): <açıklama>
 
 Tipler: feat, fix, content, refactor, docs, style, chore
-Kapsam: yazilar, haberler, promptlar, kartlar, haftalik, ui, seo, infra
+Kapsam: yazilar, haberler, promptlar, haftalik, ui, seo, infra
 Dil: Türkçe
 
 Örnekler:

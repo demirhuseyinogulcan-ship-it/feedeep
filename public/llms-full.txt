@@ -43,16 +43,7 @@ Her prompt kartında:
 - Zorluk seviyesi (başlangıç/orta/ileri)
 - Hedef rol (CMO, Growth, Editör vb.)
 
-### 4. Model & Araç Kartları (/modeller)
-Her AI model/araç için bilgi kartı:
-- Fiyatlandırma (input/output token maliyeti)
-- Context window
-- Benchmark skorları
-- Release tarihi
-- Durum (active/beta/deprecated)
-- İlgili yazılar
-
-### 5. Haftalık Brifing (/haftalik)
+### 4. Haftalık Brifing (/haftalik)
 Her hafta yayınlanan AI özet bülteni.
 - Haftanın en önemli 3 gelişmesi
 - Editör seçimi açıklamalar

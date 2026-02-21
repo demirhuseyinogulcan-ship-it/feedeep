@@ -42,11 +42,9 @@ function prefetchRelated(pathname: string) {
     // Anasayfada — ana navigasyon sayfalarını prefetch et
     routes.push("/haberler", "/yazilar", "/prompt-kutuphanesi");
   } else if (pathname === "/yazilar") {
-    routes.push("/haberler", "/modeller");
+    routes.push("/haberler", "/haftalik");
   } else if (pathname === "/haberler") {
     routes.push("/yazilar", "/haftalik");
-  } else if (pathname === "/modeller") {
-    routes.push("/prompt-kutuphanesi");
   }
 
   // Native <link rel="prefetch"> ile kaynak prefetch

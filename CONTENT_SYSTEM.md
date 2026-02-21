@@ -84,14 +84,16 @@
 
 **Haber Yazım Stili (Body):**
 
-> **KURAL:** Haber içerikleri sabit başlık şablonu KULLANMAZ.
-> Eski "Ne Oldu? / Neden Önemli? / Türkiye İçin" yapısı kaldırılmıştır.
+> **KURAL:** Sabit başlık şablonu ("Ne Oldu? / Neden Önemli? / Türkiye İçin") KULLANILMAZ.
+> Bu kalıplar AI çıktısını ele verir, okuyucu 3 saniyede fark edip çıkar.
+> Bunun yerine Hook → Retention → Reward sistemini kullan (Bölüm 7'ye bak).
 
 Haberler doğal, akıcı, gazetecilik diline uygun yazılır:
+- **Hook ile başla:** İlk cümle pattern interrupt, open loop veya specificity hook olmalı
 - **Akıcı anlatım:** Paragraflar birbiriyle doğal geçişlerle bağlanır, maddeler yerine düz yazı tercih edilir
-- **Eğitici ama çaktırmadan:** Teknik kavramlar (prompt injection, reasoning, fine-tune vb.) anlatımın içinde doğal biçimde açıklanır, ders verir gibi değil
-- **Okuyucu bilmiyor varsayımı:** Konuyu ilk defa duyan biri için de anlaşılır olmalı, ama bunu belli etmeden
-- **Zor bağlam yapma:** Türkiye bağlantısı doğal geliyorsa yaz, değilse zorlama
+- **Eğitici ama çaktırmadan:** Teknik kavramlar anlatımın içinde doğal biçimde açıklanır
+- **İnsan sesi:** Kısa cümleler + uzun cümleler karıştır, soru sor, gerilim yarat
+- **Zeigarnik hook:** Her paragrafın sonunda bir sonrakini okutacak mini-geçiş bırak
 
 ### 2.3 Prompt Şablonları (`content/promptlar/`)
 
@@ -114,21 +116,7 @@ Haberler doğal, akıcı, gazetecilik diline uygun yazılır:
 3. Varsa not ekle
 4. commonMistakes'i gerçek deneyimden yaz
 
-### 2.4 Model Kartları (`content/kartlar/`)
-
-**Ne:** AI model ve araç bilgi kartları.
-**Kadans:** Yeni model çıktığında + güncelleme olduğunda.
-
-| Alan | Kural |
-|------|-------|
-| `type` | `model` \| `arac` |
-| `company` | Şirket adı |
-| `pricing` | Güncel fiyat (free, input, output) |
-| `contextWindow` | Token sayısı |
-| `benchmarks` | Min 3 benchmark (MMLU, HumanEval, MATH vb.) |
-| `releaseDate` | İlk çıkış tarihi |
-
-### 2.5 Haftalık Brifing (`content/haftalik/`)
+### 2.4 Haftalık Brifing (`content/haftalik/`)
 
 **Ne:** Haftanın en önemli 3 AI gelişmesi + aksiyon.
 **Kadans:** Her Cuma, o haftanın son iş günü yayınlanır.
@@ -161,8 +149,6 @@ content/
 │   └── {slug}.mdx              → openai-gpt-5-2-duyuru.mdx  
 ├── promptlar/
 │   └── {slug}.mdx              → swot-analizi-promptu.mdx
-├── kartlar/
-│   └── {slug}.mdx              → claude-opus-4.mdx
 └── haftalik/
     └── {YYYY}-w{WW}.mdx        → 2026-w07.mdx
 ```
@@ -213,9 +199,6 @@ npm run new:haber
 
 # Yeni prompt oluştur
 npm run new:prompt
-
-# Yeni model kartı oluştur
-npm run new:kart
 
 # Yeni haftalık brifing oluştur
 npm run new:haftalik
@@ -293,7 +276,7 @@ npm run dev
 | **Çarşamba** | Haber (1-2) | Hafta ortası gelişmeler |
 | **Perşembe** | Prompt + Haber | Yeni prompt şablonu + günlük haber |
 | **Cuma** | Haftalık Brifing | Haftanın özeti + bülten gönderimi |
-| **Cumartesi** | (Opsiyonel) | Model kartı güncelleme veya ek yazı |
+| **Cumartesi** | (Opsiyonel) | Ek yazı veya serisel içerik |
 | **Pazar** | Planlama | Gelecek hafta konu planlaması |
 
 **Minimum Haftalık Hedef:** 2 yazı + 3 haber + 1 prompt + 1 brifing = **7 içerik**
@@ -527,7 +510,6 @@ Haber toplayıcıdan içerik üretme adımları:
 | `content/yazilar/{slug}.mdx` | `/yazilar/{slug}` | Yazı detay |
 | `content/haberler/{slug}.mdx` | `/haberler/{slug}` | Haber detay |
 | `content/promptlar/{slug}.mdx` | `/prompt-kutuphanesi/{slug}` | Prompt detay |
-| `content/kartlar/{slug}.mdx` | `/modeller/{slug}` | Model detay |
 | `content/haftalik/{YYYY-wWW}.mdx` | `/haftalik/{slug}` | Brifing detay |
 
 **Otomatik oluşan sayfalar:**
@@ -535,7 +517,6 @@ Haber toplayıcıdan içerik üretme adımları:
 - `/yazilar` → Tüm yazılar listesi
 - `/haberler` → Tüm haberler listesi
 - `/prompt-kutuphanesi` → Tüm promptlar listesi
-- `/modeller` → Tüm model kartları listesi
 - `/haftalik` → Tüm brifinglerin listesi
 - `/zaman-cizelgesi` → Haberler + editoryal timeline
 - `/arama` → Site içi arama
@@ -639,7 +620,7 @@ Abonelikten çıkmak için: [link]
 <tip>(<kapsam>): <açıklama>
 
 Tipler: feat, fix, content, refactor, docs, style, chore
-Kapsam: yazilar, haberler, promptlar, kartlar, haftalik, ui, seo, infra
+Kapsam: yazilar, haberler, promptlar, haftalik, ui, seo, infra
 Dil: Türkçe
 ```
 
@@ -658,3 +639,160 @@ Her oturum sonunda `CHANGELOG.md` dosyası güncellenir:
 - Tarih + oturum numarası
 - Eklenen, değiştirilen, düzeltilen öğeler
 - AI ajanı bu dosyayı okuyarak geçmişi anlayabilir
+
+---
+
+## 14. Dikkat Psikolojisi & İçerik Mühendisliği
+
+> **Bu bölüm tüm içerik üretiminde ZORUNLU kurallardır.**
+> Her haber, yazı ve brifing bu framework'e göre yazılır.
+
+### 14.1 HOOK — İlk 3 Saniye (Okuyucuyu Yakala)
+
+Okuyucu ilk 3 saniyede kalıp kalmayacağına karar verir. 5 hook tekniğinden EN AZ birini kullan:
+
+| Teknik | Açıklama | Örnek |
+|--------|----------|-------|
+| **Pattern Interrupt** | Beklentiyi kır, şok et | "Google kendi AI modelini öldürdü." |
+| **Open Loop** | Merak boşluğu bırak, cevabı geciktir | "OpenAI'ın gizlice geliştirdiği model, hiç kimsenin tahmin etmediği bir şey yapıyor." |
+| **Specificity Hook** | Somut rakam/detay ver | "Tam 47 saniyede 10.000 satır kod yazdı." |
+| **Identity Hook** | Okuyucunun kimliğine seslen | "Eğer hâlâ ChatGPT'yi sadece sohbet için kullanıyorsan, geride kalıyorsun." |
+| **Controversy Hook** | Tartışma başlat | "AI uzmanlarının %60'ı yanılıyor olabilir." |
+
+**YAPMA → YAP:**
+```
+❌ YAPMA: "OpenAI yeni bir model duyurdu. Bu model GPT-5 adını taşıyor."
+✅ YAP:   "GPT-5 sessizce geldi — ve ilk testlerde insanları yenen tek model oldu."
+
+❌ YAPMA: "Google DeepMind yeni bir araştırma yayınladı."
+✅ YAP:   "DeepMind'ın 3 yıldır gizlediği proje, bilim dünyasını ikiye böldü."
+
+❌ YAPMA: "Türkiye'de yapay zeka kullanımı artıyor."
+✅ YAP:   "İstanbul'da bir lise öğrencisi, AI ile 2 haftada 50.000 TL kazandı."
+```
+
+### 14.2 RETENTION — Okuyucuyu Yazının İçinde Tut
+
+Hook'tan sonra okuyucu kaçmamalı. 3 teknikle tut:
+
+#### A) Zeigarnik Etkisi (Tamamlanmamış Görev)
+Beyni "sonucu öğrenmek" için yazıda tutarsın:
+```
+"Ama asıl bomba haberi henüz söylemedim..."
+"Bunun neden önemli olduğunu birazdan göreceksin."
+"3 kritik detay var — üçüncüsü her şeyi değiştiriyor."
+```
+
+#### B) Information Gap (Bilgi Boşluğu)
+Bildiklerini hatırlat → bilmediklerini hissettir:
+```
+"ChatGPT'yi biliyorsun. Ama GPT-5'in gizli özelliğini duydun mu?"
+"Herkes AI'ın hızlı olduğunu biliyor. Kimse neden bazen yanlış yaptığını sormuyor."
+```
+
+#### C) Nested Loops (İç İçe Döngüler)
+Bir hikayeyi aç → ikincisine geç → ilkini sonra kapat:
+```
+"Google'ın planını anlatmadan önce, küçük bir detay var..."
+[başka konu]
+"Şimdi Google'a dönelim — işte tam da bu yüzden..."
+```
+
+### 14.3 REWARD — Okuyucuyu Ödüllendir
+
+Her içerik okuyucuya 3 ödül tipinden EN AZ birini vermeli:
+
+| Ödül Tipi | Açıklama | Uygulanışı |
+|-----------|----------|------------|
+| **Kabile Ödülü** | "Ben bu topluluğun parçasıyım" hissi | "AI Rehber takipçileri bunu çoktan biliyordu." |
+| **Av Ödülü** | "Değerli bilgiyi yakaladım" hissi | Somut veri, istatistik, insider bilgi paylaş |
+| **Benlik Ödülü** | "Kendimi geliştirdim" hissi | Pratik ipucu, prompt önerisi, uygulanabilir adım ver |
+
+### 14.4 INVESTMENT — Okuyucuyu Geri Getir
+
+Okuyucu emek verirse geri döner. Her yazının sonunda EN AZ biri olmalı:
+
+- **Seri İpucu:** "Yarın bu modelin Türkiye testini yayınlıyoruz."
+- **Soru:** "Sen bu konuda ne düşünüyorsun? Bize yaz."
+- **Araç/Kaynak:** "Bu prompt'u hemen dene: [...]"
+- **FOMO:** "Bu bilgiyi bilen 1000 kişiden biri oldun."
+- **Bülten CTA:** "Her sabah AI dünyasının özetini al → [bülten]"
+
+### 14.5 Başlık Psikolojisi Şablonları
+
+Her başlık aşağı formüllerden birine uymalıdır:
+
+| Formül | Pattern | Örnek |
+|--------|---------|-------|
+| **Rakam + Sıfat + Anahtar** | [Rakam] [Güçlü Sıfat] [Konu] | "5 Şok Edici GPT-5 Özelliği" |
+| **Nasıl + Fayda** | [Konu] Nasıl [Fayda Sağlar] | "AI Agent'lar Kodlamayı Nasıl 10x Hızlandırıyor" |
+| **Neden + Gerilim** | [Konu] Neden [Şaşırtıcı Sonuç] | "Google Neden Kendi AI'ını Kapatıyor" |
+| **X vs Y** | [A] vs [B]: [Sonuç] | "GPT-5 vs Claude 4: Kazanan Belli Oldu" |
+| **Gizli/Bilinmeyen** | [Kaynağın] Gizli [Şeyi] | "OpenAI'ın Gizlediği 3 Kritik Detay" |
+| **Soru + Provokasyon** | [Provokatif Soru]? | "AI Geliştiricileri İşsiz mi Kalacak?" |
+
+**Başlık Kontrol Listesi:**
+- [ ] Rakam veya somut detay var mı?
+- [ ] Merak boşluğu yaratıyor mu?
+- [ ] 60 karakterden kısa mı? (Google SERP)
+- [ ] Anahtar kelime ilk 3 kelimede mi?
+- [ ] Clickbait DEĞİL ama tıklanası mı?
+
+### 14.6 Sosyal Medya → Site Döngüsü
+
+Her haber yayınlandığında 3 katmanlı paylaşım:
+
+```
+1. HOOK POST (Twitter/X, LinkedIn):
+   → Haberin en şok edici cümlesini al
+   → "Devamı airehber.com'da 👆" ile bitir
+   → Link preview'da güçlü başlık görünmeli
+
+2. THREAD/CAROUSEL:
+   → Haberin 3-4 kilit noktasını özetle
+   → Her slide/tweet sonunda merak boşluğu
+   → Son slide: "Tam analiz → [link]"
+
+3. COMMUNITY POST:
+   → Tartışma sorusu sor
+   → Okuyucu yorumlarına yanıt ver
+   → En iyi yorumu sonraki haberde referans ver
+```
+
+### 14.7 Bağımlılık Mekanizması (Rutin Oluşturma)
+
+Okuyucuyu tek seferlik ziyaretçiden düzenli takipçiye çevirme stratejisi:
+
+| Mekanizma | Uygulama |
+|-----------|----------|
+| **Sabit Zaman** | Her gün aynı saatte (09:00) yeni içerik |
+| **Seri İçerik** | "AI Haftalık Brifing" → her Pazartesi beklenti |
+| **İlerleme Hissi** | "Bu hafta 5 haberin 3'ünü okudun" (gelecek feature) |
+| **Kayıp Korkusu** | "Dünün en çok okunan haberi: [...]" |
+| **Topluluk** | Okuyucu yorumları, anketler, geri bildirim |
+
+### 14.8 Yazım Stili Kuralları (Tüm İçerikler)
+
+```
+YAPMA                                    YAP
+─────                                    ───
+"Bu yazıda X'i inceleyeceğiz"          → Direkt hook ile başla
+"Sonuç olarak..."                       → "İşte tam da bu yüzden..."
+"Önemle belirtmek gerekir ki..."       → Kısa. Net. Vur.
+Pasif cümle: "Duyuruldu"               → Aktif: "OpenAI duyurdu"
+5+ satır paragraf                       → Max 3 satır, sonra boşluk
+Jargon açıklamasız                      → Parantez içi 1 cümle açıklama
+"Yapay zeka teknolojisi alanında..."    → "AI dünyasında..."
+Aynı cümle yapısı tekrarı              → Kısa + Uzun + Soru karıştır
+```
+
+**Ritim Kuralı:** Her 3 paragrafta bir "kırılma" olmalı:
+- Tek satırlık vurgu cümlesi
+- Soru
+- Mini liste (3 madde max)
+- Rakam/istatistik vurgusu
+
+> **SON SÖZ:** Bu framework'ün amacı manipülasyon değil,
+> değerli bilgiyi okuyucuya ulaştırabilmektir.
+> İyi bilgi + kötü sunum = kimse okumaz.
+> İyi bilgi + iyi sunum = herkes öğrenir.

@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
-import { yazilar, haberler, promptlar, kartlar } from "#site/content";
+import { yazilar, haberler, promptlar } from "#site/content";
 import { generateMeta } from "@/lib/seo";
 import { PageHeader } from "@/components/shared/page-header";
 import { SearchUI, type SearchItem } from "@/components/shared/search-ui";
@@ -44,22 +44,13 @@ export default function AramaPage() {
         type: "Prompt",
         date: p.date,
       })),
-    ...kartlar
-      .filter((k) => k.published)
-      .map((k) => ({
-        title: k.title,
-        description: k.description,
-        href: `/modeller/${k.slug}`,
-        type: "Model",
-        date: k.date,
-      })),
   ];
 
   return (
     <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
       <PageHeader
         title="Ara"
-        description="Yazılar, haberler, promptlar ve model kartlarında arayın."
+        description="Yazılar, haberler ve promptlarda arayın."
       />
       <SearchUI items={items} />
     </section>
