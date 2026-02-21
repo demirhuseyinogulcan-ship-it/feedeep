@@ -113,6 +113,8 @@ export default async function HaberDetayPage({ params }: Props) {
           updated={news.updated}
           sourceName={news.sourceName}
           readingTime={news.metadata.readingTime}
+          slug={news.slug}
+          contentType="haber"
         />
 
         <div className="line-void mb-12" />
