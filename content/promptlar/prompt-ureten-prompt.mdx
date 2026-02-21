@@ -1,0 +1,99 @@
+---
+title: "Prompt Üreten Prompt: Meta-Prompt Tekniği"
+slug: prompt-ureten-prompt
+description: "Yapay zekaya prompt yazdıran prompt. Ham fikri yapıştır, profesyonel seviye prompt al. 3 modelde test edildi."
+date: 2026-02-17
+category: genel
+difficulty: ileri
+targetRole: "Herkes"
+prompt: |
+  Sen bir prompt mühendisisin. Görevin, kullanıcının belirsiz veya zayıf talebini alıp onu yüksek kaliteli, yapılandırılmış bir prompt'a dönüştürmek.
+
+  Kullanıcının talebi: [TALEP]
+
+  Şu adımları izle:
+
+  1. Önce talebi analiz et. Eksik bilgileri, belirsizlikleri ve varsayımları listele.
+  2. Talebin arkasındaki asıl amacı çıkar — kullanıcı ne elde etmek istiyor?
+  3. Aşağıdaki yapıda optimize edilmiş bir prompt üret:
+
+  ---
+  OLUŞTURULAN PROMPT:
+  
+  [Rol Tanımı] — AI'ın hangi uzman kimliğini takınacağı
+  [Bağlam] — Görevin arka planı ve kısıtları
+  [Görev] — Net, ölçülebilir çıktı talebi
+  [Format] — Çıktının yapısı (liste, tablo, paragraf, kod vb.)
+  [Kısıtlar] — Yapılmaması gerekenler, ton, uzunluk
+  [Örnek] — Beklenen çıktıdan kısa bir örnek
+  ---
+
+  4. Oluşturduğun prompt'un güçlü ve zayıf yönlerini 1 cümlede özetle.
+  5. Alternatif bir versiyon daha sun — farklı bir açıdan yaklaşan.
+
+  Kurallar:
+  - Jargon kullanma, sade Türkçe yaz
+  - Prompt'u doğrudan kopyalanabilir formatta ver
+  - Her prompt minimum 100, maksimum 500 kelime olsun
+models:
+  - name: Claude Opus 4
+    score: 10
+    note: "Meta-prompt anlama kapasitesi rakipsiz"
+  - name: GPT-5
+    score: 9
+    note: "Yapılandırma kalitesi çok yüksek, bazen fazla uzun"
+  - name: Gemini 3 Pro
+    score: 8
+    note: "Hızlı ama format tutarlılığı düşük"
+variables:
+  - name: TALEP
+    description: "Prompt'a dönüştürülecek ham talep veya fikir"
+    example: "Bana LinkedIn postu yazdır"
+commonMistakes:
+  - "Talebi çok kısa yazmak — en az 1 cümle bağlam verin"
+  - "Üretilen prompt'u düzenlemeden kullanmak — kendi bağlamınıza uyarlayın"
+  - "Tek seferde mükemmel beklemek — 2-3 iterasyon yapın"
+keywords:
+  - meta prompt
+  - prompt muhendisligi
+  - prompt olusturucu
+  - yapay zeka prompt
+  - chatgpt prompt teknigi
+published: true
+---
+
+## Bu Prompt Ne İşe Yarar?
+
+Çoğu kişi yapay zekadan kötü çıktı alıyor çünkü girdisi kötü. "Bana bir şey yaz" demek, bir restorana girip "bana bir şey getir" demekle aynı şey. Bu meta-prompt, belirsiz talepleri profesyonel seviye prompt'lara çeviriyor.
+
+Mantık basit: yapay zeka, prompt yazmakta insandan iyi. O zaman prompt yazmayı da ona yaptırın.
+
+## Nasıl Kullanılır?
+
+1. `[TALEP]` alanına ne istediğinizi sade bir cümleyle yazın
+2. Prompt'u Claude, GPT veya Gemini'ye yapıştırın
+3. Üretilen prompt'u alın, gerekirse 1-2 kelime düzenleyin
+4. O prompt'u kullanarak asıl çıktınızı alın
+
+İki aşamalı bir süreç ama sonuç farkı devasa.
+
+## Örnek Çıktı
+
+**Girdi:** "Bana LinkedIn postu yazdır"
+
+**Üretilen Prompt:**
+
+> Sen deneyimli bir LinkedIn içerik stratejistisin. B2B teknoloji sektöründe çalışan profesyoneller için dikkat çekici, etkileşim alan postlar yazıyorsun.
+>
+> Görev: [KONU] hakkında bir LinkedIn postu yaz.
+> Format: Hook cümlesi + 3-5 kısa paragraf + CTA. Maksimum 1300 karakter.
+> Ton: Samimi ama profesyonel, iddialı ama kanıtlı.
+> Kısıtlar: Emoji maksimum 3 adet. Hashtag yok. Klişe açılışlar ("Bugün bir şey fark ettim...") yasak.
+
+Fark görünüyor mu? İlk halden üretilecek çıktı ile bu prompt'tan üretilecek çıktı arasında uçurum var.
+
+## İpuçları
+
+- Bu prompt'u her yeni proje öncesi çalıştırarak kendi prompt kütüphanenizi oluşturun
+- Üretilen prompt'u farklı modellerde test edin — her model farklı yorumluyor
+- "Alternatif versiyon" kısmı genelde altın madeni; ilk versiyondan daha iyi olabiliyor

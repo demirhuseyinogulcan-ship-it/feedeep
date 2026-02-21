@@ -4,19 +4,28 @@
 
 import type { Metadata } from "next";
 import { promptlar } from "#site/content";
-import { generateMeta } from "@/lib/seo";
+import { generateMeta, collectionPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { PROMPT_CATEGORIES, DIFFICULTY } from "@/lib/constants";
 import { PageHeader } from "@/components/shared/page-header";
+import { JsonLd } from "@/components/seo/json-ld";
 import {
   FilterableContentList,
   type ContentItem,
 } from "@/components/shared/filterable-content-list";
 
 export const metadata: Metadata = generateMeta({
-  title: "Prompt Kütüphanesi",
+  title: "AI Prompt Şablonları: Kopyala-Yapıştır Kullan [2026]",
   description:
-    "Kullanıma hazır, model bazlı skorlanmış ve değişkenli AI prompt şablonları.",
+    "ChatGPT, Claude ve Gemini için test edilmiş profesyonel prompt şablonları. Kopyala, değişkenleri doldur, yapıştır — model bazlı skorlar ve hata uyarıları dahil.",
   path: "/prompt-kutuphanesi",
+  keywords: [
+    "ai prompt",
+    "chatgpt prompt",
+    "prompt şablonu",
+    "claude prompt",
+    "yapay zeka prompt",
+    "prompt kütüphanesi",
+  ],
 });
 
 export default function PromptKutuphanesiPage() {
@@ -41,16 +50,38 @@ export default function PromptKutuphanesiPage() {
   }));
 
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
-      <PageHeader
-        title="Prompt Kütüphanesi"
-        description="Model bazlı skorlanmış, değişkenli ve hata senaryolu prompt şablonları."
+    <>
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: "AI Prompt Kütüphanesi",
+          description:
+            "ChatGPT, Claude ve Gemini için test edilmiş, model bazlı skorlanmış prompt şablonları.",
+          url: "/prompt-kutuphanesi",
+          items: prompts.map((p) => ({
+            name: p.title,
+            url: `/prompt-kutuphanesi/${p.slug}`,
+            description: p.description,
+          })),
+        })}
       />
-      <FilterableContentList
-        items={items}
-        categories={categories}
-        emptyMessage="Bu kategoride henüz prompt yok."
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Ana Sayfa", href: "/" },
+          { name: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
+        ])}
       />
-    </section>
+
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <PageHeader
+          title="AI Prompt Kütüphanesi"
+          description={`${prompts.length} adet test edilmiş, model bazlı skorlanmış prompt şablonu. Kopyala, değişkenleri doldur, yapıştır.`}
+        />
+        <FilterableContentList
+          items={items}
+          categories={categories}
+          emptyMessage="Bu kategoride henüz prompt yok."
+        />
+      </section>
+    </>
   );
 }

@@ -1,0 +1,102 @@
+---
+title: "Rakip Röntgeni Promptu"
+slug: rakip-rontgeni-promptu
+description: "Rakip şirketin adını gir, 7 katmanlı analiz al: hendek analizi, zayıf karın tespiti ve somut savaş planı dahil."
+date: 2026-02-19
+category: analiz
+difficulty: ileri
+targetRole: "Strateji Uzmanı"
+prompt: |
+  Sen rekabet istihbaratı konusunda 20 yıl deneyimli bir strateji danışmanısın. McKinsey, BCG ve Bain metodolojilerini birleştiren kendi çerçeven var.
+
+  Rakip: [RAKİP_ŞİRKET]
+  Sektör: [SEKTÖR]
+  Benim şirketim: [BENİM_ŞİRKET] (opsiyonel)
+
+  Şu 7 katmanlı analizi yap:
+
+  **KATMAN 1 — Yüzey Taraması**
+  Ürün/hizmet portföyü, fiyatlandırma modeli, hedef kitle segmentleri
+
+  **KATMAN 2 — Büyüme Mekaniği**
+  Müşteri edinme kanalları, büyüme stratejisi (organik/ücretli/ağ etkisi), viral katsayıları
+
+  **KATMAN 3 — Hendek Analizi (Moat)**
+  Rekabet avantajları, taklidi ne kadar zor, savunulabilirlik süresi
+
+  **KATMAN 4 — Zayıf Karın**
+  Savunmasız noktalar, müşteri şikayetleri, operasyonel darboğazlar, churn nedenleri
+
+  **KATMAN 5 — Finansal Sinyal**
+  Bilinen gelir, yatırım turları, yakma hızı (burn rate), kârlılık sinyalleri
+
+  **KATMAN 6 — Gelecek Hamlesi**
+  Olası 12 aylık strateji, potansiyel pivotlar, M&A ihtimalleri
+
+  **KATMAN 7 — Savaş Planı**
+  Benim şirketim için 3 somut aksiyon: (1) Hemen yapılabilir, (2) 3 ay içinde, (3) 6-12 ay uzun vade
+
+  Her katmanı tablo formatında sun. Spekülasyon yaptığın yerleri [TAHMİN] etiketiyle işaretle.
+models:
+  - name: Claude Opus 4
+    score: 10
+    note: "Katmanlı analiz yapısını mükemmel tutuyor, spekülasyon etiketlemesi titiz"
+  - name: GPT-5
+    score: 9
+    note: "Finansal sinyal bölümünde güçlü, bazen fazla iyimser varsayımlar yapıyor"
+  - name: Gemini 3 Pro
+    score: 8
+    note: "Güncel veri erişimi avantajlı ama yapı tutarlılığı düşük"
+variables:
+  - name: RAKİP_ŞİRKET
+    description: "Analiz edilecek rakip şirketin adı"
+    example: "Notion"
+  - name: SEKTÖR
+    description: "Faaliyet gösterilen sektör"
+    example: "Üretkenlik Yazılımları (SaaS)"
+  - name: BENİM_ŞİRKET
+    description: "Karşılaştırma yapılacak kendi şirketinizin adı (opsiyonel)"
+    example: "Coda"
+commonMistakes:
+  - "Sektör bilgisi vermemek — model genel analiz yapar, spesifik olmaz"
+  - "Kendi şirketinizi belirtmemek — Katman 7 savaş planı üretilemez"
+  - "Çıktıyı olduğu gibi strateji belgesi yapmak — AI'ın bilgisi sınırlı, doğrulama şart"
+keywords:
+  - rakip analizi prompt
+  - rekabet istihbarati ai
+  - chatgpt strateji analiz
+  - rakip swot ai
+  - competitive intelligence
+published: true
+---
+
+## Bu Prompt Ne İşe Yarar?
+
+McKinsey'e rekabet analizi yaptırmak 6 haneli rakamlara mal oluyor. Bu prompt aynı çerçeveyi yapay zekaya uygulatıyor. Elbette bir danışmanlık firmasının yerini tutmaz ama özellikle küçük ve orta ölçekli şirketler için ilk keşif aşamasında devasa zaman kazandırıyor.
+
+7 katmanlı yapı, yüzeysel "güçlü-zayıf yönler" analizinin çok ötesine geçiyor. Hendek analizi, zayıf karın tespiti ve somut savaş planı gibi katmanlar, gerçek stratejik değer üretiyor.
+
+## Nasıl Kullanılır?
+
+1. `[RAKİP_ŞİRKET]` ve `[SEKTÖR]` alanlarını doldurun
+2. Karşılaştırma için `[BENİM_ŞİRKET]` opsiyonel ama Katman 7 için gerekli
+3. Claude Opus 4 veya GPT-5'te çalıştırın — bu prompt'un tam potansiyeli güçlü modellerde açığa çıkıyor
+4. `[TAHMİN]` etiketli maddeleri ayrıca doğrulayın
+
+## Örnek Çıktı
+
+**Rakip:** Notion, **Sektör:** SaaS Üretkenlik
+
+**Katman 4 — Zayıf Karın (özet):**
+
+| Zayıf Nokta | Açıklama | Fırsat |
+|---|---|---|
+| Performans | Büyük workspace'lerde yavaşlama | Hız odaklı alternatif konumlandırma |
+| Offline erişim | Sınırlı offline fonksiyon | Offline-first mimari avantajı |
+| Öğrenme eğrisi | Yeni kullanıcılar için karmaşık | Basitlik mesajıyla pozisyonlama |
+
+## İpuçları
+
+- Aynı prompt'u 3 farklı rakip için çalıştırıp sonuçları yan yana koyun — örüntüler ortaya çıkıyor
+- Katman 6'daki "gelecek hamlesi" tahminlerini çeyreklik olarak tekrar çalıştırın
+- Çıktıyı aldıktan sonra "Katman 4'ü derinleştir, müşteri şikayetlerini detaylandır" diyerek drill-down yapın

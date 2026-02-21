@@ -1,0 +1,93 @@
+---
+title: "Kendini 3 Kez Düzelt Promptu"
+slug: kendini-3-kez-duzelt-promptu
+description: "AI'ın ilk cevabı asla en iyisi değil. Bu prompt modeli kendi çıktısını puanlayıp 3 kez baştan yazmaya zorluyor."
+date: 2026-02-18
+category: genel
+difficulty: orta
+targetRole: "Herkes"
+prompt: |
+  [GÖREV]
+
+  Bu görevi tamamladıktan sonra şu süreci uygula:
+
+  --- ROUND 1: İLK ÇIKTI ---
+  Görevi tamamla ve çıktını sun.
+
+  --- ROUND 2: OTOKRİTİK ---
+  Şimdi bir editör şapkası tak. Az önce ürettiğin çıktıyı şu 5 kriterde eleştir:
+  1. Doğruluk — Hatalı veya yanıltıcı bilgi var mı?
+  2. Netlik — Belirsiz veya karmaşık yerler var mı?
+  3. Eksikler — Atlanmış önemli noktalar var mı?
+  4. Yapı — Akış mantıklı mı, okuyucu takip edebilir mi?
+  5. Değer — Okuyucu bunu okuduktan sonra somut bir şey yapabilir mi?
+
+  Her kriter için 1-10 puan ver ve 1 cümle açıklama yaz.
+
+  --- ROUND 3: İYİLEŞTİRİLMİŞ VERSİYON ---
+  Round 2'deki eleştirilerine göre çıktını baştan yaz. 
+  Bu sefer:
+  - Eksikleri tamamla
+  - Belirsizlikleri netleştir
+  - Yapıyı optimize et
+  - Değer yoğunluğunu artır
+
+  Son çıktının altına "Değişiklik Özeti" ekle — ne değişti, neden değişti.
+models:
+  - name: Claude Opus 4
+    score: 10
+    note: "Otokritik kapasitesi çok güçlü, gerçekten farklı bir versiyon üretiyor"
+  - name: GPT-5
+    score: 9
+    note: "Round 2 eleştirileri detaylı, Round 3 iyileştirmesi tutarlı"
+  - name: Gemini 3 Pro
+    score: 7
+    note: "Bazen Round 3'te aynı çıktıyı tekrarlıyor"
+variables:
+  - name: GÖREV
+    description: "Yapay zekaya yaptırılacak asıl görev"
+    example: "Türkiye'deki SaaS pazarı hakkında 500 kelimelik bir analiz yaz"
+commonMistakes:
+  - "Görevi çok basit tutmak — basit görevlerde iterasyonun etkisi az olur"
+  - "Round 3 çıktısını sorgulamadan kabul etmek — bazen Round 1 daha iyi olabilir"
+  - "Prompt'u kısaltmak — 3 round yapısını tam bırakın, AI atlama eğiliminde"
+keywords:
+  - ai self critique
+  - prompt iterasyon
+  - yapay zeka cikti iyilestirme
+  - otokritik prompt
+  - chatgpt hack
+published: true
+---
+
+## Bu Prompt Ne İşe Yarar?
+
+İnsan editörler bir metni en az 3 kez revize eder. Yapay zeka ise tek seferde cevap verir ve durur. Bu prompt, AI'ı zorla editör koltuğuna oturtuyor: kendi çıktısını eleştirsin, puanlasın ve baştan yazsın.
+
+Sonuç genellikle ilk versiyondan ölçülebilir şekilde daha iyi oluyor. Özellikle uzun metin, analiz ve strateji belgelerinde fark dramatik.
+
+## Nasıl Kullanılır?
+
+1. `[GÖREV]` alanına asıl talebinizi yazın — ne kadar spesifik olursa iterasyon o kadar etkili
+2. Prompt'u yapıştırın ve çalıştırın
+3. Round 1, 2 ve 3 çıktılarını karşılaştırın
+4. Genelde Round 3 en iyisi oluyor ama bazen Round 1'in doğallığı daha iyi
+
+## Örnek Çıktı
+
+**Görev:** "Remote çalışanlar için zaman yönetimi rehberi yaz"
+
+**Round 2 Otokritik (özet):**
+> - Doğruluk: 8/10 — Pomodoro tekniği açıklaması eksik
+> - Netlik: 6/10 — 3. paragraf çok yoğun, bölünmeli  
+> - Eksikler: 5/10 — Asenkron iletişim hiç ele alınmamış
+> - Yapı: 7/10 — Giriş çok uzun, direkt konuya girilmeli
+> - Değer: 6/10 — Somut araç önerisi yok
+
+Bu eleştiriler sayesinde Round 3 versiyonu tamamen farklı bir metin oluyor.
+
+## İpuçları
+
+- Bu tekniği rapor, makale veya strateji belgesi gibi uzun formatlarda kullanın — kısa çıktılarda (tweet, slogan) etkisi sınırlı
+- Round 2'deki puanları takip edin; 8 üstü alan kriterlerde gerçek iyileşme beklemeyin
+- Claude Opus 4 bu prompt'ta özellikle güçlü — otokritik derinliği diğer modellerin önünde

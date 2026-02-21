@@ -253,3 +253,54 @@ export function howToJsonLd(params: {
     })),
   };
 }
+
+/** ItemList JSON-LD — koleksiyon/liste sayfaları için (Rich Snippet) */
+export function itemListJsonLd(params: {
+  name: string;
+  description: string;
+  items: Array<{ name: string; url: string; position?: number }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: params.name,
+    description: params.description,
+    numberOfItems: params.items.length,
+    itemListElement: params.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: item.position ?? index + 1,
+      name: item.name,
+      url: item.url.startsWith("http") ? item.url : `${SITE.url}${item.url}`,
+    })),
+  };
+}
+
+/** CollectionPage JSON-LD — Prompt Kütüphanesi gibi toplama sayfaları */
+export function collectionPageJsonLd(params: {
+  name: string;
+  description: string;
+  url: string;
+  items: Array<{ name: string; url: string; description: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: params.name,
+    description: params.description,
+    url: params.url.startsWith("http") ? params.url : `${SITE.url}${params.url}`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: params.items.length,
+      itemListElement: params.items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "HowTo",
+          name: item.name,
+          description: item.description,
+          url: item.url.startsWith("http") ? item.url : `${SITE.url}${item.url}`,
+        },
+      })),
+    },
+  };
+}
