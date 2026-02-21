@@ -6,7 +6,7 @@
 
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/json-ld";
-import { websiteJsonLd } from "@/lib/seo";
+import { websiteJsonLd, faqJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import { yazilar, haberler, promptlar, kartlar, haftalik } from "#site/content";
@@ -76,6 +76,30 @@ function getHeroItem(): HeroItem | null {
 
 const heroItem = getHeroItem();
 
+// ─── FAQ — SEO Rich Snippet + Kullanıcı bilgilendirme ───
+const AI_REHBER_FAQ = [
+  {
+    question: "AI Rehber nedir?",
+    answer:
+      "AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve kullanıma hazır prompt şablonlarını Türkçe olarak sunan bağımsız bir yayın platformudur.",
+  },
+  {
+    question: "Yapay zeka haberleri nereden takip edilir?",
+    answer:
+      "AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar. Haftalık brifing ile önemli gelişmeleri kaçırmazsınız.",
+  },
+  {
+    question: "AI Rehber'deki haberler güvenilir mi?",
+    answer:
+      "Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.",
+  },
+  {
+    question: "Prompt kütüphanesi nasıl kullanılır?",
+    answer:
+      "Prompt Kütüphanesi'ndeki şablonları doğrudan ChatGPT, Claude veya Gemini'ye kopyalayabilirsiniz. Her prompt, model bazlı performans skorları ve örnek çıktılarla birlikte sunulur.",
+  },
+];
+
 // Son Yazılar — hero'daki yazıyı çıkar
 const recentPosts = heroItem?.type === "yazi"
   ? publishedYazilar.slice(1, 4)
@@ -120,7 +144,12 @@ export default function HomePage() {
 
   return (
     <>
-      <JsonLd data={websiteJsonLd()} />
+      <JsonLd
+        data={[
+          websiteJsonLd(),
+          faqJsonLd(AI_REHBER_FAQ),
+        ]}
+      />
 
       {/* ─── Kaldığın Yerden Devam Et ─── */}
       <ContinueReadingBanner />
@@ -380,6 +409,34 @@ export default function HomePage() {
                 {section.count}
               </span>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Hair-line */}
+      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-400" />
+
+      {/* ─── SSS (FAQ) — SEO Rich Snippet ─── */}
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16 animate-fade-up delay-200">
+        <h2 className="text-xs font-mono tracking-widest uppercase text-gray-600 mb-8">
+          Sıkça Sorulan Sorular
+        </h2>
+        <div className="space-y-6">
+          {AI_REHBER_FAQ.map((faq, i) => (
+            <details
+              key={i}
+              className="group border border-white/[0.04] rounded-lg"
+            >
+              <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-gray-300 hover:text-gray-100 transition-colors">
+                {faq.question}
+                <span className="text-gray-700 group-open:rotate-45 transition-transform duration-200 text-lg">
+                  +
+                </span>
+              </summary>
+              <p className="px-5 pb-4 text-sm text-gray-500 leading-relaxed">
+                {faq.answer}
+              </p>
+            </details>
           ))}
         </div>
       </section>

@@ -12,6 +12,7 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
+import { RelatedNews } from "@/components/content/related-news";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 
 type Props = {
@@ -37,6 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     publishedTime: news.date,
     modifiedTime: news.updated,
     keywords: news.keywords,
+    section: HABER_CATEGORIES[news.category] ?? news.category,
+    tags: news.keywords,
   });
 }
 
@@ -46,6 +49,26 @@ export default async function HaberDetayPage({ params }: Props) {
   if (!news) notFound();
 
   const categoryLabel = HABER_CATEGORIES[news.category] ?? news.category;
+
+  // İlgili haberler: aynı kategori veya ortak keyword
+  const related = haberler
+    .filter(
+      (h) =>
+        h.published &&
+        h.slug !== news.slug &&
+        (h.category === news.category ||
+          h.keywords?.some((k) => news.keywords?.includes(k)))
+    )
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3)
+    .map((h) => ({
+      slug: h.slug,
+      title: h.title,
+      description: h.description,
+      date: h.date,
+      category: h.category,
+      categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
+    }));
 
   return (
     <>
@@ -60,6 +83,7 @@ export default async function HaberDetayPage({ params }: Props) {
             sourceUrl: news.sourceUrl,
             sourceName: news.sourceName,
             keywords: news.keywords,
+            articleSection: categoryLabel,
           }),
           breadcrumbJsonLd([
             { name: "Ana Sayfa", href: "/" },
@@ -121,6 +145,9 @@ export default async function HaberDetayPage({ params }: Props) {
             </a>
           </div>
         </footer>
+
+        {/* İlgili Haberler — SEO iç link ağı */}
+        <RelatedNews items={related} />
       </article>
     </>
   );

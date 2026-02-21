@@ -77,6 +77,10 @@ export default function RootLayout({
   return (
     <html lang="tr" dir="ltr" suppressHydrationWarning>
       <head>
+        {/* hreflang — uluslararası sinyal */}
+        <link rel="alternate" hrefLang="tr" href="https://airehber.com" />
+        <link rel="alternate" hrefLang="x-default" href="https://airehber.com" />
+
         {/* PWA Manifest & Theme */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#050505" />

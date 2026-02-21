@@ -54,7 +54,7 @@ export function ArticleHeader({
       <h1 className="text-3xl sm:text-4xl font-bold text-gray-100 tracking-tight leading-tight">
         {title}
       </h1>
-      <p className="mt-4 text-gray-500 leading-relaxed">{description}</p>
+      <p className="mt-4 text-gray-500 leading-relaxed" data-description="">{description}</p>
 
       <div className="mt-6 flex items-center gap-4 text-[11px] text-gray-600">
         <span>{author}</span>

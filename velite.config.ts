@@ -36,7 +36,7 @@ const yazilar = defineCollection({
 
     // Kategori & Etiketler
     category: s.enum(["rehber", "inceleme", "analiz", "karsilastirma"]),
-    keywords: s.array(s.string()).max(5), // max 5: 1 primary + 4 secondary
+    keywords: s.array(s.string()).max(6), // max 6: 1 primary + 4 secondary + 1 generic TR SEO
 
     // SEO
     image: s.string().optional(),
@@ -83,7 +83,7 @@ const haberler = defineCollection({
     sourceUrl: s.string().url(),
     sourceName: s.string(),
     category: s.enum(["sirketler", "sektor", "turkiye", "arastirma"]),
-    keywords: s.array(s.string()).max(5),
+    keywords: s.array(s.string()).max(6), // max 6: +1 generic TR SEO keyword
 
     // Güven
     sources: s.array(sourceSchema).min(1),

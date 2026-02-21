@@ -15,6 +15,10 @@ type SEOParams = {
   modifiedTime?: string;
   keywords?: string[];
   noIndex?: boolean;
+  /** OG article:section (kategori) */
+  section?: string;
+  /** OG article:tag (etiketler) */
+  tags?: string[];
 };
 
 /** Next.js metadata üretici — her sayfa için DRY */
@@ -28,6 +32,8 @@ export function generateMeta({
   modifiedTime,
   keywords,
   noIndex = false,
+  section,
+  tags,
 }: SEOParams): Metadata {
   const url = `${SITE.url}${path}`;
   const ogImage = image ?? `${SITE.url}/api/og?title=${encodeURIComponent(title)}`;
@@ -48,6 +54,9 @@ export function generateMeta({
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
       ...(publishedTime && { publishedTime }),
       ...(modifiedTime && { modifiedTime }),
+      ...(type === "article" && { authors: [SITE.author.name] }),
+      ...(section && { section }),
+      ...(tags && { tags }),
     },
     twitter: {
       card: "summary_large_image",
@@ -137,6 +146,7 @@ export function newsArticleJsonLd(params: {
   sourceUrl?: string;
   sourceName?: string;
   keywords?: string[];
+  articleSection?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -150,6 +160,7 @@ export function newsArticleJsonLd(params: {
     author: {
       "@type": "Person",
       name: SITE.author.name,
+      url: SITE.author.linkedin,
     },
     publisher: organizationJsonLd(),
     inLanguage: SITE.language,
@@ -159,6 +170,7 @@ export function newsArticleJsonLd(params: {
       "@id": `${SITE.url}/haberler/${params.slug}`,
     },
     ...(params.keywords && { keywords: params.keywords.join(", ") }),
+    ...(params.articleSection && { articleSection: params.articleSection }),
     ...(params.sourceUrl && {
       citation: {
         "@type": "WebPage",
