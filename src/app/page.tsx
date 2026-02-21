@@ -12,7 +12,7 @@ import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import { yazilar, haberler, promptlar, haftalik } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
-import { TheSignal } from "@/components/shared/the-signal";
+import { NewsTicker } from "@/components/shared/the-signal";
 import { StatsStrip } from "@/components/shared/stats-strip";
 
 // ─── Velite verilerini hazırla ───
@@ -157,8 +157,8 @@ export default function HomePage() {
       {/* ─── Kaldığın Yerden Devam Et ─── */}
       <ContinueReadingBanner />
 
-      {/* ─── The Signal: Canlı AI Nabız ─── */}
-      <TheSignal />
+      {/* ─── Gündem: Kayan Haber Şeridi ─── */}
+      <NewsTicker />
 
       {/* ─── Hero: Editörün Seçimi ─── */}
       {heroItem && (
