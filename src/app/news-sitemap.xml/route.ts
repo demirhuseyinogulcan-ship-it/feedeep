@@ -1,24 +1,28 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — Google News Sitemap
-// Google News'e dahil olmak için özel haber sitemap'i
-// Son 2 gün içindeki haberler (Google News gerekliliği)
+// Google News için özel haber sitemap'i
+// Son 30 gün içindeki yayınlanmış haberler
 // ─────────────────────────────────────────────────────────────
 
 import { haberler } from "#site/content";
 import { SITE } from "@/lib/constants";
 
 export async function GET() {
-  const twoDaysAgo = new Date();
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
   const recentNews = haberler
-    .filter((h) => h.published && new Date(h.date) >= twoDaysAgo)
+    .filter((h) => h.published && new Date(h.date) >= thirtyDaysAgo)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-${recentNews
+${recentNews.length === 0
+  ? `  <url>
+    <loc>${SITE.url}/haberler</loc>
+  </url>`
+  : recentNews
   .map(
     (h) => `  <url>
     <loc>${SITE.url}/haberler/${h.slug}</loc>
@@ -29,7 +33,6 @@ ${recentNews
       </news:publication>
       <news:publication_date>${new Date(h.date).toISOString()}</news:publication_date>
       <news:title>${escapeXml(h.title)}</news:title>
-      <news:keywords>${h.keywords?.join(", ") ?? ""}</news:keywords>
     </news:news>
   </url>`
   )
