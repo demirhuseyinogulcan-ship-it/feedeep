@@ -73,6 +73,17 @@ export const metadata: Metadata = {
     // Deploy sonrası Search Console'dan doğrulama kodu alıp ekle
     google: process.env.NEXT_PUBLIC_GSC_ID || undefined,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=20260221" },
+      { url: "/icon-192.png?v=20260221", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png?v=20260221", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png?v=20260221", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico?v=20260221"],
+  },
 };
 
 export default function RootLayout({
@@ -90,11 +101,14 @@ export default function RootLayout({
 
         {/* PWA Manifest & Theme */}
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico?v=20260221" sizes="any" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=20260221" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=20260221" />
         <meta name="theme-color" content="#050505" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="AI Rehber" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260221" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
       </head>
       <body
