@@ -13,6 +13,7 @@ import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { ActionItems } from "@/components/content/action-items";
+import { RelatedArticles } from "@/components/content/related-articles";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 
 type Props = {
@@ -39,6 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     modifiedTime: post.updated,
     keywords: post.keywords,
     image: post.image,
+    section: YAZI_CATEGORIES[post.category] ?? post.category,
+    tags: post.keywords,
   });
 }
 
@@ -48,6 +51,27 @@ export default async function YaziDetayPage({ params }: Props) {
   if (!post) notFound();
 
   const categoryLabel = YAZI_CATEGORIES[post.category] ?? post.category;
+
+  // İlgili yazılar: aynı kategori veya ortak keyword
+  const related = yazilar
+    .filter(
+      (y) =>
+        y.published &&
+        y.slug !== post.slug &&
+        (y.category === post.category ||
+          y.keywords?.some((k) => post.keywords?.includes(k)))
+    )
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3)
+    .map((y) => ({
+      slug: y.slug,
+      title: y.title,
+      description: y.description,
+      date: y.date,
+      category: y.category,
+      categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
+      readingTime: y.metadata.readingTime,
+    }));
 
   return (
     <>
@@ -62,6 +86,8 @@ export default async function YaziDetayPage({ params }: Props) {
             keywords: post.keywords,
             section: categoryLabel,
             image: post.image,
+            wordCount: post.metadata.wordCount,
+            readingTime: post.metadata.readingTime,
           }),
           breadcrumbJsonLd([
             { name: "Ana Sayfa", href: "/" },
@@ -124,6 +150,9 @@ export default async function YaziDetayPage({ params }: Props) {
             <ActionItems items={post.actionItems} />
           )}
         </footer>
+
+        {/* İlgili Yazılar — SEO iç link ağı */}
+        <RelatedArticles items={related} />
       </article>
     </>
   );

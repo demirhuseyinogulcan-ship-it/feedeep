@@ -109,6 +109,8 @@ export function articleJsonLd(params: {
   image?: string;
   keywords?: string[];
   section?: string;
+  wordCount?: number;
+  readingTime?: number;
 }) {
   return {
     "@context": "https://schema.org",
@@ -126,11 +128,18 @@ export function articleJsonLd(params: {
     },
     publisher: organizationJsonLd(),
     inLanguage: SITE.language,
+    isAccessibleForFree: true,
+    ...(params.wordCount && { wordCount: params.wordCount }),
+    ...(params.readingTime && { timeRequired: `PT${params.readingTime}M` }),
     ...(params.keywords && { keywords: params.keywords.join(", ") }),
     ...(params.section && { articleSection: params.section }),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/yazilar/${params.slug}`,
+    },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["article h1", "article [data-description]"],
     },
   };
 }
@@ -147,6 +156,8 @@ export function newsArticleJsonLd(params: {
   sourceName?: string;
   keywords?: string[];
   articleSection?: string;
+  wordCount?: number;
+  readingTime?: number;
 }) {
   return {
     "@context": "https://schema.org",
@@ -165,6 +176,8 @@ export function newsArticleJsonLd(params: {
     publisher: organizationJsonLd(),
     inLanguage: SITE.language,
     isAccessibleForFree: true,
+    ...(params.wordCount && { wordCount: params.wordCount }),
+    ...(params.readingTime && { timeRequired: `PT${params.readingTime}M` }),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE.url}/haberler/${params.slug}`,

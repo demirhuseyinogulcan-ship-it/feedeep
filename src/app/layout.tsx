@@ -45,6 +45,12 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     locale: SITE.locale,
     type: "website",
+    images: [{
+      url: `${SITE.url}/api/og?title=${encodeURIComponent(SITE.title)}`,
+      width: 1200,
+      height: 630,
+      alt: SITE.title,
+    }],
   },
   twitter: {
     card: "summary_large_image",
@@ -90,10 +96,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="AI Rehber" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
-
-        {/* Preconnect for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       </head>
       <body
         className={`${fontHeading.variable} ${fontSans.variable} ${fontMono.variable} font-sans antialiased`}

@@ -15,7 +15,8 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "GPTBot",
-        allow: ["/llms.txt", "/llms-full.txt", "/yazilar/", "/haberler/", "/prompt-kutuphanesi/"],
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
       },
       {
         userAgent: "Google-Extended",
@@ -23,11 +24,33 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "ChatGPT-User",
-        allow: ["/llms.txt", "/llms-full.txt"],
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
       },
       {
         userAgent: "Anthropic-AI",
-        allow: ["/llms.txt", "/llms-full.txt"],
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
+      },
+      {
+        userAgent: "cohere-ai",
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
       },
     ],
     sitemap: [

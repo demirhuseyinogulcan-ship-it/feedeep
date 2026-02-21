@@ -642,12 +642,127 @@ Her oturum sonunda `CHANGELOG.md` dosyası güncellenir:
 
 ---
 
-## 14. Dikkat Psikolojisi & İçerik Mühendisliği
+## 14. İnsan Yazım Tonu (AI Algısını Kırma Kuralları)
+
+> **Bu bölüm tüm AI ajanlarının içerik üretirken ZORUNLU uygulaması gereken kurallardır.**
+> Amaç: Okuyucu yazıyı okuduğunda "bunu bir insan yazmış" hissetmeli.
+> AI tarafından üretildiği anlaşılan içerik, ne kadar iyi olursa olsun okunmaz.
+
+### 14.0.1 Perspektif: Platform Sesi
+
+AI Rehber bir kişisel blog değil, bir yayın platformu. Yazım tonu buna göre ayarlanır.
+
+```
+YAPMA                                    YAP
+─────                                    ───
+"Geçen hafta şunu fark ettim..."        → "GitHub verilerine göre..."
+"Gözüme takılan bir rakam var"          → "Dikkat çeken bir veri var"
+"Bence şöyle olacak"                    → "Veriler şöyle bir tablo çiziyor"
+"Ben", "benim", "bana"                  → Nötr anlatım veya yumuşak "biz"
+"Sizin için araştırdık!"               → Direkt bilgiyi ver
+```
+
+Platform sesi: ne soğuk kurumsal ne de kişisel günlük. Bilgi veriyor ama sıkıcı değil. Kahvede akıllı bir arkadaşınla konuşur gibi ama o arkadaş kendinden bahsetmiyor, konudan bahsediyor.
+
+### 14.0.2 Noktalama ve Biçim: Minimum İşaret
+
+Türkçe günlük yazımda insanlar çok az noktalama işareti kullanır. AI ise em dash, üç nokta, ünlem, tırnak işaretlerini abartır.
+
+```
+YAPMA                                    YAP
+─────                                    ───
+Cümle — ve devamı — böyle              → Cümle, ve devamı böyle
+"kelime" (her şeyi tırnağa alma)       → Sadece alıntı ve özel terimde tırnak
+Vurgu! Her yerde! Ünlem!               → Ünlem neredeyse hiç kullanma
+Üç nokta ile bitir...                  → Noktayla bitir.
+**Her** **üçüncü** **kelime** bold     → Sadece rakamlar ve şirket adları bold
+"İşte tam da bu noktada..."            → Doğal bağlaç: "ama", "o yüzden", "bir de"
+```
+
+### 14.0.3 Paragraf Asimetrisi
+
+AI her paragrafı aynı uzunlukta yazar. İnsan yazmaz. Bazı paragraflar tek cümle, bazıları beş cümle olmalı.
+
+```
+✅ DOĞRU:
+"Dokuz kat hızlanma."                              ← tek cümle paragraf
+"Trendyol bunu 2 bin kişilik ekiple yaptı.         ← 3 cümle paragraf
+Son altı ayda 4 binden fazla görev AI tarafından
+tamamlandı. Lojistikte yüzde 20 verimlilik artışı var."
+
+❌ YANLIŞ:
+Her paragraf 3 cümle. Her bölüm eşit.
+Her geçiş aynı kalıpta. Simetrik yapı.
+```
+
+### 14.0.4 Geçiş Cümleleri
+
+AI "İşte tam da bu noktada", "Peki neden önemli?", "Hadi birlikte bakalım" gibi sahte geçişler kullanır. İnsan günlük Türkçe bağlaçlarıyla geçiş yapar.
+
+```
+YAPMA                                    YAP
+─────                                    ───
+"İşte tam da bu noktada"               → "Ama"
+"Şimdi gelin birlikte bakalım"         → (geçiş cümlesi koyma, direkt yaz)
+"Peki neden bu önemli?"                → "O yüzden"
+"Hadi bunu daha yakından inceleyelim"  → "Bir de şu var:"
+"Sonuç olarak"                         → "Kısacası" veya geçiş cümlesi koyma
+```
+
+### 14.0.5 Cümle Çeşitliliği
+
+AI hep aynı yapıda cümle kurar. İnsan kısa ve uzun cümleleri karıştırır, bazen soru sorar, bazen eksik bırakır.
+
+```
+❌ YANLIŞ (hep aynı yapı):
+"OpenAI yeni bir model duyurdu. Bu model çok güçlü. Performansı rekor kırdı."
+
+✅ DOĞRU (karışık yapı):
+"OpenAI yeni modelini duyurdu. Performans rakamları rekor
+seviyede ama asıl ilginç olan şirketin bu modeli neden
+sessizce yayınladığı."
+```
+
+### 14.0.6 Hedging ve Kesinlik
+
+AI "olabilir", "değerlendirilebilir", "söylenebilir" gibi hedge ifadeler kullanmayı sever. İnsan daha net konuşur. Emin olunmayan yerde de net biçimde emin olmadığını söyler.
+
+```
+YAPMA                                    YAP
+─────                                    ───
+"Bu durum şirketler için önemli        → "Bu şirketleri doğrudan etkiliyor"
+ olabilir"
+"Söz konusu gelişme sektörü            → "Sektörü sarsacak bir gelişme"
+ etkileyebilir"
+"İlgili verilere göre bir artış        → "Veriler net: yüzde 55 büyüme var"
+ gözlemlenmektedir"
+```
+
+Emin olunmayan durumlarda: "Henüz doğrulanmadı ama..." veya "Rakamlar kesin değil" gibi net bir belirsizlik ifadesi kullan. Pasif hedge yapma.
+
+### 14.0.7 Kontrol Listesi (Her İçerik Yayınlanmadan Önce)
+
+İçerik yazıldıktan sonra şu soruları sor:
+```
+□ "Ben/benim" ifadesi var mı? Varsa çıkar.
+□ 3'ten fazla em dash (—) var mı? Azalt.
+□ Her paragraf aynı uzunlukta mı? Bazılarını kısalt veya uzat.
+□ "İşte tam da" veya "Peki neden" gibi AI geçişi var mı? Değiştir.
+□ Her üçüncü kelime bold mu? Sadece rakam ve şirket adlarını bırak.
+□ Ünlem işareti var mı? Neredeyse hiç olmamalı.
+□ Cümleler hep aynı uzunlukta mı? Kısa-uzun karıştır.
+□ Yazıyı sesli okusan doğal mı duyuluyor?
+□ Bir arkadaşına anlatsan böyle mi anlatırsın?
+```
+
+---
+
+## 15. Dikkat Psikolojisi & İçerik Mühendisliği
 
 > **Bu bölüm tüm içerik üretiminde ZORUNLU kurallardır.**
 > Her haber, yazı ve brifing bu framework'e göre yazılır.
 
-### 14.1 HOOK — İlk 3 Saniye (Okuyucuyu Yakala)
+### 15.1 HOOK — İlk 3 Saniye (Okuyucuyu Yakala)
 
 Okuyucu ilk 3 saniyede kalıp kalmayacağına karar verir. 5 hook tekniğinden EN AZ birini kullan:
 
@@ -671,7 +786,7 @@ Okuyucu ilk 3 saniyede kalıp kalmayacağına karar verir. 5 hook tekniğinden E
 ✅ YAP:   "İstanbul'da bir lise öğrencisi, AI ile 2 haftada 50.000 TL kazandı."
 ```
 
-### 14.2 RETENTION — Okuyucuyu Yazının İçinde Tut
+### 15.2 RETENTION — Okuyucuyu Yazının İçinde Tut
 
 Hook'tan sonra okuyucu kaçmamalı. 3 teknikle tut:
 
@@ -698,7 +813,7 @@ Bir hikayeyi aç → ikincisine geç → ilkini sonra kapat:
 "Şimdi Google'a dönelim — işte tam da bu yüzden..."
 ```
 
-### 14.3 REWARD — Okuyucuyu Ödüllendir
+### 15.3 REWARD — Okuyucuyu Ödüllendir
 
 Her içerik okuyucuya 3 ödül tipinden EN AZ birini vermeli:
 
@@ -708,7 +823,7 @@ Her içerik okuyucuya 3 ödül tipinden EN AZ birini vermeli:
 | **Av Ödülü** | "Değerli bilgiyi yakaladım" hissi | Somut veri, istatistik, insider bilgi paylaş |
 | **Benlik Ödülü** | "Kendimi geliştirdim" hissi | Pratik ipucu, prompt önerisi, uygulanabilir adım ver |
 
-### 14.4 INVESTMENT — Okuyucuyu Geri Getir
+### 15.4 INVESTMENT — Okuyucuyu Geri Getir
 
 Okuyucu emek verirse geri döner. Her yazının sonunda EN AZ biri olmalı:
 
@@ -718,7 +833,7 @@ Okuyucu emek verirse geri döner. Her yazının sonunda EN AZ biri olmalı:
 - **FOMO:** "Bu bilgiyi bilen 1000 kişiden biri oldun."
 - **Bülten CTA:** "Her sabah AI dünyasının özetini al → [bülten]"
 
-### 14.5 Başlık Psikolojisi Şablonları
+### 15.5 Başlık Psikolojisi Şablonları
 
 Her başlık aşağı formüllerden birine uymalıdır:
 
@@ -738,7 +853,7 @@ Her başlık aşağı formüllerden birine uymalıdır:
 - [ ] Anahtar kelime ilk 3 kelimede mi?
 - [ ] Clickbait DEĞİL ama tıklanası mı?
 
-### 14.6 Sosyal Medya → Site Döngüsü
+### 15.6 Sosyal Medya → Site Döngüsü
 
 Her haber yayınlandığında 3 katmanlı paylaşım:
 
@@ -759,7 +874,7 @@ Her haber yayınlandığında 3 katmanlı paylaşım:
    → En iyi yorumu sonraki haberde referans ver
 ```
 
-### 14.7 Bağımlılık Mekanizması (Rutin Oluşturma)
+### 15.7 Bağımlılık Mekanizması (Rutin Oluşturma)
 
 Okuyucuyu tek seferlik ziyaretçiden düzenli takipçiye çevirme stratejisi:
 
@@ -771,7 +886,7 @@ Okuyucuyu tek seferlik ziyaretçiden düzenli takipçiye çevirme stratejisi:
 | **Kayıp Korkusu** | "Dünün en çok okunan haberi: [...]" |
 | **Topluluk** | Okuyucu yorumları, anketler, geri bildirim |
 
-### 14.8 Yazım Stili Kuralları (Tüm İçerikler)
+### 15.8 Yazım Stili Kuralları (Tüm İçerikler)
 
 ```
 YAPMA                                    YAP

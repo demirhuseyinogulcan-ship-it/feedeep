@@ -84,6 +84,8 @@ export default async function HaberDetayPage({ params }: Props) {
             sourceName: news.sourceName,
             keywords: news.keywords,
             articleSection: categoryLabel,
+            wordCount: news.metadata.wordCount,
+            readingTime: news.metadata.readingTime,
           }),
           breadcrumbJsonLd([
             { name: "Ana Sayfa", href: "/" },

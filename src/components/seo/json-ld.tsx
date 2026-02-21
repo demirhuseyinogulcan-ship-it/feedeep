@@ -1,6 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — JSON-LD Script Component (Reusable)
-// ─────────────────────────────────────────────────────────────
+// Array geldiğinde @graph wrapper ile sar—Google standartlarına uygun
+// ─────────────────────────────────────────────────────────────────
 
 type JsonLdProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -8,10 +9,14 @@ type JsonLdProps = {
 };
 
 export function JsonLd({ data }: JsonLdProps) {
+  const jsonLd = Array.isArray(data)
+    ? { "@context": "https://schema.org", "@graph": data.map(({ "@context": _ctx, ...rest }) => rest) }
+    : data;
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );
 }

@@ -1,8 +1,10 @@
 {
+  "id": "airehber-pwa",
   "name": "AI Rehber — Yapay Zeka Rehberiniz",
   "short_name": "AI Rehber",
   "description": "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#050505",
   "theme_color": "#050505",
@@ -57,10 +59,10 @@
       "url": "/prompt-kutuphanesi"
     },
     {
-      "name": "AI Modeller",
-      "short_name": "Modeller",
-      "description": "Model karşılaştırma kartları",
-      "url": "/modeller"
+      "name": "Haftalık Brifing",
+      "short_name": "Haftalık",
+      "description": "Haftalık AI bülten",
+      "url": "/haftalik"
     }
   ],
   "share_target": {

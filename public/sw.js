@@ -19,7 +19,6 @@ const CONTENT_ROUTES = [
   "/yazilar",
   "/haberler",
   "/prompt-kutuphanesi",
-  "/modeller",
   "/haftalik",
   "/zaman-cizelgesi",
   "/hakkimizda",
