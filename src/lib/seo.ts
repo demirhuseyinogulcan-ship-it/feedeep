@@ -281,7 +281,9 @@ export function collectionPageJsonLd(params: {
   description: string;
   url: string;
   items: Array<{ name: string; url: string; description: string }>;
+  itemType?: string;
 }) {
+  const resolvedType = params.itemType ?? "HowTo";
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -295,7 +297,7 @@ export function collectionPageJsonLd(params: {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "HowTo",
+          "@type": resolvedType,
           name: item.name,
           description: item.description,
           url: item.url.startsWith("http") ? item.url : `${SITE.url}${item.url}`,
