@@ -49,6 +49,8 @@ const yazilar = defineCollection({
     corrections: s.array(correctionSchema).default([]),
 
     // Editoryal
+    editorPick: s.boolean().default(false),
+    editorNote: s.string().max(200).optional(),
     counterpoint: s.string().optional(),
     actionItems: s.array(s.string()).default([]),
 
@@ -88,6 +90,10 @@ const haberler = defineCollection({
     // Güven
     sources: s.array(sourceSchema).min(1),
     confidence: s.enum(["high", "medium", "speculative"]).default("high"),
+
+    // Editoryal
+    editorPick: s.boolean().default(false),
+    editorNote: s.string().max(200).optional(),
 
     // Dağıtım
     socialSnippet: s.string().max(280).optional(),

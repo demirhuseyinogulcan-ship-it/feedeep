@@ -1,12 +1,13 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — Search UI (Client Component)
-// İçeriklerde anlık arama — client-side text match
+// Fuse.js ile fuzzy, relevance-based arama
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
+import Fuse from "fuse.js";
 import { formatDate } from "@/lib/utils";
 
 export interface SearchItem {
@@ -24,14 +25,25 @@ interface SearchUIProps {
 export function SearchUI({ items }: SearchUIProps) {
   const [query, setQuery] = useState("");
 
-  const results =
-    query.length >= 2
-      ? items.filter(
-          (item) =>
-            item.title.toLowerCase().includes(query.toLowerCase()) ||
-            item.description.toLowerCase().includes(query.toLowerCase())
-        )
-      : [];
+  const fuse = useMemo(
+    () =>
+      new Fuse(items, {
+        keys: [
+          { name: "title", weight: 0.5 },
+          { name: "description", weight: 0.3 },
+          { name: "type", weight: 0.2 },
+        ],
+        threshold: 0.4,
+        includeScore: true,
+        minMatchCharLength: 2,
+      }),
+    [items]
+  );
+
+  const results = useMemo(() => {
+    if (query.length < 2) return [];
+    return fuse.search(query).map((result) => result.item);
+  }, [fuse, query]);
 
   return (
     <>

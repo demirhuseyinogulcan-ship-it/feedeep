@@ -12,6 +12,7 @@ import {
 import { JsonLd } from "@/components/seo/json-ld";
 import { HABER_CATEGORIES, SITE } from "@/lib/constants";
 import { PageHeader } from "@/components/shared/page-header";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
 import {
   FilterableContentList,
   type ContentItem,
@@ -76,6 +77,12 @@ export default function HaberlerPage() {
         ]}
       />
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Haberler", href: "/haberler" },
+          ]}
+        />
         <PageHeader
           title="Haberler"
           description="Yapay zeka dünyasından güncel gelişmeler."

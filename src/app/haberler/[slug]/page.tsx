@@ -14,6 +14,8 @@ import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { RelatedNews } from "@/components/content/related-news";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
+import { ShareButtons } from "@/components/shared/share-buttons";
+import { SITE } from "@/lib/constants";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -68,6 +70,7 @@ export default async function HaberDetayPage({ params }: Props) {
       date: h.date,
       category: h.category,
       categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
+      editorPick: h.editorPick,
     }));
 
   return (
@@ -115,6 +118,14 @@ export default async function HaberDetayPage({ params }: Props) {
           readingTime={news.metadata.readingTime}
           slug={news.slug}
           contentType="haber"
+        />
+
+        <div className="line-void mb-8" />
+
+        <ShareButtons
+          title={news.title}
+          url={`${SITE.url}/haberler/${news.slug}`}
+          socialSnippet={news.socialSnippet}
         />
 
         <div className="line-void mb-12" />

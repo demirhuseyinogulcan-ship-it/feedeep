@@ -15,6 +15,8 @@ import { TrustBadge } from "@/components/content/trust-badge";
 import { ActionItems } from "@/components/content/action-items";
 import { RelatedArticles } from "@/components/content/related-articles";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
+import { ShareButtons } from "@/components/shared/share-buttons";
+import { SITE } from "@/lib/constants";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -71,6 +73,7 @@ export default async function YaziDetayPage({ params }: Props) {
       category: y.category,
       categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
       readingTime: y.metadata.readingTime,
+      editorPick: y.editorPick,
     }));
 
   return (
@@ -116,6 +119,14 @@ export default async function YaziDetayPage({ params }: Props) {
           readingTime={post.metadata.readingTime}
           slug={post.slug}
           contentType="yazi"
+        />
+
+        <div className="line-void mb-8" />
+
+        <ShareButtons
+          title={post.title}
+          url={`${SITE.url}/yazilar/${post.slug}`}
+          socialSnippet={post.socialSnippet}
         />
 
         <div className="line-void mb-12" />

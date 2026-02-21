@@ -12,6 +12,8 @@ import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import { yazilar, haberler, promptlar, haftalik } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
+import { TheSignal } from "@/components/shared/the-signal";
+import { StatsStrip } from "@/components/shared/stats-strip";
 
 // ─── Velite verilerini hazırla ───
 
@@ -33,43 +35,50 @@ type HeroItem = {
   href: string;
   type: "yazi" | "haber";
   readingTime: number;
+  editorPick: boolean;
+  editorNote?: string;
 };
-
-const latestYazi = publishedYazilar[0];
-const latestHaber = publishedHaberler[0];
 
 function getHeroItem(): HeroItem | null {
   const candidates: HeroItem[] = [];
 
-  if (latestYazi) {
+  // Tüm yayınlanmış içerikleri topla
+  for (const y of publishedYazilar) {
     candidates.push({
-      title: latestYazi.title,
-      description: latestYazi.description,
-      slug: latestYazi.slug,
-      date: latestYazi.date,
-      category: latestYazi.category,
-      href: `/yazilar/${latestYazi.slug}`,
+      title: y.title,
+      description: y.description,
+      slug: y.slug,
+      date: y.date,
+      category: y.category,
+      href: `/yazilar/${y.slug}`,
       type: "yazi",
-      readingTime: latestYazi.metadata.readingTime,
+      readingTime: y.metadata.readingTime,
+      editorPick: y.editorPick,
+      editorNote: y.editorNote,
     });
   }
 
-  if (latestHaber) {
+  for (const h of publishedHaberler) {
     candidates.push({
-      title: latestHaber.title,
-      description: latestHaber.description,
-      slug: latestHaber.slug,
-      date: latestHaber.date,
-      category: latestHaber.category,
-      href: `/haberler/${latestHaber.slug}`,
+      title: h.title,
+      description: h.description,
+      slug: h.slug,
+      date: h.date,
+      category: h.category,
+      href: `/haberler/${h.slug}`,
       type: "haber",
-      readingTime: latestHaber.metadata.readingTime,
+      readingTime: h.metadata.readingTime,
+      editorPick: h.editorPick,
+      editorNote: h.editorNote,
     });
   }
 
   if (candidates.length === 0) return null;
 
-  // En yeni tarihe sahip olanı seç
+  // Editörün seçimi varsa onu tercih et, yoksa en yeni tarihe sahip olanı seç
+  const editorPick = candidates.find((c) => c.editorPick);
+  if (editorPick) return editorPick;
+
   candidates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   return candidates[0];
 }
@@ -148,9 +157,12 @@ export default function HomePage() {
       {/* ─── Kaldığın Yerden Devam Et ─── */}
       <ContinueReadingBanner />
 
-      {/* ─── Hero: Massive Typography ─── */}
+      {/* ─── The Signal: Canlı AI Nabız ─── */}
+      <TheSignal />
+
+      {/* ─── Hero: Editörün Seçimi ─── */}
       {heroItem && (
-        <section className="relative mx-auto max-w-3xl px-4 sm:px-6 pt-16 sm:pt-24 pb-20">
+        <section className="relative mx-auto max-w-3xl px-4 sm:px-6 pt-12 sm:pt-20 pb-20">
           {/* Floating ambient orb */}
           <div
             aria-hidden="true"
@@ -163,6 +175,14 @@ export default function HomePage() {
 
           <div className="animate-fade-up">
             <div className="flex items-center gap-3 mb-6">
+              {heroItem.editorPick && (
+                <>
+                  <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-gray-500">
+                    Editörün Seçimi
+                  </span>
+                  <span className="text-[11px] text-gray-800">/</span>
+                </>
+              )}
               <span className="text-[11px] font-mono tracking-widest uppercase text-primary-400/80">
                 {heroCategory}
               </span>
@@ -195,6 +215,12 @@ export default function HomePage() {
             <p className="mt-8 text-sm text-gray-500 leading-relaxed max-w-md animate-fade-up delay-200">
               {heroItem.description}
             </p>
+
+            {heroItem.editorNote && (
+              <p className="mt-4 text-xs text-gray-600 italic leading-relaxed max-w-sm animate-fade-up delay-200">
+                &ldquo;{heroItem.editorNote}&rdquo;
+              </p>
+            )}
 
             <div className="mt-6 flex items-center gap-4 animate-fade-up delay-300">
               <Link
@@ -438,15 +464,21 @@ export default function HomePage() {
       {/* Hair-line */}
       <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-400" />
 
-      {/* ─── Newsletter — Floating in the void ─── */}
+      {/* ─── Sayılarla AI Rehber — Sosyal Kanıt ─── */}
+      <StatsStrip />
+
+      {/* Hair-line */}
+      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-500" />
+
+      {/* ─── İç Çember — Newsletter ─── */}
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-20 animate-fade-up delay-300">
         <div className="max-w-sm">
           <h2 className="text-xl font-bold text-gray-100">
-            Haftalık AI Brifing
+            İç Çember
           </h2>
           <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-            Her Pazartesi, yapay zeka dünyasındaki en önemli 3 gelişme.
-            Doğrudan e-posta kutunuza.
+            Her Pazartesi — sadece abonelere özel yapay zeka fırsatları
+            ve para kazanma ipuçları. Doğrudan e-posta kutunuza.
           </p>
           <div className="mt-6">
             <NewsletterForm />

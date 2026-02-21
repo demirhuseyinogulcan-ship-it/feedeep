@@ -10,6 +10,7 @@ import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
 import { NotificationPrompt } from "@/components/shared/notification-prompt";
 import { PrefetchManager } from "@/components/shared/prefetch-manager";
 import { WebVitalsReporter } from "@/components/shared/web-vitals-reporter";
+import { CookieConsent } from "@/components/shared/cookie-consent";
 import "./globals.css";
 
 // ─── Analytics ID'leri (.env veya constants'tan) ────────────
@@ -147,6 +148,9 @@ export default function RootLayout({
         </main>
 
         <Footer />
+
+        {/* KVKK Çerez Bildirimi */}
+        <CookieConsent />
 
         {/* PWA Install Banner */}
         <PwaInstallBanner />

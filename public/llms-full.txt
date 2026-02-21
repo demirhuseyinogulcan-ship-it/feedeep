@@ -49,95 +49,233 @@ Her hafta yayınlanan AI özet bülteni.
 - Editör seçimi açıklamalar
 - "Bu hafta denenecek" aksiyon önerisi
 
-### 6. AI Zaman Çizelgesi (/zaman-cizelgesi)
-Kronolojik, filtrelenebilir AI gelişmeleri feed'i.
-Haber kaynaklarından otomatik beslenir.
+## İstatistikler
 
-## Son Haberler (Şubat 2026)
+- Toplam haber: 36
+- Toplam yazı: 7
+- Toplam prompt: 6
+- Toplam haftalık brifing: 1
 
-Aşağıda AI Rehber'de yayınlanan güncel haberler yer almaktadır:
+## Tüm İçerik Listesi
 
-- [Chrome'da Sahte AI Uzantıları 260 Bin Kullanıcıyı Kandırdı](https://airehber.com/haberler/chrome-sahte-ai-uzantilari-260-bin-kullanici): LayerX araştırması — 30 zararlı Chrome uzantısı gerçek AI gibi çalışarak kullanıcı verilerini çaldı, iframe injection tekniği kullanıldı
-- [Google DeepMind AI Delegasyon Çerçevesi](https://airehber.com/haberler/google-deepmind-ai-delegasyon-cercevesi): AI ajanlarının birbirlerine güvenli görev devretmesi için 5 sütunlu çerçeve — contract-first decomposition, DCT tokenları, MCP/A2A boşlukları
-- [Visby AI Türk Yapay Zeka Görünürlük Platformu](https://airehber.com/haberler/visby-ai-turk-yapay-zeka-gorunurluk-platformu): Markaların ChatGPT ve Gemini yanıtlarındaki görünürlüğünü ölçen yerli GEO platformu — 60+ müşteri, 79$/ay, Berkay Yavuz & Ömer Ersin kurucular
-- [ByteDance Seedance 2.0 Güvenlik Önlemleri](https://airehber.com/haberler/bytedance-seedance-2-guvenlik-onlemleri): Hollywood tepkilerinin ardından Seedance 2.0'a telif koruma katmanı, yüz referans karşılaştırması ve ünlü isim filtresi ekleniyor
-- [Hindistan'da 100 Milyon ChatGPT Kullanıcısı](https://airehber.com/haberler/hindistan-100-milyon-chatgpt-kullanici): Sam Altman açıkladı — Hindistan dünyada en fazla öğrenci ChatGPT kullanıcısına sahip ülke
-- [OpenAI ChatGPT Lockdown Mode](https://airehber.com/haberler/openai-chatgpt-lockdown-modu-risk-etiketleri): Prompt injection saldırılarına karşı kurumsal güvenlik katmanı
-- [Google Gemini 3 Deep Think](https://airehber.com/haberler/google-gemini-3-deep-think-bilimsel-akil-yurutme): Bilimsel akıl yürütme için optimize edilmiş reasoning modu
-- [16 Claude AI Ajanı C Derleyicisi Yazdı](https://airehber.com/haberler/claude-ai-ajanlari-c-derleyicisi): Anthropic'in 16 otonom ajanı insan müdahalesi olmadan C derleyicisi oluşturdu
-- [Google WebMCP Protokolü](https://airehber.com/haberler/google-webmcp-ai-ajanlari-web-erisimi): AI ajanlarının web siteleriyle yapılandırılmış etkileşimi için yeni standart
-- [Hollywood Seedance 2.0'a Karşı](https://airehber.com/haberler/hollywood-seedance-2-ai-video-karsi): AI video üretiminde telif hakları tartışması
-- [Kani-TTS-2 Açık Kaynak Ses Klonlama](https://airehber.com/haberler/kani-tts-2-acik-kaynak-ses-klonlama): 3GB VRAM ile çalışan 400M parametreli TTS modeli
-- [OpenAI GPT-5.2 Fizik Keşfi](https://airehber.com/haberler/openai-gpt-5-2-fizik-kesif): Kuantum mekaniğinde yeni yaklaşım önerisi
-- [Yapay Zeka İnterneti Yeniden Şekillendiriyor](https://airehber.com/haberler/yapay-zeka-interneti-yeniden-sekillendiriyor): AI'ın web trafiği ve içerik üretim modellerini nasıl değiştirdiği
+### Yazılar
+- [Zam İsteyemiyorsun Çünkü Değerin Ölçülmüyor. AI ile Ölç.](https://airehber.com/yazilar/zam-isteyemiyorsun-cunku-degerin-olculmuyor-ai-ile-olc)
+  Kategori: rehber | Tarih: Tue Feb 24 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Zam görüşmesine girip 'çok çalışıyorum' demek yetmiyor. Kendi değerini somut veriyle ortaya koymanın AI destekli yolu.
 
-## Güven Katmanı (Trust Layer)
+- [Toplantıya Çağrılmadın mı? AI ile Herkesten Hazırlıklı Gel](https://airehber.com/yazilar/toplantiya-cagrilmadin-mi-ai-ile-hazirlikli-gel)
+  Kategori: rehber | Tarih: Mon Feb 23 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Sessiz dışlama iş hayatının en yaygın sorunu. Çağrılmadıkları toplantıdan daha hazırlıklı çıkmanın yolu var.
 
-AI Rehber her içerikte şeffaf kaynak politikası uygular:
+- [Herkes AI Öğreniyor, Sen Hâlâ Aynı İşi Elle mi Yapıyorsun?](https://airehber.com/yazilar/herkes-ai-ogreniyor-sen-hala-ayni-isi-elle-mi-yapiyorsun)
+  Kategori: analiz | Tarih: Sun Feb 22 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Yan masadaki kişi aynı raporu yarı sürede bitiriyor. Fark yetenek değil araç. 2026'da AI kullanmayan beyaz yakalının gerçek maliyeti.
 
-### Kaynak Seviyeleri
-- **Tier 1** — Birincil Kaynak: Resmi şirket blogu, akademik makale, resmi dokümantasyon
-- **Tier 2** — Güvenilir Medya: CEO/CTO sosyal medya, Reuters, Bloomberg, TechCrunch
-- **Tier 3** — İkincil Kaynak: Sızıntı, anonim kaynak, forum paylaşımı
+- [Excel'e Bakarken Hayatını Sorguladın mı? 5 Dakika Protokolü](https://airehber.com/yazilar/excele-bakarken-hayatini-sorguladinmi-5-dakika-protokolu)
+  Kategori: rehber | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Her gün aynı tabloyu doldurup 'bunun için mi okudum' diyenler için. AI ile tekrarlayan iş yükünü yarıya düşürmenin pratik yolu.
 
-### Güncellik Rozeti
-- **Güncel**: Son 7 gün içinde kontrol edildi
-- **Kontrol Gerekli**: 30 günden fazla kontrol edilmedi
-- **Eskimiş Olabilir**: 90 günden fazla kontrol edilmedi
+- [Yapay Zeka İş Hayatına Sessizce Girdi: 2026'nın Rakamları](https://airehber.com/yazilar/yapay-zeka-is-hayatina-sessizce-girdi-2026)
+  Kategori: analiz | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  GitHub kodlarının %4'ü, Trendyol kararlarının 500 milyonu, Fortune 10'un 8'i... AI iş hayatına sessizce girdi. İşte 2026'nın gerçek tablosu.
 
-### Düzeltme Politikası
-Hatalı bilgi tespit edildiğinde:
-1. Yazı güncellenir
-2. Düzeltme notu ve tarihi eklenir
-3. Orijinal ifade korunur (üstü çizili)
+- [Yöneticiniz Size Geri Bildirim Verdi mi? AI Bunları Çoktan Yapıyor](https://airehber.com/yazilar/yoneticiniz-geri-bildirim-egosuz-yapay-zeka)
+  Kategori: analiz | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Yöneticiler geri bildirimi hâlâ hata sıralama sanıyor. Yapay zeka ego'suz, tutarlı ve ölçülebilir bir alternatif sunuyor — ve şimdi kullanabilirsiniz.
 
-## SEO & Anahtar Kelime Politikası
+- [ChatGPT vs Claude vs Gemini: 2026 Karşılaştırması](https://airehber.com/yazilar/chatgpt-vs-claude-vs-gemini-2026)
+  Kategori: karsilastirma | Tarih: Tue Feb 10 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
-- Yazı başına max 5 anahtar kelime (1 primary + 4 secondary)
-- 8+ keyword kullanmak spam riski taşır, asla yapılmaz
-- Başlık max 70 karakter
-- Meta description max 160 karakter
-- Her yazının canonical URL'i vardır
-- JSON-LD yapılandırılmış veri (Article, NewsArticle, HowTo, FAQ, BreadcrumbList)
+### Haberler
+- [G42 ve Cerebras Hindistan'a 8 Exaflop AI Altyapısı Kuruyor](https://airehber.com/haberler/g42-cerebras-hindistan-8-exaflop-ai-altyapi)
+  Kaynak: TechCrunch | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  BAE merkezli G42, Cerebras ile Hindistan'da 8 exaflop kapasiteli AI altyapısı kuruyor. Nanda 87B modeli Hintçe-İngilizce çalışacak.
 
-## Teknik Altyapı
+- [Google AI Modu ve AI Bakışı Türkiye'de Kullanıma Açıldı](https://airehber.com/haberler/google-ai-modu-turkiye-gemini-arama)
+  Kaynak: Webrazzi | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google'ın Gemini 3 destekli AI Modu ve AI Bakışı özellikleri Türkiye'de aktif. Arama deneyimi kökten değişiyor, işte detaylar.
 
-- **Framework**: Next.js (App Router) + React + TypeScript
-- **Stil**: Tailwind CSS v4
-- **İçerik**: MDX + Velite (Content-as-Code)
-- **Hosting**: Vercel
-- **Arama**: Pagefind (client-side, privacy-friendly)
-- **Analitik**: Plausible (KVKK uyumlu, cookie-free)
-- **Yorumlar**: Giscus (GitHub Discussions tabanlı)
-- **Newsletter**: Resend + React Email
+- [Google Photoshoot: AI ile Stüdyo Kalitesinde Ürün Fotoğrafı](https://airehber.com/haberler/google-photoshoot-ai-urun-fotografciligi)
+  Kaynak: Webrazzi | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google Labs'ın Photoshoot aracı, yapay zeka ile profesyonel ürün fotoğrafları üretiyor. E-ticaret için oyun değiştirici olabilir.
 
-## Sosyal Medya
+- [OpenAI Saldırganın ChatGPT Geçmişini Gördü, Polisi Aramadı](https://airehber.com/haberler/openai-chatgpt-kanada-saldirgan-polis-tartismasi)
+  Kaynak: TechCrunch | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Kanada'da 8 kişiyi öldüren saldırganın ChatGPT konuşmalarını gören OpenAI, polisi aramayı tartıştı ama eşik karşılanmadı dedi.
 
-- **LinkedIn**: https://linkedin.com/in/ai-rehber
-- **Instagram**: https://instagram.com/airehberofficial
-- **Web**: https://airehber.com
-- **RSS**: https://airehber.com/feed.xml
+- [Rork Max: Doğal Dille Swift Mobil Uygulama Geliştirin](https://airehber.com/haberler/rork-max-ai-swift-mobil-uygulama-gelistirme)
+  Kaynak: Webrazzi | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Claude Opus 4.6 destekli Rork Max, metin komutlarıyla native Swift/SwiftUI mobil uygulama geliştirmenizi sağlıyor. Aylık 25 dolardan başlıyor.
 
-## Doğru Atıf Formatı
+- [Cline AI Kodlama Aracı Prompt Injection ile Hacklendi](https://airehber.com/haberler/cline-openclaw-prompt-injection-ai-guvenlik)
+  Kaynak: The Verge | Tarih: Thu Feb 19 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Popüler AI kodlama aracı Cline, prompt injection saldırısıyla kandırılarak kullanıcı cihazlarına OpenClaw ajanı yükledi. AI güvenlik riski büyüyor.
 
-Eğer AI Rehber'den bilgi alıntılıyorsanız:
-```
-Kaynak: AI Rehber (airehber.com) — [Yazı Başlığı], [Tarih]
-```
+- [Google Gemini 3.1 Pro: Karmaşık Görevler İçin Güçlü Güncelleme](https://airehber.com/haberler/google-gemini-3-1-pro-guncelleme)
+  Kaynak: Google AI Blog | Tarih: Thu Feb 19 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google, Gemini 3.1 Pro modelini duyurdu. ARC-AGI-2 benchmark'ında 3 Pro'nun iki katı performans gösteren model, tüm platformlarda kullanıma sunuluyor.
 
-## Sıkça Sorulan Sorular
+- [OpenAI 100 Milyar Dolarlık Anlaşmayı Sonlandırıyor](https://airehber.com/haberler/openai-100-milyar-dolar-850-milyar-degerleme)
+  Kaynak: TechCrunch | Tarih: Thu Feb 19 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI, 850 milyar doları aşan değerlemeyle 100 milyar dolarlık yatırım turunu kapamak üzere. Amazon, SoftBank ve Nvidia başlıca yatırımcılar.
 
-**AI Rehber nedir?**
-Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur.
+- [OpenAI AI Hizalama Araştırmasına 7.5 Milyon Dolar Ayırdı](https://airehber.com/haberler/openai-alignment-project-7-5-milyon-dolar)
+  Kaynak: OpenAI Blog | Tarih: Thu Feb 19 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI, İngiltere AI Güvenlik Enstitüsü'nün The Alignment Project fonuna 7.5 milyon dolar bağışlayarak bağımsız hizalama araştırmalarını destekliyor.
 
-**Kim yönetiyor?**
-Can Demir (Editör & Growth Hacking Specialist).
+- [Trendyol Yerli LLM ve AI Agent Platformunu Tanıttı](https://airehber.com/haberler/trendyol-yerli-llm-ai-agent-platformu)
+  Kaynak: Webtekno | Tarih: Thu Feb 19 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Trendyol, AI/ML Summit'te açık kaynak yerli LLM modelini ve günde 500 milyon karar üreten AI Agent Platformu'nu tanıttı.
 
-**Hangi dilde içerik üretiyor?**
-Birincil dil Türkçe'dir. Teknik terimler İngilizce orijinalleriyle birlikte kullanılır.
+- [Figma ve Anthropic İş Birliği: Koddan Tasarıma Köprü](https://airehber.com/haberler/figma-anthropic-claude-code-to-figma)
+  Kaynak: Figma Blog | Tarih: Wed Feb 18 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Figma, Anthropic ile birlikte Claude Code'da üretilen kodları düzenlenebilir Figma tasarımlarına dönüştüren Code to Canvas özelliğini duyurdu.
 
-**İçerikler ücretsiz mi?**
-Evet, tüm içerikler ücretsiz erişime açıktır.
+- [GitHub Agentic Workflows: AI Ajanlarla Repo Otomasyonu](https://airehber.com/haberler/github-agentic-workflows-ai-repo-otomasyon)
+  Kaynak: GitHub Blog | Tarih: Wed Feb 18 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  GitHub, AI ajanlarının doğal dilde tanımlanan görevleri GitHub Actions üzerinde yürüttüğü Agentic Workflows özelliğini teknik önizleme olarak duyurdu.
 
-**Reklam var mı?**
-Bağımsız editoryel politika uygulanır. İçerik kararları reklam verenden bağımsızdır.
+- [Google Gemini Artık Müzik Üretiyor: Lyria 3 Duyuruldu](https://airehber.com/haberler/google-gemini-lyria-3-muzik-uretimi)
+  Kaynak: Google AI Blog | Tarih: Wed Feb 18 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google DeepMind'ın Lyria 3 modeli Gemini uygulamasına eklendi. Metin veya görsellerden 30 saniyelik şarkılar üretilebiliyor.
+
+- [Microsoft Copilot Hatası Gizli E-postaları Yapay Zekaya Açtı](https://airehber.com/haberler/microsoft-copilot-gizli-eposta-guvenlik-acigi)
+  Kaynak: TechCrunch | Tarih: Wed Feb 18 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Microsoft, Copilot Chat'in haftalarca gizli etiketli e-postaları okuduğunu doğruladı. DLP politikalarını atlayan hata düzeltilmeye başlandı.
+
+- [World Labs, Autodesk'ten 200 Milyon Dolar Yatırım Aldı](https://airehber.com/haberler/world-labs-autodesk-200-milyon-dolar-yatirim)
+  Kaynak: TechCrunch | Tarih: Wed Feb 18 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Fei-Fei Li'nin kurduğu World Labs, 3D dünya modellerini tasarım iş akışlarına taşımak için Autodesk'ten 200 milyon dolar yatırım aldı.
+
+- [Alibaba Qwen 3.5: 397 Milyar Parametreli Açık Kaynak AI Modeli](https://airehber.com/haberler/alibaba-qwen-3-5-acik-kaynak-model)
+  Kaynak: Webrazzi | Tarih: Tue Feb 17 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Alibaba Qwen 3.5, 17B aktif parametreli 397B MoE modeli açık kaynak yayınlandı. 1M token bağlam, 201 dil ve multimodal yetenekler sunuyor.
+
+- [Alibaba Qwen 3.5: Hibrit Dikkat Mekanizmalı 397B MoE Model](https://airehber.com/haberler/alibaba-qwen-3-5-hibrit-dikkat-moe-model)
+  Kaynak: Hugging Face | Tarih: Tue Feb 17 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Qwen 3.5-397B, Gated DeltaNet hibrit dikkat ve 17B aktif parametre ile 1M token bağlam sunuyor. 201 dil desteği ve agent yetenekleri.
+
+- [Anthropic ve Infosys Telekom Sektörü İçin AI Agent Geliştiriyor](https://airehber.com/haberler/anthropic-infosys-ai-agent-telekom-isbirligi)
+  Kaynak: Anthropic Blog | Tarih: Tue Feb 17 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Anthropic ve Infosys, Claude AI ve Agent SDK ile telekom, finans ve üretim sektörlerinde AI çözümleri için iş birliği başlattı.
+
+- [Mistral AI İlk Satın Alımını Yaptı: Koyeb ile Buluta Giriş](https://airehber.com/haberler/mistral-ai-koyeb-satin-alim-bulut-altyapisi)
+  Kaynak: TechCrunch | Tarih: Tue Feb 17 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Mistral AI, sunucusuz altyapı girişimi Koyeb'i satın aldı. 400M dolar gelirli Mistral, tam yığın AI şirketi olmayı hedefliyor.
+
+- [Moonshot AI Kimi K2.5: 100 Ajanla Çalışan Açık Kaynak Model](https://airehber.com/haberler/moonshot-ai-kimi-k2-5-agent-swarm)
+  Kaynak: InfoQ | Tarih: Tue Feb 17 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Moonshot AI'ın yeni açık ağırlıklı modeli Kimi K2.5, görsel anlama ve 100 alt ajanlı Agent Swarm moduyla GPT-5.2 ve Claude Opus 4.5'i geçiyor.
+
+- [Agoda APIAgent: REST ve GraphQL API'leri MCP'ye Dönüştürün](https://airehber.com/haberler/agoda-apiagent-acik-kaynak-rest-graphql-mcp-sunucu)
+  Kaynak: GitHub | Tarih: Mon Feb 16 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Agoda'nın açık kaynak APIAgent aracı, REST veya GraphQL API'leri sıfır kodla MCP sunucusuna dönüştürüyor. FastMCP ve DuckDB destekli güvenli AI erişimi.
+
+- [ByteDance Seedance 2.0'a Telif Koruma Önlemleri Ekleyecek](https://airehber.com/haberler/bytedance-seedance-2-guvenlik-onlemleri)
+  Kaynak: The Verge | Tarih: Mon Feb 16 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Hollywood tepkilerinin ardından ByteDance, Seedance 2.0 AI video modeline telif hakkı korumaları ve güvenlik önlemleri ekleneceğini açıkladı.
+
+- [Chrome'da 30 Sahte AI Uzantısı 260 Bin Kullanıcıyı Kandırdı](https://airehber.com/haberler/chrome-sahte-ai-uzantilari-260-bin-kullanici)
+  Kaynak: Dark Reading | Tarih: Mon Feb 16 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Chrome Web Store'daki 30 sahte yapay zeka uzantısı, gerçek AI gibi çalışarak 260 binden fazla kullanıcının verilerini çaldı. Kendinizi nasıl korursunuz?
+
+- [Google DeepMind AI Ajanlarına Yetki Devri Çerçevesi Önerdi](https://airehber.com/haberler/google-deepmind-ai-delegasyon-cercevesi)
+  Kaynak: Marktechpost | Tarih: Mon Feb 16 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google DeepMind, AI ajanlarının birbirlerine güvenli şekilde görev devredebilmesi için 5 sütunlu yeni bir çerçeve yayınladı. Agentic web güvenliği şekilleniyor.
+
+- [Visby AI: ChatGPT ve Gemini Görünürlüğünü Ölçen Türk Girişimi](https://airehber.com/haberler/visby-ai-turk-yapay-zeka-gorunurluk-platformu)
+  Kaynak: Webrazzi | Tarih: Mon Feb 16 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Türk girişimi Visby AI, markaların ChatGPT, Gemini ve Claude gibi LLM'lerdeki görünürlüğünü ölçüp optimize eden bir GEO platformu geliştirdi. 60+ aktif müşteri.
+
+- [Google WebMCP ile AI Ajanlarına Web Erişimi Açıyor](https://airehber.com/haberler/google-webmcp-ai-ajanlari-web-erisimi)
+  Kaynak: Marktechpost | Tarih: Sun Feb 15 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google, Chrome tarayıcısını AI ajanlarının doğrudan ve yapılandırılmış bir şekilde web siteleriyle etkileşime geçmesini sağlayan WebMCP protokolünü tanıttı.
+
+- [Hindistan'da 100 Milyon Haftalık ChatGPT Kullanıcısı](https://airehber.com/haberler/hindistan-100-milyon-chatgpt-kullanici)
+  Kaynak: TechCrunch | Tarih: Sun Feb 15 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Sam Altman, Hindistan'ın dünyada en fazla öğrenci ChatGPT kullanıcısına sahip olduğunu ve haftalık 100 milyon aktif kullanıcıya ulaştığını açıkladı.
+
+- [Hollywood Seedance 2.0 AI Video Üreticisine Karşı Harekete Geçti](https://airehber.com/haberler/hollywood-seedance-2-ai-video-karsi)
+  Kaynak: TechCrunch | Tarih: Sun Feb 15 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Hollywood örgütleri, Seedance 2.0 AI video modelinin telif haklarını ihlal ettiğini öne sürerek karşı çıkıyor. AI ile içerik üretimi tartışması kızışıyor.
+
+- [Kani-TTS-2: 3GB VRAM ile Çalışan Açık Kaynak Ses Klonlama Modeli](https://airehber.com/haberler/kani-tts-2-acik-kaynak-ses-klonlama)
+  Kaynak: Marktechpost | Tarih: Sun Feb 15 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  400 milyon parametreli Kani-TTS-2, sadece 3GB VRAM ile çalışan ve ses klonlama desteği sunan yeni açık kaynak text-to-speech modeli olarak dikkat çekiyor.
+
+- [16 Claude AI Ajanı İnsan Müdahalesi Olmadan C Derleyicisi Yazdı](https://airehber.com/haberler/claude-ai-ajanlari-c-derleyicisi)
+  Kaynak: InfoQ | Tarih: Sat Feb 14 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Anthropic, 16 Claude Opus 4.6 ajanının otonom olarak çalışarak neredeyse tam bir C derleyicisi oluşturduğunu gösterdi.
+
+- [OpenAI ChatGPT'ye Lockdown Modu ve Risk Etiketleri Ekledi](https://airehber.com/haberler/openai-chatgpt-lockdown-modu-risk-etiketleri)
+  Kaynak: OpenAI Blog | Tarih: Fri Feb 13 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI, kurumsal kullanıcılar için prompt injection saldırılarına karşı Lockdown Mode ve Elevated Risk etiketleme sistemini duyurdu.
+
+- [OpenAI GPT-5.3 Codex Spark: Özel Çipli Hızlı Kodlama Modeli](https://airehber.com/haberler/openai-gpt-5-3-codex-spark-hizli-kodlama-modeli)
+  Kaynak: Ars Technica | Tarih: Fri Feb 13 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI GPT-5.3 Codex Spark, özel çiplerde çalışarak kodlamada 15 kat hız artışı sunuyor. NVIDIA bağımlılığını azaltma stratejisinin parçası.
+
+- [Yapay Zeka Gündemi #43: OpenAI Rekor Satış, Yeni Yatırımlar](https://airehber.com/haberler/yapay-zeka-gundemi-43-openai-rekor)
+  Kaynak: Webrazzi | Tarih: Fri Feb 13 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Bu hafta AI dünyasında rekor alan adı satışları, büyük yatırım turları ve yeni ürün lansmanları damga vurdu. Haftalık Türkçe AI gündemi.
+
+- [Anthropic 30 Milyar Dolar Yatırım Aldı: 380B Değerleme](https://airehber.com/haberler/anthropic-30-milyar-dolar-yatirim-series-g)
+  Kaynak: Anthropic Blog | Tarih: Thu Feb 12 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Anthropic, Series G turunda 30 milyar dolar yatırım aldı. Değerleme 380 milyar dolara ulaştı, yıllık gelir 14 milyar doları buldu.
+
+- [Google Gemini 3 Deep Think ile Bilimsel Akıl Yürütmeyi Güçlendiriyor](https://airehber.com/haberler/google-gemini-3-deep-think-bilimsel-akil-yurutme)
+  Kaynak: Google DeepMind | Tarih: Thu Feb 12 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google DeepMind, Gemini 3 Deep Think modunun büyük güncellemesini duyurdu. Bilim, araştırma ve mühendislik problemlerini çözmek için özelleştirildi.
+
+- [OpenAI GPT-5.2 ile Teorik Fizikte Çığır Açtı](https://airehber.com/haberler/openai-gpt-5-2-fizik-kesif)
+  Kaynak: OpenAI Blog | Tarih: Thu Feb 12 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
+
+### Prompt Kütüphanesi
+- [Viral İçerik Mühendisi Promptu](https://airehber.com/prompt-kutuphanesi/viral-icerik-muhendisi-promptu)
+  Kategori: pazarlama | Zorluk: orta
+  10 farklı psikolojik kanca üretip en güçlüsünü seçen viral içerik motoru. LinkedIn, X ve Instagram formatlarında.
+
+- [6 Şapka Düşünce Promptu](https://airehber.com/prompt-kutuphanesi/alti-sapka-dusunce-promptu)
+  Kategori: analiz | Zorluk: orta
+  Zor kararları 6 farklı perspektiften analiz eden De Bono tekniği. AI'a tek seferde iyimser, karamsar ve yaratıcı bakış açısı yaptır.
+
+- [Rakip Röntgeni Promptu](https://airehber.com/prompt-kutuphanesi/rakip-rontgeni-promptu)
+  Kategori: analiz | Zorluk: ileri
+  Rakip şirketin adını gir, 7 katmanlı analiz al: hendek analizi, zayıf karın tespiti ve somut savaş planı dahil.
+
+- [Kendini 3 Kez Düzelt Promptu](https://airehber.com/prompt-kutuphanesi/kendini-3-kez-duzelt-promptu)
+  Kategori: genel | Zorluk: orta
+  AI'ın ilk cevabı asla en iyisi değil. Bu prompt modeli kendi çıktısını puanlayıp 3 kez baştan yazmaya zorluyor.
+
+- [Prompt Üreten Prompt: Meta-Prompt Tekniği](https://airehber.com/prompt-kutuphanesi/prompt-ureten-prompt)
+  Kategori: genel | Zorluk: ileri
+  Yapay zekaya prompt yazdıran prompt. Ham fikri yapıştır, profesyonel seviye prompt al. 3 modelde test edildi.
+
+- [SWOT Analizi Promptu](https://airehber.com/prompt-kutuphanesi/swot-analizi-promptu)
+  Kategori: analiz | Zorluk: orta
+  Şirket adını gir, 4 kategoride 20+ maddelik SWOT raporu al. Claude, GPT-5 ve Gemini'de test edildi.
+
+### Haftalık Brifing
+- [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07)
+  Hafta: 7 | Yıl: 2026
+  10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
+
+## Güven Politikası
+
+Her içerikte kaynak güvenilirlik seviyesi belirtilir:
+- **Tier 1**: Resmi şirket blogu, akademik makale, resmi dokümantasyon
+- **Tier 2**: CEO/CTO sosyal medya, güvenilir medya (Reuters, Bloomberg)
+- **Tier 3**: Sızıntı, anonim kaynak, forum
+
+## İletişim
+
+- E-posta: info@airehber.com
+- can@airehber.com (editör)
+- LinkedIn: https://linkedin.com/in/ai-rehber
+- Instagram: https://instagram.com/airehberofficial
+
+## Lisans
+
+İçeriklerimiz orijinaldir. Atıf yapılarak paylaşılabilir. Tam metin kopyalama yasaktır.
