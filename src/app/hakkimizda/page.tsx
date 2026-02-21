@@ -4,11 +4,12 @@
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
-import { generateMeta } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationJsonLd } from "@/lib/seo";
 import { PageHeader } from "@/components/shared/page-header";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
 
 export const metadata: Metadata = generateMeta({
   title: "Hakkımızda",
@@ -43,9 +44,21 @@ const DEGERLER = [
 export default function HakkimizdaPage() {
   return (
     <>
-      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={[
+        organizationJsonLd(),
+        breadcrumbJsonLd([
+          { name: "Ana Sayfa", href: "/" },
+          { name: "Hakkımızda", href: "/hakkimizda" },
+        ]),
+      ]} />
 
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Hakkımızda", href: "/hakkimizda" },
+          ]}
+        />
         {/* ─── Header — PageHeader bileşeniyle ─── */}
         <PageHeader
           title="Hakkımızda"

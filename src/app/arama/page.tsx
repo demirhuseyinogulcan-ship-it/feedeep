@@ -5,8 +5,10 @@
 
 import type { Metadata } from "next";
 import { yazilar, haberler, promptlar } from "#site/content";
-import { generateMeta } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { PageHeader } from "@/components/shared/page-header";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { JsonLd } from "@/components/seo/json-ld";
 import { SearchUI, type SearchItem } from "@/components/shared/search-ui";
 
 export const metadata: Metadata = generateMeta({
@@ -47,12 +49,26 @@ export default function AramaPage() {
   ];
 
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
-      <PageHeader
-        title="Ara"
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Ana Sayfa", href: "/" },
+          { name: "Ara", href: "/arama" },
+        ])}
+      />
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Ara", href: "/arama" },
+          ]}
+        />
+        <PageHeader
+          title="Ara"
         description="Yazılar, haberler ve promptlarda arayın."
       />
-      <SearchUI items={items} />
-    </section>
+        <SearchUI items={items} />
+      </section>
+    </>
   );
 }

@@ -5,9 +5,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { haftalik } from "#site/content";
-import { generateMeta } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = generateMeta({
   title: "Haftalık AI Brifing",
@@ -22,9 +24,22 @@ export default function HaftalikPage() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
-      <PageHeader
-        title="Haftalık AI Brifing"
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Ana Sayfa", href: "/" },
+          { name: "Haftalık Brifing", href: "/haftalik" },
+        ])}
+      />
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Haftalık Brifing", href: "/haftalik" },
+          ]}
+        />
+        <PageHeader
+          title="Haftalık AI Brifing"
         description="Her hafta yapay zeka dünyasının en önemli 3 gelişmesi ve pratik aksiyon önerileri."
       />
 
@@ -70,6 +85,7 @@ export default function HaftalikPage() {
       {briefings.length === 0 && (
         <p className="text-gray-600 text-sm">Henüz brifing yayınlanmadı.</p>
       )}
-    </section>
+      </section>
+    </>
   );
 }

@@ -5,9 +5,11 @@
 
 import type { Metadata } from "next";
 import { haberler } from "#site/content";
-import { generateMeta } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
+import { JsonLd } from "@/components/seo/json-ld";
 import { EDITORIAL_TIMELINE } from "@/lib/timeline-data";
 
 export const metadata: Metadata = generateMeta({
@@ -34,9 +36,22 @@ export default function ZamanCizelgesiPage() {
   );
 
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
-      <PageHeader
-        title="AI Zaman Çizelgesi"
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Ana Sayfa", href: "/" },
+          { name: "AI Zaman Çizelgesi", href: "/zaman-cizelgesi" },
+        ])}
+      />
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "AI Zaman Çizelgesi", href: "/zaman-cizelgesi" },
+          ]}
+        />
+        <PageHeader
+          title="AI Zaman Çizelgesi"
         description="Yapay zeka dünyasındaki önemli gelişmeler — kronolojik sırayla."
       />
 
@@ -65,6 +80,7 @@ export default function ZamanCizelgesiPage() {
           </div>
         ))}
       </div>
-    </section>
+      </section>
+    </>
   );
 }

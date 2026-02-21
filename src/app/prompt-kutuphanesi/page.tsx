@@ -7,6 +7,7 @@ import { promptlar } from "#site/content";
 import { generateMeta, collectionPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { PROMPT_CATEGORIES, DIFFICULTY } from "@/lib/constants";
 import { PageHeader } from "@/components/shared/page-header";
+import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   FilterableContentList,
@@ -72,6 +73,12 @@ export default function PromptKutuphanesiPage() {
       />
 
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
+          ]}
+        />
         <PageHeader
           title="AI Prompt Kütüphanesi"
           description={`${prompts.length} adet test edilmiş, model bazlı skorlanmış prompt şablonu. Kopyala, değişkenleri doldur, yapıştır.`}
