@@ -5,6 +5,33 @@
 
 ---
 
+## [2026-02-22] Oturum 8 — Günlük Haber Üretimi + Yazı + Prompt + W08 Brifing
+
+### Eklenen
+- `content/haberler/anthropic-claude-sonnet-4-6-1m-context-kodlama.mdx` — Anthropic Sonnet 4.6: 1M token bağlam, ARC-AGI-2 %60.4, gelişmiş kodlama (17 Şubat haberi)
+- `content/haberler/google-vp-llm-wrapper-aggregator-girisim-hayatta-kalmaz.mdx` — Google Cloud VP Darren Mowry: LLM wrapper ve aggregator iş modellerinin çöküşü (21 Şubat)
+- `content/haberler/sam-altman-yapay-zeka-enerji-tuketimi-yanlis-anlasiliyor.mdx` — Sam Altman AI enerji/su tüketimi tartışmasını çerçeveliyor (21 Şubat)
+- `content/haberler/youtube-konusmaci-ai-asistani-televizyon-smart-tv.mdx` — YouTube konuşmacı AI özelliği smart TV'lere geliyor (19 Şubat)
+- `content/yazilar/cv-robot-reddediyor-ats-sistemi-yapay-zeka.mdx` — Beyaz yakalılar için ATS sistemi rehberi (22 Şubat), HBS 2022 "Hidden Workers" verisi temelli
+- `content/promptlar/ats-cv-optimizasyon-promptu.mdx` — İş ilanı + CV eşleştirme, ATS skor tahmini, eksik kelime analizi
+- `content/haftalik/2026-w08.mdx` — Haftalık AI Brifing #8 (15-21 Şubat): Sonnet 4.6, Google AI Modu TR, OpenAI $100B
+
+### Değiştirilen
+- `public/llms.txt` — 7 yeni içerik eklendi (4 haber + 1 yazı + 1 prompt + 1 haftalık brifing)
+- `content/haberler/sam-altman-yapay-zeka-enerji-tuketimi-yanlis-anlasiliyor.mdx` — description 167→147 karakter (validation hatası düzeltildi)
+- `content/promptlar/ats-cv-optimizasyon-promptu.mdx` — category kariyer→genel düzeltildi (keywords 6→5 düzeltildi)
+
+### Kaynak Tarama
+- TechCrunch AI kategorisi tarandı (22 Şubat)
+- Anthropic resmi blog (`anthropic.com/news`) kontrol edildi
+- Referans yazı analizi: `airehber.com/yazilar/yoneticiniz-geri-bildirim-egosuz-yapay-zeka` (yazı tonu kılavuzu için)
+
+### Build Durumu
+- `npm run validate` → 57 dosya, 0 hata ✅
+- `npm run build` → exit code 0 ✅
+
+---
+
 ## [2026-02-15] Oturum 7 — Haber Otomasyon Sistemi v2
 
 ### Eklenen
