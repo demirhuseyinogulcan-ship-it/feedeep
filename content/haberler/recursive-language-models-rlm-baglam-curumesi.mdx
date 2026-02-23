@@ -1,0 +1,36 @@
+---
+title: "RLM Yaklaşımı: Bağlam Çürümesine Yeni Bir Yol"
+slug: recursive-language-models-rlm-baglam-curumesi
+description: "Recursive Language Models yaklaşımı, context rot sorununu daha büyük model yerine dış bellek ve özyinelemeli çıkarımla çözmeyi öneriyor."
+date: 2026-02-23
+sourceUrl: "https://webrazzi.com/2026/02/23/daha-buyuk-model-degil-daha-akilli-mimari-recursive-language-models-rlm-ne-vadediyor/"
+sourceName: "Webrazzi"
+category: arastirma
+keywords:
+  - recursive language models
+  - context rot sorunu
+  - external memory ai
+  - agentic ai mimarisi
+  - rag ve rlm karsilastirma
+  - yapay zeka haberleri
+sources:
+  - url: "https://webrazzi.com/2026/02/23/daha-buyuk-model-degil-daha-akilli-mimari-recursive-language-models-rlm-ne-vadediyor/"
+    label: "Webrazzi"
+    tier: 2
+  - url: "https://arxiv.org/pdf/2512.24601"
+    label: "ArXiv"
+    tier: 1
+confidence: medium
+socialSnippet: "RLM yaklaşımı, LLM'lerdeki context rot sorununa farklı bir cevap veriyor: daha büyük model değil, dış bellek + özyinelemeli çıkarım. RAG'in yerini almak yerine onu tamamlayabilir."
+published: true
+---
+
+Yapay zekâ dünyasında uzun süredir reflex aynıydı: bağlam yetmiyorsa daha büyük model, daha çok token. Recursive Language Models (RLM) yaklaşımı bu ezberi bozuyor. Önerdiği şey daha fazla büyümek değil, mevcut aklı daha iyi organize etmek.
+
+Sorunun adı context rot. Modele çok uzun metin verdiğinizde, bilgi içeride kalsa da karar kalitesi düşüyor; model kritik noktaları kaçırabiliyor. RLM bunu tek seferde tüm metni yutmak yerine parçalı, özyinelemeli bir işleme mantığıyla ele alıyor. Model, kendini alt görevler için tekrar çağırıyor ve ara çıktıları birleştirerek sonuca gidiyor.
+
+Bu mimaride dış bellek (external memory) kritik rol oynuyor. Uzun dokümanlar modelin içinde taşınmıyor; ihtiyaç halinde çağrılan bir ortamda tutuluyor. Böylece model "hepsini aynı anda akılda tutma" zorunluluğundan kurtuluyor. Özellikle hukuk, finans ve büyük kod tabanları gibi uzun bağlam isteyen alanlarda bunun ciddi verim üretme potansiyeli var.
+
+Ama işin maliyetsiz tarafı yok. Çok adımlı çağrı yapısı sistem karmaşıklığını artırıyor, gecikme (latency) riski yaratıyor ve operasyon yönetimini zorlaştırıyor. Bu yüzden RLM'i "RAG bitti" diye okumak erken olur. Daha gerçekçi tablo, RAG + Agent + RLM hibritlerinin birlikte çalışacağı bir dönem.
+
+Kısacası yeni yarışın ekseni parametre sayısından mimari zekâya kayıyor. RLM bugün için nihai cevap değil, ama doğru soruyu soruyor: Modeli büyütmek yerine düşünme sürecini nasıl akıllandırırız?

@@ -5,6 +5,24 @@
 
 ---
 
+## [2026-02-23] Oturum 9 — Günlük Haber Üretimi (23 Şubat)
+
+### Eklenen
+- `content/haberler/spotify-prompted-playlists-uk-irlanda-avustralya-isvec.mdx` — Spotify Prompted Playlists özelliği 4 yeni pazarda Premium kullanıcılara açıldı
+- `content/haberler/pentagon-anthropic-claude-askeri-kullanim-gerilimi.mdx` — Pentagon ve Anthropic arasında Claude'un askeri kullanımı gerilimi
+- `content/haberler/apple-visual-intelligence-giyilebilir-cihazlar.mdx` — Apple'ın Visual Intelligence odağını giyilebilir cihazlara taşıma planı
+- `content/haberler/recursive-language-models-rlm-baglam-curumesi.mdx` — Recursive Language Models yaklaşımı ve context rot tartışması
+
+### Kaynak Tarama
+- TechCrunch AI kategorisi (23 Şubat güncellemeleri) tarandı
+- Webrazzi son eklenenler ve yapay zeka kategorisi tarandı
+- İkincil doğrulama için Spotify Newsroom, Axios, Bloomberg ve ArXiv referansları kullanıldı
+
+### Doğrulama
+- `npm run validate` → 61 dosya, 0 hata ✅
+
+---
+
 ## [2026-02-22] Oturum 8 — Günlük Haber Üretimi + Yazı + Prompt + W08 Brifing
 
 ### Eklenen
