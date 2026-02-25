@@ -5,6 +5,29 @@
 
 ---
 
+## [2026-02-25] Oturum 10 — Günlük Haber Üretimi (25 Şubat)
+
+### Eklenen
+- `content/haberler/meta-amd-100-milyar-dolar-cip-anlasmasi.mdx` — Meta ve AMD 100 milyar dolarlık AI çip anlaşması, 160 milyon hisse opsiyonu
+- `content/haberler/atlassian-jira-ai-ajanlari-gorev-yonetimi.mdx` — Jira'ya AI ajanlarına görev atama özelliği (açık beta)
+- `content/haberler/adobe-firefly-quick-cut-ai-video-kurgu.mdx` — Adobe Firefly Quick Cut: AI ile otomatik video ilk kurgu
+- `content/haberler/anthropic-cin-deepseek-moonshot-claude-distilasyon-suclama.mdx` — Anthropic, üç Çinli şirketi 24.000 sahte hesapla Claude'u kopyalamakla suçladı
+- `content/yazilar/chatgpt-kopyala-yapistir-yapay-icerik-guven-krizi.mdx` — AI içerik yorgunluğu analizi: okuyucuların yüzde 50'si AI yazımını fark ediyor, etkileşim yüzde 45 düşüyor
+- `content/promptlar/ai-yazilarini-insanlastirma-promptu.mdx` — AI çıktısını insanlaştıran 7 adımlı düzenleme prompt'u
+
+### Kaynak Tarama
+- TechCrunch AI kategorisi (24-25 Şubat güncellemeleri) tarandı
+- The Verge AI kategorisi kontrol edildi
+- Webrazzi yapay zeka kategorisi kontrol edildi
+- Birincil doğrulama: WSJ, Anthropic Blog referansları kullanıldı
+
+### Doğrulama
+- `npm run validate` → 65 dosya, 0 hata ✅
+- `npm run build` → 83 sayfa, exit code 0 ✅
+- `public/llms.txt` otomatik güncellendi (48 haber, 8 yazı, 7 prompt, 2 haftalık)
+
+---
+
 ## [2026-02-23] Oturum 9 — Günlük Haber Üretimi (23 Şubat)
 
 ### Eklenen

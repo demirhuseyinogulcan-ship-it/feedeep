@@ -23,6 +23,14 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 ## Son İçerikler (Şubat 2026)
 
 ### Haberler
+- [Adobe Firefly Quick Cut: AI ile Video Kurgusu Otomatikleşiyor](https://airehber.com/haberler/adobe-firefly-quick-cut-ai-video-kurgu): Adobe Firefly'ın yeni Quick Cut özelliği, ham video çekimlerinden AI ile otomatik ilk kurgu oluşturuyor. İçerik üreticileri için oyun değiştirici.
+- [Anthropic Üç Çinli Şirketi Claude'u Kopyalamakla Suçladı](https://airehber.com/haberler/anthropic-cin-deepseek-moonshot-claude-distilasyon-suclama): Anthropic, DeepSeek, Moonshot AI ve MiniMax'ın 24.000 sahte hesapla Claude'un yeteneklerini kopyaladığını açıkladı. 16 milyon konuşma tespit edildi.
+- [Jira'da Artık AI Ajanlarına Görev Atanabiliyor](https://airehber.com/haberler/atlassian-jira-ai-ajanlari-gorev-yonetimi): Atlassian, Jira'ya AI ajanlarına iş atama ve takip özelliği ekledi. İnsan ve AI ajanları aynı panelden yönetiliyor. Açık beta olarak kullanımda.
+- [Meta ve AMD 100 Milyar Dolarlık AI Çip Anlaşması İmzaladı](https://airehber.com/haberler/meta-amd-100-milyar-dolar-cip-anlasmasi): Meta, AMD'den 100 milyar dolarlık çip satın alacak. Anlaşma kapsamında AMD, Meta'ya 160 milyon hisse opsiyonu verdi. NVIDIA bağımlılığı azalıyor.
+- [Apple, Visual Intelligence'ı Giyilebilir Cihazlara Taşıyor](https://airehber.com/haberler/apple-visual-intelligence-giyilebilir-cihazlar): Apple'ın yapay zeka odağı iPhone'dan giyilebilir cihazlara kayıyor. Akıllı gözlük, AI pin ve kameralı AirPods senaryoları gündemde.
+- [Pentagon Anthropic'i Sıkıştırdı: Claude'un Askeri Kullanımı Gündemde](https://airehber.com/haberler/pentagon-anthropic-claude-askeri-kullanim-gerilimi): Pentagon, Anthropic CEO'su Dario Amodei'yi Claude'un askeri kullanımını görüşmek üzere çağırdı. Olası 'supply chain risk' etiketi masada.
+- [RLM Yaklaşımı: Bağlam Çürümesine Yeni Bir Yol](https://airehber.com/haberler/recursive-language-models-rlm-baglam-curumesi): Recursive Language Models yaklaşımı, context rot sorununu daha büyük model yerine dış bellek ve özyinelemeli çıkarımla çözmeyi öneriyor.
+- [Spotify Prompted Playlists 4 Yeni Pazarda Açıldı](https://airehber.com/haberler/spotify-prompted-playlists-uk-irlanda-avustralya-isvec): Spotify, yapay zekayla metin komutundan liste üreten Prompted Playlists özelliğini Birleşik Krallık, İrlanda, Avustralya ve İsveç'te Premium'a açtı.
 - [G42 ve Cerebras Hindistan'a 8 Exaflop AI Altyapısı Kuruyor](https://airehber.com/haberler/g42-cerebras-hindistan-8-exaflop-ai-altyapi): BAE merkezli G42, Cerebras ile Hindistan'da 8 exaflop kapasiteli AI altyapısı kuruyor. Nanda 87B modeli Hintçe-İngilizce çalışacak.
 - [Google AI Modu ve AI Bakışı Türkiye'de Kullanıma Açıldı](https://airehber.com/haberler/google-ai-modu-turkiye-gemini-arama): Google'ın Gemini 3 destekli AI Modu ve AI Bakışı özellikleri Türkiye'de aktif. Arama deneyimi kökten değişiyor, işte detaylar.
 - [Google Photoshoot: AI ile Stüdyo Kalitesinde Ürün Fotoğrafı](https://airehber.com/haberler/google-photoshoot-ai-urun-fotografciligi): Google Labs'ın Photoshoot aracı, yapay zeka ile profesyonel ürün fotoğrafları üretiyor. E-ticaret için oyun değiştirici olabilir.
@@ -65,6 +73,7 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [OpenAI GPT-5.2 ile Teorik Fizikte Çığır Açtı](https://airehber.com/haberler/openai-gpt-5-2-fizik-kesif): OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
 ### Yazılar
+- [ChatGPT'den Kopyala Yapıştır Yapanı Artık Herkes Anlıyor](https://airehber.com/yazilar/chatgpt-kopyala-yapistir-yapay-icerik-guven-krizi): LinkedIn'deki AI yazıları yüzde 45 daha az etkileşim alıyor. Okuyucuların yarısı yapay içeriği fark ediyor. İnsan eli değen yazının neden hâlâ önemli olduğu.
 - [Zam İsteyemiyorsun Çünkü Değerin Ölçülmüyor. AI ile Ölç.](https://airehber.com/yazilar/zam-isteyemiyorsun-cunku-degerin-olculmuyor-ai-ile-olc): Zam görüşmesine girip 'çok çalışıyorum' demek yetmiyor. Kendi değerini somut veriyle ortaya koymanın AI destekli yolu.
 - [Toplantıya Çağrılmadın mı? AI ile Herkesten Hazırlıklı Gel](https://airehber.com/yazilar/toplantiya-cagrilmadin-mi-ai-ile-hazirlikli-gel): Sessiz dışlama iş hayatının en yaygın sorunu. Çağrılmadıkları toplantıdan daha hazırlıklı çıkmanın yolu var.
 - [CV'nizi Bir Robot Reddediyor. Ve Kimse Size Bunu Söylemedi.](https://airehber.com/yazilar/cv-robot-reddediyor-ats-sistemi-yapay-zeka): Başvurduğunuz pozisyonları neden arayan bile kalmıyor? Çoğu şirkette CV'nizi ilk gören insan değil. İşte ATS sistemi ve AI ile nasıl geçilir.
@@ -75,6 +84,7 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [ChatGPT vs Claude vs Gemini: 2026 Karşılaştırması](https://airehber.com/yazilar/chatgpt-vs-claude-vs-gemini-2026): 2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
 ### Prompt Kütüphanesi
+- [AI Yazısını İnsanlaştırma Promptu](https://airehber.com/prompt-kutuphanesi/ai-yazilarini-insanlastirma-promptu): ChatGPT veya Claude çıktısını robot kokusundan arındırıp doğal, samimi, okunabilir Türkçe yazıya dönüştüren prompt. 7 adımlı düzenleme süreci.
 - [ATS CV Optimizasyon Promptu](https://airehber.com/prompt-kutuphanesi/ats-cv-optimizasyon-promptu): İş ilanı ve CV'ni yapıştır; ATS'nin nasıl skorladığını, hangi anahtar kelimelerin eksik olduğunu ve düzeltilmiş bir CV taslağı al.
 - [Viral İçerik Mühendisi Promptu](https://airehber.com/prompt-kutuphanesi/viral-icerik-muhendisi-promptu): 10 farklı psikolojik kanca üretip en güçlüsünü seçen viral içerik motoru. LinkedIn, X ve Instagram formatlarında.
 - [6 Şapka Düşünce Promptu](https://airehber.com/prompt-kutuphanesi/alti-sapka-dusunce-promptu): Zor kararları 6 farklı perspektiften analiz eden De Bono tekniği. AI'a tek seferde iyimser, karamsar ve yaratıcı bakış açısı yaptır.
