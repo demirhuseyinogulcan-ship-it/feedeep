@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
-import { yazilar, haberler, promptlar } from "#site/content";
+import { yazilar, haberler, promptlar, rehberler } from "#site/content";
 import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -46,6 +46,15 @@ export default function AramaPage() {
         type: "Prompt",
         date: p.date,
       })),
+    ...rehberler
+      .filter((r) => r.published)
+      .map((r) => ({
+        title: `${r.guideTitle} — Bölüm ${r.chapter}: ${r.title}`,
+        description: r.description,
+        href: `/programlama/${r.guide}/${r.slug}`,
+        type: "Ders",
+        date: r.date,
+      })),
   ];
 
   return (
@@ -65,7 +74,7 @@ export default function AramaPage() {
         />
         <PageHeader
           title="Ara"
-        description="Yazılar, haberler ve promptlarda arayın."
+        description="Yazılar, haberler, promptlar ve programlama derslerinde arayın."
       />
         <SearchUI items={items} />
       </section>

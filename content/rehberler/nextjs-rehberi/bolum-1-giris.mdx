@@ -1,0 +1,221 @@
+---
+title: "Next.js Nedir? Giriş ve Kurulum Rehberi"
+slug: bolum-1-giris
+description: "Next.js framework'ünü tanıyın, geliştirme ortamınızı kurun ve ilk projenizi çalıştırın."
+date: 2026-03-01
+published: true
+guide: nextjs-rehberi
+guideTitle: "Sıfırdan Next.js"
+chapter: 1
+totalChapters: 20
+technology: nextjs
+difficulty: baslangic
+keywords:
+  - next.js nedir
+  - next.js kurulum
+  - next.js başlangıç rehberi
+  - react framework
+  - next.js türkçe
+prerequisites:
+  - "Temel HTML ve CSS bilgisi"
+  - "Bilgisayarınızda bir kod editörü (VS Code önerilir)"
+learningOutcomes:
+  - "Next.js'in ne olduğunu ve neden kullanıldığını açıklayabilir"
+  - "Node.js ve npm/pnpm kurulumu yapabilir"
+  - "create-next-app ile yeni bir proje oluşturabilir"
+  - "Geliştirme sunucusunu başlatıp tarayıcıda görebilir"
+  - "Proje dosyalarında ilk değişikliği yapabilir"
+estimatedMinutes: 20
+---
+
+Web geliştirme dünyası hızlı hareket ediyor. React ile başlayan yolculuk, bir noktada "peki ya SEO, peki ya performans, peki ya routing?" sorularına çarpıyor. Next.js tam burada devreye giriyor.
+
+Bu bölüm sıfır noktası. Hiçbir şey bilmene gerek yok. Sadece bir bilgisayar ve merak yeterli.
+
+## Next.js Nedir?
+
+Next.js, Vercel tarafından geliştirilen bir React framework'ü. "Framework" kelimesi korkutucu gelebilir ama aslında şu anlama geliyor: React'in üzerine kurulu, hazır kuralları ve araçları olan bir yapı.
+
+Düşün ki React bir motor. Next.js o motoru içine alan, direksiyonu, vitesi, kliması hazır bir araba.
+
+**Next.js'in sağladığı temel özellikler:**
+
+| Özellik | Ne İşe Yarar |
+|---------|-------------|
+| **Dosya tabanlı routing** | Klasör oluştur → sayfa hazır. Ekstra config yok |
+| **Server-Side Rendering (SSR)** | Sayfa sunucuda oluşturulur, SEO için kritik |
+| **Static Site Generation (SSG)** | Build zamanında HTML üretir, süper hızlı |
+| **API Routes** | Backend API'ları aynı projede yazabilirsin |
+| **Image Optimization** | Görselleri otomatik sıkıştırır ve lazy load yapar |
+| **TypeScript desteği** | Sıfır config ile TypeScript kullanabilirsin |
+
+Kısacası: React ile yapabileceğin her şeyi yaparsın, üstüne bir de production-ready özellikler gelir bedavaya.
+
+<InteractiveQuiz
+  question="Next.js hangi JavaScript kütüphanesinin üzerine inşa edilmiştir?"
+  options={[
+    { text: "Vue.js", correct: false },
+    { text: "Angular", correct: false },
+    { text: "React", correct: true },
+    { text: "Svelte", correct: false }
+  ]}
+  explanation="Next.js, React üzerine kurulu bir framework'tür. React'in sunduğu component yapısını kullanır ve üzerine routing, SSR, SSG gibi özellikler ekler."
+  hint="Vercel tarafından geliştirilen bu framework, en popüler UI kütüphanesiyle çalışır."
+  taskNumber={1}
+  totalTasks={3}
+/>
+
+## Node.js Kurulumu
+
+Next.js çalışmak için Node.js gerekiyor. Node.js, JavaScript'i tarayıcı dışında çalıştırmamızı sağlayan bir runtime.
+
+**Adım 1:** [nodejs.org](https://nodejs.org) adresine git.
+
+**Adım 2:** LTS (Long Term Support) sürümünü indir. Bu yazı yazılırken Node.js 22.x LTS güncel.
+
+**Adım 3:** Kurulumu tamamla. Sonra terminali aç ve kontrol et:
+
+```bash
+node --version
+# v22.x.x gibi bir çıktı görmeli
+
+npm --version
+# 10.x.x gibi bir çıktı görmeli
+```
+
+Eğer versiyon numaralarını görüyorsan, hazırsın.
+
+> **pnpm Tavsiyesi:** npm yerine pnpm kullanmanı öneriyoruz. Daha hızlı, daha az disk alanı kullanır. Kurmak için: `npm install -g pnpm`
+
+## İlk Next.js Projesini Oluştur
+
+Terminal aç ve şu komutu çalıştır:
+
+```bash
+npx create-next-app@latest my-first-app
+```
+
+Sana birkaç soru soracak. Şimdilik şu cevapları ver:
+
+```
+✔ Would you like to use TypeScript? → Yes
+✔ Would you like to use ESLint? → Yes
+✔ Would you like to use Tailwind CSS? → Yes
+✔ Would you like your code inside a `src/` directory? → Yes
+✔ Would you like to use App Router? → Yes
+✔ Would you like to use Turbopack for next dev? → Yes
+✔ Would you like to customize the import alias? → No
+```
+
+Neden bu seçimler?
+
+- **TypeScript:** Hataları daha kodlarken yakalar. Başta zor gibi görünür ama 2 gün sonra geri dönemezsin.
+- **Tailwind CSS:** CSS yazmadan stil verebilirsin. `className="text-red-500"` gibi.
+- **App Router:** Next.js'in modern routing sistemi. Eski Pages Router yerine bunu kullanıyoruz.
+- **Turbopack:** Geliştirme sırasında sayfaları çok daha hızlı derler.
+
+Proje oluşturulduktan sonra:
+
+```bash
+cd my-first-app
+npm run dev
+```
+
+Tarayıcını aç: `http://localhost:3000`
+
+Karşında Next.js'in varsayılan sayfası var. Tebrikler, ilk projen hazır.
+
+<CodeFillBlank
+  question="Yeni bir Next.js projesi oluşturmak için terminalde hangi komutu çalıştırmalısın?"
+  codeBefore={`$ `}
+  codeAfter={` my-first-app`}
+  options={[
+    { text: "npx create-next-app@latest", correct: true },
+    { text: "npm install next", correct: false },
+    { text: "npx next init", correct: false },
+    { text: "npm create react-app", correct: false }
+  ]}
+  explanation="create-next-app, Next.js'in resmi proje oluşturma aracıdır. @latest her zaman en güncel sürümü çeker."
+  taskNumber={2}
+  totalTasks={3}
+/>
+
+## İlk Değişikliğini Yap
+
+VS Code ile projeyi aç:
+
+```bash
+code .
+```
+
+`src/app/page.tsx` dosyasını bul. İçindeki her şeyi sil ve şunu yaz:
+
+```tsx
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">
+        Merhaba Next.js! 🚀
+      </h1>
+    </main>
+  );
+}
+```
+
+Dosyayı kaydet (Ctrl+S). Tarayıcıya dön.
+
+Sayfa otomatik güncellendi. Buna **Hot Module Replacement (HMR)** deniyor — değişikliklerin anında yansıması. Sayfayı yenilemen gerekmez.
+
+Az önce şunları yaptın:
+1. Bir React component'i yazdın (`Home` fonksiyonu)
+2. JSX kullandın (HTML benzeri sözdizimi JavaScript içinde)
+3. Tailwind CSS class'ları ile stil verdin
+4. HMR'ın çalıştığını gördün
+
+Hepsi bu. İlk Next.js sayfan yayında.
+
+<CodeDetective
+  title="İlk Bug'ını Bul!"
+  description="Bir geliştirici ilk Next.js sayfasını yazdı ama tarayıcıda hata alıyor. Hangi satırda sorun var?"
+  errorMessage="SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag"
+  fileName="page.tsx"
+  lines={[
+    { num: 1, content: "export default function Home() {" },
+    { num: 2, content: "  return (" },
+    { num: 3, content: "    <h1>Merhaba</h1>" },
+    { num: 4, content: "    <p>İlk sayfam</p>" },
+    { num: 5, content: "  );" },
+    { num: 6, content: "}" }
+  ]}
+  correctLine={3}
+  explanation="JSX'te birden fazla element yan yana döndürülemez. Hepsini bir parent element ile sarmalaman gerekir. <div>, <main> veya boş fragment <> </> kullanabilirsin."
+  fix="return (<><h1>Merhaba</h1><p>İlk sayfam</p></>);"
+  hint="JSX kuralı: return içinde tek bir root element olmalı."
+  maxTries={3}
+/>
+
+## Geliştirme Ortamı İpuçları
+
+VS Code kullanıyorsan bu extension'ları kurmanı öneriyoruz:
+
+- **ES7+ React/Redux/React-Native snippets** — `rafce` yaz, Tab'a bas, component hazır
+- **Tailwind CSS IntelliSense** — Class isimleri otomatik tamamlanır
+- **Pretty TypeScript Errors** — TypeScript hatalarını okunabilir yapar
+- **Error Lens** — Hataları satır üzerinde gösterir
+
+Terminal kısayolları:
+- `Ctrl + ~` → VS Code içinde terminal aç
+- `Ctrl + C` → Çalışan sunucuyu durdur
+- `npm run dev` → Geliştirme sunucusunu başlat
+
+## Özet
+
+Bu bölümde şunları öğrendin:
+
+- **Next.js nedir** — React üzerine kurulu, production-ready bir framework
+- **Node.js kurulumu** — Next.js'in çalışması için gerekli runtime
+- **Proje oluşturma** — `create-next-app` ile sıfırdan proje kurulumu
+- **İlk değişiklik** — page.tsx dosyasını düzenleyip HMR'ı deneyimleme
+- **Geliştirme ortamı** — VS Code extension'ları ve terminal kısayolları
+
+Bir sonraki bölümde **Next.js proje yapısını** detaylıca inceleyeceğiz. Her dosya ve klasörün ne işe yaradığını öğreneceksin.

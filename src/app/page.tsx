@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { websiteJsonLd, faqJsonLd, generateMeta } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { SITE, YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
-import { yazilar, haberler, promptlar, haftalik } from "#site/content";
+import { yazilar, haberler, promptlar, haftalik, rehberler } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
 import { NewsTicker } from "@/components/shared/the-signal";
@@ -133,6 +133,12 @@ const latestBrifing = haftalik
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
 
 const EXPLORE_SECTIONS = [
+  {
+    title: "Programlama Rehberleri",
+    description: "Sıfırdan ileri seviyeye, interaktif derslerle programlama öğrenin",
+    href: "/programlama",
+    count: `${new Set(rehberler.filter((r) => r.published).map((r) => r.guide)).size || "Yeni"}`,
+  },
   {
     title: "Prompt Kütüphanesi",
     description: "Kullanıma hazır, model bazlı skorlanmış prompt şablonları",

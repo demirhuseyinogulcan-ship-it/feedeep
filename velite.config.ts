@@ -243,6 +243,46 @@ const haftalik = defineCollection({
   }),
 });
 
+// ─── Rehberler (Programlama Dersleri) ───────────────────────
+
+const rehberler = defineCollection({
+  name: "Rehber",
+  pattern: "rehberler/**/*.mdx",
+  schema: s.object({
+    // Temel bilgi
+    title: s.string().max(80),
+    slug: s.slug("rehberler"),
+    description: s.string().max(160),
+    date: s.isodate(),
+    updated: s.isodate().optional(),
+    published: s.boolean().default(true),
+
+    // Rehber & Bölüm yapısı
+    guide: s.string(),          // "nextjs-rehberi" — URL path'teki rehber adı
+    guideTitle: s.string(),     // "Sıfırdan Next.js" — görünen başlık
+    chapter: s.number(),        // 1, 2, 3...
+    totalChapters: s.number(),  // Bu rehberdeki toplam bölüm
+
+    // Teknoloji ve zorluk
+    technology: s.string(),     // "nextjs", "dart", "python"
+    difficulty: s.enum(["baslangic", "orta", "ileri"]),
+
+    // SEO & keşif
+    keywords: s.array(s.string()).max(6),
+    image: s.string().optional(),
+
+    // Eğitim meta
+    prerequisites: s.array(s.string()).default([]),      // Ön gereksinimler
+    learningOutcomes: s.array(s.string()).default([]),    // Bu bölümde öğrenilecekler
+    estimatedMinutes: s.number().default(15),             // Tahmini okuma süresi
+
+    // İçerik
+    body: s.mdx(),
+    toc: s.toc(),
+    metadata: s.metadata(),
+  }),
+});
+
 // ─── Velite Config Export ────────────────────────────────────
 
 export default defineConfig({
@@ -254,7 +294,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { yazilar, haberler, promptlar, haftalik },
+  collections: { yazilar, haberler, promptlar, haftalik, rehberler },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

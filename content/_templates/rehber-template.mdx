@@ -1,0 +1,100 @@
+---
+title: "Bölüm Başlığı: Alt Başlık"
+slug: bolum-N-konu
+description: "Bu bölümde ne öğrenileceğinin 160 karakterlik özeti."
+date: 2026-03-01
+published: false
+guide: rehber-slug
+guideTitle: "Sıfırdan Teknoloji Adı"
+chapter: 1
+totalChapters: 20
+technology: nextjs
+difficulty: baslangic
+keywords:
+  - anahtar-kelime-1
+  - anahtar-kelime-2
+  - anahtar-kelime-3
+prerequisites:
+  - "Temel HTML bilgisi"
+learningOutcomes:
+  - "Kazanım 1"
+  - "Kazanım 2"
+  - "Kazanım 3"
+estimatedMinutes: 25
+---
+
+Giriş paragrafı — bu bölümde ne öğreneceğini 2-3 cümlede anlat. Okuyucuyu motive et ama abartma.
+
+## İlk Ana Konu
+
+Kavram açıklaması. Kod örneği ile destekle:
+
+```tsx
+// Kod örneği
+export default function Page() {
+  return <h1>Merhaba Dünya</h1>;
+}
+```
+
+<InteractiveQuiz
+  question="Soru metni buraya"
+  options={[
+    { text: "Seçenek A", correct: false },
+    { text: "Seçenek B", correct: true },
+    { text: "Seçenek C", correct: false },
+  ]}
+  explanation="Doğru cevabın açıklaması"
+  hint="İpucu: ..."
+  taskNumber={1}
+  totalTasks={3}
+/>
+
+## İkinci Ana Konu
+
+Bir sonraki kavramın açıklaması.
+
+<CodeFillBlank
+  question="Boşluğu doğru kodla doldurun:"
+  codeBefore={`export default function Layout({ children }) {\n  return (\n    <html>`}
+  codeAfter={`      {children}\n    </html>\n  );\n}`}
+  options={[
+    { text: "<body>", correct: true },
+    { text: "<div>", correct: false },
+    { text: "<main>", correct: false },
+  ]}
+  explanation="HTML yapısında body elementi zorunludur."
+  taskNumber={2}
+  totalTasks={3}
+/>
+
+## Pratik Uygulama
+
+Mini proje veya alıştırma açıklaması.
+
+<CodeDetective
+  title="Bug'ı Bul!"
+  description="Bu kodda bir hata var. Hangi satırda?"
+  errorMessage="TypeError: Cannot read property 'map' of undefined"
+  fileName="page.tsx"
+  lines={[
+    { num: 1, content: "export default function Page() {" },
+    { num: 2, content: "  const data = fetch('/api/data');" },
+    { num: 3, content: "  return data.map(item => <p>{item}</p>);" },
+    { num: 4, content: "}" },
+  ]}
+  correctLine={2}
+  explanation="fetch() bir Promise döndürür, doğrudan .map() çağrılamaz. await ile beklemeli veya use() hook'u kullanmalısınız."
+  fix="const data = await fetch('/api/data').then(r => r.json());"
+  hint="fetch() fonksiyonunun dönüş tipine dikkat edin."
+  maxTries={3}
+/>
+
+## Özet
+
+Bu bölümde şunları öğrendin:
+
+- **Kazanım 1** — kısa açıklama
+- **Kazanım 2** — kısa açıklama
+- **Kazanım 3** — kısa açıklama
+
+Bir sonraki bölümde **Sonraki Konu Başlığı** konusuna geçeceğiz.

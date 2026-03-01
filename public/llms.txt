@@ -10,12 +10,14 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
 - **Prompt Kütüphanesi**: Model bazlı skorlanmış, değişkenli, hata senaryolu prompt şablonları
 - **Haftalık Brifing**: Her hafta AI dünyasının 3 önemli gelişmesi + aksiyon önerisi
+- **Programlama Rehberleri**: Sıfırdan ileri seviyeye, bölüm bazlı interaktif programlama dersleri (Next.js, Dart, Python, React)
 
 ## Sayfalar
 
 - [Yazılar](https://airehber.com/yazilar): Tüm rehberler, incelemeler ve analizler
 - [Haberler](https://airehber.com/haberler): Güncel AI haberleri
 - [Prompt Kütüphanesi](https://airehber.com/prompt-kutuphanesi): Kullanıma hazır prompt şablonları
+- [Programlama Rehberleri](https://airehber.com/programlama): Sıfırdan ileri seviyeye interaktif programlama dersleri
 - [Haftalık Brifing](https://airehber.com/haftalik): Haftalık AI özet bülteni
 - [AI Zaman Çizelgesi](https://airehber.com/zaman-cizelgesi): Kronolojik AI gelişmeleri
 - [Hakkımızda](https://airehber.com/hakkimizda): Ekip ve misyon

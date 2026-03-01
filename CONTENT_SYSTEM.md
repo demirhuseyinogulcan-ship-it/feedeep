@@ -137,6 +137,78 @@ Haberler doğal, akıcı, gazetecilik diline uygun yazılır:
 ## Haftanın Sayıları             ← 3-5 adet istatistik
 ```
 
+### 2.5 Programlama Rehberleri (`content/rehberler/{rehber-adi}/`)
+
+**Ne:** Sıfırdan ileri seviyeye, bölüm bazlı interaktif programlama dersleri. Pillar content — SEO'nun ana sütunu.
+**Kadans:** Haftada minimum 1 bölüm, hedef 2.
+**Uzunluk:** Her bölüm minimum 1500 kelime, ideal 2500-4000 kelime.
+
+| Alan | Kural | Örnek |
+|------|-------|-------|
+| `title` | Max 80 karakter, bölüm içeriğini açıklayan | `"Next.js Routing Sistemi: Dinamik ve Nested Route'lar"` |
+| `slug` | `bolum-{N}-{konu}` formatında | `bolum-1-giris` |
+| `description` | Max 160 karakter, bölümün ne öğrettiği | `"Next.js ile ilk projenizi oluşturup çalıştırın."` |
+| `guide` | Rehber slug'ı | `nextjs-rehberi` |
+| `guideTitle` | Rehber tam adı | `Sıfırdan Next.js` |
+| `chapter` | Bölüm numarası (1'den başlar) | `1` |
+| `totalChapters` | Rehberdeki toplam bölüm sayısı | `20` |
+| `technology` | `nextjs` \| `dart` \| `python` \| `react` | `nextjs` |
+| `difficulty` | `baslangic` \| `orta` \| `ileri` | `baslangic` |
+| `prerequisites` | Bu bölümden önce bilmesi gerekenler | `["Temel HTML bilgisi"]` |
+| `learningOutcomes` | Bölüm sonunda kazanımlar (3-5 madde) | `["Node.js kurulumu yapabilir"]` |
+| `estimatedMinutes` | Tahmini okuma + uygulama süresi (dk) | `25` |
+| `keywords` | Max 6, SEO anahtar kelimeleri | `["next.js kurulum", "next.js başlangıç"]` |
+
+**URL Yapısı (3 Seviyeli SEO Silo):**
+```
+/programlama                                    → Hub sayfası (tüm rehberler)
+/programlama/nextjs-rehberi                     → Pillar page (bölüm listesi)  
+/programlama/nextjs-rehberi/bolum-1-giris       → Ders sayfası (MDX içerik)
+```
+
+**İnteraktif Bileşenler (MDX içinde kullanılır):**
+- `<InteractiveQuiz />` — Çoktan seçmeli Duolingo tarzı quiz
+- `<CodeDetective />` — Koddaki bug'ı bul oyunu
+- `<CodeFillBlank />` — Boşluk doldurmalı kod egzersizi
+
+**Bölüm Body Yapısı:**
+```
+## Giriş paragrafı               ← Bu bölümde ne öğreneceksin (2-3 cümle)
+## Ana Konu 1                     ← Kavram açıklaması + kod örneği
+<InteractiveQuiz ... />           ← Öğrenmeyi test et
+## Ana Konu 2                     ← Bir sonraki kavram
+<CodeFillBlank ... />             ← Uygulama
+## Pratik Proje                   ← Bölümde öğrenilenleri birleştiren mini proje
+<CodeDetective ... />             ← Bug bulma oyunu
+## Özet                           ← 3-5 maddelik öğrenim kazanımları
+```
+
+**Mevcut Rehberler:**
+
+#### Sıfırdan Next.js Programlama Rehberi (20 Bölüm)
+| # | Slug | Başlık | Zorluk | dk |
+|---|------|--------|--------|----|
+| 1 | `bolum-1-giris` | Giriş ve Kurulum | Başlangıç | 20 |
+| 2 | `bolum-2-proje-yapisi` | Proje Yapısı ve Dosya Düzeni | Başlangıç | 25 |
+| 3 | `bolum-3-sayfalar-routing` | Sayfalar ve Routing Sistemi | Başlangıç | 30 |
+| 4 | `bolum-4-layout-sistemi` | Layout, Template ve Özel Dosyalar | Başlangıç | 25 |
+| 5 | `bolum-5-react-temelleri` | React Temelleri: JSX, Component, Props | Başlangıç | 35 |
+| 6 | `bolum-6-state-hooks` | State Yönetimi ve React Hooks | Orta | 30 |
+| 7 | `bolum-7-styling` | Tailwind CSS ve Stil Yönetimi | Başlangıç | 25 |
+| 8 | `bolum-8-veri-cekme` | Veri Çekme ve Server Components | Orta | 35 |
+| 9 | `bolum-9-server-client` | Server vs Client Components | Orta | 30 |
+| 10 | `bolum-10-api-routes` | API Route'ları ve Route Handlers | Orta | 30 |
+| 11 | `bolum-11-dinamik-veriler` | generateStaticParams ve ISR | Orta | 30 |
+| 12 | `bolum-12-formlar` | Form Handling ve Server Actions | Orta | 35 |
+| 13 | `bolum-13-metadata-seo` | Metadata ve SEO Optimizasyonu | Orta | 25 |
+| 14 | `bolum-14-image-font` | Image ve Font Optimizasyonu | Başlangıç | 20 |
+| 15 | `bolum-15-authentication` | Authentication ve Oturum Yönetimi | İleri | 40 |
+| 16 | `bolum-16-database` | Veritabanı Entegrasyonu (Prisma) | İleri | 40 |
+| 17 | `bolum-17-deployment` | Vercel'e Deploy ve Ortam Değişkenleri | Başlangıç | 20 |
+| 18 | `bolum-18-testing` | Test Yazma: Jest ve Testing Library | İleri | 35 |
+| 19 | `bolum-19-performance` | Performans ve Core Web Vitals | İleri | 30 |
+| 20 | `bolum-20-gercek-proje` | Gerçek Proje: Full-Stack Blog Uygulaması | İleri | 60 |
+
 ---
 
 ## 3. Dosya Adlandırma Kuralları
@@ -149,8 +221,11 @@ content/
 │   └── {slug}.mdx              → openai-gpt-5-2-duyuru.mdx  
 ├── promptlar/
 │   └── {slug}.mdx              → swot-analizi-promptu.mdx
-└── haftalik/
-    └── {YYYY}-w{WW}.mdx        → 2026-w07.mdx
+├── haftalik/
+│   └── {YYYY}-w{WW}.mdx        → 2026-w07.mdx
+└── rehberler/
+    └── {rehber-adi}/
+        └── bolum-{N}-{slug}.mdx → nextjs-rehberi/bolum-1-giris.mdx
 ```
 
 **Slug Kuralları:**

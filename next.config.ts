@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     return config;
   },
 
+  // Turbopack uyumluluğu (Next.js 16+ varsayılan)
+  turbopack: {},
+
   // Performans optimizasyonları
   reactStrictMode: true,
   poweredByHeader: false,

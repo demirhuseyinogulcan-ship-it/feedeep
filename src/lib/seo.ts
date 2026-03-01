@@ -316,3 +316,87 @@ export function collectionPageJsonLd(params: {
     },
   };
 }
+
+/** Course JSON-LD — Programlama rehberleri için */
+export function courseJsonLd(params: {
+  name: string;
+  description: string;
+  url: string;
+  provider?: string;
+  language?: string;
+  chapters: Array<{ name: string; url: string; position: number }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: params.name,
+    description: params.description,
+    url: params.url.startsWith("http") ? params.url : `${SITE.url}${params.url}`,
+    provider: {
+      "@type": "Organization",
+      name: params.provider ?? SITE.name,
+      url: SITE.url,
+    },
+    inLanguage: params.language ?? "tr",
+    isAccessibleForFree: true,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: `PT${params.chapters.length * 15}M`,
+    },
+    syllabusSections: params.chapters.map((ch) => ({
+      "@type": "Syllabus",
+      name: ch.name,
+      url: ch.url.startsWith("http") ? ch.url : `${SITE.url}${ch.url}`,
+      position: ch.position,
+    })),
+  };
+}
+
+/** LearningResource JSON-LD — Tekil ders/bölüm sayfaları */
+export function learningResourceJsonLd(params: {
+  name: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  keywords?: string[];
+  learningResourceType?: string;
+  educationalLevel?: string;
+  timeRequired?: string;
+  isPartOf?: { name: string; url: string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name: params.name,
+    description: params.description,
+    url: params.url.startsWith("http") ? params.url : `${SITE.url}${params.url}`,
+    author: {
+      "@type": "Person",
+      name: SITE.author.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      url: SITE.url,
+    },
+    inLanguage: "tr",
+    isAccessibleForFree: true,
+    datePublished: params.datePublished,
+    dateModified: params.dateModified,
+    keywords: params.keywords?.join(", "),
+    learningResourceType: params.learningResourceType ?? "tutorial",
+    educationalLevel: params.educationalLevel ?? "beginner",
+    timeRequired: params.timeRequired ?? "PT15M",
+    ...(params.isPartOf && {
+      isPartOf: {
+        "@type": "Course",
+        name: params.isPartOf.name,
+        url: params.isPartOf.url.startsWith("http")
+          ? params.isPartOf.url
+          : `${SITE.url}${params.isPartOf.url}`,
+      },
+    }),
+  };
+}

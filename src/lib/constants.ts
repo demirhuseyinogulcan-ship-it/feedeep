@@ -27,6 +27,7 @@ export const SITE = {
 export const NAV_ITEMS = [
   { label: "Yazılar", href: "/yazilar" },
   { label: "Haberler", href: "/haberler" },
+  { label: "Programlama", href: "/programlama" },
   { label: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
   { label: "Hakkımızda", href: "/hakkimizda" },
 ] as const;
@@ -63,6 +64,35 @@ export const PROMPT_CATEGORIES: Record<string, string> = {
   pazarlama: "Pazarlama",
   egitim: "Eğitim",
   genel: "Genel",
+};
+
+// ─── Programlama Rehberleri ──────────────────────────────────
+
+export const GUIDE_TECHNOLOGIES: Record<string, { label: string; description: string; icon: string; color: string }> = {
+  nextjs: {
+    label: "Next.js",
+    description: "React tabanlı full-stack web framework",
+    icon: "▲",
+    color: "text-white",
+  },
+  dart: {
+    label: "Dart & Flutter",
+    description: "Google'ın çapraz platform mobil geliştirme dili",
+    icon: "◆",
+    color: "text-blue-400",
+  },
+  python: {
+    label: "Python",
+    description: "Yapay zeka ve veri bilimi için en popüler dil",
+    icon: "🐍",
+    color: "text-yellow-400",
+  },
+  react: {
+    label: "React",
+    description: "Meta'nın UI kütüphanesi",
+    icon: "⚛",
+    color: "text-cyan-400",
+  },
 };
 
 // Difficulty levels for prompts
