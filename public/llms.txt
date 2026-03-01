@@ -103,6 +103,10 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [Haftalık AI Brifing #8](https://airehber.com/haftalik/2026-w08): 15-21 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri: Claude Sonnet 4.6, Google AI Modu Türkiye ve OpenAI'ın tarihi yatırım turu.
 - [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07): 10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
 
+### Programlama Rehberleri
+- [Sıfırdan Next.js Programlama Rehberi](https://airehber.com/programlama/nextjs-rehberi): 20 bölümlük ücretsiz Türkçe Next.js rehberi. İnteraktif alıştırmalar ve projelerle adım adım öğren.
+  - [Bölüm 1: Next.js Nedir? Giriş ve Kurulum Rehberi](https://airehber.com/programlama/nextjs-rehberi/bolum-1-giris): Next.js framework'ünü tanıyoruz, geliştirme ortamını birlikte kuruyoruz ve ilk projemizi çalıştırıyoruz.
+
 ## Güven Politikası
 
 Her içerikte kaynak güvenilirlik seviyesi belirtilir:

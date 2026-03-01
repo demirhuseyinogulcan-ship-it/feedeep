@@ -83,10 +83,17 @@ export default async function RehberOverviewPage({ params }: PageProps) {
       name: first.guideTitle,
       description: `${first.guideTitle}: ${first.totalChapters} bölümlük ücretsiz Türkçe rehber.`,
       url: `/programlama/${rehber}`,
+      totalChapters: first.totalChapters,
       chapters: chapters.map((c) => ({
         name: `Bölüm ${c.chapter}: ${c.title}`,
         url: `/programlama/${rehber}/${c.slug}`,
         position: c.chapter,
+        description: c.description,
+        educationalLevel:
+          ({ baslangic: "beginner", orta: "intermediate", ileri: "advanced" }[
+            c.difficulty
+          ] ?? "beginner"),
+        timeRequired: `PT${c.estimatedMinutes ?? 15}M`,
       })),
     }),
   ];

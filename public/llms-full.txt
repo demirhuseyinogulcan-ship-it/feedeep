@@ -50,12 +50,29 @@ Her hafta yayınlanan AI özet bülteni.
 - Editör seçimi açıklamalar
 - "Bu hafta denenecek" aksiyon önerisi
 
+### 5. Programlama Rehberleri (/programlama)
+Sıfırdan ileri seviyeye, bölüm bazlı interaktif programlama dersleri.
+Hedef kitle: Lise ve üniversite öğrencileri, programlamaya yeni başlayanlar.
+3 seviyeli SEO silo yapısı:
+- /programlama — Hub sayfası (tüm rehberler)
+- /programlama/{rehber-adi} — Pillar page (bölüm listesi, Course schema)
+- /programlama/{rehber-adi}/{bolum-slug} — Ders sayfası (MDX içerik, LearningResource schema)
+Her bölümde:
+- İnteraktif quiz, kod boşluk doldurma ve bug bulma alıştırmaları
+- Satır satır kod açıklamaları
+- Sıkça Sorulan Sorular (FAQ) bölümü
+- Ön gereksinimler ve öğrenim kazanımları
+- Tahmini okuma + uygulama süresi
+Teknolojiler: Next.js, React, Python, Dart/Flutter
+Tümü ücretsiz ve Türkçe.
+
 ## İstatistikler
 
 - Toplam haber: 52
 - Toplam yazı: 9
 - Toplam prompt: 8
 - Toplam haftalık brifing: 2
+- Toplam programlama rehberi: 1 (Sıfırdan Next.js — 20 bölüm planlı, 1 bölüm yayında)
 
 ## Tüm İçerik Listesi
 
@@ -346,6 +363,24 @@ Her hafta yayınlanan AI özet bülteni.
 - [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07)
   Hafta: 7 | Yıl: 2026
   10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
+
+### Programlama Rehberleri
+
+#### Sıfırdan Next.js (20 Bölüm Planlı)
+Hub: https://airehber.com/programlama
+Pillar: https://airehber.com/programlama/nextjs-rehberi
+Teknoloji: Next.js (React tabanlı full-stack web framework)
+Zorluk: Başlangıçtan ileriye
+Durum: 1/20 bölüm yayında
+
+Yayındaki bölümler:
+- [Bölüm 1: Next.js Nedir? Giriş ve Kurulum Rehberi](https://airehber.com/programlama/nextjs-rehberi/bolum-1-giris)
+  Zorluk: Başlangıç | Süre: ~35 dk | Tarih: 2026-03-01
+  Next.js framework'ünü tanıyoruz, geliştirme ortamını birlikte kuruyoruz ve ilk projemizi çalıştırıyoruz. Sıfırdan adım adım.
+  Konular: Next.js nedir, Node.js kurulum, VS Code ayarları, create-next-app, JSX ve Tailwind temelleri, HMR
+  Anahtar kelimeler: next.js nedir, next.js kurulum, next.js başlangıç rehberi, react framework, next.js türkçe
+
+Planlanan bölümler: Proje Yapısı, Routing, Layout Sistemi, React Temelleri, State/Hooks, Tailwind CSS, Veri Çekme, Server/Client Components, API Routes, ISR, Forms, SEO, Image/Font, Auth, Database, Deploy, Testing, Performance, Full-Stack Proje
 
 ## Güven Politikası
 

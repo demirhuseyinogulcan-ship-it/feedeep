@@ -324,14 +324,28 @@ export function courseJsonLd(params: {
   url: string;
   provider?: string;
   language?: string;
-  chapters: Array<{ name: string; url: string; position: number }>;
+  totalChapters?: number;
+  chapters: Array<{
+    name: string;
+    url: string;
+    position: number;
+    description?: string;
+    educationalLevel?: string;
+    timeRequired?: string;
+  }>;
 }) {
+  const resolveUrl = (u: string) => (u.startsWith("http") ? u : `${SITE.url}${u}`);
+  const totalMinutes = params.chapters.reduce((sum, ch) => {
+    const mins = ch.timeRequired ? parseInt(ch.timeRequired.replace(/\D/g, ""), 10) : 15;
+    return sum + (isNaN(mins) ? 15 : mins);
+  }, 0);
+
   return {
     "@context": "https://schema.org",
     "@type": "Course",
     name: params.name,
     description: params.description,
-    url: params.url.startsWith("http") ? params.url : `${SITE.url}${params.url}`,
+    url: resolveUrl(params.url),
     provider: {
       "@type": "Organization",
       name: params.provider ?? SITE.name,
@@ -339,17 +353,36 @@ export function courseJsonLd(params: {
     },
     inLanguage: params.language ?? "tr",
     isAccessibleForFree: true,
+    numberOfCredits: 0,
+    educationalLevel: "beginner",
     hasCourseInstance: {
       "@type": "CourseInstance",
       courseMode: "online",
-      courseWorkload: `PT${params.chapters.length * 15}M`,
+      courseWorkload: `PT${totalMinutes}M`,
+      instructor: {
+        "@type": "Person",
+        name: SITE.author.name,
+      },
     },
-    syllabusSections: params.chapters.map((ch) => ({
-      "@type": "Syllabus",
+    // hasPart — Schema.org standard, Google-uyumlu
+    hasPart: params.chapters.map((ch) => ({
+      "@type": "LearningResource",
       name: ch.name,
-      url: ch.url.startsWith("http") ? ch.url : `${SITE.url}${ch.url}`,
+      url: resolveUrl(ch.url),
       position: ch.position,
+      learningResourceType: "tutorial",
+      educationalLevel: ch.educationalLevel ?? "beginner",
+      ...(ch.timeRequired && { timeRequired: ch.timeRequired }),
+      ...(ch.description && { description: ch.description }),
+      isPartOf: {
+        "@type": "Course",
+        name: params.name,
+        url: resolveUrl(params.url),
+      },
     })),
+    ...(params.totalChapters && {
+      numberOfItems: params.totalChapters,
+    }),
   };
 }
 
@@ -365,38 +398,63 @@ export function learningResourceJsonLd(params: {
   educationalLevel?: string;
   timeRequired?: string;
   isPartOf?: { name: string; url: string };
+  faq?: Array<{ question: string; answer: string }>;
 }) {
+  const resolveUrl = (u: string) => (u.startsWith("http") ? u : `${SITE.url}${u}`);
+
   return {
     "@context": "https://schema.org",
     "@type": "LearningResource",
     name: params.name,
     description: params.description,
-    url: params.url.startsWith("http") ? params.url : `${SITE.url}${params.url}`,
+    url: resolveUrl(params.url),
     author: {
       "@type": "Person",
       name: SITE.author.name,
+      url: SITE.author.linkedin,
     },
-    publisher: {
-      "@type": "Organization",
-      name: SITE.name,
-      url: SITE.url,
-    },
+    publisher: organizationJsonLd(),
     inLanguage: "tr",
     isAccessibleForFree: true,
     datePublished: params.datePublished,
-    dateModified: params.dateModified,
+    dateModified: params.dateModified ?? params.datePublished,
     keywords: params.keywords?.join(", "),
     learningResourceType: params.learningResourceType ?? "tutorial",
     educationalLevel: params.educationalLevel ?? "beginner",
     timeRequired: params.timeRequired ?? "PT15M",
+    interactivityType: "mixed",
     ...(params.isPartOf && {
       isPartOf: {
         "@type": "Course",
         name: params.isPartOf.name,
-        url: params.isPartOf.url.startsWith("http")
-          ? params.isPartOf.url
-          : `${SITE.url}${params.isPartOf.url}`,
+        url: resolveUrl(params.isPartOf.url),
       },
     }),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": resolveUrl(params.url),
+    },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["article h1", "article [data-description]", "article h2"],
+    },
+  };
+}
+
+/** FAQ JSON-LD — Bölüm SSS bölümleri için (standalone export) */
+export function rehberFaqJsonLd(
+  questions: Array<{ question: string; answer: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map((q) => ({
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: q.answer,
+      },
+    })),
   };
 }

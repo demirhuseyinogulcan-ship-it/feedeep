@@ -276,6 +276,14 @@ const rehberler = defineCollection({
     learningOutcomes: s.array(s.string()).default([]),    // Bu bölümde öğrenilecekler
     estimatedMinutes: s.number().default(15),             // Tahmini okuma süresi
 
+    // SSS (FAQ) — Google featured snippet için
+    faq: s.array(
+      s.object({
+        question: s.string(),
+        answer: s.string(),
+      })
+    ).default([]),
+
     // İçerik
     body: s.mdx(),
     toc: s.toc(),

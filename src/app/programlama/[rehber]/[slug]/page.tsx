@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { rehberler } from "#site/content";
-import { generateMeta, breadcrumbJsonLd, learningResourceJsonLd } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd, learningResourceJsonLd, rehberFaqJsonLd } from "@/lib/seo";
 import { GUIDE_TECHNOLOGIES } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -16,7 +16,7 @@ import { ChapterNav } from "@/components/content/chapter-nav";
 import { InteractiveQuiz } from "@/components/interactive/quiz";
 import { CodeDetective } from "@/components/interactive/code-detective";
 import { CodeFillBlank } from "@/components/interactive/code-fill-blank";
-import { ChevronLeft, Clock, BookOpen, GraduationCap } from "lucide-react";
+import { ChevronLeft, Clock, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
 
 // ─── Static Params ────────────────────────────────────────────
 
@@ -102,6 +102,10 @@ export default async function ChapterPage({ params }: PageProps) {
         url: `/programlama/${rehber}`,
       },
     }),
+    // FAQ JSON-LD — Google featured snippet için
+    ...(chapter.faq && chapter.faq.length > 0
+      ? [rehberFaqJsonLd(chapter.faq)]
+      : []),
   ];
 
   // MDX componentleri — MDX dosyaları içinden <InteractiveQuiz /> vb. kullanılabilir
@@ -241,6 +245,117 @@ export default async function ChapterPage({ params }: PageProps) {
           prev={prev ? { slug: prev.slug, title: prev.title, chapter: prev.chapter } : null}
           next={next ? { slug: next.slug, title: next.title, chapter: next.chapter } : null}
         />
+
+        {/* ─── Sıkça Sorulan Sorular (FAQ) ─── */}
+        {chapter.faq && chapter.faq.length > 0 && (
+          <>
+            <div className="line-void my-10" />
+            <section className="animate-fade-up">
+              <h2 className="text-lg font-bold text-gray-100 tracking-tight mb-6">
+                Sıkça Sorulan Sorular
+              </h2>
+              <div className="space-y-3">
+                {chapter.faq.map((item: { question: string; answer: string }, i: number) => (
+                  <details
+                    key={i}
+                    className="group rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden"
+                  >
+                    <summary className="flex items-center justify-between px-5 py-4 text-sm font-medium text-gray-300 cursor-pointer select-none hover:text-gray-100 transition-colors">
+                      <span>{item.question}</span>
+                      <span className="ml-3 text-gray-600 group-open:rotate-45 transition-transform text-lg leading-none">
+                        +
+                      </span>
+                    </summary>
+                    <div className="px-5 pb-4 text-sm text-gray-500 leading-relaxed">
+                      {item.answer}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* ─── Bu Rehberdeki Diğer Bölümler (İç Bağlantı Bloğu) ─── */}
+        {siblings.length > 1 && (
+          <>
+            <div className="line-void my-10" />
+            <section className="animate-fade-up">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-lg font-bold text-gray-100 tracking-tight">
+                  Bu Rehberdeki Bölümler
+                </h2>
+                <Link
+                  href={`/programlama/${rehber}`}
+                  className="text-xs text-gray-600 hover:text-primary-400 transition-colors"
+                >
+                  Tümünü gör
+                </Link>
+              </div>
+              <div className="space-y-1">
+                {siblings.map((s) => {
+                  const isCurrent = s.slug === slug;
+                  return (
+                    <Link
+                      key={s.slug}
+                      href={`/programlama/${rehber}/${s.slug}`}
+                      className={`group flex items-center gap-3 px-4 py-3 rounded-lg transition-all border ${
+                        isCurrent
+                          ? "border-primary-500/20 bg-primary-500/[0.04]"
+                          : "border-transparent hover:border-white/[0.04] hover:bg-surface-2"
+                      }`}
+                    >
+                      <span
+                        className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold shrink-0 ${
+                          isCurrent
+                            ? "bg-primary-500/20 text-primary-400"
+                            : "bg-white/[0.04] text-gray-600"
+                        }`}
+                      >
+                        {s.chapter}
+                      </span>
+                      <span
+                        className={`text-sm truncate ${
+                          isCurrent
+                            ? "text-primary-400 font-medium"
+                            : "text-gray-400 group-hover:text-gray-200"
+                        }`}
+                      >
+                        {s.title}
+                      </span>
+                      {isCurrent && (
+                        <span className="ml-auto text-[10px] font-mono text-primary-400/60">
+                          Şu an buradasın
+                        </span>
+                      )}
+                      {!isCurrent && s.estimatedMinutes && (
+                        <span className="ml-auto text-[10px] font-mono text-gray-700">
+                          {s.estimatedMinutes} dk
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* ─── Pillar Page CTA ─── */}
+        <div className="line-void my-10" />
+        <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 text-center animate-fade-up">
+          <p className="text-sm text-gray-500 mb-3">
+            {chapter.guideTitle} rehberinin tüm bölümlerine göz at
+          </p>
+          <Link
+            href={`/programlama/${rehber}`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary-400 hover:text-primary-300 transition-colors"
+          >
+            <BookOpen className="h-4 w-4" />
+            {chapter.guideTitle} — Tüm Bölümler
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
       </article>
     </>
   );
