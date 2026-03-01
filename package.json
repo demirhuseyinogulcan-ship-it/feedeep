@@ -12,6 +12,7 @@
     "new:prompt": "node scripts/new-content.mjs prompt",
     "new:haftalik": "node scripts/new-content.mjs haftalik",
     "validate": "node scripts/validate-content.mjs",
+    "submit-indexing": "node scripts/submit-indexing.mjs",
     "update-llms": "node scripts/update-llms.mjs",
     "prebuild": "node scripts/validate-content.mjs && node scripts/update-llms.mjs"
   },
@@ -20,6 +21,7 @@
     "clsx": "^2.1.1",
     "feed": "^5.2.0",
     "fuse.js": "^7.1.0",
+    "googleapis": "^171.4.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.564.0",
     "next": "16.1.6",

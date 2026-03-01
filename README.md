@@ -34,3 +34,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Post-Deploy Index Pipeline (P0)
+
+Bu projede deploy sonrası otomatik indeksleme akışı hazırdır:
+
+1. Vercel webhook, `POST /api/indexing/trigger` endpoint'ini çağırır.
+2. Endpoint, GitHub `repository_dispatch` ile `post-deploy-indexing` workflow'unu tetikler.
+3. Workflow, `scripts/submit-indexing.mjs` ile Search Console'a `sitemap.xml` ve `news-sitemap.xml` submit eder.
+
+Gerekli environment/secrets:
+
+- `GSC_SITE_URL`
+- `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`
+- `INDEXING_WEBHOOK_SECRET`
+- `GITHUB_INDEXING_TOKEN`
+- `GITHUB_REPO_OWNER`
+- `GITHUB_REPO_NAME`
+
+Manuel test:
+
+```bash
+npm run submit-indexing
+```

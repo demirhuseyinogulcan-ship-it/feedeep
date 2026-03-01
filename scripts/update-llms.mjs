@@ -161,7 +161,8 @@ function generateLlmsFullTxt() {
 - **Site Adı**: AI Rehber
 - **URL**: ${SITE_URL}
 - **Kurucu & Editör**: Can Demir
-- **E-posta**: can@airehber.com
+- **E-posta**: info@airehber.com
+- **Mailing/Operasyon**: can@airehber.com
 - **Kuruluş**: 2026
 - **Dil**: Türkçe (tr-TR)
 - **Hedef Kitle**: Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler, teknoloji meraklıları
@@ -248,7 +249,7 @@ Her içerikte kaynak güvenilirlik seviyesi belirtilir:
 ## İletişim
 
 - E-posta: info@airehber.com
-- can@airehber.com (editör)
+- Mailing/Operasyon: can@airehber.com
 - LinkedIn: https://linkedin.com/in/ai-rehber
 - Instagram: https://instagram.com/airehberofficial
 

@@ -9,6 +9,8 @@ type SEOParams = {
   title: string;
   description: string;
   path: string;
+  canonicalPath?: string;
+  canonicalUrl?: string;
   image?: string;
   type?: "article" | "website";
   publishedTime?: string;
@@ -26,6 +28,8 @@ export function generateMeta({
   title,
   description,
   path,
+  canonicalPath,
+  canonicalUrl,
   image,
   type = "website",
   publishedTime,
@@ -36,18 +40,23 @@ export function generateMeta({
   tags,
 }: SEOParams): Metadata {
   const url = `${SITE.url}${path}`;
+  const canonical = canonicalUrl
+    ? canonicalUrl.startsWith("http")
+      ? canonicalUrl
+      : `${SITE.url}${canonicalUrl}`
+    : `${SITE.url}${canonicalPath ?? path}`;
   const ogImage = image ?? `${SITE.url}/api/og?title=${encodeURIComponent(title)}`;
 
   return {
     title,
     description,
     keywords,
-    alternates: { canonical: url },
+    alternates: { canonical },
     robots: noIndex ? { index: false, follow: false } : undefined,
     openGraph: {
       title,
       description,
-      url,
+      url: canonical,
       siteName: SITE.name,
       locale: SITE.locale,
       type: type === "article" ? "article" : "website",
@@ -91,6 +100,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: SITE.organization.name,
     url: SITE.url,
+    email: SITE.author.email,
     logo: {
       "@type": "ImageObject",
       url: `${SITE.url}${SITE.organization.logo}`,

@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────
+# AI Rehber — Post Deploy Indexing Pipeline
+# Vercel webhook veya manuel tetiklemede Search Console sitemap submit
+# ─────────────────────────────────────────────────────────────
+
+name: Post Deploy Indexing
+
+on:
+  repository_dispatch:
+    types: [vercel_deploy_success]
+  workflow_dispatch:
+
+concurrency:
+  group: post-deploy-indexing
+  cancel-in-progress: false
+
+jobs:
+  submit-index:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.client_payload.deploymentState == 'READY' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Submit sitemaps to Search Console
+        env:
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY }}
+        run: node scripts/submit-indexing.mjs

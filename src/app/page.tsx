@@ -4,16 +4,25 @@
 // Massive typography · Numbered editorial · Ambient void
 // ─────────────────────────────────────────────────────────────
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/json-ld";
-import { websiteJsonLd, faqJsonLd } from "@/lib/seo";
+import { websiteJsonLd, faqJsonLd, generateMeta } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
-import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
+import { SITE, YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import { yazilar, haberler, promptlar, haftalik } from "#site/content";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
 import { NewsTicker } from "@/components/shared/the-signal";
 import { StatsStrip } from "@/components/shared/stats-strip";
+
+export const metadata: Metadata = generateMeta({
+  title: SITE.title,
+  description: SITE.description,
+  path: "/",
+  canonicalPath: "/",
+  noIndex: true,
+});
 
 // ─── Velite verilerini hazırla ───
 

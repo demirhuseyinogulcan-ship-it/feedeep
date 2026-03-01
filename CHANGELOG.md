@@ -5,6 +5,28 @@
 
 ---
 
+## [2026-03-01] Oturum 12 — P0 SEO + Otomatik İndeksleme Pipeline
+
+### Eklenen
+- `.github/workflows/post-deploy-indexing.yml` — Vercel webhook dispatch ve manuel tetikleme için deploy sonrası Search Console submit akışı
+- `scripts/submit-indexing.mjs` — `sitemap.xml` ve `news-sitemap.xml` dosyalarını Google Search Console API üzerinden submit eden script
+- `src/app/api/indexing/trigger/route.ts` — Vercel webhook çağrısını doğrulayıp GitHub `repository_dispatch` tetikleyen endpoint
+
+### Değiştirilen
+- `src/app/page.tsx` — Anasayfa için metadata override eklendi (`noindex`, canonical path)
+- `src/app/robots.ts` — Crawler dostu kural seti sadeleştirildi (`/_next/` disallow kaldırıldı, `/api/` disallow korundu)
+- `src/lib/seo.ts` — `generateMeta()` canonical override desteği (`canonicalPath`, `canonicalUrl`) ve Organization JSON-LD `email` alanı eklendi
+- `scripts/update-llms.mjs` — Public e-posta `info@airehber.com`, operasyonel e-posta `can@airehber.com` olarak netleştirildi
+- `.env.example`, `.env.local.example` — Index pipeline için gerekli environment değişkenleri eklendi
+- `package.json` — `submit-indexing` scripti ve `googleapis` bağımlılığı eklendi
+- `public/llms-full.txt`, `public/llms.txt` — E-posta standardı ve içerik listesi güncellendi
+
+### Build Durumu
+- `npm run validate` → 71 dosya, 0 hata ✅
+- `npm run build` → exit code 0 ✅
+
+---
+
 ## [2026-03-01] Oturum 11 — Anasayfa Mobil Kaydırma UX Düzeltmesi
 
 ### Değiştirilen
