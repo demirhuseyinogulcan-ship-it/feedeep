@@ -209,6 +209,40 @@ Haberler doğal, akıcı, gazetecilik diline uygun yazılır:
 | 19 | `bolum-19-performance` | Performans ve Core Web Vitals | İleri | 30 |
 | 20 | `bolum-20-gercek-proje` | Gerçek Proje: Full-Stack Blog Uygulaması | İleri | 60 |
 
+**Rehber Yazım Kuralları (Zorunlu):**
+
+> Bu kurallar tüm rehber bölümleri için geçerlidir. İstisnası yoktur.
+
+1. **Minimum kelime sayısı:** Her bölüm en az 1500 kelime olmalı. Hedef 2500-4000 kelime. 500 kelimelik bölüm kabul edilmez.
+
+2. **Hedef kitle:** Lise ve üniversite öğrencileri. İlk kez programlama öğrenen birisi her şeyi anlayabilmeli. "Bunu zaten biliyorsundur" diye bir varsayım yapma.
+
+3. **Emoji yasağı:** Rehber bölümlerinde -ve tüm site genelinde- emoji kullanımı kesinlikle yasaktır. Headinglerdaki iconlar, interaktif bileşenlerdeki emojiler, maddedeki emojiler: hiçbiri olmayacak. İstisna yoktur.
+
+4. **AI-generated hissi vermemeli:** Şu kalıplardan kaçın:
+   - "Hadi başlayalım!" / "Haydi gelin birlikte keşfedelim!"
+   - "Merak etmeyin, çok kolay!"
+   - "Bu bölümde X, Y ve Z öğreneceksiniz" (giriş paragrafında — bunun yerine doğal bir hook kullan)
+   - Sabit başlık kalıpları ("Ne Oldu? / Neden Önemli?")
+   - Her paragrafta ünlem işareti kullanmak
+   - Listeye sıralı olmayan maddelerin başına aynı yapıyı koymak ("X ile Y yapabilirsiniz, Z ile W yapabilirsiniz")
+
+5. **Doğal dil ve insan sesi:** Kısa cümlelerle uzun cümleleri karıştır. Soru sor. Benzetme yap. Okuyucuyla konuş ama çocuğa anlatır gibi değil, bir arkadaşa anlatır gibi. Samimi ama profesyonel.
+
+6. **Yazı tipi uyumu:** Component'lerde heading'ler `font-[family-name:var(--font-montserrat)]` kullanmalı. Body metni `Inter` (varsayılan). Kod örnekleri `JetBrains Mono`.
+
+7. **İnteraktif bileşen kuralları:**
+   - Her bölümde en az 2, ideal 3-4 interaktif bileşen olmalı
+   - Seçenek prop'u `text` (label DEĞİL): `{ text: "...", correct: true/false }`
+   - Bileşenlerde emoji yok — "Doğru!", "Yanlış", "İpucu:" gibi sade ifadeler kullan
+   - taskNumber ve totalTasks prop'ları sıralı olmalı
+
+8. **Boşluk ve hiyerarşi:** Başlıklar (##) arasında en az 3-4 paragraf olmalı. Tek paragraftan sonra alt başlık açma. Her kavramı düzgünce aç, örnekle destekle, sonra geç.
+
+9. **Kod örnekleri:** Gerçek, çalışan kod olmalı. Placeholder ya da "..." ile kısaltılmış kod kabul edilmez. Her kod bloğunun hemen altında satır satır açıklama yap.
+
+10. **Bölümün Türk internetindeki en detaylı kaynak olması hedeflenir.** Başka hiçbir Türkçe kaynakta bu kadar detaylı anlatılmamış olmalı.
+
 ---
 
 ## 3. Dosya Adlandırma Kuralları

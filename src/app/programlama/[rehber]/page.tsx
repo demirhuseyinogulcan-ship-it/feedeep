@@ -106,15 +106,6 @@ export default async function RehberOverviewPage({ params }: PageProps) {
 
         {/* ─── Hero ─── */}
         <div className="mb-12 animate-fade-up">
-          <div className="flex items-center gap-3 mb-4">
-            {tech && (
-              <span className={`text-2xl ${tech.color}`}>{tech.icon}</span>
-            )}
-            <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${difficultyConfig[first.difficulty]?.cls ?? ""}`}>
-              {difficultyConfig[first.difficulty]?.label ?? "Başlangıç"}
-            </span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-100 tracking-tight mb-3">
             {first.guideTitle}
           </h1>

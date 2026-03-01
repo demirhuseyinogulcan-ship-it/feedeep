@@ -7,7 +7,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Bell, X } from "lucide-react";
 
 export function NotificationPrompt() {
   const [show, setShow] = useState(false);
@@ -69,45 +68,29 @@ export function NotificationPrompt() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md animate-fade-up">
-      <div className="relative rounded-2xl border border-white/[0.08] bg-surface-2/95 backdrop-blur-xl p-4 shadow-2xl shadow-primary-900/20">
-        <button
-          onClick={handleDismiss}
-          className="absolute top-3 right-3 p-1 rounded-lg text-gray-600 hover:text-gray-300 hover:bg-surface-3 transition-colors"
-          aria-label="Kapat"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        <div className="flex items-start gap-3 pr-4">
-          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-900/30 border border-primary-700/20 flex items-center justify-center">
-            <Bell className="h-5 w-5 text-primary-400" />
-          </div>
-
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-gray-100">
-              Yeni İçeriklerden Haberdar Ol
-            </h3>
-            <p className="mt-1 text-xs text-gray-500 leading-relaxed">
-              Yeni yazı, haber ve haftalık brifing yayınlandığında bildirim al.
-            </p>
-
-            <div className="mt-3 flex items-center gap-2">
-              <button
-                onClick={requestPermission}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary-600 hover:bg-primary-500 text-white text-xs font-medium transition-colors"
-              >
-                <Bell className="h-3.5 w-3.5" />
-                İzin Ver
-              </button>
-              <button
-                onClick={handleDismiss}
-                className="px-3 py-1.5 rounded-lg text-xs text-gray-500 hover:text-gray-300 hover:bg-surface-3 transition-colors"
-              >
-                Şimdi Değil
-              </button>
-            </div>
-          </div>
+    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm z-50 animate-fade-up">
+      <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl p-5 shadow-2xl">
+        <p className="text-sm text-gray-300 mb-2">
+          Yeni İçeriklerden Haberdar Ol
+        </p>
+        <p className="text-xs text-gray-500 leading-relaxed mb-4">
+          Yeni yazı, haber ve haftalık brifing yayınlandığında bildirim al.
+        </p>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={handleDismiss}
+            className="text-xs text-gray-500 hover:text-gray-300 bg-transparent border border-white/[0.06] px-3 py-1.5 rounded-md transition-colors"
+          >
+            Şimdi Değil
+          </button>
+          <button
+            type="button"
+            onClick={requestPermission}
+            className="text-xs text-gray-200 bg-white/[0.06] hover:bg-white/[0.1] px-3 py-1.5 rounded-md transition-colors"
+          >
+            İzin Ver
+          </button>
         </div>
       </div>
     </div>

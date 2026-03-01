@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, RotateCcw, ChevronRight } from "lucide-react";
 
 type QuizOption = {
-  label: string;
+  text: string;
   correct?: boolean;
 };
 
@@ -95,7 +95,7 @@ export function InteractiveQuiz({
 
       {/* ─── Question ─── */}
       <div className="p-6">
-        <h3 className="text-base font-semibold text-gray-100 mb-4 leading-relaxed">
+        <h3 className="text-base font-semibold text-gray-100 mb-4 leading-relaxed font-[family-name:var(--font-montserrat)]">
           {question}
         </h3>
 
@@ -142,7 +142,7 @@ export function InteractiveQuiz({
                 <span className="flex items-center gap-2">
                   {showCorrect && <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0" />}
                   {showWrong && <XCircle className="h-4 w-4 text-red-400 shrink-0" />}
-                  {option.label}
+                  {option.text}
                 </span>
               </button>
             );
@@ -170,7 +170,7 @@ export function InteractiveQuiz({
           <div className="flex items-center justify-between p-4 bg-green-500/10 border border-green-500/20 rounded-xl animate-fade-up">
             <div>
               <span className="font-semibold text-green-400 text-sm block">
-                Doğru! 🎯
+                Doğru!
               </span>
               {explanation && (
                 <span className="text-xs text-gray-500 mt-1 block">
@@ -187,7 +187,7 @@ export function InteractiveQuiz({
               </span>
               {attempts >= 2 && hint && (
                 <span className="text-xs text-gray-500 mt-1 block">
-                  💡 {hint}
+                  {hint}
                 </span>
               )}
             </div>

@@ -160,14 +160,6 @@ export default function ProgramlamaPage() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
-                      {/* Tech + Badge */}
-                      <div className="flex items-center gap-3 mb-3">
-                        {tech && (
-                          <span className={`text-lg ${tech.color}`}>{tech.icon}</span>
-                        )}
-                        <DifficultyBadge level={g.difficulty} />
-                      </div>
-
                       {/* Title */}
                       <h2 className="text-lg font-bold text-gray-100 group-hover:text-primary-400 transition-colors mb-1">
                         {g.guideTitle}

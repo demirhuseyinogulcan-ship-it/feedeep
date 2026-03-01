@@ -111,9 +111,6 @@ export function CodeDetective({
           <span className="text-blue-400">{fileExt}</span>
           <span>{fileName}</span>
         </div>
-        <span className="ml-auto text-[9px] font-bold tracking-widest uppercase text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full">
-          🔍 Dedektif Modu
-        </span>
       </div>
 
       {/* ─── Challenge meta ─── */}
@@ -122,7 +119,7 @@ export function CodeDetective({
           <span className="w-4 h-px bg-blue-400" />
           Hata Tespiti
         </div>
-        <h3 className="font-bold text-base text-gray-100 leading-tight mb-1.5">
+        <h3 className="font-bold text-base text-gray-100 leading-tight mb-1.5 font-[family-name:var(--font-montserrat)]">
           {title}
         </h3>
         <p className="text-[11.5px] text-gray-500 leading-relaxed">
@@ -145,7 +142,7 @@ export function CodeDetective({
       {/* ─── Hint ─── */}
       {showHint && hint && (
         <div className="mx-5 mb-4 p-3 bg-yellow-500/[0.06] border border-yellow-500/20 rounded-lg text-[11px] text-yellow-400 leading-relaxed animate-fade-up">
-          💡 <strong>İpucu:</strong> {hint}
+          <strong>İpucu:</strong> {hint}
         </div>
       )}
 
@@ -159,7 +156,7 @@ export function CodeDetective({
               onClick={() => setShowHint(true)}
               className="text-[9px] font-semibold tracking-wider text-yellow-400 bg-yellow-500/10 border border-yellow-500/25 px-2 py-0.5 rounded-full hover:bg-yellow-500/20 transition-colors flex items-center gap-1"
             >
-              💡 İpucu
+              İpucu
             </button>
           )}
         </div>
@@ -242,7 +239,7 @@ export function CodeDetective({
                 didFindCorrect ? "text-green-400" : "text-red-400"
               )}
             >
-              {didFindCorrect ? "Hatayı buldun! 🎯" : `Cevap: ${correctLine}. satır`}
+              {didFindCorrect ? "Hatayı buldun!" : `Cevap: ${correctLine}. satır`}
             </div>
             <div className="text-[11.5px] text-gray-500 leading-relaxed">
               {explanation}

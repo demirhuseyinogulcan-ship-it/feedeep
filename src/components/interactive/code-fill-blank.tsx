@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, RotateCcw } from "lucide-react";
 
 type BlankOption = {
-  label: string;
+  text: string;
   correct?: boolean;
 };
 
@@ -95,7 +95,7 @@ export function CodeFillBlank({
 
       {/* ─── Question ─── */}
       <div className="p-6">
-        <h3 className="text-base font-semibold text-gray-100 mb-6 leading-relaxed">
+        <h3 className="text-base font-semibold text-gray-100 mb-6 leading-relaxed font-[family-name:var(--font-montserrat)]">
           {question}
         </h3>
 
@@ -110,13 +110,13 @@ export function CodeFillBlank({
                 : "border-b-2 border-dashed border-gray-600 text-gray-600"
             )}
           >
-            {selected !== null ? options[selected].label : "????"}
+            {selected !== null ? options[selected].text : "????"}
           </span>
           <span dangerouslySetInnerHTML={{ __html: codeAfter }} />
         </div>
 
         {/* ─── Options ─── */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {options.map((option, i) => {
             const isSelected = selected === i;
             const showCorrect = submitted && i === correctIndex;
@@ -150,7 +150,7 @@ export function CodeFillBlank({
                 <span className="flex items-center justify-center gap-1">
                   {showCorrect && <CheckCircle2 className="h-3.5 w-3.5" />}
                   {showWrong && <XCircle className="h-3.5 w-3.5" />}
-                  {option.label}
+                  {option.text}
                 </span>
               </button>
             );
@@ -178,7 +178,7 @@ export function CodeFillBlank({
           <div className="flex items-center justify-between p-4 bg-green-500/10 border border-green-500/20 rounded-xl animate-fade-up">
             <div>
               <span className="font-semibold text-green-400 text-sm block">
-                Harika! Doğru mantık. 🎉
+                Doğru!
               </span>
               {explanation && (
                 <span className="text-xs text-gray-500 mt-1 block">

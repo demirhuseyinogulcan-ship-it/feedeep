@@ -139,10 +139,7 @@ export default async function ChapterPage({ params }: PageProps) {
         <header className="mb-10 animate-fade-up">
           {/* Chapter badge */}
           <div className="flex items-center gap-3 mb-4">
-            {tech && (
-              <span className={`text-sm ${tech.color}`}>{tech.icon}</span>
-            )}
-            <span className="text-[10px] font-mono uppercase tracking-widest text-primary-400">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-gray-600">
               {chapter.guideTitle} — Bölüm {chapter.chapter}/{chapter.totalChapters}
             </span>
           </div>
@@ -192,20 +189,17 @@ export default async function ChapterPage({ params }: PageProps) {
 
         {/* ─── Learning Outcomes ─── */}
         {chapter.learningOutcomes.length > 0 && (
-          <div className="rounded-xl border border-primary-500/10 bg-primary-500/[0.03] p-5 mb-10 animate-fade-up delay-100">
-            <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="h-4 w-4 text-primary-400" />
-              <span className="text-sm font-semibold text-primary-400">
-                Bu bölümde öğreneceklerin
-              </span>
-            </div>
-            <ul className="space-y-1.5">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 mb-10 animate-fade-up delay-100">
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              Bu bölümde öğreneceklerin
+            </span>
+            <ul className="mt-3 space-y-1.5">
               {chapter.learningOutcomes.map((outcome, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-2 text-sm text-gray-400"
+                  className="flex items-start gap-2 text-sm text-gray-500"
                 >
-                  <span className="text-primary-500 mt-0.5">✓</span>
+                  <span className="text-gray-600 mt-0.5">•</span>
                   {outcome}
                 </li>
               ))}
@@ -215,8 +209,8 @@ export default async function ChapterPage({ params }: PageProps) {
 
         {/* ─── Prerequisites ─── */}
         {chapter.prerequisites.length > 0 && (
-          <div className="rounded-xl border border-yellow-500/10 bg-yellow-500/[0.03] p-5 mb-10 animate-fade-up delay-100">
-            <span className="text-xs font-semibold text-yellow-400 uppercase tracking-wider">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 mb-10 animate-fade-up delay-100">
+            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
               Ön Gereksinimler
             </span>
             <ul className="mt-2 space-y-1">
