@@ -5,6 +5,17 @@
 
 ---
 
+## [2026-03-01] Oturum 11 — Anasayfa Mobil Kaydırma UX Düzeltmesi
+
+### Değiştirilen
+- `src/app/page.tsx` — Mobilde yatay kaydırılan `Son Haberler`, `Son Yazılar` ve `Keşfet` blokları dikey akışa çevrildi
+- `src/app/page.tsx` — Mobil kartlar artık sağa/sola swipe gerektirmeden doğal aşağı kaydırma ile tüketilecek şekilde düzenlendi
+
+### Build Durumu
+- `npm run build` → exit code 0 ✅
+
+---
+
 ## [2026-02-25] Oturum 10 — Günlük Haber Üretimi (25 Şubat)
 
 ### Eklenen
@@ -25,6 +36,29 @@
 - `npm run validate` → 65 dosya, 0 hata ✅
 - `npm run build` → 83 sayfa, exit code 0 ✅
 - `public/llms.txt` otomatik güncellendi (48 haber, 8 yazı, 7 prompt, 2 haftalık)
+
+---
+
+## [2026-03-01] Oturum 10 — Günlük Haber Üretimi (1 Mart)
+
+### Eklenen
+- `content/haberler/openai-pentagon-anlasmasi-guvenlik-sartlari.mdx` — OpenAI'nin Pentagon anlaşmasındaki teknik güvenlik şartları ve kırmızı çizgiler
+- `content/haberler/chatgpt-900-milyon-haftalik-kullaniciya-ulasti.mdx` — ChatGPT'nin 900 milyon haftalık aktif kullanıcı ve 50 milyon abone eşiği
+- `content/haberler/openai-110-milyar-dolar-yatirim-duyurusu.mdx` — OpenAI'nin 110 milyar dolarlık yeni yatırım turu ve altyapı ortaklıkları
+- `content/haberler/google-nano-banana-2-gorsel-uretimi-hizlandi.mdx` — Google Nano Banana 2 ile hızlanan görsel üretim ve geniş entegrasyon
+
+### Değiştirilen
+- `public/llms.txt` — Yeni içeriklerle güncellendi
+- `public/llms-full.txt` — Yeni içeriklerle güncellendi
+
+### Kaynak Tarama
+- TechCrunch AI kategorisi (26-28 Şubat güncellemeleri) tarandı
+- OpenAI resmi duyuruları (`scaling-ai-for-everyone`, `our-agreement-with-the-department-of-war`) incelendi
+- Webrazzi yapay zeka kategorisi ve Nano Banana 2 haberi ile çapraz doğrulama yapıldı
+
+### Build Durumu
+- `npm run validate` → 71 dosya, 0 hata ✅
+- `npm run build` → exit code 0 ✅
 
 ---
 

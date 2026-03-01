@@ -20,9 +20,13 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [AI Zaman Çizelgesi](https://airehber.com/zaman-cizelgesi): Kronolojik AI gelişmeleri
 - [Hakkımızda](https://airehber.com/hakkimizda): Ekip ve misyon
 
-## Son İçerikler (Şubat 2026)
+## Son İçerikler (Mart 2026)
 
 ### Haberler
+- [ChatGPT 900 Milyon Haftalık Aktif Kullanıcıya Ulaştı](https://airehber.com/haberler/chatgpt-900-milyon-haftalik-kullaniciya-ulasti): OpenAI, ChatGPT'nin haftalık aktif kullanıcı sayısının 900 milyona çıktığını açıkladı. Şirketin tüketici abone sayısı da 50 milyonu geçti.
+- [Google Nano Banana 2 ile Görsel Üretimini Hızlandırdı](https://airehber.com/haberler/google-nano-banana-2-gorsel-uretimi-hizlandi): Google, Gemini 3.1 Flash Image tabanlı Nano Banana 2 modelini duyurdu. Yeni sürüm daha hızlı üretim, daha güçlü sahne tutarlılığı ve entegrasyon getiriyor.
+- [OpenAI 110 Milyar Dolarlık Yeni Yatırımını Duyurdu](https://airehber.com/haberler/openai-110-milyar-dolar-yatirim-duyurusu): OpenAI, 730 milyar dolar ön değerleme üzerinden 110 milyar dolarlık yeni yatırım turunu açıkladı. Turda Amazon, NVIDIA ve SoftBank öne çıkıyor.
+- [OpenAI Pentagon Anlaşmasının Güvenlik Şartlarını Açıkladı](https://airehber.com/haberler/openai-pentagon-anlasmasi-guvenlik-sartlari): OpenAI, Pentagon ile yapılan yeni anlaşmada üç kırmızı çizgiyi duyurdu: kitlesel gözetim yok, tam otonom silah yok, yüksek riskli otomatik karar yok.
 - [Adobe Firefly Quick Cut: AI ile Video Kurgusu Otomatikleşiyor](https://airehber.com/haberler/adobe-firefly-quick-cut-ai-video-kurgu): Adobe Firefly'ın yeni Quick Cut özelliği, ham video çekimlerinden AI ile otomatik ilk kurgu oluşturuyor. İçerik üreticileri için oyun değiştirici.
 - [Anthropic Üç Çinli Şirketi Claude'u Kopyalamakla Suçladı](https://airehber.com/haberler/anthropic-cin-deepseek-moonshot-claude-distilasyon-suclama): Anthropic, DeepSeek, Moonshot AI ve MiniMax'ın 24.000 sahte hesapla Claude'un yeteneklerini kopyaladığını açıkladı. 16 milyon konuşma tespit edildi.
 - [Jira'da Artık AI Ajanlarına Görev Atanabiliyor](https://airehber.com/haberler/atlassian-jira-ai-ajanlari-gorev-yonetimi): Atlassian, Jira'ya AI ajanlarına iş atama ve takip özelliği ekledi. İnsan ve AI ajanları aynı panelden yönetiliyor. Açık beta olarak kullanımda.

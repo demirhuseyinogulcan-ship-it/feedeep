@@ -109,15 +109,15 @@ const AI_REHBER_FAQ = [
   },
 ];
 
-// Son Yazılar — hero'daki yazıyı çıkar
-const recentPosts = heroItem?.type === "yazi"
-  ? publishedYazilar.slice(1, 4)
-  : publishedYazilar.slice(0, 3);
+// Son Yazılar — hero'da yazı varsa aynı slug'ı çıkar, en güncel 3'ü göster
+const recentPosts = publishedYazilar
+  .filter((post) => !(heroItem?.type === "yazi" && post.slug === heroItem.slug))
+  .slice(0, 3);
 
-// Son Haberler — hero'daki haberi çıkar, en fazla 5 göster
-const latestNews = heroItem?.type === "haber"
-  ? publishedHaberler.slice(1, 5)
-  : publishedHaberler.slice(0, 5);
+// Son Haberler — hero'da haber varsa aynı slug'ı çıkar, en güncel 5'i göster
+const latestNews = publishedHaberler
+  .filter((news) => !(heroItem?.type === "haber" && news.slug === heroItem.slug))
+  .slice(0, 5);
 
 const latestBrifing = haftalik
   .filter((h) => h.published)
@@ -256,13 +256,13 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Mobile: horizontal scroll, Desktop: stacked */}
-        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+        {/* Mobile: vertical stack, Desktop: stacked */}
+        <div className="sm:hidden space-y-5">
           {latestNews.map((news, i) => (
             <Link
               key={news.slug}
               href={`/haberler/${news.slug}`}
-              className="group flex-shrink-0 w-[85vw] max-w-[300px] snap-start animate-fade-up"
+              className="group block animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
               <div className="flex items-center gap-3 mb-2">
@@ -323,13 +323,13 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Mobile: horizontal scroll, Desktop: stacked */}
-        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+        {/* Mobile: vertical stack, Desktop: stacked */}
+        <div className="sm:hidden space-y-6">
           {recentPosts.map((post, i) => (
             <Link
               key={post.slug}
               href={`/yazilar/${post.slug}`}
-              className="group flex-shrink-0 w-[85vw] max-w-[300px] snap-start animate-fade-up"
+              className="group block animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
               <div className="flex items-center gap-3 mb-2">
@@ -387,13 +387,13 @@ export default function HomePage() {
           Keşfet
         </h2>
 
-        {/* Mobile: horizontal scroll, Desktop: rows */}
-        <div className="sm:hidden flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+        {/* Mobile: vertical stack, Desktop: rows */}
+        <div className="sm:hidden space-y-5">
           {EXPLORE_SECTIONS.map((section, i) => (
             <Link
               key={section.href}
               href={section.href}
-              className="group flex-shrink-0 w-[75vw] max-w-[260px] snap-start animate-fade-up"
+              className="group block animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
               <span className="text-[11px] font-mono tracking-wider text-gray-700 group-hover:text-primary-400 transition-colors">

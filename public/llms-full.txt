@@ -51,7 +51,7 @@ Her hafta yayınlanan AI özet bülteni.
 
 ## İstatistikler
 
-- Toplam haber: 48
+- Toplam haber: 52
 - Toplam yazı: 9
 - Toplam prompt: 8
 - Toplam haftalık brifing: 2
@@ -96,6 +96,22 @@ Her hafta yayınlanan AI özet bülteni.
   2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
 ### Haberler
+- [ChatGPT 900 Milyon Haftalık Aktif Kullanıcıya Ulaştı](https://airehber.com/haberler/chatgpt-900-milyon-haftalik-kullaniciya-ulasti)
+  Kaynak: TechCrunch | Tarih: Sun Mar 01 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI, ChatGPT'nin haftalık aktif kullanıcı sayısının 900 milyona çıktığını açıkladı. Şirketin tüketici abone sayısı da 50 milyonu geçti.
+
+- [Google Nano Banana 2 ile Görsel Üretimini Hızlandırdı](https://airehber.com/haberler/google-nano-banana-2-gorsel-uretimi-hizlandi)
+  Kaynak: TechCrunch | Tarih: Sun Mar 01 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  Google, Gemini 3.1 Flash Image tabanlı Nano Banana 2 modelini duyurdu. Yeni sürüm daha hızlı üretim, daha güçlü sahne tutarlılığı ve entegrasyon getiriyor.
+
+- [OpenAI 110 Milyar Dolarlık Yeni Yatırımını Duyurdu](https://airehber.com/haberler/openai-110-milyar-dolar-yatirim-duyurusu)
+  Kaynak: TechCrunch | Tarih: Sun Mar 01 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI, 730 milyar dolar ön değerleme üzerinden 110 milyar dolarlık yeni yatırım turunu açıkladı. Turda Amazon, NVIDIA ve SoftBank öne çıkıyor.
+
+- [OpenAI Pentagon Anlaşmasının Güvenlik Şartlarını Açıkladı](https://airehber.com/haberler/openai-pentagon-anlasmasi-guvenlik-sartlari)
+  Kaynak: OpenAI | Tarih: Sun Mar 01 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
+  OpenAI, Pentagon ile yapılan yeni anlaşmada üç kırmızı çizgiyi duyurdu: kitlesel gözetim yok, tam otonom silah yok, yüksek riskli otomatik karar yok.
+
 - [Adobe Firefly Quick Cut: AI ile Video Kurgusu Otomatikleşiyor](https://airehber.com/haberler/adobe-firefly-quick-cut-ai-video-kurgu)
   Kaynak: TechCrunch | Tarih: Wed Feb 25 2026 03:00:00 GMT+0300 (Türkiye Standart Saati) | Güven: high
   Adobe Firefly'ın yeni Quick Cut özelliği, ham video çekimlerinden AI ile otomatik ilk kurgu oluşturuyor. İçerik üreticileri için oyun değiştirici.
