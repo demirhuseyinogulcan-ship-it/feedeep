@@ -1,0 +1,44 @@
+---
+title: "Alibaba Qwen 3.5 Small: 9B Model, 120B'lik GPT-oss'u Geçiyor"
+slug: alibaba-qwen-3-5-small-kucuk-model-serisi
+description: "Alibaba'nın Qwen 3.5 Small serisi 0.8B'den 9B'ye dört model sunuyor. 9B varyantı, 13,5 kat büyük OpenAI gpt-oss-120B'yi benchmarklarda geride bırakıyor."
+date: 2026-03-03
+sourceUrl: "https://webrazzi.com/2026/03/03/alibaba-dan-openai-in-gpt-oss-120b-sini-geride-birakan-yeni-model-serisi-qwen-3-5-small-model-series/"
+sourceName: "Webrazzi"
+category: sirketler
+keywords:
+  - qwen 3.5 small model serisi
+  - alibaba kucuk ai model
+  - qwen 9b benchmark sonuclari
+  - gpt-oss-120b karsilastirma
+  - kucuk dil modelleri 2026
+  - yapay zeka haberleri
+sources:
+  - url: "https://webrazzi.com/2026/03/03/alibaba-dan-openai-in-gpt-oss-120b-sini-geride-birakan-yeni-model-serisi-qwen-3-5-small-model-series/"
+    label: "Webrazzi"
+    tier: 2
+  - url: "https://x.com/Alibaba_Qwen/status/2028460046510965160"
+    label: "Qwen Resmi X Hesabı"
+    tier: 1
+  - url: "https://huggingface.co/collections/Qwen/qwen35"
+    label: "Hugging Face"
+    tier: 1
+confidence: high
+socialSnippet: "Alibaba'nın 9 milyar parametreli Qwen 3.5 modeli, kendisinden 13,5 kat büyük OpenAI gpt-oss-120B'yi GPQA Diamond'da geride bırakıyor. 4 model, Apache 2.0 lisansı, Hugging Face'te hazır."
+published: true
+---
+
+9 milyar parametre ile 120 milyar parametreyi geçmek. Kulağa imkansız geliyor ama Alibaba'nın yeni Qwen 3.5 Small serisi tam olarak bunu yapıyor.
+
+Qwen ekibi bugün dört modelden oluşan Qwen 3.5 Small serisini tanıttı: 0.8B, 2B, 4B ve 9B. Serinin amacı, büyük modellerin performansını küçük boyutlarda sunarak cihaz üzerinde ve düşük maliyetli dağıtımları mümkün kılmak. En küçük 0.8B ve 0.2B varyantları, pil ömrünün kritik olduğu mobil cihazlar için optimize edilmiş durumda.
+
+Serinin yıldızı 9B modeli. GPQA Diamond karşılaştırmasında 81,7 puan alarak OpenAI'ın açık kaynaklı gpt-oss-120B modelinin 80,1 puanını geride bırakıyor. Parametre sayısı 13,5 kat daha küçük bir modelin bu sonucu elde etmesi, mimari tasarımın ham büyüklükten daha belirleyici olduğunu kanıtlıyor.
+
+Bu performansın arkasında Verimli Hibrit Mimari var. Alibaba, standart Transformer yerine Gated Delta Networks adlı bir doğrusal dikkat mekanizmasını seyrek Mixture-of-Experts ile birleştiriyor. Bu kombinasyon, küçük modelleri genellikle sınırlayan bellek darboğazını ortadan kaldırarak daha yüksek verim ve daha düşük gecikme sağlıyor.
+
+4B modeli de kendi sınıfında etkili. 262.144 token bağlam penceresi ile hafif agent uygulamaları için güçlü bir multimodal taban sunuyor. Video-MME ölçütünde 83,5 puan alan 4B ve 84,5 puan alan 9B, Gemini 2.5 Flash-Lite'ın 74,6 puanını ciddi farkla geçiyor. HMMT Şubat 2025 matematik turnuvasında 9B modeli 83,2 puanla rakiplerinin önünde yer alıyor.
+
+Doğal olarak çok modlu eğitilen bu modeller, erken füzyon tekniği sayesinde arayüz öğelerini okumak, videodaki nesneleri saymak gibi görsel görevlerde daha önce on kat büyük modellerin gerektirdiği performansı sergiliyor. OmniDocBench'te 87,7, MMMLU'da 81,2 puanla belge tanıma ve çok dilli yeteneklerde de zirvede.
+
+Ağırlıklar Apache 2.0 lisansı altında Hugging Face ve ModelScope'ta yayında. Ticari kullanıma açık, özelleştirilebilir. Küçük model yarışında Alibaba'nın attığı bu adım, "büyük model kazanır" varsayımını ciddi şekilde sorgulatıyor.
+

@@ -10,14 +10,12 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
 - **Prompt Kütüphanesi**: Model bazlı skorlanmış, değişkenli, hata senaryolu prompt şablonları
 - **Haftalık Brifing**: Her hafta AI dünyasının 3 önemli gelişmesi + aksiyon önerisi
-- **Programlama Rehberleri**: Sıfırdan ileri seviyeye, bölüm bazlı interaktif programlama dersleri (Next.js, Dart, Python, React)
 
 ## Sayfalar
 
 - [Yazılar](https://airehber.com/yazilar): Tüm rehberler, incelemeler ve analizler
 - [Haberler](https://airehber.com/haberler): Güncel AI haberleri
 - [Prompt Kütüphanesi](https://airehber.com/prompt-kutuphanesi): Kullanıma hazır prompt şablonları
-- [Programlama Rehberleri](https://airehber.com/programlama): Sıfırdan ileri seviyeye interaktif programlama dersleri
 - [Haftalık Brifing](https://airehber.com/haftalik): Haftalık AI özet bülteni
 - [AI Zaman Çizelgesi](https://airehber.com/zaman-cizelgesi): Kronolojik AI gelişmeleri
 - [Hakkımızda](https://airehber.com/hakkimizda): Ekip ve misyon
@@ -25,6 +23,11 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 ## Son İçerikler (Mart 2026)
 
 ### Haberler
+- [Alibaba Qwen 3.5 Small: 9B Model, 120B'lik GPT-oss'u Geçiyor](https://airehber.com/haberler/alibaba-qwen-3-5-small-kucuk-model-serisi): Alibaba'nın Qwen 3.5 Small serisi 0.8B'den 9B'ye dört model sunuyor. 9B varyantı, 13,5 kat büyük OpenAI gpt-oss-120B'yi benchmarklarda geride bırakıyor.
+- [Anthropic, Claude Code'a Ses Modu Ekliyor: Konuşarak Kodla](https://airehber.com/haberler/anthropic-claude-code-ses-modu-voice): Claude Code artık sesli komut destekliyor. Boşluk tuşuna basıp konuşarak kod yazabileceksiniz. Pro, Max, Team ve Enterprise planlarına dahil.
+- [Google Gemini 3.1 Flash-Lite: En Hızlı ve En Ucuz Gemini 3 Modeli](https://airehber.com/haberler/google-gemini-3-1-flash-lite-hiz-maliyet): Google, Gemini 3 serisinin en hızlı ve en uygun maliyetli modeli Flash-Lite'ı duyurdu. 1M giriş tokeni 0,25 dolar, 2,5 kat daha hızlı yanıt süresi.
+- [Google ve MIT Çoklu Agent Sistemleri İçin İlkeler Yayınladı](https://airehber.com/haberler/google-mit-multi-agent-olcekleme-ilkeleri): Google ve MIT araştırmacıları, çoklu agent mimarilerini ne zaman ve nasıl ölçeklendirmenin etkin olduğunu gösteren bir tahmin çerçevesi geliştirdi.
+- [Santander ve Mastercard Avrupa'nın İlk AI Ödeme Pilotunu Yaptı](https://airehber.com/haberler/santander-mastercard-avrupa-ilk-ai-odeme-pilotu): Bir AI sistemi Avrupa'da ilk kez canlı bankacılık ağında ödeme tamamladı. Santander ve Mastercard'dan yeni dönem.
 - [ChatGPT 900 Milyon Haftalık Aktif Kullanıcıya Ulaştı](https://airehber.com/haberler/chatgpt-900-milyon-haftalik-kullaniciya-ulasti): OpenAI, ChatGPT'nin haftalık aktif kullanıcı sayısının 900 milyona çıktığını açıkladı. Şirketin tüketici abone sayısı da 50 milyonu geçti.
 - [Google Nano Banana 2 ile Görsel Üretimini Hızlandırdı](https://airehber.com/haberler/google-nano-banana-2-gorsel-uretimi-hizlandi): Google, Gemini 3.1 Flash Image tabanlı Nano Banana 2 modelini duyurdu. Yeni sürüm daha hızlı üretim, daha güçlü sahne tutarlılığı ve entegrasyon getiriyor.
 - [OpenAI 110 Milyar Dolarlık Yeni Yatırımını Duyurdu](https://airehber.com/haberler/openai-110-milyar-dolar-yatirim-duyurusu): OpenAI, 730 milyar dolar ön değerleme üzerinden 110 milyar dolarlık yeni yatırım turunu açıkladı. Turda Amazon, NVIDIA ve SoftBank öne çıkıyor.
@@ -102,10 +105,6 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 ### Haftalık Brifing
 - [Haftalık AI Brifing #8](https://airehber.com/haftalik/2026-w08): 15-21 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri: Claude Sonnet 4.6, Google AI Modu Türkiye ve OpenAI'ın tarihi yatırım turu.
 - [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07): 10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
-
-### Programlama Rehberleri
-- [Sıfırdan Next.js Programlama Rehberi](https://airehber.com/programlama/nextjs-rehberi): 20 bölümlük ücretsiz Türkçe Next.js rehberi. İnteraktif alıştırmalar ve projelerle adım adım öğren.
-  - [Bölüm 1: Next.js Nedir? Giriş ve Kurulum Rehberi](https://airehber.com/programlama/nextjs-rehberi/bolum-1-giris): Next.js framework'ünü tanıyoruz, geliştirme ortamını birlikte kuruyoruz ve ilk projemizi çalıştırıyoruz.
 
 ## Güven Politikası
 

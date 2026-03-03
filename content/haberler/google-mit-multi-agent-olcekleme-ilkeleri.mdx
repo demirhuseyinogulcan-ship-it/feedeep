@@ -1,0 +1,44 @@
+---
+title: "Google ve MIT Çoklu Agent Sistemleri İçin İlkeler Yayınladı"
+slug: google-mit-multi-agent-olcekleme-ilkeleri
+description: "Google ve MIT araştırmacıları, çoklu agent mimarilerini ne zaman ve nasıl ölçeklendirmenin etkin olduğunu gösteren bir tahmin çerçevesi geliştirdi."
+date: 2026-03-03
+sourceUrl: "https://www.infoq.com/news/2026/03/google-multi-agent/"
+sourceName: "InfoQ"
+category: arastirma
+keywords:
+  - multi agent scaling
+  - google mit arastirma
+  - agentic ai mimari
+  - coklu agent koordinasyon
+  - ai agent olcekleme
+  - yapay zeka haberleri
+sources:
+  - url: "https://www.infoq.com/news/2026/03/google-multi-agent/"
+    label: "InfoQ"
+    tier: 2
+  - url: "https://arxiv.org/abs/2512.08296"
+    label: "arXiv (Araştırma Makalesi)"
+    tier: 1
+  - url: "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/"
+    label: "Google Research Blog"
+    tier: 1
+confidence: high
+socialSnippet: "Google ve MIT, çoklu agent sistemlerinin ne zaman işe yaradığını öngören bir çerçeve geliştirdi. Sonuç: Daha fazla agent her zaman daha iyi değil. Optimum mimariyi %87 doğrulukla tahmin edebiliyor."
+published: true
+---
+
+Daha fazla agent eklemek her zaman daha iyi sonuç verir mi? Google ve MIT'in ortak araştırması, bu soruya net bir "hayır" diyor.
+
+İki kurumun araştırmacıları, çoklu agent sistemlerini ne zaman ve nasıl ölçeklendirmenin mantıklı olduğunu gösteren bir tahmin çerçevesi yayınladı. Çerçeve, test verisi üzerinde optimum koordinasyon stratejisini yüzde 87 doğrulukla tahmin edebiliyor.
+
+Araştırma, çoklu agent mimarilerini dört kategoriye ayırıyor: bağımsız (agentlar arası koordinasyon yok), merkezileştirilmiş (tek bir orkestratörle iletişim), dağıtık (eşler arası koordinasyon) ve hibrit. Her birinin farklı hesaplama maliyetleri, bellek gereksinimleri ve LLM çağrı sayıları var.
+
+Model, dokuz tahmin değişkeni ve aralarındaki etkileşim terimlerinden oluşan 20 terimlik bir regresyon modeli. Temel değişkenler arasında altta yatan LLM'nin zeka endeksi, tek bir agentın taban performansı, agent sayısı, araç sayısı ve koordinasyon metrikleri bulunuyor.
+
+Araştırmanın ortaya koyduğu üç dominant etki oldukça açıklayıcı. Birincisi, araç-koordinasyon ödünleşimi: çok sayıda araç gerektiren görevler, çoklu agent yükü altında daha kötü performans gösteriyor. İkincisi, kapasite doygunluğu: tek bir agentın taban performansı belirli bir eşiği geçtiğinde, yeni agent eklemek azalan getiri sağlıyor. Üçüncüsü, topolojiye bağlı hata büyütmesi: merkezileştirilmiş orkestrasyon, hata yayılımını azaltıyor.
+
+Dikkat çekici bir bulgu da koordinasyon stratejisinin göreve göre değişmesi gerektiği. Finansal muhakeme görevleri merkezileştirilmiş orkestrasyondan fayda görürken, web navigasyonu dağıtık stratejiyle daha iyi sonuç veriyor. Tek tip bir mimari her senaryo için çalışmıyor.
+
+Google'ın araştırma ekibine göre Gemini gibi temel modeller geliştikçe çoklu agent sistemlerine duyulan ihtiyaç azalmıyor, tam tersine artıyor. Ancak mimari doğru seçilmediğinde, daha fazla agent eklemek sorunu çözmek yerine karmaşıklaştırıyor. Bu çerçeve, sezgisel kararlardan kantitatif ilkelere geçiş için somut bir araç sunuyor.
+
