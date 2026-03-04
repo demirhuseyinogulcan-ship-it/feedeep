@@ -53,23 +53,23 @@ export default function PromptKutuphanesiPage() {
   return (
     <>
       <JsonLd
-        data={collectionPageJsonLd({
-          name: "AI Prompt Kütüphanesi",
-          description:
-            "ChatGPT, Claude ve Gemini için test edilmiş, model bazlı skorlanmış prompt şablonları.",
-          url: "/prompt-kutuphanesi",
-          items: prompts.map((p) => ({
-            name: p.title,
-            url: `/prompt-kutuphanesi/${p.slug}`,
-            description: p.description,
-          })),
-        })}
-      />
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Ana Sayfa", href: "/" },
-          { name: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
-        ])}
+        data={[
+          collectionPageJsonLd({
+            name: "AI Prompt Kütüphanesi",
+            description:
+              "ChatGPT, Claude ve Gemini için test edilmiş, model bazlı skorlanmış prompt şablonları.",
+            url: "/prompt-kutuphanesi",
+            items: prompts.map((p) => ({
+              name: p.title,
+              url: `/prompt-kutuphanesi/${p.slug}`,
+              description: p.description,
+            })),
+          }),
+          breadcrumbJsonLd([
+            { name: "Ana Sayfa", href: "/" },
+            { name: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
+          ]),
+        ]}
       />
 
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">

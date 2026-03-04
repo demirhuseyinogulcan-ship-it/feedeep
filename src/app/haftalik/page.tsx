@@ -13,10 +13,17 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = generateMeta({
-  title: "Haftalık AI Brifing",
+  title: "Haftalık AI Brifing: Yapay Zeka Haftalık Özet [2026]",
   description:
-    "Her hafta yapay zeka dünyasının en önemli 3 gelişmesi ve aksiyon önerileri.",
+    "Her hafta yapay zeka dünyasının en önemli 3 gelişmesi ve aksiyon önerileri. Haftanın AI gündemini kaçırmayın.",
   path: "/haftalik",
+  keywords: [
+    "haftalık ai brifing",
+    "yapay zeka haftalık özet",
+    "ai gelişmeleri özet",
+    "haftalık yapay zeka",
+    "ai haftalık bülten",
+  ],
 });
 
 export default function HaftalikPage() {

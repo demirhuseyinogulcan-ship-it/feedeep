@@ -5,7 +5,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { promptlar } from "#site/content";
-import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd, creativeWorkJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PROMPT_CATEGORIES, DIFFICULTY } from "@/lib/constants";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -48,11 +48,22 @@ export default async function PromptDetayPage({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Ana Sayfa", href: "/" },
-          { name: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
-          { name: prompt.title, href: `/prompt-kutuphanesi/${prompt.slug}` },
-        ])}
+        data={[
+          creativeWorkJsonLd({
+            title: prompt.title,
+            description: prompt.description,
+            url: `/prompt-kutuphanesi/${prompt.slug}`,
+            datePublished: prompt.date,
+            dateModified: prompt.updated,
+            keywords: prompt.keywords,
+            category: categoryLabel,
+          }),
+          breadcrumbJsonLd([
+            { name: "Ana Sayfa", href: "/" },
+            { name: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
+            { name: prompt.title, href: `/prompt-kutuphanesi/${prompt.slug}` },
+          ]),
+        ]}
       />
 
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-12">

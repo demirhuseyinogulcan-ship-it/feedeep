@@ -3,7 +3,13 @@
 // ─────────────────────────────────────────────────────────────
 
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Home, BookOpen } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Sayfa Bulunamadı — 404",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

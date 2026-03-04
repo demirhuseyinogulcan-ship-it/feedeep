@@ -15,10 +15,18 @@ import {
 } from "@/components/shared/filterable-content-list";
 
 export const metadata: Metadata = generateMeta({
-  title: "Yazılar",
+  title: "Yapay Zeka Yazıları: Rehberler, Analizler ve İncelemeler [2026]",
   description:
-    "Yapay zeka hakkında derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar.",
+    "Yapay zeka hakkında derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar. ChatGPT, Claude, Gemini araç incelemeleri ve pratik kullanım kılavuzları.",
   path: "/yazilar",
+  keywords: [
+    "yapay zeka yazıları",
+    "ai rehber",
+    "yapay zeka analizleri",
+    "ai incelemeleri",
+    "chatgpt rehberi",
+    "yapay zeka rehberleri",
+  ],
 });
 
 export default function YazilarPage() {

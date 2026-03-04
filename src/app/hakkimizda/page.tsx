@@ -12,10 +12,16 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 
 export const metadata: Metadata = generateMeta({
-  title: "Hakkımızda",
+  title: "Hakkımızda — AI Rehber Ekibi",
   description:
     "AI Rehber — Yapay zeka dünyasının Türkçe rehberi. Bağımsız, güvenilir, pratik.",
   path: "/hakkimizda",
+  keywords: [
+    "ai rehber hakkında",
+    "yapay zeka rehberi",
+    "türkçe ai platformu",
+    "yapay zeka türkçe",
+  ],
 });
 
 const DEGERLER = [

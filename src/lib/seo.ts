@@ -464,6 +464,46 @@ export function rehberFaqJsonLd(
   };
 }
 
+// ─── CreativeWork JSON-LD — Prompt Detay Sayfaları ───
+
+export function creativeWorkJsonLd(params: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  keywords?: string[];
+  category?: string;
+}) {
+  const resolveUrl = (u: string) =>
+    u.startsWith("http") ? u : `${SITE.url}${u}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: params.title,
+    description: params.description,
+    url: resolveUrl(params.url),
+    datePublished: params.datePublished,
+    dateModified: params.dateModified ?? params.datePublished,
+    author: {
+      "@type": "Person",
+      name: SITE.author.name,
+      url: SITE.author.linkedin,
+    },
+    publisher: organizationJsonLd(),
+    inLanguage: SITE.language,
+    isAccessibleForFree: true,
+    ...(params.keywords && { keywords: params.keywords.join(", ") }),
+    ...(params.category && { genre: params.category }),
+    learningResourceType: "prompt template",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": resolveUrl(params.url),
+    },
+  };
+}
+
 // ─── Person JSON-LD (E-E-A-T Author) ───
 
 export function personJsonLd(params: {
