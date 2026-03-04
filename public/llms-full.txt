@@ -58,7 +58,7 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
 
 ## İstatistikler
 
-- Toplam haber: 57
+- Toplam haber: 64
 - Toplam yazı: 10
 - Toplam prompt: 8
 - Toplam haftalık brifing: 2
@@ -108,9 +108,21 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
 ### Haberler
+- [Baba Google'a Dava Açtı: Gemini Oğlumu Öldürdü](https://airehber.com/haberler/google-gemini-chatbot-dava-olumcul-sanri)
+  Kaynak: TechCrunch | Tarih: Wed Mar 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Bir baba, Google'ın Gemini chatbotunun oğlunu ölümcül sanrıya sürüklediğini iddia ederek dava açtı. AI psikozunun en ağır vakaları arasında gösteriliyor.
+
+- [AI Kodunun Sadece %10'u Güvenli: Endor Labs AURI'yi Çıkardı](https://airehber.com/haberler/ai-uretilen-kod-yuzde-10-guvenli-endor-labs)
+  Kaynak: VentureBeat | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Carnegie Mellon araştırmasına göre AI'ın ürettiği kodun sadece yüzde 10'u güvenli. Endor Labs, bu sorunu çözmek için AURI aracını ücretsiz olarak sunuyor.
+
 - [Alibaba Qwen 3.5 Small: 9B Model, 120B'lik GPT-oss'u Geçiyor](https://airehber.com/haberler/alibaba-qwen-3-5-small-kucuk-model-serisi)
   Kaynak: Webrazzi | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Alibaba'nın Qwen 3.5 Small serisi 0.8B'den 9B'ye dört model sunuyor. 9B varyantı, 13,5 kat büyük OpenAI gpt-oss-120B'yi benchmarklarda geride bırakıyor.
+
+- [Alibaba'nın Qwen Teknik Lideri Ayrıldı, Ekip Dağılıyor](https://airehber.com/haberler/alibaba-qwen-teknik-lider-istifa-ekip-dagilma)
+  Kaynak: TechCrunch | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Alibaba'nın Qwen AI projesi teknik lideri Junyang Lin istifa etti. Qwen 3.5 lansmanının ardından gelen ayrılık ekipte zincirleme etki yarattı.
 
 - [Anthropic, Claude Code'a Ses Modu Ekliyor: Konuşarak Kodla](https://airehber.com/haberler/anthropic-claude-code-ses-modu-voice)
   Kaynak: Webrazzi | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
@@ -124,9 +136,25 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   Kaynak: InfoQ | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Google ve MIT araştırmacıları, çoklu agent mimarilerini ne zaman ve nasıl ölçeklendirmenin etkin olduğunu gösteren bir tahmin çerçevesi geliştirdi.
 
+- [OpenAI'ın 2 Kişilik Ekibi 4000 Çalışana Hizmet Veren AI Ajanı Kurdu](https://airehber.com/haberler/openai-dahili-ai-veri-ajani-4000-calisan)
+  Kaynak: VentureBeat | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI'da sadece 2 mühendis tarafından 3 ayda geliştirilen dahili veri ajanı, 600 petabayt veriyi doğal dille sorgulatıyor ve 4000 çalışan kullanıyor.
+
+- [GPT-5.3 Instant Halüsinasyonları %26.8 Azalttı](https://airehber.com/haberler/openai-gpt-5-3-instant-halusinasyon-azalma)
+  Kaynak: OpenAI Blog | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI'ın yeni varsayılan modeli GPT-5.3 Instant, halüsinasyonları yüzde 26.8 düşürürken küçümseyici ton sorununu ve aşırı reddetmeleri ortadan kaldırıyor.
+
 - [Santander ve Mastercard Avrupa'nın İlk AI Ödeme Pilotunu Yaptı](https://airehber.com/haberler/santander-mastercard-avrupa-ilk-ai-odeme-pilotu)
   Kaynak: AI News | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Bir AI sistemi Avrupa'da ilk kez canlı bankacılık ağında ödeme tamamladı. Santander ve Mastercard'dan yeni dönem.
+
+- [ChatGPT Silmeleri Pentagon Anlaşmasından Sonra %295 Arttı](https://airehber.com/haberler/chatgpt-silme-artisi-pentagon-anlasmasi-tepki)
+  Kaynak: TechCrunch | Tarih: Mon Mar 02 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI'ın Savunma Bakanlığı anlaşmasının ardından ChatGPT uygulama silmeleri bir günde yüzde 295 fırladı. Claude indirmeleri yüzde 51 arttı.
+
+- [Cursor'ın Yıllık Geliri 2 Milyar Doları Aştı](https://airehber.com/haberler/cursor-2-milyar-dolar-yillik-gelir)
+  Kaynak: TechCrunch | Tarih: Mon Mar 02 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  AI kod editörü Cursor, yıllık gelirini 3 ayda ikiye katlayarak 2 milyar dolara ulaştı. Şirketin değerlemesi 29.3 milyar dolar seviyesinde.
 
 - [ChatGPT 900 Milyon Haftalık Aktif Kullanıcıya Ulaştı](https://airehber.com/haberler/chatgpt-900-milyon-haftalik-kullaniciya-ulasti)
   Kaynak: TechCrunch | Tarih: Sun Mar 01 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high

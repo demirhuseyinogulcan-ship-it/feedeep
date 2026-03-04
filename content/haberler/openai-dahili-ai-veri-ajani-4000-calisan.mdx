@@ -1,0 +1,42 @@
+---
+title: "OpenAI'ın 2 Kişilik Ekibi 4000 Çalışana Hizmet Veren AI Ajanı Kurdu"
+slug: openai-dahili-ai-veri-ajani-4000-calisan
+description: "OpenAI'da sadece 2 mühendis tarafından 3 ayda geliştirilen dahili veri ajanı, 600 petabayt veriyi doğal dille sorgulatıyor ve 4000 çalışan kullanıyor."
+date: 2026-03-03
+sourceUrl: "https://venturebeat.com/orchestration/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and"
+sourceName: "VentureBeat"
+category: sirketler
+keywords:
+  - openai dahili ai ajan
+  - ai veri analiz araci
+  - openai codex kurumsal
+  - yapay zeka veri ajani
+  - openai enterprise ai
+  - yapay zeka haberleri
+sources:
+  - url: "https://venturebeat.com/orchestration/openais-ai-data-agent-built-by-two-engineers-now-serves-4-000-employees-and"
+    label: "VentureBeat"
+    tier: 2
+  - url: "https://openai.com/index/inside-our-in-house-data-agent/"
+    label: "OpenAI Blog"
+    tier: 1
+confidence: high
+socialSnippet: "OpenAI'da 2 mühendis, 3 ayda 600 petabayt veriyi doğal dille sorgulatabilecek bir AI ajanı inşa etti. Kodun %70'ini Codex yazdı. 4000+ çalışan aktif kullanıyor."
+published: true
+---
+
+Bir finans analisti Slack'e Türkçe bir soru yazar gibi doğal dilde bir sorgu yazıyor ve dakikalar içinde grafikli, dashboardlu bir analiz raporu alıyor. Bu, OpenAI'ın kendi içinde geliştirdiği veri ajanının günlük iş akışı.
+
+Bu aracı iki mühendis, üç ayda inşa etti. Kodunun yüzde 70'ini Codex yazdı. Şu an OpenAI'ın 5000 çalışanından 4000'den fazlası aktif olarak kullanıyor.
+
+OpenAI'ın veri altyapı sorumlusu Emma Tang, VentureBeat'e verdiği röportajda sistemin nasıl çalıştığını ilk kez detaylı şekilde anlattı. Ajan, GPT-5.2 üzerinde çalışıyor ve Slack, web arayüzü, IDE'ler ve Codex CLI dahil çalışanların zaten kullandığı her platformdan erişilebiliyor. Düz metin sorgularını alıp grafik, dashboard ve uzun formatlı analitik raporlara dönüştürüyor.
+
+Asıl teknik zorluk, 70 bin veri seti arasından doğru tabloyu bulmak. Tang bunu "en büyük problem" olarak tanımlıyor. Çözüm altı katmanlı bir bağlam sisteminde yatıyor. Codex, her gün asenkron olarak önemli tabloları inceleyip bağımlılıklarını, sahipliğini ve birleştirme anahtarlarını haritalıyor. Bu "Codex Enrichment" katmanı, temel şema bilgisinden Slack ve Notion'dan çekilen kurumsal bilgiye kadar beş diğer katmanla birleşiyor.
+
+Ajanın en ilginç davranışsal düzeltmesi ise aşırı güven sorunuyla ilgili. "Model genellikle aşırı kendinden emin oluyor" diyen Tang, çözümü bir keşif aşaması eklemekte buldu. Prompt mühendisliğiyle ajan, analiz yapmaya atılmadan önce olası senaryoları karşılaştırıp doğru tablo olduğunu teyit etmeye yönlendiriliyor. "Daha az bağlam verip daha doğru bağlam verdiğimizde sonuçlar iyileşiyor" diyor Tang.
+
+Güvenlik tarafında sistem kasıtlı olarak basit tutulmuş. Her kullanıcı kendi erişim tokeniyle çalışıyor, ajan yalnızca o kişinin erişim yetkisi olan verileri görebiliyor. Yazma erişimi geçici bir test şemasıyla sınırlı ve periyodik olarak temizleniyor.
+
+OpenAI bu aracı ürünleştirmeyi planlamıyor. Strateji, yapı taşlarını sunup her şirketin kendininkini kurmasını sağlamak. Tang'ın mesajı net: "Aynı API'leri, aynı araçları kullandık. Fine-tune edilmiş bir model yok. Sadece GPT-5.2. Siz de bunu yapabilirsiniz."
+
+Kurumsal AI ajanlarının geleceği modelden çok veriye bağlı. Tang'ın son sözü bu gerçeği özetliyor: "Veri yönetişimi seksi değil ama veri ajanlarının iyi çalışması için zorunlu."

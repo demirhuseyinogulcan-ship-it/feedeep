@@ -1,0 +1,40 @@
+---
+title: "AI Kodunun Sadece %10'u Güvenli: Endor Labs AURI'yi Çıkardı"
+slug: ai-uretilen-kod-yuzde-10-guvenli-endor-labs
+description: "Carnegie Mellon araştırmasına göre AI'ın ürettiği kodun sadece yüzde 10'u güvenli. Endor Labs, bu sorunu çözmek için AURI aracını ücretsiz olarak sunuyor."
+date: 2026-03-03
+sourceUrl: "https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated"
+sourceName: "VentureBeat"
+category: arastirma
+keywords:
+  - ai kod guvenlik
+  - endor labs auri
+  - ai uretilen kod zafiyet
+  - vibe coding guvenlik riski
+  - ai yazilim gelistirme
+  - yapay zeka haberleri
+sources:
+  - url: "https://venturebeat.com/technology/endor-labs-launches-free-tool-auri-after-study-finds-only-10-of-ai-generated"
+    label: "VentureBeat"
+    tier: 2
+  - url: "https://arxiv.org/pdf/2512.03262"
+    label: "Carnegie Mellon / Columbia / Johns Hopkins Araştırması"
+    tier: 1
+confidence: high
+socialSnippet: "Geliştirme ekiplerinin %90'ı AI kodlama asistanı kullanıyor. Ama Carnegie Mellon araştırmasına göre AI'ın ürettiği kodun sadece %10'u hem çalışıyor hem güvenli."
+published: true
+---
+
+Geliştirme ekiplerinin yüzde 90'ı AI kodlama asistanı kullanıyor. Ama bu araçların ürettiği kodun güvenlik profili, hız vaadinin çok gerisinde kalıyor.
+
+Carnegie Mellon, Columbia ve Johns Hopkins üniversitelerinin ortaklaşa yürüttüğü araştırma, önde gelen AI modellerinin fonksiyonel olarak doğru kod üretme oranının yüzde 61 olduğunu ortaya koydu. Buraya kadar idare eder gibi görünüyor. Ama bu çıktının hem fonksiyonel hem güvenli olan kısmı sadece yüzde 10. Yani AI'ın ürettiği her 10 çalışan koddan 9'u güvenlik açığı taşıyor.
+
+Bu verinin arka planı daha da endişe verici. AI kodlama modelleri, internetteki açık kaynak depolarından toplanan devasa kod külliyatıyla eğitildi. Bu külliyat içinde en iyi pratikler var ama yıllar önce yazılmış ve henüz keşfedilmemiş güvenlik açıklarıyla dolu kodlar da var. Endor Labs CEO'su Varun Badhwar'ın ifadesiyle: "Hiç zafiyet içermemiş kodları filtrelemeye kalksanız, eğitim için kullanacak kod kalmazdı."
+
+Bu sorunu çözmek için Endor Labs, AURI adlı yeni bir platform duyurdu. AURI, gerçek zamanlı güvenlik istihbaratını doğrudan AI kodlama araçlarına entegre ediyor. VS Code, Cursor ve Windsurf gibi popüler editörlerde MCP (Model Context Protocol) üzerinden çalışıyor ve bireysel geliştiriciler için tamamen ücretsiz.
+
+AURI'nin teknik farkı, "kod bağlam grafiği" adını verdiği yaklaşımda yatıyor. Rakip araçlar bir uygulamanın hangi kütüphaneleri kullandığına bakıp bilinen zafiyet veritabanlarıyla eşleştirirken, AURI fonksiyon seviyesinde izleme yapıyor. Bir geliştirici büyük bir AWS SDK'sı import edip sadece 10 satırlık bir kısmını kullanıyorsa, AURI geri kalan 99 bin satırdaki zafiyetleri görmezden geliyor. Bu yaklaşım, kurumsal müşterilerde güvenlik bulgularını ortalama yüzde 80 ila 95 oranında azaltıyor.
+
+Platform zaten sahada sonuç vermeye başladı. Şubat'ta AURI, popüler AI ajanı OpenClaw'da yedi güvenlik açığı tespit etti. Bunların altısı sonradan yamalandı. Endor Labs'ın müşteri listesinde OpenAI, Cursor, Dropbox, Atlassian ve Snowflake gibi isimler var.
+
+Vibe coding çağında hız kazandık ama güvenliği hesaba katmadan yazılan her satır kod, gelecekte karşımıza teknik borç olarak çıkacak.

@@ -27,7 +27,7 @@ export function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm z-50 animate-fade-up">
+    <div className="fixed bottom-4 left-4 right-4 sm:right-auto sm:left-4 sm:max-w-sm z-50 animate-fade-up">
       <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl p-5 shadow-2xl">
         <p className="text-sm text-gray-300 mb-2">
           Çerez Bildirimi
