@@ -121,13 +121,18 @@ export function articleJsonLd(params: {
   section?: string;
   wordCount?: number;
   readingTime?: number;
+  /** Varsayılan /yazilar/{slug} yerine özel URL path */
+  urlPath?: string;
 }) {
+  const articleUrl = params.urlPath
+    ? `${SITE.url}${params.urlPath}`
+    : `${SITE.url}/yazilar/${params.slug}`;
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: params.title,
     description: params.description,
-    url: `${SITE.url}/yazilar/${params.slug}`,
+    url: articleUrl,
     image: params.image ?? `${SITE.url}/api/og?title=${encodeURIComponent(params.title)}`,
     datePublished: params.publishedTime,
     dateModified: params.modifiedTime ?? params.publishedTime,
@@ -145,7 +150,7 @@ export function articleJsonLd(params: {
     ...(params.section && { articleSection: params.section }),
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${SITE.url}/yazilar/${params.slug}`,
+      "@id": articleUrl,
     },
     speakable: {
       "@type": "SpeakableSpecification",
@@ -456,5 +461,33 @@ export function rehberFaqJsonLd(
         text: q.answer,
       },
     })),
+  };
+}
+
+// ─── Person JSON-LD (E-E-A-T Author) ───
+
+export function personJsonLd(params: {
+  name: string;
+  url: string;
+  jobTitle: string;
+  description: string;
+  sameAs: string[];
+  worksFor: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: params.name,
+    url: params.url,
+    jobTitle: params.jobTitle,
+    description: params.description,
+    sameAs: params.sameAs,
+    worksFor: {
+      "@type": "Organization",
+      name: params.worksFor,
+      url: SITE.url,
+    },
+    ...(params.image && { image: params.image }),
   };
 }

@@ -5,7 +5,8 @@
 
 import type { Metadata } from "next";
 import { haberler } from "#site/content";
-import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
+import { SITE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -13,10 +14,17 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { EDITORIAL_TIMELINE } from "@/lib/timeline-data";
 
 export const metadata: Metadata = generateMeta({
-  title: "AI Zaman Çizelgesi",
+  title: "AI Zaman Çizelgesi: Yapay Zeka Gelişmeleri Kronolojisi",
   description:
     "Yapay zeka dünyasındaki önemli gelişmelerin kronolojik, filtrelenebilir zaman çizelgesi.",
   path: "/zaman-cizelgesi",
+  keywords: [
+    "yapay zeka zaman çizelgesi",
+    "AI kronoloji",
+    "yapay zeka gelişmeleri",
+    "AI tarihçesi",
+    "yapay zeka kilometre taşları",
+  ],
 });
 
 export default function ZamanCizelgesiPage() {
@@ -38,10 +46,21 @@ export default function ZamanCizelgesiPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Ana Sayfa", href: "/" },
-          { name: "AI Zaman Çizelgesi", href: "/zaman-cizelgesi" },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "Ana Sayfa", href: "/" },
+            { name: "AI Zaman Çizelgesi", href: "/zaman-cizelgesi" },
+          ]),
+          itemListJsonLd({
+            name: "Yapay Zeka Zaman Çizelgesi",
+            description: "Yapay zeka dünyasındaki önemli gelişmelerin kronolojik listesi",
+            items: sorted.slice(0, 50).map((item, i) => ({
+              name: item.title,
+              url: item.url,
+              position: i + 1,
+            })),
+          }),
+        ]}
       />
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
         <Breadcrumb

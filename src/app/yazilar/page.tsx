@@ -4,8 +4,8 @@
 
 import type { Metadata } from "next";
 import { yazilar } from "#site/content";
-import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
-import { YAZI_CATEGORIES } from "@/lib/constants";
+import { generateMeta, breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
+import { YAZI_CATEGORIES, SITE } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -45,6 +45,17 @@ export default function YazilarPage() {
     <>
       <JsonLd
         data={[
+          collectionPageJsonLd({
+            name: "Yapay Zeka Yazıları",
+            description: "Yapay zeka hakkında derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar.",
+            url: "/yazilar",
+            itemType: "Article",
+            items: posts.slice(0, 20).map((p) => ({
+              name: p.title,
+              url: `${SITE.url}/yazilar/${p.slug}`,
+              description: p.description,
+            })),
+          }),
           breadcrumbJsonLd([
             { name: "Ana Sayfa", href: "/" },
             { name: "Yazılar", href: "/yazilar" },

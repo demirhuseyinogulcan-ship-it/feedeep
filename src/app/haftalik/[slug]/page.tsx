@@ -6,7 +6,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { haftalik } from "#site/content";
-import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd, articleJsonLd } from "@/lib/seo";
+import { SITE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -57,11 +58,23 @@ export default async function HaftalikDetayPage({ params }: PageProps) {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Ana Sayfa", href: "/" },
-          { name: "Haftalık Brifing", href: "/haftalik" },
-          { name: briefing.title, href: `/haftalik/${slug}` },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "Ana Sayfa", href: "/" },
+            { name: "Haftalık Brifing", href: "/haftalik" },
+            { name: briefing.title, href: `/haftalik/${slug}` },
+          ]),
+          articleJsonLd({
+            title: briefing.title,
+            description: briefing.description,
+            slug: slug,
+            publishedTime: briefing.date,
+            section: "Haftalık Brifing",
+            wordCount: briefing.metadata.wordCount,
+            readingTime: briefing.metadata.readingTime,
+            urlPath: `/haftalik/${slug}`,
+          }),
+        ]}
       />
 
       <article className="mx-auto max-w-3xl px-4 sm:px-6 py-12">

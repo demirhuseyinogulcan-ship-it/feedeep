@@ -21,7 +21,6 @@ export const metadata: Metadata = generateMeta({
   description: SITE.description,
   path: "/",
   canonicalPath: "/",
-  noIndex: true,
 });
 
 // ─── Velite verilerini hazırla ───

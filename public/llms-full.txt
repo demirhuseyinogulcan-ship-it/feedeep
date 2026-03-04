@@ -50,16 +50,27 @@ Her hafta yayınlanan AI özet bülteni.
 - Editör seçimi açıklamalar
 - "Bu hafta denenecek" aksiyon önerisi
 
+### 5. Programlama Rehberleri (/programlama)
+Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
+- Next.js, React ve diğer modern framework rehberleri
+- Başlangıçtan ileri seviyeye adım adım ilerleme
+- Gerçek proje örnekleri ve kod parçacıkları
+
 ## İstatistikler
 
 - Toplam haber: 57
-- Toplam yazı: 9
+- Toplam yazı: 10
 - Toplam prompt: 8
 - Toplam haftalık brifing: 2
+- Toplam rehber bölümü: 2
 
 ## Tüm İçerik Listesi
 
 ### Yazılar
+- [AI Yüzünden mi Kovuldular? İşten Çıkarmaların Gerçek Nedeni](https://airehber.com/yazilar/ai-isten-cikarmalarin-gercek-nedeni-pandemi-faizler)
+  Kategori: analiz | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Şirketler binlerce kişiyi çıkarıp AI dönüşümü diyor. Ama asıl sebep sıfır faiz döneminde şişen kadrolar ve pahalanan borçlar olabilir.
+
 - [ChatGPT'den Kopyala Yapıştır Yapanı Artık Herkes Anlıyor](https://airehber.com/yazilar/chatgpt-kopyala-yapistir-yapay-icerik-guven-krizi)
   Kategori: analiz | Tarih: Wed Feb 25 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   LinkedIn'deki AI yazıları yüzde 45 daha az etkileşim alıyor. Okuyucuların yarısı yapay içeriği fark ediyor. İnsan eli değen yazının neden hâlâ önemli olduğu.
@@ -366,6 +377,31 @@ Her hafta yayınlanan AI özet bülteni.
 - [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07)
   Hafta: 7 | Yıl: 2026
   10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
+
+### Programlama Rehberleri
+
+**bolum-1-giris**
+- [Next.js Nedir? Giriş ve Kurulum Rehberi](https://airehber.com/programlama/bolum-1-giris)
+  Next.js framework'ünü tanıyoruz, geliştirme ortamını birlikte kuruyoruz ve ilk projemizi çalıştırıyoruz. Sıfırdan adım adım.
+
+
+**bolum-2-proje-yapisi**
+- [Next.js Proje Yapısı ve Dosya Düzeni Rehberi](https://airehber.com/programlama/bolum-2-proje-yapisi)
+  Next.js projesindeki her dosya ve klasörü tek tek inceliyoruz. Hangisine dokunacaksın, hangisini rahat bırakacaksın?
+
+## Sıkça Sorulan Sorular
+
+**AI Rehber nedir?**
+AI Rehber, yapay zeka teknolojilerini Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
+
+**İçerikler nasıl doğrulanıyor?**
+Her içerikte Tier 1-3 arası kaynak güvenilirlik seviyesi belirtilir. Yazılar düzenli olarak güncellik kontrolünden geçer.
+
+**AI Rehber kimler için?**
+Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler ve yapay zeka teknolojilerini iş hayatında kullanmak isteyen herkes.
+
+**Hangi konular ele alınıyor?**
+AI haberleri, derinlemesine analizler, prompt mühendisliği şablonları, programlama rehberleri ve haftalık AI brifingleri.
 
 ## Güven Politikası
 

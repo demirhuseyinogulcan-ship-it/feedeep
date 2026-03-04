@@ -5,7 +5,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { haftalik } from "#site/content";
-import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
+import { SITE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -26,10 +27,23 @@ export default function HaftalikPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Ana Sayfa", href: "/" },
-          { name: "Haftalık Brifing", href: "/haftalik" },
-        ])}
+        data={[
+          collectionPageJsonLd({
+            name: "Haftalık AI Brifing",
+            description: "Her hafta yapay zeka dünyasının en önemli 3 gelişmesi ve aksiyon önerileri.",
+            url: "/haftalik",
+            itemType: "Article",
+            items: briefings.map((b) => ({
+              name: b.title,
+              url: `${SITE.url}/haftalik/${b.slug}`,
+              description: b.description,
+            })),
+          }),
+          breadcrumbJsonLd([
+            { name: "Ana Sayfa", href: "/" },
+            { name: "Haftalık Brifing", href: "/haftalik" },
+          ]),
+        ]}
       />
       <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
         <Breadcrumb

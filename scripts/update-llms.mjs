@@ -46,6 +46,45 @@ function getContent(dir) {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+/**
+ * Nested dizinlerdeki MDX dosyalarini okur (rehberler gibi)
+ * rehberler/nextjs-rehberi/bolum-1.mdx gibi yapilar icin
+ */
+function getNestedContent(dir) {
+  const fullPath = join(CONTENT_DIR, dir);
+  const items = [];
+  let subdirs;
+  try {
+    subdirs = readdirSync(fullPath, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+
+  for (const entry of subdirs) {
+    if (entry.isDirectory()) {
+      const subPath = join(fullPath, entry.name);
+      const mdxFiles = readdirSync(subPath).filter((f) => f.endsWith(".mdx"));
+      for (const file of mdxFiles) {
+        const raw = readFileSync(join(subPath, file), "utf-8");
+        const { data } = matter(raw);
+        if (data.published === false) continue;
+        data._guide = entry.name;
+        items.push(data);
+      }
+    } else if (entry.name.endsWith(".mdx")) {
+      const raw = readFileSync(join(fullPath, entry.name), "utf-8");
+      const { data } = matter(raw);
+      if (data.published === false) continue;
+      items.push(data);
+    }
+  }
+
+  return items.sort((a, b) => {
+    if (a.guide === b.guide) return (a.chapter || 0) - (b.chapter || 0);
+    return (a.guide || "").localeCompare(b.guide || "");
+  });
+}
+
 // ─── llms.txt oluştur (özet) ─────────────────────────────────
 
 function generateLlmsTxt() {
@@ -53,6 +92,7 @@ function generateLlmsTxt() {
   const yazilar = getContent("yazilar");
   const promptlar = getContent("promptlar");
   const haftalik = getContent("haftalik");
+  const rehberler = getNestedContent("rehberler");
 
   const now = new Date();
   const monthNames = [
@@ -73,6 +113,7 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
 - **Prompt Kütüphanesi**: Model bazlı skorlanmış, değişkenli, hata senaryolu prompt şablonları
 - **Haftalık Brifing**: Her hafta AI dünyasının 3 önemli gelişmesi + aksiyon önerisi
+- **Programlama Rehberleri**: Sıfırdan ileri seviyeye, interaktif alıştırmalarla programlama dersleri
 
 ## Sayfalar
 
@@ -80,7 +121,9 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [Haberler](${SITE_URL}/haberler): Güncel AI haberleri
 - [Prompt Kütüphanesi](${SITE_URL}/prompt-kutuphanesi): Kullanıma hazır prompt şablonları
 - [Haftalık Brifing](${SITE_URL}/haftalik): Haftalık AI özet bülteni
+- [Programlama Rehberleri](${SITE_URL}/programlama): Adım adım programlama dersleri
 - [AI Zaman Çizelgesi](${SITE_URL}/zaman-cizelgesi): Kronolojik AI gelişmeleri
+- [Yazar](${SITE_URL}/yazar/can-demir): Editör ve kurucu hakkında
 - [Hakkımızda](${SITE_URL}/hakkimizda): Ekip ve misyon
 
 ## Son İçerikler (${dateLabel})
@@ -111,7 +154,28 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
     }
   }
 
+  if (rehberler.length > 0) {
+    output += `\n### Programlama Rehberleri\n`;
+    let currentGuide = "";
+    for (const r of rehberler) {
+      const guide = r.guide || r._guide || "";
+      if (guide !== currentGuide) {
+        currentGuide = guide;
+        output += `\n**${r.guideTitle || guide}** (${SITE_URL}/programlama/${guide})\n`;
+      }
+      output += `- [Bölüm ${r.chapter}: ${r.title}](${SITE_URL}/programlama/${guide}/${r.slug}): ${r.description}\n`;
+    }
+  }
+
+  // FAQ — AI modellerinin sik sorulan sorulara yanit verebilmesi icin
   output += `
+## Sıkça Sorulan Sorular
+
+- **AI Rehber nedir?** AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve kullanıma hazır prompt şablonlarını Türkçe olarak sunan bağımsız bir yayın platformudur.
+- **Yapay zeka haberleri nereden takip edilir?** AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar. Haftalık brifing ile önemli gelişmeleri kaçırmazsınız.
+- **AI Rehber'deki haberler güvenilir mi?** Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.
+- **Prompt kütüphanesi nasıl kullanılır?** Prompt Kütüphanesi'ndeki şablonları doğrudan ChatGPT, Claude veya Gemini'ye kopyalayabilirsiniz. Her prompt, model bazlı performans skorları ve örnek çıktılarla birlikte sunulur.
+
 ## Güven Politikası
 
 Her içerikte kaynak güvenilirlik seviyesi belirtilir:
@@ -151,6 +215,7 @@ function generateLlmsFullTxt() {
   const yazilar = getContent("yazilar");
   const promptlar = getContent("promptlar");
   const haftalik = getContent("haftalik");
+  const rehberler = getNestedContent("rehberler");
 
   let output = `# AI Rehber — Tam Bilgi Dosyası (LLMs Full Context)
 
@@ -204,12 +269,19 @@ Her hafta yayınlanan AI özet bülteni.
 - Editör seçimi açıklamalar
 - "Bu hafta denenecek" aksiyon önerisi
 
+### 5. Programlama Rehberleri (/programlama)
+Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
+- Next.js, React ve diğer modern framework rehberleri
+- Başlangıçtan ileri seviyeye adım adım ilerleme
+- Gerçek proje örnekleri ve kod parçacıkları
+
 ## İstatistikler
 
 - Toplam haber: ${haberler.length}
 - Toplam yazı: ${yazilar.length}
 - Toplam prompt: ${promptlar.length}
 - Toplam haftalık brifing: ${haftalik.length}
+- Toplam rehber bölümü: ${rehberler.length}
 
 ## Tüm İçerik Listesi
 
@@ -238,6 +310,35 @@ Her hafta yayınlanan AI özet bülteni.
       output += `- [${h.title}](${SITE_URL}/haftalik/${h.slug})\n  Hafta: ${h.weekNumber} | Yıl: ${h.year}\n  ${h.description}\n\n`;
     }
   }
+
+  if (rehberler.length > 0) {
+    output += `### Programlama Rehberleri\n`;
+    let currentGuide = "";
+    for (const r of rehberler) {
+      const guideName = r.slug.split("/")[0];
+      if (guideName !== currentGuide) {
+        currentGuide = guideName;
+        output += `\n**${guideName}**\n`;
+      }
+      output += `- [${r.title}](${SITE_URL}/programlama/${r.slug})\n  ${r.description}\n\n`;
+    }
+  }
+
+  output += `## Sıkça Sorulan Sorular
+
+**AI Rehber nedir?**
+AI Rehber, yapay zeka teknolojilerini Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
+
+**İçerikler nasıl doğrulanıyor?**
+Her içerikte Tier 1-3 arası kaynak güvenilirlik seviyesi belirtilir. Yazılar düzenli olarak güncellik kontrolünden geçer.
+
+**AI Rehber kimler için?**
+Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler ve yapay zeka teknolojilerini iş hayatında kullanmak isteyen herkes.
+
+**Hangi konular ele alınıyor?**
+AI haberleri, derinlemesine analizler, prompt mühendisliği şablonları, programlama rehberleri ve haftalık AI brifingleri.
+
+`;
 
   output += `## Güven Politikası
 
@@ -273,7 +374,8 @@ const haberCount = getContent("haberler").length;
 const yaziCount = getContent("yazilar").length;
 const promptCount = getContent("promptlar").length;
 const haftalikCount = getContent("haftalik").length;
-const total = haberCount + yaziCount + promptCount + haftalikCount;
+const rehberCount = getNestedContent("rehberler").length;
+const total = haberCount + yaziCount + promptCount + haftalikCount + rehberCount;
 
-console.log(`✅ llms.txt güncellendi (${total} içerik: ${haberCount} haber, ${yaziCount} yazı, ${promptCount} prompt, ${haftalikCount} haftalık)`);
-console.log(`✅ llms-full.txt güncellendi`);
+console.log(`llms.txt güncellendi (${total} içerik: ${haberCount} haber, ${yaziCount} yazı, ${promptCount} prompt, ${haftalikCount} haftalık, ${rehberCount} rehber bölümü)`);
+console.log(`llms-full.txt güncellendi`);

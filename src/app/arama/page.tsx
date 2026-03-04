@@ -15,6 +15,7 @@ export const metadata: Metadata = generateMeta({
   title: "Ara",
   description: "AI Rehber içeriklerinde arama yapın.",
   path: "/arama",
+  noIndex: true,
 });
 
 export default function AramaPage() {

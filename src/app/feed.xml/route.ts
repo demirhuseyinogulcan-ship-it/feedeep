@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────
 
 import { SITE } from "@/lib/constants";
-import { yazilar, haberler } from "#site/content";
+import { yazilar, haberler, promptlar, haftalik } from "#site/content";
 
 function escapeXml(str: string): string {
   return str
@@ -32,6 +32,22 @@ export async function GET() {
       .map((h) => ({
         title: h.title,
         url: `${SITE.url}/haberler/${h.slug}`,
+        description: h.description,
+        date: h.date,
+      })),
+    ...promptlar
+      .filter((p) => p.published)
+      .map((p) => ({
+        title: p.title,
+        url: `${SITE.url}/prompt-kutuphanesi/${p.slug}`,
+        description: p.description,
+        date: p.date,
+      })),
+    ...haftalik
+      .filter((h) => h.published)
+      .map((h) => ({
+        title: h.title,
+        url: `${SITE.url}/haftalik/${h.slug}`,
         description: h.description,
         date: h.date,
       })),
