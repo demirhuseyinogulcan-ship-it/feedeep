@@ -1,7 +1,7 @@
 ---
-title: "Next.js Proje Yapısı ve Dosya Düzeni Rehberi"
+title: "Next.js Proje Yapısı: Dosya Düzeni, App Router ve Layout Sistemi [2026]"
 slug: bolum-2-proje-yapisi
-description: "Next.js projesindeki her dosya ve klasörü tek tek inceliyoruz. Hangisine dokunacaksın, hangisini rahat bırakacaksın?"
+description: "Next.js projesindeki tüm dosya ve klasörleri öğren. package.json, app/ klasörü, layout.tsx, page.tsx ve App Router yapısını adım adım inceliyoruz."
 date: 2026-03-03
 published: true
 guide: nextjs-rehberi
@@ -12,11 +12,11 @@ technology: nextjs
 difficulty: baslangic
 keywords:
   - next.js proje yapısı
-  - next.js dosya düzeni
-  - next.js app klasörü
-  - next.js layout.tsx
+  - next.js app router
+  - next.js layout
   - next.js page.tsx
-  - next.js klasör yapısı
+  - next.js dosya yapısı
+  - next.js klasör düzeni
 prerequisites:
   - "Bölüm 1'deki Node.js ve VS Code kurulumunu tamamlamış olmak"
   - "create-next-app ile bir proje oluşturmuş olmak"
@@ -45,6 +45,10 @@ faq:
     answer: ".next klasörü, Next.js'in build çıktısını sakladığı geçici bir dizindir. npm run build veya npm run dev komutları bu klasörü otomatik oluşturur. İçeriği her build'de yeniden üretildiği için Git'e eklenmez. Silseniz bile tekrar oluşturulur."
   - question: "public/ klasörüne koyduğum dosyalara nasıl erişirim?"
     answer: "public/ klasöründeki dosyalar doğrudan URL üzerinden erişilebilir. Örneğin public/logo.png dosyasına tarayıcıda /logo.png adresiyle ulaşırsınız. Next.js bu dosyaları olduğu gibi sunar, herhangi bir işleme veya optimizasyon uygulamaz. Favicon, robots.txt, manifest.json gibi dosyalar genellikle buraya konur."
+  - question: "Next.js App Router nedir ve Pages Router'dan farkı ne?"
+    answer: "App Router, Next.js 13+ ile gelen modern yönlendirme sistemidir. Pages Router'ın aksine React Server Components, nested layout'lar, loading/error UI ve route groups gibi güçlü özellikleri destekler. 2026 itibarıyla yeni projeler için App Router önerilmektedir."
+  - question: "Sıfırdan web geliştirme öğrenmek için Next.js iyi bir başlangıç mı?"
+    answer: "Evet. Next.js hem frontend hem backend geliştirmeyi tek projede yapmanızı sağlar. Dosya tabanlı routing sayesinde config dosyalarıyla uğraşmadan sayfa oluşturabilirsiniz. TypeScript ve Tailwind CSS desteği ile modern web geliştirme pratiklerini baştan öğrenirsiniz."
 ---
 
 Bir önceki bölümde ilk Next.js projeni oluşturdun, geliştirme sunucusunu çalıştırdın ve "Merhaba Next.js" yazısını ekrana bastın. Her şey güzel. Ama şimdi VS Code'da sol taraftaki dosya gezginine bir bak. Bir sürü dosya ve klasör var. Hangisi ne işe yarıyor? Hangisine dokunacaksın, hangisini olduğu gibi bırakacaksın?
