@@ -5,7 +5,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { generateMeta, breadcrumbJsonLd, personJsonLd } from "@/lib/seo";
+import { generateMeta, breadcrumbJsonLd, personJsonLd, profilePageJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PageHeader } from "@/components/shared/page-header";
@@ -61,13 +61,17 @@ export default function YazarCanDemirPage() {
     <>
       <JsonLd
         data={[
-          personJsonLd({
-            name: SITE.author.name,
-            url: `${SITE.url}/yazar/can-demir`,
-            jobTitle: SITE.author.role,
-            description: `${SITE.author.name}, AI Rehber'in kurucusu ve baş editörüdür. Yapay zeka, growth hacking ve dijital içerik stratejisi alanlarında çalışmaktadır.`,
-            sameAs: [SITE.author.linkedin, SITE.author.instagram],
-            worksFor: SITE.organization.name,
+          profilePageJsonLd({
+            dateCreated: "2025-01-01",
+            dateModified: new Date().toISOString().split("T")[0],
+            mainEntity: personJsonLd({
+              name: SITE.author.name,
+              url: `${SITE.url}/yazar/can-demir`,
+              jobTitle: SITE.author.role,
+              description: `${SITE.author.name}, AI Rehber'in kurucusu ve baş editörüdür. Yapay zeka, growth hacking ve dijital içerik stratejisi alanlarında çalışmaktadır.`,
+              sameAs: [SITE.author.linkedin, SITE.author.instagram],
+              worksFor: SITE.organization.name,
+            }),
           }),
           breadcrumbJsonLd([
             { name: "Ana Sayfa", href: "/" },

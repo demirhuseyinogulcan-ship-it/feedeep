@@ -72,6 +72,8 @@ export function generateMeta({
       title,
       description,
       images: [ogImage],
+      site: "@airehbercom",
+      creator: "@airehbercom",
     },
   };
 }
@@ -98,14 +100,41 @@ export function websiteJsonLd() {
 export function organizationJsonLd() {
   return {
     "@type": "Organization",
+    "@id": `${SITE.url}/#organization`,
     name: SITE.organization.name,
     url: SITE.url,
     email: SITE.author.email,
+    description:
+      "Yapay zeka dunyasinin Turkce rehberi. Guncel haberler, derinlemesine yazilar, prompt kutuphanesi ve AI model karsilastirmalari.",
+    foundingDate: "2025-01-01",
     logo: {
       "@type": "ImageObject",
       url: `${SITE.url}${SITE.organization.logo}`,
+      width: 512,
+      height: 512,
     },
     sameAs: [SITE.author.linkedin, SITE.author.instagram],
+    areaServed: {
+      "@type": "Country",
+      name: "Turkey",
+    },
+    knowsAbout: [
+      "Yapay Zeka",
+      "Makine Ogrenmesi",
+      "Buyuk Dil Modelleri",
+      "Prompt Muhendisligi",
+      "ChatGPT",
+      "Google Gemini",
+      "Claude AI",
+      "AI Ajanlari",
+    ],
+    publishingPrinciples: `${SITE.url}/hakkimizda`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: SITE.author.email,
+      contactType: "editorial",
+      availableLanguage: "Turkish",
+    },
   };
 }
 
@@ -518,6 +547,7 @@ export function personJsonLd(params: {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${SITE.url}/#person-can-demir`,
     name: params.name,
     url: params.url,
     jobTitle: params.jobTitle,
@@ -528,6 +558,42 @@ export function personJsonLd(params: {
       name: params.worksFor,
       url: SITE.url,
     },
+    knowsAbout: [
+      "Yapay Zeka",
+      "LLM Ekosistemi",
+      "Prompt Muhendisligi",
+      "Growth Hacking",
+      "Dijital Icerik Stratejisi",
+      "SEO",
+      "Next.js",
+      "TypeScript",
+    ],
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Editoryal Icerik Yoneticisi & Growth Hacking Uzmani",
+      occupationalCategory: "15-1252.00",
+      skills: "AI Content Engineering, SEO, Growth Hacking, Prompt Engineering",
+    },
+    nationality: {
+      "@type": "Country",
+      name: "Turkey",
+    },
     ...(params.image && { image: params.image }),
+  };
+}
+
+// ─── ProfilePage JSON-LD (Google 2024+ recommended) ───
+
+export function profilePageJsonLd(params: {
+  dateCreated: string;
+  dateModified: string;
+  mainEntity: ReturnType<typeof personJsonLd>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    dateCreated: params.dateCreated,
+    dateModified: params.dateModified,
+    mainEntity: params.mainEntity,
   };
 }

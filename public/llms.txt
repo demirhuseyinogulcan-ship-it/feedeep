@@ -122,6 +122,7 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 **Sıfırdan Next.js** (https://airehber.com/programlama/nextjs-rehberi)
 - [Bölüm 1: Next.js Nedir? Giriş ve Kurulum Rehberi](https://airehber.com/programlama/nextjs-rehberi/bolum-1-giris): Next.js framework'ünü tanıyoruz, geliştirme ortamını birlikte kuruyoruz ve ilk projemizi çalıştırıyoruz. Sıfırdan adım adım.
 - [Bölüm 2: Next.js Proje Yapısı ve Dosya Düzeni Rehberi](https://airehber.com/programlama/nextjs-rehberi/bolum-2-proje-yapisi): Next.js projesindeki her dosya ve klasörü tek tek inceliyoruz. Hangisine dokunacaksın, hangisini rahat bırakacaksın?
+- [Bölüm 3: Next.js Routing: Sayfa Yönlendirme ve Dinamik Route Rehberi](https://airehber.com/programlama/nextjs-rehberi/bolum-3-routing): Next.js App Router ile dosya tabanlı routing, dinamik route'lar, nested layout'lar, route grupları ve Link bileşenini sıfırdan öğren.
 
 ## Sıkça Sorulan Sorular
 

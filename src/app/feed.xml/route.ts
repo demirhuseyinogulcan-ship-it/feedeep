@@ -16,7 +16,13 @@ function escapeXml(str: string): string {
 
 export async function GET() {
   // Combine yazilar + haberler, sort by date desc
-  type FeedEntry = { title: string; url: string; description: string; date: string };
+  type FeedEntry = {
+    title: string;
+    url: string;
+    description: string;
+    date: string;
+    category?: string;
+  };
 
   const entries: FeedEntry[] = [
     ...yazilar
@@ -26,6 +32,7 @@ export async function GET() {
         url: `${SITE.url}/yazilar/${y.slug}`,
         description: y.description,
         date: y.date,
+        category: y.category,
       })),
     ...haberler
       .filter((h) => h.published)
@@ -34,6 +41,7 @@ export async function GET() {
         url: `${SITE.url}/haberler/${h.slug}`,
         description: h.description,
         date: h.date,
+        category: h.category,
       })),
     ...promptlar
       .filter((p) => p.published)
@@ -42,6 +50,7 @@ export async function GET() {
         url: `${SITE.url}/prompt-kutuphanesi/${p.slug}`,
         description: p.description,
         date: p.date,
+        category: p.category,
       })),
     ...haftalik
       .filter((h) => h.published)
@@ -62,7 +71,8 @@ export async function GET() {
       <link>${entry.url}</link>
       <description>${escapeXml(entry.description)}</description>
       <pubDate>${new Date(entry.date).toUTCString()}</pubDate>
-      <guid isPermaLink="true">${entry.url}</guid>
+      <guid isPermaLink="true">${entry.url}</guid>${entry.category ? `\n      <category>${escapeXml(entry.category)}</category>` : ""}
+      <content:encoded><![CDATA[<p>${escapeXml(entry.description)}</p><p><a href="${entry.url}">Devamini oku</a></p>]]></content:encoded>
     </item>`
     )
     .join("");

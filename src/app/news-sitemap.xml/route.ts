@@ -17,7 +17,8 @@ export async function GET() {
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${recentNews.length === 0
   ? `  <url>
     <loc>${SITE.url}/haberler</loc>
@@ -34,6 +35,10 @@ ${recentNews.length === 0
       <news:publication_date>${new Date(h.date).toISOString()}</news:publication_date>
       <news:title>${escapeXml(h.title)}</news:title>
     </news:news>
+    <image:image>
+      <image:loc>${SITE.url}/api/og?title=${encodeURIComponent(h.title)}</image:loc>
+      <image:title>${escapeXml(h.title)}</image:title>
+    </image:image>
   </url>`
   )
   .join("\n")}

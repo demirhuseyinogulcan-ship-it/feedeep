@@ -57,7 +57,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
-    // X/Twitter hesabı aktif değil — site ve creator belirtilmiyor
+    site: "@airehbercom",
+    creator: "@airehbercom",
   },
   robots: {
     index: true,
