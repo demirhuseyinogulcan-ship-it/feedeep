@@ -1,0 +1,2 @@
+// AI Rehber — Test Setup
+import "@testing-library/jest-dom/vitest";

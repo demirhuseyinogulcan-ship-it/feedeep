@@ -7,6 +7,10 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "new:yazi": "node scripts/new-content.mjs yazi",
     "new:haber": "node scripts/new-content.mjs haber",
     "new:prompt": "node scripts/new-content.mjs prompt",
@@ -14,7 +18,14 @@
     "validate": "node scripts/validate-content.mjs",
     "submit-indexing": "node scripts/submit-indexing.mjs",
     "update-llms": "node scripts/update-llms.mjs",
-    "prebuild": "node scripts/validate-content.mjs && node scripts/update-llms.mjs"
+    "prebuild": "node scripts/validate-content.mjs && node scripts/update-llms.mjs",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "vitest related --run"
+    ]
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
@@ -41,13 +52,20 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5.1.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
+    "lint-staged": "^16.3.2",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.18"
   }
 }

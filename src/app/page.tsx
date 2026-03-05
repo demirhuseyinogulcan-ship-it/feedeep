@@ -10,7 +10,13 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { websiteJsonLd, faqJsonLd, generateMeta } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { SITE, YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
-import { yazilar, haberler, promptlar, haftalik, rehberler } from "#site/content";
+import {
+  getHeroItem,
+  getRecentPosts,
+  getLatestNews,
+  getExploreSections,
+  AI_REHBER_FAQ,
+} from "@/lib/homepage";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
 import { NewsTicker } from "@/components/shared/the-signal";
@@ -23,134 +29,11 @@ export const metadata: Metadata = generateMeta({
   canonicalPath: "/",
 });
 
-// ─── Velite verilerini hazırla ───
-
-const publishedYazilar = yazilar
-  .filter((y) => y.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-const publishedHaberler = haberler
-  .filter((h) => h.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-// Hero: Siteye en son eklenen içerik (yazı veya haber — hangisi daha yeniyse)
-type HeroItem = {
-  title: string;
-  description: string;
-  slug: string;
-  date: string;
-  category: string;
-  href: string;
-  type: "yazi" | "haber";
-  readingTime: number;
-  editorPick: boolean;
-  editorNote?: string;
-};
-
-function getHeroItem(): HeroItem | null {
-  const candidates: HeroItem[] = [];
-
-  // Tüm yayınlanmış içerikleri topla
-  for (const y of publishedYazilar) {
-    candidates.push({
-      title: y.title,
-      description: y.description,
-      slug: y.slug,
-      date: y.date,
-      category: y.category,
-      href: `/yazilar/${y.slug}`,
-      type: "yazi",
-      readingTime: y.metadata.readingTime,
-      editorPick: y.editorPick,
-      editorNote: y.editorNote,
-    });
-  }
-
-  for (const h of publishedHaberler) {
-    candidates.push({
-      title: h.title,
-      description: h.description,
-      slug: h.slug,
-      date: h.date,
-      category: h.category,
-      href: `/haberler/${h.slug}`,
-      type: "haber",
-      readingTime: h.metadata.readingTime,
-      editorPick: h.editorPick,
-      editorNote: h.editorNote,
-    });
-  }
-
-  if (candidates.length === 0) return null;
-
-  // Editörün seçimi varsa onu tercih et, yoksa en yeni tarihe sahip olanı seç
-  const editorPick = candidates.find((c) => c.editorPick);
-  if (editorPick) return editorPick;
-
-  candidates.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  return candidates[0];
-}
-
+// ─── Veri hazırlığı ───
 const heroItem = getHeroItem();
-
-// ─── FAQ — SEO Rich Snippet + Kullanıcı bilgilendirme ───
-const AI_REHBER_FAQ = [
-  {
-    question: "AI Rehber nedir?",
-    answer:
-      "AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve kullanıma hazır prompt şablonlarını Türkçe olarak sunan bağımsız bir yayın platformudur.",
-  },
-  {
-    question: "Yapay zeka haberleri nereden takip edilir?",
-    answer:
-      "AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar. Haftalık brifing ile önemli gelişmeleri kaçırmazsınız.",
-  },
-  {
-    question: "AI Rehber'deki haberler güvenilir mi?",
-    answer:
-      "Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.",
-  },
-  {
-    question: "Prompt kütüphanesi nasıl kullanılır?",
-    answer:
-      "Prompt Kütüphanesi'ndeki şablonları doğrudan ChatGPT, Claude veya Gemini'ye kopyalayabilirsiniz. Her prompt, model bazlı performans skorları ve örnek çıktılarla birlikte sunulur.",
-  },
-];
-
-// Son Yazılar — hero'da yazı varsa aynı slug'ı çıkar, en güncel 3'ü göster
-const recentPosts = publishedYazilar
-  .filter((post) => !(heroItem?.type === "yazi" && post.slug === heroItem.slug))
-  .slice(0, 3);
-
-// Son Haberler — hero'da haber varsa aynı slug'ı çıkar, en güncel 5'i göster
-const latestNews = publishedHaberler
-  .filter((news) => !(heroItem?.type === "haber" && news.slug === heroItem.slug))
-  .slice(0, 5);
-
-const latestBrifing = haftalik
-  .filter((h) => h.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
-
-const EXPLORE_SECTIONS = [
-  {
-    title: "Programlama Rehberleri",
-    description: "Sıfırdan ileri seviyeye, interaktif derslerle programlama öğrenin",
-    href: "/programlama",
-    count: `${new Set(rehberler.filter((r) => r.published).map((r) => r.guide)).size || "Yeni"}`,
-  },
-  {
-    title: "Prompt Kütüphanesi",
-    description: "Kullanıma hazır, model bazlı skorlanmış prompt şablonları",
-    href: "/prompt-kutuphanesi",
-    count: `${promptlar.filter((p) => p.published).length}+`,
-  },
-  {
-    title: "Haftalık Brifing",
-    description: "Her hafta AI dünyasının en önemli 3 gelişmesi",
-    href: "/haftalik",
-    count: latestBrifing ? `W${String(latestBrifing.weekNumber).padStart(2, "0")}` : "—",
-  },
-] as const;
+const recentPosts = getRecentPosts(heroItem);
+const latestNews = getLatestNews(heroItem);
+const exploreSections = getExploreSections();
 
 export default function HomePage() {
   const heroCategory = heroItem
@@ -403,7 +286,7 @@ export default function HomePage() {
 
         {/* Mobile: vertical stack, Desktop: rows */}
         <div className="sm:hidden space-y-5">
-          {EXPLORE_SECTIONS.map((section, i) => (
+          {exploreSections.map((section, i) => (
             <Link
               key={section.href}
               href={section.href}
@@ -424,7 +307,7 @@ export default function HomePage() {
         </div>
 
         <div className="hidden sm:block space-y-0">
-          {EXPLORE_SECTIONS.map((section, i) => (
+          {exploreSections.map((section, i) => (
             <Link
               key={section.href}
               href={section.href}
