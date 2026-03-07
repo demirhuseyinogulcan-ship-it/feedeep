@@ -7,7 +7,7 @@
 
 import { useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, XCircle, RotateCcw, ChevronRight } from "lucide-react";
+import { CheckCircle2, XCircle, RotateCcw } from "lucide-react";
 
 type QuizOption = {
   text: string;

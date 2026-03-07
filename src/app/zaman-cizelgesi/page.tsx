@@ -6,7 +6,6 @@
 import type { Metadata } from "next";
 import { haberler } from "#site/content";
 import { generateMeta, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo";
-import { SITE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";

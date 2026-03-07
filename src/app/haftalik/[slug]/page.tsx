@@ -7,7 +7,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { haftalik } from "#site/content";
 import { generateMeta, breadcrumbJsonLd, articleJsonLd } from "@/lib/seo";
-import { SITE } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumb } from "@/components/shared/breadcrumb";

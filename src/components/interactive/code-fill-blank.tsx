@@ -42,7 +42,6 @@ export function CodeFillBlank({
 }: CodeFillBlankProps) {
   const [selected, setSelected] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [attempts, setAttempts] = useState(0);
 
   const correctIndex = options.findIndex((o) => o.correct);
   const isCorrect = selected === correctIndex;
@@ -59,9 +58,6 @@ export function CodeFillBlank({
   const handleRun = useCallback(() => {
     if (selected === null) return;
     setSubmitted(true);
-    if (selected !== correctIndex) {
-      setAttempts((a) => a + 1);
-    }
   }, [selected, correctIndex]);
 
   const handleRetry = useCallback(() => {

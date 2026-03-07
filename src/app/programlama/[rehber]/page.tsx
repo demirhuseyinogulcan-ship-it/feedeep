@@ -8,7 +8,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { rehberler } from "#site/content";
 import { generateMeta, breadcrumbJsonLd, courseJsonLd } from "@/lib/seo";
-import { GUIDE_TECHNOLOGIES, SITE } from "@/lib/constants";
+import { GUIDE_TECHNOLOGIES } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { CheckCircle2, Lock, Clock, GraduationCap, BookOpen } from "lucide-react";

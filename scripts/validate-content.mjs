@@ -46,6 +46,7 @@ function warn(file, msg) {
   totalWarnings++;
 }
 
+// eslint-disable-next-line no-unused-vars
 function ok(msg) {
   console.log(`  ✅ ${msg}`);
 }
@@ -163,6 +164,7 @@ function validatePrompt(file, data) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function validateKart(file, data) {
   checkRequired(file, data, "title");
   checkRequired(file, data, "slug");

@@ -32,6 +32,9 @@ jobs:
       - name: Content validation
         run: npm run validate
 
+      - name: Build content (Velite)
+        run: npx velite build
+
       - name: Lint
         run: npm run lint
 

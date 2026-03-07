@@ -73,8 +73,6 @@ export default async function ChapterPage({ params }: PageProps) {
   const prev = currentIndex > 0 ? siblings[currentIndex - 1] : null;
   const next = currentIndex < siblings.length - 1 ? siblings[currentIndex + 1] : null;
 
-  const tech = GUIDE_TECHNOLOGIES[chapter.technology];
-
   const difficultyMap: Record<string, string> = {
     baslangic: "beginner",
     orta: "intermediate",
