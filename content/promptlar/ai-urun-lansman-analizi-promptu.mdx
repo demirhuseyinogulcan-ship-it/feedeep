@@ -1,0 +1,118 @@
+---
+title: "AI Urun Lansman Analizi Promptu"
+slug: ai-urun-lansman-analizi-promptu
+description: "Yeni AI urun lansmanlarini benchmark verisi, fiyatlandirma ve rekabet dinamikleriyle sistematik analiz eden prompt. Karar vericiler icin."
+date: 2026-03-07
+category: analiz
+difficulty: ileri
+targetRole: "CTO / Urun Yoneticisi / AI Muhendisi"
+prompt: |
+  Sen kurumsal AI stratejisti ve teknik analistsin. Gartner, Forrester ve bagimsiz benchmark raporlarini takip ediyorsun. Amacin yeni bir AI urun lansmanini karar vericiler icin sistematik olarak degerlendirmek.
+
+  Urun/Model Adi: [URUN_ADI]
+  Saglayici: [SAGLAYICI]
+  Lansman Tarihi: [LANSMAN_TARIHI]
+  Bilinen Benchmark Sonuclari: [BENCHMARKLAR]
+  Fiyatlandirma: [FIYATLANDIRMA]
+  Mevcut Rakipler: [RAKIPLER]
+
+  Su 4 asamali analizi uygula:
+
+  **ASAMA 1 — TEKNiK ANALIZ**
+  - Saglayicinin duyurdugu benchmark sonuclarini listele
+  - Her benchmark icin neyi olctugunu tek cumleyle acikla
+  - Saglayicinin secici benchmark raporlamasi yapip yapmadigini degerlendir
+  - Gercekten yeni olan teknik yetenekleri, pazarlama dilinden ayiklayarak belirle
+
+  **ASAMA 2 — FIYAT-PERFORMANS MATRiSi**
+  Urun ve en yakin 3-5 rakibini tablo formatinda karsilastir:
+  | Model | Input/1M token | Output/1M token | Onemli Benchmark | Benzersiz Ozellik |
+  Her satir icin fiyat-performans oranini degerlender (dusuk/orta/yuksek)
+
+  **ASAMA 3 — KURUMSAL ETKi DEGERLENDiRMESi**
+  - Hangi is birimleri dogrudan etkilenir?
+  - Mevcut is akislarinda ne degisir?
+  - Gecis maliyeti ve entegrasyon eforu nedir?
+  - 6 aylik zaman diliminde beklenen ROI tahmini
+  - Risk faktorleri (vendor lock-in, API degisiklikleri, uyum gereksinimleri)
+
+  **ASAMA 4 — EYLEM PLANI**
+  - Simdi: ilk 2 hafta icinde yapilmasi gereken test/PoC
+  - Kisa vade: 1-3 ay icinde degerlendirme
+  - Orta vade: 3-6 ay icinde uretim karari
+  Her adim icin somut eylem, sorumlu birim ve basari metrigi belirt.
+
+  Onemli: Pazarlama vaatlerini bagimsiz dogrulama olmadan tekrarlama. Saglayici iddialarini "saglayiciya gore" etiketiyle isaretle.
+models:
+  - name: Claude Opus 4.6
+    score: 9
+    note: "Benchmark dogrulamasi ve secici raporlama tespitinde cok basarili"
+  - name: GPT-5.4
+    score: 9
+    note: "Fiyat-performans matrisi ve tablo formatlama kalitesi yuksek"
+  - name: Gemini 3 Pro
+    score: 8
+    note: "Teknik analiz iyi ama eylem plani asamasinda genellemeler yapiyor"
+variables:
+  - name: URUN_ADI
+    description: "Analiz edilecek AI urun veya model adi"
+    example: "GPT-5.4"
+  - name: SAGLAYICI
+    description: "Urunu yayinlayan sirket"
+    example: "OpenAI"
+  - name: LANSMAN_TARIHI
+    description: "Urunun duyuruldugu tarih"
+    example: "5 Mart 2026"
+  - name: BENCHMARKLAR
+    description: "Saglayicinin paylastigi benchmark sonuclari"
+    example: "OSWorld-Verified %75.0, BrowseComp %89.3, GDPval %83.0"
+  - name: FIYATLANDIRMA
+    description: "API veya abonelik fiyatlandirmasi"
+    example: "1M input token $2.50, 1M output token $15"
+  - name: RAKIPLER
+    description: "Karsilastirilacak alternatif modeller veya urunler"
+    example: "Claude Opus 4.6, Gemini 3 Pro, GPT-5.2"
+commonMistakes:
+  - "Benchmark sonuclarini saglayicidan aldigi gibi kabul etmek — bagimsiz dogrulama olmadan her iddia 'saglayiciya gore' etiketli olmali"
+  - "Yalnizca teknik ozelliklere odaklanmak — kurumsal etki ve gecis maliyeti genellikle teknik ustunlukten daha belirleyici"
+  - "Rakip listesini dar tutmak — acik kaynak alternatifleri ve ozel cozumleri de dahil edin"
+keywords:
+  - ai urun analizi promptu
+  - llm karsilastirma framework
+  - kurumsal ai degerlendirme
+  - model benchmark analizi
+  - ai fiyat performans karsilastirma
+published: true
+---
+
+## Bu Prompt Ne Ise Yarar?
+
+Her hafta yeni bir AI modeli veya urun lansmani geliyor. Her biri "en yetenekli", "en hizli" veya "en verimli" oldugunu iddia ediyor. Bu prompt, pazarlama dilinin ardindaki gercek degeri cikarmaniza yardiyor.
+
+Cogu karar verici benchmark sonuclarini saglayicinin sundugu haliyle kabul ediyor. Ancak sirketler genellikle yalnizca iyi ciktiklari testleri one cikariyorlar. Bu prompt, neyin olculup neyin olculmedini sistematik olarak sorguluyor.
+
+## Nasil Kullanilir?
+
+1. Lansman blog yazisini ve teknik dokumantasyonu acan bir sekme birrakiin
+2. Tum bilinen benchmark sonuclarini `[BENCHMARKLAR]` alanina kopyalayin
+3. Rakipler icin en az 3-4 alternatif belirleyin, acik kaynak seceneklerini eklemeyi unutmayin
+4. Ciktiyi ekibinizle paylasirken Asama 4'teki eylem planini onceligin belirlenmesi icin kullanin
+
+## Ornek Cikti
+
+**Urun:** GPT-5.4 | **Saglayici:** OpenAI
+
+**Asama 1'den bir kesit:**
+
+> **OSWorld-Verified (%75.0):** Masaustu navigasyonunu ekran goruntusu + fare/klavye ile olcer. Saglayiciya gore insan performansi %72.4. Dikkat: bu sinirrli bir test ortami, gercek masaustu karmasikligini tam yansitmiyor olabilir.
+>
+> **Token verimliligi (%47 azalma):** Bu rakam yalnizca 36 MCP sunucusuyla Scale MCP Atlas benchmark'inda Tool Search yapilanmasiyla elde edildi. Genel kullanim icin dogrudan uygulanabilir degil.
+
+Bu tur nüansslar, ham benchmark rakamlarinin vermediig baglami sagliyor.
+
+## Ipuclari
+
+- Saglayici blog yazilarinda "benchmark X'te yuzde Y iyilestirme" gordugünüzde hemen sorun: iyilestirme neye gore? Onceki model mi, rakip mi, insan mi?
+- Fiyat-performans matrisini her ceyrektte guncelleyin; fiyatlar ve modeller hizla degisiyor
+- Asama 3'teki ROI tahminini iic paydaslarla paylasmadan once finans ekibinin dogrulamasini isteyin
+- Bu prompt'u her buyuk lansmanda calistirin ve sonuclari bir dahili bilgi tabaninda biriktirin

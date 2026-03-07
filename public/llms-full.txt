@@ -58,11 +58,11 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
 
 ## İstatistikler
 
-- Toplam haber: 64
+- Toplam haber: 72
 - Toplam yazı: 10
-- Toplam prompt: 8
-- Toplam haftalık brifing: 2
-- Toplam rehber bölümü: 2
+- Toplam prompt: 9
+- Toplam haftalık brifing: 4
+- Toplam rehber bölümü: 3
 
 ## Tüm İçerik Listesi
 
@@ -108,6 +108,38 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
 ### Haberler
+- [Anthropic Claude Marketplace: Kurumsal AI Uygulama Magazasi](https://airehber.com/haberler/anthropic-claude-marketplace-kurumsal-ai-uygulama-magazasi)
+  Kaynak: Anthropic | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic, isletmelerin mevcut harcamalarini Replit, GitLab, Harvey ve Snowflake gibi Claude tabanli araclara yonlendirebilecegi Claude Marketplace'i duyurdu.
+
+- [Claude Opus 4.6, Firefox'ta 22 Guvenlik Acigi Buldu](https://airehber.com/haberler/claude-opus-firefox-22-guvenlik-acigi)
+  Kaynak: Anthropic | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic'in Claude Opus 4.6 modeli, Mozilla is birligiyle iki hafta icinde Firefox'ta 22 guvenlik acigi tespit etti. Bunlarin 14'u yuksek oncelikli.
+
+- [MIT'den Attention Matching: LLM Bellegini 50 Kat Sikistiriyor](https://airehber.com/haberler/mit-attention-matching-llm-bellek-50-kat-sikistirma)
+  Kaynak: arXiv | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  MIT arastirmacilari, buyuk dil modellerinin KV cache bellegini dogruluk kaybetmeden 50 kat sikistiran Attention Matching tekniigini gelistirdi.
+
+- [OpenAI GPT-5.4: Bilgisayar Kullanimi ve Finansal Eklentiler](https://airehber.com/haberler/openai-gpt-5-4-bilgisayar-kullanimi-finansal-eklentiler)
+  Kaynak: OpenAI | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI, GPT-5.4 modelini bilgisayar kullanim modu, Excel ve Google Sheets entegrasyonu ve yuzde 47 daha az token tuketimi ile piyasaya surdu.
+
+- [Self-Flow: Multimodal AI Egitimi 2.8 Kat Daha Verimli](https://airehber.com/haberler/black-forest-labs-self-flow-multimodal-egitim-verimliligi)
+  Kaynak: VentureBeat | Tarih: Thu Mar 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Black Forest Labs'in Self-Flow teknigi, multimodal AI modellerinin egitim verimliligini 2.8 kat artiriyor. Kurumsal ozel model gelistirme kolaylasiyor.
+
+- [Dario Amodei: OpenAI'in Pentagon Aciklamalari 'Duz Yalan'](https://airehber.com/haberler/dario-amodei-openai-pentagon-duz-yalan)
+  Kaynak: TechCrunch | Tarih: Thu Mar 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic CEO Dario Amodei, OpenAI'in Pentagon anlasmasindaki guvenlik taahhutlerini 'duz yalan' ve 'guvenlik tiyatrosu' olarak nitelendirdi.
+
+- [Decagon 4.5 Milyar Dolara Ulasti: AI Destek Patlamasi](https://airehber.com/haberler/decagon-4-5-milyar-dolar-degerleme-ai-musteri-destek)
+  Kaynak: TechCrunch | Tarih: Thu Mar 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  AI musteri destek girisimi Decagon, 4.5 milyar dolar degerleme ile ilk tender offer'ini tamamladi. 3 yilda 300'den fazla calisana likidite sunuyor.
+
+- [Jensen Huang: NVIDIA, OpenAI ve Anthropic'e Yatirimi Durdurabilir](https://airehber.com/haberler/nvidia-openai-anthropic-yatirim-geri-cekilme)
+  Kaynak: TechCrunch | Tarih: Thu Mar 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  NVIDIA CEO Jensen Huang, OpenAI ve Anthropic'e yapilan yatirimlarin muhtemelen sonuncusu oldugunu acikladi. IPO sureci ve cip bagimliligi denklemi karisiyor.
+
 - [Baba Google'a Dava Açtı: Gemini Oğlumu Öldürdü](https://airehber.com/haberler/google-gemini-chatbot-dava-olumcul-sanri)
   Kaynak: TechCrunch | Tarih: Wed Mar 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Bir baba, Google'ın Gemini chatbotunun oğlunu ölümcül sanrıya sürüklediğini iddia ederek dava açtı. AI psikozunun en ağır vakaları arasında gösteriliyor.
@@ -365,6 +397,10 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
 ### Prompt Kütüphanesi
+- [AI Urun Lansman Analizi Promptu](https://airehber.com/prompt-kutuphanesi/ai-urun-lansman-analizi-promptu)
+  Kategori: analiz | Zorluk: ileri
+  Yeni AI urun lansmanlarini benchmark verisi, fiyatlandirma ve rekabet dinamikleriyle sistematik analiz eden prompt. Karar vericiler icin.
+
 - [AI Yazısını İnsanlaştırma Promptu](https://airehber.com/prompt-kutuphanesi/ai-yazilarini-insanlastirma-promptu)
   Kategori: icerik-uretim | Zorluk: orta
   ChatGPT veya Claude çıktısını robot kokusundan arındırıp doğal, samimi, okunabilir Türkçe yazıya dönüştüren prompt. 7 adımlı düzenleme süreci.
@@ -398,6 +434,14 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   Şirket adını gir, 4 kategoride 20+ maddelik SWOT raporu al. Claude, GPT-5 ve Gemini'de test edildi.
 
 ### Haftalık Brifing
+- [Haftalık AI Brifing #10](https://airehber.com/haftalik/2026-w10)
+  Hafta: 10 | Yıl: 2026
+  1-7 Mart 2026 haftasının öne çıkan AI gelişmeleri: ChatGPT 900 milyon kullanıcı, Cursor 2 milyar dolar gelir ve Gemini chatbot davası.
+
+- [Haftalık AI Brifing #9](https://airehber.com/haftalik/2026-w09)
+  Hafta: 9 | Yıl: 2026
+  22-28 Şubat haftasının öne çıkan AI gelişmeleri: Meta-AMD 100 milyar dolarlık çip anlaşması, Anthropic distilasyon suçlaması ve Jira AI ajanları.
+
 - [Haftalık AI Brifing #8](https://airehber.com/haftalik/2026-w08)
   Hafta: 8 | Yıl: 2026
   15-21 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri: Claude Sonnet 4.6, Google AI Modu Türkiye ve OpenAI'ın tarihi yatırım turu.
@@ -409,13 +453,18 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
 ### Programlama Rehberleri
 
 **bolum-1-giris**
-- [Next.js Nedir? Giriş ve Kurulum Rehberi](https://airehber.com/programlama/bolum-1-giris)
-  Next.js framework'ünü tanıyoruz, geliştirme ortamını birlikte kuruyoruz ve ilk projemizi çalıştırıyoruz. Sıfırdan adım adım.
+- [Next.js Nedir? Sıfırdan Kurulum ve İlk Proje Rehberi [2026]](https://airehber.com/programlama/bolum-1-giris)
+  Next.js nedir, neden kullanılır? Node.js kurulumu, create-next-app ile ilk proje oluşturma ve geliştirme sunucusu başlatma. Sıfırdan adım adım Türkçe rehber.
 
 
 **bolum-2-proje-yapisi**
-- [Next.js Proje Yapısı ve Dosya Düzeni Rehberi](https://airehber.com/programlama/bolum-2-proje-yapisi)
-  Next.js projesindeki her dosya ve klasörü tek tek inceliyoruz. Hangisine dokunacaksın, hangisini rahat bırakacaksın?
+- [Next.js Proje Yapısı: Dosya Düzeni, App Router ve Layout Sistemi [2026]](https://airehber.com/programlama/bolum-2-proje-yapisi)
+  Next.js projesindeki tüm dosya ve klasörleri öğren. package.json, app/ klasörü, layout.tsx, page.tsx ve App Router yapısını adım adım inceliyoruz.
+
+
+**bolum-3-routing**
+- [Next.js Routing: Sayfa Yönlendirme ve Dinamik Route Rehberi [2026]](https://airehber.com/programlama/bolum-3-routing)
+  Next.js App Router ile dosya tabanlı routing, dinamik route'lar, nested layout'lar, route grupları ve Link bileşenini sıfırdan öğren. Türkçe adım adım rehber.
 
 ## Sıkça Sorulan Sorular
 
