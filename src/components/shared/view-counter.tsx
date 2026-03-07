@@ -4,7 +4,7 @@
 // Başlangıç sayısı yayın tarihine göre hesaplanır.
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface ViewCounterProps {
   slug: string;
@@ -32,17 +32,15 @@ function formatCount(n: number): string {
 }
 
 export function ViewCounter({ slug, publishDate, type = "yazi" }: ViewCounterProps) {
-  const [views, setViews] = useState<number | null>(null);
+  const [views] = useState<number | null>(() => {
+    if (typeof window === "undefined") return null;
 
-  useEffect(() => {
     const storageKey = `views:${type}:${slug}`;
     const visitedKey = `visited:${type}:${slug}`;
 
-    // Mevcut sayıyı al veya base hesapla
     const stored = localStorage.getItem(storageKey);
     let current = stored ? parseInt(stored, 10) : getBaseViews(publishDate);
 
-    // Bu oturumda ilk ziyaretse +1
     const visited = sessionStorage.getItem(visitedKey);
     if (!visited) {
       current += 1;
@@ -50,8 +48,8 @@ export function ViewCounter({ slug, publishDate, type = "yazi" }: ViewCounterPro
     }
 
     localStorage.setItem(storageKey, String(current));
-    setViews(current);
-  }, [slug, publishDate, type]);
+    return current;
+  });
 
   if (views === null) return null;
 

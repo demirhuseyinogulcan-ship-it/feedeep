@@ -5,10 +5,10 @@
 
 import * as runtime from "react/jsx-runtime";
 
-const useMDXComponent = (code: string) => {
+function getMDXComponent(code: string) {
   const fn = new Function(code);
   return fn({ ...runtime }).default;
-};
+}
 
 interface MDXContentProps {
   code: string;
@@ -17,10 +17,10 @@ interface MDXContentProps {
 }
 
 export function MDXContent({ code, components = {} }: MDXContentProps) {
-  const Component = useMDXComponent(code);
+  const Component = getMDXComponent(code);
   return (
     <div className="prose">
-      <Component components={components} />
+      {Component({ components })}
     </div>
   );
 }

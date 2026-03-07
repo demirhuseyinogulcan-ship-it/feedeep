@@ -115,7 +115,7 @@ async function registerPeriodicSync() {
       });
 
       if (status.state === "granted") {
-        // @ts-expect-error
+        // @ts-expect-error — periodicSync register henuz standart TS tiplerinde yok
         await registration.periodicSync.register("content-check", {
           minInterval: 12 * 60 * 60 * 1000, // 12 saat
         });

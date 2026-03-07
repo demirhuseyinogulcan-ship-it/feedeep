@@ -17,7 +17,10 @@ export function PwaInstallBanner() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showBanner, setShowBanner] = useState(false);
-  const [isIos, setIsIos] = useState(false);
+  const [isIos] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return /iPad|iPhone|iPod/.test(window.navigator.userAgent);
+  });
 
   useEffect(() => {
     // Service Worker'ı kaydet (PWA install prompt için şart)
@@ -27,9 +30,6 @@ export function PwaInstallBanner() {
       });
     }
 
-    // iOS kontrolü (Safari'de beforeinstallprompt yok)
-    const ua = window.navigator.userAgent;
-    const isIosDevice = /iPad|iPhone|iPod/.test(ua);
     const isStandalone =
       "standalone" in window.navigator &&
       (window.navigator as unknown as { standalone: boolean }).standalone;
@@ -45,8 +45,7 @@ export function PwaInstallBanner() {
       return;
     }
 
-    if (isIosDevice) {
-      setIsIos(true);
+    if (isIos) {
       // iOS'ta 1.5 saniye sonra göster
       const timer = setTimeout(() => setShowBanner(true), 1500);
       return () => clearTimeout(timer);
