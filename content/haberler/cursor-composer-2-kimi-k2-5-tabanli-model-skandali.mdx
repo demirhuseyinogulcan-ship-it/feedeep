@@ -1,0 +1,46 @@
+---
+title: "Cursor'ın Sırrı Ortaya Çıktı: Composer 2 Aslında Kimi Tabanlı"
+slug: cursor-composer-2-kimi-k2-5-tabanli-model-skandali
+description: "Cursor, Composer 2 modelinin Moonshot AI'ın Kimi K2.5 tabanlı olduğunu itiraf etti. Bir geliştirici API trafiğinde model ID'sini yakaladı."
+date: 2026-03-22
+sourceUrl: "https://techcrunch.com/2026/03/22/cursor-admits-its-new-coding-model-was-built-on-top-of-moonshot-ais-kimi/"
+sourceName: "TechCrunch"
+category: sirketler
+keywords:
+  - cursor composer 2 kimi k2.5
+  - cursor moonshot ai model skandalı
+  - kimi k2.5 kodlama modeli cursor
+  - batı açık model açığı sorunu
+  - cursor 29 milyar dolar değerleme
+  - yapay zeka haberleri
+sources:
+  - url: "https://techcrunch.com/2026/03/22/cursor-admits-its-new-coding-model-was-built-on-top-of-moonshot-ais-kimi/"
+    label: "TechCrunch"
+    tier: 2
+  - url: "https://venturebeat.com/ai/cursor-built-composer-2-on-chinese-model-now-the-ai-coding-world-is-asking-who-else-is/"
+    label: "VentureBeat"
+    tier: 2
+confidence: high
+socialSnippet: "Cursor Composer 2'nin arkasında Çin'den Moonshot AI'ın Kimi K2.5 modeli çıktı. Geliştirici API trafiğinde kimi-k2p5-rl-0317 ID'sini yakaladı. X'te 2.6M görüntülenme. Cursor itiraf etti."
+published: true
+---
+
+**29.3 milyar dolar** değerlemeyle AI kodlama dünyasının en parlak isimlerinden biri olan Cursor, geçtiğimiz günlerde **Composer 2**'yi "frontier-level coding intelligence" olarak duyurdu. Ancak bir geliştirici, herkesin gözünden kaçan bir detayı yakaladı.
+
+Fynn adlı geliştirici, Composer 2'nin API trafiğini incelediğinde model tanımlayıcısında `kimi-k2p5-rl-0317-s515-fast` ifadesini gördü. Bu, Çin merkezli **Moonshot AI**'ın açık ağırlıklı modeli **Kimi K2.5**'e işaret ediyordu. Paylaşım X'te **2.6 milyon** görüntülenmeye ulaştı ve geliştirici camiasında ciddi bir güven tartışması başlattı.
+
+## Cursor ne dedi?
+
+Şirketin kurucu ortağı Aman Sanger kısa sürede yanıt verdi: *"Kimi tabanını belirtmemek bir hataydı."* Açıklamaya göre Composer 2'nin sadece **dörtte biri** Kimi K2.5'in temel ağırlıklarından geliyor. Geri kalan **dörtte üçü** Cursor'ın kendi eğitim verileri, fine-tuning süreci ve özelleştirmeleriyle oluşturulmuş.
+
+Teknik detaylar da ortaya çıktı. Kimi K2.5, **1 trilyon** parametreli bir Mixture-of-Experts modeli; 32 milyar parametresi aktif, 256K bağlam penceresi var. Cursor bu tabana self-summarization tekniği eklemiş: bağlam sıkıştırma hatalarını **yüzde 50** azaltıyor ve beşte bir token tüketiyor.
+
+Benchmark sonuçları tartışılmaz düzeyde güçlü. CursorBench'te Composer 2, **61.3** skoruyla Composer 1.5'in 44.2'sini ciddi farkla geçiyor. Terminal-Bench 2.0'da **61.7**, SWE-bench Multilingual'da **73.7** skora ulaşıyor.
+
+## Batı'nın açık model açığı
+
+Olayın teknik boyutunun ötesinde daha geniş bir tablo var. Cursor gibi 29 milyar dolarlık bir Batılı şirketin neden Çin'den bir taban model kullandığı sorusu, sektördeki yapısal bir sorunu gün yüzüne çıkarıyor.
+
+Meta'nın Llama 4 Behemoth modeli belirsiz süreyle ertelendi. Google'ın Gemma 3 serisi 27 milyar parametrede tavana vurdu. OpenAI'ın gpt-oss-120b modeli kağıt üzerinde 120 milyar parametrelik görünse de sadece 5.1 milyar aktif parametreyle çalışıyor. Yani Batı'da kodlama için yeterince güçlü, açık ağırlıklı bir taban model bulmak giderek zorlaşıyor ve Çinli alternatifler bu boşluğu dolduruyor.
+
+Cursor'ın performans rakamları ortada ve kullanıcılar için sonuç değişmedi. Ancak şeffaflık tarafındaki bu gedik, özellikle kurumsal müşteriler için güven meselesini gündeme taşıdı. Hangi modeli kullandığınızı bilmek, artık "teknik bir detay" değil; tedarik zinciri güvenliği meselesi.

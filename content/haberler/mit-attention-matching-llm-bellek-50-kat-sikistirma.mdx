@@ -1,17 +1,17 @@
 ---
-title: "MIT'den Attention Matching: LLM Bellegini 50 Kat Sikistiriyor"
+title: "MIT'den Attention Matching: LLM Belleğini 50 Kat Sıkıştırıyor"
 slug: mit-attention-matching-llm-bellek-50-kat-sikistirma
-description: "MIT arastirmacilari, buyuk dil modellerinin KV cache bellegini dogruluk kaybetmeden 50 kat sikistiran Attention Matching tekniigini gelistirdi."
+description: "MIT araştırmacıları, büyük dil modellerinin KV cache belleğini doğruluk kaybetmeden 50 kat sıkıştıran Attention Matching tekniğini geliştirdi."
 date: 2026-03-07
 sourceUrl: "https://arxiv.org/abs/2602.16284"
 sourceName: "arXiv"
 category: arastirma
 keywords:
-  - attention matching kv cache sikistirma
+  - attention matching kv cache sıkıştırma
   - mit llm bellek optimizasyonu
-  - kv cache 50x sikistirma teknigi
-  - uzun baglam bellek sorunu cozumu
-  - acik kaynak llm bellek kompaksiyon
+  - kv cache 50x sıkıştırma tekniği
+  - uzun bağlam bellek sorunu çözümü
+  - açık kaynak llm bellek kompaksiyon
   - yapay zeka haberleri
 sources:
   - url: "https://arxiv.org/abs/2602.16284"
@@ -24,24 +24,24 @@ sources:
     label: "GitHub Repo"
     tier: 1
 confidence: high
-socialSnippet: "MIT'den yeni teknik: Attention Matching, LLM'lerin KV cache bellegini 50 kat sikistiriyor, dogruluk ayni kaliyor. Gradyan optimizasyonu yerine cebirsel cozum. Saniyeler icinde calisiyor."
+socialSnippet: "MIT'den yeni teknik: Attention Matching, LLM'lerin KV cache belleğini 50 kat sıkıştırıyor, doğruluk aynı kalıyor. Gradyan optimizasyonu yerine cebirsel çözüm. Saniyeler içinde çalışıyor."
 published: true
 ---
 
-Buyuk dil modellerinin en buyuk darbogazlarindan biri uzun baglamlarda hafizanin sismesi. Model her tokeni islediginde anahtar-deger ciftlerini KV cache'de depoluyor ve bu bellek konusma uzadikca gigabaytlarca buyuyebiliyor. **MIT** arastirmacilari bu soruna yeni bir cozum getirdi: **Attention Matching**.
+Büyük dil modellerinin en büyük darboğazlarından biri uzun bağlamlarda hafızanın şişmesi. Model her tokeni işlediğinde anahtar-değer çiftlerini KV cache'de depoluyor ve bu bellek konuşma uzadıkça gigabaytlarca büyüyebiliyor. **MIT** araştırmacıları bu soruna yeni bir çözüm getirdi: **Attention Matching**.
 
-Teknigin vaadi buyuk: KV cache'i **50 kat** sikistirmak, dogruluktan onemli olcude odun vermeden ve bunu saniyeler icinde yapmak.
+Tekniğin vaadi büyük: KV cache'i **50 kat** sıkıştırmak, doğruluktan önemli ölçüde ödün vermeden ve bunu saniyeler içinde yapmak.
 
-Mevcut yontemler ya yetersiz ya da cok yavas. Token atma ve birlestirme gibi yontemler hafif sikistirmada ise yariyor ama yuksek oranlarda hizla bozuluyor. Metin ozetleme ise bilgi kaybina yol aciyor; arastirmacilarin testlerinde yogun tibbi kayitlarda ozetleme yontemi ile modelin dogrulugu "baglam yok" seviyesine dustu. Daha once Cartridges yontemi yuksek sikistirma basarabiliyordu ama gradyan tabanli optimizasyonu tek bir baglam icin saatlerce GPU hesaplamasi gerektiriyordu.
+Mevcut yöntemler ya yetersiz ya da çok yavaş. Token atma ve birleştirme gibi yöntemler hafif sıkıştırmada işe yarıyor ama yüksek oranlarda hızla bozuluyor. Metin özetleme ise bilgi kaybına yol açıyor; araştırmacıların testlerinde yoğun tıbbi kayıtlarda özetleme yöntemi ile modelin doğruluğu "bağlam yok" seviyesine düştü. Daha önce Cartridges yöntemi yüksek sıkıştırma başarabiliyordu ama gradyan tabanlı optimizasyonu tek bir bağlam için saatlerce GPU hesaplaması gerektiriyordu.
 
-Attention Matching farkli bir yoldan gidiyor. Sikistirilan bellegin iki matematiksel ozelligi korumasi gerektigini tespit ettiler: dikkat ciktisi yani modelin bellekten cektigi gercek bilgi ve dikkat kutlesi yani her tokenin diger tokenlere gore agirlik. Bu iki ozellik korunursa sikistirilan bellek orjinaliyle ayni davranisi sergiliyor.
+Attention Matching farklı bir yoldan gidiyor. Sıkıştırılan belleğin iki matematiksel özelliği koruması gerektiğini tespit ettiler: dikkat çıktısı yani modelin bellekten çektiği gerçek bilgi ve dikkat kütlesi yani her tokenin diğer tokenlere göre ağırlığı. Bu iki özellik korunursa sıkıştırılan bellek orijinaliyle aynı davranışı sergiliyor.
 
-Referans sorgulari olusturularak sikistirilmis bellegin bu sorgulari dogru yanmitlayabilecegi dogrulaniyor. Ardindan korunacak anahtarlar en yuksek dikkat degerlertne gore seciliyor ve degerler siradan en kucuk kareler gibi cebirsel yontemlerle hesaplaniyor. Gradyan optimizasyonu tamamen devre disi.
+Referans sorguları oluşturularak sıkıştırılmış belleğin bu sorguları doğru yanıtlayabileceği doğrulanıyor. Ardından korunacak anahtarlar en yüksek dikkat değerlerine göre seçiliyor ve değerler sıradan en küçük kareler gibi cebirsel yöntemlerle hesaplanıyor. Gradyan optimizasyonu tamamen devre dışı.
 
-Sonuclar kayda deger. Llama 3.1 ve Qwen-3 modelleriyle yapilan testlerde QuALITY okuma anlama benchmark'inda **50x sikistirma** ile dogruluk korundu. Yogun tibbi kayitlar iceren LongHealth veri setinde yuksek sikistirma oranlarinda ozetlemeyi ciddi farkla gecti. AIME matematik testinde model bellegi doldugunda alti kez ust uste yuzde 50 sikistirildi ve sinirssiz bellekli modelle ayni performansi gosterdi.
+Sonuçlar kayda değer. Llama 3.1 ve Qwen-3 modelleriyle yapılan testlerde QuALITY okuma anlama benchmark'ında **50x sıkıştırma** ile doğruluk korundu. Yoğun tıbbi kayıtlar içeren LongHealth veri setinde yüksek sıkıştırma oranlarında özetlemeyi ciddi farkla geçti. AIME matematik testinde model belleği dolduğunda altı kez üst üste yüzde 50 sıkıştırıldı ve sınırsız bellekli modelle aynı performansı gösterdi.
 
-**200 kat** sikistirma bile mumkun. Metin ozeti uzerine Attention Matching uygulandiginda standart ozetlemenin dogruligunu koruyan ama cok daha kucuk bellek ayak izi olan bir sonuc elde ediliyor.
+**200 kat** sıkıştırma bile mümkün. Metin özeti üzerine Attention Matching uygulandığında standart özetlemenin doğruluğunu koruyan ama çok daha küçük bellek ayak izi olan bir sonuç elde ediliyor.
 
-Sinirlamalar var. Teknik acik agirlikli modeller gerektiriyor, kapali API'ler uzerinden uygulanamaz. Mevcut cikarsam motorlarina entegrasyon icin muhendislik calismasi gerekiyor. Ama arastirmacilar kodun acik kay kaynak olarak [GitHub'da](https://github.com/adamzweiger/compaction) yayinlandigini ve "buyuk arac cagrilari veya uzun belgeler islendiginde hemen kullanaibileceigini" belirtiyor.
+Sınırlamalar var. Teknik açık ağırlıklı modeller gerektiriyor, kapalı API'ler üzerinden uygulanamaz. Mevcut çıkarım motorlarına entegrasyon için mühendislik çalışması gerekiyor. Ama araştırmacılar kodun açık kaynak olarak [GitHub'da](https://github.com/adamzweiger/compaction) yayınlandığını ve "büyük araç çağrıları veya uzun belgeler işlendiğinde hemen kullanılabileceğini" belirtiyor.
 
-Kurumsal AI'in uzun belgeee analizi, cok oturumlu musteri diyaloglari ve otonom kodlama ajanlari gibi kullanimlari hizla yayiliyor. Bu kullaniv senaryolarinin hepsi dev KV cache gerektiriyor. Attention Matching, bu darbogazi cebirsel bir zarafetle cozmeye aday.
+Kurumsal AI'ın uzun belge analizi, çok oturumlu müşteri diyalogları ve otonom kodlama ajanları gibi kullanımları hızla yayılıyor. Bu kullanım senaryolarının hepsi dev KV cache gerektiriyor. Attention Matching, bu darboğazı cebirsel bir zarafetle çözmeye aday.
