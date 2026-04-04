@@ -58,7 +58,7 @@ export function CodeFillBlank({
   const handleRun = useCallback(() => {
     if (selected === null) return;
     setSubmitted(true);
-  }, [selected, correctIndex]);
+  }, [selected]);
 
   const handleRetry = useCallback(() => {
     setSelected(null);

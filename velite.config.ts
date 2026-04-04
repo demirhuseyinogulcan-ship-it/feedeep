@@ -158,7 +158,7 @@ const promptlar = defineCollection({
 
 // ─── Model/Araç Kartları ────────────────────────────────────
 
-const kartlar = defineCollection({
+const _kartlar = defineCollection({
   name: "Kart",
   pattern: "kartlar/**/*.mdx",
   schema: s.object({

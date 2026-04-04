@@ -10,7 +10,7 @@ type JsonLdProps = {
 
 export function JsonLd({ data }: JsonLdProps) {
   const jsonLd = Array.isArray(data)
-    ? { "@context": "https://schema.org", "@graph": data.map(({ "@context": _ctx, ...rest }) => rest) }
+    ? { "@context": "https://schema.org", "@graph": data.map(({ "@context": _, ...rest }) => rest) }
     : data;
 
   return (

@@ -89,8 +89,7 @@ export async function POST(request: NextRequest) {
     } else {
       // Geliştirme ortamı — Resend API Key yok
       if (process.env.NODE_ENV === "development") {
-        // eslint-disable-next-line no-console
-        console.log(`[Newsletter] Yeni abone (dev): ${email}`);
+          console.log(`[Newsletter] Yeni abone (dev): ${email}`);
       }
     }
 

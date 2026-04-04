@@ -61,7 +61,7 @@ export function PwaInstallBanner() {
 
     window.addEventListener("beforeinstallprompt", handler);
     return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
+  }, [isIos]);
 
   const handleInstall = async () => {
     if (deferredPrompt) {

@@ -39,13 +39,15 @@ export function generateMeta({
   section,
   tags,
 }: SEOParams): Metadata {
-  const url = `${SITE.url}${path}`;
   const canonical = canonicalUrl
     ? canonicalUrl.startsWith("http")
       ? canonicalUrl
       : `${SITE.url}${canonicalUrl}`
     : `${SITE.url}${canonicalPath ?? path}`;
-  const ogImage = image ?? `${SITE.url}/api/og?title=${encodeURIComponent(title)}`;
+  const ogParams = new URLSearchParams({ title });
+  if (section) ogParams.set("category", section);
+  if (publishedTime) ogParams.set("date", publishedTime.slice(0, 10));
+  const ogImage = image ?? `${SITE.url}/api/og?${ogParams.toString()}`;
 
   return {
     title,

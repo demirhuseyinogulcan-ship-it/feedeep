@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ─── Difficulty helpers ──────────────────────────────────────
 
-const difficultyConfig: Record<string, { label: string; cls: string }> = {
+const _difficultyConfig: Record<string, { label: string; cls: string }> = {
   baslangic: { label: "Başlangıç", cls: "bg-green-500/10 text-green-400 border-green-500/20" },
   orta: { label: "Orta", cls: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" },
   ileri: { label: "İleri", cls: "bg-red-500/10 text-red-400 border-red-500/20" },
