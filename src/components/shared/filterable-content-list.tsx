@@ -7,6 +7,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/utils";
 
@@ -19,6 +20,8 @@ export interface ContentItem {
   categoryLabel?: string;
   href: string;
   meta?: string; // Ek bilgi (kaynak adı, zorluk seviyesi vb.)
+  image?: string;
+  imageAlt?: string;
 }
 
 interface Category {
@@ -89,29 +92,44 @@ export function FilterableContentList({
             className="group block animate-fade-up"
             style={{ animationDelay: `${(i + 1) * 100}ms` }}
           >
-            <div className="flex items-center gap-3 mb-2">
-              {item.categoryLabel && (
-                <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
-                  {item.categoryLabel}
-                </span>
+            <div className={item.image ? "flex gap-5" : ""}>
+              {item.image && (
+                <div className="hidden sm:block shrink-0 w-32 h-20 relative rounded-lg overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.imageAlt ?? item.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="128px"
+                  />
+                </div>
               )}
-              {item.meta && (
-                <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
-                  {item.meta}
-                </span>
-              )}
-              <span className="text-[10px] text-gray-800">
-                {formatDate(item.date)}
-              </span>
+              <div className="min-w-0">
+                <div className="flex items-center gap-3 mb-2">
+                  {item.categoryLabel && (
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
+                      {item.categoryLabel}
+                    </span>
+                  )}
+                  {item.meta && (
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
+                      {item.meta}
+                    </span>
+                  )}
+                  <span className="text-[10px] text-gray-800">
+                    {formatDate(item.date)}
+                  </span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
+                  {item.title}
+                </h2>
+                {item.description && (
+                  <p className="mt-2 text-sm text-gray-600 max-w-lg leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+              </div>
             </div>
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
-              {item.title}
-            </h2>
-            {item.description && (
-              <p className="mt-2 text-sm text-gray-600 max-w-lg leading-relaxed">
-                {item.description}
-              </p>
-            )}
           </Link>
         ))}
       </div>

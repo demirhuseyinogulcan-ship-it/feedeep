@@ -38,8 +38,13 @@ const yazilar = defineCollection({
     category: s.enum(["rehber", "inceleme", "analiz", "karsilastirma"]),
     keywords: s.array(s.string()).max(6), // max 6: 1 primary + 4 secondary + 1 generic TR SEO
 
-    // SEO
+    // Görsel
     image: s.string().optional(),
+    imageAlt: s.string().optional(),
+    imageCredit: s.string().optional(),
+    blurDataURL: s.string().optional(),
+
+    // SEO
     canonical: s.string().url().optional(),
 
     // Güven Katmanı
@@ -80,6 +85,12 @@ const haberler = defineCollection({
     date: s.isodate(),
     updated: s.isodate().optional(),
     published: s.boolean().default(true),
+
+    // Görsel
+    image: s.string().optional(),
+    imageAlt: s.string().optional(),
+    imageCredit: s.string().optional(),
+    blurDataURL: s.string().optional(),
 
     // Haber spesifik
     sourceUrl: s.string().url(),
@@ -223,6 +234,12 @@ const haftalik = defineCollection({
     year: s.number(),
     date: s.isodate(),
     published: s.boolean().default(true),
+
+    // Görsel
+    image: s.string().optional(),
+    imageAlt: s.string().optional(),
+    imageCredit: s.string().optional(),
+    blurDataURL: s.string().optional(),
 
     // Editör seçimi — haftanın en önemli 3 gelişmesi
     highlights: s

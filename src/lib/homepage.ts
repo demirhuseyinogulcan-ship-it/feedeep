@@ -18,6 +18,10 @@ export type HeroItem = {
   readingTime: number;
   editorPick: boolean;
   editorNote?: string;
+  image?: string;
+  imageAlt?: string;
+  imageCredit?: string;
+  blurDataURL?: string;
 };
 
 export type ExploreSection = {
@@ -58,6 +62,10 @@ export function getHeroItem(): HeroItem | null {
       readingTime: y.metadata.readingTime,
       editorPick: y.editorPick,
       editorNote: y.editorNote,
+      image: y.image,
+      imageAlt: y.imageAlt,
+      imageCredit: y.imageCredit,
+      blurDataURL: y.blurDataURL,
     });
   }
 
@@ -73,6 +81,10 @@ export function getHeroItem(): HeroItem | null {
       readingTime: h.metadata.readingTime,
       editorPick: h.editorPick,
       editorNote: h.editorNote,
+      image: h.image,
+      imageAlt: h.imageAlt,
+      imageCredit: h.imageCredit,
+      blurDataURL: h.blurDataURL,
     });
   }
 

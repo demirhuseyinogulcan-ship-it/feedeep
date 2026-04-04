@@ -6,6 +6,7 @@
 
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { JsonLd } from "@/components/seo/json-ld";
 import { websiteJsonLd, faqJsonLd, generateMeta } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
@@ -119,6 +120,30 @@ export default function HomePage() {
               </p>
             )}
 
+            {/* Hero Görsel */}
+            {heroItem.image && (
+              <div className="mt-10 animate-fade-up delay-200">
+                <Link href={heroItem.href} className="group block">
+                  <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+                    <Image
+                      src={heroItem.image}
+                      alt={heroItem.imageAlt ?? heroItem.title}
+                      fill
+                      priority
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, 720px"
+                      {...(heroItem.blurDataURL ? { placeholder: "blur" as const, blurDataURL: heroItem.blurDataURL } : {})}
+                    />
+                  </div>
+                </Link>
+                {heroItem.imageCredit && (
+                  <p className="mt-2 text-[10px] text-gray-700 text-right">
+                    {heroItem.imageCredit}
+                  </p>
+                )}
+              </div>
+            )}
+
             <div className="mt-6 flex items-center gap-4 animate-fade-up delay-300">
               <Link
                 href={heroItem.href}
@@ -185,17 +210,32 @@ export default function HomePage() {
               className="group block py-5 animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
-                  {news.sourceName}
-                </span>
-                <span className="text-[10px] text-gray-800">
-                  {formatDate(news.date)}
-                </span>
+              <div className={news.image ? "flex gap-4 items-start" : ""}>
+                {news.image && (
+                  <div className="shrink-0 w-20 h-14 relative rounded-lg overflow-hidden mt-1">
+                    <Image
+                      src={news.image}
+                      alt={news.imageAlt ?? news.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="80px"
+                    />
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
+                      {news.sourceName}
+                    </span>
+                    <span className="text-[10px] text-gray-800">
+                      {formatDate(news.date)}
+                    </span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-200 group-hover:text-gray-100 transition-colors text-glow">
+                    {news.title}
+                  </h3>
+                </div>
               </div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-200 group-hover:text-gray-100 transition-colors text-glow">
-                {news.title}
-              </h3>
             </Link>
           ))}
         </div>
@@ -255,20 +295,35 @@ export default function HomePage() {
               className="group block animate-fade-up"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
-                  {YAZI_CATEGORIES[post.category] ?? post.category}
-                </span>
-                <span className="text-[10px] text-gray-800">
-                  {formatDate(post.date)}
-                </span>
+              <div className={post.image ? "flex gap-4 items-start" : ""}>
+                {post.image && (
+                  <div className="shrink-0 w-24 h-16 relative rounded-lg overflow-hidden mt-1">
+                    <Image
+                      src={post.image}
+                      alt={post.imageAlt ?? post.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="96px"
+                    />
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
+                      {YAZI_CATEGORIES[post.category] ?? post.category}
+                    </span>
+                    <span className="text-[10px] text-gray-800">
+                      {formatDate(post.date)}
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
+                    {post.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600 max-w-lg leading-relaxed">
+                    {post.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
-                {post.title}
-              </h3>
-              <p className="mt-2 text-sm text-gray-600 max-w-lg leading-relaxed">
-                {post.description}
-              </p>
             </Link>
           ))}
         </div>

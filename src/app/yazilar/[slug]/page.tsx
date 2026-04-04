@@ -14,6 +14,7 @@ import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { ActionItems } from "@/components/content/action-items";
 import { RelatedArticles } from "@/components/content/related-articles";
+import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { SITE } from "@/lib/constants";
@@ -120,6 +121,15 @@ export default async function YaziDetayPage({ params }: Props) {
           slug={post.slug}
           contentType="yazi"
         />
+
+        {post.image && (
+          <CoverImage
+            src={post.image}
+            alt={post.imageAlt ?? post.title}
+            credit={post.imageCredit}
+            blurDataURL={post.blurDataURL}
+          />
+        )}
 
         <div className="line-void mb-8" />
 

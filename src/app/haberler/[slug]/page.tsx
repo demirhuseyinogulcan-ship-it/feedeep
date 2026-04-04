@@ -13,6 +13,7 @@ import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { RelatedNews } from "@/components/content/related-news";
+import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { SITE } from "@/lib/constants";
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     publishedTime: news.date,
     modifiedTime: news.updated,
     keywords: news.keywords,
+    image: news.image,
     section: HABER_CATEGORIES[news.category] ?? news.category,
     tags: news.keywords,
   });
@@ -89,6 +91,7 @@ export default async function HaberDetayPage({ params }: Props) {
             articleSection: categoryLabel,
             wordCount: news.metadata.wordCount,
             readingTime: news.metadata.readingTime,
+            image: news.image,
           }),
           breadcrumbJsonLd([
             { name: "Ana Sayfa", href: "/" },
@@ -119,6 +122,15 @@ export default async function HaberDetayPage({ params }: Props) {
           slug={news.slug}
           contentType="haber"
         />
+
+        {news.image && (
+          <CoverImage
+            src={news.image}
+            alt={news.imageAlt ?? news.title}
+            credit={news.imageCredit}
+            blurDataURL={news.blurDataURL}
+          />
+        )}
 
         <div className="line-void mb-8" />
 

@@ -42,6 +42,8 @@ export default function YazilarPage() {
     category: p.category,
     categoryLabel: YAZI_CATEGORIES[p.category] ?? p.category,
     href: `/yazilar/${p.slug}`,
+    image: p.image,
+    imageAlt: p.imageAlt,
   }));
 
   const categories = Object.entries(YAZI_CATEGORIES).map(([key, label]) => ({

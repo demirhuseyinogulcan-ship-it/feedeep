@@ -186,6 +186,48 @@ h1, h2, h3, h4, h5, h6 {
   @apply rounded-xl shadow-md;
 }
 
+/* ─── Figure & Cover Image ────────────────────────────────── */
+
+.figure-block {
+  @apply my-8;
+}
+
+.figure-img {
+  @apply w-full h-auto rounded-xl shadow-md;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.figure-caption {
+  @apply mt-2 text-xs text-gray-600 flex items-center justify-between gap-2;
+}
+
+.figure-credit {
+  @apply text-gray-700;
+}
+
+.figure-credit a {
+  @apply text-gray-600 hover:text-gray-400 underline decoration-gray-800 underline-offset-2 transition-colors;
+}
+
+.cover-image {
+  @apply mb-10 mt-2;
+}
+
+.cover-image-img {
+  @apply w-full h-auto rounded-xl shadow-lg;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.cover-image-caption {
+  @apply mt-2 text-[10px] text-gray-700 text-right;
+}
+
+.cover-image-caption a {
+  @apply text-gray-600 hover:text-gray-400 underline decoration-gray-800 underline-offset-2 transition-colors;
+}
+
 .prose table {
   @apply w-full border-collapse;
 }

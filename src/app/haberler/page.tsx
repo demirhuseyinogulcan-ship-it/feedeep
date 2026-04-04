@@ -48,6 +48,8 @@ export default function HaberlerPage() {
     categoryLabel: HABER_CATEGORIES[n.category] ?? n.category,
     meta: n.sourceName,
     href: `/haberler/${n.slug}`,
+    image: n.image,
+    imageAlt: n.imageAlt,
   }));
 
   const categories = Object.entries(HABER_CATEGORIES).map(([key, label]) => ({

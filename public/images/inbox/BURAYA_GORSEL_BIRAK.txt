@@ -1,0 +1,8 @@
+Bu klasor senin gorsel birakma alanin.
+
+Habere/yaziya eklemek istedigin gorseli buraya kopyala.
+Ben dosyayi uygun isimle, alt metinle ve SEO duzenleriyle
+dogru klasore tasiyacagim.
+
+Desteklenen formatlar: .webp, .jpg, .jpeg, .png, .avif
+Onerilen boyut: min 1200px genislik (cover icin)

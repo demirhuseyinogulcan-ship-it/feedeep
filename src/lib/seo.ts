@@ -47,7 +47,9 @@ export function generateMeta({
   const ogParams = new URLSearchParams({ title });
   if (section) ogParams.set("category", section);
   if (publishedTime) ogParams.set("date", publishedTime.slice(0, 10));
-  const ogImage = image ?? `${SITE.url}/api/og?${ogParams.toString()}`;
+  const ogImage = image
+    ? image.startsWith("http") ? image : `${SITE.url}${image}`
+    : `${SITE.url}/api/og?${ogParams.toString()}`;
 
   return {
     title,
@@ -164,7 +166,9 @@ export function articleJsonLd(params: {
     headline: params.title,
     description: params.description,
     url: articleUrl,
-    image: params.image ?? `${SITE.url}/api/og?title=${encodeURIComponent(params.title)}`,
+    image: params.image
+      ? (params.image.startsWith("http") ? params.image : `${SITE.url}${params.image}`)
+      : `${SITE.url}/api/og?title=${encodeURIComponent(params.title)}`,
     datePublished: params.publishedTime,
     dateModified: params.modifiedTime ?? params.publishedTime,
     author: {
@@ -211,7 +215,9 @@ export function newsArticleJsonLd(params: {
     headline: params.title,
     description: params.description,
     url: `${SITE.url}/haberler/${params.slug}`,
-    image: params.image ?? `${SITE.url}/api/og?title=${encodeURIComponent(params.title)}`,
+    image: params.image
+      ? (params.image.startsWith("http") ? params.image : `${SITE.url}${params.image}`)
+      : `${SITE.url}/api/og?title=${encodeURIComponent(params.title)}`,
     datePublished: params.publishedTime,
     dateModified: params.modifiedTime ?? params.publishedTime,
     author: {
