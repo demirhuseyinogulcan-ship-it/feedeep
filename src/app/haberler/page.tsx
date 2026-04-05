@@ -13,10 +13,8 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { HABER_CATEGORIES, SITE } from "@/lib/constants";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
-import {
-  FilterableContentList,
-  type ContentItem,
-} from "@/components/shared/filterable-content-list";
+import { FilterableContentList } from "@/components/shared/filterable-content-list";
+import { buildHaberFeed } from "@/lib/feed";
 
 const publishedNews = haberler
   .filter((h) => h.published)
@@ -38,19 +36,7 @@ export const metadata: Metadata = generateMeta({
 
 export default function HaberlerPage() {
   const news = publishedNews;
-
-  const items: ContentItem[] = news.map((n) => ({
-    slug: n.slug,
-    title: n.title,
-    description: n.description,
-    date: n.date,
-    category: n.category,
-    categoryLabel: HABER_CATEGORIES[n.category] ?? n.category,
-    meta: n.sourceName,
-    href: `/haberler/${n.slug}`,
-    image: n.image,
-    imageAlt: n.imageAlt,
-  }));
+  const items = buildHaberFeed();
 
   const categories = Object.entries(HABER_CATEGORIES).map(([key, label]) => ({
     key,
@@ -78,7 +64,7 @@ export default function HaberlerPage() {
           ]),
         ]}
       />
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
         <Breadcrumb
           items={[
             { label: "Ana Sayfa", href: "/" },

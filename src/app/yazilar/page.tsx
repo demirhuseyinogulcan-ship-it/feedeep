@@ -9,10 +9,8 @@ import { YAZI_CATEGORIES, SITE } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
-import {
-  FilterableContentList,
-  type ContentItem,
-} from "@/components/shared/filterable-content-list";
+import { FilterableContentList } from "@/components/shared/filterable-content-list";
+import { buildYaziFeed } from "@/lib/feed";
 
 export const metadata: Metadata = generateMeta({
   title: "Yapay Zeka Yazıları: Rehberler, Analizler ve İncelemeler [2026]",
@@ -34,17 +32,7 @@ export default function YazilarPage() {
     .filter((y) => y.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const items: ContentItem[] = posts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    description: p.description,
-    date: p.date,
-    category: p.category,
-    categoryLabel: YAZI_CATEGORIES[p.category] ?? p.category,
-    href: `/yazilar/${p.slug}`,
-    image: p.image,
-    imageAlt: p.imageAlt,
-  }));
+  const items = buildYaziFeed();
 
   const categories = Object.entries(YAZI_CATEGORIES).map(([key, label]) => ({
     key,
@@ -72,7 +60,7 @@ export default function YazilarPage() {
           ]),
         ]}
       />
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
         <Breadcrumb
           items={[
             { label: "Ana Sayfa", href: "/" },

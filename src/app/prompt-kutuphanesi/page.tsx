@@ -5,14 +5,12 @@
 import type { Metadata } from "next";
 import { promptlar } from "#site/content";
 import { generateMeta, collectionPageJsonLd, breadcrumbJsonLd } from "@/lib/seo";
-import { PROMPT_CATEGORIES, DIFFICULTY } from "@/lib/constants";
+import { PROMPT_CATEGORIES } from "@/lib/constants";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { JsonLd } from "@/components/seo/json-ld";
-import {
-  FilterableContentList,
-  type ContentItem,
-} from "@/components/shared/filterable-content-list";
+import { FilterableContentList } from "@/components/shared/filterable-content-list";
+import { buildPromptFeed } from "@/lib/feed";
 
 export const metadata: Metadata = generateMeta({
   title: "AI Prompt Şablonları: Kopyala-Yapıştır Kullan [2026]",
@@ -34,16 +32,7 @@ export default function PromptKutuphanesiPage() {
     .filter((p) => p.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const items: ContentItem[] = prompts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    description: p.description,
-    date: p.date,
-    category: p.category,
-    categoryLabel: PROMPT_CATEGORIES[p.category] ?? p.category,
-    meta: DIFFICULTY[p.difficulty] ?? p.difficulty,
-    href: `/prompt-kutuphanesi/${p.slug}`,
-  }));
+  const items = buildPromptFeed();
 
   const categories = Object.entries(PROMPT_CATEGORIES).map(([key, label]) => ({
     key,
@@ -72,7 +61,7 @@ export default function PromptKutuphanesiPage() {
         ]}
       />
 
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
         <Breadcrumb
           items={[
             { label: "Ana Sayfa", href: "/" },

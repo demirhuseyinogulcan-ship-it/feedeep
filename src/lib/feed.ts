@@ -19,6 +19,7 @@ type BaseItem = {
   description: string;
   href: string;
   date: string;
+  category: string;
   categoryLabel: string;
   readingTime: number;
   editorPick: boolean;
@@ -84,6 +85,7 @@ export function buildFeed(): FeedItem[] {
       description: h.description,
       href: `/haberler/${h.slug}`,
       date: h.date,
+      category: h.category,
       categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
       readingTime: h.metadata.readingTime,
       editorPick: h.editorPick,
@@ -103,6 +105,7 @@ export function buildFeed(): FeedItem[] {
       description: y.description,
       href: `/yazilar/${y.slug}`,
       date: y.date,
+      category: y.category,
       categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
       readingTime: y.metadata.readingTime,
       editorPick: y.editorPick,
@@ -121,6 +124,7 @@ export function buildFeed(): FeedItem[] {
       description: p.description,
       href: `/prompt-kutuphanesi/${p.slug}`,
       date: p.date,
+      category: p.category,
       categoryLabel: PROMPT_CATEGORIES[p.category] ?? p.category,
       readingTime: p.metadata.readingTime,
       editorPick: false,
@@ -138,6 +142,7 @@ export function buildFeed(): FeedItem[] {
       description: b.description,
       href: `/haftalik/${b.slug}`,
       date: b.date,
+      category: "haftalik",
       categoryLabel: "Haftalık Brifing",
       readingTime: b.metadata.readingTime,
       editorPick: false,
@@ -162,4 +167,72 @@ export function buildFeed(): FeedItem[] {
   }
 
   return items;
+}
+
+// ─── Type-Specific Builders (listing sayfalari icin) ───
+
+export function buildHaberFeed(): HaberFeedItem[] {
+  return haberler
+    .filter((x) => x.published)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((h) => ({
+      id: `haber-${h.slug}`,
+      type: "haber" as const,
+      title: h.title,
+      description: h.description,
+      href: `/haberler/${h.slug}`,
+      date: h.date,
+      category: h.category,
+      categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
+      readingTime: h.metadata.readingTime,
+      editorPick: h.editorPick,
+      image: h.image,
+      imageAlt: h.imageAlt,
+      blurDataURL: h.blurDataURL,
+      sourceName: h.sourceName,
+      confidence: h.confidence,
+    }));
+}
+
+export function buildYaziFeed(): YaziFeedItem[] {
+  return yazilar
+    .filter((x) => x.published)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((y) => ({
+      id: `yazi-${y.slug}`,
+      type: "yazi" as const,
+      title: y.title,
+      description: y.description,
+      href: `/yazilar/${y.slug}`,
+      date: y.date,
+      category: y.category,
+      categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
+      readingTime: y.metadata.readingTime,
+      editorPick: y.editorPick,
+      image: y.image,
+      imageAlt: y.imageAlt,
+      blurDataURL: y.blurDataURL,
+      confidence: y.confidence,
+    }));
+}
+
+export function buildPromptFeed(): PromptFeedItem[] {
+  return promptlar
+    .filter((x) => x.published)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((p) => ({
+      id: `prompt-${p.slug}`,
+      type: "prompt" as const,
+      title: p.title,
+      description: p.description,
+      href: `/prompt-kutuphanesi/${p.slug}`,
+      date: p.date,
+      category: p.category,
+      categoryLabel: PROMPT_CATEGORIES[p.category] ?? p.category,
+      readingTime: p.metadata.readingTime,
+      editorPick: false,
+      promptPreview: p.prompt.split("\n").slice(0, 3).join("\n"),
+      difficulty: p.difficulty,
+      difficultyLabel: DIFFICULTY[p.difficulty] ?? p.difficulty,
+    }));
 }

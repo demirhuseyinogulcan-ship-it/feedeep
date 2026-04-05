@@ -1,28 +1,14 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — Filterable Content List (Client Component)
-// Kategori filtreleme + içerik listesi — tüm listing sayfalarında kullanılır
+// Kategori filtreleme + feed card görünümü — tüm listing sayfalarında kullanılır
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { useState, Fragment } from "react";
 import { cn } from "@/lib/utils";
-import { formatDate } from "@/lib/utils";
-
-export interface ContentItem {
-  slug: string;
-  title: string;
-  description?: string;
-  date: string;
-  category?: string;
-  categoryLabel?: string;
-  href: string;
-  meta?: string; // Ek bilgi (kaynak adı, zorluk seviyesi vb.)
-  image?: string;
-  imageAlt?: string;
-}
+import type { FeedItem } from "@/lib/feed";
+import { FeedCard } from "@/components/feed/feed-card";
 
 interface Category {
   key: string;
@@ -30,7 +16,7 @@ interface Category {
 }
 
 interface FilterableContentListProps {
-  items: ContentItem[];
+  items: FeedItem[];
   categories?: Category[];
   emptyMessage?: string;
 }
@@ -83,54 +69,15 @@ export function FilterableContentList({
         </div>
       )}
 
-      {/* İçerik Listesi */}
-      <div className="space-y-8">
+      {/* İçerik Listesi — Feed Card formatı (anasayfayla birebir aynı) */}
+      <div className="pt-4 space-y-6 sm:space-y-8">
         {filtered.map((item, i) => (
-          <Link
-            key={item.slug}
-            href={item.href}
-            className="group block animate-fade-up"
-            style={{ animationDelay: `${(i + 1) * 100}ms` }}
-          >
-            <div className={item.image ? "flex gap-5" : ""}>
-              {item.image && (
-                <div className="hidden sm:block shrink-0 w-32 h-20 relative rounded-lg overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.imageAlt ?? item.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="128px"
-                  />
-                </div>
-              )}
-              <div className="min-w-0">
-                <div className="flex items-center gap-3 mb-2">
-                  {item.categoryLabel && (
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
-                      {item.categoryLabel}
-                    </span>
-                  )}
-                  {item.meta && (
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
-                      {item.meta}
-                    </span>
-                  )}
-                  <span className="text-[10px] text-gray-800">
-                    {formatDate(item.date)}
-                  </span>
-                </div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
-                  {item.title}
-                </h2>
-                {item.description && (
-                  <p className="mt-2 text-sm text-gray-600 max-w-lg leading-relaxed">
-                    {item.description}
-                  </p>
-                )}
-              </div>
-            </div>
-          </Link>
+          <Fragment key={item.id}>
+            {i > 0 && (
+              <div className="mx-auto w-12 h-px bg-white/[0.04]" />
+            )}
+            <FeedCard item={item} index={i} />
+          </Fragment>
         ))}
       </div>
 

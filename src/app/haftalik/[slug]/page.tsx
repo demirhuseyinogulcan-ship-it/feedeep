@@ -76,7 +76,7 @@ export default async function HaftalikDetayPage({ params }: PageProps) {
         ]}
       />
 
-      <article className="mx-auto max-w-3xl px-4 sm:px-6 py-12">
+      <article className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
         <Breadcrumb
           items={[
             { label: "Ana Sayfa", href: "/" },

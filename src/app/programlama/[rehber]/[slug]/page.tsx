@@ -117,7 +117,7 @@ export default async function ChapterPage({ params }: PageProps) {
     <>
       <JsonLd data={jsonLdData} />
 
-      <article className="mx-auto max-w-3xl px-4 sm:px-6 py-12">
+      <article className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
         {/* ─── Breadcrumb ─── */}
         <Breadcrumb
           items={[
