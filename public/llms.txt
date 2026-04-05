@@ -26,6 +26,11 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 ## Son İçerikler (Nisan 2026)
 
 ### Haberler
+- [Anthropic, Claude Aboneliklerini OpenClaw'a Kapattı](https://airehber.com/haberler/anthropic-claude-abonelik-openclaw-ucuncu-parti-kisitlama): Anthropic, Claude Pro ve Max aboneliklerinin OpenClaw ve üçüncü parti AI ajanlarla kullanımını sona erdirdi. Kullandıkça öde modeli başladı.
+- [Nvidia GTC 2026: Agent Toolkit ve 17 Fortune 500 Şirketi](https://airehber.com/haberler/nvidia-gtc-2026-agent-toolkit-17-sirket): Jensen Huang, GTC 2026'da açık kaynaklı Agent Toolkit platformunu tanıttı. Adobe, Salesforce, SAP dahil 17 Fortune 500 şirketi altyapıyı benimsedi.
+- [OpenAI Üst Yönetiminde Üç Koltuk Birden Değişti](https://airehber.com/haberler/openai-ust-yonetim-degisikligi-lightcap-simo-rouch): COO Brad Lightcap özel projelere geçiyor, AGI CEO'su Fidji Simo tıbbi izne ayrılıyor, CMO Kate Rouch kanser tedavisi için görevden ayrılıyor.
+- [Arcee Trinity-Large-Thinking: 400B Açık Kaynak Model](https://airehber.com/haberler/arcee-trinity-large-thinking-400b-acik-kaynak-model): Arcee AI, 399 milyar parametreli Trinity-Large-Thinking modelini Apache 2.0 lisansla yayınladı. Opus 4.6'ya yakın performans, %96 ucuz.
+- [Anthropic Siyasi Lobiye Ağırlığı Koyuyor: AnthroPAC Kuruldu](https://airehber.com/haberler/anthropic-anthropac-siyasi-lobi-pac-kuruldu): Anthropic, AnthroPAC adlı siyasi eylem komitesi kurdu. AI şirketleri 2026 ara seçimlerine toplam 185 milyon dolar akıttı.
 - [OpenAI Sora'yı Kapattı: Günde 1 Milyon Dolar Zarar Detayı](https://airehber.com/haberler/openai-sora-kapatti-gunde-1-milyon-dolar-zarar): WSJ soruşturmasına göre OpenAI'ın video üretici Sora, günde 1 milyon dolar zarar ediyordu. Disney 1 milyar dolarlık anlaşmayı bir saat öncesinde öğrendi.
 - [Claude Code Kaynak Kodu Sızdı, Anthropic 8.100 GitHub Reposunu Kapattı](https://airehber.com/haberler/anthropic-claude-code-kaynak-kodu-sizintisi-github): Anthropic, Claude Code'un kaynak kodunu yanlışlıkla yayınladı. Geri almaya çalışırken DMCA bildirimiyle 8.100 GitHub deposunu kapattırdı.
 - [OpenAI 122 Milyar Dolarlık Rekor Yatırım Turunu Kapattı](https://airehber.com/haberler/openai-122-milyar-dolar-rekor-yatirim-turu): OpenAI, 852 milyar dolar değerlemeyle 122 milyar dolarlık yatırım turu kapattı. 3 milyar dolar bireysel yatırımcılardan geldi.
