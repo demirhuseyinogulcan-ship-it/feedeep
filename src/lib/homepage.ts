@@ -106,7 +106,7 @@ export function getRecentPosts(heroItem: HeroItem | null) {
     .filter(
       (post) => !(heroItem?.type === "yazi" && post.slug === heroItem.slug)
     )
-    .slice(0, 3);
+    .slice(0, 8);
 }
 
 export function getLatestNews(heroItem: HeroItem | null) {
@@ -114,7 +114,7 @@ export function getLatestNews(heroItem: HeroItem | null) {
     .filter(
       (news) => !(heroItem?.type === "haber" && news.slug === heroItem.slug)
     )
-    .slice(0, 5);
+    .slice(0, 8);
 }
 
 export function getExploreSections(): readonly ExploreSection[] {
