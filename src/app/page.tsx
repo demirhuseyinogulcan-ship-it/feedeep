@@ -142,11 +142,6 @@ export default function HomePage() {
                     />
                   </div>
                 </Link>
-                {heroItem.imageCredit && (
-                  <p className="mt-2 text-[10px] text-gray-700 text-right">
-                    {heroItem.imageCredit}
-                  </p>
-                )}
               </div>
             ) : (
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-surface-1 void-grid">
@@ -208,11 +203,6 @@ export default function HomePage() {
                     />
                   </div>
                 </Link>
-                {heroItem.imageCredit && (
-                  <p className="mt-2 text-[10px] text-gray-700 text-right">
-                    {heroItem.imageCredit}
-                  </p>
-                )}
               </div>
             )}
 

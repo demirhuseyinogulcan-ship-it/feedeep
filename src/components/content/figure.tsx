@@ -37,20 +37,9 @@ export function Figure({
         className="figure-img"
         sizes="(max-width: 768px) 100vw, 720px"
       />
-      {(caption || credit) && (
+      {caption && (
         <figcaption className="figure-caption">
-          {caption && <span>{caption}</span>}
-          {credit && (
-            <span className="figure-credit">
-              {creditUrl ? (
-                <a href={creditUrl} target="_blank" rel="noopener noreferrer">
-                  {credit}
-                </a>
-              ) : (
-                credit
-              )}
-            </span>
-          )}
+          <span>{caption}</span>
         </figcaption>
       )}
     </figure>

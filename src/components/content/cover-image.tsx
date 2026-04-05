@@ -34,17 +34,6 @@ export function CoverImage({
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 720px, 720px"
         {...(blurDataURL ? { placeholder: "blur", blurDataURL } : {})}
       />
-      {credit && (
-        <figcaption className="cover-image-caption">
-          {creditUrl ? (
-            <a href={creditUrl} target="_blank" rel="noopener noreferrer">
-              {credit}
-            </a>
-          ) : (
-            credit
-          )}
-        </figcaption>
-      )}
     </figure>
   );
 }
