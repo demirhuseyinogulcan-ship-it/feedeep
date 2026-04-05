@@ -329,6 +329,25 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
 }
 
+/* Subtle grid pattern for void fallbacks */
+.void-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* 3D tilt card base */
+.tilt-card {
+  position: relative;
+  border-radius: 0.75rem;
+  background: rgba(255,255,255,0.015);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: transform;
+  --glow-x: 50%;
+  --glow-y: 50%;
+}
+
 /* ─── News Ticker ─────────────────────────────────────────── */
 
 @keyframes ticker-scroll {

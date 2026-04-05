@@ -58,7 +58,7 @@ export function NewsTicker() {
     ));
 
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 pt-6 animate-fade-up">
+    <div className="mx-auto max-w-5xl px-4 sm:px-8 pt-6 animate-fade-up">
       <div className="flex items-center">
         {/* Sabit etiket */}
         <div className="shrink-0 flex items-center gap-2.5 pr-5 border-r border-white/[0.06]">

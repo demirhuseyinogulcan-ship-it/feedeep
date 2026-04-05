@@ -1,27 +1,25 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — Anasayfa
 // "The Void speaks in light."
-// Massive typography · Numbered editorial · Ambient void
+// Wide desktop layout · Side-by-side hero · Card grids
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { JsonLd } from "@/components/seo/json-ld";
-import { websiteJsonLd, faqJsonLd, generateMeta } from "@/lib/seo";
+import { websiteJsonLd, generateMeta } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 import { SITE, YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import {
   getHeroItem,
   getRecentPosts,
   getLatestNews,
-  getExploreSections,
-  AI_REHBER_FAQ,
 } from "@/lib/homepage";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { ContinueReadingBanner } from "@/components/shared/continue-reading-banner";
 import { NewsTicker } from "@/components/shared/the-signal";
-import { StatsStrip } from "@/components/shared/stats-strip";
+import { TiltCard } from "@/components/shared/tilt-card";
 
 export const metadata: Metadata = generateMeta({
   title: SITE.title,
@@ -34,7 +32,6 @@ export const metadata: Metadata = generateMeta({
 const heroItem = getHeroItem();
 const recentPosts = getRecentPosts(heroItem);
 const latestNews = getLatestNews(heroItem);
-const exploreSections = getExploreSections();
 
 export default function HomePage() {
   const heroCategory = heroItem
@@ -45,12 +42,7 @@ export default function HomePage() {
 
   return (
     <>
-      <JsonLd
-        data={[
-          websiteJsonLd(),
-          faqJsonLd(AI_REHBER_FAQ),
-        ]}
-      />
+      <JsonLd data={[websiteJsonLd()]} />
 
       {/* ─── Kaldığın Yerden Devam Et ─── */}
       <ContinueReadingBanner />
@@ -60,7 +52,7 @@ export default function HomePage() {
 
       {/* ─── Hero: Editörün Seçimi ─── */}
       {heroItem && (
-        <section className="relative mx-auto max-w-3xl px-4 sm:px-6 pt-12 sm:pt-20 pb-20">
+        <section className="relative mx-auto max-w-5xl px-4 sm:px-8 pt-12 sm:pt-20 pb-20">
           {/* Floating ambient orb */}
           <div
             aria-hidden="true"
@@ -71,7 +63,105 @@ export default function HomePage() {
             }}
           />
 
-          <div className="animate-fade-up">
+          {/* Desktop: side-by-side layout (metin sol, görsel sağ) */}
+          <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center animate-fade-up">
+            {/* Sol: metin içeriği */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                {heroItem.editorPick && (
+                  <>
+                    <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-gray-500">
+                      Editörün Seçimi
+                    </span>
+                    <span className="text-[11px] text-gray-800">/</span>
+                  </>
+                )}
+                <span className="text-[11px] font-mono tracking-widest uppercase text-primary-400/80">
+                  {heroCategory}
+                </span>
+                <span className="text-[11px] text-gray-600">/</span>
+                <span className="text-[11px] font-mono tracking-wider text-gray-600">
+                  {heroItem.readingTime} dk
+                </span>
+                {heroItem.type === "haber" && (
+                  <>
+                    <span className="text-[11px] text-gray-600">/</span>
+                    <span className="text-[10px] font-mono tracking-wider text-primary-500/60 uppercase">
+                      Haber
+                    </span>
+                  </>
+                )}
+              </div>
+
+              <Link href={heroItem.href} className="group block">
+                <h1
+                  className="font-bold tracking-tight text-gray-100 leading-[1.05] text-glow"
+                  style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.5rem)" }}
+                >
+                  {heroItem.title}
+                </h1>
+              </Link>
+
+              <p className="mt-6 text-sm text-gray-500 leading-relaxed max-w-md">
+                {heroItem.description}
+              </p>
+
+              {heroItem.editorNote && (
+                <p className="mt-4 text-xs text-gray-600 italic leading-relaxed max-w-sm">
+                  &ldquo;{heroItem.editorNote}&rdquo;
+                </p>
+              )}
+
+              <div className="mt-6 flex items-center gap-4">
+                <Link
+                  href={heroItem.href}
+                  className="text-sm font-medium text-gray-200 hover:text-primary-400 transition-colors"
+                >
+                  {heroItem.type === "haber" ? "Haberi oku" : "Yazıyı oku"} &rarr;
+                </Link>
+                <span className="text-gray-800">—</span>
+                <span className="text-[11px] text-gray-600">
+                  {formatDate(heroItem.date)}
+                </span>
+              </div>
+            </div>
+
+            {/* Sağ: görsel */}
+            {heroItem.image ? (
+              <div>
+                <Link href={heroItem.href} className="group block">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+                    <Image
+                      src={heroItem.image}
+                      alt={heroItem.imageAlt ?? heroItem.title}
+                      fill
+                      priority
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 1024px) 100vw, 480px"
+                      {...(heroItem.blurDataURL ? { placeholder: "blur" as const, blurDataURL: heroItem.blurDataURL } : {})}
+                    />
+                  </div>
+                </Link>
+                {heroItem.imageCredit && (
+                  <p className="mt-2 text-[10px] text-gray-700 text-right">
+                    {heroItem.imageCredit}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-surface-1 void-grid">
+                <div
+                  className="absolute inset-0 animate-breathe"
+                  style={{
+                    background: "radial-gradient(ellipse at 40% 60%, rgba(139,92,246,0.08) 0%, transparent 60%)",
+                  }}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Mobile/Tablet: stacked layout (mevcut tasarım) */}
+          <div className="lg:hidden animate-fade-up">
             <div className="flex items-center gap-3 mb-6">
               {heroItem.editorPick && (
                 <>
@@ -88,41 +178,23 @@ export default function HomePage() {
               <span className="text-[11px] font-mono tracking-wider text-gray-600">
                 {heroItem.readingTime} dk
               </span>
-              {heroItem.type === "haber" && (
-                <>
-                  <span className="text-[11px] text-gray-600">/</span>
-                  <span className="text-[10px] font-mono tracking-wider text-primary-500/60 uppercase">
-                    Haber
-                  </span>
-                </>
-              )}
             </div>
 
-            <Link
-              href={heroItem.href}
-              className="group block"
-            >
+            <Link href={heroItem.href} className="group block">
               <h1
-                className="font-bold tracking-tight text-gray-100 leading-[0.95] text-glow"
-                style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+                className="font-bold tracking-tight text-gray-100 leading-[1.05] text-glow"
+                style={{ fontSize: "clamp(1.5rem, 5vw, 2.25rem)" }}
               >
                 {heroItem.title}
               </h1>
             </Link>
 
-            <p className="mt-8 text-sm text-gray-500 leading-relaxed max-w-md animate-fade-up delay-200">
+            <p className="mt-6 text-sm text-gray-500 leading-relaxed">
               {heroItem.description}
             </p>
 
-            {heroItem.editorNote && (
-              <p className="mt-4 text-xs text-gray-600 italic leading-relaxed max-w-sm animate-fade-up delay-200">
-                &ldquo;{heroItem.editorNote}&rdquo;
-              </p>
-            )}
-
-            {/* Hero Görsel */}
             {heroItem.image && (
-              <div className="mt-10 animate-fade-up delay-200">
+              <div className="mt-8">
                 <Link href={heroItem.href} className="group block">
                   <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
                     <Image
@@ -131,7 +203,7 @@ export default function HomePage() {
                       fill
                       priority
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      sizes="(max-width: 768px) 100vw, 720px"
+                      sizes="100vw"
                       {...(heroItem.blurDataURL ? { placeholder: "blur" as const, blurDataURL: heroItem.blurDataURL } : {})}
                     />
                   </div>
@@ -144,12 +216,12 @@ export default function HomePage() {
               </div>
             )}
 
-            <div className="mt-6 flex items-center gap-4 animate-fade-up delay-300">
+            <div className="mt-6 flex items-center gap-4">
               <Link
                 href={heroItem.href}
                 className="text-sm font-medium text-gray-200 hover:text-primary-400 transition-colors"
               >
-                {heroItem.type === "haber" ? "Haberi oku" : "Yazıyı oku"}
+                {heroItem.type === "haber" ? "Haberi oku" : "Yazıyı oku"} &rarr;
               </Link>
               <span className="text-gray-800">—</span>
               <span className="text-[11px] text-gray-600">
@@ -161,269 +233,234 @@ export default function HomePage() {
       )}
 
       {/* Hair-line */}
-      <div className="line-void mx-auto max-w-3xl animate-line-reveal" />
+      <div className="line-void mx-auto max-w-5xl animate-line-reveal" />
 
-      {/* ─── Son Haberler — Stacked titles ─── */}
+      {/* ─── Son Haberler — 2 sütunlu kart grid ─── */}
       {latestNews.length > 0 && (
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-5xl px-4 sm:px-8 py-16">
         <div className="flex items-center justify-between mb-10 animate-fade-up">
           <h2 className="text-[11px] font-mono font-semibold tracking-widest uppercase text-gray-500">
             Son Haberler
           </h2>
-          <Link
-            href="/haberler"
-            className="text-[11px] font-mono tracking-wider text-gray-600 hover:text-primary-400 transition-colors"
-          >
-            Tümü
-          </Link>
         </div>
 
-        {/* Mobile: vertical stack, Desktop: stacked */}
-        <div className="sm:hidden space-y-5">
+        {/* Desktop: 2-column card grid */}
+        <div className="hidden sm:grid sm:grid-cols-2 gap-6">
           {latestNews.map((news, i) => (
-            <Link
+            <TiltCard
               key={news.slug}
-              href={`/haberler/${news.slug}`}
-              className="group block animate-fade-up"
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
+              className="group animate-fade-up"
+              style={{ animationDelay: `${(i + 1) * 80}ms` }}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
-                  {news.sourceName}
-                </span>
-                <span className="text-[10px] text-gray-800">
-                  {formatDate(news.date)}
-                </span>
-              </div>
-              <h3 className="text-base font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-snug text-glow">
-                {news.title}
-              </h3>
-            </Link>
+              <Link
+                href={`/haberler/${news.slug}`}
+                className="block p-4"
+              >
+                <div className="flex gap-4 items-start">
+                  <div className="shrink-0 w-24 h-[68px] relative rounded-lg overflow-hidden">
+                    {news.image ? (
+                      <Image
+                        src={news.image}
+                        alt={news.imageAlt ?? news.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="96px"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-surface-1 void-grid">
+                        <div className="absolute inset-0 animate-breathe" style={{ background: "radial-gradient(ellipse at 40% 60%, rgba(139,92,246,0.1) 0%, transparent 60%)" }} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
+                        {news.sourceName}
+                      </span>
+                      <span className="text-[10px] text-gray-800">
+                        {formatDate(news.date)}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-snug text-glow">
+                      {news.title}
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            </TiltCard>
           ))}
         </div>
 
-        <div className="hidden sm:block space-y-0">
+        {/* Mobile: compact list with thumbnail */}
+        <div className="sm:hidden space-y-4">
           {latestNews.map((news, i) => (
             <Link
               key={news.slug}
               href={`/haberler/${news.slug}`}
-              className="group block py-5 animate-fade-up"
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
+              className="group flex gap-3 items-start animate-fade-up"
+              style={{ animationDelay: `${(i + 1) * 80}ms` }}
             >
-              <div className={news.image ? "flex gap-4 items-start" : ""}>
-                {news.image && (
-                  <div className="shrink-0 w-20 h-14 relative rounded-lg overflow-hidden mt-1">
-                    <Image
-                      src={news.image}
-                      alt={news.imageAlt ?? news.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="80px"
-                    />
+              <div className="shrink-0 w-16 h-12 relative rounded-lg overflow-hidden">
+                {news.image ? (
+                  <Image
+                    src={news.image}
+                    alt={news.imageAlt ?? news.title}
+                    fill
+                    className="object-cover"
+                    sizes="64px"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-surface-1 void-grid">
+                    <div className="absolute inset-0 animate-breathe" style={{ background: "radial-gradient(ellipse at 40% 60%, rgba(139,92,246,0.1) 0%, transparent 60%)" }} />
                   </div>
                 )}
-                <div className="min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
-                      {news.sourceName}
-                    </span>
-                    <span className="text-[10px] text-gray-800">
-                      {formatDate(news.date)}
-                    </span>
-                  </div>
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-200 group-hover:text-gray-100 transition-colors text-glow">
-                    {news.title}
-                  </h3>
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
+                    {news.sourceName}
+                  </span>
+                  <span className="text-[10px] text-gray-800">
+                    {formatDate(news.date)}
+                  </span>
                 </div>
+                <h3 className="text-sm font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-snug text-glow">
+                  {news.title}
+                </h3>
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Tümünü Gör butonu */}
+        <div className="mt-10 text-center animate-fade-up delay-300">
+          <Link
+            href="/haberler"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/[0.06] hover:border-white/[0.12] px-6 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition-all"
+          >
+            Tüm Haberleri Gör &rarr;
+          </Link>
         </div>
       </section>
       )}
 
       {/* Hair-line */}
-      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-200" />
+      <div className="line-void mx-auto max-w-5xl animate-line-reveal delay-200" />
 
-      {/* ─── Son Yazılar — Stacked Titles ─── */}
+      {/* ─── Son Yazılar — 2 sütunlu kart grid (haberlerle aynı) ─── */}
       {recentPosts.length > 0 && (
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-5xl px-4 sm:px-8 py-16">
         <div className="flex items-center justify-between mb-10 animate-fade-up">
           <h2 className="text-[11px] font-mono font-semibold tracking-widest uppercase text-gray-500">
             Son Yazılar
           </h2>
-          <Link
-            href="/yazilar"
-            className="text-[11px] font-mono tracking-wider text-gray-600 hover:text-primary-400 transition-colors"
-          >
-            Tümü
-          </Link>
         </div>
 
-        {/* Mobile: vertical stack, Desktop: stacked */}
-        <div className="sm:hidden space-y-6">
+        {/* Desktop: 2-column card grid */}
+        <div className="hidden sm:grid sm:grid-cols-2 gap-6">
           {recentPosts.map((post, i) => (
-            <Link
+            <TiltCard
               key={post.slug}
-              href={`/yazilar/${post.slug}`}
-              className="group block animate-fade-up"
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
+              className="group animate-fade-up"
+              style={{ animationDelay: `${(i + 1) * 80}ms` }}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
-                  {YAZI_CATEGORIES[post.category] ?? post.category}
-                </span>
-                <span className="text-[10px] text-gray-800">
-                  {formatDate(post.date)}
-                </span>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
-                {post.title}
-              </h3>
-              <p className="mt-2 text-sm text-gray-600 leading-relaxed">
-                {post.description}
-              </p>
-            </Link>
+              <Link
+                href={`/yazilar/${post.slug}`}
+                className="block p-4"
+              >
+                <div className="flex gap-4 items-start">
+                  <div className="shrink-0 w-24 h-[68px] relative rounded-lg overflow-hidden">
+                    {post.image ? (
+                      <Image
+                        src={post.image}
+                        alt={post.imageAlt ?? post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="96px"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-surface-1 void-grid">
+                        <div className="absolute inset-0 animate-breathe" style={{ background: "radial-gradient(ellipse at 40% 60%, rgba(139,92,246,0.1) 0%, transparent 60%)" }} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
+                        {YAZI_CATEGORIES[post.category] ?? post.category}
+                      </span>
+                      <span className="text-[10px] text-gray-800">
+                        {formatDate(post.date)}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-snug text-glow">
+                      {post.title}
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            </TiltCard>
           ))}
         </div>
 
-        <div className="hidden sm:block space-y-8">
+        {/* Mobile: compact list with thumbnail */}
+        <div className="sm:hidden space-y-4">
           {recentPosts.map((post, i) => (
             <Link
               key={post.slug}
               href={`/yazilar/${post.slug}`}
-              className="group block animate-fade-up"
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
+              className="group flex gap-3 items-start animate-fade-up"
+              style={{ animationDelay: `${(i + 1) * 80}ms` }}
             >
-              <div className={post.image ? "flex gap-4 items-start" : ""}>
-                {post.image && (
-                  <div className="shrink-0 w-24 h-16 relative rounded-lg overflow-hidden mt-1">
-                    <Image
-                      src={post.image}
-                      alt={post.imageAlt ?? post.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="96px"
-                    />
+              <div className="shrink-0 w-16 h-12 relative rounded-lg overflow-hidden">
+                {post.image ? (
+                  <Image
+                    src={post.image}
+                    alt={post.imageAlt ?? post.title}
+                    fill
+                    className="object-cover"
+                    sizes="64px"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-surface-1 void-grid">
+                    <div className="absolute inset-0 animate-breathe" style={{ background: "radial-gradient(ellipse at 40% 60%, rgba(139,92,246,0.1) 0%, transparent 60%)" }} />
                   </div>
                 )}
-                <div className="min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
-                      {YAZI_CATEGORIES[post.category] ?? post.category}
-                    </span>
-                    <span className="text-[10px] text-gray-800">
-                      {formatDate(post.date)}
-                    </span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-tight text-glow">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600 max-w-lg leading-relaxed">
-                    {post.description}
-                  </p>
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
+                    {YAZI_CATEGORIES[post.category] ?? post.category}
+                  </span>
+                  <span className="text-[10px] text-gray-800">
+                    {formatDate(post.date)}
+                  </span>
                 </div>
+                <h3 className="text-sm font-semibold text-gray-200 group-hover:text-gray-100 transition-colors leading-snug text-glow">
+                  {post.title}
+                </h3>
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Tümünü Gör butonu */}
+        <div className="mt-10 text-center animate-fade-up delay-300">
+          <Link
+            href="/yazilar"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/[0.06] hover:border-white/[0.12] px-6 py-3 text-sm font-medium text-gray-400 hover:text-gray-200 transition-all"
+          >
+            Tüm Yazıları Gör &rarr;
+          </Link>
         </div>
       </section>
       )}
 
       {/* Hair-line */}
-      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-300" />
-
-      {/* ─── Keşfet — Minimal row links ─── */}
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
-        <h2 className="text-[11px] font-mono font-semibold tracking-widest uppercase text-gray-500 mb-10 animate-fade-up">
-          Keşfet
-        </h2>
-
-        {/* Mobile: vertical stack, Desktop: rows */}
-        <div className="sm:hidden space-y-5">
-          {exploreSections.map((section, i) => (
-            <Link
-              key={section.href}
-              href={section.href}
-              className="group block animate-fade-up"
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
-            >
-              <span className="text-[11px] font-mono tracking-wider text-gray-700 group-hover:text-primary-400 transition-colors">
-                {section.count}
-              </span>
-              <h3 className="mt-1.5 text-lg font-semibold text-gray-200 group-hover:text-primary-400 transition-colors text-glow">
-                {section.title}
-              </h3>
-              <p className="mt-1 text-xs text-gray-600 leading-relaxed">
-                {section.description}
-              </p>
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden sm:block space-y-0">
-          {exploreSections.map((section, i) => (
-            <Link
-              key={section.href}
-              href={section.href}
-              className="group flex items-center justify-between py-5 animate-fade-up"
-              style={{ animationDelay: `${(i + 1) * 100}ms` }}
-            >
-              <div>
-                <h3 className="text-lg font-semibold text-gray-200 group-hover:text-primary-400 transition-colors text-glow">
-                  {section.title}
-                </h3>
-                <p className="mt-1 text-xs text-gray-600 leading-relaxed">
-                  {section.description}
-                </p>
-              </div>
-              <span className="text-[11px] font-mono tracking-wider text-gray-700 group-hover:text-primary-400 transition-colors flex-shrink-0 ml-8">
-                {section.count}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Hair-line */}
-      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-400" />
-
-      {/* ─── SSS (FAQ) — SEO Rich Snippet ─── */}
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16 animate-fade-up delay-200">
-        <h2 className="text-xs font-mono tracking-widest uppercase text-gray-600 mb-8">
-          Sıkça Sorulan Sorular
-        </h2>
-        <div className="space-y-6">
-          {AI_REHBER_FAQ.map((faq, i) => (
-            <details
-              key={i}
-              className="group border border-white/[0.04] rounded-lg"
-            >
-              <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-gray-300 hover:text-gray-100 transition-colors">
-                {faq.question}
-                <span className="text-gray-700 group-open:rotate-45 transition-transform duration-200 text-lg">
-                  +
-                </span>
-              </summary>
-              <p className="px-5 pb-4 text-sm text-gray-500 leading-relaxed">
-                {faq.answer}
-              </p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* Hair-line */}
-      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-400" />
-
-      {/* ─── Sayılarla AI Rehber — Sosyal Kanıt ─── */}
-      <StatsStrip />
-
-      {/* Hair-line */}
-      <div className="line-void mx-auto max-w-3xl animate-line-reveal delay-500" />
+      <div className="line-void mx-auto max-w-5xl animate-line-reveal delay-300" />
 
       {/* ─── İç Çember — Newsletter ─── */}
-      <section className="mx-auto max-w-3xl px-4 sm:px-6 py-20 animate-fade-up delay-300">
+      <section className="mx-auto max-w-5xl px-4 sm:px-8 py-20 animate-fade-up delay-300">
         <div className="max-w-sm">
           <h2 className="text-xl font-bold text-gray-100">
             İç Çember
