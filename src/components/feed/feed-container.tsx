@@ -1,14 +1,13 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — Feed Container (Client Component)
-// Sonsuz scroll + filtre yönetimi + newsletter enjeksiyonu
+// Sonsuz scroll + newsletter enjeksiyonu
 // İleride: beğen/kaydet butonları, üyelik sistemi buraya eklenir
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
-import { useState, useEffect, useRef, useMemo, Fragment } from "react";
-import type { FeedItem, FeedFilterKey } from "@/lib/feed";
-import { FeedFilters } from "./feed-filters";
+import { useState, useEffect, useRef, Fragment } from "react";
+import type { FeedItem } from "@/lib/feed";
 import { FeedCard } from "./feed-card";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 
@@ -21,40 +20,11 @@ type Props = {
 };
 
 export function FeedContainer({ items }: Props) {
-  const [filter, setFilter] = useState<FeedFilterKey>("tumu");
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  // Filtre değişince görünür sayıyı da sıfırla
-  const handleFilterChange = (key: FeedFilterKey) => {
-    setFilter(key);
-    setVisibleCount(INITIAL_COUNT);
-  };
-
-  // Filtrelenmiş öğeler
-  const filtered = useMemo(
-    () =>
-      filter === "tumu" ? items : items.filter((i) => i.type === filter),
-    [items, filter],
-  );
-
-  // Tip bazlı sayaçlar
-  const counts = useMemo(() => {
-    const c: Record<FeedFilterKey, number> = {
-      tumu: items.length,
-      haber: 0,
-      yazi: 0,
-      prompt: 0,
-      haftalik: 0,
-    };
-    for (const item of items) {
-      c[item.type]++;
-    }
-    return c;
-  }, [items]);
-
-  const visible = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
+  const visible = items.slice(0, visibleCount);
+  const hasMore = visibleCount < items.length;
 
   // IntersectionObserver ile sonsuz scroll
   useEffect(() => {
@@ -65,7 +35,7 @@ export function FeedContainer({ items }: Props) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisibleCount((prev) =>
-            Math.min(prev + LOAD_MORE_COUNT, filtered.length),
+            Math.min(prev + LOAD_MORE_COUNT, items.length),
           );
         }
       },
@@ -74,19 +44,19 @@ export function FeedContainer({ items }: Props) {
 
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [hasMore, filtered.length]);
+  }, [hasMore, items.length]);
 
   return (
     <div className="mx-auto max-w-[640px] px-4 sm:px-0">
-      {/* Sticky filter tabs — header (h-14) altında */}
-      <div className="sticky top-14 z-30 bg-surface-0/80 backdrop-blur-md border-b border-white/[0.04] -mx-4 px-4 sm:mx-0 sm:px-0">
-        <FeedFilters active={filter} onChange={handleFilterChange} counts={counts} />
-      </div>
-
-      {/* Feed akışı */}
-      <div className="pt-4 space-y-4">
+      {/* Feed akışı — gönderiler arası nefes alanı */}
+      <div className="pt-4 space-y-6 sm:space-y-8">
         {visible.map((item, i) => (
           <Fragment key={item.id}>
+            {/* Gönderiler arası ince ayırıcı çizgi */}
+            {i > 0 && (
+              <div className="mx-auto w-12 h-px bg-white/[0.04]" />
+            )}
+
             <FeedCard item={item} index={i} />
 
             {/* Her N karttan sonra newsletter CTA */}
@@ -114,16 +84,9 @@ export function FeedContainer({ items }: Props) {
       )}
 
       {/* Akış sonu */}
-      {!hasMore && filtered.length > 0 && (
+      {!hasMore && items.length > 0 && (
         <p className="py-12 text-center text-xs font-mono text-gray-800">
           Tüm içerikleri gördün
-        </p>
-      )}
-
-      {/* Boş filtre durumu */}
-      {filtered.length === 0 && (
-        <p className="py-20 text-center text-sm text-gray-600">
-          Bu kategoride henüz içerik yok.
         </p>
       )}
     </div>

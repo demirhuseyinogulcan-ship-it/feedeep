@@ -5,6 +5,7 @@ import { fontHeading, fontSans, fontMono } from "@/lib/fonts";
 import { SITE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import { CursorGlow } from "@/components/layout/cursor-glow";
 import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
 import { NotificationPrompt } from "@/components/shared/notification-prompt";
@@ -150,6 +151,12 @@ export default function RootLayout({
         </main>
 
         <Footer />
+
+        {/* Mobil alt navigasyon (Instagram/Substack tarzı) */}
+        <MobileNav />
+
+        {/* Mobil nav için alt boşluk */}
+        <div className="h-14 md:hidden" aria-hidden="true" />
 
         {/* KVKK Çerez Bildirimi */}
         <CookieConsent />

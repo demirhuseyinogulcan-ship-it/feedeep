@@ -141,18 +141,6 @@ export default async function YaziDetayPage({ params }: Props) {
 
         <div className="line-void mb-12" />
 
-        {/* Karşı Görüş */}
-        {post.counterpoint && (
-          <aside className="mb-12 py-4 border-l-2 border-white/[0.06] pl-4 animate-fade-up delay-100">
-            <p className="text-[11px] font-mono tracking-widest uppercase text-gray-600 mb-2">
-              Karşı görüş
-            </p>
-            <p className="text-sm text-gray-400 leading-relaxed italic">
-              {post.counterpoint}
-            </p>
-          </aside>
-        )}
-
         {/* MDX İçerik */}
         <div className="animate-fade-up delay-200">
           <MDXContent code={post.body} />

@@ -56,7 +56,6 @@ const yazilar = defineCollection({
     // Editoryal
     editorPick: s.boolean().default(false),
     editorNote: s.string().max(200).optional(),
-    counterpoint: s.string().optional(),
     actionItems: s.array(s.string()).default([]),
 
     // Seri Navigasyonu
