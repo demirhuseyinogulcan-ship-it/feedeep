@@ -14,9 +14,18 @@ export type AuthUser = {
 
 /** Username → deterministic fake e-posta. Supabase Auth e-posta zorunlu kılıyor,
  *  biz kullanıcıdan e-posta istemiyoruz. Aynı username her zaman aynı e-postayı üretir.
- *  .invalid TLD — IANA reserved, asla gerçek domain olmayacak. */
+ *  .invalid TLD — IANA reserved, asla gerçek domain olmayacak.
+ *  Sadece ASCII — Supabase/SMTP Türkçe karakterleri kabul etmiyor. */
 function usernameToEmail(username: string): string {
-  const slug = username.toLowerCase().replace(/[^a-z0-9çğıöşü]/gi, "");
+  const slug = username
+    .toLowerCase()
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ı/g, "i")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
+    .replace(/[^a-z0-9]/g, "");
   return `${slug}@kullanici.invalid`;
 }
 

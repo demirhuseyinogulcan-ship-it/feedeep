@@ -58,18 +58,17 @@ export function useComments(articleId: string) {
   }, [articleId, user]);
 
   // Supabase'den ilk yükleme (async — effect'te güvenli)
+  // Herkes (anonim dahil) Supabase yorumlarını görebilir (RLS: SELECT true)
   useEffect(() => {
     isSupabase.current = false;
-    if (user) {
-      fetchCommentsFromSupabase(articleId).then((remote) => {
-        if (remote.length > 0 || isSupabase.current) {
-          isSupabase.current = true;
-          setComments(remote);
-        }
-      }).catch((err) => {
-        console.error("[useComments] Supabase fetch hatası:", err);
-      });
-    }
+    fetchCommentsFromSupabase(articleId).then((remote) => {
+      if (remote.length > 0) {
+        isSupabase.current = true;
+        setComments(remote);
+      }
+    }).catch((err) => {
+      console.error("[useComments] Supabase fetch hatası:", err);
+    });
   }, [articleId, user]);
 
   // Root yorumları filtrele

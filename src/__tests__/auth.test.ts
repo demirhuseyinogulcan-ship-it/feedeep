@@ -68,10 +68,10 @@ describe("Auth — usernameToEmail davranışı", () => {
     expect(capturedEmail).toMatch(/@kullanici\.invalid$/);
   });
 
-  it("signUp username'i lowercase slug yapar", async () => {
+  it("signUp username'i lowercase ASCII slug yapar (Turkce karakterler donusturulur)", async () => {
     const { signUp } = await import("@/lib/auth");
     await signUp("password123", "BulutMühendisi");
-    expect(capturedEmail).toMatch(/^bulutmühendisi@/);
+    expect(capturedEmail).toMatch(/^bulutmuhendisi@/);
   });
 
   it("signIn aynı username'den aynı email üretir", async () => {
