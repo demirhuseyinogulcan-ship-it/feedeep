@@ -9,9 +9,7 @@ import {
   FRESHNESS,
   YAZI_CATEGORIES,
   HABER_CATEGORIES,
-  PROMPT_CATEGORIES,
   GUIDE_TECHNOLOGIES,
-  DIFFICULTY,
 } from "@/lib/constants";
 
 // ─── SITE config ───
@@ -104,13 +102,8 @@ describe("Category maps", () => {
     expect(HABER_CATEGORIES).toHaveProperty("arastirma");
   });
 
-  it("PROMPT_CATEGORIES has expected categories", () => {
-    expect(PROMPT_CATEGORIES).toHaveProperty("kod");
-    expect(PROMPT_CATEGORIES).toHaveProperty("analiz");
-  });
-
   it("all category values are non-empty strings", () => {
-    const allMaps = [YAZI_CATEGORIES, HABER_CATEGORIES, PROMPT_CATEGORIES];
+    const allMaps = [YAZI_CATEGORIES, HABER_CATEGORIES];
     for (const map of allMaps) {
       for (const [key, value] of Object.entries(map)) {
         expect(key).toBeTruthy();
@@ -140,11 +133,4 @@ describe("GUIDE_TECHNOLOGIES", () => {
 
 // ─── DIFFICULTY ───
 
-describe("DIFFICULTY levels", () => {
-  it("has three levels", () => {
-    expect(Object.keys(DIFFICULTY)).toHaveLength(3);
-    expect(DIFFICULTY).toHaveProperty("baslangic");
-    expect(DIFFICULTY).toHaveProperty("orta");
-    expect(DIFFICULTY).toHaveProperty("ileri");
-  });
-});
+

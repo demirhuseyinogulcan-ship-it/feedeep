@@ -7,9 +7,6 @@
 // Kullanım:
 //   node scripts/new-content.mjs yazi
 //   node scripts/new-content.mjs haber
-//   node scripts/new-content.mjs prompt
-//   node scripts/new-content.mjs kart
-//   node scripts/new-content.mjs haftalik
 // ─────────────────────────────────────────────────────────────
 
 import { createInterface } from "readline";
@@ -38,22 +35,6 @@ function slugify(text) {
 
 function today() {
   return new Date().toISOString().split("T")[0];
-}
-
-function getISOWeek(date) {
-  const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7));
-  const week1 = new Date(d.getFullYear(), 0, 4);
-  return (
-    1 +
-    Math.round(
-      ((d.getTime() - week1.getTime()) / 86400000 -
-        3 +
-        ((week1.getDay() + 6) % 7)) /
-        7
-    )
-  );
 }
 
 function ask(rl, question, defaultValue) {
@@ -207,164 +188,16 @@ socialSnippet: ""
 published: true
 ---
 
-## Ne Oldu?
+[HOOK: Haberin en dikkat çekici cümlesiyle başla.]
 
-[1-2 cümle net özet.]
+[BAĞLAM: Detayları ver, teknik kavramları doğal biçimde açıkla.]
 
-## Neden Önemli?
+[ANALİZ: Somut değer — rakam, karşılaştırma, insider bilgi.]
 
-[Bağlam ve etki analizi.]
-
-## Türkiye İçin Ne Anlama Geliyor?
-
-[Yerel perspektif.]
+[KAPANIŞ: Pratik adım veya gelecek perspektifi.]
 `;
 
   writeContent("haberler", `${slug}.mdx`, content);
-}
-
-async function newPrompt(rl) {
-  console.log("\n🎯 Yeni Prompt Oluştur\n");
-
-  const title = await ask(rl, "Başlık (max 70 karakter)");
-  const slug = await ask(rl, "Slug", slugify(title));
-  const description = await ask(rl, "Açıklama (max 160 karakter)");
-  const category = await choose(rl, "Kategori:", [
-    "icerik-uretim",
-    "kod",
-    "analiz",
-    "pazarlama",
-    "egitim",
-    "genel",
-  ]);
-  const difficulty = await choose(rl, "Zorluk:", [
-    "baslangic",
-    "orta",
-    "ileri",
-  ]);
-  const targetRole = await ask(rl, "Hedef kitle (ör: Pazarlamacı)");
-  const keywords = await ask(rl, "Keywords (virgülle ayır, max 5)");
-
-  const keywordList = keywords
-    .split(",")
-    .map((k) => k.trim())
-    .filter(Boolean)
-    .slice(0, 5);
-
-  const content = `---
-title: "${title}"
-slug: ${slug}
-description: "${description}"
-date: ${today()}
-prompt: |
-  PROMPT METNİ BURAYA
-
-  [DEĞİŞKEN_1] ve [DEĞİŞKEN_2] yerlerine kendi değerlerinizi yazın.
-category: ${category}
-difficulty: ${difficulty}
-targetRole: "${targetRole}"
-models:
-  - name: "Claude Opus 4"
-    score: 0
-    note: ""
-  - name: "GPT-4.1"
-    score: 0
-    note: ""
-variables:
-  - name: "DEĞİŞKEN_1"
-    description: "Açıklama"
-    example: "Örnek değer"
-commonMistakes:
-  - "Sık yapılan hata 1"
-  - "Sık yapılan hata 2"
-keywords:
-${keywordList.map((k) => `  - "${k}"`).join("\n")}
-published: true
----
-
-## Bu Prompt Ne İşe Yarar?
-
-[Hangi sorunu çözer, kimin için faydalı.]
-
-## Nasıl Kullanılır?
-
-1. Değişkenleri doldurun
-2. Modele yapıştırın
-3. Çıktıyı kontrol edin
-
-## Örnek Çıktı
-
-> [Örnek çıktı buraya]
-
-## İpuçları
-
-- [İpucu 1]
-- [İpucu 2]
-`;
-
-  writeContent("promptlar", `${slug}.mdx`, content);
-}
-
-async function newHaftalik(rl) {
-  console.log("\n📅 Yeni Haftalık Brifing Oluştur\n");
-
-  const now = new Date();
-  const weekNum = getISOWeek(now);
-  const year = now.getFullYear();
-
-  const weekNumber = await ask(rl, "Hafta numarası", String(weekNum));
-  const yearStr = await ask(rl, "Yıl", String(year));
-  const wn = weekNumber.padStart(2, "0");
-  const slug = `${yearStr}-w${wn}`;
-
-  const content = `---
-title: "AI Haftalık Brifing — Hafta ${weekNumber}, ${yearStr}"
-slug: "${slug}"
-description: "${yearStr} yılının ${weekNumber}. haftasında öne çıkan AI gelişmeleri ve eylem önerisi"
-weekNumber: ${parseInt(weekNumber)}
-year: ${parseInt(yearStr)}
-date: ${today()}
-highlights:
-  - title: "Highlight 1"
-    summary: "Özet"
-    url: ""
-  - title: "Highlight 2"
-    summary: "Özet"
-    url: ""
-  - title: "Highlight 3"
-    summary: "Özet"
-    url: ""
-weeklyAction: "Bu hafta yapmanız gereken eylem"
-published: true
----
-
-## Bu Hafta Neler Oldu?
-
-[Haftanın genel tonu.]
-
-### 1. [Highlight 1]
-
-[Detaylı özet — 3-5 cümle.]
-
-### 2. [Highlight 2]
-
-[Detaylı özet — 3-5 cümle.]
-
-### 3. [Highlight 3]
-
-[Detaylı özet — 3-5 cümle.]
-
-## Haftanın Sayıları
-
-- **[Sayı 1]:** [Bağlam]
-- **[Sayı 2]:** [Bağlam]
-
-## Bu Hafta Ne Yapmalısınız?
-
-[Haftalık aksiyon detayı.]
-`;
-
-  writeContent("haftalik", `${slug}.mdx`, content);
 }
 
 // ─── Main ────────────────────────────────────────────────────
@@ -373,8 +206,6 @@ const type = process.argv[2];
 const TYPES = {
   yazi: newYazi,
   haber: newHaber,
-  prompt: newPrompt,
-  haftalik: newHaftalik,
 };
 
 if (!type || !TYPES[type]) {
@@ -386,8 +217,6 @@ if (!type || !TYPES[type]) {
 ║   Kullanım:                                  ║
 ║     npm run new:yazi                         ║
 ║     npm run new:haber                        ║
-║     npm run new:prompt                       ║
-║     npm run new:haftalik                     ║
 ║                                              ║
 ╚══════════════════════════════════════════════╝
 `);

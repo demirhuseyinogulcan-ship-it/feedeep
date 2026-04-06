@@ -54,7 +54,7 @@ export function ViewCounter({ slug, publishDate, type = "yazi" }: ViewCounterPro
   if (views === null) return null;
 
   return (
-    <span className="text-[10px] font-mono tracking-wider text-gray-600">
+    <span className="text-[10px] font-sans tracking-wider text-gray-600">
       {formatCount(views)} görüntülenme
     </span>
   );

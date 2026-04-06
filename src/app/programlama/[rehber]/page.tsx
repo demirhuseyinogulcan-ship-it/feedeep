@@ -142,8 +142,8 @@ export default async function RehberOverviewPage({ params }: PageProps) {
         {/* ─── Progress ─── */}
         <div className="mb-8 animate-fade-up delay-100">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-mono text-gray-600">İlerleme</span>
-            <span className="text-xs font-mono text-gray-600">
+            <span className="text-xs font-sans text-gray-600">İlerleme</span>
+            <span className="text-xs font-sans text-gray-600">
               {chapters.length}/{first.totalChapters}
             </span>
           </div>
@@ -186,7 +186,7 @@ export default async function RehberOverviewPage({ params }: PageProps) {
                     {/* Meta */}
                     <div className="flex items-center gap-3 shrink-0">
                       {chapter.estimatedMinutes && (
-                        <span className="text-[10px] font-mono text-gray-600">
+                        <span className="text-[10px] font-sans text-gray-600">
                           {chapter.estimatedMinutes} dk
                         </span>
                       )}

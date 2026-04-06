@@ -4,7 +4,7 @@
 
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/constants";
-import { yazilar, haberler, promptlar, haftalik, rehberler } from "#site/content";
+import { yazilar, haberler, rehberler } from "#site/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
@@ -28,24 +28,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.9,
-    },
-    {
-      url: `${SITE.url}/prompt-kutuphanesi`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/zaman-cizelgesi`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE.url}/haftalik`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
     },
     {
       url: `${SITE.url}/programlama`,
@@ -92,24 +74,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }));
 
-  const promptlarPages: MetadataRoute.Sitemap = promptlar
-    .filter((p) => p.published)
-    .map((p) => ({
-      url: `${SITE.url}/prompt-kutuphanesi/${p.slug}`,
-      lastModified: p.updated ?? p.date,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    }));
-
-  const haftalikPages: MetadataRoute.Sitemap = haftalik
-    .filter((h) => h.published)
-    .map((h) => ({
-      url: `${SITE.url}/haftalik/${h.slug}`,
-      lastModified: h.date,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }));
-
   // Rehber overview sayfaları (pillar pages)
   const guides = new Set(rehberler.filter((r) => r.published).map((r) => r.guide));
   const rehberOverviewPages: MetadataRoute.Sitemap = Array.from(guides).map((g) => ({
@@ -133,8 +97,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...yazilarPages,
     ...haberlerPages,
-    ...promptlarPages,
-    ...haftalikPages,
     ...rehberOverviewPages,
     ...rehberPages,
   ];

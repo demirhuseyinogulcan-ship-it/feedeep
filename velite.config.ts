@@ -114,58 +114,6 @@ const haberler = defineCollection({
   }),
 });
 
-// ─── Prompt Kütüphanesi ─────────────────────────────────────
-
-const promptlar = defineCollection({
-  name: "Prompt",
-  pattern: "promptlar/**/*.mdx",
-  schema: s.object({
-    title: s.string().max(70),
-    slug: s.slug("promptlar"),
-    description: s.string().max(160),
-    date: s.isodate(),
-    updated: s.isodate().optional(),
-    published: s.boolean().default(true),
-
-    // Prompt spesifik
-    prompt: s.string(), // Prompt metni
-    category: s.enum(["icerik-uretim", "kod", "analiz", "pazarlama", "egitim", "genel"]),
-    difficulty: s.enum(["baslangic", "orta", "ileri"]),
-    targetRole: s.string().optional(), // "CMO", "Growth", "Editör"
-
-    // Model skorları
-    models: s
-      .array(
-        s.object({
-          name: s.string(),
-          score: s.number().min(1).max(10),
-          note: s.string().optional(),
-        })
-      )
-      .default([]),
-
-    // Değişkenler
-    variables: s
-      .array(
-        s.object({
-          name: s.string(),
-          description: s.string(),
-          example: s.string().optional(),
-        })
-      )
-      .default([]),
-
-    // Hata senaryoları
-    commonMistakes: s.array(s.string()).default([]),
-
-    keywords: s.array(s.string()).max(5),
-
-    // MDX body — detaylı açıklama ve örnek output
-    body: s.mdx(),
-    metadata: s.metadata(),
-  }),
-});
-
 // ─── Model/Araç Kartları ────────────────────────────────────
 
 const _kartlar = defineCollection({
@@ -215,45 +163,6 @@ const _kartlar = defineCollection({
     relatedYazilar: s.array(s.string()).default([]),
 
     // MDX body — detaylı inceleme
-    body: s.mdx(),
-    metadata: s.metadata(),
-  }),
-});
-
-// ─── Haftalık Brifing ───────────────────────────────────────
-
-const haftalik = defineCollection({
-  name: "Haftalik",
-  pattern: "haftalik/**/*.mdx",
-  schema: s.object({
-    title: s.string(),
-    slug: s.slug("haftalik"),
-    description: s.string().max(160),
-    weekNumber: s.number(),
-    year: s.number(),
-    date: s.isodate(),
-    published: s.boolean().default(true),
-
-    // Görsel
-    image: s.string().optional(),
-    imageAlt: s.string().optional(),
-    imageCredit: s.string().optional(),
-    blurDataURL: s.string().optional(),
-
-    // Editör seçimi — haftanın en önemli 3 gelişmesi
-    highlights: s
-      .array(
-        s.object({
-          title: s.string(),
-          summary: s.string(),
-          url: s.string().url().optional(),
-        })
-      )
-      .max(3),
-
-    // Bu hafta denenecek aksiyon
-    weeklyAction: s.string(),
-
     body: s.mdx(),
     metadata: s.metadata(),
   }),
@@ -318,7 +227,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { yazilar, haberler, promptlar, haftalik, rehberler },
+  collections: { yazilar, haberler, rehberler },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

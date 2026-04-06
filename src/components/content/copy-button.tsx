@@ -38,7 +38,7 @@ export function CopyButton({ text, className }: CopyButtonProps) {
     <button
       type="button"
       onClick={handleCopy}
-      className={`text-xs font-mono transition-colors ${
+      className={`text-xs font-sans transition-colors ${
         copied ? "text-gray-300" : "text-gray-600 hover:text-gray-400"
       } ${className ?? ""}`}
       aria-label={copied ? "Kopyalandı" : "Panoya kopyala"}

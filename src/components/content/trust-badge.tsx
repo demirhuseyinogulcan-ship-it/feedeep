@@ -25,7 +25,7 @@ type TrustBadgeProps = {
   className?: string;
 };
 
-const confidenceLabel = {
+const _confidenceLabel = {
   high: "Yüksek",
   medium: "Orta",
   speculative: "Spekülatif",
@@ -45,7 +45,7 @@ export function TrustBadge({
         className
       )}
     >
-      <span className="text-[10px] font-mono tracking-widest uppercase text-gray-700 block mb-4">
+      <span className="text-[10px] font-sans tracking-widest uppercase text-gray-700 block mb-4">
         Kaynaklar
       </span>
 
@@ -53,7 +53,7 @@ export function TrustBadge({
       <div className="space-y-1.5 mb-4">
         {sources.map((source, i) => (
           <div key={i} className="flex items-baseline gap-3 text-sm">
-            <span className="text-[10px] font-mono text-gray-700 flex-shrink-0">
+            <span className="text-[10px] font-sans text-gray-700 flex-shrink-0">
               T{source.tier}
             </span>
             <a
@@ -70,14 +70,13 @@ export function TrustBadge({
 
       {/* Meta */}
       <div className="flex flex-wrap gap-4 text-[10px] text-gray-800">
-        <span>Güven: {confidenceLabel[confidence]}</span>
         <span>Son kontrol: {formatDate(lastFactChecked)}</span>
       </div>
 
       {/* Corrections */}
       {corrections.length > 0 && (
         <div className="mt-4 pt-3 border-t border-white/[0.04]">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-gray-700 block mb-2">
+          <span className="text-[10px] font-sans tracking-widest uppercase text-gray-700 block mb-2">
             Düzeltmeler
           </span>
           {corrections.map((c, i) => (

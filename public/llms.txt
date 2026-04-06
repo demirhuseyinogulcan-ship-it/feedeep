@@ -1,6 +1,6 @@
 # AI Rehber
 
-> Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.
+> Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.
 
 AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz yakalı profesyonellere, pazarlamacılara ve teknoloji meraklılarına yapay zeka araçlarını iş hayatlarında nasıl kullanabileceklerini gösteren pratik, güvenilir ve güncel içerikler sunar.
 
@@ -8,40 +8,35 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 
 - **Yazılar**: Derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar (1000-5000 kelime, evergreen)
 - **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
-- **Prompt Kütüphanesi**: Model bazlı skorlanmış, değişkenli, hata senaryolu prompt şablonları
-- **Haftalık Brifing**: Her hafta AI dünyasının 3 önemli gelişmesi + aksiyon önerisi
 - **Programlama Rehberleri**: Sıfırdan ileri seviyeye, interaktif alıştırmalarla programlama dersleri
 
 ## Sayfalar
 
 - [Yazılar](https://airehber.com/yazilar): Tüm rehberler, incelemeler ve analizler
 - [Haberler](https://airehber.com/haberler): Güncel AI haberleri
-- [Prompt Kütüphanesi](https://airehber.com/prompt-kutuphanesi): Kullanıma hazır prompt şablonları
-- [Haftalık Brifing](https://airehber.com/haftalik): Haftalık AI özet bülteni
 - [Programlama Rehberleri](https://airehber.com/programlama): Adım adım programlama dersleri
-- [AI Zaman Çizelgesi](https://airehber.com/zaman-cizelgesi): Kronolojik AI gelişmeleri
 - [Yazar](https://airehber.com/yazar/can-demir): Editör ve kurucu hakkında
 - [Hakkımızda](https://airehber.com/hakkimizda): Ekip ve misyon
 
 ## Son İçerikler (Nisan 2026)
 
 ### Haberler
+- [Anthropic Siyasi Lobiye Ağırlığını Koyuyor: AnthroPAC Kuruldu](https://airehber.com/haberler/anthropic-anthropac-siyasi-lobi-pac-kuruldu): Anthropic, AnthroPAC adlı siyasi eylem komitesi kurdu. AI şirketleri 2026 ara seçimlerine toplam 185 milyon dolar akıttı.
 - [Anthropic, Claude Aboneliklerini OpenClaw'a Kapattı](https://airehber.com/haberler/anthropic-claude-abonelik-openclaw-ucuncu-parti-kisitlama): Anthropic, Claude Pro ve Max aboneliklerinin OpenClaw ve üçüncü parti AI ajanlarla kullanımını sona erdirdi. Kullandıkça öde modeli başladı.
+- [Arcee Trinity-Large-Thinking: 400B Açık Kaynak Model](https://airehber.com/haberler/arcee-trinity-large-thinking-400b-acik-kaynak-model): Arcee AI, 399 milyar parametreli Trinity-Large-Thinking modelini Apache 2.0 lisansla yayınladı. Opus 4.6'ya yakın performans, %96 ucuz.
 - [Nvidia GTC 2026: Agent Toolkit ve 17 Fortune 500 Şirketi](https://airehber.com/haberler/nvidia-gtc-2026-agent-toolkit-17-sirket): Jensen Huang, GTC 2026'da açık kaynaklı Agent Toolkit platformunu tanıttı. Adobe, Salesforce, SAP dahil 17 Fortune 500 şirketi altyapıyı benimsedi.
 - [OpenAI Üst Yönetiminde Üç Koltuk Birden Değişti](https://airehber.com/haberler/openai-ust-yonetim-degisikligi-lightcap-simo-rouch): COO Brad Lightcap özel projelere geçiyor, AGI CEO'su Fidji Simo tıbbi izne ayrılıyor, CMO Kate Rouch kanser tedavisi için görevden ayrılıyor.
-- [Arcee Trinity-Large-Thinking: 400B Açık Kaynak Model](https://airehber.com/haberler/arcee-trinity-large-thinking-400b-acik-kaynak-model): Arcee AI, 399 milyar parametreli Trinity-Large-Thinking modelini Apache 2.0 lisansla yayınladı. Opus 4.6'ya yakın performans, %96 ucuz.
-- [Anthropic Siyasi Lobiye Ağırlığı Koyuyor: AnthroPAC Kuruldu](https://airehber.com/haberler/anthropic-anthropac-siyasi-lobi-pac-kuruldu): Anthropic, AnthroPAC adlı siyasi eylem komitesi kurdu. AI şirketleri 2026 ara seçimlerine toplam 185 milyon dolar akıttı.
-- [OpenAI Sora'yı Kapattı: Günde 1 Milyon Dolar Zarar Detayı](https://airehber.com/haberler/openai-sora-kapatti-gunde-1-milyon-dolar-zarar): WSJ soruşturmasına göre OpenAI'ın video üretici Sora, günde 1 milyon dolar zarar ediyordu. Disney 1 milyar dolarlık anlaşmayı bir saat öncesinde öğrendi.
 - [Claude Code Kaynak Kodu Sızdı, Anthropic 8.100 GitHub Reposunu Kapattı](https://airehber.com/haberler/anthropic-claude-code-kaynak-kodu-sizintisi-github): Anthropic, Claude Code'un kaynak kodunu yanlışlıkla yayınladı. Geri almaya çalışırken DMCA bildirimiyle 8.100 GitHub deposunu kapattırdı.
+- [Anthropic, Coefficient Bio'yu 400 Milyon Dolara Satın Aldı](https://airehber.com/haberler/anthropic-coefficient-bio-400-milyon-dolar-satin-alim): Anthropic, biyoteknoloji girişimi Coefficient Bio'yu 400 milyon dolarlık hisse anlaşmasıyla satın aldı. Claude'un sağlık ve yaşam bilimleri atılımı sürüyor.
+- [Google Gemma 4'u Apache 2.0 ile Açtı: Çin Kapatırken Google Açıyor](https://airehber.com/haberler/google-gemma-4-apache-2-0-acik-kaynak): Google, Gemma 4 modelini Apache 2.0 lisansıyla tamamen açık kaynak olarak yayınladı. Çinli laboratuvarlar açık kaynaktan çekilirken Google ters yönde ilerliyor.
+- [Microsoft 3 Yeni Temel Model Tanıttı: Ses, Görsel, Transkript](https://airehber.com/haberler/microsoft-mai-3-yeni-temel-model-ses-gorsel-transkript): Microsoft, MAI-Transcribe-1, MAI-Voice-1 ve MAI-Image-2 modellerini duyurdu. Suleyman'ın süper zeka ekibinden gelen modeller rekabeti kızıştırıyor.
+- [Mistral AI Veri Merkezi İçin 830 Milyon Dolar Borç Aldı](https://airehber.com/haberler/mistral-ai-830-milyon-dolar-veri-merkezi-paris): Fransız AI laboratuvarı Mistral AI, Paris yakınında veri merkezi kurmak için 830 milyon dolar borç finansmanı sağladı. Nvidia çipleriyle donatılacak.
 - [OpenAI 122 Milyar Dolarlık Rekor Yatırım Turunu Kapattı](https://airehber.com/haberler/openai-122-milyar-dolar-rekor-yatirim-turu): OpenAI, 852 milyar dolar değerlemeyle 122 milyar dolarlık yatırım turu kapattı. 3 milyar dolar bireysel yatırımcılardan geldi.
-- [Microsoft 3 Yeni Temel Model Tanıttı: Ses, Görsel, Transkript](https://airehber.com/haberler/microsoft-mai-3-yeni-temel-model-ses-gorsel-transkript): Microsoft, MAI-Transcribe-1, MAI-Voice-1 ve MAI-Image-2 modellerini duyurdu. Suleyman'ın süper zeka ekibinden gelen modeller.
-- [Google Gemma 4'u Apache 2.0 ile Açtı: Çin Kapatırken Google Açıyor](https://airehber.com/haberler/google-gemma-4-apache-2-0-acik-kaynak): Google, Gemma 4 modelini Apache 2.0 lisansıyla tamamen açık kaynak olarak yayınladı. Çinli laboratuvarlar açık kaynaktan çekilirken Google ters yönde.
-- [Anthropic, Coefficient Bio'yu 400 Milyon Dolara Satın Aldı](https://airehber.com/haberler/anthropic-coefficient-bio-400-milyon-dolar-satin-alim): Anthropic, biyoteknoloji girişimi Coefficient Bio'yu 400 milyon dolarlık hisse anlaşmasıyla satın aldı. Claude'un yaşam bilimleri atılımı sürüyor.
-- [Slack 30 Yeni AI Özellik Ekledi: Çalışanlar Günde 90 Dakika Kazanıyor](https://airehber.com/haberler/slack-30-yeni-ai-ozellik-salesforce-en-hizli): Salesforce, Slack'i şirket tarihinin en hızlı benimsenen ürünü ilan etti. 30 yeni AI özellikle çalışanlar günde 90 dakika kazanıyor.
-- [Mistral AI Veri Merkezi İçin 830 Milyon Dolar Borç Aldı](https://airehber.com/haberler/mistral-ai-830-milyon-dolar-veri-merkezi-paris): Fransız AI laboratuvarı Mistral AI, Paris yakınında veri merkezi kurmak için 830 milyon dolar borç finansmanı sağladı.
+- [OpenAI Sora'yı Kapattı: Günde 1 Milyon Dolar Zarar Detayı](https://airehber.com/haberler/openai-sora-kapatti-gunde-1-milyon-dolar-zarar): WSJ soruşturmasına göre OpenAI'ın video üretici Sora, günde 1 milyon dolar zarar ediyordu. Disney 1 milyar dolarlık anlaşmayı bir saat öncesinde öğrendi.
+- [Slack 30 Yeni AI Özellik Ekledi: Çalışanlar Günde 90 Dakika Kazanıyor](https://airehber.com/haberler/slack-30-yeni-ai-ozellik-salesforce-en-hizli): Salesforce, Slack'i şirket tarihinin en hızlı benimsenen ürünü ilan etti. 30 yeni AI özellikle çalışanlar günde 90 dakika, ekipler haftada 20 saat kazanıyor.
 - [Apple WWDC 2026 Duyuruldu: İlk Kez Yapay Zeka Vurgusu](https://airehber.com/haberler/apple-wwdc-2026-yapay-zeka-vurgusu-haziran): Apple, WWDC 2026'yı 8-12 Haziran için duyurdu. Şirket tarihinde ilk kez resmi duyuruda yapay zeka gelişmeleri ifadesine yer verdi.
-- [Cursor'ın Sırrı Ortaya Çıktı: Composer 2 Aslında Kimi Tabanlı](https://airehber.com/haberler/cursor-composer-2-kimi-k2-5-tabanli-model-skandali): 29.3 milyar dolar değerlemeli Cursor, yeni Composer 2 modelinin Moonshot AI'ın Kimi K2.5 tabanlı olduğunu itiraf etti.
-- [Cloudflare CEO: 2027'de Bot Trafiği İnsan Trafiğini Geçecek](https://airehber.com/haberler/cloudflare-ceo-2027-bot-trafigi-insan-trafigini-gecek): Cloudflare CEO'su Matthew Prince, SXSW'de bot trafiğinin 2027'de insan trafiğini geçeceğini açıkladı.
+- [Cursor'ın Sırrı Ortaya Çıktı: Composer 2 Aslında Kimi Tabanlı](https://airehber.com/haberler/cursor-composer-2-kimi-k2-5-tabanli-model-skandali): Cursor, Composer 2 modelinin Moonshot AI'ın Kimi K2.5 tabanlı olduğunu itiraf etti. Bir geliştirici API trafiğinde model ID'sini yakaladı.
+- [Cloudflare CEO: 2027'de Bot Trafiği İnsan Trafiğini Geçecek](https://airehber.com/haberler/cloudflare-ceo-2027-bot-trafigi-insan-trafigini-gecek): Cloudflare CEO'su Matthew Prince, SXSW'de bot trafiğinin 2027'de insan trafiğini geçeceğini açıkladı. GenAI öncesi botlar yüzde 20'ydi.
 - [OpenAI, Astral'ı Satın Alıyor: Python Araçları Codex'e Taşınıyor](https://airehber.com/haberler/openai-astral-satin-alim-python-codex-ekosistemi): OpenAI, Python ekosisteminin en popüler açık kaynak araçlarını geliştiren Astral'ı satın alarak Codex platformunu güçlendiriyor.
 - [OpenAI GPT-5.4 mini ve nano: Küçük, Hızlı, Ucuz](https://airehber.com/haberler/openai-gpt-5-4-mini-nano-hizli-ucuz-modeller): OpenAI, GPT-5.4 mini ve nano modellerini duyurdu. Mini model GPT-5 mini'den 2 kat hızlı, nano ise milyon token başına sadece 20 sent.
 - [Nvidia GTC 2026: Jensen Huang'dan 1 Trilyon Dolarlık Çip Projeksiyonu](https://airehber.com/haberler/nvidia-gtc-2026-jensen-huang-1-trilyon-dolar-cip-hedefi): Jensen Huang, GTC 2026 açılışında Blackwell ve Vera Rubin çiplerinden 2027 sonuna kadar 1 trilyon dolarlık sipariş projeksiyonu açıkladı.
@@ -119,6 +114,7 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [OpenAI GPT-5.2 ile Teorik Fizikte Çığır Açtı](https://airehber.com/haberler/openai-gpt-5-2-fizik-kesif): OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
 ### Yazılar
+- [Bilgi Saklayan Yönetici Gerçekten Kazanıyor mu?](https://airehber.com/yazilar/bilgi-saklayan-yonetici-gercekten-kazaniyor-mu): Yöneticiler bilgiyi güç aracı olarak saklıyor. Araştırmalar bunun yaratıcılığı, performansı ve güveni yıktığını gösteriyor. AI bu denklemi kökten değiştiriyor.
 - [AI Yüzünden mi Kovuldular? İşten Çıkarmaların Gerçek Nedeni](https://airehber.com/yazilar/ai-isten-cikarmalarin-gercek-nedeni-pandemi-faizler): Şirketler binlerce kişiyi çıkarıp AI dönüşümü diyor. Ama asıl sebep sıfır faiz döneminde şişen kadrolar ve pahalanan borçlar olabilir.
 - [ChatGPT'den Kopyala Yapıştır Yapanı Artık Herkes Anlıyor](https://airehber.com/yazilar/chatgpt-kopyala-yapistir-yapay-icerik-guven-krizi): LinkedIn'deki AI yazıları yüzde 45 daha az etkileşim alıyor. Okuyucuların yarısı yapay içeriği fark ediyor. İnsan eli değen yazının neden hâlâ önemli olduğu.
 - [Zam İsteyemiyorsun Çünkü Değerin Ölçülmüyor. AI ile Ölç.](https://airehber.com/yazilar/zam-isteyemiyorsun-cunku-degerin-olculmuyor-ai-ile-olc): Zam görüşmesine girip 'çok çalışıyorum' demek yetmiyor. Kendi değerini somut veriyle ortaya koymanın AI destekli yolu.
@@ -128,26 +124,7 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 - [Excel'e Bakarken Hayatını Sorguladın mı? 5 Dakika Protokolü](https://airehber.com/yazilar/excele-bakarken-hayatini-sorguladinmi-5-dakika-protokolu): Her gün aynı tabloyu doldurup 'bunun için mi okudum' diyenler için. AI ile tekrarlayan iş yükünü yarıya düşürmenin pratik yolu.
 - [Yapay Zeka İş Hayatına Sessizce Girdi: 2026'nın Rakamları](https://airehber.com/yazilar/yapay-zeka-is-hayatina-sessizce-girdi-2026): GitHub kodlarının %4'ü, Trendyol kararlarının 500 milyonu, Fortune 10'un 8'i... AI iş hayatına sessizce girdi. İşte 2026'nın gerçek tablosu.
 - [Yöneticiniz Size Geri Bildirim Verdi mi? AI Bunları Çoktan Yapıyor](https://airehber.com/yazilar/yoneticiniz-geri-bildirim-egosuz-yapay-zeka): Yöneticiler geri bildirimi hâlâ hata sıralama sanıyor. Yapay zeka ego'suz, tutarlı ve ölçülebilir bir alternatif sunuyor — ve şimdi kullanabilirsiniz.
-- [Bilgi Saklayan Yönetici Gerçekten Kazanıyor mu?](https://airehber.com/yazilar/bilgi-saklayan-yonetici-gercekten-kazaniyor-mu): Yöneticiler bilgiyi güç aracı olarak saklıyor. Araştırmalar bunun yaratıcılığı, performansı ve güveni yıktığını gösteriyor. AI bu denklemi kökten değiştiriyor.
 - [ChatGPT vs Claude vs Gemini: 2026 Karşılaştırması](https://airehber.com/yazilar/chatgpt-vs-claude-vs-gemini-2026): 2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
-
-### Prompt Kütüphanesi
-- [AI Urun Lansman Analizi Promptu](https://airehber.com/prompt-kutuphanesi/ai-urun-lansman-analizi-promptu): Yeni AI urun lansmanlarini benchmark verisi, fiyatlandirma ve rekabet dinamikleriyle sistematik analiz eden prompt. Karar vericiler icin.
-- [AI Yazısını İnsanlaştırma Promptu](https://airehber.com/prompt-kutuphanesi/ai-yazilarini-insanlastirma-promptu): ChatGPT veya Claude çıktısını robot kokusundan arındırıp doğal, samimi, okunabilir Türkçe yazıya dönüştüren prompt. 7 adımlı düzenleme süreci.
-- [ATS CV Optimizasyon Promptu](https://airehber.com/prompt-kutuphanesi/ats-cv-optimizasyon-promptu): İş ilanı ve CV'ni yapıştır; ATS'nin nasıl skorladığını, hangi anahtar kelimelerin eksik olduğunu ve düzeltilmiş bir CV taslağı al.
-- [Viral İçerik Mühendisi Promptu](https://airehber.com/prompt-kutuphanesi/viral-icerik-muhendisi-promptu): 10 farklı psikolojik kanca üretip en güçlüsünü seçen viral içerik motoru. LinkedIn, X ve Instagram formatlarında.
-- [6 Şapka Düşünce Promptu](https://airehber.com/prompt-kutuphanesi/alti-sapka-dusunce-promptu): Zor kararları 6 farklı perspektiften analiz eden De Bono tekniği. AI'a tek seferde iyimser, karamsar ve yaratıcı bakış açısı yaptır.
-- [Rakip Röntgeni Promptu](https://airehber.com/prompt-kutuphanesi/rakip-rontgeni-promptu): Rakip şirketin adını gir, 7 katmanlı analiz al: hendek analizi, zayıf karın tespiti ve somut savaş planı dahil.
-- [Kendini 3 Kez Düzelt Promptu](https://airehber.com/prompt-kutuphanesi/kendini-3-kez-duzelt-promptu): AI'ın ilk cevabı asla en iyisi değil. Bu prompt modeli kendi çıktısını puanlayıp 3 kez baştan yazmaya zorluyor.
-- [Prompt Üreten Prompt: Meta-Prompt Tekniği](https://airehber.com/prompt-kutuphanesi/prompt-ureten-prompt): Yapay zekaya prompt yazdıran prompt. Ham fikri yapıştır, profesyonel seviye prompt al. 3 modelde test edildi.
-- [SWOT Analizi Promptu](https://airehber.com/prompt-kutuphanesi/swot-analizi-promptu): Şirket adını gir, 4 kategoride 20+ maddelik SWOT raporu al. Claude, GPT-5 ve Gemini'de test edildi.
-
-### Haftalık Brifing
-- [Haftalık AI Brifing #12](https://airehber.com/haftalik/2026-w12): 15-21 Mart 2026 haftasının öne çıkan AI gelişmeleri: Nvidia GTC 1 trilyon dolarlık projeksiyon, OpenAI GPT-5.4 mini/nano ve Cloudflare bot trafiği tahmini.
-- [Haftalık AI Brifing #10](https://airehber.com/haftalik/2026-w10): 1-7 Mart 2026 haftasının öne çıkan AI gelişmeleri: ChatGPT 900 milyon kullanıcı, Cursor 2 milyar dolar gelir ve Gemini chatbot davası.
-- [Haftalık AI Brifing #9](https://airehber.com/haftalik/2026-w09): 22-28 Şubat haftasının öne çıkan AI gelişmeleri: Meta-AMD 100 milyar dolarlık çip anlaşması, Anthropic distilasyon suçlaması ve Jira AI ajanları.
-- [Haftalık AI Brifing #8](https://airehber.com/haftalik/2026-w08): 15-21 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri: Claude Sonnet 4.6, Google AI Modu Türkiye ve OpenAI'ın tarihi yatırım turu.
-- [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07): 10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
 
 ### Programlama Rehberleri
 
@@ -158,10 +135,9 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
 
 ## Sıkça Sorulan Sorular
 
-- **AI Rehber nedir?** AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve kullanıma hazır prompt şablonlarını Türkçe olarak sunan bağımsız bir yayın platformudur.
-- **Yapay zeka haberleri nereden takip edilir?** AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar. Haftalık brifing ile önemli gelişmeleri kaçırmazsınız.
+- **AI Rehber nedir?** AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.
+- **Yapay zeka haberleri nereden takip edilir?** AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.
 - **AI Rehber'deki haberler güvenilir mi?** Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.
-- **Prompt kütüphanesi nasıl kullanılır?** Prompt Kütüphanesi'ndeki şablonları doğrudan ChatGPT, Claude veya Gemini'ye kopyalayabilirsiniz. Her prompt, model bazlı performans skorları ve örnek çıktılarla birlikte sunulur.
 
 ## Güven Politikası
 

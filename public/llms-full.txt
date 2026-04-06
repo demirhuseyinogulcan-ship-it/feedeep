@@ -35,22 +35,7 @@ Güncel AI gelişmeleri. 200-500 kelime.
 Kategoriler: sirketler, sektor, turkiye, arastirma.
 Her haberde kaynak URL ve kaynak adı zorunlu.
 
-### 3. Prompt Kütüphanesi (/prompt-kutuphanesi)
-Kullanıma hazır prompt şablonları.
-Her prompt kartında:
-- Model bazlı skor (1-10, GPT/Claude/Gemini)
-- Değişken sistemi (kullanıcı kendi değerlerini girer)
-- Hata senaryoları
-- Zorluk seviyesi (başlangıç/orta/ileri)
-- Hedef rol (CMO, Growth, Editör vb.)
-
-### 4. Haftalık Brifing (/haftalik)
-Her hafta yayınlanan AI özet bülteni.
-- Haftanın en önemli 3 gelişmesi
-- Editör seçimi açıklamalar
-- "Bu hafta denenecek" aksiyon önerisi
-
-### 5. Programlama Rehberleri (/programlama)
+### 3. Programlama Rehberleri (/programlama)
 Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
 - Next.js, React ve diğer modern framework rehberleri
 - Başlangıçtan ileri seviyeye adım adım ilerleme
@@ -58,15 +43,17 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
 
 ## İstatistikler
 
-- Toplam haber: 72
-- Toplam yazı: 10
-- Toplam prompt: 9
-- Toplam haftalık brifing: 4
+- Toplam haber: 91
+- Toplam yazı: 11
 - Toplam rehber bölümü: 3
 
 ## Tüm İçerik Listesi
 
 ### Yazılar
+- [Bilgi Saklayan Yönetici Gerçekten Kazanıyor mu?](https://airehber.com/yazilar/bilgi-saklayan-yonetici-gercekten-kazaniyor-mu)
+  Kategori: analiz | Tarih: Mon Mar 23 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Yöneticiler bilgiyi güç aracı olarak saklıyor. Araştırmalar bunun yaratıcılığı, performansı ve güveni yıktığını gösteriyor. AI bu denklemi kökten değiştiriyor.
+
 - [AI Yüzünden mi Kovuldular? İşten Çıkarmaların Gerçek Nedeni](https://airehber.com/yazilar/ai-isten-cikarmalarin-gercek-nedeni-pandemi-faizler)
   Kategori: analiz | Tarih: Tue Mar 03 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Şirketler binlerce kişiyi çıkarıp AI dönüşümü diyor. Ama asıl sebep sıfır faiz döneminde şişen kadrolar ve pahalanan borçlar olabilir.
@@ -108,21 +95,97 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
 ### Haberler
-- [Anthropic Claude Marketplace: Kurumsal AI Uygulama Magazasi](https://airehber.com/haberler/anthropic-claude-marketplace-kurumsal-ai-uygulama-magazasi)
-  Kaynak: Anthropic | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
-  Anthropic, isletmelerin mevcut harcamalarini Replit, GitLab, Harvey ve Snowflake gibi Claude tabanli araclara yonlendirebilecegi Claude Marketplace'i duyurdu.
+- [Anthropic Siyasi Lobiye Ağırlığını Koyuyor: AnthroPAC Kuruldu](https://airehber.com/haberler/anthropic-anthropac-siyasi-lobi-pac-kuruldu)
+  Kaynak: TechCrunch | Tarih: Sun Apr 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic, AnthroPAC adlı siyasi eylem komitesi kurdu. AI şirketleri 2026 ara seçimlerine toplam 185 milyon dolar akıttı.
 
-- [Claude Opus 4.6, Firefox'ta 22 Guvenlik Acigi Buldu](https://airehber.com/haberler/claude-opus-firefox-22-guvenlik-acigi)
-  Kaynak: Anthropic | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
-  Anthropic'in Claude Opus 4.6 modeli, Mozilla is birligiyle iki hafta icinde Firefox'ta 22 guvenlik acigi tespit etti. Bunlarin 14'u yuksek oncelikli.
+- [Anthropic, Claude Aboneliklerini OpenClaw'a Kapattı](https://airehber.com/haberler/anthropic-claude-abonelik-openclaw-ucuncu-parti-kisitlama)
+  Kaynak: VentureBeat | Tarih: Sun Apr 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic, Claude Pro ve Max aboneliklerinin OpenClaw ve üçüncü parti AI ajanlarla kullanımını sona erdirdi. Kullandıkça öde modeli başladı.
 
-- [MIT'den Attention Matching: LLM Bellegini 50 Kat Sikistiriyor](https://airehber.com/haberler/mit-attention-matching-llm-bellek-50-kat-sikistirma)
+- [Arcee Trinity-Large-Thinking: 400B Açık Kaynak Model](https://airehber.com/haberler/arcee-trinity-large-thinking-400b-acik-kaynak-model)
+  Kaynak: VentureBeat | Tarih: Sun Apr 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Arcee AI, 399 milyar parametreli Trinity-Large-Thinking modelini Apache 2.0 lisansla yayınladı. Opus 4.6'ya yakın performans, %96 ucuz.
+
+- [Nvidia GTC 2026: Agent Toolkit ve 17 Fortune 500 Şirketi](https://airehber.com/haberler/nvidia-gtc-2026-agent-toolkit-17-sirket)
+  Kaynak: VentureBeat | Tarih: Sun Apr 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Jensen Huang, GTC 2026'da açık kaynaklı Agent Toolkit platformunu tanıttı. Adobe, Salesforce, SAP dahil 17 Fortune 500 şirketi altyapıyı benimsedi.
+
+- [OpenAI Üst Yönetiminde Üç Koltuk Birden Değişti](https://airehber.com/haberler/openai-ust-yonetim-degisikligi-lightcap-simo-rouch)
+  Kaynak: TechCrunch | Tarih: Sun Apr 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  COO Brad Lightcap özel projelere geçiyor, AGI CEO'su Fidji Simo tıbbi izne ayrılıyor, CMO Kate Rouch kanser tedavisi için görevden ayrılıyor.
+
+- [Claude Code Kaynak Kodu Sızdı, Anthropic 8.100 GitHub Reposunu Kapattı](https://airehber.com/haberler/anthropic-claude-code-kaynak-kodu-sizintisi-github)
+  Kaynak: TechCrunch | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic, Claude Code'un kaynak kodunu yanlışlıkla yayınladı. Geri almaya çalışırken DMCA bildirimiyle 8.100 GitHub deposunu kapattırdı.
+
+- [Anthropic, Coefficient Bio'yu 400 Milyon Dolara Satın Aldı](https://airehber.com/haberler/anthropic-coefficient-bio-400-milyon-dolar-satin-alim)
+  Kaynak: TechCrunch | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic, biyoteknoloji girişimi Coefficient Bio'yu 400 milyon dolarlık hisse anlaşmasıyla satın aldı. Claude'un sağlık ve yaşam bilimleri atılımı sürüyor.
+
+- [Google Gemma 4'u Apache 2.0 ile Açtı: Çin Kapatırken Google Açıyor](https://airehber.com/haberler/google-gemma-4-apache-2-0-acik-kaynak)
+  Kaynak: VentureBeat | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Google, Gemma 4 modelini Apache 2.0 lisansıyla tamamen açık kaynak olarak yayınladı. Çinli laboratuvarlar açık kaynaktan çekilirken Google ters yönde ilerliyor.
+
+- [Microsoft 3 Yeni Temel Model Tanıttı: Ses, Görsel, Transkript](https://airehber.com/haberler/microsoft-mai-3-yeni-temel-model-ses-gorsel-transkript)
+  Kaynak: TechCrunch | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Microsoft, MAI-Transcribe-1, MAI-Voice-1 ve MAI-Image-2 modellerini duyurdu. Suleyman'ın süper zeka ekibinden gelen modeller rekabeti kızıştırıyor.
+
+- [Mistral AI Veri Merkezi İçin 830 Milyon Dolar Borç Aldı](https://airehber.com/haberler/mistral-ai-830-milyon-dolar-veri-merkezi-paris)
+  Kaynak: TechCrunch | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Fransız AI laboratuvarı Mistral AI, Paris yakınında veri merkezi kurmak için 830 milyon dolar borç finansmanı sağladı. Nvidia çipleriyle donatılacak.
+
+- [OpenAI 122 Milyar Dolarlık Rekor Yatırım Turunu Kapattı](https://airehber.com/haberler/openai-122-milyar-dolar-rekor-yatirim-turu)
+  Kaynak: TechCrunch | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI, 852 milyar dolar değerlemeyle 122 milyar dolarlık yatırım turu kapattı. 3 milyar dolar bireysel yatırımcılardan geldi.
+
+- [OpenAI Sora'yı Kapattı: Günde 1 Milyon Dolar Zarar Detayı](https://airehber.com/haberler/openai-sora-kapatti-gunde-1-milyon-dolar-zarar)
+  Kaynak: TechCrunch | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  WSJ soruşturmasına göre OpenAI'ın video üretici Sora, günde 1 milyon dolar zarar ediyordu. Disney 1 milyar dolarlık anlaşmayı bir saat öncesinde öğrendi.
+
+- [Slack 30 Yeni AI Özellik Ekledi: Çalışanlar Günde 90 Dakika Kazanıyor](https://airehber.com/haberler/slack-30-yeni-ai-ozellik-salesforce-en-hizli)
+  Kaynak: VentureBeat | Tarih: Sat Apr 04 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Salesforce, Slack'i şirket tarihinin en hızlı benimsenen ürünü ilan etti. 30 yeni AI özellikle çalışanlar günde 90 dakika, ekipler haftada 20 saat kazanıyor.
+
+- [Apple WWDC 2026 Duyuruldu: İlk Kez Yapay Zeka Vurgusu](https://airehber.com/haberler/apple-wwdc-2026-yapay-zeka-vurgusu-haziran)
+  Kaynak: TechCrunch | Tarih: Mon Mar 23 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Apple, WWDC 2026'yı 8-12 Haziran için duyurdu. Şirket tarihinde ilk kez resmi duyuruda yapay zeka gelişmeleri ifadesine yer verdi.
+
+- [Cursor'ın Sırrı Ortaya Çıktı: Composer 2 Aslında Kimi Tabanlı](https://airehber.com/haberler/cursor-composer-2-kimi-k2-5-tabanli-model-skandali)
+  Kaynak: TechCrunch | Tarih: Sun Mar 22 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Cursor, Composer 2 modelinin Moonshot AI'ın Kimi K2.5 tabanlı olduğunu itiraf etti. Bir geliştirici API trafiğinde model ID'sini yakaladı.
+
+- [Cloudflare CEO: 2027'de Bot Trafiği İnsan Trafiğini Geçecek](https://airehber.com/haberler/cloudflare-ceo-2027-bot-trafigi-insan-trafigini-gecek)
+  Kaynak: TechCrunch | Tarih: Thu Mar 19 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Cloudflare CEO'su Matthew Prince, SXSW'de bot trafiğinin 2027'de insan trafiğini geçeceğini açıkladı. GenAI öncesi botlar yüzde 20'ydi.
+
+- [OpenAI, Astral'ı Satın Alıyor: Python Araçları Codex'e Taşınıyor](https://airehber.com/haberler/openai-astral-satin-alim-python-codex-ekosistemi)
+  Kaynak: OpenAI | Tarih: Thu Mar 19 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI, Python ekosisteminin en popüler açık kaynak araçlarını geliştiren Astral'ı satın alarak Codex platformunu güçlendiriyor.
+
+- [OpenAI GPT-5.4 mini ve nano: Küçük, Hızlı, Ucuz](https://airehber.com/haberler/openai-gpt-5-4-mini-nano-hizli-ucuz-modeller)
+  Kaynak: OpenAI | Tarih: Tue Mar 17 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI, GPT-5.4 mini ve nano modellerini duyurdu. Mini model GPT-5 mini'den 2 kat hızlı, nano ise milyon token başına sadece 20 sent.
+
+- [Nvidia GTC 2026: Jensen Huang'dan 1 Trilyon Dolarlık Çip Projeksiyonu](https://airehber.com/haberler/nvidia-gtc-2026-jensen-huang-1-trilyon-dolar-cip-hedefi)
+  Kaynak: TechCrunch | Tarih: Mon Mar 16 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Jensen Huang, GTC 2026 açılışında Blackwell ve Vera Rubin çiplerinden 2027 sonuna kadar 1 trilyon dolarlık sipariş projeksiyonu açıkladı.
+
+- [Anthropic Claude Marketplace: Kurumsal AI Uygulama Mağazası](https://airehber.com/haberler/anthropic-claude-marketplace-kurumsal-ai-uygulama-magazasi)
+  Kaynak: Anthropic | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic, işletmelerin mevcut harcamalarını Replit, GitLab, Harvey ve Snowflake gibi Claude tabanlı araçlara yönlendirebileceği Claude Marketplace'i duyurdu.
+
+- [Claude Opus 4.6, Firefox'ta 22 Güvenlik Açığı Buldu](https://airehber.com/haberler/claude-opus-firefox-22-guvenlik-acigi)
+  Kaynak: Anthropic | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Anthropic'in Claude Opus 4.6 modeli, Mozilla iş birliğiyle iki hafta içinde Firefox'ta 22 güvenlik açığı tespit etti. Bunların 14'ü yüksek öncelikli.
+
+- [MIT'den Attention Matching: LLM Belleğini 50 Kat Sıkıştırıyor](https://airehber.com/haberler/mit-attention-matching-llm-bellek-50-kat-sikistirma)
   Kaynak: arXiv | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
-  MIT arastirmacilari, buyuk dil modellerinin KV cache bellegini dogruluk kaybetmeden 50 kat sikistiran Attention Matching tekniigini gelistirdi.
+  MIT araştırmacıları, büyük dil modellerinin KV cache belleğini doğruluk kaybetmeden 50 kat sıkıştıran Attention Matching tekniğini geliştirdi.
 
-- [OpenAI GPT-5.4: Bilgisayar Kullanimi ve Finansal Eklentiler](https://airehber.com/haberler/openai-gpt-5-4-bilgisayar-kullanimi-finansal-eklentiler)
+- [OpenAI GPT-5.4: Bilgisayar Kullanımı ve Finansal Eklentiler](https://airehber.com/haberler/openai-gpt-5-4-bilgisayar-kullanimi-finansal-eklentiler)
   Kaynak: OpenAI | Tarih: Sat Mar 07 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
-  OpenAI, GPT-5.4 modelini bilgisayar kullanim modu, Excel ve Google Sheets entegrasyonu ve yuzde 47 daha az token tuketimi ile piyasaya surdu.
+  OpenAI, GPT-5.4 modelini bilgisayar kullanım modu, Excel ve Google Sheets entegrasyonu ve yüzde 47 daha az token tüketimi ile piyasaya sürdü.
 
 - [Self-Flow: Multimodal AI Egitimi 2.8 Kat Daha Verimli](https://airehber.com/haberler/black-forest-labs-self-flow-multimodal-egitim-verimliligi)
   Kaynak: VentureBeat | Tarih: Thu Mar 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
@@ -396,60 +459,6 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   Kaynak: OpenAI Blog | Tarih: Thu Feb 12 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
-### Prompt Kütüphanesi
-- [AI Urun Lansman Analizi Promptu](https://airehber.com/prompt-kutuphanesi/ai-urun-lansman-analizi-promptu)
-  Kategori: analiz | Zorluk: ileri
-  Yeni AI urun lansmanlarini benchmark verisi, fiyatlandirma ve rekabet dinamikleriyle sistematik analiz eden prompt. Karar vericiler icin.
-
-- [AI Yazısını İnsanlaştırma Promptu](https://airehber.com/prompt-kutuphanesi/ai-yazilarini-insanlastirma-promptu)
-  Kategori: icerik-uretim | Zorluk: orta
-  ChatGPT veya Claude çıktısını robot kokusundan arındırıp doğal, samimi, okunabilir Türkçe yazıya dönüştüren prompt. 7 adımlı düzenleme süreci.
-
-- [ATS CV Optimizasyon Promptu](https://airehber.com/prompt-kutuphanesi/ats-cv-optimizasyon-promptu)
-  Kategori: genel | Zorluk: baslangic
-  İş ilanı ve CV'ni yapıştır; ATS'nin nasıl skorladığını, hangi anahtar kelimelerin eksik olduğunu ve düzeltilmiş bir CV taslağı al.
-
-- [Viral İçerik Mühendisi Promptu](https://airehber.com/prompt-kutuphanesi/viral-icerik-muhendisi-promptu)
-  Kategori: pazarlama | Zorluk: orta
-  10 farklı psikolojik kanca üretip en güçlüsünü seçen viral içerik motoru. LinkedIn, X ve Instagram formatlarında.
-
-- [6 Şapka Düşünce Promptu](https://airehber.com/prompt-kutuphanesi/alti-sapka-dusunce-promptu)
-  Kategori: analiz | Zorluk: orta
-  Zor kararları 6 farklı perspektiften analiz eden De Bono tekniği. AI'a tek seferde iyimser, karamsar ve yaratıcı bakış açısı yaptır.
-
-- [Rakip Röntgeni Promptu](https://airehber.com/prompt-kutuphanesi/rakip-rontgeni-promptu)
-  Kategori: analiz | Zorluk: ileri
-  Rakip şirketin adını gir, 7 katmanlı analiz al: hendek analizi, zayıf karın tespiti ve somut savaş planı dahil.
-
-- [Kendini 3 Kez Düzelt Promptu](https://airehber.com/prompt-kutuphanesi/kendini-3-kez-duzelt-promptu)
-  Kategori: genel | Zorluk: orta
-  AI'ın ilk cevabı asla en iyisi değil. Bu prompt modeli kendi çıktısını puanlayıp 3 kez baştan yazmaya zorluyor.
-
-- [Prompt Üreten Prompt: Meta-Prompt Tekniği](https://airehber.com/prompt-kutuphanesi/prompt-ureten-prompt)
-  Kategori: genel | Zorluk: ileri
-  Yapay zekaya prompt yazdıran prompt. Ham fikri yapıştır, profesyonel seviye prompt al. 3 modelde test edildi.
-
-- [SWOT Analizi Promptu](https://airehber.com/prompt-kutuphanesi/swot-analizi-promptu)
-  Kategori: analiz | Zorluk: orta
-  Şirket adını gir, 4 kategoride 20+ maddelik SWOT raporu al. Claude, GPT-5 ve Gemini'de test edildi.
-
-### Haftalık Brifing
-- [Haftalık AI Brifing #10](https://airehber.com/haftalik/2026-w10)
-  Hafta: 10 | Yıl: 2026
-  1-7 Mart 2026 haftasının öne çıkan AI gelişmeleri: ChatGPT 900 milyon kullanıcı, Cursor 2 milyar dolar gelir ve Gemini chatbot davası.
-
-- [Haftalık AI Brifing #9](https://airehber.com/haftalik/2026-w09)
-  Hafta: 9 | Yıl: 2026
-  22-28 Şubat haftasının öne çıkan AI gelişmeleri: Meta-AMD 100 milyar dolarlık çip anlaşması, Anthropic distilasyon suçlaması ve Jira AI ajanları.
-
-- [Haftalık AI Brifing #8](https://airehber.com/haftalik/2026-w08)
-  Hafta: 8 | Yıl: 2026
-  15-21 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri: Claude Sonnet 4.6, Google AI Modu Türkiye ve OpenAI'ın tarihi yatırım turu.
-
-- [Haftalık AI Brifing #7](https://airehber.com/haftalik/2026-w07)
-  Hafta: 7 | Yıl: 2026
-  10-14 Şubat 2026 haftasının en önemli yapay zeka gelişmeleri ve aksiyon önerileri.
-
 ### Programlama Rehberleri
 
 **bolum-1-giris**
@@ -478,7 +487,7 @@ Her içerikte Tier 1-3 arası kaynak güvenilirlik seviyesi belirtilir. Yazılar
 Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler ve yapay zeka teknolojilerini iş hayatında kullanmak isteyen herkes.
 
 **Hangi konular ele alınıyor?**
-AI haberleri, derinlemesine analizler, prompt mühendisliği şablonları, programlama rehberleri ve haftalık AI brifingleri.
+AI haberleri, derinlemesine analizler, programlama rehberleri ve yapay zeka araçları.
 
 ## Güven Politikası
 

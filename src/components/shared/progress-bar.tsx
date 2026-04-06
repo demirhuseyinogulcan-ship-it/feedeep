@@ -40,7 +40,7 @@ export function ProgressBar({
           style={{ width: `${percentage}%` }}
         />
       </div>
-      <span className="text-xs font-mono text-gray-600 tabular-nums w-14 text-right">
+      <span className="text-xs font-sans text-gray-600 tabular-nums w-14 text-right">
         {value}
         {maxValue !== 100 ? `/${maxValue}` : ""}
       </span>

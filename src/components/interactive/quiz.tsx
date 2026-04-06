@@ -87,7 +87,7 @@ export function InteractiveQuiz({
           </div>
         )}
         {taskNumber && totalTasks && (
-          <span className="text-[10px] font-mono tracking-widest text-gray-600 uppercase whitespace-nowrap">
+          <span className="text-[10px] font-sans tracking-widest text-gray-600 uppercase whitespace-nowrap">
             AI REHBER | Görev {taskNumber}/{totalTasks}
           </span>
         )}
@@ -101,7 +101,7 @@ export function InteractiveQuiz({
 
         {/* Code block (optional) */}
         {code && (
-          <div className="bg-surface-0 border border-white/[0.04] rounded-xl p-4 font-mono text-sm text-gray-300 mb-6 overflow-x-auto whitespace-pre">
+          <div className="bg-surface-0 border border-white/[0.04] rounded-xl p-4 font-sans text-sm text-gray-300 mb-6 overflow-x-auto whitespace-pre">
             {code}
           </div>
         )}
@@ -120,7 +120,7 @@ export function InteractiveQuiz({
                 onClick={() => handleSelect(i)}
                 disabled={submitted && isCorrect}
                 className={cn(
-                  "relative py-3 px-4 rounded-xl font-mono text-sm font-medium transition-all text-left",
+                  "relative py-3 px-4 rounded-xl font-sans text-sm font-medium transition-all text-left",
                   "border-2",
                   // Default
                   !isSelected && !showCorrect && !showWrong &&

@@ -12,10 +12,13 @@ import { useState } from "react";
 import { Menu, X, Search } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { AuthModal } from "@/components/auth/auth-modal";
+import { useAuth } from "@/components/auth/auth-provider";
 
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, loading, requestAuth } = useAuth();
 
   return (
     <header className="sticky top-0 z-40 w-full bg-surface-0/60 backdrop-blur-xl">
@@ -61,8 +64,19 @@ export function Header() {
           })}
         </ul>
 
-        {/* Search + Mobile Toggle */}
+        {/* Auth + Search + Mobile Toggle */}
         <div className="flex items-center gap-2">
+          <AuthModal />
+
+          {!loading && !user && (
+            <button
+              onClick={requestAuth}
+              className="text-[11px] font-heading font-semibold tracking-widest uppercase px-3 py-1.5 rounded-md border border-primary-500/30 text-primary-400 hover:bg-primary-500/10 transition-colors"
+            >
+              Giriş
+            </button>
+          )}
+
           <Link
             href="/arama"
             className="p-2 rounded-lg text-gray-500 hover:text-gray-100 hover:bg-surface-2 transition-colors"

@@ -7,8 +7,6 @@
 import type { FeedItem } from "@/lib/feed";
 import { HaberCard } from "./haber-card";
 import { YaziCard } from "./yazi-card";
-import { PromptFeedCard } from "./prompt-feed-card";
-import { BrifingCard } from "./brifing-card";
 
 type Props = { item: FeedItem; index: number };
 
@@ -18,9 +16,5 @@ export function FeedCard({ item, index }: Props) {
       return <HaberCard item={item} index={index} />;
     case "yazi":
       return <YaziCard item={item} index={index} />;
-    case "prompt":
-      return <PromptFeedCard item={item} index={index} />;
-    case "haftalik":
-      return <BrifingCard item={item} index={index} />;
   }
 }

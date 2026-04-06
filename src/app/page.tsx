@@ -1,7 +1,7 @@
-﻿// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-// AI Rehber â€” Anasayfa (Feed Model)
-// Sosyal medya tarzÄ± sonsuz akÄ±ÅŸ â€” tÃ¼m iÃ§erikler tek feed'de
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────
+// AI Rehber — Anasayfa (Feed Model)
+// Sosyal medya tarzı sonsuz akış — tüm içerikler tek feed'de
+// ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -19,7 +19,7 @@ export const metadata: Metadata = generateMeta({
   canonicalPath: "/",
 });
 
-// â”€â”€â”€ Veri hazÄ±rlÄ±ÄŸÄ± (build-time, SSG) â”€â”€â”€
+// ─── Veri hazırlığı (build-time, SSG) ───
 const feedItems = buildFeed();
 
 export default function HomePage() {
@@ -27,13 +27,13 @@ export default function HomePage() {
     <>
       <JsonLd data={[websiteJsonLd()]} />
 
-      {/* KaldÄ±ÄŸÄ±n Yerden Devam Et */}
+      {/* Kaldığın Yerden Devam Et */}
       <ContinueReadingBanner />
 
-      {/* GÃ¼ndem: Kayan Haber Åeridi */}
+      {/* Gündem: Kayan Haber Şeridi */}
       <NewsTicker />
 
-      {/* Feed: Sonsuz AkÄ±ÅŸ */}
+      {/* Feed: Sonsuz Akış */}
       <main className="pt-6 pb-20">
         <FeedContainer items={feedItems} />
       </main>

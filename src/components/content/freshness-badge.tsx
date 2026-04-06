@@ -17,7 +17,7 @@ export function FreshnessBadge({ lastChecked, className }: FreshnessBadgeProps) 
   return (
     <span
       className={cn(
-        "text-[10px] font-mono tracking-wider text-gray-600",
+        "text-[10px] font-sans tracking-wider text-gray-600",
         className
       )}
       title={`Son kontrol: ${new Date(lastChecked).toLocaleDateString("tr-TR")}`}

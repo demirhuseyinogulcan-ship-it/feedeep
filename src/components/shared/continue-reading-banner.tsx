@@ -72,7 +72,7 @@ export function ContinueReadingBanner() {
           </div>
 
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-mono tracking-widest uppercase text-gray-600">
+            <p className="text-[10px] font-sans tracking-widest uppercase text-gray-600">
               Kaldığın yerden devam et
             </p>
             <p className="text-sm font-medium text-gray-200 group-hover:text-primary-400 transition-colors truncate mt-0.5">
@@ -88,7 +88,7 @@ export function ContinueReadingBanner() {
                 style={{ width: `${reading.progress}%` }}
               />
             </div>
-            <span className="text-[10px] font-mono text-gray-600">
+            <span className="text-[10px] font-sans text-gray-600">
               %{reading.progress}
             </span>
           </div>

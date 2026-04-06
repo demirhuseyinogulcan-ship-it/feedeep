@@ -12,11 +12,12 @@ import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
-import { ActionItems } from "@/components/content/action-items";
 import { RelatedArticles } from "@/components/content/related-articles";
 import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
+import { SignalBar } from "@/components/signals/signal-bar";
+import { CommentSection } from "@/components/signals/comment-section";
 import { SITE } from "@/lib/constants";
 
 type Props = {
@@ -75,6 +76,9 @@ export default async function YaziDetayPage({ params }: Props) {
       categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
       readingTime: y.metadata.readingTime,
       editorPick: y.editorPick,
+      image: y.image,
+      imageAlt: y.imageAlt,
+      blurDataURL: y.blurDataURL,
     }));
 
   return (
@@ -148,7 +152,7 @@ export default async function YaziDetayPage({ params }: Props) {
 
         <div className="line-void my-12" />
 
-        {/* Güven Katmanı & Aksiyon Öğeleri */}
+        {/* Güven Katmanı */}
         <footer className="space-y-8 animate-fade-up delay-300">
           <TrustBadge
             sources={post.sources}
@@ -156,11 +160,17 @@ export default async function YaziDetayPage({ params }: Props) {
             lastFactChecked={post.lastFactChecked}
             corrections={post.corrections}
           />
-
-          {post.actionItems.length > 0 && (
-            <ActionItems items={post.actionItems} />
-          )}
         </footer>
+
+        {/* Sinyal Çubuğu */}
+        <div className="my-10 animate-fade-up delay-300">
+          <SignalBar articleId={`yazi-${post.slug}`} size="lg" />
+        </div>
+
+        {/* Görüşler */}
+        <div className="my-10 animate-fade-up delay-300">
+          <CommentSection articleId={`yazi-${post.slug}`} />
+        </div>
 
         {/* İlgili Yazılar — SEO iç link ağı */}
         <RelatedArticles items={related} />

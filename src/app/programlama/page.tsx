@@ -140,7 +140,7 @@ export default function ProgramlamaPage() {
                           <p className="text-xs font-semibold text-gray-300">{tech?.label ?? g.technology}</p>
                           <p className="text-[10px] text-gray-600">{formatDate(g.latestDate)}</p>
                         </div>
-                        <span className="ml-auto text-[9px] font-mono tracking-widest uppercase text-cyan-400/50 border border-cyan-400/20 rounded-full px-2 py-0.5">
+                        <span className="ml-auto text-[9px] font-sans tracking-widest uppercase text-cyan-400/50 border border-cyan-400/20 rounded-full px-2 py-0.5">
                           Rehber
                         </span>
                       </div>
@@ -151,12 +151,12 @@ export default function ProgramlamaPage() {
                           <span className="w-2 h-2 rounded-full bg-red-500/40" />
                           <span className="w-2 h-2 rounded-full bg-yellow-500/40" />
                           <span className="w-2 h-2 rounded-full bg-green-500/40" />
-                          <span className="ml-2 text-[9px] font-mono text-gray-700">ilerleme</span>
+                          <span className="ml-2 text-[9px] font-sans text-gray-700">ilerleme</span>
                         </div>
                         <div className="px-3 py-3 sm:px-4 sm:py-4">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] font-mono text-gray-600">{g.publishedChapters}/{g.totalChapters} bolum yayinda</span>
-                            <span className="text-[10px] font-mono text-cyan-400/60">%{progress}</span>
+                            <span className="text-[10px] font-sans text-gray-600">{g.publishedChapters}/{g.totalChapters} bolum yayinda</span>
+                            <span className="text-[10px] font-sans text-cyan-400/60">%{progress}</span>
                           </div>
                           <div className="h-1.5 bg-white/[0.04] rounded-full overflow-hidden">
                             <div
@@ -181,7 +181,7 @@ export default function ProgramlamaPage() {
 
                       {/* Post footer */}
                       <div className="flex items-center justify-between px-4 pb-4 sm:px-5 sm:pb-5 pt-1">
-                        <span className="text-[10px] font-mono text-gray-700">
+                        <span className="text-[10px] font-sans text-gray-700">
                           Ucretsiz & Turkce
                         </span>
                         <span className="text-xs text-cyan-400/60 group-hover:text-cyan-400 transition-colors">

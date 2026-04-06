@@ -16,6 +16,8 @@ import { RelatedNews } from "@/components/content/related-news";
 import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
+import { SignalBar } from "@/components/signals/signal-bar";
+import { CommentSection } from "@/components/signals/comment-section";
 import { SITE } from "@/lib/constants";
 
 type Props = {
@@ -73,6 +75,10 @@ export default async function HaberDetayPage({ params }: Props) {
       category: h.category,
       categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
       editorPick: h.editorPick,
+      image: h.image,
+      imageAlt: h.imageAlt,
+      blurDataURL: h.blurDataURL,
+      sourceName: h.sourceName,
     }));
 
   return (
@@ -159,7 +165,7 @@ export default async function HaberDetayPage({ params }: Props) {
 
           {/* Kaynak Link */}
           <div className="pt-4 border-t border-white/[0.04]">
-            <span className="text-[10px] font-mono tracking-widest uppercase text-gray-700 block mb-2">
+            <span className="text-[10px] font-sans tracking-widest uppercase text-gray-700 block mb-2">
               Orijinal Kaynak
             </span>
             <a
@@ -172,6 +178,16 @@ export default async function HaberDetayPage({ params }: Props) {
             </a>
           </div>
         </footer>
+
+        {/* Sinyal Çubuğu */}
+        <div className="my-10 animate-fade-up delay-300">
+          <SignalBar articleId={`haber-${news.slug}`} size="lg" />
+        </div>
+
+        {/* Görüşler */}
+        <div className="my-10 animate-fade-up delay-300">
+          <CommentSection articleId={`haber-${news.slug}`} />
+        </div>
 
         {/* İlgili Haberler — SEO iç link ağı */}
         <RelatedNews items={related} />

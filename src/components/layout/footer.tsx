@@ -56,21 +56,12 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/zaman-cizelgesi"
+                  href="/programlama"
                   className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
                 >
-                  AI Zaman Çizelgesi
+                  Programlama Rehberleri
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/haftalik"
-                  className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
-                >
-                  Haftalık Brifing
-                </Link>
-              </li>
-
             </ul>
           </div>
 

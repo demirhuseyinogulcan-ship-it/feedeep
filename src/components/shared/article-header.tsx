@@ -35,21 +35,13 @@ export function ArticleHeader({
   return (
     <header className="mb-12 animate-fade-up">
       <div className="flex items-center gap-3 mb-4">
-        <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
+        <span className="text-[10px] font-sans tracking-widest uppercase text-primary-400/50">
           {categoryLabel}
         </span>
-        {readingTime && (
-          <>
-            <span className="text-[10px] text-gray-800">/</span>
-            <span className="text-[10px] font-mono tracking-wider text-gray-600">
-              {readingTime} dk okuma
-            </span>
-          </>
-        )}
         {sourceName && (
           <>
             <span className="text-[10px] text-gray-800">/</span>
-            <span className="text-[10px] font-mono tracking-wider text-gray-600">
+            <span className="text-[10px] font-sans tracking-wider text-gray-600">
               {sourceName}
             </span>
           </>

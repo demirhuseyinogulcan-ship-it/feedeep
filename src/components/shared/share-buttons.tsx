@@ -90,7 +90,7 @@ export function ShareButtons({ title, url, socialSnippet }: ShareButtonsProps) {
 
   return (
     <div className="flex items-center gap-3 py-4">
-      <span className="text-[10px] font-mono tracking-widest uppercase text-gray-700">
+      <span className="text-[10px] font-sans tracking-widest uppercase text-gray-700">
         Paylaş
       </span>
       {links.map((link) => (
@@ -112,7 +112,7 @@ export function ShareButtons({ title, url, socialSnippet }: ShareButtonsProps) {
         aria-label="Linki kopyala"
       >
         {copied ? (
-          <span className="text-[10px] font-mono text-gray-400">Kopyalandı!</span>
+          <span className="text-[10px] font-sans text-gray-400">Kopyalandı!</span>
         ) : (
           <LinkIcon className="h-4 w-4" />
         )}

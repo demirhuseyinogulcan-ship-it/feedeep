@@ -38,7 +38,7 @@ export function FeedFilters({ active, onChange, counts }: Props) {
             {f.label}
             {count > 0 && (
               <span
-                className={`ml-1.5 text-[10px] font-mono ${
+                className={`ml-1.5 text-[10px] font-sans ${
                   isActive ? "text-gray-400" : "text-gray-700"
                 }`}
               >

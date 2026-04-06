@@ -70,7 +70,7 @@ export function SearchUI({ items }: SearchUIProps) {
             className="group block animate-fade-up"
           >
             <div className="flex items-center gap-3 mb-1.5">
-              <span className="text-[10px] font-mono tracking-widest uppercase text-primary-400/50">
+              <span className="text-[10px] font-sans tracking-widest uppercase text-primary-400/50">
                 {item.type}
               </span>
               <span className="text-[10px] text-gray-800">

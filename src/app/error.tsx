@@ -34,7 +34,7 @@ export default function GlobalError({
       </p>
 
       {error.digest && (
-        <p className="text-[10px] font-mono text-gray-700 mb-6 tracking-wider">
+        <p className="text-[10px] font-sans text-gray-700 mb-6 tracking-wider">
           Referans: {error.digest}
         </p>
       )}

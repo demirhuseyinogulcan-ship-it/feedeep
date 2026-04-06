@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
               <ul style="font-size: 14px; line-height: 1.8; color: #a78bfa; padding-left: 20px;">
                 <li><a href="https://airehber.com/haberler" style="color: #a78bfa;">Son AI Haberleri</a></li>
                 <li><a href="https://airehber.com/yazilar" style="color: #a78bfa;">Derin Yazılar</a></li>
-                <li><a href="https://airehber.com/prompt-kutuphanesi" style="color: #a78bfa;">Prompt Kütüphanesi</a></li>
+                <li><a href="https://airehber.com/programlama" style="color: #a78bfa;">Programlama Rehberleri</a></li>
               </ul>
               <p style="font-size: 12px; color: #6b7280; margin-top: 32px; border-top: 1px solid #1f2937; padding-top: 16px;">
                 AI Rehber — airehber.com

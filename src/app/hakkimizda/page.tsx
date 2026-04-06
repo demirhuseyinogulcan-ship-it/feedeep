@@ -73,7 +73,7 @@ export default function HakkimizdaPage() {
 
         {/* ─── Misyon ─── */}
         <div className="animate-fade-up delay-100">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-primary-400/80 mb-4 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-primary-400/80 mb-4 block">
             Felsefemiz
           </span>
           <p className="text-sm text-gray-400 leading-relaxed max-w-lg">
@@ -88,7 +88,7 @@ export default function HakkimizdaPage() {
 
         {/* ─── Değerlerimiz ─── */}
         <div className="animate-fade-up delay-200">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-8 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-8 block">
             Değerlerimiz
           </span>
 
@@ -115,7 +115,7 @@ export default function HakkimizdaPage() {
 
         {/* ─── Kurucu ─── */}
         <div className="animate-fade-up delay-400">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-6 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-6 block">
             Kurucu
           </span>
 
@@ -159,7 +159,7 @@ export default function HakkimizdaPage() {
 
         {/* ─── İletişim ─── */}
         <div className="animate-fade-up delay-500">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-4 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-4 block">
             İletişim
           </span>
           <p className="text-sm text-gray-500 leading-relaxed max-w-lg">

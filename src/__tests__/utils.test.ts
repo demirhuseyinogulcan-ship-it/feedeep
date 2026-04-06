@@ -72,9 +72,9 @@ describe("formatDateShort()", () => {
 // ─── timeAgo() — Relative time ───
 
 describe("timeAgo()", () => {
-  it('returns "Bugün" for today', () => {
+  it('returns "Az önce" for just now', () => {
     const today = new Date().toISOString();
-    expect(timeAgo(today)).toBe("Bugün");
+    expect(timeAgo(today)).toBe("Az önce");
   });
 
   it('returns "Dün" for yesterday', () => {

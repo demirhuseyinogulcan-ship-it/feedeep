@@ -140,29 +140,6 @@ function validateHaber(file, data) {
   checkEnum(file, data, "confidence", ["high", "medium", "speculative"]);
 }
 
-function validatePrompt(file, data) {
-  checkRequired(file, data, "title");
-  checkRequired(file, data, "slug");
-  checkRequired(file, data, "description");
-  checkRequired(file, data, "date");
-  checkRequired(file, data, "prompt");
-  checkRequired(file, data, "category");
-  checkRequired(file, data, "difficulty");
-
-  checkMaxLength(file, data, "title", 70);
-  checkMaxLength(file, data, "description", 160);
-  checkSlug(file, data);
-  checkDate(file, data, "date");
-  checkEnum(file, data, "category", [
-    "icerik-uretim", "kod", "analiz", "pazarlama", "egitim", "genel",
-  ]);
-  checkEnum(file, data, "difficulty", ["baslangic", "orta", "ileri"]);
-
-  if (!data.commonMistakes || data.commonMistakes.length < 2) {
-    warn(file, "commonMistakes en az 2 hata içermeli");
-  }
-}
-
 function _validateKart(file, data) {
   checkRequired(file, data, "title");
   checkRequired(file, data, "slug");
@@ -178,31 +155,11 @@ function _validateKart(file, data) {
   checkEnum(file, data, "status", ["active", "beta", "deprecated"]);
 }
 
-function validateHaftalik(file, data) {
-  checkRequired(file, data, "title");
-  checkRequired(file, data, "slug");
-  checkRequired(file, data, "description");
-  checkRequired(file, data, "date");
-  checkRequired(file, data, "weekNumber");
-  checkRequired(file, data, "year");
-  checkRequired(file, data, "weeklyAction");
-
-  checkMaxLength(file, data, "description", 160);
-  checkSlug(file, data);
-  checkDate(file, data, "date");
-
-  if (data.weeklyAction === "") {
-    error(file, "weeklyAction boş olamaz");
-  }
-}
-
 // ─── Scanner ────────────────────────────────────────────────
 
 const VALIDATORS = {
   yazilar: { validate: validateYazi, label: "Yazılar" },
   haberler: { validate: validateHaber, label: "Haberler" },
-  promptlar: { validate: validatePrompt, label: "Promptlar" },
-  haftalik: { validate: validateHaftalik, label: "Haftalık" },
 };
 
 function scanDirectory(dir) {

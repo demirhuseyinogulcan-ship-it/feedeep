@@ -1,7 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // AI Rehber — Feed Container (Client Component)
-// Sonsuz scroll + newsletter enjeksiyonu
-// İleride: beğen/kaydet butonları, üyelik sistemi buraya eklenir
+// Sonsuz scroll feed akışı
 // ─────────────────────────────────────────────────────────────
 
 "use client";
@@ -9,11 +8,9 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import type { FeedItem } from "@/lib/feed";
 import { FeedCard } from "./feed-card";
-import { NewsletterForm } from "@/components/shared/newsletter-form";
 
 const INITIAL_COUNT = 20;
 const LOAD_MORE_COUNT = 10;
-const NEWSLETTER_INTERVAL = 8;
 
 type Props = {
   items: FeedItem[];
@@ -58,22 +55,6 @@ export function FeedContainer({ items }: Props) {
             )}
 
             <FeedCard item={item} index={i} />
-
-            {/* Her N karttan sonra newsletter CTA */}
-            {(i + 1) % NEWSLETTER_INTERVAL === 0 &&
-              i < visible.length - 1 && (
-                <div className="py-2 animate-fade-up">
-                  <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-5">
-                    <p className="text-xs font-mono tracking-widest uppercase text-gray-600 mb-2">
-                      İç Çember
-                    </p>
-                    <p className="text-sm text-gray-400 mb-4">
-                      Her Pazartesi — yapay zeka fırsatları ve ipuçları.
-                    </p>
-                    <NewsletterForm />
-                  </div>
-                </div>
-              )}
           </Fragment>
         ))}
       </div>
@@ -85,7 +66,7 @@ export function FeedContainer({ items }: Props) {
 
       {/* Akış sonu */}
       {!hasMore && items.length > 0 && (
-        <p className="py-12 text-center text-xs font-mono text-gray-800">
+        <p className="py-12 text-center text-xs font-sans text-gray-800">
           Tüm içerikleri gördün
         </p>
       )}

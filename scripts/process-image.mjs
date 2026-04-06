@@ -36,7 +36,7 @@ if (args.length < 2) {
 Kullanım:
   node scripts/process-image.mjs <hedef-klasor> <seo-slug> [--caption "alt text"]
 
-Hedef klasörler: haberler, yazilar, haftalik, promptlar, rehberler
+Hedef klasörler: haberler, yazilar, rehberler
 
 Örnek:
   node scripts/process-image.mjs haberler anthropic-claude-code-sizinti
@@ -49,7 +49,7 @@ const seoSlug = args[1];
 const captionIdx = args.indexOf("--caption");
 const caption = captionIdx !== -1 ? args[captionIdx + 1] : null;
 
-const validFolders = ["haberler", "yazilar", "haftalik", "promptlar", "rehberler"];
+const validFolders = ["haberler", "yazilar", "rehberler"];
 if (!validFolders.includes(targetFolder)) {
   console.error(`Hata: Geçersiz klasör "${targetFolder}". Geçerli: ${validFolders.join(", ")}`);
   process.exit(1);

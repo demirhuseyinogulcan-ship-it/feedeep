@@ -141,7 +141,7 @@ export default async function ChapterPage({ params }: PageProps) {
         <header className="mb-10 animate-fade-up">
           {/* Chapter badge */}
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-gray-600">
+            <span className="text-[10px] font-sans uppercase tracking-widest text-gray-600">
               {chapter.guideTitle} — Bölüm {chapter.chapter}/{chapter.totalChapters}
             </span>
           </div>
@@ -322,12 +322,12 @@ export default async function ChapterPage({ params }: PageProps) {
                         {s.title}
                       </span>
                       {isCurrent && (
-                        <span className="ml-auto text-[10px] font-mono text-primary-400/60">
+                        <span className="ml-auto text-[10px] font-sans text-primary-400/60">
                           Şu an buradasın
                         </span>
                       )}
                       {!isCurrent && s.estimatedMinutes && (
-                        <span className="ml-auto text-[10px] font-mono text-gray-700">
+                        <span className="ml-auto text-[10px] font-sans text-gray-700">
                           {s.estimatedMinutes} dk
                         </span>
                       )}

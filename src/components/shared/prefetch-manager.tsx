@@ -40,11 +40,11 @@ function prefetchRelated(pathname: string) {
 
   if (pathname === "/") {
     // Anasayfada — ana navigasyon sayfalarını prefetch et
-    routes.push("/haberler", "/yazilar", "/prompt-kutuphanesi");
+    routes.push("/haberler", "/yazilar", "/programlama");
   } else if (pathname === "/yazilar") {
-    routes.push("/haberler", "/haftalik");
+    routes.push("/haberler", "/programlama");
   } else if (pathname === "/haberler") {
-    routes.push("/yazilar", "/haftalik");
+    routes.push("/yazilar", "/programlama");
   }
 
   // Native <link rel="prefetch"> ile kaynak prefetch

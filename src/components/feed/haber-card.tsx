@@ -6,8 +6,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { HaberFeedItem } from "@/lib/feed";
-import { formatDate } from "@/lib/utils";
+import { timeAgo } from "@/lib/utils";
 import { TiltCard } from "@/components/shared/tilt-card";
+import { SignalBar } from "@/components/signals/signal-bar";
+import { CommentSection } from "@/components/signals/comment-section";
 
 type Props = { item: HaberFeedItem; index: number };
 
@@ -25,9 +27,9 @@ export function HaberCard({ item, index }: Props) {
           </div>
           <div className="min-w-0">
             <p className="text-xs font-semibold text-gray-300">{item.sourceName}</p>
-            <p className="text-[10px] text-gray-600">{formatDate(item.date)}</p>
+            <p className="text-[10px] text-gray-500">{timeAgo(item.date)}</p>
           </div>
-          <span className="ml-auto text-[9px] font-mono tracking-widest uppercase text-primary-400/50 border border-primary-400/20 rounded-full px-2 py-0.5">
+          <span className="ml-auto text-[9px] font-sans tracking-widest uppercase text-primary-400/50 border border-primary-400/20 rounded-full px-2 py-0.5">
             Haber
           </span>
         </div>
@@ -68,16 +70,23 @@ export function HaberCard({ item, index }: Props) {
           </p>
         </div>
 
-        {/* Post footer — okuma süresi + devamını oku */}
-        <div className="flex items-center justify-between px-4 pb-4 sm:px-5 sm:pb-5 pt-1">
-          <span className="text-[10px] font-mono text-gray-700">
-            {item.readingTime} dk okuma
-          </span>
+        {/* Post footer */}
+        <div className="flex items-center justify-end px-4 pb-4 sm:px-5 sm:pb-5 pt-1">
           <span className="text-xs text-primary-400/60 group-hover:text-primary-400 transition-colors">
             Devamını oku &rarr;
           </span>
         </div>
       </Link>
+
+      {/* Sinyal Çubuğu */}
+      <div className="px-4 pb-3 sm:px-5 sm:pb-3">
+        <SignalBar articleId={item.id} />
+      </div>
+
+      {/* Yorum Önizleme + Inline Form */}
+      <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+        <CommentSection articleId={item.id} preview previewCount={3} />
+      </div>
     </TiltCard>
   );
 }

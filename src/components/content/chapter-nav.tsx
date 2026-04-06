@@ -39,7 +39,7 @@ export function ChapterNav({
         <span className="text-sm font-semibold text-gray-300">
           {guideTitle}
         </span>
-        <span className="text-xs text-gray-500 font-mono">
+        <span className="text-xs text-gray-500 font-sans">
           {currentChapter}/{totalChapters}
         </span>
       </div>

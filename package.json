@@ -13,8 +13,6 @@
     "test:coverage": "vitest run --coverage",
     "new:yazi": "node scripts/new-content.mjs yazi",
     "new:haber": "node scripts/new-content.mjs haber",
-    "new:prompt": "node scripts/new-content.mjs prompt",
-    "new:haftalik": "node scripts/new-content.mjs haftalik",
     "validate": "node scripts/validate-content.mjs",
     "submit-indexing": "node scripts/submit-indexing.mjs",
     "update-llms": "node scripts/update-llms.mjs",
@@ -28,6 +26,8 @@
     ]
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.101.1",
     "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "feed": "^5.2.0",

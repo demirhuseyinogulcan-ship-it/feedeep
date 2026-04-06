@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
-import { fontHeading, fontSans, fontMono } from "@/lib/fonts";
+import { fontHeading, fontSans } from "@/lib/fonts";
 import { SITE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -12,6 +12,7 @@ import { NotificationPrompt } from "@/components/shared/notification-prompt";
 import { PrefetchManager } from "@/components/shared/prefetch-manager";
 import { WebVitalsReporter } from "@/components/shared/web-vitals-reporter";
 import { CookieConsent } from "@/components/shared/cookie-consent";
+import { AuthProvider } from "@/components/auth/auth-provider";
 import "./globals.css";
 
 // ─── Analytics ID'leri (.env veya constants'tan) ────────────
@@ -116,7 +117,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
       </head>
       <body
-        className={`${fontHeading.variable} ${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
+        className={`${fontHeading.variable} ${fontSans.variable} font-sans antialiased`}
       >
         {/* Google Analytics — GA4 */}
         {GA_ID && (
@@ -143,6 +144,7 @@ export default function RootLayout({
           İçeriğe geç
         </a>
 
+        <AuthProvider>
         <CursorGlow />
         <Header />
 
@@ -175,6 +177,7 @@ export default function RootLayout({
 
         {/* Vercel Web Analytics */}
         <Analytics />
+        </AuthProvider>
       </body>
     </html>
   );

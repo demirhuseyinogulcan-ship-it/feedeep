@@ -6,8 +6,8 @@ export const SITE = {
   name: "AI Rehber",
   title: "AI Rehber — Yapay Zeka Rehberiniz",
   description:
-    "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.",
-  url: "https://airehber.com",
+    "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://airehber.com",
   locale: "tr_TR",
   language: "tr",
   author: {
@@ -28,7 +28,6 @@ export const NAV_ITEMS = [
   { label: "Yazılar", href: "/yazilar" },
   { label: "Haberler", href: "/haberler" },
   { label: "Programlama", href: "/programlama" },
-  { label: "Prompt Kütüphanesi", href: "/prompt-kutuphanesi" },
   { label: "Hakkımızda", href: "/hakkimizda" },
 ] as const;
 
@@ -55,15 +54,6 @@ export const HABER_CATEGORIES: Record<string, string> = {
   sektor: "Sektör",
   turkiye: "Türkiye",
   arastirma: "Araştırma",
-};
-
-export const PROMPT_CATEGORIES: Record<string, string> = {
-  "icerik-uretim": "İçerik Üretim",
-  kod: "Kod",
-  analiz: "Analiz",
-  pazarlama: "Pazarlama",
-  egitim: "Eğitim",
-  genel: "Genel",
 };
 
 // ─── Programlama Rehberleri ──────────────────────────────────
@@ -95,9 +85,3 @@ export const GUIDE_TECHNOLOGIES: Record<string, { label: string; description: st
   },
 };
 
-// Difficulty levels for prompts
-export const DIFFICULTY: Record<string, string> = {
-  baslangic: "Başlangıç",
-  orta: "Orta",
-  ileri: "İleri",
-};

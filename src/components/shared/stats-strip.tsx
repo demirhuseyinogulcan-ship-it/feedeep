@@ -1,12 +1,11 @@
 // AI Rehber — Sayılarla AI Rehber: Sosyal Kanıt Şeridi
-// Toplam haber, yazı, prompt ve benzersiz kaynak sayılarını gösterir
+// Toplam haber, yazı ve benzersiz kaynak sayılarını gösterir
 
-import { yazilar, haberler, promptlar } from "#site/content";
+import { yazilar, haberler } from "#site/content";
 
 function getStats() {
   const publishedYazilar = yazilar.filter((y) => y.published);
   const publishedHaberler = haberler.filter((h) => h.published);
-  const publishedPromptlar = promptlar.filter((p) => p.published);
 
   // Benzersiz kaynak URL sayısı
   const sourceUrls = new Set<string>();
@@ -20,7 +19,6 @@ function getStats() {
   return {
     haberler: publishedHaberler.length,
     yazilar: publishedYazilar.length,
-    promptlar: publishedPromptlar.length,
     kaynaklar: sourceUrls.size,
   };
 }
@@ -31,22 +29,21 @@ export function StatsStrip() {
   const items = [
     { value: stats.haberler, label: "Haber" },
     { value: stats.yazilar, label: "Yazı" },
-    { value: stats.promptlar, label: "Prompt" },
     { value: stats.kaynaklar, label: "Kaynak" },
   ];
 
   return (
     <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16 animate-fade-up">
-      <h2 className="text-[11px] font-mono font-semibold tracking-widest uppercase text-gray-500 mb-10">
+      <h2 className="text-[11px] font-sans font-semibold tracking-widest uppercase text-gray-500 mb-10">
         Sayılarla AI Rehber
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
         {items.map((item) => (
           <div key={item.label}>
-            <span className="block text-2xl font-bold text-gray-200 font-mono">
+            <span className="block text-2xl font-bold text-gray-200 font-sans">
               {item.value}
             </span>
-            <span className="text-[10px] font-mono tracking-widest uppercase text-gray-600 mt-1">
+            <span className="text-[10px] font-sans tracking-widest uppercase text-gray-600 mt-1">
               {item.label}
             </span>
           </div>

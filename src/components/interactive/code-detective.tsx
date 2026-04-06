@@ -133,7 +133,7 @@ export function CodeDetective({
           <div className="flex items-center justify-center w-5 h-5 bg-red-500 rounded text-[10px] text-white font-bold shrink-0 mt-0.5">
             ✕
           </div>
-          <div className="text-[11px] text-red-400 font-mono leading-relaxed">
+          <div className="text-[11px] text-red-400 font-sans leading-relaxed">
             {errorMessage}
           </div>
         </div>
@@ -185,7 +185,7 @@ export function CodeDetective({
                 {/* Line number */}
                 <div
                   className={cn(
-                    "w-11 shrink-0 flex items-center justify-end px-3 text-[12px] font-mono select-none border-r border-white/[0.04] transition-colors",
+                    "w-11 shrink-0 flex items-center justify-end px-3 text-[12px] font-sans select-none border-r border-white/[0.04] transition-colors",
                     isCorrectLine
                       ? "text-green-500"
                       : isSelected
@@ -198,7 +198,7 @@ export function CodeDetective({
 
                 {/* Content */}
                 <div
-                  className="flex-1 px-4 py-2 font-mono text-[12.5px] leading-relaxed text-gray-300 whitespace-pre flex items-center"
+                  className="flex-1 px-4 py-2 font-sans text-[12.5px] leading-relaxed text-gray-300 whitespace-pre flex items-center"
                   dangerouslySetInnerHTML={{ __html: line.content }}
                 />
 

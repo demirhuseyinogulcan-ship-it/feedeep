@@ -10,7 +10,7 @@ import { SITE } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/json-ld";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
-import { yazilar, haberler, haftalik } from "#site/content";
+import { yazilar, haberler } from "#site/content";
 
 export const metadata: Metadata = generateMeta({
   title: `${SITE.author.name} — Kurucu & Editör`,
@@ -51,11 +51,7 @@ export default function YazarCanDemirPage() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
 
-  const sonHaftalik = [...haftalik]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3);
-
-  const toplamIcerik = yazilar.length + haberler.length + haftalik.length;
+  const toplamIcerik = yazilar.length + haberler.length;
 
   return (
     <>
@@ -97,7 +93,7 @@ export default function YazarCanDemirPage() {
 
         {/* ─── Biyografi ─── */}
         <div className="animate-fade-up delay-100">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-primary-400/80 mb-4 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-primary-400/80 mb-4 block">
             Hakkında
           </span>
           <div className="space-y-3 text-sm text-gray-400 leading-relaxed max-w-lg">
@@ -120,7 +116,7 @@ export default function YazarCanDemirPage() {
 
         {/* ─── Uzmanlık Alanları ─── */}
         <div className="animate-fade-up delay-200">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-8 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-8 block">
             Uzmanlik Alanlari
           </span>
 
@@ -147,7 +143,7 @@ export default function YazarCanDemirPage() {
 
         {/* ─── İstatistikler ─── */}
         <div className="animate-fade-up delay-300">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-6 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-6 block">
             Icerik Istatistikleri
           </span>
           <div className="grid grid-cols-3 gap-6">
@@ -171,7 +167,7 @@ export default function YazarCanDemirPage() {
 
         {/* ─── Son Yazılar ─── */}
         <div className="animate-fade-up delay-400">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-6 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-6 block">
             Son Yazilar
           </span>
           <div className="space-y-0">
@@ -204,7 +200,7 @@ export default function YazarCanDemirPage() {
 
         {/* ─── Son Haberler ─── */}
         <div className="animate-fade-up delay-500">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-6 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-6 block">
             Son Haberler
           </span>
           <div className="space-y-0">
@@ -232,47 +228,14 @@ export default function YazarCanDemirPage() {
           </div>
         </div>
 
-        {/* ─── Son Haftalık Brifing ─── */}
-        {sonHaftalik.length > 0 && (
-          <>
-            <div className="line-void my-10 animate-line-reveal delay-500" />
-            <div className="animate-fade-up delay-500">
-              <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-6 block">
-                Son Haftalik Brifingler
-              </span>
-              <div className="space-y-0">
-                {sonHaftalik.map((h, i) => (
-                  <Link
-                    key={h.slug}
-                    href={`/haftalik/${h.slug}`}
-                    className="group block py-4 animate-fade-up"
-                    style={{ animationDelay: `${(i + 5) * 60}ms` }}
-                  >
-                    <h3 className="text-sm font-medium text-gray-300 group-hover:text-primary-400 transition-colors">
-                      {h.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-gray-600">
-                      {h.date}
-                    </p>
-                  </Link>
-                ))}
-                <Link
-                  href="/haftalik"
-                  className="block pt-4 text-xs text-gray-500 hover:text-primary-400 transition-colors"
-                >
-                  Tum brifinglari gor
-                </Link>
-              </div>
-            </div>
-          </>
-        )}
+        {/* ─── Son Haftalık Brifing — KALDIRILDI ─── */}
 
         {/* ─── Çizgi ─── */}
         <div className="line-void my-12 animate-line-reveal delay-500" />
 
         {/* ─── İletişim ─── */}
         <div className="animate-fade-up delay-500">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-gray-500 mb-4 block">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-gray-500 mb-4 block">
             Iletisim
           </span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">

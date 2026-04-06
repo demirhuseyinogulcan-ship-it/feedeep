@@ -83,7 +83,7 @@ export function CodeFillBlank({
           </div>
         )}
         {taskNumber && totalTasks && (
-          <span className="text-[10px] font-mono tracking-widest text-gray-600 uppercase whitespace-nowrap">
+          <span className="text-[10px] font-sans tracking-widest text-gray-600 uppercase whitespace-nowrap">
             AI REHBER | Görev {taskNumber}/{totalTasks}
           </span>
         )}
@@ -96,7 +96,7 @@ export function CodeFillBlank({
         </h3>
 
         {/* ─── Code block with blank ─── */}
-        <div className="bg-surface-0 border border-white/[0.04] rounded-xl p-5 font-mono text-sm leading-relaxed text-gray-300 overflow-x-auto mb-6">
+        <div className="bg-surface-0 border border-white/[0.04] rounded-xl p-5 font-sans text-sm leading-relaxed text-gray-300 overflow-x-auto mb-6">
           <span dangerouslySetInnerHTML={{ __html: codeBefore }} />
           <span
             className={cn(
@@ -125,7 +125,7 @@ export function CodeFillBlank({
                 onClick={() => handleSelect(i)}
                 disabled={submitted && isCorrect}
                 className={cn(
-                  "py-3 px-2 rounded-lg font-mono text-xs sm:text-sm font-medium transition-all border-2",
+                  "py-3 px-2 rounded-lg font-sans text-xs sm:text-sm font-medium transition-all border-2",
                   // Default
                   !isSelected && !showCorrect && !showWrong &&
                     "bg-surface-0 border-white/[0.04] text-gray-400 hover:text-gray-200 hover:border-gray-600",

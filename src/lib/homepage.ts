@@ -3,7 +3,7 @@
 // Anasayfa veri hazırlama mantığı (page.tsx'den çıkarıldı)
 // ─────────────────────────────────────────────────────────────
 
-import { yazilar, haberler, promptlar, haftalik, rehberler } from "#site/content";
+import { yazilar, haberler, rehberler } from "#site/content";
 
 // ─── Types ───
 
@@ -40,10 +40,6 @@ export const publishedYazilar = yazilar
 export const publishedHaberler = haberler
   .filter((h) => h.published)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-export const latestBrifing = haftalik
-  .filter((h) => h.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
 
 // ─── Hero Item Selection ───
 
@@ -126,20 +122,6 @@ export function getExploreSections(): readonly ExploreSection[] {
       href: "/programlama",
       count: `${new Set(rehberler.filter((r) => r.published).map((r) => r.guide)).size || "Yeni"}`,
     },
-    {
-      title: "Prompt Kütüphanesi",
-      description: "Kullanıma hazır, model bazlı skorlanmış prompt şablonları",
-      href: "/prompt-kutuphanesi",
-      count: `${promptlar.filter((p) => p.published).length}+`,
-    },
-    {
-      title: "Haftalık Brifing",
-      description: "Her hafta AI dünyasının en önemli 3 gelişmesi",
-      href: "/haftalik",
-      count: latestBrifing
-        ? `W${String(latestBrifing.weekNumber).padStart(2, "0")}`
-        : "—",
-    },
   ] as const;
 }
 
@@ -149,21 +131,16 @@ export const AI_REHBER_FAQ = [
   {
     question: "AI Rehber nedir?",
     answer:
-      "AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve kullanıma hazır prompt şablonlarını Türkçe olarak sunan bağımsız bir yayın platformudur.",
+      "AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.",
   },
   {
     question: "Yapay zeka haberleri nereden takip edilir?",
     answer:
-      "AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar. Haftalık brifing ile önemli gelişmeleri kaçırmazsınız.",
+      "AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.",
   },
   {
     question: "AI Rehber'deki haberler güvenilir mi?",
     answer:
       "Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.",
-  },
-  {
-    question: "Prompt kütüphanesi nasıl kullanılır?",
-    answer:
-      "Prompt Kütüphanesi'ndeki şablonları doğrudan ChatGPT, Claude veya Gemini'ye kopyalayabilirsiniz. Her prompt, model bazlı performans skorları ve örnek çıktılarla birlikte sunulur.",
   },
 ];
