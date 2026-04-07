@@ -14,7 +14,7 @@ function createSvg(size, padding = 0) {
   // Font size relative to icon size — "fd" needs to fit nicely
   const fontSize = Math.round(innerSize * 0.48);
   const cx = size / 2;
-  const cy = size / 2 + fontSize * 0.08; // slight optical centering
+  const cy = size / 2 + fontSize * 0.03; // minimal optical adjustment for ascender
 
   return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -42,7 +42,7 @@ function createMaskableSvg(size) {
   const padding = (size - safeZone) / 2;
   const fontSize = Math.round(safeZone * 0.48);
   const cx = size / 2;
-  const cy = size / 2 + fontSize * 0.08;
+  const cy = size / 2 + fontSize * 0.03;
 
   return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
   <defs>
