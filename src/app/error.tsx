@@ -17,7 +17,7 @@ export default function GlobalError({
 }) {
   useEffect(() => {
     // Hataları loglama (GA4 veya monitoring servisine gönderilebilir)
-    console.error("[AI Rehber] Uygulama hatası:", error);
+    console.error("[feedeep] Uygulama hatası:", error);
   }, [error]);
 
   return (

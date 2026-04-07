@@ -11,7 +11,7 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
-  const title = searchParams.get("title") ?? "AI Rehber";
+  const title = searchParams.get("title") ?? "feedeep";
   const category = searchParams.get("category") ?? "";
   const date = searchParams.get("date") ?? "";
 
@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
                 color: "white",
               }}
             >
-              AI
+              fd
             </div>
             <span
               style={{
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
                 color: "#c4b5fd",
               }}
             >
-              AI Rehber
+              feedeep
             </span>
           </div>
 
@@ -166,7 +166,7 @@ export async function GET(request: NextRequest) {
               color: "#6b7280",
             }}
           >
-            airehber.com
+            feedeep.com
           </span>
         </div>
       </div>

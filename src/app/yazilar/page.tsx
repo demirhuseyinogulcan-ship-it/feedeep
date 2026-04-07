@@ -19,7 +19,7 @@ export const metadata: Metadata = generateMeta({
   path: "/yazilar",
   keywords: [
     "yapay zeka yazıları",
-    "ai rehber",
+    "feedeep",
     "yapay zeka analizleri",
     "ai incelemeleri",
     "chatgpt rehberi",

@@ -1,12 +1,11 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Header Component
+// feedeep — Header Component
 // Responsive navigation with mobile menu
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, Search } from "lucide-react";
@@ -26,17 +25,10 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold text-lg text-gray-100 hover:text-primary-400 transition-colors"
-          aria-label="AI Rehber Ana Sayfa"
+          className="logo-gradient text-[22px] leading-none"
+          aria-label="feedeep Ana Sayfa"
         >
-          <Image
-            src="/logo.png"
-            alt="AI Rehber Logo"
-            width={180}
-            height={46}
-            className="h-11 w-auto"
-            priority
-          />
+          feedeep
         </Link>
 
         {/* Desktop Nav */}
@@ -71,9 +63,9 @@ export function Header() {
           {!loading && !user && (
             <button
               onClick={requestAuth}
-              className="text-[11px] font-heading font-semibold tracking-widest uppercase px-3 py-1.5 rounded-md border border-primary-500/30 text-primary-400 hover:bg-primary-500/10 transition-colors"
+              className="text-xs font-heading font-bold px-4 py-1.5 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#a855f7] text-white hover:shadow-[0_4px_20px_rgba(124,58,237,0.35)] hover:-translate-y-px transition-all"
             >
-              Giriş
+              Giris Yap
             </button>
           )}
 

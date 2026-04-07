@@ -35,7 +35,7 @@ export function StatsStrip() {
   return (
     <section className="mx-auto max-w-3xl px-4 sm:px-6 py-16 animate-fade-up">
       <h2 className="text-[11px] font-sans font-semibold tracking-widest uppercase text-gray-500 mb-10">
-        Sayılarla AI Rehber
+        Sayılarla feedeep
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
         {items.map((item) => (

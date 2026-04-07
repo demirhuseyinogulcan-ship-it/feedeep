@@ -43,9 +43,9 @@ export async function POST(request: NextRequest) {
 
         // Welcome email gönder
         await resend.emails.send({
-          from: "AI Rehber <info@airehber.com>",
+          from: "feedeep <info@feedeep.com>",
           to: email,
-          subject: "İç Çember'e Hoş Geldin — AI Rehber",
+          subject: "İç Çember'e Hoş Geldin — feedeep",
           html: `
             <div style="font-family: Inter, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px; color: #d1d5db; background: #050505;">
               <h1 style="font-size: 20px; font-weight: 700; color: #f3f4f6; margin-bottom: 16px;">
@@ -59,12 +59,12 @@ export async function POST(request: NextRequest) {
                 Bu arada keşfetmeye başla:
               </p>
               <ul style="font-size: 14px; line-height: 1.8; color: #a78bfa; padding-left: 20px;">
-                <li><a href="https://airehber.com/haberler" style="color: #a78bfa;">Son AI Haberleri</a></li>
-                <li><a href="https://airehber.com/yazilar" style="color: #a78bfa;">Derin Yazılar</a></li>
-                <li><a href="https://airehber.com/programlama" style="color: #a78bfa;">Programlama Rehberleri</a></li>
+                <li><a href="https://feedeep.com/haberler" style="color: #a78bfa;">Son AI Haberleri</a></li>
+                <li><a href="https://feedeep.com/yazilar" style="color: #a78bfa;">Derin Yazılar</a></li>
+                <li><a href="https://feedeep.com/programlama" style="color: #a78bfa;">Programlama Rehberleri</a></li>
               </ul>
               <p style="font-size: 12px; color: #6b7280; margin-top: 32px; border-top: 1px solid #1f2937; padding-top: 16px;">
-                AI Rehber — airehber.com
+                feedeep — feedeep.com
               </p>
             </div>
           `,

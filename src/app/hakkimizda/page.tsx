@@ -12,12 +12,12 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 
 export const metadata: Metadata = generateMeta({
-  title: "Hakkımızda — AI Rehber Ekibi",
+  title: "Hakkımızda — feedeep Ekibi",
   description:
-    "AI Rehber — Yapay zeka dünyasının Türkçe rehberi. Bağımsız, güvenilir, pratik.",
+    "feedeep — Yapay zeka dünyasının Türkçe rehberi. Bağımsız, güvenilir, pratik.",
   path: "/hakkimizda",
   keywords: [
-    "ai rehber hakkında",
+    "feedeep hakkında",
     "yapay zeka rehberi",
     "türkçe ai platformu",
     "yapay zeka türkçe",

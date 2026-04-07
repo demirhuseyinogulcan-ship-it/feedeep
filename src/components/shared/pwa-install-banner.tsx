@@ -99,7 +99,7 @@ export function PwaInstallBanner() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/icon-192.png"
-              alt="AI Rehber"
+              alt="feedeep"
               width={40}
               height={40}
               className="rounded-lg"
@@ -108,7 +108,7 @@ export function PwaInstallBanner() {
 
           <div className="flex-1 min-w-0 pr-4">
             <h3 className="text-sm font-semibold text-gray-100">
-              AI Rehber Uygulaması
+              feedeep Uygulaması
             </h3>
             <p className="mt-0.5 text-xs text-gray-500 leading-relaxed">
               {isIos

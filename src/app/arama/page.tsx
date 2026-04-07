@@ -13,7 +13,7 @@ import { SearchUI, type SearchItem } from "@/components/shared/search-ui";
 
 export const metadata: Metadata = generateMeta({
   title: "Ara",
-  description: "AI Rehber içeriklerinde arama yapın.",
+  description: "feedeep içeriklerinde arama yapın.",
   path: "/arama",
   noIndex: true,
 });

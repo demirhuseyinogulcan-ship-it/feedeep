@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — İçerik Scaffolding Script
+// feedeep — İçerik Scaffolding Script
 // İnteraktif olarak yeni içerik MDX dosyaları oluşturur.
 //
 // Kullanım:
@@ -211,7 +211,7 @@ const TYPES = {
 if (!type || !TYPES[type]) {
   console.log(`
 ╔══════════════════════════════════════════════╗
-║   AI Rehber — İçerik Oluşturucu              ║
+║   feedeep — İçerik Oluşturucu              ║
 ╠══════════════════════════════════════════════╣
 ║                                              ║
 ║   Kullanım:                                  ║

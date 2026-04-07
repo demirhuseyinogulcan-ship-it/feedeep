@@ -84,7 +84,7 @@ export function CodeFillBlank({
         )}
         {taskNumber && totalTasks && (
           <span className="text-[10px] font-sans tracking-widest text-gray-600 uppercase whitespace-nowrap">
-            AI REHBER | Görev {taskNumber}/{totalTasks}
+            FEEDEEP | Görev {taskNumber}/{totalTasks}
           </span>
         )}
       </div>

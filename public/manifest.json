@@ -1,7 +1,7 @@
 {
-  "id": "airehber-pwa",
-  "name": "AI Rehber — Yapay Zeka Rehberiniz",
-  "short_name": "AI Rehber",
+  "id": "feedeep-pwa",
+  "name": "feedeep — Yapay Zeka Haberleri ve Rehberleri",
+  "short_name": "feedeep",
   "description": "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.",
   "start_url": "/",
   "scope": "/",

@@ -129,17 +129,17 @@ export function getExploreSections(): readonly ExploreSection[] {
 
 export const AI_REHBER_FAQ = [
   {
-    question: "AI Rehber nedir?",
+    question: "feedeep nedir?",
     answer:
-      "AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.",
+      "feedeep, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.",
   },
   {
     question: "Yapay zeka haberleri nereden takip edilir?",
     answer:
-      "AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.",
+      "feedeep, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.",
   },
   {
-    question: "AI Rehber'deki haberler güvenilir mi?",
+    question: "feedeep'teki haberler güvenilir mi?",
     answer:
       "Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.",
   },

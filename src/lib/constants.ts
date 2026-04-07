@@ -1,24 +1,24 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Site-wide Constants (Single Source of Truth)
+// feedeep — Site-wide Constants (Single Source of Truth)
 // ─────────────────────────────────────────────────────────────
 
 export const SITE = {
-  name: "AI Rehber",
-  title: "AI Rehber — Yapay Zeka Rehberiniz",
+  name: "feedeep",
+  title: "feedeep — Yapay Zeka Haberleri ve Rehberleri",
   description:
     "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://airehber.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://feedeep.com",
   locale: "tr_TR",
   language: "tr",
   author: {
     name: "Can Demir",
-    email: "info@airehber.com",
+    email: "info@feedeep.com",
     role: "Editör & Growth Hacking Specialist",
     linkedin: "https://linkedin.com/in/ai-rehber",
-    instagram: "https://instagram.com/airehberofficial",
+    instagram: "https://instagram.com/feedeepcom",
   },
   organization: {
-    name: "AI Rehber",
+    name: "feedeep",
     logo: "/logo.png",
     logoSquare: "/logo-512.png",
   },

@@ -14,7 +14,7 @@ import { yazilar, haberler } from "#site/content";
 
 export const metadata: Metadata = generateMeta({
   title: `${SITE.author.name} — Kurucu & Editör`,
-  description: `${SITE.author.name}, AI Rehber'in kurucusu ve baş editörüdür. Yapay zeka teknolojileri, growth hacking ve dijital içerik stratejisi alanlarında çalışmaktadır.`,
+  description: `${SITE.author.name}, feedeep'in kurucusu ve baş editörüdür. Yapay zeka teknolojileri, growth hacking ve dijital içerik stratejisi alanlarında çalışmaktadır.`,
   path: "/yazar/can-demir",
 });
 
@@ -64,7 +64,7 @@ export default function YazarCanDemirPage() {
               name: SITE.author.name,
               url: `${SITE.url}/yazar/can-demir`,
               jobTitle: SITE.author.role,
-              description: `${SITE.author.name}, AI Rehber'in kurucusu ve baş editörüdür. Yapay zeka, growth hacking ve dijital içerik stratejisi alanlarında çalışmaktadır.`,
+              description: `${SITE.author.name}, feedeep'in kurucusu ve baş editörüdür. Yapay zeka, growth hacking ve dijital içerik stratejisi alanlarında çalışmaktadır.`,
               sameAs: [SITE.author.linkedin, SITE.author.instagram],
               worksFor: SITE.organization.name,
             }),
@@ -88,7 +88,7 @@ export default function YazarCanDemirPage() {
         {/* ─── Profil ─── */}
         <PageHeader
           title={SITE.author.name}
-          description={`${SITE.author.role} — AI Rehber'in kurucusu ve baş editörü. Yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla aktarıyor.`}
+          description={`${SITE.author.role} — feedeep'in kurucusu ve baş editörü. Yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla aktarıyor.`}
         />
 
         {/* ─── Biyografi ─── */}
@@ -98,7 +98,7 @@ export default function YazarCanDemirPage() {
           </span>
           <div className="space-y-3 text-sm text-gray-400 leading-relaxed max-w-lg">
             <p>
-              AI Rehber, yapay zeka alanındaki gelişmeleri Türkçe olarak, bağımsız
+              feedeep, yapay zeka alanındaki gelişmeleri Türkçe olarak, bağımsız
               ve güvenilir bir şekilde aktarmak amacıyla kurulmuştur. Platformda
               yayınlanan tüm içerikler, kaynak doğrulama ve güven katmanı
               sisteminden geçerek okuyucuya ulaşır.

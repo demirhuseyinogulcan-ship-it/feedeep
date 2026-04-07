@@ -1,9 +1,8 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Footer Component
+// feedeep — Footer Component
 // ─────────────────────────────────────────────────────────────
 
 import Link from "next/link";
-import Image from "next/image";
 import { SITE, NAV_ITEMS } from "@/lib/constants";
 
 export function Footer() {
@@ -15,14 +14,8 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" aria-label="AI Rehber Ana Sayfa">
-              <Image
-                src="/logo.png"
-                alt="AI Rehber Logo"
-                width={140}
-                height={36}
-                className="h-9 w-auto"
-              />
+            <Link href="/" className="logo-gradient text-lg leading-none inline-block" aria-label="feedeep Ana Sayfa">
+              feedeep
             </Link>
             <p className="mt-3 text-xs text-gray-500 max-w-xs leading-relaxed">
               {SITE.description}

@@ -45,7 +45,7 @@ export function NotificationPrompt() {
         // Hoşgeldin bildirimi gönder
         if ("serviceWorker" in navigator) {
           const registration = await navigator.serviceWorker.ready;
-          registration.showNotification("AI Rehber", {
+          registration.showNotification("feedeep", {
             body: "Bildirimler aktif! Yeni içeriklerden haberdar olacaksınız.",
             icon: "/icon-192.png",
             badge: "/icon-192.png",

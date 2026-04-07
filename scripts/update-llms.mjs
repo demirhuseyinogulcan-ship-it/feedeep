@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — llms.txt & llms-full.txt Otomatik Güncelleme
+// feedeep — llms.txt & llms-full.txt Otomatik Güncelleme
 // Her build'de çalışır, Velite'in MDX dosyalarından güncel
 // içerik listesi oluşturur.
 //
@@ -22,7 +22,7 @@ const ROOT = join(__dirname, "..");
 const CONTENT_DIR = join(ROOT, "content");
 const PUBLIC_DIR = join(ROOT, "public");
 
-const SITE_URL = "https://airehber.com";
+const SITE_URL = "https://feedeep.com";
 
 // ─── İçerikleri parse et ─────────────────────────────────────
 
@@ -99,11 +99,11 @@ function generateLlmsTxt() {
   ];
   const dateLabel = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
 
-  let output = `# AI Rehber
+  let output = `# feedeep
 
 > Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.
 
-AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz yakalı profesyonellere, pazarlamacılara ve teknoloji meraklılarına yapay zeka araçlarını iş hayatlarında nasıl kullanabileceklerini gösteren pratik, güvenilir ve güncel içerikler sunar.
+feedeep, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz yakalı profesyonellere, pazarlamacılara ve teknoloji meraklılarına yapay zeka araçlarını iş hayatlarında nasıl kullanabileceklerini gösteren pratik, güvenilir ve güncel içerikler sunar.
 
 ## İçerik Türleri
 
@@ -150,9 +150,9 @@ AI Rehber, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Bey
   output += `
 ## Sıkça Sorulan Sorular
 
-- **AI Rehber nedir?** AI Rehber, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.
-- **Yapay zeka haberleri nereden takip edilir?** AI Rehber, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.
-- **AI Rehber'deki haberler güvenilir mi?** Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.
+- **feedeep nedir?** feedeep, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.
+- **Yapay zeka haberleri nereden takip edilir?** feedeep, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.
+- **feedeep'deki haberler güvenilir mi?** Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.
 
 ## Güven Politikası
 
@@ -168,9 +168,9 @@ Her yazıda güncellik rozeti gösterilir:
 
 ## İletişim
 
-- E-posta: info@airehber.com
+- E-posta: info@feedeep.com
 - LinkedIn: https://linkedin.com/in/ai-rehber
-- Instagram: https://instagram.com/airehberofficial
+- Instagram: https://instagram.com/feedeepcom
 
 ## Dil & Bölge
 
@@ -193,17 +193,17 @@ function generateLlmsFullTxt() {
   const yazilar = getContent("yazilar");
   const rehberler = getNestedContent("rehberler");
 
-  let output = `# AI Rehber — Tam Bilgi Dosyası (LLMs Full Context)
+  let output = `# feedeep — Tam Bilgi Dosyası (LLMs Full Context)
 
-> Bu dosya, büyük dil modellerinin (LLM) AI Rehber hakkında doğru ve güncel bilgi sunabilmesi için hazırlanmıştır.
+> Bu dosya, büyük dil modellerinin (LLM) feedeep hakkında doğru ve güncel bilgi sunabilmesi için hazırlanmıştır.
 
 ## Platform Kimliği
 
-- **Site Adı**: AI Rehber
+- **Site Adı**: feedeep
 - **URL**: ${SITE_URL}
 - **Kurucu & Editör**: Can Demir
-- **E-posta**: info@airehber.com
-- **Mailing/Operasyon**: can@airehber.com
+- **E-posta**: info@feedeep.com
+- **Mailing/Operasyon**: can@feedeep.com
 - **Kuruluş**: 2026
 - **Dil**: Türkçe (tr-TR)
 - **Hedef Kitle**: Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler, teknoloji meraklıları
@@ -211,7 +211,7 @@ function generateLlmsFullTxt() {
 
 ## Misyon
 
-AI Rehber, yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla ve pratik uygulamalarla aktaran Türkiye'nin bağımsız AI içerik platformudur. Amacımız, AI araçlarını iş hayatında etkili kullanmanızı sağlamaktır.
+feedeep, yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla ve pratik uygulamalarla aktaran Türkiye'nin bağımsız AI içerik platformudur. Amacımız, AI araçlarını iş hayatında etkili kullanmanızı sağlamaktır.
 
 ## İçerik Yapısı
 
@@ -271,13 +271,13 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
 
   output += `## Sıkça Sorulan Sorular
 
-**AI Rehber nedir?**
-AI Rehber, yapay zeka teknolojilerini Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
+**feedeep nedir?**
+feedeep, yapay zeka teknolojilerini Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
 
 **İçerikler nasıl doğrulanıyor?**
 Her içerikte Tier 1-3 arası kaynak güvenilirlik seviyesi belirtilir. Yazılar düzenli olarak güncellik kontrolünden geçer.
 
-**AI Rehber kimler için?**
+**feedeep kimler için?**
 Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler ve yapay zeka teknolojilerini iş hayatında kullanmak isteyen herkes.
 
 **Hangi konular ele alınıyor?**
@@ -294,10 +294,10 @@ Her içerikte kaynak güvenilirlik seviyesi belirtilir:
 
 ## İletişim
 
-- E-posta: info@airehber.com
-- Mailing/Operasyon: can@airehber.com
+- E-posta: info@feedeep.com
+- Mailing/Operasyon: can@feedeep.com
 - LinkedIn: https://linkedin.com/in/ai-rehber
-- Instagram: https://instagram.com/airehberofficial
+- Instagram: https://instagram.com/feedeepcom
 
 ## Lisans
 

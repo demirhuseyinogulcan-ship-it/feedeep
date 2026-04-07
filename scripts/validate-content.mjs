@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — İçerik Doğrulayıcı (Content Validator)
+// feedeep — İçerik Doğrulayıcı (Content Validator)
 // Tüm MDX dosyalarının frontmatter'ını kontrol eder.
 //
 // Kullanım:
@@ -219,7 +219,7 @@ function scanDirectory(dir) {
 const target = process.argv[2]; // optional: "yazilar", "haberler" etc.
 
 console.log("╔══════════════════════════════════════════════╗");
-console.log("║   AI Rehber — İçerik Doğrulayıcı             ║");
+console.log("║   feedeep — İçerik Doğrulayıcı             ║");
 console.log("╚══════════════════════════════════════════════╝");
 
 if (target && VALIDATORS[target]) {

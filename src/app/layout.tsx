@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
-    site: "@airehbercom",
-    creator: "@airehbercom",
+    site: "@feedeepcom",
+    creator: "@feedeepcom",
   },
   robots: {
     index: true,
@@ -100,9 +100,9 @@ export default function RootLayout({
     <html lang="tr" dir="ltr" suppressHydrationWarning>
       <head>
         {/* hreflang — uluslararası sinyal */}
-        <link rel="alternate" hrefLang="tr" href="https://airehber.com" />
-        <link rel="alternate" hrefLang="x-default" href="https://airehber.com" />
-        <link rel="alternate" type="application/rss+xml" title="AI Rehber RSS" href="https://airehber.com/feed.xml" />
+        <link rel="alternate" hrefLang="tr" href="https://feedeep.com" />
+        <link rel="alternate" hrefLang="x-default" href="https://feedeep.com" />
+        <link rel="alternate" type="application/rss+xml" title="feedeep RSS" href="https://feedeep.com/feed.xml" />
 
         {/* PWA Manifest & Theme */}
         <link rel="manifest" href="/manifest.json" />
@@ -112,7 +112,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#050505" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="AI Rehber" />
+        <meta name="apple-mobile-web-app-title" content="feedeep" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260301" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
       </head>

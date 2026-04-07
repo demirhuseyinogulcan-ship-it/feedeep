@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Service Worker v2
+// feedeep — Service Worker v2
 // Offline cache, push notification, navigation preload
 // ─────────────────────────────────────────────────────────────
 
-const STATIC_CACHE = "airehber-static-v2";
-const CONTENT_CACHE = "airehber-content-v2";
+const STATIC_CACHE = "feedeep-static-v2";
+const CONTENT_CACHE = "feedeep-content-v2";
 
 // Statik dosyalar — her zaman cache'le
 const STATIC_ASSETS = [
@@ -150,7 +150,7 @@ self.addEventListener("fetch", (event) => {
 // ─── Push Notification ───────────────────────────────────────
 self.addEventListener("push", (event) => {
   let data = {
-    title: "AI Rehber",
+    title: "feedeep",
     body: "Yeni içerik yayınlandı!",
     url: "/",
     icon: "/icon-192.png",
@@ -170,7 +170,7 @@ self.addEventListener("push", (event) => {
       body: data.body,
       icon: data.icon,
       badge: data.badge,
-      tag: "airehber-update",
+      tag: "feedeep-update",
       renotify: true,
       data: { url: data.url },
       actions: [
@@ -221,7 +221,7 @@ async function checkForNewContent() {
 
     if (lastHash && hash !== lastHash) {
       await storeValue("feed-hash", hash);
-      await self.registration.showNotification("AI Rehber", {
+      await self.registration.showNotification("feedeep", {
         body: "Yeni içerik yayınlandı! Göz atmak ister misiniz?",
         icon: "/icon-192.png",
         badge: "/icon-192.png",
