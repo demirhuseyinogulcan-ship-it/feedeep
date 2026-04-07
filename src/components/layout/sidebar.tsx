@@ -22,6 +22,30 @@ export function Sidebar({ isOpen, onToggle }: Props) {
 
   return (
     <>
+      {/* Toggle butonu — sidebar sağ kenarında kayar, logo yanında değil */}
+      <button
+        type="button"
+        onClick={onToggle}
+        className={cn(
+          "hidden lg:flex fixed top-8 z-50 items-center justify-center w-9 h-9 rounded-full",
+          "bg-surface-1 border border-white/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.5)]",
+          "text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10",
+          "transition-[left] duration-300 ease-in-out",
+          isOpen ? "left-[206px]" : "left-1",
+        )}
+        aria-label={isOpen ? "Kenar çubuğunu kapat" : "Kenar çubuğunu aç"}
+      >
+        {/* 6 nokta — 3 sütun × 2 satır grip deseni */}
+        <span className="grid grid-cols-3 gap-[3.5px]">
+          <span className="w-[4px] h-[4px] rounded-full bg-current" />
+          <span className="w-[4px] h-[4px] rounded-full bg-current" />
+          <span className="w-[4px] h-[4px] rounded-full bg-current" />
+          <span className="w-[4px] h-[4px] rounded-full bg-current" />
+          <span className="w-[4px] h-[4px] rounded-full bg-current" />
+          <span className="w-[4px] h-[4px] rounded-full bg-current" />
+        </span>
+      </button>
+
       {/* Sidebar panel */}
       <aside
         className={cn(
@@ -30,8 +54,8 @@ export function Sidebar({ isOpen, onToggle }: Props) {
           isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        {/* Logo + toggle */}
-        <div className="flex items-center gap-3 px-5 pt-6 pb-8">
+        {/* Logo — toggle butonu artık burada değil */}
+        <div className="px-5 pt-6 pb-8">
           <Link
             href="/"
             className="logo-gradient text-[22px] leading-none"
@@ -39,21 +63,6 @@ export function Sidebar({ isOpen, onToggle }: Props) {
           >
             feedeep
           </Link>
-          <button
-            type="button"
-            onClick={onToggle}
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10 transition-colors"
-            aria-label="Kenar çubuğunu kapat"
-          >
-            <span className="grid grid-cols-2 gap-[3px]">
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
-              <span className="w-[4px] h-[4px] rounded-full bg-current" />
-            </span>
-          </button>
         </div>
 
         {/* Navigasyon */}
@@ -116,24 +125,6 @@ export function Sidebar({ isOpen, onToggle }: Props) {
           </p>
         </div>
       </aside>
-
-      {!isOpen && (
-        <button
-          type="button"
-          onClick={onToggle}
-          className="hidden lg:flex fixed top-5 left-4 z-40 items-center justify-center w-9 h-9 rounded-full bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10 transition-colors"
-          aria-label="Kenar çubuğunu aç"
-        >
-          <span className="grid grid-cols-2 gap-[3px]">
-            <span className="w-[4px] h-[4px] rounded-full bg-current" />
-            <span className="w-[4px] h-[4px] rounded-full bg-current" />
-            <span className="w-[4px] h-[4px] rounded-full bg-current" />
-            <span className="w-[4px] h-[4px] rounded-full bg-current" />
-            <span className="w-[4px] h-[4px] rounded-full bg-current" />
-            <span className="w-[4px] h-[4px] rounded-full bg-current" />
-          </span>
-        </button>
-      )}
     </>
   );
 }
