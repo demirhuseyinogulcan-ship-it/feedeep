@@ -32,6 +32,7 @@ export function useSignal(articleId: string) {
   const { user } = useAuth();
   const [signal, setSignal] = useState<Signal>(() => getSignal(articleId));
   const [stats, setStats] = useState<ArticleStats>(EMPTY_STATS);
+  const [statsLoaded, setStatsLoaded] = useState(false);
 
   // articleId değişince localStorage'dan sinyali güncelle (render-time)
   const [prevArticleId, setPrevArticleId] = useState(articleId);
@@ -39,14 +40,19 @@ export function useSignal(articleId: string) {
     setPrevArticleId(articleId);
     setSignal(getSignal(articleId));
     setStats(EMPTY_STATS);
+    setStatsLoaded(false);
   }
 
   // Sayfa yüklenince: Supabase'den kullanıcı sinyali + istatistikleri al
   useEffect(() => {
 
     // Supabase'den istatistikleri al (herkes için)
-    fetchArticleStats(articleId).then(setStats).catch((err) => {
+    fetchArticleStats(articleId).then((s) => {
+      setStats(s);
+      setStatsLoaded(true);
+    }).catch((err) => {
       console.error("[useSignal] Stats fetch hatası:", err);
+      setStatsLoaded(true);
     });
 
     // Giriş yapmışsa kendi sinyalini de Supabase'den al
@@ -117,6 +123,7 @@ export function useSignal(articleId: string) {
   return {
     signal,
     stats,
+    statsLoaded,
     toggleOwn: handleToggleOwn,
     toggleVote: handleToggleVote,
   };

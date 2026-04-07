@@ -26,12 +26,14 @@ export function useComments(articleId: string) {
   const { user } = useAuth();
   const [comments, setComments] = useState<Comment[]>([]);
   const isSupabase = useRef(false);
+  const [loading, setLoading] = useState(true);
 
   // articleId/user değişince localStorage'dan yükle (render-time)
   const depsKey = `${articleId}-${user?.id ?? ""}`;
   const [prevDeps, setPrevDeps] = useState(depsKey);
   if (depsKey !== prevDeps) {
     setPrevDeps(depsKey);
+    setLoading(true);
     const store = JSON.parse(localStorage.getItem("airehber_comments") ?? "{}");
     const all: Comment[] = store[articleId] ?? [];
     setComments([...all].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
@@ -68,6 +70,8 @@ export function useComments(articleId: string) {
       }
     }).catch((err) => {
       console.error("[useComments] Supabase fetch hatası:", err);
+    }).finally(() => {
+      setLoading(false);
     });
   }, [articleId, user]);
 
@@ -159,6 +163,7 @@ export function useComments(articleId: string) {
   return {
     comments,
     rootComments,
+    loading,
     getReplies,
     addComment,
     removeComment,

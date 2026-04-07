@@ -241,6 +241,7 @@ export function CommentSection({
   const { user, requestAuth } = useAuth();
   const {
     rootComments,
+    loading,
     getReplies,
     addComment: hookAddComment,
     removeComment,
@@ -260,8 +261,16 @@ export function CommentSection({
     : rootComments;
   const hasMore = preview && rootComments.length > previewCount;
 
-  // Önizleme modunda — feed kartlarında
+  // Onizleme modunda — feed kartlarinda
   if (preview) {
+    if (loading) {
+      return (
+        <div className="space-y-2 pt-2 animate-pulse">
+          <div className="rounded-lg bg-white/[0.03] h-12" />
+        </div>
+      );
+    }
+
     if (rootComments.length === 0) return null;
 
     return (
@@ -295,12 +304,12 @@ export function CommentSection({
     );
   }
 
-  // Tam görünüm — detay sayfası
+  // Tam gorunum — detay sayfasi
   return (
     <div className="space-y-6">
-      {/* Başlık */}
+      {/* Baslik */}
       <span className="text-[10px] tracking-widest uppercase text-gray-500 block">
-        Görüşler
+        Gorusler
       </span>
 
       {/* Yeni yorum formu */}
@@ -311,12 +320,25 @@ export function CommentSection({
           onClick={requestAuth}
           className="w-full text-center text-[11px] font-heading tracking-widest uppercase py-3 rounded-lg border border-white/[0.06] text-gray-500 hover:text-primary-400 hover:border-primary-500/30 transition-colors"
         >
-          Görüş yazmak için giriş yap
+          Gorus yazmak icin giris yap
         </button>
       )}
 
+      {/* Yukleniyor skeleton */}
+      {loading && (
+        <div className="space-y-3 pt-2 animate-pulse">
+          {[1, 2].map((i) => (
+            <div key={i} className="space-y-2 py-2">
+              <div className="h-3 w-20 rounded bg-white/[0.04]" />
+              <div className="h-4 w-3/4 rounded bg-white/[0.03]" />
+              <div className="h-3 w-32 rounded bg-white/[0.02]" />
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Threaded yorum listesi */}
-      {rootComments.length > 0 && (
+      {!loading && rootComments.length > 0 && (
         <div className="space-y-1 pt-2">
           {rootComments.map((comment) => (
             <CommentItem
