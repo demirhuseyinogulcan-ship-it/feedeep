@@ -28,7 +28,7 @@ export function Sidebar({ isOpen, onToggle }: Props) {
         type="button"
         onClick={onToggle}
         className={cn(
-          "hidden lg:flex fixed top-8 z-50 items-center justify-center w-6 h-9 rounded-lg",
+          "hidden lg:flex fixed top-20 z-20 items-center justify-center w-6 h-9 rounded-lg",
           "bg-surface-2 border border-white/[0.10] shadow-[0_2px_8px_rgba(0,0,0,0.6)]",
           "text-gray-500 hover:text-gray-200 hover:border-primary-500/50 hover:bg-primary-500/10",
           "transition-[left] duration-300 ease-in-out",
@@ -50,7 +50,7 @@ export function Sidebar({ isOpen, onToggle }: Props) {
       {/* Sidebar panel */}
       <aside
         className={cn(
-          "hidden lg:flex fixed top-0 left-0 h-dvh w-56 flex-col border-r border-white/[0.04] bg-surface-0/80 backdrop-blur-xl z-40",
+          "hidden lg:flex fixed top-14 left-0 h-[calc(100dvh-3.5rem)] w-56 flex-col border-r border-white/[0.04] bg-surface-0/80 backdrop-blur-xl z-20",
           "transition-transform duration-300 ease-in-out",
           isOpen ? "translate-x-0" : "-translate-x-full",
         )}

@@ -148,18 +148,18 @@ export default function RootLayout({
         <AuthProvider>
         <CursorGlow />
 
-        <LayoutShell>
-          {/* Header: her zaman gorunur */}
-          <Header />
+        {/* Header — LayoutShell dışında, hiçbir zaman kaymaz */}
+        <Header />
 
-          {/* Gundem seridi: tum sayfalarda header altinda */}
+        <LayoutShell>
+          {/* Gündem şeridi: tüm sayfalarda header altında */}
           <NewsTicker />
 
           <main id="main-content" className="min-h-[calc(100vh-16rem)]">
             {children}
           </main>
 
-          {/* Footer: sadece lg altinda (sidebar yokken) */}
+          {/* Footer: sadece mobilde (sidebar yokken) */}
           <div className="lg:hidden">
             <Footer />
           </div>
