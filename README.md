@@ -1,6 +1,6 @@
-# AI Rehber
+# feedeep
 
-**Turkiye'nin yapay zeka odakli bagimsiz icerik platformu.**
+**Yazilim ve yapay zeka dunyasini Turkce takip eden bagimsiz icerik platformu.**
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.1-black?logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev)
@@ -9,7 +9,7 @@
 [![Velite](https://img.shields.io/badge/CMS-Velite_0.3-orange)](https://velite.js.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-> [airehber.com](https://airehber.com) — Guncel AI haberleri, derinlemesine analizler, prompt sablonlari ve programlama rehberleri.
+> [feedeep.com](https://feedeep.com) — Guncel AI haberleri, derinlemesine analizler ve arac incelemeleri.
 
 ---
 
@@ -20,30 +20,33 @@ src/
 ├── app/                 # Next.js App Router (SSG)
 │   ├── api/             # API Routes (newsletter, indexing, OG image)
 │   ├── haberler/        # AI haber arsivi
-│   ├── yazilar/         # Analiz & rehber yazilari
-│   ├── prompt-kutuphanesi/ # Prompt sablonlari
-│   ├── haftalik/        # Haftalik AI brifingleri
-│   ├── programlama/     # Interaktif programlama rehberleri
+│   ├── yazilar/         # Analiz & inceleme yazilari
+│   ├── arama/           # Site ici arama
+│   ├── hakkimizda/      # Hakkimizda sayfasi
+│   ├── koleksiyon/      # Kullanici koleksiyonu
+│   ├── profil/          # Kullanici profili
 │   ├── feed.xml/        # RSS Feed (dinamik)
 │   ├── news-sitemap.xml/# Google News Sitemap
 │   └── sitemap.ts       # Dinamik sitemap
 ├── components/
-│   ├── shared/          # Yeniden kullanilabilir UI bileşenleri
+│   ├── shared/          # Yeniden kullanilabilir UI bilesenleri
 │   ├── layout/          # Header, Footer, Navigation
-│   ├── content/         # MDX rendering bileşenleri
-│   ├── seo/             # JSON-LD, meta bileşenleri
-│   └── interactive/     # Client-side interaktif bileşenler
+│   ├── content/         # MDX rendering bilesenleri
+│   ├── feed/            # Haber ve yazi kartlari
+│   ├── seo/             # JSON-LD, meta bilesenleri
+│   ├── signals/         # Oy, yorum, sahiplenme bilesenleri
+│   └── auth/            # Kimlik dogrulama bilesenleri
 ├── lib/
-│   ├── seo.ts           # 15+ JSON-LD generator (WebSite, Article, FAQ, HowTo, Course...)
+│   ├── seo.ts           # JSON-LD generators (WebSite, Article, NewsArticle, FAQ...)
 │   ├── utils.ts         # Utility fonksiyonlari (slugify, formatDate, timeAgo...)
-│   └── constants.ts     # Site sabitleri & kategori mapleri
+│   ├── constants.ts     # Site sabitleri & kategori mapleri
+│   ├── homepage.ts      # Ana sayfa veri katmani
+│   └── feed.ts          # Icerik birlestirme & siralama
 content/                 # Velite MDX icerikler
-├── haberler/            # 68+ haber makalesi
-├── yazilar/             # 10+ analiz yazisi
-├── promptlar/           # 8+ prompt sablonu
-├── haftalik/            # 4+ haftalik brifing
+├── haberler/            # 91+ haber makalesi
+├── yazilar/             # 11+ analiz yazisi
 └── _templates/          # Icerik sablonlari
-scripts/                 # Otomasyon (validate, indexing, llms.txt)
+scripts/                 # Otomasyon (validate, indexing, llms.txt, favicon)
 ```
 
 ## Teknoloji Yigini
@@ -54,24 +57,27 @@ scripts/                 # Otomasyon (validate, indexing, llms.txt)
 | UI | React 19 + TypeScript (strict mode) |
 | Styling | Tailwind CSS v4 (CSS-first config, design tokens) |
 | CMS | Velite 0.3 (MDX + Zod schema validation) |
-| SEO | 15+ JSON-LD semalari, OG image API, RSS, News Sitemap |
+| Backend | Supabase (auth, signals, comments) |
+| SEO | JSON-LD semalari, OG image API, RSS, News Sitemap |
 | Analytics | Vercel Analytics + Google Analytics 4 + Web Vitals |
 | PWA | Service Worker, manifest.json, offline cache |
 | Email | Resend API (newsletter) |
 | Search | Fuse.js (client-side fuzzy search) |
-| Fonts | Montserrat + Inter + JetBrains Mono (next/font) |
+| Fonts | Montserrat (headings) + Inter (body) |
+| Testing | Vitest (172 test) |
 | CI/CD | GitHub Actions (lint, type-check, test, build) |
 | Deploy | Vercel |
 
 ## Ozellikler
 
-- **Kapsamli SEO:** 15+ JSON-LD sema tipi, dinamik OG image, hreflang, news-sitemap, RSS
-- **llms.txt:** LLM-dostu site dokumantasyonu (ileriye donuk)
+- **Kapsamli SEO:** JSON-LD sema tipleri, dinamik OG image, hreflang, news-sitemap, RSS
+- **llms.txt:** LLM-dostu site dokumantasyonu (ChatGPT, Claude, Gemini uyumlu)
 - **Icerik dogrulama:** Pre-build frontmatter validation (70+ kural)
+- **Sinyal sistemi:** Oy verme, sahiplenme, yorum — Supabase tabanli
 - **Guvenlik:** HSTS, CSP, Permissions-Policy, X-Frame-Options, nosniff
 - **Erisebilirlik:** Skip-to-content, aria-labels, prefers-reduced-motion, semantic HTML
 - **Web Vitals:** CLS, LCP, INP, TTFB izleme → GA4 event
-- **Tasarim sistemi:** "The Void" — monokrom dark tema, CSS design tokens
+- **Tasarim sistemi:** "The Void" — koyu tema, mor-pembe gradient accent, CSS design tokens
 
 ## Baslangic
 
@@ -100,10 +106,10 @@ Gerekli degiskenler icin `.env.example` dosyasina bakin.
 
 ```bash
 npm run dev          # Gelistirme sunucusu (localhost:3000)
-npm run build        # Production build
+npm run build        # Production build (validate + llms.txt + next build)
 npm run lint         # ESLint
 npm run type-check   # TypeScript tip kontrolu
-npm run test         # Vitest unit testleri
+npm run test         # Vitest unit testleri (172 test)
 npm run validate     # Icerik frontmatter dogrulama
 ```
 
@@ -112,8 +118,6 @@ npm run validate     # Icerik frontmatter dogrulama
 ```bash
 npm run new:haber    # Yeni haber makalesi
 npm run new:yazi     # Yeni analiz yazisi
-npm run new:prompt   # Yeni prompt sablonu
-npm run new:haftalik # Yeni haftalik brifing
 ```
 
 ## Post-Deploy Index Pipeline
@@ -133,7 +137,7 @@ npm run submit-indexing  # Manuel test
 | Dosya | Aciklama |
 |-------|----------|
 | `CLAUDE.md` | AI agent kurallari ve kod konvansiyonlari |
-| `CONTENT_SYSTEM.md` | Editoryal kilavuz (1000+ satir) — tier sistemi, yazim kurallari |
+| `CONTENT_SYSTEM.md` | Editoryal kilavuz — tier sistemi, yazim kurallari |
 | `CHANGELOG.md` | Oturum bazli degisiklik kaydi |
 | `public/llms.txt` | LLM-dostu site icerik haritasi |
 
