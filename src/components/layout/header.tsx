@@ -40,8 +40,8 @@ export function Header() {
           <span className="truncate">daha derine dal...</span>
         </Link>
 
-        {/* Auth */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Auth — sağa yapışık */}
+        <div className="ml-auto flex items-center gap-2 shrink-0">
           <AuthModal />
 
           {!loading && !user && (

@@ -45,9 +45,13 @@ export function Sidebar({ isOpen, onToggle }: Props) {
             className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10 transition-colors"
             aria-label="Kenar çubuğunu kapat"
           >
-            <span className="flex gap-[3px]">
-              <span className="w-[5px] h-[5px] rounded-full bg-current" />
-              <span className="w-[5px] h-[5px] rounded-full bg-current" />
+            <span className="grid grid-cols-2 gap-[3px]">
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
+              <span className="w-[4px] h-[4px] rounded-full bg-current" />
             </span>
           </button>
         </div>
@@ -120,9 +124,13 @@ export function Sidebar({ isOpen, onToggle }: Props) {
           className="hidden lg:flex fixed top-5 left-4 z-40 items-center justify-center w-9 h-9 rounded-full bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10 transition-colors"
           aria-label="Kenar çubuğunu aç"
         >
-          <span className="flex gap-[3px]">
-            <span className="w-[5px] h-[5px] rounded-full bg-current" />
-            <span className="w-[5px] h-[5px] rounded-full bg-current" />
+          <span className="grid grid-cols-2 gap-[3px]">
+            <span className="w-[4px] h-[4px] rounded-full bg-current" />
+            <span className="w-[4px] h-[4px] rounded-full bg-current" />
+            <span className="w-[4px] h-[4px] rounded-full bg-current" />
+            <span className="w-[4px] h-[4px] rounded-full bg-current" />
+            <span className="w-[4px] h-[4px] rounded-full bg-current" />
+            <span className="w-[4px] h-[4px] rounded-full bg-current" />
           </span>
         </button>
       )}
