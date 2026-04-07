@@ -46,11 +46,11 @@ export function OwnButton({ signal, stats, toggleOwn, size = "sm", className }: 
       onClick={handleClick}
       className={cn(
         "relative font-heading font-semibold tracking-wide uppercase transition-all duration-200 select-none",
-        "border rounded-md",
+        "rounded-md",
         isLg ? "text-xs px-4 py-2" : "text-[11px] px-3 py-1.5",
         signal.owned
-          ? "bg-primary-500/15 border-primary-500/40 text-primary-400"
-          : "bg-transparent border-white/[0.08] text-gray-400 hover:text-gray-200 hover:border-white/[0.15]",
+          ? "bg-gradient-to-br from-[#7c3aed] to-[#a855f7] text-white shadow-[0_2px_12px_rgba(124,58,237,0.3)]"
+          : "border border-white/[0.08] bg-transparent text-gray-400 hover:text-gray-200 hover:border-primary-500/40 hover:bg-primary-500/10",
         animate && "signal-pulse",
         className
       )}

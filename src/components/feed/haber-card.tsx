@@ -69,13 +69,6 @@ export function HaberCard({ item, index }: Props) {
             {item.description}
           </p>
         </div>
-
-        {/* Post footer */}
-        <div className="flex items-center justify-end px-4 pb-4 sm:px-5 sm:pb-5 pt-1">
-          <span className="text-xs text-primary-400/60 group-hover:text-primary-400 transition-colors">
-            Devamını oku &rarr;
-          </span>
-        </div>
       </Link>
 
       {/* Sinyal Çubuğu */}

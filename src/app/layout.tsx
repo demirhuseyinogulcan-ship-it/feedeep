@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { Sidebar } from "@/components/layout/sidebar";
 import { CursorGlow } from "@/components/layout/cursor-glow";
 import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
 import { NotificationPrompt } from "@/components/shared/notification-prompt";
@@ -145,13 +146,26 @@ export default function RootLayout({
 
         <AuthProvider>
         <CursorGlow />
-        <Header />
 
-        <main id="main-content" className="min-h-[calc(100vh-16rem)]">
-          {children}
-        </main>
+        {/* Desktop: sidebar */}
+        <Sidebar />
 
-        <Footer />
+        {/* Mobil/tablet: header (lg ustunde gizlenir) */}
+        <div className="lg:hidden">
+          <Header />
+        </div>
+
+        {/* Sidebar offset: lg'de sol 14rem (w-56) bosluk birak */}
+        <div className="lg:ml-56">
+          <main id="main-content" className="min-h-[calc(100vh-16rem)]">
+            {children}
+          </main>
+
+          {/* Footer: sadece lg altinda goster (sidebar yokken) */}
+          <div className="lg:hidden">
+            <Footer />
+          </div>
+        </div>
 
         {/* Mobil alt navigasyon (Instagram/Substack tarzı) */}
         <MobileNav />

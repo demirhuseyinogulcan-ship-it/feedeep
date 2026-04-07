@@ -388,10 +388,17 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   border-radius: 0.75rem;
   background: rgba(255,255,255,0.015);
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.3s ease;
   will-change: transform;
   --glow-x: 50%;
   --glow-y: 50%;
+}
+
+/* Mobil: dokunulduğunda hafif mor renklendirme */
+@media (hover: none) {
+  .tilt-card:active {
+    background: rgba(139,92,246,0.06);
+  }
 }
 
 /* ─── News Ticker ─────────────────────────────────────────── */
