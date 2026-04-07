@@ -9,7 +9,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { NAV_ITEMS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +31,7 @@ export function Sidebar({ isOpen, onToggle }: Props) {
         )}
       >
         {/* Logo + toggle */}
-        <div className="flex items-center justify-between px-5 pt-6 pb-8">
+        <div className="flex items-center gap-3 px-5 pt-6 pb-8">
           <Link
             href="/"
             className="logo-gradient text-[22px] leading-none"
@@ -43,10 +42,13 @@ export function Sidebar({ isOpen, onToggle }: Props) {
           <button
             type="button"
             onClick={onToggle}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-white/[0.15] transition-colors"
-            aria-label="Kenar cubugunu kapat"
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10 transition-colors"
+            aria-label="Kenar çubuğunu kapat"
           >
-            <PanelLeftClose className="h-4.5 w-4.5" />
+            <span className="flex gap-[3px]">
+              <span className="w-[5px] h-[5px] rounded-full bg-current" />
+              <span className="w-[5px] h-[5px] rounded-full bg-current" />
+            </span>
           </button>
         </div>
 
@@ -115,10 +117,13 @@ export function Sidebar({ isOpen, onToggle }: Props) {
         <button
           type="button"
           onClick={onToggle}
-          className="hidden lg:flex fixed top-4 left-4 z-40 items-center justify-center w-9 h-9 rounded-lg bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-white/[0.15] transition-colors"
-          aria-label="Kenar cubugunu ac"
+          className="hidden lg:flex fixed top-5 left-4 z-40 items-center justify-center w-9 h-9 rounded-full bg-surface-2 border border-white/[0.06] text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10 transition-colors"
+          aria-label="Kenar çubuğunu aç"
         >
-          <PanelLeftOpen className="h-4.5 w-4.5" />
+          <span className="flex gap-[3px]">
+            <span className="w-[5px] h-[5px] rounded-full bg-current" />
+            <span className="w-[5px] h-[5px] rounded-full bg-current" />
+          </span>
         </button>
       )}
     </>

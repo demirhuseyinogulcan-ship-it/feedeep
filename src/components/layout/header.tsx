@@ -31,13 +31,13 @@ export function Header() {
           feedeep
         </Link>
 
-        {/* Arama cubugu — genis */}
+        {/* Arama çubuğu */}
         <Link
           href="/arama"
-          className="flex-1 flex items-center gap-2 h-9 px-4 rounded-full bg-surface-2 border border-white/[0.06] text-sm text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
+          className="flex items-center gap-2 h-9 w-full max-w-xs px-4 rounded-full bg-surface-2 border border-white/[0.06] text-sm text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
         >
           <Search className="h-4 w-4 shrink-0" />
-          <span className="truncate">Haberlerde, yazılarda ara...</span>
+          <span className="truncate">daha derine dal...</span>
         </Link>
 
         {/* Auth */}
