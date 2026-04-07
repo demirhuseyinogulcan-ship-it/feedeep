@@ -28,7 +28,7 @@ export function Sidebar({ isOpen, onToggle }: Props) {
         type="button"
         onClick={onToggle}
         className={cn(
-          "hidden lg:flex fixed top-[96px] z-20 items-center justify-center w-6 h-9 rounded-lg",
+          "hidden lg:flex fixed top-[96px] z-30 items-center justify-center w-6 h-9 rounded-lg",
           "bg-surface-2 border border-white/[0.10] shadow-[0_2px_8px_rgba(0,0,0,0.6)]",
           "text-gray-500 hover:text-gray-200 hover:border-primary-500/50 hover:bg-primary-500/10",
           "transition-[left] duration-300 ease-in-out",

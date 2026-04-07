@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { AuthModal } from "@/components/auth/auth-modal";
@@ -21,8 +21,8 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-30 w-full bg-surface-0/80 backdrop-blur-xl border-b border-white/[0.04]">
-      <div className="flex h-14 w-full items-center gap-3 px-4 sm:px-6">
-        {/* Logo — her zaman görünür, sidebar'dan bağımsız */}
+      <div className="flex h-14 w-full items-center px-4 sm:px-6">
+        {/* Logo — her zaman sol kenarda, sidebar'dan bağımsız */}
         <Link
           href="/"
           className="logo-gradient text-[20px] leading-none shrink-0"
@@ -31,16 +31,7 @@ export function Header() {
           feedeep
         </Link>
 
-        {/* Arama çubuğu */}
-        <Link
-          href="/arama"
-          className="flex items-center gap-2 h-9 w-full max-w-xs px-4 rounded-full bg-surface-2 border border-white/[0.06] text-sm text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
-        >
-          <Search className="h-4 w-4 shrink-0" />
-          <span className="truncate">daha derine dal...</span>
-        </Link>
-
-        {/* Auth — sağa yapışık */}
+        {/* Auth — tamamen sağa yapışık */}
         <div className="ml-auto flex items-center gap-2 shrink-0">
           <AuthModal />
 
