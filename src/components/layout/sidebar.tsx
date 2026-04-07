@@ -23,20 +23,21 @@ export function Sidebar({ isOpen, onToggle }: Props) {
   return (
     <>
       {/* Toggle butonu — sidebar sağ kenarında kayar, logo yanında değil */}
+      {/* Toggle butonu — dikey dikdörtgen, sidebar sağ kenarında kayar */}
       <button
         type="button"
         onClick={onToggle}
         className={cn(
-          "hidden lg:flex fixed top-8 z-50 items-center justify-center w-9 h-9 rounded-full",
-          "bg-surface-1 border border-white/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.5)]",
-          "text-gray-400 hover:text-gray-100 hover:border-primary-500/40 hover:bg-primary-500/10",
+          "hidden lg:flex fixed top-8 z-50 items-center justify-center w-6 h-9 rounded-lg",
+          "bg-surface-2 border border-white/[0.10] shadow-[0_2px_8px_rgba(0,0,0,0.6)]",
+          "text-gray-500 hover:text-gray-200 hover:border-primary-500/50 hover:bg-primary-500/10",
           "transition-[left] duration-300 ease-in-out",
-          isOpen ? "left-[206px]" : "left-1",
+          isOpen ? "left-[210px]" : "left-1",
         )}
         aria-label={isOpen ? "Kenar çubuğunu kapat" : "Kenar çubuğunu aç"}
       >
-        {/* 6 nokta — 3 sütun × 2 satır grip deseni */}
-        <span className="grid grid-cols-3 gap-[3.5px]">
+        {/* 6 nokta — 2 sütun × 3 satır dikey grip */}
+        <span className="grid grid-cols-2 gap-[3px]">
           <span className="w-[4px] h-[4px] rounded-full bg-current" />
           <span className="w-[4px] h-[4px] rounded-full bg-current" />
           <span className="w-[4px] h-[4px] rounded-full bg-current" />
@@ -54,16 +55,8 @@ export function Sidebar({ isOpen, onToggle }: Props) {
           isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        {/* Logo — toggle butonu artık burada değil */}
-        <div className="px-5 pt-6 pb-8">
-          <Link
-            href="/"
-            className="logo-gradient text-[22px] leading-none"
-            aria-label="feedeep Ana Sayfa"
-          >
-            feedeep
-          </Link>
-        </div>
+        {/* Logo header'a taşındı — burada boşluk bırakılır */}
+        <div className="pt-6 pb-8" />
 
         {/* Navigasyon */}
         <nav className="flex-1 px-3">

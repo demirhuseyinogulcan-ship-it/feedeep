@@ -22,10 +22,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 w-full bg-surface-0/80 backdrop-blur-xl border-b border-white/[0.04]">
       <div className="mx-auto flex h-14 max-w-5xl items-center gap-3 px-4 sm:px-6">
-        {/* Mobil: logo (sidebar yokken) */}
+        {/* Logo — her zaman görünür, sidebar'dan bağımsız */}
         <Link
           href="/"
-          className="lg:hidden logo-gradient text-[20px] leading-none shrink-0"
+          className="logo-gradient text-[20px] leading-none shrink-0"
           aria-label="feedeep Ana Sayfa"
         >
           feedeep
