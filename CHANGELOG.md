@@ -1,4 +1,4 @@
-# AI Rehber — Değişiklik Günlüğü (Changelog)
+# feedeep — Değişiklik Günlüğü (Changelog)
 
 > Her oturumda yapılan işler burada kayıt altına alınır.
 > Format: Tarih → Oturum özeti → Yapılan işler listesi
