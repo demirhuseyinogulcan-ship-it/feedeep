@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Comment Data Layer Tests
+// feedeep — Comment Data Layer Tests
 // Threaded yorum sistemi localStorage katmanı.
 // Standart bazlı: CRUD, thread yapısı, oy, sınır durumları.
 // ─────────────────────────────────────────────────────────────
@@ -15,8 +15,8 @@ import {
   getCommentCount,
 } from "@/lib/comments";
 
-const STORAGE_KEY = "airehber_comments";
-const SIGNAL_KEY = "airehber_signals";
+const STORAGE_KEY = "feedeep_comments";
+const SIGNAL_KEY = "feedeep_signals";
 
 beforeEach(() => {
   localStorage.clear();

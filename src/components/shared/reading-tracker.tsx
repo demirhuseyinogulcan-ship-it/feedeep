@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Okuma Takipçisi
+// feedeep — Okuma Takipçisi
 // Makale sayfalarında scroll pozisyonu + okuma ilerlemesini kaydeder.
 // Anasayfada "Kaldığın yerden devam et" banner'ı gösterir.
 // ─────────────────────────────────────────────────────────────
@@ -8,7 +8,7 @@
 
 import { useEffect, useCallback, useRef } from "react";
 
-const STORAGE_KEY = "airehber-reading-progress";
+const STORAGE_KEY = "feedeep-reading-progress";
 
 interface ReadingData {
   /** Tam yol, örn. /yazilar/chatgpt-vs-claude */

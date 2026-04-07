@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Deploy sonrası index tetikleyici webhook endpoint
+// feedeep — Deploy sonrası index tetikleyici webhook endpoint
 // Vercel webhook çağrısını doğrular ve GitHub Action dispatch eder
 // ─────────────────────────────────────────────────────────────
 

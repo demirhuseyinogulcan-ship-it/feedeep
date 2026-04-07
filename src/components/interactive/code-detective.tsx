@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Code Detective (Hata Bulma Oyunu)
+// feedeep — Code Detective (Hata Bulma Oyunu)
 // MDX içinden <CodeDetective /> olarak kullanılır
 // ─────────────────────────────────────────────────────────────
 

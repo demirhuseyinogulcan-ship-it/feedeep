@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Global Error Boundary
+// feedeep — Global Error Boundary
 // Hata durumlarında crawler confusion'ı önler, UX korur
 // ─────────────────────────────────────────────────────────────
 

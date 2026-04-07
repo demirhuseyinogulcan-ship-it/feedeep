@@ -1,4 +1,4 @@
-// AI Rehber — KVKK / Çerez Bildirimi
+// feedeep — KVKK / Çerez Bildirimi
 // Glass morphism tasarım, 2 buton: Gereksiz Olanları Reddet + Kabul Et
 // Her iki buton da consent kaydeder (zorunlu çerezler hariç tutma)
 
@@ -6,7 +6,7 @@
 
 import { useState, useEffect } from "react";
 
-const CONSENT_KEY = "airehber-cookie-consent";
+const CONSENT_KEY = "feedeep-cookie-consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);

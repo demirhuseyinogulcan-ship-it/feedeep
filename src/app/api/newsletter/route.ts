@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Newsletter API Route
+// feedeep — Newsletter API Route
 // Resend entegrasyonu ile e-posta abonelik endpoint'i
 // RESEND_API_KEY yoksa graceful fallback (loglama)
 // ─────────────────────────────────────────────────────────────
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
         // Welcome email gönder
         await resend.emails.send({
-          from: "feedeep <info@feedeep.com>",
+          from: "feedeep <hey@feedeep.com>",
           to: email,
           subject: "İç Çember'e Hoş Geldin — feedeep",
           html: `
@@ -60,8 +60,7 @@ export async function POST(request: NextRequest) {
               </p>
               <ul style="font-size: 14px; line-height: 1.8; color: #a78bfa; padding-left: 20px;">
                 <li><a href="https://feedeep.com/haberler" style="color: #a78bfa;">Son AI Haberleri</a></li>
-                <li><a href="https://feedeep.com/yazilar" style="color: #a78bfa;">Derin Yazılar</a></li>
-                <li><a href="https://feedeep.com/programlama" style="color: #a78bfa;">Programlama Rehberleri</a></li>
+                <li><a href="https://feedeep.com/yazilar" style="color: #a78bfa;">Derinlemesine Yazılar</a></li>
               </ul>
               <p style="font-size: 12px; color: #6b7280; margin-top: 32px; border-top: 1px solid #1f2937; padding-top: 16px;">
                 feedeep — feedeep.com

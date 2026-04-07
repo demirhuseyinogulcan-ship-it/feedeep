@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Filterable Content List (Client Component)
+// feedeep — Filterable Content List (Client Component)
 // Kategori filtreleme + feed card görünümü — tüm listing sayfalarında kullanılır
 // ─────────────────────────────────────────────────────────────
 

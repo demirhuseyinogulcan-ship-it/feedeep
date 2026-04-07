@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Feed Container (Client Component)
+// feedeep — Feed Container (Client Component)
 // Sonsuz scroll feed akışı
 // ─────────────────────────────────────────────────────────────
 

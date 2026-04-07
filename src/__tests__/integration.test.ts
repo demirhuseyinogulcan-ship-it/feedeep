@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Cross-module Integration Tests
+// feedeep — Cross-module Integration Tests
 // Modüller arası etkileşim: yorum → otomatik sahiplenme,
 // sinyal + yorum birlikte çalışma, veri tutarlılığı.
 // ─────────────────────────────────────────────────────────────

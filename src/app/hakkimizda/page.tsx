@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Hakkımızda Sayfası
+// feedeep — Hakkımızda Sayfası
 // Diğer sayfalarla aynı layout, animasyon ve orantı
 // ─────────────────────────────────────────────────────────────
 
@@ -12,15 +12,15 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 
 export const metadata: Metadata = generateMeta({
-  title: "Hakkımızda — feedeep Ekibi",
+  title: "Hakkımızda — feedeep Editöryal Ekibi",
   description:
-    "feedeep — Yapay zeka dünyasının Türkçe rehberi. Bağımsız, güvenilir, pratik.",
+    "feedeep — Yazılım ve yapay zeka dünyasından güncel haberler sunan bağımsız Türkçe yayın platformu. Akışın dibindeyiz.",
   path: "/hakkimizda",
   keywords: [
     "feedeep hakkında",
-    "yapay zeka rehberi",
-    "türkçe ai platformu",
-    "yapay zeka türkçe",
+    "feedeep editöryal ekibi",
+    "yazılım ve ai haberleri",
+    "türkçe teknoloji platformu",
   ],
 });
 
@@ -68,7 +68,7 @@ export default function HakkimizdaPage() {
         {/* ─── Header — PageHeader bileşeniyle ─── */}
         <PageHeader
           title="Hakkımızda"
-          description="Yapay zeka dünyasının Türkçe rehberi. Güvenilir kaynaklarla, pratik uygulamalarla ve Türkiye'nin gerçeklerine uygun içeriklerle yayın yapıyoruz."
+          description="Yazılım ve yapay zeka dünyasını Türkçe takip ediyoruz. Güvenilir kaynaklarla, pratik uygulamalarla ve Türkiye'nin gerçeklerine uygun içeriklerle yayın yapıyoruz."
         />
 
         {/* ─── Misyon ─── */}

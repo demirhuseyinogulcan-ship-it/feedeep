@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Feed Data Layer
+// feedeep — Feed Data Layer
 // Tüm içerik tiplerini birleşik akış (feed) olarak sunar
 // ─────────────────────────────────────────────────────────────
 

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Freshness Badge (Güncellik Rozeti)
+// feedeep — Freshness Badge (Güncellik Rozeti)
 // Monochrome void style
 // ─────────────────────────────────────────────────────────────
 

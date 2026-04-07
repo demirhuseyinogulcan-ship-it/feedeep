@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Newsletter Form (Client Component)
+// feedeep — Newsletter Form (Client Component)
 // E-posta abonelik formu — API route ile çalışır
 // ─────────────────────────────────────────────────────────────
 

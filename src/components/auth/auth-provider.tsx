@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Auth Context Provider
+// feedeep — Auth Context Provider
 // Kullanıcı oturumunu tüm bileşenlerde erişilebilir kılar.
 // + requestAuth() ile herhangi bileşenden modal açılabilir.
 // ─────────────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Feed Filters (Tab Bar)
+// feedeep — Feed Filters (Tab Bar)
 // Sticky horizontal filter tabs — her içerik tipini filtreler
 // ─────────────────────────────────────────────────────────────
 

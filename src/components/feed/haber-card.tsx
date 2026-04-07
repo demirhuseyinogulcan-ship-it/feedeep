@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Haber Feed Card (Sosyal Medya Post Formatı)
+// feedeep — Haber Feed Card (Sosyal Medya Post Formatı)
 // Full-width görsel + kaynak header + başlık + açıklama + footer
 // ─────────────────────────────────────────────────────────────
 

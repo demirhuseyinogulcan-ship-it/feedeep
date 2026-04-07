@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Global Loading Skeleton
+// feedeep — Global Loading Skeleton
 // Suspense boundary — CLS koruması ve UX iyileştirmesi
 // ─────────────────────────────────────────────────────────────
 

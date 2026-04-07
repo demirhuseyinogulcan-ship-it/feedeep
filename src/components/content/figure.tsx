@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Figure Component (MDX içi görsel)
+// feedeep — Figure Component (MDX içi görsel)
 // MDX içeriklerinde <Figure /> ile kullanılır
 // ─────────────────────────────────────────────────────────────
 

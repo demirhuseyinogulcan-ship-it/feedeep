@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — useSignal Hook
+// feedeep — useSignal Hook
 // Optimistic localStorage + Supabase sync.
 // Giriş yapmamış: localStorage only.
 // Giriş yapmış: localStorage + Supabase arka plan sync.
@@ -61,9 +61,9 @@ export function useSignal(articleId: string) {
         if (remote) {
           setSignal(remote);
           // localStorage'ı da güncelle
-          const store = JSON.parse(localStorage.getItem("airehber_signals") ?? "{}");
+          const store = JSON.parse(localStorage.getItem("feedeep_signals") ?? "{}");
           store[articleId] = remote;
-          localStorage.setItem("airehber_signals", JSON.stringify(store));
+          localStorage.setItem("feedeep_signals", JSON.stringify(store));
         }
       }).catch((err) => {
         console.error("[useSignal] User signal fetch hatası:", err);

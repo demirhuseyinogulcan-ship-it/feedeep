@@ -47,8 +47,7 @@ function getContent(dir) {
 }
 
 /**
- * Nested dizinlerdeki MDX dosyalarini okur (rehberler gibi)
- * rehberler/nextjs-rehberi/bolum-1.mdx gibi yapilar icin
+ * Nested dizinlerdeki MDX dosyalarini okur
  */
 function getNestedContent(dir) {
   const fullPath = join(CONTENT_DIR, dir);
@@ -90,7 +89,6 @@ function getNestedContent(dir) {
 function generateLlmsTxt() {
   const haberler = getContent("haberler");
   const yazilar = getContent("yazilar");
-  const rehberler = getNestedContent("rehberler");
 
   const now = new Date();
   const monthNames = [
@@ -101,22 +99,19 @@ function generateLlmsTxt() {
 
   let output = `# feedeep
 
-> Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.
+> Yazılım ve yapay zeka dünyasını Türkçe takip ediyoruz. Güncel haberler, derinlemesine analizler ve araç incelemeleri.
 
-feedeep, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz yakalı profesyonellere, pazarlamacılara ve teknoloji meraklılarına yapay zeka araçlarını iş hayatlarında nasıl kullanabileceklerini gösteren pratik, güvenilir ve güncel içerikler sunar.
+feedeep, Türkiye'nin yazılım ve yapay zeka odaklı bağımsız içerik platformudur. Profesyonellere, geliştiricilere ve teknoloji meraklılarına yapay zeka ve yazılım dünyasından güvenilir ve güncel içerikler sunar.
 
 ## İçerik Türleri
 
-- **Yazılar**: Derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar (1000-5000 kelime, evergreen)
-- **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
-- **Programlama Rehberleri**: Sıfırdan ileri seviyeye, interaktif alıştırmalarla programlama dersleri
+- **Yazılar**: Derinlemesine incelemeler, analizler ve karşılaştırmalar (1000-5000 kelime, evergreen)
+- **Haberler**: Güncel AI ve yazılım gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
 
 ## Sayfalar
 
-- [Yazılar](${SITE_URL}/yazilar): Tüm rehberler, incelemeler ve analizler
-- [Haberler](${SITE_URL}/haberler): Güncel AI haberleri
-- [Programlama Rehberleri](${SITE_URL}/programlama): Adım adım programlama dersleri
-- [Yazar](${SITE_URL}/yazar/can-demir): Editör ve kurucu hakkında
+- [Yazılar](${SITE_URL}/yazilar): Tüm incelemeler, analizler ve karşılaştırmalar
+- [Haberler](${SITE_URL}/haberler): Güncel AI ve yazılım haberleri
 - [Hakkımızda](${SITE_URL}/hakkimizda): Ekip ve misyon
 
 ## Son İçerikler (${dateLabel})
@@ -133,24 +128,11 @@ feedeep, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz
     output += `- [${y.title}](${SITE_URL}/yazilar/${y.slug}): ${y.description}\n`;
   }
 
-  if (rehberler.length > 0) {
-    output += `\n### Programlama Rehberleri\n`;
-    let currentGuide = "";
-    for (const r of rehberler) {
-      const guide = r.guide || r._guide || "";
-      if (guide !== currentGuide) {
-        currentGuide = guide;
-        output += `\n**${r.guideTitle || guide}** (${SITE_URL}/programlama/${guide})\n`;
-      }
-      output += `- [Bölüm ${r.chapter}: ${r.title}](${SITE_URL}/programlama/${guide}/${r.slug}): ${r.description}\n`;
-    }
-  }
-
-  // FAQ — AI modellerinin sik sorulan sorulara yanit verebilmesi icin
+  // FAQ
   output += `
 ## Sıkça Sorulan Sorular
 
-- **feedeep nedir?** feedeep, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.
+- **feedeep nedir?** feedeep, yapay zeka ve yazılım dünyasındaki güncel haberleri, derinlemesine analizleri ve araç incelemelerini Türkçe olarak sunan bağımsız bir yayın platformudur.
 - **Yapay zeka haberleri nereden takip edilir?** feedeep, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.
 - **feedeep'deki haberler güvenilir mi?** Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.
 
@@ -168,8 +150,7 @@ Her yazıda güncellik rozeti gösterilir:
 
 ## İletişim
 
-- E-posta: info@feedeep.com
-- LinkedIn: https://linkedin.com/in/ai-rehber
+- E-posta: hey@feedeep.com
 - Instagram: https://instagram.com/feedeepcom
 
 ## Dil & Bölge
@@ -191,7 +172,6 @@ Her yazıda güncellik rozeti gösterilir:
 function generateLlmsFullTxt() {
   const haberler = getContent("haberler");
   const yazilar = getContent("yazilar");
-  const rehberler = getNestedContent("rehberler");
 
   let output = `# feedeep — Tam Bilgi Dosyası (LLMs Full Context)
 
@@ -201,23 +181,21 @@ function generateLlmsFullTxt() {
 
 - **Site Adı**: feedeep
 - **URL**: ${SITE_URL}
-- **Kurucu & Editör**: Can Demir
-- **E-posta**: info@feedeep.com
-- **Mailing/Operasyon**: can@feedeep.com
+- **E-posta**: hey@feedeep.com
 - **Kuruluş**: 2026
 - **Dil**: Türkçe (tr-TR)
-- **Hedef Kitle**: Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler, teknoloji meraklıları
+- **Hedef Kitle**: Geliştiriciler, profesyoneller, teknoloji meraklıları
 - **Konum**: İstanbul, Türkiye
 
 ## Misyon
 
-feedeep, yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla ve pratik uygulamalarla aktaran Türkiye'nin bağımsız AI içerik platformudur. Amacımız, AI araçlarını iş hayatında etkili kullanmanızı sağlamaktır.
+feedeep, yapay zeka ve yazılım dünyasını herkesin anlayabileceği dilde, güvenilir kaynaklarla aktaran Türkiye'nin bağımsız içerik platformudur.
 
 ## İçerik Yapısı
 
 ### 1. Yazılar (/yazilar)
 Derinlemesine, evergreen içerikler. 1000-5000 kelime arası.
-Kategoriler: rehber, inceleme, analiz, karşılaştırma.
+Kategoriler: inceleme, analiz, karşılaştırma.
 Her yazıda zorunlu alanlar:
 - Kaynak listesi (tier 1-3 güvenilirlik)
 - Güven seviyesi (high/medium/speculative)
@@ -226,21 +204,14 @@ Her yazıda zorunlu alanlar:
 - Düzeltme geçmişi
 
 ### 2. Haberler (/haberler)
-Güncel AI gelişmeleri. 200-500 kelime.
+Güncel AI ve yazılım gelişmeleri. 200-500 kelime.
 Kategoriler: sirketler, sektor, turkiye, arastirma.
 Her haberde kaynak URL ve kaynak adı zorunlu.
-
-### 3. Programlama Rehberleri (/programlama)
-Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
-- Next.js, React ve diğer modern framework rehberleri
-- Başlangıçtan ileri seviyeye adım adım ilerleme
-- Gerçek proje örnekleri ve kod parçacıkları
 
 ## İstatistikler
 
 - Toplam haber: ${haberler.length}
 - Toplam yazı: ${yazilar.length}
-- Toplam rehber bölümü: ${rehberler.length}
 
 ## Tüm İçerik Listesi
 
@@ -256,32 +227,19 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
     output += `- [${h.title}](${SITE_URL}/haberler/${h.slug})\n  Kaynak: ${h.sourceName} | Tarih: ${h.date} | Güven: ${h.confidence || "high"}\n  ${h.description}\n\n`;
   }
 
-  if (rehberler.length > 0) {
-    output += `### Programlama Rehberleri\n`;
-    let currentGuide = "";
-    for (const r of rehberler) {
-      const guideName = r.slug.split("/")[0];
-      if (guideName !== currentGuide) {
-        currentGuide = guideName;
-        output += `\n**${guideName}**\n`;
-      }
-      output += `- [${r.title}](${SITE_URL}/programlama/${r.slug})\n  ${r.description}\n\n`;
-    }
-  }
-
   output += `## Sıkça Sorulan Sorular
 
 **feedeep nedir?**
-feedeep, yapay zeka teknolojilerini Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
+feedeep, yapay zeka ve yazılım dünyasını Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
 
 **İçerikler nasıl doğrulanıyor?**
 Her içerikte Tier 1-3 arası kaynak güvenilirlik seviyesi belirtilir. Yazılar düzenli olarak güncellik kontrolünden geçer.
 
 **feedeep kimler için?**
-Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler ve yapay zeka teknolojilerini iş hayatında kullanmak isteyen herkes.
+Geliştiriciler, profesyoneller ve yapay zeka ile yazılım dünyasını takip etmek isteyen herkes.
 
 **Hangi konular ele alınıyor?**
-AI haberleri, derinlemesine analizler, programlama rehberleri ve yapay zeka araçları.
+AI haberleri, yazılım gelişmeleri, derinlemesine analizler ve araç incelemeleri.
 
 `;
 
@@ -294,9 +252,7 @@ Her içerikte kaynak güvenilirlik seviyesi belirtilir:
 
 ## İletişim
 
-- E-posta: info@feedeep.com
-- Mailing/Operasyon: can@feedeep.com
-- LinkedIn: https://linkedin.com/in/ai-rehber
+- E-posta: hey@feedeep.com
 - Instagram: https://instagram.com/feedeepcom
 
 ## Lisans
@@ -317,8 +273,7 @@ writeFileSync(join(PUBLIC_DIR, "llms-full.txt"), llmsFullTxt, "utf-8");
 
 const haberCount = getContent("haberler").length;
 const yaziCount = getContent("yazilar").length;
-const rehberCount = getNestedContent("rehberler").length;
-const total = haberCount + yaziCount + rehberCount;
+const total = haberCount + yaziCount;
 
-console.log(`llms.txt güncellendi (${total} içerik: ${haberCount} haber, ${yaziCount} yazı, ${rehberCount} rehber bölümü)`);
+console.log(`llms.txt güncellendi (${total} içerik: ${haberCount} haber, ${yaziCount} yazı)`);
 console.log(`llms-full.txt güncellendi`);

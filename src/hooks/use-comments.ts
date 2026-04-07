@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — useComments Hook
+// feedeep — useComments Hook
 // Optimistic localStorage + Supabase sync.
 // Giriş yapmamış: localStorage only.
 // Giriş yapmış: Supabase as source of truth.
@@ -34,7 +34,7 @@ export function useComments(articleId: string) {
   if (depsKey !== prevDeps) {
     setPrevDeps(depsKey);
     setLoading(true);
-    const store = JSON.parse(localStorage.getItem("airehber_comments") ?? "{}");
+    const store = JSON.parse(localStorage.getItem("feedeep_comments") ?? "{}");
     const all: Comment[] = store[articleId] ?? [];
     setComments([...all].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
   }
@@ -54,7 +54,7 @@ export function useComments(articleId: string) {
       }
     }
     // Fallback: localStorage — tüm yorumları al (nested dahil)
-    const store = JSON.parse(localStorage.getItem("airehber_comments") ?? "{}");
+    const store = JSON.parse(localStorage.getItem("feedeep_comments") ?? "{}");
     const all: Comment[] = store[articleId] ?? [];
     setComments([...all].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
   }, [articleId, user]);

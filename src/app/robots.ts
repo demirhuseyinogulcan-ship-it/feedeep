@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — robots.ts (Dynamically generated)
+// feedeep — robots.ts (Dynamically generated)
 // ─────────────────────────────────────────────────────────────
 
 import type { MetadataRoute } from "next";

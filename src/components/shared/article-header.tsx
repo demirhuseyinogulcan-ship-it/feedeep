@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Article Header (DRY shared component)
+// feedeep — Article Header (DRY shared component)
 // Yazı ve haber detay sayfaları için ortak başlık bölümü
 // ─────────────────────────────────────────────────────────────
 

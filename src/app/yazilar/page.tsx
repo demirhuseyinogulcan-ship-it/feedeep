@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Yazılar Listesi Sayfası (Velite)
+// feedeep — Yazılar Listesi Sayfası (Velite)
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
@@ -13,17 +13,17 @@ import { FilterableContentList } from "@/components/shared/filterable-content-li
 import { buildYaziFeed } from "@/lib/feed";
 
 export const metadata: Metadata = generateMeta({
-  title: "Yapay Zeka Yazıları: Rehberler, Analizler ve İncelemeler [2026]",
+  title: "Yazılım ve AI Yazıları: Analizler ve İncelemeler [2026]",
   description:
-    "Yapay zeka hakkında derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar. ChatGPT, Claude, Gemini araç incelemeleri ve pratik kullanım kılavuzları.",
+    "Yapay zeka ve yazılım dünyasından derinlemesine analizler, araç incelemeleri ve karşılaştırmalar.",
   path: "/yazilar",
   keywords: [
     "yapay zeka yazıları",
-    "feedeep",
-    "yapay zeka analizleri",
-    "ai incelemeleri",
-    "chatgpt rehberi",
-    "yapay zeka rehberleri",
+    "yazılım analizleri",
+    "ai araç incelemeleri",
+    "feedeep yazılar",
+    "teknoloji incelemeleri",
+    "yazılım karşılaştırma",
   ],
 });
 
@@ -45,7 +45,7 @@ export default function YazilarPage() {
         data={[
           collectionPageJsonLd({
             name: "Yapay Zeka Yazıları",
-            description: "Yapay zeka hakkında derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar.",
+            description: "Yapay zeka ve yazılım hakkında derinlemesine analizler, incelemeler ve karşılaştırmalar.",
             url: "/yazilar",
             itemType: "Article",
             items: posts.slice(0, 20).map((p) => ({
@@ -69,7 +69,7 @@ export default function YazilarPage() {
         />
         <PageHeader
         title="Yazılar"
-        description="Derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar."
+        description="Derinlemesine analizler, incelemeler ve karşılaştırmalar."
       />
       <FilterableContentList
         items={items}

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Search UI (Client Component)
+// feedeep — Search UI (Client Component)
 // Fuse.js ile fuzzy, relevance-based arama
 // ─────────────────────────────────────────────────────────────
 

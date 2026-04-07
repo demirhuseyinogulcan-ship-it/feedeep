@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Mobile Bottom Navigation
+// feedeep — Mobile Bottom Navigation
 // Instagram/Substack tarzı sabit alt menü — sadece mobilde görünür
 // ─────────────────────────────────────────────────────────────
 

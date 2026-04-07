@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — OG Image API Route (next/og + Satori)
+// feedeep — OG Image API Route (next/og + Satori)
 // Otomatik yazı kartı üretimi
 // ─────────────────────────────────────────────────────────────
 

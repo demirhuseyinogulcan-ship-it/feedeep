@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Action Items Component
+// feedeep — Action Items Component
 // Monochrome void style
 // ─────────────────────────────────────────────────────────────
 

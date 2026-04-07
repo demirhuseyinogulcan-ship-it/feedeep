@@ -1,9 +1,9 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Homepage Data Helpers
+// feedeep — Homepage Data Helpers
 // Anasayfa veri hazırlama mantığı (page.tsx'den çıkarıldı)
 // ─────────────────────────────────────────────────────────────
 
-import { yazilar, haberler, rehberler } from "#site/content";
+import { yazilar, haberler } from "#site/content";
 
 // ─── Types ───
 
@@ -114,29 +114,21 @@ export function getLatestNews(heroItem: HeroItem | null) {
 }
 
 export function getExploreSections(): readonly ExploreSection[] {
-  return [
-    {
-      title: "Programlama Rehberleri",
-      description:
-        "Sıfırdan ileri seviyeye, interaktif derslerle programlama öğrenin",
-      href: "/programlama",
-      count: `${new Set(rehberler.filter((r) => r.published).map((r) => r.guide)).size || "Yeni"}`,
-    },
-  ] as const;
+  return [] as const;
 }
 
 // ─── FAQ Data ───
 
-export const AI_REHBER_FAQ = [
+export const FEEDEEP_FAQ = [
   {
     question: "feedeep nedir?",
     answer:
-      "feedeep, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.",
+      "feedeep, yapay zeka, yazılım ve web geliştirme dünyasından güncel haberleri, derinlemesine analizleri ve araç incelemelerini Türkçe olarak sunan bağımsız bir yayın platformudur.",
   },
   {
-    question: "Yapay zeka haberleri nereden takip edilir?",
+    question: "feedeep hangi konuları takip ediyor?",
     answer:
-      "feedeep, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.",
+      "Yapay zeka, yazılım geliştirme, web teknolojileri, siber güvenlik ve kodlama alanlarındaki güncel gelişmeleri takip ediyoruz. OpenAI, Google, Anthropic gibi şirketlerin duyurularından açık kaynak projelere kadar geniş bir yelpazede içerik üretiyoruz.",
   },
   {
     question: "feedeep'teki haberler güvenilir mi?",

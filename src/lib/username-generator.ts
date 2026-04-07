@@ -1,12 +1,12 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Username Generator (Alan + Rol)
+// feedeep — Username Generator (Alan + Rol)
 // Anonim ama kişilikli kullanıcı adları.
 // Format: "{Alan}{Rol}" — ör: "KernelMuhafızı", "VeriKaşifi"
 // Türkçe karakter destekli (ı, ğ, ü, ö, ş, ç, İ).
 // Supabase TEXT sütunu UTF-8 — sorun yok.
 // ─────────────────────────────────────────────────────────────
 
-const STORAGE_KEY = "airehber_username";
+const STORAGE_KEY = "feedeep_username";
 
 // ─── Alan (Domain / Konu) ───
 

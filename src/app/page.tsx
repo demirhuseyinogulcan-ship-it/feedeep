@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Anasayfa (Feed Model)
+// feedeep — Anasayfa (Feed Model)
 // Sosyal medya tarzı sonsuz akış — tüm içerikler tek feed'de
 // ─────────────────────────────────────────────────────────────
 

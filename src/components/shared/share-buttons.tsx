@@ -1,4 +1,4 @@
-// AI Rehber — Sosyal Paylaşım Butonları
+// feedeep — Sosyal Paylaşım Butonları
 // Twitter/X, LinkedIn, WhatsApp, Link Kopyala
 // Her içerik sayfasında kullanılır — organik büyüme motoru
 

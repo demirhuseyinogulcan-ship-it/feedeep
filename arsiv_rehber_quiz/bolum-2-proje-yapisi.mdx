@@ -1,0 +1,922 @@
+---
+title: "Next.js Proje Yapısı: Dosya Düzeni, App Router ve Layout Sistemi [2026]"
+slug: bolum-2-proje-yapisi
+description: "Next.js projesindeki tüm dosya ve klasörleri öğren. package.json, app/ klasörü, layout.tsx, page.tsx ve App Router yapısını adım adım inceliyoruz."
+date: 2026-03-03
+published: true
+guide: nextjs-rehberi
+guideTitle: "Sıfırdan Next.js"
+chapter: 2
+totalChapters: 20
+technology: nextjs
+difficulty: baslangic
+keywords:
+  - next.js proje yapısı
+  - next.js app router
+  - next.js layout
+  - next.js page.tsx
+  - next.js dosya yapısı
+  - next.js klasör düzeni
+prerequisites:
+  - "Bölüm 1'deki Node.js ve VS Code kurulumunu tamamlamış olmak"
+  - "create-next-app ile bir proje oluşturmuş olmak"
+  - "Temel dosya ve klasör kavramlarını bilmek"
+learningOutcomes:
+  - "Next.js projesindeki her dosya ve klasörün görevini açıklayabilir"
+  - "page.tsx, layout.tsx ve diğer özel dosyaların rollerini ayırt edebilir"
+  - "package.json dosyasını okuyabilir ve script komutlarını anlayabilir"
+  - "Hangi dosyalara dokunulacağını, hangilerinin otomatik yönetildiğini bilir"
+  - "Projeye yeni bir sayfa ekleyebilir ve layout yapısını kavrayabilir"
+estimatedMinutes: 45
+faq:
+  - question: "Next.js'te app/ klasörü ne işe yarar?"
+    answer: "app/ klasörü Next.js 13+ ile gelen App Router sisteminin temelidir. Bu klasörün içindeki dosya ve klasör yapısı doğrudan sitenizin URL yapısını belirler. Örneğin app/hakkimda/page.tsx dosyası otomatik olarak /hakkimda adresinde bir sayfa oluşturur. Layout, loading, error gibi özel dosyalar da bu klasörün içinde tanımlanır."
+  - question: "page.tsx ve layout.tsx arasındaki fark nedir?"
+    answer: "page.tsx bir sayfanın benzersiz içeriğini tanımlar ve her sayfa için farklıdır. layout.tsx ise birden fazla sayfa tarafından paylaşılan ortak çerçeveyi (header, footer, navigasyon gibi) tanımlar. layout.tsx sayfalar arası geçişte yeniden render edilmez, bu da performansı artırır. Her route segmentinin kendi layout'u olabilir ve bunlar iç içe sarmalanır."
+  - question: "node_modules klasörünü silsem ne olur?"
+    answer: "node_modules klasörü projenizin bağımlılıklarını (indirilen paketleri) içerir. Silseniz bile npm install veya pnpm install komutuyla tekrar oluşturabilirsiniz çünkü hangi paketlerin gerekli olduğu package.json dosyasında kayıtlıdır. Bu yüzden node_modules asla Git'e eklenmez."
+  - question: "package.json'daki dependencies ve devDependencies farkı nedir?"
+    answer: "dependencies, uygulamanızın çalışması için gereken paketlerdir (React, Next.js gibi). devDependencies ise sadece geliştirme sırasında kullanılan araçlardır (ESLint, TypeScript, Tailwind gibi). Production ortamında devDependencies yüklenmez, bu da sunucu boyutunu küçük tutar."
+  - question: "next.config.ts dosyasında ne tür ayarlar yapılır?"
+    answer: "next.config.ts, Next.js'in davranışını özelleştiren yapılandırma dosyasıdır. Görsel optimizasyonu ayarları, yönlendirme kuralları (redirects/rewrites), environment değişkenleri, Webpack özelleştirmeleri ve deneysel özellikler bu dosyada tanımlanır. Çoğu proje için varsayılan ayarlar yeterlidir."
+  - question: "tsconfig.json dosyası ne işe yarar?"
+    answer: "tsconfig.json, TypeScript derleyicisinin (compiler) ayarlarını içerir. Hangi ES sürümünün hedefleneceği, path alias'ları (@ kısayolu gibi), strict mod ayarları ve modül çözümleme stratejisi bu dosyada belirlenir. Next.js bu dosyayı otomatik oluşturur ve çoğu ayarı sizin için optimize eder."
+  - question: ".next klasörü nedir ve neden Git'e eklenmez?"
+    answer: ".next klasörü, Next.js'in build çıktısını sakladığı geçici bir dizindir. npm run build veya npm run dev komutları bu klasörü otomatik oluşturur. İçeriği her build'de yeniden üretildiği için Git'e eklenmez. Silseniz bile tekrar oluşturulur."
+  - question: "public/ klasörüne koyduğum dosyalara nasıl erişirim?"
+    answer: "public/ klasöründeki dosyalar doğrudan URL üzerinden erişilebilir. Örneğin public/logo.png dosyasına tarayıcıda /logo.png adresiyle ulaşırsınız. Next.js bu dosyaları olduğu gibi sunar, herhangi bir işleme veya optimizasyon uygulamaz. Favicon, robots.txt, manifest.json gibi dosyalar genellikle buraya konur."
+  - question: "Next.js App Router nedir ve Pages Router'dan farkı ne?"
+    answer: "App Router, Next.js 13+ ile gelen modern yönlendirme sistemidir. Pages Router'ın aksine React Server Components, nested layout'lar, loading/error UI ve route groups gibi güçlü özellikleri destekler. 2026 itibarıyla yeni projeler için App Router önerilmektedir."
+  - question: "Sıfırdan web geliştirme öğrenmek için Next.js iyi bir başlangıç mı?"
+    answer: "Evet. Next.js hem frontend hem backend geliştirmeyi tek projede yapmanızı sağlar. Dosya tabanlı routing sayesinde config dosyalarıyla uğraşmadan sayfa oluşturabilirsiniz. TypeScript ve Tailwind CSS desteği ile modern web geliştirme pratiklerini baştan öğrenirsiniz."
+---
+
+Bir önceki bölümde ilk Next.js projeni oluşturdun, geliştirme sunucusunu çalıştırdın ve "Merhaba Next.js" yazısını ekrana bastın. Her şey güzel. Ama şimdi VS Code'da sol taraftaki dosya gezginine bir bak. Bir sürü dosya ve klasör var. Hangisi ne işe yarıyor? Hangisine dokunacaksın, hangisini olduğu gibi bırakacaksın?
+
+Bu bölümde projenin röntgenini çekeceğiz. Her dosyayı, her klasörü tek tek inceleyeceğiz. Ve en önemlisi: bunların birbirleriyle nasıl konuştuğunu anlayacaksın.
+
+
+## Projeyi VS Code'da Açalım
+
+Eğer projeyi kapattıysan, yeniden açmak çok basit. VS Code'u aç, üst menüden **File > Open Folder** seçeneğini tıkla ve `ilk-nextjs-projem` klasörünü seç.
+
+Solda dosya gezgini (Explorer) paneli açıkken projenin genel yapısını göreceksin. Eğer Explorer görünmüyorsa `Ctrl + Shift + E` kısayolu ile açabilirsin.
+
+Şimdi projenin ağaç yapısına bakalım. `create-next-app` komutu şu dosya ve klasörleri oluşturdu:
+
+```
+ilk-nextjs-projem/
+  .next/                  (geliştirme sunucusu çalıştıktan sonra oluşur)
+  node_modules/           (indirilen paketler)
+  public/                 (statik dosyalar — favicon, görseller)
+  src/
+    app/
+      favicon.ico
+      globals.css
+      layout.tsx
+      page.tsx
+  .eslintrc.json
+  .gitignore
+  next-env.d.ts
+  next.config.ts
+  package-lock.json       (veya pnpm-lock.yaml)
+  package.json
+  postcss.config.mjs
+  README.md
+  tailwind.config.ts
+  tsconfig.json
+```
+
+İlk bakışta kalabalık görünüyor. Ama merak etme. Bu dosyaların çoğuna günlük geliştirmede dokunmayacaksın bile. Şimdi her birini tek tek ele alacağız ama önce bir ayrım yapalım: bu dosyaları iki gruba ayırabiliriz.
+
+**Birinci grup: Senin dosyaların.** Bunlar senin yazacağın, düzenleyeceğin, kodlayacağın dosyalar. `src/app/` klasörünün içindekiler bu gruba giriyor. Zamanının yüzde doksanını burada geçireceksin.
+
+**İkinci grup: Yapılandırma dosyaları.** Bunlar projenin alt yapısını ayarlayan, genellikle bir kez düzenlenip bırakılan dosyalar. `package.json`, `tsconfig.json`, `next.config.ts` gibi. Bunlara ara sıra dokunursun ama her gün değil.
+
+Bu ayrımı aklında tut. Şimdi ikinci gruptan başlayalım. Altyapıyı anlayınca senin dosyaların çok daha mantıklı gelecek.
+
+
+## package.json — Projenin Kimlik Kartı
+
+`package.json` projenin en önemli yapılandırma dosyası. Her Node.js projesinde bulunur. İsmi, versiyonu, bağımlılıkları ve çalıştırılabilir komutları bu dosyada tanımlı.
+
+Dosyayı VS Code'da aç. Şuna benzer bir içerik göreceksin:
+
+```json
+{
+  "name": "ilk-nextjs-projem",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "16.1.6"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "@eslint/eslintrc": "^3"
+  }
+}
+```
+
+Bu dosyayı bölüm bölüm inceleyelim.
+
+**name ve version:**
+
+```json
+"name": "ilk-nextjs-projem",
+"version": "0.1.0",
+"private": true
+```
+
+`name` projenin adı. Terminalde `create-next-app` çalıştırırken verdiğin isim buraya yazılıyor. `version` ise projenin sürüm numarası. Yeni bir projede genellikle `0.1.0` olarak başlar. `private: true` bu paketin npm'e yayınlanmamasını sağlar. Yani yanlışlıkla `npm publish` yazsan bile projen halka açık bir paket olarak yayınlanmaz.
+
+**scripts — Çalıştırılabilir Komutlar:**
+
+```json
+"scripts": {
+  "dev": "next dev --turbopack",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+}
+```
+
+Bu bölüm çok önemli. Terminalde `npm run` ile bu komutları çalıştırabilirsin. Her birinin görevi farklı:
+
+- `npm run dev` — Geliştirme sunucusunu başlatır. Bölüm 1'de kullandık. `--turbopack` parametresi Turbopack'i aktif eder ki dosya değişiklikleri çok hızlı yansısın. Sadece geliştirme sırasında kullanılır.
+- `npm run build` — Projeyi production için derler. Tüm sayfaları optimize eder, statik HTML oluşturur, JavaScript'leri sıkıştırır. Bu komutu sitenizi yayınlamadan önce çalıştırırsınız.
+- `npm run start` — Build edilmiş projeyi çalıştırır. `npm run build` komutundan sonra kullanılır. Production ortamını simüle eder.
+- `npm run lint` — Kodunuzu ESLint ile kontrol eder. Potansiyel hataları ve stil tutarsızlıklarını bulur.
+
+Kısacası: geliştirirken `dev`, yayınlamadan önce `build`, yayınladıktan sonra `start`, kod kalitesi için `lint`.
+
+**dependencies — Çalışma Zamanı Bağımlılıkları:**
+
+```json
+"dependencies": {
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0",
+  "next": "16.1.6"
+}
+```
+
+Bu üç paket uygulamanın çalışması için zorunlu. Sunucuda da tarayıcıda da gerekli:
+
+- `react` — Arayüz bileşenlerini (component) oluşturan kütüphane. Bölüm 1'de bahsettiğimiz motor.
+- `react-dom` — React bileşenlerini tarayıcıdaki DOM'a (HTML ağacına) bağlayan köprü. React "şunu göster" der, react-dom bunu tarayıcıya çizer.
+- `next` — Framework'ün kendisi. Routing, SSR, SSG, optimizasyon ve gerisini yapar.
+
+Versiyon numaralarındaki `^` işareti "bu major versiyon içindeki en güncel sürümü kullan" demek. `^19.0.0` ifadesi `19.x.x` aralığındaki en güncel sürümü kabul eder ama `20.0.0`'a geçmez.
+
+**devDependencies — Geliştirme Araçları:**
+
+```json
+"devDependencies": {
+  "typescript": "^5",
+  "@types/node": "^22",
+  "@types/react": "^19",
+  "@types/react-dom": "^19",
+  "@tailwindcss/postcss": "^4",
+  "tailwindcss": "^4",
+  "eslint": "^9",
+  "eslint-config-next": "16.1.6",
+  "@eslint/eslintrc": "^3"
+}
+```
+
+Bu paketler sadece geliştirme sırasında kullanılır. Canlı ortamda (production) bunlara ihtiyaç yok. Bir benzetme yapalım: bir bina inşa ederken kullandığın iskele, vinç, matkap gibi araçlar var. Bina bittiğinde o araçları kaldırırsın. İskele binanın parçası değil. `devDependencies` de bu araçlara benzer.
+
+- `typescript` ve `@types/*` paketleri — TypeScript desteği. Kodundaki tipleri kontrol eder ve hataları yakalar.
+- `tailwindcss` ve `@tailwindcss/postcss` — Tailwind CSS motoru. Class isimlerinden CSS üretir.
+- `eslint` ve `eslint-config-next` — Kod kalitesi aracı. Hatalı veya tutarsız kod yazdığında seni uyarır.
+
+Yeni bir paket yüklemek istediğinde `npm install paket-adi` komutunu kullanırsın. Bu komut paketi `dependencies`'e ekler. Eğer sadece geliştirme aracı yüklüyorsan `npm install -D paket-adi` komutuyla `devDependencies`'e eklersin.
+
+<InteractiveQuiz
+  question="package.json dosyasındaki 'scripts' bölümünde tanımlanan 'dev' komutu ne işe yarar?"
+  options={[
+    { text: "Projeyi production için derler", correct: false },
+    { text: "Geliştirme sunucusunu başlatır ve dosya değişikliklerini izler", correct: true },
+    { text: "Projeyi internete yayınlar (deploy eder)", correct: false },
+    { text: "Yeni bir Next.js projesi oluşturur", correct: false }
+  ]}
+  explanation="npm run dev komutu Next.js geliştirme sunucusunu başlatır. Bu sunucu dosya değişikliklerini izleyerek sayfayı otomatik günceller (HMR). Sadece geliştirme ortamında kullanılır, production'da değil."
+  hint="Bölüm 1'de projeyi çalıştırmak için hangi komutu kullanmıştın?"
+  taskNumber={1}
+  totalTasks={5}
+/>
+
+
+## tsconfig.json — TypeScript'in Kuralları
+
+`tsconfig.json` dosyası TypeScript derleyicisinin nasıl davranacağını belirler. Dosyayı açtığında uzun bir ayar listesi göreceksin. Hepsini bilmene gerek yok. Ama birkaç önemli ayarı anlayalım:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+```
+
+Çoğu ayar zaten Next.js tarafından optimize edilmiş durumda. Şimdilik bilmen gereken iki şey var:
+
+**strict: true** — TypeScript'in en katı modunu aktif eder. Bu, daha fazla hata yakalar ama bazen sinir bozucu olabilir. Yeni başlayanlar için zorlayıcı görünebilir ama uzun vadede seni koruyan bir kask gibi düşün. Başta rahatsız eder, ama kaza anında hayat kurtarır.
+
+**paths — Kısayol Tanımları:**
+
+```json
+"paths": {
+  "@/*": ["./src/*"]
+}
+```
+
+Bu çok kullanışlı bir özellik. Normalde bir dosyayı import ederken göreceli yol yazarsın:
+
+```tsx
+import { Button } from "../../../components/Button";
+```
+
+Üç seviye yukarı çıkıyorsun. Dosya taşındığında yol bozulur. Path alias'ı ile aynı şeyi çok daha temiz yazabilirsin:
+
+```tsx
+import { Button } from "@/components/Button";
+```
+
+`@` her zaman `src/` klasörünü işaret eder. Projenin neresinde olursan ol, `@/components/Button` yazarsın ve TypeScript doğru dosyayı bulur. Bu kısayolu rehber boyunca çok kullanacağız.
+
+
+## next.config.ts — Next.js'in Kontrol Paneli
+
+Bu dosya Next.js'in davranışını özelleştirdiğin yer. Yeni oluşturulan bir projede neredeyse boş gelir:
+
+```ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+```
+
+Şu an bir şey yapmıyor. Ama ilerleyen bölümlerde buraya ayarlar ekleyeceğiz. Mesela:
+
+- Harici bir kaynaktan (CDN gibi) görsel yüklemek istediğinde `images.remotePatterns` ayarı
+- URL yönlendirmeleri (redirect) tanımlamak istediğinde `redirects` ayarı
+- Deneysel özellikleri aktif etmek istediğinde `experimental` bloğu
+
+Şimdilik bu dosyanın varlığını bil ve ihtiyaç duyduğunda buraya döneceğini hatırla.
+
+
+## Diğer Kök Dizin Dosyaları
+
+Projenin kök dizininde birkaç dosya daha var. Bunları hızlıca tanıyalım:
+
+**postcss.config.mjs** — PostCSS, CSS dosyalarını işleyen bir araç. Tailwind CSS bu aracı kullanarak class isimlerinden gerçek CSS üretiyor. Bu dosyaya dokunmana gerek yok, Tailwind otomatik kullanır.
+
+**tailwind.config.ts** — Tailwind CSS'in yapılandırma dosyası. Özel renkler, fontlar, breakpoint'ler tanımlamak istediğinde bu dosyayı düzenlersin. Tailwind v4 ile bu dosya minimal gelir çünkü çoğu ayar artık CSS dosyasının içinde `@theme` ile yapılıyor.
+
+**.eslintrc.json** — ESLint kurallarını tanımlayan dosya. Hangi kod kalitesi kurallarının uygulanacağını belirler. Next.js'in kendi önerilen kuralları varsayılan olarak gelir. İleride özel kurallar eklemek istersen bu dosyayı düzenlersin.
+
+**.gitignore** — Git versiyon kontrol sistemine "bu dosyaları takip etme" diyen dosya. İçinde `node_modules/`, `.next/`, `.env.local` gibi girişler var. Bu dosyalar geçici veya hassas oldukları için Git'e eklenmez. Bir ekip arkadaşınla kod paylaştığında bu dosyalar gitmez, karşı taraf `npm install` ile kendi kopyasını oluşturur.
+
+**next-env.d.ts** — Next.js'in TypeScript tip tanımlarını içeren dosya. Otomatik oluşturulur. Bu dosyayı düzenleme, Next.js her build'de yeniden üretir.
+
+**README.md** — Projenin açıklama dosyası. GitHub'a yüklediğinde ilk görünen metin. İçinde projenin ne olduğu, nasıl çalıştırılacağı gibi bilgiler yazılır. `create-next-app` varsayılan bir README oluşturur ama bunu kendi projenize göre düzenlemeniz beklenir.
+
+**package-lock.json (veya pnpm-lock.yaml)** — Bağımlılıkların tam sürüm numaralarını kilitleyen dosya. `package.json`'da `^19.0.0` yazdığında npm `19.0.0` da yükleyebilir, `19.3.2` de yükleyebilir. Lock dosyası "tam olarak 19.3.2 yükle" der. Bu sayede sen ve ekip arkadaşın aynı sürümleri kullanırsınız. Bu dosyayı elle düzenleme, otomatik yönetilir.
+
+
+## src/ Klasörü — Senin Çalışma Alanın
+
+Projenin kök dizininde bir `src/` klasörü var. `create-next-app` sırasında "Would you like your code inside a src/ directory?" sorusuna "Yes" dediğin için kodların bu klasörün içinde.
+
+`src/` kullanmanın amacı basit: yapılandırma dosyalarını (package.json, tsconfig.json, next.config.ts gibi) kaynak kodundan ayırmak. Kök dizinde sadece yapılandırma dosyaları kalır, tüm uygulama kodu `src/` içinde yaşar. Bu ayrım proje büyüdükçe düzeni korumanı sağlar.
+
+Ama asıl yıldız `src/` değil. Onun içindeki `app/` klasörü.
+
+
+## app/ Klasörü — Uygulamanın Beyni
+
+`app/` klasörü Next.js'in App Router sisteminin kalbi. Bu klasörün içindeki dosya ve klasör yapısı doğrudan sitenin URL yapısını belirler. Bunu dosya tabanlı yönlendirme (file-based routing) diyoruz ve Next.js'i diğer framework'lerden ayıran en önemli özelliklerden biri.
+
+Şu an `app/` klasörünün içinde dört dosya var:
+
+```
+src/app/
+  favicon.ico      ← Tarayıcı sekmesindeki küçük ikon
+  globals.css      ← Tüm sayfaları etkileyen genel CSS dosyası
+  layout.tsx       ← Kök layout — her sayfayı saran çerçeve
+  page.tsx         ← Ana sayfa (/) içeriği
+```
+
+Bu dört dosyanın her biri kritik bir role sahip ve Next.js'in nasıl çalıştığını anlamak için bunları iyi kavramak gerekiyor. En önemlilerinden başlayalım.
+
+
+### page.tsx — Sayfanın İçeriği
+
+`page.tsx` bir URL'nin ne göstereceğini tanımlayan dosya. Bölüm 1'de bu dosyayı düzenleyerek "Merhaba Next.js" yazısını ekrana bastık.
+
+Kural basit: Next.js `app/` klasörünün içinde `page.tsx` adlı bir dosya gördüğünde o klasörü bir sayfa olarak tanır.
+
+Örnek üzerinden gidelim:
+
+| Dosya Yolu | URL |
+|-----------|-----|
+| `src/app/page.tsx` | `/` (ana sayfa) |
+| `src/app/hakkimda/page.tsx` | `/hakkimda` |
+| `src/app/blog/page.tsx` | `/blog` |
+| `src/app/blog/ilk-yazi/page.tsx` | `/blog/ilk-yazi` |
+
+Gördüğün gibi: klasör adı URL'yi, `page.tsx` dosyası içeriği belirliyor. Ekstra bir ayar dosyası, route tanımı, yapılandırma yok. Klasör oluştur, `page.tsx` koy, bitti. Bu yüzden dosya tabanlı yönlendirme diyoruz.
+
+Peki ya `page.tsx` olmayan bir klasör? Mesela `src/app/utils/` diye bir klasör oluştursan ama içine `page.tsx` koymazsan ne olur? Hiçbir şey. O klasör bir URL oluşturmaz. İstediğin yardımcı dosyaları `app/` içinde `page.tsx` koymadan tutabilirsin. Next.js sadece `page.tsx` dosyalarını sayfa olarak tanır.
+
+Bu sistemi bir sonraki bölümde (Routing) çok daha derinlemesine inceleyeceğiz. Şimdi ikinci kritik dosyaya geçelim.
+
+
+### layout.tsx — Sayfaların Ortak Çerçevesi
+
+`layout.tsx` dosyası Next.js'in en güçlü konseptlerinden biri. Bir sayfa değil, sayfaları saran bir çerçeve.
+
+Düşün ki bir web sitesi yapıyorsun. Her sayfada aynı navigasyon menüsü olacak, aynı footer olacak. Bu ortak parçaları her sayfanın `page.tsx` dosyasına kopyala yapıştır mı edeceksin? Tabii ki hayır. `layout.tsx` tam bu sorunu çözüyor.
+
+`src/app/layout.tsx` dosyasını aç:
+
+```tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Bu dosya uzun görünüyor ama mantığı basit. Satır satır inceleyelim.
+
+**Font tanımları:**
+
+```tsx
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+```
+
+Next.js'in `next/font` modülü Google Fonts'tan fontları otomatik indirip optimize eder. Burada Geist ve Geist Mono adlı iki font tanımlanmış. `variable` ile CSS değişkeni oluşturuluyor ki Tailwind bu fontu kullanabilsin. `subsets: ["latin"]` ise sadece Latin karakterleri indir demek. Bu, font dosyasının boyutunu küçük tutar.
+
+**metadata:**
+
+```tsx
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+```
+
+Sayfanın tarayıcı sekmesinde görünen başlık ve Google arama sonuçlarında çıkan açıklama. Bu varsayılan metni kendi projenize göre değiştirmelisin. Metadata konusunu ileride SEO bölümünde derinlemesine işleyeceğiz.
+
+**RootLayout fonksiyonu:**
+
+```tsx
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Buradaki `children` parametresi çok önemli. `children`, o an hangi sayfa gösteriliyorsa onun içeriğini temsil ediyor. Kullanıcı `/` adresine girdiğinde `children` yerine `page.tsx`'in içeriği geliyor. `/hakkimda` adresine girdiğinde `hakkimda/page.tsx`'in içeriği geliyor.
+
+Bunu bir çerçeve (frame) gibi düşün:
+
+```
+┌─── layout.tsx ─────────────────────┐
+│  <html>                            │
+│    <body>                          │
+│      ┌─── children ──────────┐     │
+│      │                       │     │
+│      │   page.tsx içeriği    │     │
+│      │                       │     │
+│      └───────────────────────┘     │
+│    </body>                         │
+│  </html>                           │
+└────────────────────────────────────┘
+```
+
+Layout sayfayı sarıyor. Her sayfada aynı `<html>` ve `<body>` tagları kullanılıyor. `globals.css` her sayfada yükleniyor. Fontlar her sayfada aktif.
+
+Ve burada kritik bir performans detayı var: Layout birden fazla sayfa arasında geçiş yaptığında yeniden render edilmez. Sadece `children` (yani sayfa içeriği) değişir. Bu, navigasyonun çok hızlı olmasını sağlar çünkü ortak kısımlar yeniden çizilmez.
+
+Bir web sitesinin gerçek dünya örneğinde bu layout şöyle olurdu:
+
+```tsx
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="tr">
+      <body>
+        <header>
+          <nav>Site Menüsü</nav>
+        </header>
+
+        <main>{children}</main>
+
+        <footer>
+          <p>2026 Tüm hakları saklıdır.</p>
+        </footer>
+      </body>
+    </html>
+  );
+}
+```
+
+Header ve footer her sayfada görünür. Sadece `<main>` içindeki `{children}` değişir.
+
+<CodeFillBlank
+  question="layout.tsx dosyasında sayfa içeriğinin nereye yerleştirileceğini belirleyen özel parametre hangisidir?"
+  codeBefore={`export default function RootLayout({\n  `}
+  codeAfter={`,\n}: { children: React.ReactNode }) {\n  return (\n    <html lang="tr">\n      <body>{children}</body>\n    </html>\n  );\n}`}
+  options={[
+    { text: "children", correct: true },
+    { text: "content", correct: false },
+    { text: "pages", correct: false },
+    { text: "slots", correct: false }
+  ]}
+  explanation="children prop'u React'te bir bileşenin içine yerleştirilen alt elemanları temsil eder. Next.js layout sisteminde children, o an aktif olan sayfanın (page.tsx) içeriğini taşır."
+  taskNumber={2}
+  totalTasks={5}
+/>
+
+
+### globals.css — Genel Stiller
+
+`globals.css` tüm uygulamayı etkileyen CSS dosyası. `layout.tsx` içinde import edildiği için her sayfada yüklenir.
+
+Yeni bir projede bu dosya Tailwind'in temel direktiflerini içerir:
+
+```css
+@import "tailwindcss";
+```
+
+Tailwind v4'te bu tek satır yeterli. Tailwind'in tüm utility class'larını kullanabilir hale geliyorsun. İhtiyaç duyarsan bu dosyaya kendi özel CSS kurallarını da ekleyebilirsin. Mesela tüm sayfalarda geçerli olacak bir font ayarı veya renk teması tanımlayabilirsin.
+
+**favicon.ico** — Tarayıcı sekmesindeki küçük ikon. `app/` klasörüne koyduğunda Next.js bunu otomatik algılar ve `<head>` içine ekler. Kendi ikonunu koymak istersen bu dosyayı değiştirmen yeterli.
+
+
+### Diğer Özel Dosyalar
+
+Next.js'in `page.tsx` ve `layout.tsx` dışında tanıdığı birkaç özel dosya daha var. Bunları henüz projende görmüyorsun çünkü oluşturmadık. Ama bilmen gerekiyor:
+
+**loading.tsx** — Sayfa yüklenirken gösterilen arayüz. Bir sayfanın verisi sunucudan gelirken kullanıcıya boş ekran göstermek yerine bir yükleniyor animasyonu gösterebilirsin. Bu dosyayı bir klasöre koyduğunda Next.js otomatik olarak kullanır:
+
+```tsx
+export default function Loading() {
+  return <div>Yükleniyor...</div>;
+}
+```
+
+**error.tsx** — Sayfada bir hata oluştuğunda gösterilen arayüz. Kullanıcıya çirkin bir hata mesajı göstermek yerine düzgün bir hata sayfası sunarsın. Bu dosya `"use client"` direktifi gerektirir çünkü hatayı tarayıcı tarafında yakalamak için React'in Error Boundary mekanizmasını kullanır:
+
+```tsx
+"use client";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  return (
+    <div>
+      <h2>Bir şeyler ters gitti.</h2>
+      <button onClick={() => reset()}>Tekrar dene</button>
+    </div>
+  );
+}
+```
+
+`reset` fonksiyonu sayfayı yeniden render etmeye çalışır. Geçici bir sorunsa kullanıcı "Tekrar dene" butonuyla sayfayı kurtarabilir.
+
+**not-found.tsx** — Var olmayan bir URL'ye girildiğinde gösterilen 404 sayfası:
+
+```tsx
+export default function NotFound() {
+  return (
+    <div>
+      <h2>Sayfa bulunamadı</h2>
+      <p>Aradığınız sayfa mevcut değil veya taşınmış olabilir.</p>
+    </div>
+  );
+}
+```
+
+Bu özel dosyaların tamamını kullanmak zorunda değilsin. Oluşturmadığın sürece Next.js kendi varsayılanlarını kullanır. Ama profesyonel bir projede bunların hepsini oluşturman beklenir çünkü kullanıcı deneyimini doğrudan etkilerler.
+
+Bir tablo ile özetleyelim:
+
+| Dosya | Görev | Zorunlu mu? |
+|-------|-------|-------------|
+| `page.tsx` | Sayfanın içeriğini tanımlar | Evet (sayfa oluşturmak için) |
+| `layout.tsx` | Sayfaları saran ortak çerçeve | Evet (kök layout zorunlu) |
+| `loading.tsx` | Yükleniyor durumu | Hayır (opsiyonel) |
+| `error.tsx` | Hata durumu | Hayır (opsiyonel) |
+| `not-found.tsx` | 404 sayfası | Hayır (opsiyonel) |
+| `globals.css` | Genel stiller | Hayır (ama önerilir) |
+
+<InteractiveQuiz
+  question="Bir Next.js uygulamasında hangi dosya, sayfa yüklenirken gösterilecek arayüzü tanımlar?"
+  options={[
+    { text: "page.tsx", correct: false },
+    { text: "layout.tsx", correct: false },
+    { text: "loading.tsx", correct: true },
+    { text: "error.tsx", correct: false }
+  ]}
+  explanation="loading.tsx dosyası, sayfanın verileri sunucudan yüklenirken kullanıcıya gösterilecek geçici arayüzü tanımlar. Bu dosya React Suspense mekanizmasını kullanarak otomatik çalışır."
+  hint="Bu dosya, veri yüklenirken kullanıcının boş ekran yerine bir animasyon veya mesaj görmesini sağlar."
+  taskNumber={3}
+  totalTasks={5}
+/>
+
+
+## public/ Klasörü — Statik Dosyaların Evi
+
+`public/` klasörü, değişmeyen dosyalarını koyduğun yer: görseller, ikonlar, fontlar, `robots.txt`, `manifest.json` gibi dosyalar.
+
+Bu klasörün özel bir tarafı var. İçine koyduğun her dosya, doğrudan URL üzerinden erişilebilir. Herhangi bir import ya da yapılandırma gerekmez.
+
+```
+public/
+  logo.png          → tarayıcıda /logo.png
+  images/
+    banner.jpg      → tarayıcıda /images/banner.jpg
+  robots.txt        → tarayıcıda /robots.txt
+```
+
+`public/logo.png` dosyasına kodunda şöyle erişirsin:
+
+```tsx
+<img src="/logo.png" alt="Logo" />
+```
+
+Dikkat: `public/logo.png` değil, `/logo.png` yazıyorsun. URL'de `public` kelimesi yok. Next.js `public/` klasörünün içeriğini doğrudan kök URL'den sunar.
+
+Peki ne zaman `public/` klasörünü, ne zaman Next.js'in `Image` bileşenini kullanmalısın? Genel kural:
+
+- **public/** — Favicon, robots.txt, manifest.json, OpenGraph görselleri gibi tarayıcının veya arama motorlarının doğrudan erişmesi gereken dosyalar.
+- **Image bileşeni** — Sayfa içindeki görseller. Next.js bunları otomatik optimize eder, doğru boyuta küçültür ve lazy loading uygular. Bunu ileride detaylıca göreceğiz.
+
+
+## node_modules/ ve .next/ — Dokunulmaz Bölge
+
+Bu iki klasör otomatik oluşturulur ve sana ait değildir. Ama ne olduklarını bilmen gerekiyor.
+
+**node_modules/** — `npm install` veya `pnpm install` çalıştırdığında tüm bağımlılıklar bu klasöre indirilir. Projenin kullandığı her paketin kodu burada. Dosya sayısı onbinlerce olabilir ve boyutu yüzlerce megabayt bulabilir.
+
+Bu klasöre asla elle müdahale etme. İçini düzenleme, dosya silme, dosya ekleme. Paket yöneticisi (npm veya pnpm) bu klasörü tamamen kontrol eder.
+
+Silsen ne olur? Projenin çalışmayı durdurur. Ama panik yok: `npm install` komutu `package.json`'ı okuyup tüm paketleri tekrar indirir. Bu yüzden `node_modules/` asla Git'e eklenmez. `.gitignore` dosyasında zaten tanımlı.
+
+**.next/** — Next.js'in build çıktısını sakladığı klasör. `npm run dev` çalıştırdığında development build'i, `npm run build` çalıştırdığında production build'i buraya yazılır. Derlenmiş sayfalar, optimize edilmiş JavaScript dosyaları, cache verileri burada.
+
+Bu klasör de otomatik yönetilir. Silsen tekrar oluşturulur. Git'e eklenmez. Ama bazen geliştirme sırasında garip hatalar alırsan `.next/` klasörünü silip `npm run dev` ile tekrar başlatmak sorunu çözebilir. Bir nevi "önbelleği temizle" işlemi.
+
+İkisinin ortak özelliği: **otomatik oluşturulurlar, Git'e eklenmezler, elle düzenlenmezler.**
+
+
+## Dosya Yapısını Pratikte Uygula
+
+Teoriyi yeterince gördük. Şimdi öğrendiklerini pekiştirelim. İlk önce projeye yeni bir sayfa ekleyelim.
+
+VS Code'da `src/app/` klasörüne sağ tıkla ve **New Folder** seç. Klasör adını `hakkimda` yaz.
+
+Oluşturduğun `hakkimda` klasörünün içine sağ tıkla ve **New File** seç. Dosya adını `page.tsx` yaz.
+
+`page.tsx` dosyasına şu kodu yaz:
+
+```tsx
+export default function Hakkimda() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-gray-950">
+      <div className="text-center max-w-lg">
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Hakkimda
+        </h1>
+        <p className="text-gray-400 text-lg leading-relaxed">
+          Ben bir web gelistirici adayiyim. 
+          Next.js ogreniyorum ve bu benim ilk projem.
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+Dosyayı kaydet. Geliştirme sunucusu çalışıyorsa tarayıcıda `http://localhost:3000/hakkimda` adresini aç.
+
+Yeni sayfan karşında. Hiçbir route tanımı yapmadın, hiçbir yapılandırma dosyasını düzenlemedin. Klasör oluşturdun, `page.tsx` koydun, sayfa hazır. Bu dosya tabanlı routing'in gücü.
+
+Dikkat etmen gereken bir şey var: `layout.tsx` dosyasını bu klasöre koymadık. Peki neden sayfa yine de düzgün çalışıyor? Çünkü Next.js layout'ları yukarıdan aşağıya arar. `hakkimda/` klasöründe layout bulamazsa bir üst klasöre bakar. Orada `app/layout.tsx` (kök layout) var. Bu layout tüm sayfaları sarar.
+
+Proje yapısı şimdi şöyle görünüyor:
+
+```
+src/app/
+  hakkimda/
+    page.tsx          → /hakkimda
+  favicon.ico
+  globals.css
+  layout.tsx          → Tüm sayfaları sarar
+  page.tsx            → /
+```
+
+Şimdi bir adım daha ilerleyelim. Ana sayfadan hakkımda sayfasına bir link ekleyelim.
+
+`src/app/page.tsx` dosyasını aç ve şu şekilde güncelle:
+
+```tsx
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-black">
+      <div className="text-center">
+        <h1 className="text-5xl font-bold text-white mb-4">
+          Merhaba Next.js
+        </h1>
+        <p className="text-gray-400 text-lg mb-8">
+          Ilk projemi basariyla olusturdum.
+        </p>
+        <Link
+          href="/hakkimda"
+          className="text-blue-400 hover:text-blue-300 underline text-lg"
+        >
+          Hakkimda sayfasina git
+        </Link>
+      </div>
+    </main>
+  );
+}
+```
+
+Burada `next/link` modülünden `Link` bileşenini import ettik. HTML'deki `<a>` etiketi yerine Next.js'in `<Link>` bileşenini kullanıyoruz. Neden? Çünkü `<Link>` sayfalar arası geçişi çok hızlı yapıyor. Normal `<a>` etiketi tüm sayfayı yeniden yükler. `<Link>` ise sadece değişen kısmı günceller. Sayfa geçişleri anlık olur.
+
+Tarayıcıda "Hakkimda sayfasina git" linkine tıkla. Sayfanın yeniden yüklenmeden geçiş yaptığını fark edeceksin. URL değişiyor, içerik değişiyor ama sayfa sıfırdan yüklenmiyor. Bu Next.js'in client-side navigation özelliği.
+
+<CodeFillBlank
+  question="Next.js'te sayfalar arası hızlı geçiş için HTML'deki a etiketi yerine hangi bileşen kullanılır?"
+  codeBefore={`import `}
+  codeAfter={` from "next/link";\n\nfunction Menu() {\n  return <Link href="/hakkimda">Hakkimda</Link>;\n}`}
+  options={[
+    { text: "Link", correct: true },
+    { text: "Router", correct: false },
+    { text: "Navigate", correct: false },
+    { text: "Anchor", correct: false }
+  ]}
+  explanation="next/link modülündeki Link bileşeni, sayfalar arası client-side navigation sağlar. Tüm sayfa yeniden yüklenmez, sadece değişen kısım güncellenir. Bu da çok hızlı sayfa geçişleri sağlar."
+  taskNumber={4}
+  totalTasks={5}
+/>
+
+
+## Layout Sistemini Pratikte Gör
+
+Şimdi layout'un gücünü somut olarak görelim. Kök layout'a basit bir navigasyon menüsü ekleyeceğiz.
+
+`src/app/layout.tsx` dosyasını aç ve şu şekilde güncelle:
+
+```tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Ilk Next.js Projem",
+  description: "Next.js ile yaptigim ilk web sitesi",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="tr">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <nav className="flex gap-6 p-4 bg-gray-900 text-white">
+          <Link href="/" className="hover:text-blue-400">
+            Ana Sayfa
+          </Link>
+          <Link href="/hakkimda" className="hover:text-blue-400">
+            Hakkimda
+          </Link>
+        </nav>
+
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Kaydet ve tarayıcına bak. Artık hem ana sayfada hem hakkımda sayfasında aynı navigasyon menüsü görünüyor. Ama bu menüyü iki kez yazmadık. Sadece layout'a bir kez ekledik ve tüm sayfalarda otomatik göründü.
+
+Sayfalar arasında geçiş yap. Menü yerinde kalıyor, sadece altındaki içerik değişiyor. Layout yeniden render edilmiyor. Bu hem performans hem de kullanıcı deneyimi açısından büyük avantaj.
+
+Az önce yaptığın değişiklikleri gözden geçirelim:
+
+1. `lang="en"` ifadesini `lang="tr"` olarak değiştirdik. Bu tarayıcıya ve arama motorlarına sayfanın Türkçe olduğunu söylüyor.
+2. `metadata` içindeki başlık ve açıklamayı kendi projemize uygun yazdık.
+3. `{children}`'ın üstüne bir `<nav>` ekledik. Bu nav tüm sayfalarda görünecek.
+
+Bunu elle yapıyor olsan her sayfaya ayrı ayrı menü kodu kopyalaman gerekirdi. On sayfalık bir projede on kez. Menüde bir değişiklik yapsan on dosyayı tek tek güncellemen gerekirdi. Layout bu sorunu kökten çözüyor.
+
+
+## Dosya Yapısını Bir Hata Üzerinden Anla
+
+Proje yapısını anladığını düşünüyorsun. Ama gerçek öğrenme hataları bulmaktan geçer. Aşağıdaki kodda bir sorun var:
+
+<CodeDetective
+  title="Layout Hatasini Bul"
+  description="Bir gelistirici kök layout.tsx dosyasini yazdi ama sayfalar duz metin olarak gorunuyor, hicbir stil uygulanmiyor ve konsolda hata var."
+  errorMessage="Error: Missing required html tags in Root Layout. Expected: html, body"
+  fileName="layout.tsx"
+  lines={[
+    { num: 1, content: "import './globals.css';" },
+    { num: 2, content: "", empty: true },
+    { num: 3, content: "export default function RootLayout({" },
+    { num: 4, content: "  children," },
+    { num: 5, content: "}: { children: React.ReactNode }) {" },
+    { num: 6, content: "  return (" },
+    { num: 7, content: "    &lt;div className=\"min-h-screen\"&gt;" },
+    { num: 8, content: "      &lt;nav&gt;Menü&lt;/nav&gt;" },
+    { num: 9, content: "      {children}" },
+    { num: 10, content: "    &lt;/div&gt;" },
+    { num: 11, content: "  );" },
+    { num: 12, content: "}" }
+  ]}
+  correctLine={7}
+  explanation="Kök layout.tsx dosyasında html ve body etiketleri zorunludur. Bu kod doğrudan bir div ile başlıyor, html ve body etiketleri eksik. Next.js kök layout'ta bu iki etiketi mutlaka bekler. Doğru yapı: return (<html><body><div>...</div></body></html>) şeklinde olmalı."
+  fix="div yerine html ve body etiketlerini ekle: <html lang='tr'><body><div className='min-h-screen'>...</div></body></html>"
+  hint="Next.js kök layout'ta hangi HTML etiketlerinin zorunlu olduğunu düşün. Bir web sayfasının en dış kabuğu nedir?"
+  maxTries={3}
+/>
+
+
+## Proje Yapisi Zihin Haritasi
+
+Bütün bölümü bir araya getirirsek, Next.js projesindeki dosyaları görevlerine göre üç katmana ayırabiliriz:
+
+**Katman 1 — Uygulama Kodu (her gün dokunursun):**
+
+```
+src/app/
+  page.tsx          → Sayfaların içeriği
+  layout.tsx        → Sayfaların ortak çerçevesi
+  loading.tsx       → Yükleniyor ekranı
+  error.tsx         → Hata sayfası
+  not-found.tsx     → 404 sayfası
+  globals.css       → Genel stiller
+```
+
+**Katman 2 — Yapılandırma (ara sıra dokunursun):**
+
+```
+package.json        → Bağımlılıklar ve komutlar
+tsconfig.json       → TypeScript ayarları
+next.config.ts      → Next.js ayarları
+tailwind.config.ts  → Tailwind özelleştirmeleri
+.eslintrc.json      → Kod kalitesi kuralları
+```
+
+**Katman 3 — Otomatik (asla dokunma):**
+
+```
+node_modules/       → İndirilen paketler
+.next/              → Build çıktısı
+package-lock.json   → Versiyon kilitleri
+next-env.d.ts       → TypeScript tip tanımları
+```
+
+Bu ayrımı aklında tut. Zamanının büyük çoğunluğu Katman 1'de geçecek. Katman 2'ye proje kurulumunda dokunursun. Katman 3'e asla.
+
+
+## Bu Bölümde Neler Öğrendin?
+
+Geri dönüp bakalım:
+
+- **package.json** projenin kimlik kartı. Bağımlılıklar, komutlar ve proje bilgileri burada tanımlı. `dependencies` üretimde gereken paketler, `devDependencies` sadece geliştirmede kullanılan araçlar.
+- **tsconfig.json** TypeScript'in kurallarını belirliyor. `@/*` path alias'ı ile uzun import yolları yerine kısa yazabiliyorsun.
+- **next.config.ts** Next.js'in kontrol paneli. Şimdilik boş ama ilerleyen bölümlerde ayarlar ekleyeceğiz.
+- **app/ klasörü** uygulamanın kalbi. Klasör yapısı URL yapısını belirliyor. `page.tsx` varsa sayfa var. Yoksa yok.
+- **layout.tsx** sayfaların ortak çerçevesi. Menü, footer gibi paylaşılan elemanlar burada. Sayfa geçişlerinde yeniden render edilmiyor.
+- **Özel dosyalar:** `loading.tsx` yükleniyor ekranı, `error.tsx` hata sayfası, `not-found.tsx` 404 sayfası.
+- **public/** statik dosyalar için. Doğrudan URL'den erişilebilir.
+- **node_modules/** ve **.next/** otomatik yönetilir, Git'e eklenmez, elle düzenlenmez.
+
+<InteractiveQuiz
+  question="Bir Next.js projesinde src/app/iletisim/page.tsx dosyasi olusturdugunuzda, bu sayfa hangi URL'de erisilebilir olur?"
+  options={[
+    { text: "/src/app/iletisim", correct: false },
+    { text: "/iletisim/page", correct: false },
+    { text: "/iletisim", correct: true },
+    { text: "/app/iletisim", correct: false }
+  ]}
+  explanation="Next.js dosya tabanlı routing kullanır. src/app/ yolundan sonraki klasör adı doğrudan URL olur. page.tsx dosyası o URL'nin içeriğini tanımlar. Yani src/app/iletisim/page.tsx otomatik olarak /iletisim adresini oluşturur."
+  hint="Dosya tabanlı routing'de app/ klasöründen sonraki yol, URL'yi belirler. page.tsx dosya adı URL'de görünmez."
+  taskNumber={5}
+  totalTasks={5}
+/>
+
+
+## Sıradaki Bölüm
+
+Dosya yapısını artık tanıyorsun. Hangi dosya ne işe yarıyor, hangisine dokunacaksın, hangisini rahat bırakacaksın biliyorsun. Bir sonraki bölümde Next.js'in en güçlü özelliklerinden birine dalacağız: **Routing sistemi.** Dinamik route'lar, nested (iç içe) route'lar, route grupları ve parametre yakalama gibi konuları derinlemesine inceleyeceğiz. Hakkimda sayfası kolaydı, peki ya `/blog/2026/mart/ilk-yazi` gibi bir URL nasıl oluşturulur?
+
+Projeyi silme. Aynı projeyle devam edeceğiz ve her bölümde biraz daha büyüteceğiz.

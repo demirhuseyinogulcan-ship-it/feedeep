@@ -1,4 +1,4 @@
-// AI Rehber — Sayılarla AI Rehber: Sosyal Kanıt Şeridi
+// feedeep — Sayılarla feedeep: Sosyal Kanıt Şeridi
 // Toplam haber, yazı ve benzersiz kaynak sayılarını gösterir
 
 import { yazilar, haberler } from "#site/content";

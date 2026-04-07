@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Trust Badge & Source List (Güven Katmanı)
+// feedeep — Trust Badge & Source List (Güven Katmanı)
 // Monochrome void style
 // ─────────────────────────────────────────────────────────────
 

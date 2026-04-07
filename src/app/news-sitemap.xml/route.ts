@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Google News Sitemap
+// feedeep — Google News Sitemap
 // Google News için özel haber sitemap'i
 // Son 30 gün içindeki yayınlanmış haberler
 // ─────────────────────────────────────────────────────────────

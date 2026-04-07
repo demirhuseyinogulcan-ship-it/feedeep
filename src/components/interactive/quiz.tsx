@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Interactive Quiz (Duolingo-Tarzı Çoktan Seçmeli)
+// feedeep — Interactive Quiz (Duolingo-Tarzı Çoktan Seçmeli)
 // MDX içinden <InteractiveQuiz /> olarak kullanılır
 // ─────────────────────────────────────────────────────────────
 

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Utility Functions (DRY helpers)
+// feedeep — Utility Functions (DRY helpers)
 // ─────────────────────────────────────────────────────────────
 
 import { type ClassValue, clsx } from "clsx";

@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Beğen / Beğenme (Upvote / Downvote)
+// feedeep — Beğen / Beğenme (Upvote / Downvote)
 // Reddit tarz. Tipografik — ok işaretleri, ikon değil.
 // Props alır — state SignalBar'da yönetilir.
 // ─────────────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Yazı Detay Sayfası (Velite)
+// feedeep — Yazı Detay Sayfası (Velite)
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";

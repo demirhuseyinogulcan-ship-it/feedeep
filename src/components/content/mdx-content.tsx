@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — MDX Content Renderer
+// feedeep — MDX Content Renderer
 // Velite'den gelen derlenmiş MDX kodunu React component'e çevirir
 // ─────────────────────────────────────────────────────────────
 

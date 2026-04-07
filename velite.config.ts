@@ -35,7 +35,7 @@ const yazilar = defineCollection({
     published: s.boolean().default(true),
 
     // Kategori & Etiketler
-    category: s.enum(["rehber", "inceleme", "analiz", "karsilastirma"]),
+    category: s.enum(["inceleme", "analiz", "karsilastirma"]),
     keywords: s.array(s.string()).max(6), // max 6: 1 primary + 4 secondary + 1 generic TR SEO
 
     // Görsel
@@ -168,9 +168,10 @@ const _kartlar = defineCollection({
   }),
 });
 
-// ─── Rehberler (Programlama Dersleri) ───────────────────────
+// ─── Rehberler (Programlama Dersleri) — DEVRE DISI ─────────
+// Arsivlendi: arsiv_rehber_quiz/ klasorunde
 
-const rehberler = defineCollection({
+const _rehberler = defineCollection({
   name: "Rehber",
   pattern: "rehberler/**/*.mdx",
   schema: s.object({
@@ -227,7 +228,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { yazilar, haberler, rehberler },
+  collections: { yazilar, haberler },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

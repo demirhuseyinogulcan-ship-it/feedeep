@@ -114,7 +114,7 @@ function validateYazi(file, data) {
   checkSlug(file, data);
   checkDate(file, data, "date");
   checkDate(file, data, "lastFactChecked");
-  checkEnum(file, data, "category", ["rehber", "inceleme", "analiz", "karsilastirma"]);
+  checkEnum(file, data, "category", ["inceleme", "analiz", "karsilastirma"]);
   checkEnum(file, data, "confidence", ["high", "medium", "speculative"]);
 
   if (!data.sources || (Array.isArray(data.sources) && data.sources.length === 0)) {

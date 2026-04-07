@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Haberler Listesi Sayfası (Velite)
+// feedeep — Haberler Listesi Sayfası (Velite)
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
@@ -21,16 +21,16 @@ const publishedNews = haberler
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 export const metadata: Metadata = generateMeta({
-  title: "Yapay Zeka Haberleri: Güncel AI Gelişmeleri [2026]",
-  description: `OpenAI, Google, Anthropic ve Türkiye'den ${publishedNews.length}+ yapay zeka haberi. Sektör analizleri, şirket duyuruları ve AI trendleri — her gün güncelleniyor.`,
+  title: "Yazılım ve AI Haberleri: Güncel Gelişmeler [2026]",
+  description: `Yapay zeka, yazılım ve web geliştirme dünyasından ${publishedNews.length}+ güncel haber. Şirket duyuruları, sektör analizleri ve teknoloji trendleri — her gün güncelleniyor.`,
   path: "/haberler",
   keywords: [
     "yapay zeka haberleri",
+    "yazılım haberleri",
     "ai haberleri",
-    "openai haberleri",
-    "google ai haberleri",
-    "türkiye yapay zeka",
-    "ai gelişmeleri 2026",
+    "kodlama haberleri",
+    "web geliştirme haberleri",
+    "teknoloji gelişmeleri 2026",
   ],
 });
 

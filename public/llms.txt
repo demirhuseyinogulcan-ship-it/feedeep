@@ -1,21 +1,18 @@
 # feedeep
 
-> Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.
+> Yazılım ve yapay zeka dünyasını Türkçe takip ediyoruz. Güncel haberler, derinlemesine analizler ve araç incelemeleri.
 
-feedeep, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz yakalı profesyonellere, pazarlamacılara ve teknoloji meraklılarına yapay zeka araçlarını iş hayatlarında nasıl kullanabileceklerini gösteren pratik, güvenilir ve güncel içerikler sunar.
+feedeep, Türkiye'nin yazılım ve yapay zeka odaklı bağımsız içerik platformudur. Profesyonellere, geliştiricilere ve teknoloji meraklılarına yapay zeka ve yazılım dünyasından güvenilir ve güncel içerikler sunar.
 
 ## İçerik Türleri
 
-- **Yazılar**: Derinlemesine rehberler, incelemeler, analizler ve karşılaştırmalar (1000-5000 kelime, evergreen)
-- **Haberler**: Güncel AI gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
-- **Programlama Rehberleri**: Sıfırdan ileri seviyeye, interaktif alıştırmalarla programlama dersleri
+- **Yazılar**: Derinlemesine incelemeler, analizler ve karşılaştırmalar (1000-5000 kelime, evergreen)
+- **Haberler**: Güncel AI ve yazılım gelişmeleri, şirket duyuruları, sektör haberleri (200-500 kelime)
 
 ## Sayfalar
 
-- [Yazılar](https://feedeep.com/yazilar): Tüm rehberler, incelemeler ve analizler
-- [Haberler](https://feedeep.com/haberler): Güncel AI haberleri
-- [Programlama Rehberleri](https://feedeep.com/programlama): Adım adım programlama dersleri
-- [Yazar](https://feedeep.com/yazar/can-demir): Editör ve kurucu hakkında
+- [Yazılar](https://feedeep.com/yazilar): Tüm incelemeler, analizler ve karşılaştırmalar
+- [Haberler](https://feedeep.com/haberler): Güncel AI ve yazılım haberleri
 - [Hakkımızda](https://feedeep.com/hakkimizda): Ekip ve misyon
 
 ## Son İçerikler (Nisan 2026)
@@ -126,16 +123,9 @@ feedeep, Türkiye'nin yapay zeka odaklı bağımsız içerik platformudur. Beyaz
 - [Yöneticiniz Size Geri Bildirim Verdi mi? AI Bunları Çoktan Yapıyor](https://feedeep.com/yazilar/yoneticiniz-geri-bildirim-egosuz-yapay-zeka): Yöneticiler geri bildirimi hâlâ hata sıralama sanıyor. Yapay zeka ego'suz, tutarlı ve ölçülebilir bir alternatif sunuyor — ve şimdi kullanabilirsiniz.
 - [ChatGPT vs Claude vs Gemini: 2026 Karşılaştırması](https://feedeep.com/yazilar/chatgpt-vs-claude-vs-gemini-2026): 2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
-### Programlama Rehberleri
-
-**Sıfırdan Next.js** (https://feedeep.com/programlama/nextjs-rehberi)
-- [Bölüm 1: Next.js Nedir? Sıfırdan Kurulum ve İlk Proje Rehberi [2026]](https://feedeep.com/programlama/nextjs-rehberi/bolum-1-giris): Next.js nedir, neden kullanılır? Node.js kurulumu, create-next-app ile ilk proje oluşturma ve geliştirme sunucusu başlatma. Sıfırdan adım adım Türkçe rehber.
-- [Bölüm 2: Next.js Proje Yapısı: Dosya Düzeni, App Router ve Layout Sistemi [2026]](https://feedeep.com/programlama/nextjs-rehberi/bolum-2-proje-yapisi): Next.js projesindeki tüm dosya ve klasörleri öğren. package.json, app/ klasörü, layout.tsx, page.tsx ve App Router yapısını adım adım inceliyoruz.
-- [Bölüm 3: Next.js Routing: Sayfa Yönlendirme ve Dinamik Route Rehberi [2026]](https://feedeep.com/programlama/nextjs-rehberi/bolum-3-routing): Next.js App Router ile dosya tabanlı routing, dinamik route'lar, nested layout'lar, route grupları ve Link bileşenini sıfırdan öğren. Türkçe adım adım rehber.
-
 ## Sıkça Sorulan Sorular
 
-- **feedeep nedir?** feedeep, yapay zeka dünyasındaki güncel haberleri, derinlemesine analizleri ve programlama rehberlerini Türkçe olarak sunan bağımsız bir yayın platformudur.
+- **feedeep nedir?** feedeep, yapay zeka ve yazılım dünyasındaki güncel haberleri, derinlemesine analizleri ve araç incelemelerini Türkçe olarak sunan bağımsız bir yayın platformudur.
 - **Yapay zeka haberleri nereden takip edilir?** feedeep, OpenAI, Google DeepMind, Anthropic gibi şirketlerin gelişmelerini takip ederek güvenilir kaynaklardan doğrulanmış haberleri Türkçe olarak yayınlar.
 - **feedeep'deki haberler güvenilir mi?** Her haber en az 2 güvenilir kaynakla doğrulanır ve güven seviyesi (yüksek/orta/spekülatif) şeffaf şekilde belirtilir. Orijinal kaynak linkleri her makalenin altında yer alır.
 
@@ -153,8 +143,7 @@ Her yazıda güncellik rozeti gösterilir:
 
 ## İletişim
 
-- E-posta: info@feedeep.com
-- LinkedIn: https://linkedin.com/in/ai-rehber
+- E-posta: hey@feedeep.com
 - Instagram: https://instagram.com/feedeepcom
 
 ## Dil & Bölge

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Prefetch Manager
+// feedeep — Prefetch Manager
 // Viewport'a giren linkleri ve popüler sayfaları önceden yükler.
 // ─────────────────────────────────────────────────────────────
 

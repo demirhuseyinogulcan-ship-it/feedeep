@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Copy Button (Client Component)
+// feedeep — Copy Button (Client Component)
 // Prompt metinlerini panoya kopyalar
 // ─────────────────────────────────────────────────────────────
 

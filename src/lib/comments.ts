@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Comment Data Layer (localStorage + Supabase)
+// feedeep — Comment Data Layer (localStorage + Supabase)
 // Threaded reply + vote destekli.
 // localStorage: optimistic UI / anonymous fallback.
 // Supabase: authenticated kullanıcılar için kalıcı depo.
@@ -8,7 +8,7 @@
 import { toggleOwnership, getSignal } from "./signals";
 import { getSupabase, isSupabaseConfigured, getSessionUserId } from "./supabase";
 
-const STORAGE_KEY = "airehber_comments";
+const STORAGE_KEY = "feedeep_comments";
 
 // ─── Types ───
 

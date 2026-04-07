@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Supabase Database Types
+// feedeep — Supabase Database Types
 // Supabase tablolarının TypeScript tip tanımları.
 // Tablo eklendikçe burası güncellenir.
 // ─────────────────────────────────────────────────────────────

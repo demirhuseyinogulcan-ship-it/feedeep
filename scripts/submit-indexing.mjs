@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Google Search Console Sitemap Submit Script
+// feedeep — Google Search Console Sitemap Submit Script
 // Deploy sonrası sitemap/news-sitemap submit ederek keşfi hızlandırır
 // ─────────────────────────────────────────────────────────────
 
 import { google } from "googleapis";
 
-const SITE_URL = process.env.GSC_SITE_URL || "https://airehber.com/";
+const SITE_URL = process.env.GSC_SITE_URL || "https://feedeep.com/";
 const SITEMAP_URLS = [
   `${SITE_URL.replace(/\/$/, "")}/sitemap.xml`,
   `${SITE_URL.replace(/\/$/, "")}/news-sitemap.xml`,

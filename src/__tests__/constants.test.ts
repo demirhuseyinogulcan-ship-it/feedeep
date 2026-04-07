@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Constants Integrity Tests
+// feedeep — Constants Integrity Tests
 // ─────────────────────────────────────────────────────────────
 
 import { describe, it, expect } from "vitest";
@@ -9,7 +9,6 @@ import {
   FRESHNESS,
   YAZI_CATEGORIES,
   HABER_CATEGORIES,
-  GUIDE_TECHNOLOGIES,
 } from "@/lib/constants";
 
 // ─── SITE config ───
@@ -92,8 +91,8 @@ describe("FRESHNESS badges", () => {
 
 describe("Category maps", () => {
   it("YAZI_CATEGORIES has expected categories", () => {
-    expect(YAZI_CATEGORIES).toHaveProperty("rehber");
     expect(YAZI_CATEGORIES).toHaveProperty("analiz");
+    expect(YAZI_CATEGORIES).toHaveProperty("inceleme");
   });
 
   it("HABER_CATEGORIES has expected categories", () => {
@@ -110,23 +109,6 @@ describe("Category maps", () => {
         expect(value).toBeTruthy();
         expect(typeof value).toBe("string");
       }
-    }
-  });
-});
-
-// ─── GUIDE_TECHNOLOGIES ───
-
-describe("GUIDE_TECHNOLOGIES", () => {
-  it("has at least one technology", () => {
-    expect(Object.keys(GUIDE_TECHNOLOGIES).length).toBeGreaterThan(0);
-  });
-
-  it("each technology has required fields", () => {
-    for (const [, tech] of Object.entries(GUIDE_TECHNOLOGIES)) {
-      expect(tech.label).toBeDefined();
-      expect(tech.description).toBeDefined();
-      expect(tech.icon).toBeDefined();
-      expect(tech.color).toBeDefined();
     }
   });
 });

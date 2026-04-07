@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — RSS Feed Route (Velite)
+// feedeep — RSS Feed Route (Velite)
 // ─────────────────────────────────────────────────────────────
 
 import { SITE } from "@/lib/constants";

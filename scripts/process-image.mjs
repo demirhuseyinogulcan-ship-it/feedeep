@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Görsel İşleme Scripti
+// feedeep — Görsel İşleme Scripti
 // Inbox'tan al → WebP'ye dönüştür → Optimize et → Hedef klasöre taşı
 //
 // Kullanım:
@@ -30,13 +30,13 @@ const args = process.argv.slice(2);
 if (args.length < 2) {
   console.error(`
 ╔══════════════════════════════════════════════╗
-║   AI Rehber — Görsel İşleme                 ║
+║   feedeep — Görsel İşleme                    ║
 ╚══════════════════════════════════════════════╝
 
 Kullanım:
   node scripts/process-image.mjs <hedef-klasor> <seo-slug> [--caption "alt text"]
 
-Hedef klasörler: haberler, yazilar, rehberler
+Hedef klasörler: haberler, yazilar
 
 Örnek:
   node scripts/process-image.mjs haberler anthropic-claude-code-sizinti
@@ -49,7 +49,7 @@ const seoSlug = args[1];
 const captionIdx = args.indexOf("--caption");
 const caption = captionIdx !== -1 ? args[captionIdx + 1] : null;
 
-const validFolders = ["haberler", "yazilar", "rehberler"];
+const validFolders = ["haberler", "yazilar"];
 if (!validFolders.includes(targetFolder)) {
   console.error(`Hata: Geçersiz klasör "${targetFolder}". Geçerli: ${validFolders.join(", ")}`);
   process.exit(1);

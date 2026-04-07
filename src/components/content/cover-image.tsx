@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Cover Image (Hero görsel — makale başı)
+// feedeep — Cover Image (Hero görsel — makale başı)
 // Haber/yazı detay sayfalarında ArticleHeader altına eklenir
 // ─────────────────────────────────────────────────────────────
 

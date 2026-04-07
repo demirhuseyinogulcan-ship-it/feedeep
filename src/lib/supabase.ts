@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Supabase Client
+// feedeep — Supabase Client
 // Tek bir istemci örneği — tüm uygulama bunu kullanır.
 // ─────────────────────────────────────────────────────────────
 

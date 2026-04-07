@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Font Configuration
+// feedeep — Font Configuration
 // Montserrat: başlıklar | Inter: body text
 // ─────────────────────────────────────────────────────────────
 

@@ -18,9 +18,6 @@ const STATIC_ASSETS = [
 const CONTENT_ROUTES = [
   "/yazilar",
   "/haberler",
-  "/prompt-kutuphanesi",
-  "/haftalik",
-  "/zaman-cizelgesi",
   "/hakkimizda",
 ];
 
@@ -41,7 +38,7 @@ self.addEventListener("install", (event) => {
 
 // ─── Activate ────────────────────────────────────────────────
 self.addEventListener("activate", (event) => {
-  const validCaches = [STATIC_CACHE, CONTENT_CACHE, "airehber-meta"];
+  const validCaches = [STATIC_CACHE, CONTENT_CACHE, "feedeep-meta"];
   event.waitUntil(
     Promise.all([
       caches.keys().then((keys) =>
@@ -250,7 +247,7 @@ async function digestMessage(message) {
 
 async function getStoredValue(key) {
   try {
-    const cache = await caches.open("airehber-meta");
+    const cache = await caches.open("feedeep-meta");
     const response = await cache.match(key);
     if (response) return response.text();
   } catch {}
@@ -258,6 +255,6 @@ async function getStoredValue(key) {
 }
 
 async function storeValue(key, value) {
-  const cache = await caches.open("airehber-meta");
+  const cache = await caches.open("feedeep-meta");
   await cache.put(key, new Response(value));
 }

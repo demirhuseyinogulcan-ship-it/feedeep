@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — JSON-LD Script Component (Reusable)
+// feedeep — JSON-LD Script Component (Reusable)
 // Array geldiğinde @graph wrapper ile sar—Google standartlarına uygun
 // ─────────────────────────────────────────────────────────────────
 

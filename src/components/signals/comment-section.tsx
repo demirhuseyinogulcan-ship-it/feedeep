@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Comment Section (Threaded)
+// feedeep — Comment Section (Threaded)
 // Reddit-style nested replies + oy.
 // Supabase hybrid: authenticated → persistent, anonymous → localStorage.
 // ─────────────────────────────────────────────────────────────

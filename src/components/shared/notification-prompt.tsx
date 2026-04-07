@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Bildirim İzni Bileşeni
+// feedeep — Bildirim İzni Bileşeni
 // Push notification izni ister + periodic background sync kaydeder.
 // Kurulum banner'ı kapandıktan sonra gösterilir.
 // ─────────────────────────────────────────────────────────────

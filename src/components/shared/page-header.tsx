@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Page Header (DRY shared component)
+// feedeep — Page Header (DRY shared component)
 // Tüm listing sayfaları için ortak başlık ve alt yazı
 // ─────────────────────────────────────────────────────────────
 

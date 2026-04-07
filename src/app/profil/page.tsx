@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Profil Sayfası
+// feedeep — Profil Sayfası
 // "Tek Hayat Hesap" — sahiplenilen, oylanan, yorum yapılan makaleler.
 // ─────────────────────────────────────────────────────────────
 

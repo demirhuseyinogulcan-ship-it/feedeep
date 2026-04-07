@@ -1,8 +1,8 @@
 {
   "id": "feedeep-pwa",
-  "name": "feedeep — Yapay Zeka Haberleri ve Rehberleri",
+  "name": "feedeep — Yazılım ve AI Haberleri",
   "short_name": "feedeep",
-  "description": "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar, prompt kütüphanesi ve AI model karşılaştırmaları.",
+  "description": "Yapay zeka, yazılım ve web geliştirme dünyasından güncel haberler, derinlemesine analizler ve araç incelemeleri.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -43,26 +43,14 @@
     {
       "name": "Haberler",
       "short_name": "Haberler",
-      "description": "Güncel AI haberleri",
+      "description": "Güncel yazılım ve AI haberleri",
       "url": "/haberler"
     },
     {
       "name": "Yazılar",
       "short_name": "Yazılar",
-      "description": "Derinlemesine analizler",
+      "description": "Derinlemesine analizler ve incelemeler",
       "url": "/yazilar"
-    },
-    {
-      "name": "Prompt Kütüphanesi",
-      "short_name": "Promptlar",
-      "description": "Hazır prompt şablonları",
-      "url": "/prompt-kutuphanesi"
-    },
-    {
-      "name": "Haftalık Brifing",
-      "short_name": "Haftalık",
-      "description": "Haftalık AI bülten",
-      "url": "/haftalik"
     }
   ],
   "share_target": {

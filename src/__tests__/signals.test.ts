@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Signal Data Layer Tests
+// feedeep — Signal Data Layer Tests
 // Sahip Ol + Beğen/Beğenme localStorage katmanı.
 // Standart bazlı: veri tutarlılığı, sınır durumları, toggle davranışı.
 // ─────────────────────────────────────────────────────────────
@@ -15,7 +15,7 @@ import {
   type Signal,
 } from "@/lib/signals";
 
-const STORAGE_KEY = "airehber_signals";
+const STORAGE_KEY = "feedeep_signals";
 
 beforeEach(() => {
   localStorage.clear();

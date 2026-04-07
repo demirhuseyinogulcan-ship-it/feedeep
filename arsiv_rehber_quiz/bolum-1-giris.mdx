@@ -1,0 +1,493 @@
+---
+title: "Next.js Nedir? Sıfırdan Kurulum ve İlk Proje Rehberi [2026]"
+slug: bolum-1-giris
+description: "Next.js nedir, neden kullanılır? Node.js kurulumu, create-next-app ile ilk proje oluşturma ve geliştirme sunucusu başlatma. Sıfırdan adım adım Türkçe rehber."
+date: 2026-03-01
+published: true
+guide: nextjs-rehberi
+guideTitle: "Sıfırdan Next.js"
+chapter: 1
+totalChapters: 20
+technology: nextjs
+difficulty: baslangic
+keywords:
+  - next.js nedir
+  - next.js kurulum
+  - sıfırdan next.js öğrenme
+  - next.js başlangıç
+  - next.js türkçe eğitim
+  - next.js dersleri
+prerequisites:
+  - "Temel HTML ve CSS bilgisi"
+  - "Bilgisayarınızda bir kod editörü (VS Code önerilir)"
+learningOutcomes:
+  - "Next.js'in ne olduğunu ve neden tercih edildiğini açıklayabilir"
+  - "Node.js ve npm/pnpm kurulumu yapabilir"
+  - "create-next-app ile sıfırdan yeni bir proje oluşturabilir"
+  - "Geliştirme sunucusunu başlatıp tarayıcıda görebilir"
+  - "Proje dosyalarında ilk değişikliği yapıp sonucu görebilir"
+estimatedMinutes: 35
+faq:
+  - question: "Next.js nedir ve ne işe yarar?"
+    answer: "Next.js, Vercel tarafından geliştirilen açık kaynaklı bir React framework'üdür. Sayfa yönlendirmesi (routing), sunucu taraflı render (SSR), statik site üretimi (SSG), API route'ları ve görsel optimizasyonu gibi özellikleri hazır olarak sunar. React'in üstüne kurulmuştur ve hem frontend hem backend geliştirmeyi tek projede yapmanızı sağlar."
+  - question: "Next.js öğrenmek için hangi ön bilgiler gerekli?"
+    answer: "Temel HTML ve CSS bilgisi yeterlidir. JavaScript bilmeniz avantajdır ama bu rehber sıfırdan başlayanlara göre yazılmıştır. TypeScript, React ve Tailwind CSS gibi konuları rehber içinde adım adım öğreneceksiniz."
+  - question: "Node.js nedir ve neden Node.js kurmam gerekiyor?"
+    answer: "Node.js, JavaScript kodunu tarayıcı dışında (bilgisayarınızda) çalıştıran bir çalışma ortamıdır (runtime). Next.js, Node.js üzerinde çalıştığı için projenizi oluşturmak ve geliştirme sunucusunu başlatmak için Node.js gereklidir. nodejs.org adresinden LTS sürümünü indirip kurabilirsiniz."
+  - question: "npm ve pnpm arasındaki fark nedir?"
+    answer: "İkisi de Node.js paket yöneticisidir. npm, Node.js ile birlikte otomatik gelir. pnpm ise aynı paketleri tekrar indirmek yerine önbelleğe alarak hem disk tasarrufu sağlar hem de kurulumu hızlandırır. Bu rehberde her ikisiyle de çalışabilirsiniz."
+  - question: "create-next-app komutu ne yapar?"
+    answer: "create-next-app, Next.js'in resmi proje iskelesi oluşturma aracıdır. npx create-next-app@latest proje-adi komutuyla çalıştırılır. TypeScript, ESLint, Tailwind CSS gibi seçenekleri sorar ve cevaplara göre hazır bir proje yapısı oluşturur."
+  - question: "localhost:3000 ne anlama geliyor?"
+    answer: "localhost bilgisayarınızın kendi kendine işaret eden adresidir, 3000 ise port numarasıdır. npm run dev komutuyla başlattığınız geliştirme sunucusu bu adreste çalışır. Sadece sizin bilgisayarınızdan erişilebilir, internete açık değildir."
+  - question: "Next.js öğrenmek zor mu, ne kadar sürer?"
+    answer: "Temel HTML-CSS bilgisiyle başlayabilirsiniz. Bu rehber sıfırdan başlayanlara göre tasarlanmıştır. İnteraktif alıştırmalarla desteklenen 20 bölümlük programı kendi hızınızda tamamlayabilirsiniz. Ortalama 2-4 hafta içinde temel konulara hakim olabilirsiniz."
+  - question: "Next.js mi yoksa düz React mi öğrenmeliyim?"
+    answer: "2026 itibarıyla React ekibi de Next.js gibi bir framework kullanmayı önermektedir. Next.js, React'ın üstüne routing, SSR, SSG, görsel optimizasyonu ve API route gibi özellikler ekler. Doğrudan Next.js ile başlamak hem React'ı hem de modern web geliştirmeyi aynı anda öğretir."
+---
+
+Bir web sitesi yapmak istiyorsun. Belki kişisel bir portfolyo, belki bir blog, belki de bir gün kendi ürününü satacağın bir platform. HTML ve CSS ile başladın, belki biraz da JavaScript öğrendin. Ama bir noktada şu sorularla karşılaştın:
+
+"Sayfalar arası nasıl geçiş yapacağım? Google bu siteyi nasıl bulacak? Neden her şey bu kadar yavaş yükleniyor?"
+
+Normal. Herkes bu noktaya geliyor. Ve çözüm zaten hazır.
+
+
+## Neden Next.js?
+
+Öncelikle şu soruyu cevaplayalım: "Neden bir framework kullanmam gerekiyor? Düz HTML ve JavaScript ile her şeyi yapamaz mıyım?"
+
+Yapabilirsin. Ama şöyle düşün:
+
+Bir ev yapacaksın. Tuğlayı, çimentoyu, demiri tek tek taşıyıp her şeyi sıfırdan inşa edebilirsin. Ya da temeli atılmış, su ve elektrik tesisatı hazır bir yapıya taşınabilirsin. İkincisi seni daha hızlı hedefe ulaştırır. Framework de bu işi yapıyor.
+
+Peki neden özellikle Next.js?
+
+Web geliştirme dünyasında en popüler araç React. Facebook (Meta) tarafından geliştirildi ve bugün milyonlarca geliştirici kullanıyor. Ama React tek başına bir "kütüphane". Yani sana arayüz oluşturma araçları veriyor, gerisini senin çözmen gerekiyor: sayfa yönlendirmesi (routing), sunucu taraflı render, resim optimizasyonu, SEO ayarları...
+
+Next.js tam burada devreye giriyor.
+
+Next.js, Vercel firması tarafından geliştirilen bir React framework'ü. React'in üstüne kurulmuş ve bütün o "gerisini sen çöz" dediği şeyleri hazır olarak paketiyle sunuyor.
+
+Bir benzetme yapalım: React bir motor. Güçlü, hızlı, esnek. Ama sadece motor. Next.js ise o motoru içine alan, direksiyonu takılı, kliması çalışan, yola çıkmaya hazır bir araba.
+
+
+## Next.js ile Neler Yapabilirsin?
+
+Next.js'in sunduklarını somut örneklerle anlatalım:
+
+**1. Dosya Tabanlı Sayfa Yönlendirmesi (Routing)**
+
+Başka framework'lerde sayfa eklemek için config dosyaları yazarsın, route tanımları yaparsın. Next.js'te ise bir klasör oluşturup içine bir dosya koyarsın. O kadar.
+
+`app/hakkimda/page.tsx` diye bir dosya oluşturdun mu? Tebrikler, artık `sitenim.com/hakkimda` adresi çalışıyor. Ekstra bir şey yapmana gerek yok.
+
+**2. Sunucu Taraflı Render (SSR)**
+
+Normal bir React uygulamasında tarayıcı önce boş bir HTML alır, sonra JavaScript'i indirir, sonra sayfayı oluşturur. Bu süreç hem yavaştır hem de Google bu boş sayfayı indeksleme konusunda sorun yaşayabilir.
+
+Next.js'te sayfalar sunucuda oluşturulur ve tarayıcıya hazır HTML olarak gönderilir. Kullanıcı sayfayı anında görür. Google da içeriği hemen okuyabilir.
+
+**3. Statik Site Üretimi (SSG)**
+
+Bazı sayfalar hiç değişmiyor. Mesela bir "Hakkımda" sayfası. Next.js bu tip sayfaları build sırasında bir kez oluşturur ve hazır HTML olarak sunar. Sonuç: milisaniyeler içinde yüklenen sayfalar.
+
+**4. API Routes**
+
+Normalde backend için ayrı bir sunucu kurarsın. Node.js, Express, veritabanı bağlantıları... Next.js'te backend API'larını aynı proje içinde yazabilirsin. Tek proje, hem frontend hem backend.
+
+**5. Görsel Optimizasyonu**
+
+Bir web sitesini en çok yavaşlatan şey görseller. Next.js'in `Image` bileşenini kullandığında görseller otomatik olarak:
+
+- Doğru boyuta küçülür
+- Modern formatlara (WebP, AVIF) dönüştürülür
+- Sayfa açılışında değil, görünür olduklarında yüklenir (lazy loading)
+
+**6. TypeScript Desteği**
+
+TypeScript, JavaScript'in "üstüne tip koruması eklemiş" hali. Hataları daha sen kodu yazarken yakalar. Next.js ile TypeScript kullanmak için hiçbir ayar yapmana gerek yok. Projeni oluştururken "TypeScript kullan" de, gerisini Next.js halleder.
+
+Kısacası: React ile yapabileceğin her şeyi yaparsın. Üstüne SEO, performans, routing ve daha birçok özellik ücretsiz gelir.
+
+<InteractiveQuiz
+  question="Next.js hangi JavaScript kütüphanesinin üzerine inşa edilmiştir?"
+  options={[
+    { text: "Vue.js", correct: false },
+    { text: "Angular", correct: false },
+    { text: "React", correct: true },
+    { text: "Svelte", correct: false }
+  ]}
+  explanation="Next.js, React üzerine kurulu bir framework'tür. React'in sunduğu component yapısını kullanır ve üzerine routing, SSR, SSG gibi özellikler ekler."
+  hint="Vercel tarafından geliştirilen bu framework, dünyanın en popüler UI kütüphanesiyle çalışır."
+  taskNumber={1}
+  totalTasks={4}
+/>
+
+
+## Geliştirme Ortamını Hazırlayalım
+
+Herhangi bir kod yazmadan önce bilgisayarını hazırlaman gerekiyor. Merak etme, karmaşık değil. Üç şey lazım:
+
+1. **Node.js** — JavaScript'i bilgisayarında çalıştıran program
+2. **Bir paket yöneticisi** — npm veya pnpm
+3. **Bir kod editörü** — VS Code öneriyoruz
+
+Bunları sırayla kuralım.
+
+
+### Node.js Kurulumu
+
+Node.js, JavaScript kodunu tarayıcı dışında çalıştırmanı sağlayan bir çalışma ortamı (runtime). Next.js de Node.js üzerinde çalışıyor. Yani Node.js olmadan Next.js projesi oluşturamazsın.
+
+**Windows için kurulum:**
+
+1. Tarayıcını aç ve [nodejs.org](https://nodejs.org) adresine git
+2. Karşılaştığın sayfada iki buton göreceksin. **LTS** (Long Term Support) yazan butona tıkla. Bu, en kararlı ve en çok test edilmiş sürümdür. Bu rehberin yazıldığı tarihte güncel sürüm Node.js 22.x.
+3. İndirilen `.msi` dosyasını çalıştır
+4. Kurulum sihirbazında "Next" butonlarına tıklayarak ilerle. Varsayılan ayarları değiştirmene gerek yok.
+5. Kurulum tamamlandığında bilgisayarını yeniden başlat (özellikle PATH değişkenlerinin güncellenmesi için)
+
+**Kurulumu doğrulamak için:**
+
+Windows'ta `Win + R` tuşuna bas, `cmd` yaz ve Enter'a bas. Açılan komut satırına şu komutu yaz:
+
+```bash
+node --version
+```
+
+Ekrana `v22.x.x` gibi bir sayı gelmeli. Bu, Node.js'in başarıyla yüklendiğini gösteriyor.
+
+Sonra şunu dene:
+
+```bash
+npm --version
+```
+
+Ekrana `10.x.x` gibi bir sayı gelmeli. npm (Node Package Manager), Node.js ile birlikte otomatik yüklenir. Paket indirmek ve yönetmek için kullanacağız.
+
+Her iki komutta da versiyon numarası görüyorsan hazırsın.
+
+> Eğer "node tanınmıyor" gibi bir hata alırsan, bilgisayarını yeniden başlatmayı dene. Hâlâ olmuyorsa Node.js'i kaldırıp tekrar kur.
+
+**pnpm (Opsiyonel ama Önerilen):**
+
+npm gayet iyi çalışır. Ama biz bu rehberde pnpm kullanmayı öneriyoruz. Neden? Çünkü pnpm aynı paketleri tekrar tekrar indirmek yerine önbelleğe alır. Bu da hem disk alanından tasarruf sağlar hem de kurulumu hızlandırır.
+
+pnpm kurmak için terminale şu komutu yaz:
+
+```bash
+npm install -g pnpm
+```
+
+`-g` parametresi "global" demek. Yani pnpm'i sadece bu proje için değil, bilgisayarındaki tüm projeler için kullanılabilir hale getiriyor.
+
+Kurulduktan sonra doğrula:
+
+```bash
+pnpm --version
+```
+
+Versiyon numarası görüyorsan hazırsın.
+
+
+### VS Code Kurulumu
+
+Kod yazmak için bir metin editörü lazım. Teorik olarak Not Defteri'nde bile kod yazabilirsin ama bu, çiviyi kalemle sıkıştırmaya benzer. İş yapar ama verimli değil.
+
+VS Code (Visual Studio Code), Microsoft'un ücretsiz kod editörüdür ve bugün dünyanın en çok kullanılan geliştirme ortamı. Neden VS Code?
+
+- Ücretsiz ve açık kaynak
+- Binlerce eklenti (extension) ile özelleştirilebilir
+- Terminal içinde gömülü (yani ayrı bir pencere açmana gerek yok)
+- TypeScript, React ve Next.js için mükemmel destek
+
+**Kurulum:** [code.visualstudio.com](https://code.visualstudio.com) adresinden indir ve kur.
+
+**Önerilen eklentiler (extension):**
+
+VS Code'u kurduktan sonra sol taraftaki extension ikonuna tıkla (veya `Ctrl+Shift+X` kısayolu) ve şu eklentileri ara ve yükle:
+
+- **ES7+ React/Redux/React-Native snippets** -- `rafce` yazıp Tab'a bastığında otomatik component şablonu oluşturur
+- **Tailwind CSS IntelliSense** -- CSS class isimlerini yazarken otomatik tamamlama sağlar
+- **Pretty TypeScript Errors** -- TypeScript hata mesajlarını okunabilir hale getirir
+- **Error Lens** -- Hataları satırın hemen yanında gösterir, alt pencereye bakmana gerek kalmaz
+- **Turkish Language Pack** -- VS Code arayüzünü Türkçeleştirir (istersen)
+
+Bu eklentileri şimdi yükle. İleride çok işine yarayacak.
+
+
+## İlk Next.js Projesini Oluştur
+
+Şimdi herhangi bir metin editörü açmadan, doğrudan terminalden projeyi oluşturacağız.
+
+VS Code'u aç. Üst menüden **Terminal > New Terminal** seçeneğine tıkla (veya `Ctrl + ~` kısayolunu kullan). Altta bir terminal penceresi açılacak.
+
+Öncelikle projeni oluşturmak istediğin klasöre git. Masaüstünü kullanalım:
+
+```bash
+cd Desktop
+```
+
+Şimdi Next.js'in resmi proje oluşturma aracını çalıştır:
+
+```bash
+npx create-next-app@latest ilk-nextjs-projem
+```
+
+Bu komutta ne oluyor?
+
+- `npx` -- npm ile gelen bir araç. Paketi indirmeden çalıştırmanızı sağlar
+- `create-next-app` -- Next.js'in resmi proje iskelesi oluşturma aracı
+- `@latest` -- Her zaman en son sürümü kullan
+- `ilk-nextjs-projem` -- Proje klasörünün adı. İstediğin ismi verebilirsin ama boşluk ve Türkçe karakter kullanma
+
+Komut çalıştıktan sonra terminal sana birkaç soru soracak. Cevapları şu şekilde ver:
+
+- `Would you like to use TypeScript?` → `Yes`
+- `Would you like to use ESLint?` → `Yes`
+- `Would you like to use Tailwind CSS?` → `Yes`
+- `Would you like your code inside a src/ directory?` → `Yes`
+- `Would you like to use App Router?` → `Yes`
+- `Would you like to use Turbopack for next dev?` → `Yes`
+- `Would you like to customize the import alias?` → `No`
+
+Bu seçimlerin her birinin bir sebebi var. Hepsini bu rehber boyunca detaylı öğreneceksin ama şimdilik kısa açıklamalar:
+
+- **TypeScript:** Hataları daha kodu yazarken yakalar. Başlangıçta biraz farklı görünür ama iki gün içinde onsuz yazamaz hale geleceksin
+- **ESLint:** Kod kaliteni kontrol eden bir araç. Hatalı veya tutarsız kod yazdığında seni uyarır
+- **Tailwind CSS:** CSS dosyaları oluşturmadan, doğrudan HTML elemanlarının üzerine stil yazabilirsin. Örneğin `className="text-red-500 font-bold"` yazarak kırmızı ve kalın bir metin oluşturabilirsin
+- **src/ dizini:** Kodlarını `src` klasörünün içinde tutar. Proje daha düzenli olur
+- **App Router:** Next.js'in modern sayfa yönlendirme sistemi. Eski "Pages Router" yerine bunu kullanıyoruz
+- **Turbopack:** Geliştirme sırasında dosyaları çok daha hızlı derleyen bir araç. Sayfalar saniyeler içinde güncellenir
+
+Kurulum birkaç dakika sürebilir. Terminal paketleri indirecek ve proje yapısını oluşturacak. Tamamlandığında şu mesajı göreceksin:
+
+```
+Success! Created ilk-nextjs-projem at ...
+```
+
+<CodeFillBlank
+  question="Yeni bir Next.js projesi oluşturmak için terminalde hangi komutu çalıştırmalısın?"
+  codeBefore={`$ `}
+  codeAfter={` ilk-nextjs-projem`}
+  options={[
+    { text: "npx create-next-app@latest", correct: true },
+    { text: "npm install next", correct: false },
+    { text: "npx next init", correct: false },
+    { text: "npm create react-app", correct: false }
+  ]}
+  explanation="create-next-app, Next.js'in resmi proje oluşturma aracıdır. @latest parametresi her zaman en güncel sürümü çekmesini sağlar."
+  taskNumber={2}
+  totalTasks={4}
+/>
+
+
+## Projeyi Çalıştır
+
+Proje oluşturuldu. Şimdi içine girelim ve çalıştıralım:
+
+```bash
+cd ilk-nextjs-projem
+```
+
+Bu komut seni proje klasörünün içine götürür. Şimdi geliştirme sunucusunu başlat:
+
+```bash
+npm run dev
+```
+
+Terminal sana şöyle bir çıktı verecek:
+
+```
+  > Next.js 16.x.x (Turbopack)
+  > Local: http://localhost:3000
+```
+
+Tarayıcını aç ve adres çubuğuna `http://localhost:3000` yaz.
+
+Karşında Next.js'in varsayılan karşılama sayfası görünecek. Siyah bir arka plan üzerinde Next.js logosu ve birkaç link.
+
+Bu sayfayı görüyorsan her şey doğru çalışıyor. Tebrikler, ilk Next.js projen ayakta.
+
+`localhost:3000` ne demek? `localhost` bilgisayarının kendi kendine işaret eden adresi. `3000` ise port numarası. Yani bu adres "kendi bilgisayarımın 3000 numaralı kapısından ulaşabileceğim sunucu" anlamına geliyor. Bu sunucu sadece senin bilgisayarında çalışıyor, internete açık değil.
+
+
+## İlk Değişikliğini Yap
+
+Şimdi bu varsayılan sayfayı değiştirelim. Kendi yazımızı ekleyelim.
+
+VS Code'da sol taraftaki dosya gezgininden (Explorer) şu yolu takip et:
+
+```
+src/ > app/ > page.tsx
+```
+
+Bu, ana sayfanın kaynak dosyası. İçinde Next.js'in varsayılan kodları var. Şimdi içindeki her şeyi sil ve şu kodu yaz:
+
+```tsx
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-black">
+      <div className="text-center">
+        <h1 className="text-5xl font-bold text-white mb-4">
+          Merhaba Next.js
+        </h1>
+        <p className="text-gray-400 text-lg">
+          İlk projemi başarıyla oluşturdum.
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+Dosyayı kaydet: `Ctrl + S`
+
+Şimdi tarayıcına dön ve `localhost:3000` adresine bak.
+
+Sayfa otomatik güncellendi. Siyah bir arka plan üzerinde beyaz "Merhaba Next.js" yazısı ve altında gri bir açıklama metni göreceksin.
+
+Sayfayı yenilemedin. Dosyayı kaydettikten sonra değişiklik anında yansıdı. Buna **Hot Module Replacement (HMR)** deniyor. Next.js geliştirme sunucusu dosya değişikliklerini izliyor ve sayfayı otomatik güncelliyor. Bu özellik geliştirme sürecini inanılmaz hızlandırır çünkü her değişiklikte sayfayı elle yenilemen gerekmiyor.
+
+Şimdi az önce yazdığın kodu satır satır anlayalım:
+
+```tsx
+export default function Home() {
+```
+
+Bu satır bir React bileşeni (component) oluşturuyor. `Home` adında bir fonksiyon ve bu fonksiyon sayfanın içeriğini döndürüyor. `export default` ise bu bileşenin dosyanın ana çıktısı olduğu anlamına geliyor. Next.js `page.tsx` dosyasındaki `default export`'u otomatik olarak o sayfanın içeriği olarak kullanıyor.
+
+```tsx
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-black">
+```
+
+`return` içerisinde HTML'e benzeyen bir söz dizimi görüyorsun. Bu **JSX** (JavaScript XML). JavaScript içinde HTML yazmanın yolu. Ama birkaç farkı var:
+
+- HTML'de `class` yazarsın, JSX'te `className` yazarsın (çünkü `class` JavaScript'te rezerve bir kelime)
+- HTML'de `style="color: red"` yazarsın, JSX'te `style={{ color: "red" }}` yazarsın
+- Her şey bir JavaScript ifadesi içinde olduğu için değişkenler, koşullar ve döngüler doğrudan kullanılabilir
+
+`className` içindeki `flex min-h-screen items-center justify-center bg-black` ifadesi Tailwind CSS class'ları. Bunların her birinin bir anlamı var:
+
+- `flex` -- Flexbox düzeni aktif eder
+- `min-h-screen` -- Minimum yüksekliği ekran boyutu kadar yapar
+- `items-center` -- Dikey hizalamayı ortalar
+- `justify-center` -- Yatay hizalamayı ortalar
+- `bg-black` -- Arka plan rengini siyah yapar
+
+Sonuç olarak içeriğin hem yatay hem dikey olarak ekranın tam ortasında gözükür.
+
+```tsx
+        <h1 className="text-5xl font-bold text-white mb-4">
+          Merhaba Next.js
+        </h1>
+```
+
+`text-5xl` çok büyük yazı boyutu, `font-bold` kalın yazı, `text-white` beyaz renk, `mb-4` alt taraftan boşluk. Tailwind'de her şey bu şekilde class isimleriyle kontrol ediliyor.
+
+```tsx
+        <p className="text-gray-400 text-lg">
+          İlk projemi başarıyla oluşturdum.
+        </p>
+```
+
+`text-gray-400` açık gri renk, `text-lg` normal büyüklükte yazı. Basit ve okunaklı.
+
+<CodeDetective
+  title="İlk Bug'ını Bul"
+  description="Bir geliştirici ilk Next.js sayfasını yazdı ama tarayıcıda hata alıyor. Hangi satırda sorun var?"
+  errorMessage="SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag"
+  fileName="page.tsx"
+  lines={[
+    { num: 1, content: "export default function Home() {" },
+    { num: 2, content: "  return (" },
+    { num: 3, content: "    &lt;h1&gt;Merhaba&lt;/h1&gt;" },
+    { num: 4, content: "    &lt;p&gt;İlk sayfam&lt;/p&gt;" },
+    { num: 5, content: "  );" },
+    { num: 6, content: "}" }
+  ]}
+  correctLine={3}
+  explanation="JSX'te return içinde birden fazla element yan yana döndürülemez. Hepsini bir parent element ile sarmalaman gerekir. div, main veya boş fragment kullanabilirsin: return (<><h1>Merhaba</h1><p>İlk sayfam</p></>)"
+  fix="Tüm elementleri bir parent element ile sarmala: <div>, <main> veya <> </> (fragment)"
+  hint="JSX kuralı: return içinde her zaman tek bir kök (root) element olmalı."
+  maxTries={3}
+/>
+
+
+## Projeyi Durdur ve Yeniden Başlat
+
+Terminal penceresine dön. Geliştirme sunucusu hâlâ çalışıyor. Durdurmak için:
+
+```bash
+Ctrl + C
+```
+
+Terminal sana "Terminate batch job?" diye sorabilir. `Y` yazıp Enter'a bas.
+
+Sunucu durdu. Tarayıcıda `localhost:3000` adresini yenilersen sayfa açılamayacak.
+
+Tekrar başlatmak için:
+
+```bash
+npm run dev
+```
+
+Bu iki komutu çok sık kullanacaksın. Ezbere bil:
+
+- `Ctrl + C` -- Sunucuyu durdur
+- `npm run dev` -- Sunucuyu başlat
+
+
+## Terminal Kullanımı İpuçları
+
+Programlama öğrenirken terminalle çok vakit geçireceksin. Birkaç temel komut ve kısayol:
+
+**VS Code terminal kısayolları:**
+
+- `Ctrl + ~` -- Terminal panelini aç/kapat
+- `Ctrl + Shift + ~` -- Yeni terminal penceresi aç
+- Yukarı ok tuşu -- Önceki komutu getir (tekrar yazmana gerek kalmaz)
+
+**Temel terminal komutları:**
+
+- `cd klasor-adi` -- Klasörün içine gir
+- `cd ..` -- Bir üst klasöre çık
+- `dir` (Windows) veya `ls` (Mac/Linux) -- Klasörün içeriğini listele
+- `cls` (Windows) veya `clear` (Mac/Linux) -- Ekranı temizle
+
+Bunları ezberleme. Kullandıkça öğreneceksin. Ama bilmende fayda var.
+
+
+## Bu Bölümde Neler Öğrendin?
+
+Geri dönüp bakalım:
+
+- **Next.js**, React üzerine kurulmuş bir framework. Sıfırdan routing, SSR, SSG, API ve görsel optimizasyonu gibi özellikleri hazır sunuyor.
+- **Node.js** kurdun. Bu, JavaScript'i bilgisayarında çalıştıran program. Next.js onsuz çalışmaz.
+- **VS Code** kurdun ve geliştirme ortamını hazır hale getirdin.
+- **create-next-app** ile ilk projeni oluşturdun ve geliştirme sunucusunu başlattın.
+- `page.tsx` dosyasını düzenleyerek **JSX, Tailwind CSS ve HMR** kavramlarıyla tanıştın.
+- Terminalde proje oluşturmayı, sunucu başlatmayı ve durdurmayı öğrendin.
+
+<InteractiveQuiz
+  question="Next.js geliştirme sunucusunu başlatmak için hangi komut kullanılır?"
+  options={[
+    { text: "npm start", correct: false },
+    { text: "npm run dev", correct: true },
+    { text: "npx next start", correct: false },
+    { text: "node server.js", correct: false }
+  ]}
+  explanation="npm run dev komutu geliştirme sunucusunu başlatır. Bu sunucu dosya değişikliklerini izler ve HMR ile anında günceller. npm start ise production modunda çalışır."
+  hint="Geliştirme sırasında kullanılan komut, package.json'daki dev scriptini çalıştırır."
+  taskNumber={4}
+  totalTasks={4}
+/>
+
+
+## Sıradaki Bölüm
+
+Bir sonraki bölümde projenin iç yapısını inceleyeceğiz. Her dosya ve klasörün ne işe yaradığını, hangisine dokunman gerektiğini ve hangisini rahat bırakmanı öğreneceksin. `app/` klasörünün sihri, `layout.tsx`'in rolü ve `next.config.ts`'in ne işe yaradığı gibi konulara dalacağız.
+
+Projeyi silme. Aynı projeyle devam edeceğiz.

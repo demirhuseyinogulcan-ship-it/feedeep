@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — "Kaldığın Yerden Devam Et" Banner
+// feedeep — "Kaldığın Yerden Devam Et" Banner
 // Anasayfada yarım bırakılan makaleye dönüş butonu gösterir.
 // ─────────────────────────────────────────────────────────────
 

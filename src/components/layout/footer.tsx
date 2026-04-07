@@ -41,23 +41,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Kaynaklar */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-200 mb-3">
-              Kaynaklar
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/programlama"
-                  className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
-                >
-                  Programlama Rehberleri
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* İletişim */}
           <div>
             <h3 className="text-sm font-semibold text-gray-200 mb-3">

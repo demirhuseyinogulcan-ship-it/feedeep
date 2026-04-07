@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Progress Bar (DRY shared component)
+// feedeep — Progress Bar (DRY shared component)
 // Benchmark skorları ve model puanları için erişilebilir bar
 // ─────────────────────────────────────────────────────────────
 

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Series Navigation (Seri İçerik Navigasyonu)
+// feedeep — Series Navigation (Seri İçerik Navigasyonu)
 // ─────────────────────────────────────────────────────────────
 
 import Link from "next/link";

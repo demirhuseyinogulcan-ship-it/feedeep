@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Cursor Glow Effect
+// feedeep — Cursor Glow Effect
 // Ambient radial gradient that follows the mouse
 // ─────────────────────────────────────────────────────────────
 

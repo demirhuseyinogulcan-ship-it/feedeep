@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Yazar Sayfası: Can Demir (E-E-A-T)
+// feedeep — Yazar Sayfası: Can Demir (E-E-A-T)
 // Google E-E-A-T sinyali: Deneyim, Uzmanlık, Otorite, Güven
 // ─────────────────────────────────────────────────────────────
 

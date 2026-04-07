@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Auth Layer
+// feedeep — Auth Layer
 // "Tek hayat hesap" — kullanıcı adı + şifre, e-posta yok.
 // Supabase Auth üzerinden, username metadata olarak saklanır.
 // ─────────────────────────────────────────────────────────────

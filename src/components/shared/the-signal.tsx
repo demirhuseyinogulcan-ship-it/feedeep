@@ -1,4 +1,4 @@
-// AI Rehber — Kayan Haber Şeridi: TV tarzı canlı gündem bandı
+// feedeep — Kayan Haber Şeridi: TV tarzı canlı gündem bandı
 // Anasayfanın tepesinde, son haberlerin Montserrat fontlu sürekli akan şeridi
 
 import Link from "next/link";

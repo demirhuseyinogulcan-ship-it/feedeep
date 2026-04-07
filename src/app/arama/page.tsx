@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Search Page
+// feedeep — Search Page
 // Tüm içeriklerde arama yapma sayfası
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
-import { yazilar, haberler, rehberler } from "#site/content";
+import { yazilar, haberler } from "#site/content";
 import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -37,15 +37,6 @@ export default function AramaPage() {
         href: `/haberler/${h.slug}`,
         type: "Haber",
         date: h.date,
-      })),
-    ...rehberler
-      .filter((r) => r.published)
-      .map((r) => ({
-        title: `${r.guideTitle} — Bölüm ${r.chapter}: ${r.title}`,
-        description: r.description,
-        href: `/programlama/${r.guide}/${r.slug}`,
-        type: "Ders",
-        date: r.date,
       })),
   ];
 

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Code Fill-in-the-Blank (Boşluk Doldurma)
+// feedeep — Code Fill-in-the-Blank (Boşluk Doldurma)
 // MDX içinden <CodeFillBlank /> olarak kullanılır
 // ─────────────────────────────────────────────────────────────
 

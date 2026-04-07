@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Username Generator Tests
+// feedeep — Username Generator Tests
 // ~16K+ kombinasyon, Türkçe karakter desteği, benzersizlik.
 // ─────────────────────────────────────────────────────────────
 

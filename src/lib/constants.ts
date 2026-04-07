@@ -4,17 +4,18 @@
 
 export const SITE = {
   name: "feedeep",
-  title: "feedeep — Yapay Zeka Haberleri ve Rehberleri",
+  title: "feedeep — Yazılım ve AI Haberleri",
+  slogan: "Akışın dibindeyiz.",
   description:
-    "Yapay zeka dünyasının Türkçe rehberi. Güncel haberler, derinlemesine yazılar ve programlama rehberleri.",
+    "Yapay zeka, yazılım ve web geliştirme dünyasından güncel haberler, derinlemesine analizler ve araç incelemeleri.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://feedeep.com",
   locale: "tr_TR",
   language: "tr",
   author: {
-    name: "Can Demir",
-    email: "info@feedeep.com",
-    role: "Editör & Growth Hacking Specialist",
-    linkedin: "https://linkedin.com/in/ai-rehber",
+    name: "feedeep Editöryal Ekibi",
+    email: "hey@feedeep.com",
+    role: "Editöryal Ekip",
+    linkedin: "https://linkedin.com",
     instagram: "https://instagram.com/feedeepcom",
   },
   organization: {
@@ -27,7 +28,6 @@ export const SITE = {
 export const NAV_ITEMS = [
   { label: "Yazılar", href: "/yazilar" },
   { label: "Haberler", href: "/haberler" },
-  { label: "Programlama", href: "/programlama" },
   { label: "Hakkımızda", href: "/hakkimizda" },
 ] as const;
 
@@ -43,7 +43,6 @@ export const FRESHNESS = {
 // ─── Kategori Haritaları (content type bazlı) ───────────────
 
 export const YAZI_CATEGORIES: Record<string, string> = {
-  rehber: "Rehber",
   inceleme: "İnceleme",
   analiz: "Analiz",
   karsilastirma: "Karşılaştırma",
@@ -56,32 +55,4 @@ export const HABER_CATEGORIES: Record<string, string> = {
   arastirma: "Araştırma",
 };
 
-// ─── Programlama Rehberleri ──────────────────────────────────
-
-export const GUIDE_TECHNOLOGIES: Record<string, { label: string; description: string; icon: string; color: string }> = {
-  nextjs: {
-    label: "Next.js",
-    description: "React tabanlı full-stack web framework",
-    icon: "▲",
-    color: "text-white",
-  },
-  dart: {
-    label: "Dart & Flutter",
-    description: "Google'ın çapraz platform mobil geliştirme dili",
-    icon: "◆",
-    color: "text-blue-400",
-  },
-  python: {
-    label: "Python",
-    description: "Yapay zeka ve veri bilimi için en popüler dil",
-    icon: "🐍",
-    color: "text-yellow-400",
-  },
-  react: {
-    label: "React",
-    description: "Meta'nın UI kütüphanesi",
-    icon: "⚛",
-    color: "text-cyan-400",
-  },
-};
 

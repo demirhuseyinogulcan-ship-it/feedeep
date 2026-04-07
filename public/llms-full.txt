@@ -6,23 +6,21 @@
 
 - **Site Adı**: feedeep
 - **URL**: https://feedeep.com
-- **Kurucu & Editör**: Can Demir
-- **E-posta**: info@feedeep.com
-- **Mailing/Operasyon**: can@feedeep.com
+- **E-posta**: hey@feedeep.com
 - **Kuruluş**: 2026
 - **Dil**: Türkçe (tr-TR)
-- **Hedef Kitle**: Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler, teknoloji meraklıları
+- **Hedef Kitle**: Geliştiriciler, profesyoneller, teknoloji meraklıları
 - **Konum**: İstanbul, Türkiye
 
 ## Misyon
 
-feedeep, yapay zeka teknolojilerini herkesin anlayabileceği dilde, güvenilir kaynaklarla ve pratik uygulamalarla aktaran Türkiye'nin bağımsız AI içerik platformudur. Amacımız, AI araçlarını iş hayatında etkili kullanmanızı sağlamaktır.
+feedeep, yapay zeka ve yazılım dünyasını herkesin anlayabileceği dilde, güvenilir kaynaklarla aktaran Türkiye'nin bağımsız içerik platformudur.
 
 ## İçerik Yapısı
 
 ### 1. Yazılar (/yazilar)
 Derinlemesine, evergreen içerikler. 1000-5000 kelime arası.
-Kategoriler: rehber, inceleme, analiz, karşılaştırma.
+Kategoriler: inceleme, analiz, karşılaştırma.
 Her yazıda zorunlu alanlar:
 - Kaynak listesi (tier 1-3 güvenilirlik)
 - Güven seviyesi (high/medium/speculative)
@@ -31,21 +29,14 @@ Her yazıda zorunlu alanlar:
 - Düzeltme geçmişi
 
 ### 2. Haberler (/haberler)
-Güncel AI gelişmeleri. 200-500 kelime.
+Güncel AI ve yazılım gelişmeleri. 200-500 kelime.
 Kategoriler: sirketler, sektor, turkiye, arastirma.
 Her haberde kaynak URL ve kaynak adı zorunlu.
-
-### 3. Programlama Rehberleri (/programlama)
-Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
-- Next.js, React ve diğer modern framework rehberleri
-- Başlangıçtan ileri seviyeye adım adım ilerleme
-- Gerçek proje örnekleri ve kod parçacıkları
 
 ## İstatistikler
 
 - Toplam haber: 91
 - Toplam yazı: 11
-- Toplam rehber bölümü: 3
 
 ## Tüm İçerik Listesi
 
@@ -63,15 +54,15 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   LinkedIn'deki AI yazıları yüzde 45 daha az etkileşim alıyor. Okuyucuların yarısı yapay içeriği fark ediyor. İnsan eli değen yazının neden hâlâ önemli olduğu.
 
 - [Zam İsteyemiyorsun Çünkü Değerin Ölçülmüyor. AI ile Ölç.](https://feedeep.com/yazilar/zam-isteyemiyorsun-cunku-degerin-olculmuyor-ai-ile-olc)
-  Kategori: rehber | Tarih: Tue Feb 24 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Kategori: analiz | Tarih: Tue Feb 24 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Zam görüşmesine girip 'çok çalışıyorum' demek yetmiyor. Kendi değerini somut veriyle ortaya koymanın AI destekli yolu.
 
 - [Toplantıya Çağrılmadın mı? AI ile Herkesten Hazırlıklı Gel](https://feedeep.com/yazilar/toplantiya-cagrilmadin-mi-ai-ile-hazirlikli-gel)
-  Kategori: rehber | Tarih: Mon Feb 23 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Kategori: analiz | Tarih: Mon Feb 23 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Sessiz dışlama iş hayatının en yaygın sorunu. Çağrılmadıkları toplantıdan daha hazırlıklı çıkmanın yolu var.
 
 - [CV'nizi Bir Robot Reddediyor. Ve Kimse Size Bunu Söylemedi.](https://feedeep.com/yazilar/cv-robot-reddediyor-ats-sistemi-yapay-zeka)
-  Kategori: rehber | Tarih: Sun Feb 22 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Kategori: analiz | Tarih: Sun Feb 22 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Başvurduğunuz pozisyonları neden arayan bile kalmıyor? Çoğu şirkette CV'nizi ilk gören insan değil. İşte ATS sistemi ve AI ile nasıl geçilir.
 
 - [Herkes AI Öğreniyor, Sen Hâlâ Aynı İşi Elle mi Yapıyorsun?](https://feedeep.com/yazilar/herkes-ai-ogreniyor-sen-hala-ayni-isi-elle-mi-yapiyorsun)
@@ -79,7 +70,7 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   Yan masadaki kişi aynı raporu yarı sürede bitiriyor. Fark yetenek değil araç. 2026'da AI kullanmayan beyaz yakalının gerçek maliyeti.
 
 - [Excel'e Bakarken Hayatını Sorguladın mı? 5 Dakika Protokolü](https://feedeep.com/yazilar/excele-bakarken-hayatini-sorguladinmi-5-dakika-protokolu)
-  Kategori: rehber | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Kategori: analiz | Tarih: Sat Feb 21 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Her gün aynı tabloyu doldurup 'bunun için mi okudum' diyenler için. AI ile tekrarlayan iş yükünü yarıya düşürmenin pratik yolu.
 
 - [Yapay Zeka İş Hayatına Sessizce Girdi: 2026'nın Rakamları](https://feedeep.com/yazilar/yapay-zeka-is-hayatina-sessizce-girdi-2026)
@@ -459,35 +450,19 @@ Bölüm bölüm ilerleyen kapsamlı programlama rehberleri.
   Kaynak: OpenAI Blog | Tarih: Thu Feb 12 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
-### Programlama Rehberleri
-
-**bolum-1-giris**
-- [Next.js Nedir? Sıfırdan Kurulum ve İlk Proje Rehberi [2026]](https://feedeep.com/programlama/bolum-1-giris)
-  Next.js nedir, neden kullanılır? Node.js kurulumu, create-next-app ile ilk proje oluşturma ve geliştirme sunucusu başlatma. Sıfırdan adım adım Türkçe rehber.
-
-
-**bolum-2-proje-yapisi**
-- [Next.js Proje Yapısı: Dosya Düzeni, App Router ve Layout Sistemi [2026]](https://feedeep.com/programlama/bolum-2-proje-yapisi)
-  Next.js projesindeki tüm dosya ve klasörleri öğren. package.json, app/ klasörü, layout.tsx, page.tsx ve App Router yapısını adım adım inceliyoruz.
-
-
-**bolum-3-routing**
-- [Next.js Routing: Sayfa Yönlendirme ve Dinamik Route Rehberi [2026]](https://feedeep.com/programlama/bolum-3-routing)
-  Next.js App Router ile dosya tabanlı routing, dinamik route'lar, nested layout'lar, route grupları ve Link bileşenini sıfırdan öğren. Türkçe adım adım rehber.
-
 ## Sıkça Sorulan Sorular
 
 **feedeep nedir?**
-feedeep, yapay zeka teknolojilerini Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
+feedeep, yapay zeka ve yazılım dünyasını Türkçe olarak, güvenilir kaynaklarla aktaran bağımsız bir içerik platformudur.
 
 **İçerikler nasıl doğrulanıyor?**
 Her içerikte Tier 1-3 arası kaynak güvenilirlik seviyesi belirtilir. Yazılar düzenli olarak güncellik kontrolünden geçer.
 
 **feedeep kimler için?**
-Beyaz yakalı profesyoneller, pazarlamacılar, girişimciler ve yapay zeka teknolojilerini iş hayatında kullanmak isteyen herkes.
+Geliştiriciler, profesyoneller ve yapay zeka ile yazılım dünyasını takip etmek isteyen herkes.
 
 **Hangi konular ele alınıyor?**
-AI haberleri, derinlemesine analizler, programlama rehberleri ve yapay zeka araçları.
+AI haberleri, yazılım gelişmeleri, derinlemesine analizler ve araç incelemeleri.
 
 ## Güven Politikası
 
@@ -498,9 +473,7 @@ Her içerikte kaynak güvenilirlik seviyesi belirtilir:
 
 ## İletişim
 
-- E-posta: info@feedeep.com
-- Mailing/Operasyon: can@feedeep.com
-- LinkedIn: https://linkedin.com/in/ai-rehber
+- E-posta: hey@feedeep.com
 - Instagram: https://instagram.com/feedeepcom
 
 ## Lisans

@@ -1,0 +1,1141 @@
+---
+title: "Next.js Routing: Sayfa Yönlendirme ve Dinamik Route Rehberi [2026]"
+slug: bolum-3-routing
+description: "Next.js App Router ile dosya tabanlı routing, dinamik route'lar, nested layout'lar, route grupları ve Link bileşenini sıfırdan öğren. Türkçe adım adım rehber."
+date: 2026-03-04
+published: true
+guide: nextjs-rehberi
+guideTitle: "Sıfırdan Next.js"
+chapter: 3
+totalChapters: 20
+technology: nextjs
+difficulty: baslangic
+keywords:
+  - next.js routing
+  - next.js dinamik route
+  - next.js sayfa yönlendirme
+  - next.js app router türkçe
+  - next.js link bileşeni
+  - next.js nested layout
+prerequisites:
+  - "Bölüm 1 ve 2'yi tamamlamış olmak"
+  - "create-next-app ile oluşturulan projenin çalışır durumda olması"
+  - "page.tsx ve layout.tsx dosyalarının ne işe yaradığını bilmek"
+learningOutcomes:
+  - "Dosya tabanlı routing mantığını tam olarak kavrayabilir"
+  - "Statik ve dinamik route'lar oluşturabilir"
+  - "URL parametrelerini params ile yakalayıp kullanabilir"
+  - "Nested (iç içe) layout'lar oluşturarak bölüm bazlı tasarım yapabilir"
+  - "Route grupları ile URL'yi etkilemeden klasör düzeni oluşturabilir"
+  - "Link bileşeni ve usePathname ile navigasyon yapabilir"
+estimatedMinutes: 55
+faq:
+  - question: "Next.js'te routing nasıl çalışır?"
+    answer: "Next.js dosya tabanlı routing kullanır. src/app/ klasörünün içindeki klasör yapısı doğrudan URL yapısını belirler. Bir klasör oluşturup içine page.tsx dosyası koyduğunuzda o klasör adı otomatik olarak bir URL (route) olur. Örneğin app/blog/page.tsx dosyası /blog adresini oluşturur. Ekstra bir yapılandırma dosyası gerekmez."
+  - question: "Next.js'te dinamik route nedir ve nasıl oluşturulur?"
+    answer: "Dinamik route, URL'nin bir bölümünün değişken olduğu sayfalardır. Köşeli parantez kullanarak oluşturulur: app/blog/[slug]/page.tsx dosyası /blog/herhangi-bir-yazi adresini yakalar. slug parametresine params objesi üzerinden erişirsiniz. Bu sayede tek bir dosyayla sınırsız sayfa oluşturabilirsiniz."
+  - question: "Next.js App Router'da nested layout ne işe yarar?"
+    answer: "Nested layout, belirli bir route grubuna özel ortak çerçeve oluşturmanızı sağlar. Örneğin blog/ klasörüne bir layout.tsx koyarsanız sadece blog sayfalarını saran bir çerçeve oluşturursunuz. Bu layout, kök layout'un içine yerleşir (iç içe sarmalanır). Blog'a özel sidebar, başlık veya navigasyon ekleyebilirsiniz."
+  - question: "Next.js'te route group nedir?"
+    answer: "Route group, parantez içinde yazılan klasör adlarıdır: (marketing), (app) gibi. Bu klasörler URL'de görünmez ama dosya düzenini organize etmenize yardımcı olur. Örneğin (marketing)/hakkimda/page.tsx dosyası yine /hakkimda URL'sini oluşturur. Farklı sayfa gruplarına farklı layout'lar uygulamak için kullanılır."
+  - question: "Next.js Link bileşeni ile HTML a etiketi arasındaki fark nedir?"
+    answer: "Next.js'in Link bileşeni client-side navigation sağlar. Yani sayfa geçişlerinde tüm sayfa yeniden yüklenmez, sadece değişen kısım güncellenir. Ayrıca Link, hedef sayfanın kodunu arka planda önceden yükler (prefetch) böylece geçişler anlık olur. HTML'deki a etiketi ise her tıklamada sayfayı sıfırdan yükler."
+  - question: "Next.js'te catch-all route nedir?"
+    answer: "Catch-all route, birden fazla URL segmentini tek bir dosyayla yakalar. Üç nokta ile oluşturulur: app/docs/[...slug]/page.tsx dosyası /docs/a, /docs/a/b, /docs/a/b/c gibi tüm alt yolları yakalar. slug parametresi bir dizi (array) olarak gelir. Dokümantasyon siteleri ve çok katmanlı navigasyonlar için kullanılır."
+  - question: "Next.js'te usePathname hook'u ne işe yarar?"
+    answer: "usePathname, mevcut URL yolunu döndüren bir React hook'udur. Client component'larda (use client) kullanılır. En yaygın kullanımı aktif menü linkini vurgulamaktır: pathname === href kontrolüyle hangi linkin aktif olduğunu belirleyebilir ve ona farklı stil uygulayabilirsiniz."
+  - question: "Next.js'te sayfa nasıl oluşturulur?"
+    answer: "Üç adımda: 1) src/app/ içinde bir klasör oluştur (klasör adı URL olacak), 2) klasörün içine page.tsx dosyası oluştur, 3) default export olarak bir React bileşeni yaz. Örneğin src/app/iletisim/page.tsx dosyası /iletisim adresinde bir sayfa oluşturur. Bu kadar basit."
+---
+
+Önceki bölümde projenin dosya yapısını öğrendin. Her dosyanın görevini biliyorsun. Hakkımda sayfası ekledin, sayfalar arası link koydun, layout sistemini gördün. Güzel.
+
+Ama bir web sitesinde iki sayfa yetmez. Bir blog istiyorsun. Her yazının kendi sayfası olacak. Bir proje portfolyosu istiyorsun. Belki bir e-ticaret sitesi, ürün kategorileri, ürün detay sayfaları...
+
+Yani şu soruları cevaplamalısın:
+
+"Yüzlerce ürünüm var. Her biri için ayrı ayrı dosya mı oluşturacağım? URL'leri nasıl düzenleyeceğim? Blog yazılarının listesi bir sayfada, her yazının detayı ayrı sayfada olacak — bunu nasıl yapacağım?"
+
+Cevap: **Routing sistemi.**
+
+Next.js'in routing sistemi, web geliştirmedeki en zarif çözümlerden biri. Dosya ve klasör oluşturarak URL yapını belirliyorsun. Hiçbir yapılandırma dosyası yok. Hiçbir route tanımı yok. Sadece klasörler ve dosyalar.
+
+Bu bölümde bu sistemi derinlemesine öğreneceksin.
+
+
+## Routing Nedir?
+
+Routing, bir URL'nin hangi sayfaya yönlendirileceğini belirleyen sistem. Kullanıcı tarayıcıya `sitenisim.com/hakkimda` yazıyor. Routing sistemi bu URL'yi alıyor ve "Hakkımda sayfasını göster" diyor.
+
+Geleneksel web framework'lerinde (Express, Django, Laravel gibi) route tanımları ayrı bir dosyada yapılır. Şöyle bir şey:
+
+```js
+// Express.js — Route tanımı
+app.get('/hakkimda', (req, res) => {
+  res.render('hakkimda');
+});
+
+app.get('/blog', (req, res) => {
+  res.render('blog');
+});
+
+app.get('/blog/:slug', (req, res) => {
+  res.render('blog-detay', { slug: req.params.slug });
+});
+```
+
+Her URL için bir satır route tanımı. Proje büyüdükçe bu dosya uzar, karmaşıklaşır, hata yapmak kolaylaşır.
+
+Next.js tamamen farklı bir yaklaşım benimsiyor: **dosya tabanlı routing.**
+
+
+## Dosya Tabanlı Routing — Temel Kural
+
+Kuralı bir kez öğren, sonsuza kadar uygula:
+
+> **`app/` klasörünün içinde bir klasör oluştur ve içine `page.tsx` koy. Klasör adı URL olur.**
+
+Bu kadar. Başka bir şey yok.
+
+Bölüm 2'de bunu gördük ama şimdi derinleştirelim. Projenin şu anki yapısını hatırla:
+
+```
+src/app/
+  hakkimda/
+    page.tsx          → /hakkimda
+  layout.tsx          → Tüm sayfaları saran çerçeve
+  page.tsx            → / (ana sayfa)
+  globals.css
+  favicon.ico
+```
+
+İki sayfamız var: `/` ve `/hakkimda`. Şimdi daha fazla sayfa ekleyelim.
+
+
+## Birden Fazla Statik Sayfa Oluştur
+
+Gerçek bir web sitesinde birçok sayfa olur. Hepsini oluşturalım.
+
+VS Code'da `src/app/` klasörüne sağ tıkla ve sırasıyla şu klasör ve dosyaları oluştur:
+
+**1. İletişim sayfası:**
+
+`src/app/iletisim/page.tsx` dosyasını oluştur:
+
+```tsx
+export default function Iletisim() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-gray-950">
+      <div className="text-center max-w-lg">
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Iletisim
+        </h1>
+        <p className="text-gray-400 text-lg">
+          Bize e-posta ile ulasabilirsiniz: info@orneksite.com
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+**2. Projeler sayfası:**
+
+`src/app/projeler/page.tsx` dosyasını oluştur:
+
+```tsx
+export default function Projeler() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-gray-950">
+      <div className="text-center max-w-lg">
+        <h1 className="text-4xl font-bold text-white mb-4">
+          Projelerim
+        </h1>
+        <p className="text-gray-400 text-lg">
+          Uzerinde calistigim projeler burada listelenecek.
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+**3. Blog sayfası:**
+
+`src/app/blog/page.tsx` dosyasını oluştur:
+
+```tsx
+import Link from "next/link";
+
+export default function Blog() {
+  const yazilar = [
+    { slug: "nextjs-nedir", baslik: "Next.js Nedir?" },
+    { slug: "react-temelleri", baslik: "React Temelleri" },
+    { slug: "tailwind-giris", baslik: "Tailwind CSS Giris" },
+  ];
+
+  return (
+    <main className="min-h-screen bg-gray-950 p-8">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold text-white mb-8">Blog</h1>
+        <div className="space-y-4">
+          {yazilar.map((yazi) => (
+            <Link
+              key={yazi.slug}
+              href={`/blog/${yazi.slug}`}
+              className="block p-4 rounded-lg border border-gray-800 hover:border-gray-600 transition-colors"
+            >
+              <h2 className="text-xl font-semibold text-gray-200">
+                {yazi.baslik}
+              </h2>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+```
+
+Dosyaları kaydet ve proje yapısına bak:
+
+```
+src/app/
+  blog/
+    page.tsx            → /blog
+  hakkimda/
+    page.tsx            → /hakkimda
+  iletisim/
+    page.tsx            → /iletisim
+  projeler/
+    page.tsx            → /projeler
+  layout.tsx
+  page.tsx              → /
+  globals.css
+  favicon.ico
+```
+
+Beş farklı URL, beş farklı sayfa. Hiçbir route tanımı yazmadın. Sadece klasör oluşturup içine `page.tsx` koydun. Geliştirme sunucusu çalışıyorsa (`npm run dev`) her birini tarayıcıda test edebilirsin:
+
+- `http://localhost:3000/`
+- `http://localhost:3000/hakkimda`
+- `http://localhost:3000/iletisim`
+- `http://localhost:3000/projeler`
+- `http://localhost:3000/blog`
+
+Her sayfa çalışıyor ve hepsi layout'taki menüyü paylaşıyor (Bölüm 2'de eklediğimiz navigasyon).
+
+<InteractiveQuiz
+  question="src/app/ayarlar/profil/page.tsx dosyası hangi URL'de erişilebilir olur?"
+  options={[
+    { text: "/ayarlar-profil", correct: false },
+    { text: "/ayarlar/profil", correct: true },
+    { text: "/profil/ayarlar", correct: false },
+    { text: "/app/ayarlar/profil", correct: false }
+  ]}
+  explanation="Dosya tabanlı routing'de klasör yapısı birebir URL yapısını belirler. src/app/ayarlar/profil/page.tsx dosyası /ayarlar/profil URL'sini oluşturur. Klasörlerin sırası önemlidir."
+  hint="Her iç içe klasör, URL'de bir slash (/) sonrası yeni bir segment oluşturur."
+  taskNumber={1}
+  totalTasks={6}
+/>
+
+
+## İç İçe Route'lar (Nested Routes)
+
+Blog sayfasında yazı başlıklarını listeledik. Ama başlıklara tıklayınca ne olacak? Her yazının kendi detay sayfası olmalı.
+
+Şimdi blog'un altına statik yazı sayfaları ekleyelim:
+
+`src/app/blog/nextjs-nedir/page.tsx`:
+
+```tsx
+import Link from "next/link";
+
+export default function NextjsNedir() {
+  return (
+    <main className="min-h-screen bg-gray-950 p-8">
+      <div className="max-w-2xl mx-auto">
+        <Link
+          href="/blog"
+          className="text-blue-400 hover:text-blue-300 text-sm mb-6 inline-block"
+        >
+          ← Blog'a don
+        </Link>
+        <h1 className="text-3xl font-bold text-white mb-4">
+          Next.js Nedir?
+        </h1>
+        <p className="text-gray-400 leading-relaxed">
+          Next.js, React uzerine kurulmus bir web framework'udur.
+          Dosya tabanli routing, sunucu tarafli render ve
+          statik site uretimi gibi ozellikleri hazir sunar.
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+Proje yapısı:
+
+```
+src/app/
+  blog/
+    nextjs-nedir/
+      page.tsx          → /blog/nextjs-nedir
+    page.tsx            → /blog
+```
+
+`blog/` klasörünün içinde hem `page.tsx` (liste sayfası) hem de `nextjs-nedir/` alt klasörü (detay sayfası) var. İkisi de çalışır. Bu sisteme **nested routes** (iç içe yönlendirmeler) denir.
+
+URL hiyerarşisi de aynı dosya hiyerarşisini takip ediyor:
+
+```
+/blog                     → blog/page.tsx
+/blog/nextjs-nedir        → blog/nextjs-nedir/page.tsx
+/blog/react-temelleri     → blog/react-temelleri/page.tsx
+/blog/tailwind-giris      → blog/tailwind-giris/page.tsx
+```
+
+Ama dur. Her blog yazısı için ayrı ayrı klasör oluşturmak mantıklı mı? Üç yazı varsa üç klasör, otuz yazı varsa otuz klasör, üç bin yazı varsa...
+
+İşte burada **dinamik route'lar** devreye giriyor.
+
+
+## Dinamik Route'lar — Tek Dosya, Sonsuz Sayfa
+
+Dinamik route, URL'nin bir bölümünün değişken olduğu sayfalardır. On bin ürünün var ve her birinin detay sayfası lazım. On bin dosya oluşturmak yerine tek bir dosya oluşturuyorsun ve Next.js URL'den gelen değeri sana veriyor.
+
+Nasıl? Köşeli parantez `[` `]` kullanarak.
+
+Önce az önce oluşturduğun `blog/nextjs-nedir/` klasörünü sil. Yerine şunu oluştur:
+
+`src/app/blog/[slug]/page.tsx`:
+
+```tsx
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function BlogYazi({ params }: Props) {
+  const { slug } = await params;
+
+  return (
+    <main className="min-h-screen bg-gray-950 p-8">
+      <div className="max-w-2xl mx-auto">
+        <p className="text-sm text-gray-600 mb-4">
+          Yazi slug'i: {slug}
+        </p>
+        <h1 className="text-3xl font-bold text-white mb-4">
+          Blog Yazisi: {slug}
+        </h1>
+        <p className="text-gray-400">
+          Bu sayfanin icerigi "{slug}" parametresine gore degisir.
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+`[slug]` klasör adındaki köşeli parantezler Next.js'e şunu söylüyor: "Bu klasör adı sabit değil. URL'den gelen herhangi bir değeri bu isimle yakala."
+
+Proje yapısı:
+
+```
+src/app/
+  blog/
+    [slug]/
+      page.tsx          → /blog/:slug (herhangi bir değer)
+    page.tsx            → /blog
+```
+
+Şimdi tarayıcıda şu adresleri dene:
+
+- `http://localhost:3000/blog/nextjs-nedir` → slug = "nextjs-nedir"
+- `http://localhost:3000/blog/react-temelleri` → slug = "react-temelleri"
+- `http://localhost:3000/blog/herhangi-bir-sey` → slug = "herhangi-bir-sey"
+- `http://localhost:3000/blog/42` → slug = "42"
+
+Hepsi çalışıyor. Tek bir `page.tsx` dosyası ile sonsuz sayfa oluşturabiliyorsun. URL'den gelen değer `params.slug` olarak sana ulaşıyor.
+
+Bu nasıl çalışıyor? Adım adım:
+
+1. Kullanıcı `/blog/nextjs-nedir` adresine giriyor
+2. Next.js `app/blog/[slug]/page.tsx` dosyasını buluyor
+3. URL'den `nextjs-nedir` değerini alıyor ve `params.slug`'a atıyor
+4. Sayfa bileşeni bu değeri kullanarak içeriği render ediyor
+
+Gerçek bir projede bu `slug` değeri ile veritabanından veya bir dosyadan ilgili yazıyı çekersin. Ama bu konuyu ilerideki bölümlerde işleyeceğiz. Şimdi önemli olan dinamik routing'in nasıl çalıştığını anlamak.
+
+### Parametre Adı Sen Belirlersin
+
+`[slug]` yerine istediğin ismi kullanabilirsin:
+
+| Klasör Adı | Parametre | Örnek URL | params Değeri |
+|-----------|-----------|-----------|---------------|
+| `[slug]` | `params.slug` | `/blog/merhaba` | `"merhaba"` |
+| `[id]` | `params.id` | `/urunler/42` | `"42"` |
+| `[kategori]` | `params.kategori` | `/magaza/elektronik` | `"elektronik"` |
+| `[username]` | `params.username` | `/profil/can` | `"can"` |
+
+İsimlendirme tamamen sana kalmış. Ama anlamlı isimler kullan. `[x]` yerine `[slug]` veya `[id]` yazmak kodu okuyan herkes için daha net.
+
+### Birden Fazla Dinamik Segment
+
+Bir URL'de birden fazla dinamik segment olabilir:
+
+```
+src/app/magaza/[kategori]/[urunId]/page.tsx
+```
+
+Bu yapı `/magaza/elektronik/42` gibi URL'leri yakalar:
+
+```tsx
+type Props = {
+  params: Promise<{ kategori: string; urunId: string }>;
+};
+
+export default async function UrunDetay({ params }: Props) {
+  const { kategori, urunId } = await params;
+
+  return (
+    <div>
+      <p>Kategori: {kategori}</p>
+      <p>Urun ID: {urunId}</p>
+    </div>
+  );
+}
+```
+
+`/magaza/elektronik/42` → `kategori = "elektronik"`, `urunId = "42"`
+`/magaza/giyim/155` → `kategori = "giyim"`, `urunId = "155"`
+
+Her seviyedeki köşeli parantez ayrı bir parametre yakalar.
+
+<CodeFillBlank
+  question="Bir blog yazısının URL'sinden slug parametresini yakalamak için klasör adı nasıl olmalıdır?"
+  codeBefore={`src/app/blog/`}
+  codeAfter={`/page.tsx\n\n// Bu dosya /blog/herhangi-bir-deger URL'sini yakalar`}
+  options={[
+    { text: "[slug]", correct: true },
+    { text: ":slug", correct: false },
+    { text: "{slug}", correct: false },
+    { text: "$slug", correct: false }
+  ]}
+  explanation="Next.js'te dinamik route segmentleri köşeli parantez ile tanımlanır. [slug] klasörü, URL'nin o seviyesindeki herhangi bir değeri yakalar ve params.slug olarak erişmenizi sağlar."
+  taskNumber={2}
+  totalTasks={6}
+/>
+
+
+## Dinamik Route ile Gerçek Veri Kullanımı
+
+Şimdilik sayfada sadece slug değerini gösteriyoruz. Gerçek bir projede bu slug ile eşleşen veriyi göstermen gerekir. Basit bir örnek yapalım.
+
+`src/app/blog/[slug]/page.tsx` dosyasını şu şekilde güncelle:
+
+```tsx
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+// Simdilik veriyi burada tanimliyoruz.
+// Ileri bolumlerde bunu bir dosyadan veya API'dan cekecegiz.
+const yazilar = [
+  {
+    slug: "nextjs-nedir",
+    baslik: "Next.js Nedir?",
+    icerik: "Next.js, React uzerine kurulmus bir web framework'udur. Dosya tabanli routing, sunucu tarafli render ve statik site uretimi gibi ozellikleri hazir olarak sunar.",
+  },
+  {
+    slug: "react-temelleri",
+    baslik: "React Temelleri",
+    icerik: "React, kullanici arayuzu olusturmak icin kullanilan bir JavaScript kutuphanesidir. Component yapisi, props ve state kavramlari ile calisiyor.",
+  },
+  {
+    slug: "tailwind-giris",
+    baslik: "Tailwind CSS Giris",
+    icerik: "Tailwind CSS, utility-first yaklasimi ile CSS yazmani saglayan bir framework'tur. Sinif isimleriyle dogrudan HTML uzerinde stil uygularsin.",
+  },
+];
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function BlogYazi({ params }: Props) {
+  const { slug } = await params;
+
+  const yazi = yazilar.find((y) => y.slug === slug);
+
+  if (!yazi) {
+    notFound();
+  }
+
+  return (
+    <main className="min-h-screen bg-gray-950 p-8">
+      <div className="max-w-2xl mx-auto">
+        <Link
+          href="/blog"
+          className="text-blue-400 hover:text-blue-300 text-sm mb-6 inline-block"
+        >
+          ← Blog'a don
+        </Link>
+        <h1 className="text-3xl font-bold text-white mb-4">
+          {yazi.baslik}
+        </h1>
+        <p className="text-gray-400 leading-relaxed">
+          {yazi.icerik}
+        </p>
+      </div>
+    </main>
+  );
+}
+```
+
+Bu kodda önemli bir yenilik var: `notFound()` fonksiyonu. Eğer URL'deki slug değeri ile eşleşen bir yazı bulamazsak, `notFound()` fonksiyonu çağrılıyor. Bu fonksiyon Next.js'in 404 sayfasını gösteriyor. Yani `/blog/olmayan-yazi` adresine girildiğinde kullanıcı düzgün bir "Sayfa bulunamadı" mesajı görüyor.
+
+`notFound` fonksiyonu `next/navigation` modülünden import ediliyor. Bu modülü ileride çokça kullanacağız.
+
+Şimdi tarayıcıda test et:
+
+- `http://localhost:3000/blog/nextjs-nedir` → "Next.js Nedir?" yazısı
+- `http://localhost:3000/blog/react-temelleri` → "React Temelleri" yazısı
+- `http://localhost:3000/blog/bos-sayfa` → 404 sayfası
+
+Her URL aynı dosyayı kullanıyor ama farklı içerik gösteriyor. Bu dinamik routing'in gücü.
+
+
+## Nested Layoutlar — Bölüm Bazlı Tasarım
+
+Bölüm 2'de layout.tsx dosyasını öğrendin. Kök layout tüm sayfaları sarıyor. Ama ya sadece blog sayfalarına özel bir layout istersen?
+
+Mesela blog sayfalarında sol tarafta bir sidebar olsun, ana sayfada olmasın. Veya blog sayfalarının farklı bir arka plan rengi olsun.
+
+Çözüm: **nested layout** (iç içe layout).
+
+`src/app/blog/layout.tsx` dosyasını oluştur:
+
+```tsx
+export default function BlogLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <aside className="w-64 bg-gray-900 border-r border-gray-800 p-6 hidden md:block">
+        <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">
+          Blog Kategorileri
+        </h2>
+        <nav className="space-y-2">
+          <a href="#" className="block text-sm text-gray-500 hover:text-white transition-colors">
+            Yazilim
+          </a>
+          <a href="#" className="block text-sm text-gray-500 hover:text-white transition-colors">
+            Tasarim
+          </a>
+          <a href="#" className="block text-sm text-gray-500 hover:text-white transition-colors">
+            Kariyer
+          </a>
+        </nav>
+      </aside>
+
+      {/* Ana icerik */}
+      <div className="flex-1">
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+Proje yapısı:
+
+```
+src/app/
+  blog/
+    [slug]/
+      page.tsx
+    layout.tsx          ← Blog'a özel layout (YENİ)
+    page.tsx
+  layout.tsx            ← Kök layout (tüm sayfalar)
+  page.tsx
+```
+
+Şimdi ne oluyor? Layout'lar iç içe sarmalanıyor:
+
+```
+┌─── Kök layout.tsx ────────────────────────────┐
+│  <html>                                        │
+│    <body>                                      │
+│      <nav>Site Menüsü</nav>                    │
+│      ┌─── blog/layout.tsx ──────────────┐      │
+│      │  <aside>Sidebar</aside>          │      │
+│      │  ┌─── children ───────────┐      │      │
+│      │  │                        │      │      │
+│      │  │   page.tsx içeriği     │      │      │
+│      │  │                        │      │      │
+│      │  └────────────────────────┘      │      │
+│      └──────────────────────────────────┘      │
+│    </body>                                      │
+│  </html>                                        │
+└────────────────────────────────────────────────┘
+```
+
+Blog sayfalarında hem üstteki menü (kök layout'tan) hem de sol taraftaki sidebar (blog layout'undan) görünür. Ana sayfada ise sadece üstteki menü görünür, sidebar yok.
+
+Bu sistemi bir bina gibi düşün. Kök layout binanın dış cephesi ve lobisi. Blog layout'u binanın "Blog katı"ndaki özel düzenleme. Her katta aynı asansör (menü) var ama her katın kendi özel dekorasyonu olabilir.
+
+**Kritik detay:** Layout'lar sayfa geçişlerinde yeniden render edilmez. Kullanıcı `/blog/nextjs-nedir` sayfasından `/blog/react-temelleri` sayfasına geçtiğinde sidebar yeniden çizilmez. Sadece `{children}` içindeki sayfa içeriği değişir. Bu performans açısından büyük avantaj.
+
+Tarayıcıda test et:
+
+- `http://localhost:3000/` → Sidebar yok, sadece menü
+- `http://localhost:3000/blog` → Sidebar var + menü
+- `http://localhost:3000/blog/nextjs-nedir` → Sidebar var + menü
+
+Blog dışındaki sayfalarda sidebar görünmüyor. Sadece `/blog` ve altındaki tüm sayfalarda aktif.
+
+<InteractiveQuiz
+  question="Blog sayfalarında sidebar göstermek istiyorsun ama ana sayfada göstermek istemiyorsun. Ne yapmalısın?"
+  options={[
+    { text: "Kök layout.tsx'e sidebar ekle ve ana sayfada CSS ile gizle", correct: false },
+    { text: "Her blog sayfasının page.tsx dosyasına sidebar kodunu kopyala", correct: false },
+    { text: "blog/ klasörüne bir layout.tsx dosyası oluştur ve sidebar'ı orada tanımla", correct: true },
+    { text: "globals.css'e /blog path'i için özel CSS yaz", correct: false }
+  ]}
+  explanation="Nested layout, belirli bir route grubuna özel ortak çerçeve oluşturmanızı sağlar. blog/ klasörüne layout.tsx koyduğunuzda sadece blog sayfalarını saran bir çerçeve oluşturursunuz. Bu, kök layout'un üstüne eklenir."
+  hint="Next.js'in layout sistemi, farklı bölümlere farklı çerçeveler uygulamanı sağlayan iç içe sarmalama yapısı sunar."
+  taskNumber={3}
+  totalTasks={6}
+/>
+
+
+## Route Grupları — URL'yi Etkilemeden Düzenleme
+
+Proje büyüdükçe `app/` klasörü kalabalıklaşır. Diyelim ki sitenin iki farklı "bölümü" var:
+
+1. **Pazarlama sayfaları:** Ana sayfa, hakkımda, iletişim, fiyatlandırma
+2. **Uygulama sayfaları:** Dashboard, ayarlar, profil
+
+Bu sayfaların hepsini `app/` klasörünün doğrudan altına koyarsan düz bir liste olur:
+
+```
+src/app/
+  ayarlar/
+  dashboard/
+  fiyatlandirma/
+  hakkimda/
+  iletisim/
+  profil/
+  page.tsx
+```
+
+Bu çalışır ama düzensiz. Hangi sayfa hangi gruba ait? Belli değil. Ve daha kötüsü: pazarlama sayfalarına farklı layout, uygulama sayfalarına farklı layout uygulamak istersen ne yapacaksın?
+
+Çözüm: **Route grupları.**
+
+Route grupları parantez `(` `)` ile oluşturulur ve URL'de görünmez:
+
+```
+src/app/
+  (pazarlama)/
+    hakkimda/
+      page.tsx          → /hakkimda (URL'de "pazarlama" yok!)
+    iletisim/
+      page.tsx          → /iletisim
+    fiyatlandirma/
+      page.tsx          → /fiyatlandirma
+    layout.tsx          → Pazarlama sayfalarına özel layout
+  (uygulama)/
+    dashboard/
+      page.tsx          → /dashboard
+    ayarlar/
+      page.tsx          → /ayarlar
+    profil/
+      page.tsx          → /profil
+    layout.tsx          → Uygulama sayfalarına özel layout
+  layout.tsx            → Kök layout
+  page.tsx              → /
+```
+
+Dikkat: `(pazarlama)` ve `(uygulama)` klasör adları URL'de hiç görünmüyor. Sadece dosya düzenini organize ediyorlar.
+
+- `/hakkimda` → `(pazarlama)/hakkimda/page.tsx` dosyasını render eder
+- `/dashboard` → `(uygulama)/dashboard/page.tsx` dosyasını render eder
+
+Ve en güzel tarafı: her grubun kendi layout'u olabilir. Pazarlama sayfaları için renkli header + footer ile minimal bir tasarım. Uygulama sayfaları için sidebar + topbar ile dashboard tarzı bir tasarım. Kök layout ikisini de sarar.
+
+### Route Gruplarını Ne Zaman Kullanmalısın?
+
+- Farklı sayfa gruplarına farklı layout uygulamak istediğinde
+- Dosya düzenini mantıksal gruplara ayırmak istediğinde
+- URL yapısını bozmadan klasörleri organize etmek istediğinde
+
+### Ne Zaman Kullanmamalısın?
+
+- URL'de de bir gruplama istiyorsan parantez kullanma, normal klasör oluştur
+- Sadece birkaç sayfan varsa gereksiz düzenleme. Basit tut
+
+Şimdilik projemizde route grubu kullanmayacağız çünkü henüz birkaç sayfamız var. Ama proje büyüdüğünde bu yapı hayat kurtarıcı olacak.
+
+<InteractiveQuiz
+  question="src/app/(admin)/kullanicilar/page.tsx dosyası hangi URL'de erişilebilir?"
+  options={[
+    { text: "/(admin)/kullanicilar", correct: false },
+    { text: "/admin/kullanicilar", correct: false },
+    { text: "/kullanicilar", correct: true },
+    { text: "/app/admin/kullanicilar", correct: false }
+  ]}
+  explanation="Parantez içindeki klasörler (route grupları) URL'de görünmez. (admin) sadece dosya düzenini organize eder. URL doğrudan /kullanicilar olur."
+  hint="Route grupları URL'yi etkilemez. Parantez içindeki isim dosya sistemine özeldir."
+  taskNumber={4}
+  totalTasks={6}
+/>
+
+
+## Link Bileşeni — Sayfalar Arası Navigasyon
+
+Bölüm 2'de `next/link` modülündeki `Link` bileşenini kısaca tanıttık. Şimdi derinleştirelim.
+
+### Neden Link Kullanıyoruz?
+
+HTML'in `<a>` etiketi sayfalar arası geçiş yapar. Ama her tıklamada tüm sayfayı sıfırdan yükler. HTML, CSS, JavaScript — her şey yeniden indirilir. Bu yavaş.
+
+Next.js'in `Link` bileşeni ise **client-side navigation** yapar. Yani:
+
+1. Sayfa zaten yüklü. Layout, menü, footer yerinde duruyor
+2. Linke tıklıyorsun
+3. Next.js sadece yeni sayfanın **içeriğini** (page.tsx) getiriyor
+4. Layout yeniden render edilmiyor, sadece `{children}` değişiyor
+5. URL güncelleniyor ama tam sayfa yenilenmesi yok
+
+Ayrıca `Link` bileşeni **prefetch** yapıyor. Yani link ekranda göründüğünde, kullanıcı henüz tıklamadan hedef sayfanın kodunu arka planda indiriyor. Tıkladığında sayfa anında açılıyor çünkü kod zaten hazır.
+
+### Temel Kullanım
+
+```tsx
+import Link from "next/link";
+
+export default function Menu() {
+  return (
+    <nav>
+      <Link href="/">Ana Sayfa</Link>
+      <Link href="/blog">Blog</Link>
+      <Link href="/hakkimda">Hakkimda</Link>
+    </nav>
+  );
+}
+```
+
+### Dinamik URL ile Link
+
+```tsx
+const yazilar = [
+  { slug: "nextjs-nedir", baslik: "Next.js Nedir?" },
+  { slug: "react-temelleri", baslik: "React Temelleri" },
+];
+
+export default function BlogListesi() {
+  return (
+    <ul>
+      {yazilar.map((yazi) => (
+        <li key={yazi.slug}>
+          <Link href={`/blog/${yazi.slug}`}>
+            {yazi.baslik}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+Template literal (backtick) kullanarak dinamik URL'ler oluşturabilirsin. `/blog/${yazi.slug}` ifadesi `yazi.slug` değerine göre farklı URL'ler üretir.
+
+### Link'e Stil Vermek
+
+`Link` bileşeni `className` ve diğer HTML özelliklerini kabul eder:
+
+```tsx
+<Link
+  href="/blog"
+  className="text-blue-400 hover:text-blue-300 underline"
+>
+  Blog
+</Link>
+```
+
+### Harici Linkler
+
+Site dışına yönlendirmeler için `Link` bileşenini kullanmana gerek yok. Normal `<a>` etiketi kullan:
+
+```tsx
+<a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
+  Next.js Resmi Site
+</a>
+```
+
+`target="_blank"` linki yeni sekmede açar. `rel="noopener noreferrer"` güvenlik için eklenir.
+
+**Kural:** Site içi bağlantılar için `Link`, site dışı bağlantılar için `<a>` kullan.
+
+
+## Aktif Link Vurgulama — usePathname
+
+Bir menüde hangi sayfada olduğunu göstermek kullanıcı deneyimi için çok önemli. Aktif sayfanın linki farklı renkte veya kalın olmalı.
+
+Bunun için `usePathname` hook'unu kullanıyoruz. Bu hook URL'nin path kısmını döndürür.
+
+Öncelikle Bölüm 2'de oluşturduğumuz layout'taki navigasyonu bir component'e çıkaralım. `src/app/` klasörüne bir `navigation.tsx` dosyası oluştur:
+
+```tsx
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const linkler = [
+  { href: "/", label: "Ana Sayfa" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projeler", label: "Projeler" },
+  { href: "/hakkimda", label: "Hakkimda" },
+  { href: "/iletisim", label: "Iletisim" },
+];
+
+export function Navigation() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="flex gap-6 p-4 bg-gray-900 text-white">
+      {linkler.map((link) => {
+        const isActive =
+          link.href === "/"
+            ? pathname === "/"
+            : pathname.startsWith(link.href);
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={
+              isActive
+                ? "text-blue-400 font-semibold"
+                : "text-gray-400 hover:text-white transition-colors"
+            }
+          >
+            {link.label}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+```
+
+Bu kodda birkaç önemli nokta var.
+
+**`"use client";` direktifi:** Bu dosyanın en üstünde `"use client"` yazıyor. Neden? Çünkü `usePathname` bir React hook'u ve hook'lar sadece client component'larda çalışır. Next.js'te varsayılan olarak tüm component'lar server component'tır. Tarayıcı tarafında çalışan bir özellik (hook, event handler gibi) kullanacaksan dosyanın başına `"use client"` yazman gerekir.
+
+Bu konuyu Server Components bölümünde derinlemesine işleyeceğiz. Şimdilik bilmen gereken: `usePathname`, `useState`, `onClick` gibi tarayıcı taraflı özellikler kullanacaksan dosyanın üstüne `"use client"` yaz.
+
+**isActive kontrolü:** Ana sayfa için `pathname === "/"` (tam eşleşme), diğer sayfalar için `pathname.startsWith(link.href)` (başlangıç eşleşmesi) kullanıyoruz. Neden? Çünkü `/blog/nextjs-nedir` URL'sinde de Blog linkinin aktif görünmesini istiyoruz. `startsWith("/blog")` kontrolü bunu sağlar.
+
+Şimdi `src/app/layout.tsx` dosyasını bu yeni component'ı kullanacak şekilde güncelle:
+
+```tsx
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Navigation } from "./navigation";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Ilk Next.js Projem",
+  description: "Next.js ile yaptigim ilk web sitesi",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="tr">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Navigation />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Artık hangi sayfadaysan o sayfanın linki mavi ve kalın görünüyor. Diğerleri gri. Blog altındaki herhangi bir yazıda olsan bile "Blog" linki aktif.
+
+<CodeDetective
+  title="Aktif Link Hatasini Bul"
+  description="Bir gelistirici aktif link kontrolu yazdi ama /blog/nextjs-nedir sayfasinda Blog linki aktif goruntmuyor. Neden?"
+  errorMessage="Blog linki /blog/nextjs-nedir sayfasında aktif değil"
+  fileName="navigation.tsx"
+  lines={[
+    { num: 1, content: "\"use client\";" },
+    { num: 2, content: "import Link from \"next/link\";" },
+    { num: 3, content: "import { usePathname } from \"next/navigation\";" },
+    { num: 4, content: "" },
+    { num: 5, content: "export function Navigation() {" },
+    { num: 6, content: "  const pathname = usePathname();" },
+    { num: 7, content: "  const isActive = pathname === \"/blog\";" },
+    { num: 8, content: "  return (" },
+    { num: 9, content: "    &lt;Link href=\"/blog\" className={isActive ? \"text-blue-400\" : \"text-gray-400\"}&gt;" },
+    { num: 10, content: "      Blog" },
+    { num: 11, content: "    &lt;/Link&gt;" },
+    { num: 12, content: "  );" },
+    { num: 13, content: "}" }
+  ]}
+  correctLine={7}
+  explanation="pathname === '/blog' sadece tam eşleşme kontrol eder. /blog/nextjs-nedir sayfasında pathname '/blog/nextjs-nedir' olur ve '/blog' ile eşit değildir. Çözüm: pathname.startsWith('/blog') kullanmak. Bu, /blog ile başlayan tüm URL'lerde Blog linkini aktif gösterir."
+  fix="pathname === '/blog' yerine pathname.startsWith('/blog') kullan"
+  hint="Tam eşleşme (===) ile başlangıç eşleşmesi (startsWith) arasındaki farkı düşün."
+  maxTries={3}
+/>
+
+
+## Catch-All Route'lar — Çok Katmanlı URL'ler
+
+Bazı durumlarda altındaki tüm yolları yakalaması gereken bir route istersin. Mesela bir dokümantasyon sitesi:
+
+```
+/docs/getting-started
+/docs/getting-started/installation
+/docs/api/components/button
+/docs/api/hooks/use-state
+```
+
+Her seviye için ayrı dinamik route oluşturmak karmaşık olur. Bunun yerine **catch-all route** kullanırsın:
+
+```
+src/app/docs/[...slug]/page.tsx
+```
+
+Üç nokta `...` işareti "bundan sonrasının tamamını yakala" demek. Parametre bir dizi (array) olarak gelir.
+
+```tsx
+type Props = {
+  params: Promise<{ slug: string[] }>;
+};
+
+export default async function DocsPage({ params }: Props) {
+  const { slug } = await params;
+
+  // slug bir array:
+  // /docs/getting-started → slug = ["getting-started"]
+  // /docs/api/hooks/use-state → slug = ["api", "hooks", "use-state"]
+
+  return (
+    <div>
+      <h1>Docs Sayfasi</h1>
+      <p>Yol: {slug.join(" / ")}</p>
+    </div>
+  );
+}
+```
+
+| URL | slug değeri |
+|-----|-------------|
+| `/docs/giris` | `["giris"]` |
+| `/docs/api/hooks` | `["api", "hooks"]` |
+| `/docs/api/hooks/use-state` | `["api", "hooks", "use-state"]` |
+
+Catch-all route'lar bir şeyi yakalamaz: ana yolu. Yani `/docs` adresi bu route'u tetiklemez çünkü slug için en az bir segment gerekir. Bunu da yakalamak istersen **optional catch-all** kullanırsın: `[[...slug]]` (çift köşeli parantez).
+
+```
+src/app/docs/[[...slug]]/page.tsx
+```
+
+Bu yapı `/docs` adresini de yakalar. Bu durumda `slug` parametresi `undefined` olur.
+
+Catch-all route'lar ileri bir konu. Şimdilik varlığını bil. İleride dokümantasyon veya çok katmanlı bir yapı oluşturduğumuzda detaylı kullanacağız.
+
+
+## Route Dosya Sözlüğü
+
+Next.js'in tanıdığı özel dosyaları bir tabloda toparlayalım:
+
+| Dosya | Görev | Bölüm |
+|-------|-------|-------|
+| `page.tsx` | Sayfa içeriğini tanımlar | Bölüm 2'de gördük |
+| `layout.tsx` | Sayfaların ortak çerçevesi | Bölüm 2'de gördük |
+| `loading.tsx` | Yükleniyor ekranı | Bölüm 2'de tanıttık |
+| `error.tsx` | Hata sayfası | Bölüm 2'de tanıttık |
+| `not-found.tsx` | 404 sayfası | Bölüm 2'de tanıttık |
+| `route.ts` | API endpoint (sadece backend) | İlerideki bölümlerde |
+| `template.tsx` | Layout gibi ama her geçişte yeniden render edilir | İleri seviye |
+| `default.tsx` | Parallel route varsayılanı | İleri seviye |
+
+Önemli kural: `page.tsx` ve `route.ts` aynı klasörde bulunamaz. Bir klasör ya sayfa ya da API endpoint olur, ikisi birden olmaz.
+
+
+## Routing Akış Şeması
+
+Kullanıcı bir URL'ye girdiğinde Next.js ne yapıyor? Adım adım:
+
+```
+1. Kullanıcı /blog/nextjs-nedir adresine giriyor
+              │
+2. Next.js app/ klasöründe yol arıyor
+              │
+3. app/blog/ klasörünü buluyor
+              │
+4. blog/ içinde [slug]/ klasörünü buluyor
+              │
+5. [slug] dinamik route → slug = "nextjs-nedir"
+              │
+6. [slug]/page.tsx dosyasını render ediyor
+              │
+7. Layout zinciri oluşturuluyor:
+   - app/layout.tsx (kök layout)
+     └── app/blog/layout.tsx (blog layout)
+         └── app/blog/[slug]/page.tsx (sayfa)
+              │
+8. HTML oluşturulup tarayıcıya gönderiliyor
+```
+
+Her adımda Next.js layout'ları yukarıdan aşağıya sarmalıyor. Kök layout → blog layout → sayfa. Bu zincir otomatik. Sen sadece dosyaları doğru yere koyuyorsun.
+
+
+## Navigasyonu Güncelle — Tüm Linkleri Ekle
+
+Artık çok sayfa var. Layout'taki navigasyonu güncelleyelim ki tüm sayfalara erişebilelim.
+
+Daha önce oluşturduğumuz `src/app/navigation.tsx` dosyasında `linkler` dizisi zaten tüm sayfaları içeriyor. Eğer yeni sayfalar eklersen bu diziye eklemen yeterli.
+
+Ama daha kullanışlı bir navigasyon yapalım. Her sayfanın alt sayfaları olduğunda menüde dropdown göstermek isteyebilirsin. Bu ileri bir konu ama temelini şimdi atalım.
+
+`navigation.tsx` dosyasını açıp linkler dizisine projeler ve iletişim linklerini eklediğinden emin ol. Sonra tarayıcıda her sayfaya gidip aktif link vurgulamasını test et.
+
+
+## Projendeki URL Haritası
+
+Bölüm sonuna geldik. Şu an projende olan tüm URL'leri toparlayalım:
+
+| URL | Dosya | Tür |
+|-----|-------|-----|
+| `/` | `app/page.tsx` | Statik |
+| `/hakkimda` | `app/hakkimda/page.tsx` | Statik |
+| `/iletisim` | `app/iletisim/page.tsx` | Statik |
+| `/projeler` | `app/projeler/page.tsx` | Statik |
+| `/blog` | `app/blog/page.tsx` | Statik (liste) |
+| `/blog/nextjs-nedir` | `app/blog/[slug]/page.tsx` | Dinamik |
+| `/blog/react-temelleri` | `app/blog/[slug]/page.tsx` | Dinamik |
+| `/blog/tailwind-giris` | `app/blog/[slug]/page.tsx` | Dinamik |
+
+Statik sayfalar: Bir URL → bir dosya. URL sabit.
+Dinamik sayfalar: Birçok URL → tek dosya. URL'nin bir kısmı değişken.
+
+
+## Sık Yapılan Hatalar
+
+Routing ile çalışırken sık karşılaşılan hataları ve çözümlerini bilelim:
+
+**Hata 1: page.tsx dosyası unutuldu**
+
+```
+src/app/blog/
+  layout.tsx
+  [slug]/
+    page.tsx
+```
+
+`/blog` adresine girdiğinde 404 alırsın. Çünkü `blog/` klasöründe `page.tsx` yok. Layout var ama sayfa yok. Çözüm: `blog/page.tsx` dosyasını oluştur.
+
+**Hata 2: Klasör adında boşluk veya Türkçe karakter**
+
+```
+src/app/hakkımızda/page.tsx     ← YANLIŞ (Türkçe karakter)
+src/app/hakkimizda/page.tsx     ← DOĞRU
+```
+
+URL'lerde Türkçe karakter kullanma. `ı`, `ş`, `ç`, `ö`, `ü`, `ğ` gibi harfler sorun çıkarır. ASCII karakterler ve tire kullan.
+
+**Hata 3: page.tsx ve route.ts aynı klasörde**
+
+```
+src/app/api/kullanicilar/
+  page.tsx      ← ÇAKIŞMA!
+  route.ts      ← ÇAKIŞMA!
+```
+
+Bir klasör ya sayfa ya da API endpoint olabilir. İkisi birden olmaz. API route'larını `api/` altında tut, sayfaları ayrı tut.
+
+**Hata 4: Layout ve page aynı seviyede children kullanmamak**
+
+Layout'ta `{children}` yazmayı unutursan sayfalar görünmez. Layout render edilir ama sayfa içeriği hiçbir yere yerleştirilmez.
+
+<CodeFillBlank
+  question="Dinamik route ile bir ürün detay sayfası oluşturmak istiyorsun. params objesinden ürün ID'sine nasıl erişirsin?"
+  codeBefore={`// src/app/urunler/[id]/page.tsx\n\ntype Props = {\n  params: Promise<{ id: string }>;\n};\n\nexport default async function UrunDetay({ params }: Props) {\n  const { id } = await `}
+  codeAfter={`;\n\n  return <h1>Urun ID: {id}</h1>;\n}`}
+  options={[
+    { text: "params", correct: true },
+    { text: "props", correct: false },
+    { text: "query", correct: false },
+    { text: "request", correct: false }
+  ]}
+  explanation="Next.js dinamik route'larda URL parametrelerini params objesi üzerinden iletir. params bir Promise olduğu için await ile çözümlenir. Köşeli parantez içindeki isim (burada [id]) params objesindeki anahtar adını belirler."
+  taskNumber={5}
+  totalTasks={6}
+/>
+
+
+## Bu Bölümde Neler Öğrendin?
+
+Geri dönüp bakalım:
+
+- **Dosya tabanlı routing** ile klasör yapısının URL yapısını belirlediğini kavradın. Klasör oluştur, `page.tsx` koy, sayfa hazır.
+- **Statik route'lar** oluşturdun: iletişim, projeler, blog sayfaları.
+- **Nested route'lar** ile blog listesi ve blog detay sayfalarını iç içe oluşturdun.
+- **Dinamik route** oluşturdun: `[slug]` köşeli parantez ile tek dosyadan sonsuz sayfa.
+- **URL parametrelerini** `params` objesiyle yakaladın ve sayfada kullandın.
+- **Nested layout** ile sadece blog sayfalarına özel sidebar ekledin.
+- **Route grupları** `(parantez)` ile URL'yi etkilemeden dosya düzeni oluşturdun.
+- **Link bileşeni**nin neden `<a>` etiketinden üstün olduğunu öğrendin: client-side navigation ve prefetch.
+- **usePathname** ile aktif link vurgulama yaptın.
+- **Catch-all route** kavramını tanıdın.
+- **`notFound()`** fonksiyonu ile 404 yönlendirmesi yaptın.
+
+<InteractiveQuiz
+  question="Aşağıdaki dosya yapısında /magaza/elektronik/42 URL'si hangi dosyayı render eder?"
+  code={`src/app/\n  magaza/\n    [kategori]/\n      [urunId]/\n        page.tsx\n      page.tsx\n    page.tsx`}
+  options={[
+    { text: "magaza/page.tsx", correct: false },
+    { text: "magaza/[kategori]/page.tsx", correct: false },
+    { text: "magaza/[kategori]/[urunId]/page.tsx", correct: true },
+    { text: "Hata verir, çünkü iki dinamik segment olamaz", correct: false }
+  ]}
+  explanation="Next.js URL segmentlerini soldan sağa eşler: magaza → statik, elektronik → [kategori], 42 → [urunId]. En derin eşleşen page.tsx dosyası render edilir. Birden fazla dinamik segment sorunsuz çalışır."
+  hint="URL'deki her segment bir klasör seviyesine karşılık gelir. Next.js her seviyeyi sırayla eşleştirir."
+  taskNumber={6}
+  totalTasks={6}
+/>
+
+
+## Sıradaki Bölüm
+
+Routing sistemini artık biliyorsun. Sayfalar oluşturabilir, dinamik route'lar yazabilir, layout'ları iç içe yerleştirebilirsin. Ama dikkat ettiysen sayfalarımız şu an biraz çıplak. Tailwind class'ları ile basit stiller verdik ama gerçek bir tasarım yok.
+
+Bir sonraki bölümde **React Component'lar, Props ve JSX** konusuna dalacağız. Tekrar kullanılabilir UI parçaları oluşturmayı, veri aktarmayı (props) ve JSX'in inceliklerini derinlemesine öğreneceğiz. Butonu her sayfada yeniden yazmak yerine bir kez yazıp her yerde kullanacaksın.
+
+Projeyi silme. Aynı projeyle devam edeceğiz.

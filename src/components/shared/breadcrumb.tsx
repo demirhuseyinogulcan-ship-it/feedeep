@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Breadcrumb Navigation (DRY shared component)
+// feedeep — Breadcrumb Navigation (DRY shared component)
 // Semantic breadcrumb with proper a11y and Next.js Link
 // ─────────────────────────────────────────────────────────────
 

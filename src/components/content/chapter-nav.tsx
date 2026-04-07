@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Chapter Navigation (Bölümler Arası Navigasyon)
-// Rehber bölümleri arasında önceki/sonraki + progress dots
+// feedeep — Chapter Navigation (Bölümler Arası Navigasyon)
+// Seri bölümleri arasında önceki/sonraki + progress dots
 // ─────────────────────────────────────────────────────────────
 
 import Link from "next/link";

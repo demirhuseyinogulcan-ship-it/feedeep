@@ -78,7 +78,6 @@ async function newYazi(rl) {
   const slug = await ask(rl, "Slug", slugify(title));
   const description = await ask(rl, "Açıklama (max 160 karakter)");
   const category = await choose(rl, "Kategori:", [
-    "rehber",
     "inceleme",
     "analiz",
     "karsilastirma",

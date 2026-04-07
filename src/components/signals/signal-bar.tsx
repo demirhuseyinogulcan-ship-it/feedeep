@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Signal Bar (Sahip Ol + Begen/Begenme)
+// feedeep — Signal Bar (Sahip Ol + Begen/Begenme)
 // Feed kartlari ve detay sayfalari icin birlesik sinyal cubugu.
 // useSignal tek burada cagrilir — OwnButton ve VoteButtons paylas.
 // ─────────────────────────────────────────────────────────────

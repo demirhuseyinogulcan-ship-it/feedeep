@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Koleksiyon Sayfası
+// feedeep — Koleksiyon Sayfası
 // Sahiplenilen içeriklerin dikey mini kart grid'i.
 // ─────────────────────────────────────────────────────────────
 

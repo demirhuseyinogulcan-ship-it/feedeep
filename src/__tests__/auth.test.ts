@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Auth Layer Tests
+// feedeep — Auth Layer Tests
 // "Tek Hayat Hesap" iş mantığı testi.
 // Supabase çağrıları mock'lanır — saf iş mantığı test edilir.
 // ─────────────────────────────────────────────────────────────

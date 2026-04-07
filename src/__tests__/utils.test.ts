@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Utils Unit Tests
+// feedeep — Utils Unit Tests
 // ─────────────────────────────────────────────────────────────
 
 import { describe, it, expect } from "vitest";
@@ -144,7 +144,7 @@ describe("extractDomain()", () => {
   });
 
   it("removes www prefix", () => {
-    expect(extractDomain("https://www.airehber.com")).toBe("airehber.com");
+    expect(extractDomain("https://www.feedeep.com")).toBe("feedeep.com");
   });
 
   it("handles URL without www", () => {

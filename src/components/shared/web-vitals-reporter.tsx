@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Web Vitals Raporlama
+// feedeep — Web Vitals Raporlama
 // LCP, FID, CLS, TTFB, INP metriklerini GA4'e gönderir.
 // ─────────────────────────────────────────────────────────────
 

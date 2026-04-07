@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — PWA Install Prompt
+// feedeep — PWA Install Prompt
 // Mobilde "Uygulamayı Yükle" banner'ı gösterir
 // ─────────────────────────────────────────────────────────────
 

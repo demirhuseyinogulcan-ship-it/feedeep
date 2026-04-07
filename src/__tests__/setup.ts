@@ -1,2 +1,2 @@
-// AI Rehber — Test Setup
+// feedeep — Test Setup
 import "@testing-library/jest-dom/vitest";

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — İlgili Haberler Komponenti
+// feedeep — İlgili Haberler Komponenti
 // Anasayfadaki feed kartıyla birebir aynı görünüm
 // SEO: İç link ağı güçlendirmesi, bounce rate düşürme
 // ─────────────────────────────────────────────────────────────

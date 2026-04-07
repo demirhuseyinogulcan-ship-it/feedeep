@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Auth Modal
+// feedeep — Auth Modal
 // "Tek Hayat Hesap" — kayıt ve giriş tek modal.
 // Context-driven: useAuth().requestAuth() ile herhangi yerden açılır.
 // ─────────────────────────────────────────────────────────────

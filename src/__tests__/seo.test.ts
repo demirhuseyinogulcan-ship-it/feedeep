@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — SEO Helpers Unit Tests
+// feedeep — SEO Helpers Unit Tests
 // ─────────────────────────────────────────────────────────────
 
 import { describe, it, expect } from "vitest";
@@ -63,8 +63,8 @@ describe("generateMeta()", () => {
     // Twitter object contains card, site, creator
     const twitter = meta.twitter as Record<string, unknown>;
     expect(twitter.card).toBe("summary_large_image");
-    expect(twitter.site).toBe("@airehbercom");
-    expect(twitter.creator).toBe("@airehbercom");
+    expect(twitter.site).toBe("@feedeepcom");
+    expect(twitter.creator).toBe("@feedeepcom");
   });
 
   it("sets noIndex when specified", () => {

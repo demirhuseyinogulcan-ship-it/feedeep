@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Feed Card Dispatcher
+// feedeep — Feed Card Dispatcher
 // FeedItem tipine göre doğru kartı render eder
 // Open/Closed: yeni tip eklemek = yeni case + yeni card file
 // ─────────────────────────────────────────────────────────────

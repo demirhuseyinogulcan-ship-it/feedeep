@@ -1,7 +1,7 @@
 "use client";
 
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — "Sahip Ol" Butonu
+// feedeep — "Sahip Ol" Butonu
 // Tipografik, ikonsuz. Toggle davranışı.
 // Props alır — state SignalBar'da yönetilir.
 // ─────────────────────────────────────────────────────────────

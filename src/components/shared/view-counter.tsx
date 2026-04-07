@@ -1,4 +1,4 @@
-// AI Rehber — View Counter (Social Proof)
+// feedeep — View Counter (Social Proof)
 // İçerik sayfalarında görüntülenme sayısı gösterir.
 // localStorage tabanlı: her benzersiz ziyaret +1 artırır.
 // Başlangıç sayısı yayın tarihine göre hesaplanır.

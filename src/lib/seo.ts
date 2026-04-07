@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — SEO Helpers (JSON-LD, Meta, Structured Data)
+// feedeep — SEO Helpers (JSON-LD, Meta, Structured Data)
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
@@ -76,8 +76,8 @@ export function generateMeta({
       title,
       description,
       images: [ogImage],
-      site: "@airehbercom",
-      creator: "@airehbercom",
+      site: "@feedeepcom",
+      creator: "@feedeepcom",
     },
   };
 }
@@ -109,7 +109,7 @@ export function organizationJsonLd() {
     url: SITE.url,
     email: SITE.author.email,
     description:
-      "Yapay zeka dunyasinin Turkce rehberi. Guncel haberler, derinlemesine yazilar, prompt kutuphanesi ve AI model karsilastirmalari.",
+      "Yapay zeka, yazilim ve web gelistirme dunyasindan guncel haberler, derinlemesine analizler ve arac incelemeleri.",
     foundingDate: "2025-01-01",
     logo: {
       "@type": "ImageObject",
@@ -117,7 +117,7 @@ export function organizationJsonLd() {
       width: 512,
       height: 512,
     },
-    sameAs: [SITE.author.linkedin, SITE.author.instagram],
+    sameAs: [SITE.author.instagram].filter(Boolean),
     areaServed: {
       "@type": "Country",
       name: "Turkey",
@@ -126,11 +126,16 @@ export function organizationJsonLd() {
       "Yapay Zeka",
       "Makine Ogrenmesi",
       "Buyuk Dil Modelleri",
-      "Prompt Muhendisligi",
+      "Yazilim Gelistirme",
+      "Web Gelistirme",
+      "Kodlama",
+      "Siber Guvenlik",
       "ChatGPT",
       "Google Gemini",
       "Claude AI",
       "AI Ajanlari",
+      "React",
+      "Next.js",
     ],
     publishingPrinciples: `${SITE.url}/hakkimizda`,
     contactPoint: {
@@ -284,28 +289,6 @@ export function faqJsonLd(
   };
 }
 
-/** HowTo JSON-LD — rehber yazıları için */
-export function howToJsonLd(params: {
-  title: string;
-  description: string;
-  steps: Array<{ name: string; text: string }>;
-  totalTime?: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: params.title,
-    description: params.description,
-    ...(params.totalTime && { totalTime: params.totalTime }),
-    step: params.steps.map((step, index) => ({
-      "@type": "HowToStep",
-      position: index + 1,
-      name: step.name,
-      text: step.text,
-    })),
-  };
-}
-
 /** ItemList JSON-LD — koleksiyon/liste sayfaları için (Rich Snippet) */
 export function itemListJsonLd(params: {
   name: string;
@@ -355,188 +338,6 @@ export function collectionPageJsonLd(params: {
           url: item.url.startsWith("http") ? item.url : `${SITE.url}${item.url}`,
         },
       })),
-    },
-  };
-}
-
-/** Course JSON-LD — Programlama rehberleri için */
-export function courseJsonLd(params: {
-  name: string;
-  description: string;
-  url: string;
-  provider?: string;
-  language?: string;
-  totalChapters?: number;
-  chapters: Array<{
-    name: string;
-    url: string;
-    position: number;
-    description?: string;
-    educationalLevel?: string;
-    timeRequired?: string;
-  }>;
-}) {
-  const resolveUrl = (u: string) => (u.startsWith("http") ? u : `${SITE.url}${u}`);
-  const totalMinutes = params.chapters.reduce((sum, ch) => {
-    const mins = ch.timeRequired ? parseInt(ch.timeRequired.replace(/\D/g, ""), 10) : 15;
-    return sum + (isNaN(mins) ? 15 : mins);
-  }, 0);
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: params.name,
-    description: params.description,
-    url: resolveUrl(params.url),
-    provider: {
-      "@type": "Organization",
-      name: params.provider ?? SITE.name,
-      url: SITE.url,
-    },
-    inLanguage: params.language ?? "tr",
-    isAccessibleForFree: true,
-    numberOfCredits: 0,
-    educationalLevel: "beginner",
-    hasCourseInstance: {
-      "@type": "CourseInstance",
-      courseMode: "online",
-      courseWorkload: `PT${totalMinutes}M`,
-      instructor: {
-        "@type": "Person",
-        name: SITE.author.name,
-      },
-    },
-    // hasPart — Schema.org standard, Google-uyumlu
-    hasPart: params.chapters.map((ch) => ({
-      "@type": "LearningResource",
-      name: ch.name,
-      url: resolveUrl(ch.url),
-      position: ch.position,
-      learningResourceType: "tutorial",
-      educationalLevel: ch.educationalLevel ?? "beginner",
-      ...(ch.timeRequired && { timeRequired: ch.timeRequired }),
-      ...(ch.description && { description: ch.description }),
-      isPartOf: {
-        "@type": "Course",
-        name: params.name,
-        url: resolveUrl(params.url),
-      },
-    })),
-    ...(params.totalChapters && {
-      numberOfItems: params.totalChapters,
-    }),
-  };
-}
-
-/** LearningResource JSON-LD — Tekil ders/bölüm sayfaları */
-export function learningResourceJsonLd(params: {
-  name: string;
-  description: string;
-  url: string;
-  datePublished: string;
-  dateModified?: string;
-  keywords?: string[];
-  learningResourceType?: string;
-  educationalLevel?: string;
-  timeRequired?: string;
-  isPartOf?: { name: string; url: string };
-  faq?: Array<{ question: string; answer: string }>;
-}) {
-  const resolveUrl = (u: string) => (u.startsWith("http") ? u : `${SITE.url}${u}`);
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "LearningResource",
-    name: params.name,
-    description: params.description,
-    url: resolveUrl(params.url),
-    author: {
-      "@type": "Person",
-      name: SITE.author.name,
-      url: SITE.author.linkedin,
-    },
-    publisher: organizationJsonLd(),
-    inLanguage: "tr",
-    isAccessibleForFree: true,
-    datePublished: params.datePublished,
-    dateModified: params.dateModified ?? params.datePublished,
-    keywords: params.keywords?.join(", "),
-    learningResourceType: params.learningResourceType ?? "tutorial",
-    educationalLevel: params.educationalLevel ?? "beginner",
-    timeRequired: params.timeRequired ?? "PT15M",
-    interactivityType: "mixed",
-    ...(params.isPartOf && {
-      isPartOf: {
-        "@type": "Course",
-        name: params.isPartOf.name,
-        url: resolveUrl(params.isPartOf.url),
-      },
-    }),
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": resolveUrl(params.url),
-    },
-    speakable: {
-      "@type": "SpeakableSpecification",
-      cssSelector: ["article h1", "article [data-description]", "article h2"],
-    },
-  };
-}
-
-/** FAQ JSON-LD — Bölüm SSS bölümleri için (standalone export) */
-export function rehberFaqJsonLd(
-  questions: Array<{ question: string; answer: string }>
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: questions.map((q) => ({
-      "@type": "Question",
-      name: q.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: q.answer,
-      },
-    })),
-  };
-}
-
-// ─── CreativeWork JSON-LD — Prompt Detay Sayfaları ───
-
-export function creativeWorkJsonLd(params: {
-  title: string;
-  description: string;
-  url: string;
-  datePublished: string;
-  dateModified?: string;
-  keywords?: string[];
-  category?: string;
-}) {
-  const resolveUrl = (u: string) =>
-    u.startsWith("http") ? u : `${SITE.url}${u}`;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: params.title,
-    description: params.description,
-    url: resolveUrl(params.url),
-    datePublished: params.datePublished,
-    dateModified: params.dateModified ?? params.datePublished,
-    author: {
-      "@type": "Person",
-      name: SITE.author.name,
-      url: SITE.author.linkedin,
-    },
-    publisher: organizationJsonLd(),
-    inLanguage: SITE.language,
-    isAccessibleForFree: true,
-    ...(params.keywords && { keywords: params.keywords.join(", ") }),
-    ...(params.category && { genre: params.category }),
-    learningResourceType: "prompt template",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": resolveUrl(params.url),
     },
   };
 }

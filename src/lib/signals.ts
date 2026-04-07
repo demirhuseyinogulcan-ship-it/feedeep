@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────
-// AI Rehber — Signal Data Layer (localStorage + Supabase)
+// feedeep — Signal Data Layer (localStorage + Supabase)
 // Sahip Ol + Beğen/Beğenme veri katmanı.
 // localStorage: optimistic UI / anonymous fallback.
 // Supabase: authenticated kullanıcılar için kalıcı depo.
@@ -7,7 +7,7 @@
 
 import { getSupabase, isSupabaseConfigured, getSessionUserId } from "./supabase";
 
-const STORAGE_KEY = "airehber_signals";
+const STORAGE_KEY = "feedeep_signals";
 
 // ─── Types ───
 
