@@ -7,7 +7,6 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
 import { websiteJsonLd, generateMeta } from "@/lib/seo";
 import { SITE } from "@/lib/constants";
-import { NewsTicker } from "@/components/shared/the-signal";
 import { FeedContainer } from "@/components/feed/feed-container";
 import { buildFeed } from "@/lib/feed";
 
@@ -25,9 +24,6 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={[websiteJsonLd()]} />
-
-      {/* Gündem: Kayan Haber Şeridi */}
-      <NewsTicker />
 
       {/* Feed: Sonsuz Akış */}
       <main className="pt-6 pb-20">

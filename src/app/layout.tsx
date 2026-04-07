@@ -6,8 +6,9 @@ import { SITE } from "@/lib/constants";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { Sidebar } from "@/components/layout/sidebar";
+import { LayoutShell } from "@/components/layout/layout-shell";
 import { CursorGlow } from "@/components/layout/cursor-glow";
+import { NewsTicker } from "@/components/shared/the-signal";
 import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
 import { NotificationPrompt } from "@/components/shared/notification-prompt";
 import { PrefetchManager } from "@/components/shared/prefetch-manager";
@@ -147,25 +148,22 @@ export default function RootLayout({
         <AuthProvider>
         <CursorGlow />
 
-        {/* Desktop: sidebar */}
-        <Sidebar />
-
-        {/* Mobil/tablet: header (lg ustunde gizlenir) */}
-        <div className="lg:hidden">
+        <LayoutShell>
+          {/* Header: her zaman gorunur */}
           <Header />
-        </div>
 
-        {/* Sidebar offset: lg'de sol 14rem (w-56) bosluk birak */}
-        <div className="lg:ml-56">
+          {/* Gundem seridi: tum sayfalarda header altinda */}
+          <NewsTicker />
+
           <main id="main-content" className="min-h-[calc(100vh-16rem)]">
             {children}
           </main>
 
-          {/* Footer: sadece lg altinda goster (sidebar yokken) */}
+          {/* Footer: sadece lg altinda (sidebar yokken) */}
           <div className="lg:hidden">
             <Footer />
           </div>
-        </div>
+        </LayoutShell>
 
         {/* Mobil alt navigasyon (Instagram/Substack tarzı) */}
         <MobileNav />
