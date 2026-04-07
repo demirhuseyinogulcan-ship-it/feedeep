@@ -45,7 +45,7 @@ export function OwnButton({ signal, stats, toggleOwn, size = "sm", className }: 
       type="button"
       onClick={handleClick}
       className={cn(
-        "relative font-heading font-semibold tracking-wide uppercase transition-all duration-200 select-none",
+        "relative font-heading font-semibold tracking-wide transition-all duration-200 select-none",
         "rounded-md",
         isLg ? "text-xs px-4 py-2" : "text-[11px] px-3 py-1.5",
         signal.owned

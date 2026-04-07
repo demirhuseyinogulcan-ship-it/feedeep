@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Header Component
-// Responsive navigation with mobile menu
+// Genis arama cubugu + Giris Yap — logo ve nav sidebar'da.
 // ─────────────────────────────────────────────────────────────
 
 "use client";
@@ -20,44 +20,28 @@ export function Header() {
   const { user, loading, requestAuth } = useAuth();
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-surface-0/60 backdrop-blur-xl">
-      <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
-        {/* Logo */}
+    <header className="sticky top-0 z-30 w-full bg-surface-0/80 backdrop-blur-xl border-b border-white/[0.04]">
+      <div className="mx-auto flex h-14 max-w-5xl items-center gap-3 px-4 sm:px-6">
+        {/* Mobil: logo (sidebar yokken) */}
         <Link
           href="/"
-          className="logo-gradient text-[22px] leading-none"
+          className="lg:hidden logo-gradient text-[20px] leading-none shrink-0"
           aria-label="feedeep Ana Sayfa"
         >
           feedeep
         </Link>
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-1">
-          {NAV_ITEMS.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              pathname.startsWith(`${item.href}/`);
+        {/* Arama cubugu — genis */}
+        <Link
+          href="/arama"
+          className="flex-1 flex items-center gap-2 h-9 px-4 rounded-full bg-surface-2 border border-white/[0.06] text-sm text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
+        >
+          <Search className="h-4 w-4 shrink-0" />
+          <span className="truncate">Haberlerde, yazılarda ara...</span>
+        </Link>
 
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-primary-900/30 text-primary-400"
-                      : "text-gray-400 hover:text-gray-100 hover:bg-surface-2"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Auth + Search + Mobile Toggle */}
-        <div className="flex items-center gap-2">
+        {/* Auth */}
+        <div className="flex items-center gap-2 shrink-0">
           <AuthModal />
 
           {!loading && !user && (
@@ -69,19 +53,12 @@ export function Header() {
             </button>
           )}
 
-          <Link
-            href="/arama"
-            className="p-2 rounded-lg text-gray-500 hover:text-gray-100 hover:bg-surface-2 transition-colors"
-            aria-label="Ara"
-          >
-            <Search className="h-5 w-5" />
-          </Link>
-
+          {/* Mobil: hamburger menu */}
           <button
             type="button"
-            className="md:hidden p-2 rounded-lg text-gray-500 hover:text-gray-100 hover:bg-surface-2 transition-colors"
+            className="lg:hidden p-2 rounded-lg text-gray-500 hover:text-gray-100 hover:bg-surface-2 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-label={mobileOpen ? "Menuyu kapat" : "Menuyu ac"}
             aria-expanded={mobileOpen}
           >
             {mobileOpen ? (
@@ -91,11 +68,11 @@ export function Header() {
             )}
           </button>
         </div>
-      </nav>
+      </div>
 
-      {/* Mobile Menu */}
+      {/* Mobil Menu — nav linkleri (lg ustunde sidebar var) */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/[0.04] bg-surface-0">
+        <div className="lg:hidden border-t border-white/[0.04] bg-surface-0">
           <ul className="flex flex-col p-4 gap-1">
             {NAV_ITEMS.map((item) => {
               const isActive =
