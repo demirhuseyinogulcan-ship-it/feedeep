@@ -5,16 +5,17 @@
 // ─────────────────────────────────────────────────────────────
 
 import type { FeedItem } from "@/lib/feed";
+import type { ArticleStats } from "@/lib/signals";
 import { HaberCard } from "./haber-card";
 import { YaziCard } from "./yazi-card";
 
-type Props = { item: FeedItem; index: number };
+type Props = { item: FeedItem; index: number; initialStats?: ArticleStats };
 
-export function FeedCard({ item, index }: Props) {
+export function FeedCard({ item, index, initialStats }: Props) {
   switch (item.type) {
     case "haber":
-      return <HaberCard item={item} index={index} />;
+      return <HaberCard item={item} index={index} initialStats={initialStats} />;
     case "yazi":
-      return <YaziCard item={item} index={index} />;
+      return <YaziCard item={item} index={index} initialStats={initialStats} />;
   }
 }

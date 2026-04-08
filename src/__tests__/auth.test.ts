@@ -142,6 +142,68 @@ describe("signUp()", () => {
     expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
   });
 
+  it("profiles UNIQUE ihlali — duplicate key / 23505 / unique constraint hepsi Türkçe hata döner", async () => {
+    const { signUp } = await import("@/lib/auth");
+
+    // 1. PostgreSQL duplicate key format
+    vi.mocked(getSupabase).mockReturnValue({
+      auth: {
+        signUp: vi.fn(async () => ({
+          data: { user: null },
+          error: { message: "duplicate key value violates unique constraint", code: "23505" },
+        })),
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+    expect((await signUp("pass123", "KernelMuhafızı")).error).toBe("Bu kullanıcı adı zaten alınmış.");
+
+    // 2. Supabase error code 23505 (string)
+    vi.mocked(getSupabase).mockReturnValue({
+      auth: {
+        signUp: vi.fn(async () => ({
+          data: { user: null },
+          error: { message: "some db error", code: "23505" },
+        })),
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+    expect((await signUp("pass123", "PixelKaşifi")).error).toBe("Bu kullanıcı adı zaten alınmış.");
+
+    // 3. unique constraint mesaj formatı
+    vi.mocked(getSupabase).mockReturnValue({
+      auth: {
+        signUp: vi.fn(async () => ({
+          data: { user: null },
+          error: { message: "unique constraint on profiles.username", code: "42710" },
+        })),
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+    expect((await signUp("pass123", "VoidBüyücüsü")).error).toBe("Bu kullanıcı adı zaten alınmış.");
+  });
+
+  it("aynı ASCII slug'a düşen iki farklı username çakışır — slug normalizasyon collision", async () => {
+    // "ŞıfraYazıcısı" → "siframyazicisi@kullanici.invalid"
+    // "SifraYazicisi" → aynı slug → "siframyazicisi@kullanici.invalid"
+    // Her ikisi de "already registered" hatası alır
+    const { signUp } = await import("@/lib/auth");
+
+    vi.mocked(getSupabase).mockReturnValue({
+      auth: {
+        signUp: vi.fn(async () => ({
+          data: { user: null },
+          error: { message: "User already registered" },
+        })),
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any);
+
+    const result1 = await signUp("pass123", "ŞıfraYazıcısı");
+    const result2 = await signUp("pass123", "SifraYazicisi");
+    expect(result1.error).toBe("Bu kullanıcı adı zaten alınmış.");
+    expect(result2.error).toBe("Bu kullanıcı adı zaten alınmış.");
+  });
+
   it("kullanıcı adı belirtilmezse otomatik üretir", async () => {
     const mockAuth = {
       signUp: vi.fn(async ({ options }: { options: { data: { username: string } } }) => ({

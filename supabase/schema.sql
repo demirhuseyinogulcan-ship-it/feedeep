@@ -177,6 +177,37 @@ END;
 $$;
 
 -- ═══════════════════════════════════════════════════════════
+-- 6b. FUNCTION: Çoklu makale istatistiklerini tek sorguda hesapla
+--     50 kart = 1 RPC çağrısı — server-side GROUP BY + FILTER
+-- ═══════════════════════════════════════════════════════════
+
+CREATE OR REPLACE FUNCTION public.get_batch_article_stats(article_ids TEXT[])
+RETURNS TABLE (
+  article_id TEXT,
+  total_owners INTEGER,
+  total_upvotes INTEGER,
+  total_downvotes INTEGER,
+  total_comments INTEGER
+)
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT
+    ids.article_id,
+    COALESCE(SUM(CASE WHEN s.owned = true THEN 1 ELSE 0 END)::INTEGER, 0)       AS total_owners,
+    COALESCE(SUM(CASE WHEN s.vote = 'upvote' THEN 1 ELSE 0 END)::INTEGER, 0)    AS total_upvotes,
+    COALESCE(SUM(CASE WHEN s.vote = 'downvote' THEN 1 ELSE 0 END)::INTEGER, 0)  AS total_downvotes,
+    COALESCE((
+      SELECT COUNT(*)::INTEGER
+      FROM public.comments c
+      WHERE c.article_id = ids.article_id
+    ), 0)                                                                          AS total_comments
+  FROM unnest(article_ids) AS ids(article_id)
+  LEFT JOIN public.signals s ON s.article_id = ids.article_id
+  GROUP BY ids.article_id;
+$$;
+
+-- ═══════════════════════════════════════════════════════════
 -- 7. TRIGGER: Kayıt olunca otomatik profil oluştur
 -- ═══════════════════════════════════════════════════════════
 

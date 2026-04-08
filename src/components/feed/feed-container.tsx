@@ -1,12 +1,15 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Feed Container (Client Component)
-// Sonsuz scroll feed akışı
+// Sonsuz scroll feed akışı + batch stats pre-fetch.
+// visibleCount arttıkça yeni kartlar için tek RPC çağrısı yapılır.
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
 import { useState, useEffect, useRef, Fragment } from "react";
 import type { FeedItem } from "@/lib/feed";
+import type { ArticleStats } from "@/lib/signals";
+import { batchFetchStats } from "@/lib/signal-batch";
 import { FeedCard } from "./feed-card";
 
 const INITIAL_COUNT = 20;
@@ -18,10 +21,29 @@ type Props = {
 
 export function FeedContainer({ items }: Props) {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+  const [statsMap, setStatsMap] = useState<Map<string, ArticleStats>>(new Map());
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const fetchedIdsRef = useRef<Set<string>>(new Set());
 
   const visible = items.slice(0, visibleCount);
   const hasMore = visibleCount < items.length;
+
+  // visibleCount değişince yeni görünür kartların stats'larını batch olarak çek
+  useEffect(() => {
+    const newIds = items
+      .slice(0, visibleCount)
+      .map((item) => item.id)
+      .filter((id) => !fetchedIdsRef.current.has(id));
+
+    if (newIds.length === 0) return;
+
+    batchFetchStats(newIds).then((map) => {
+      map.forEach((_, id) => fetchedIdsRef.current.add(id));
+      setStatsMap((prev) => new Map([...prev, ...map]));
+    }).catch((err) => {
+      console.error("[FeedContainer] Batch stats hatası:", err);
+    });
+  }, [items, visibleCount]);
 
   // IntersectionObserver ile sonsuz scroll
   useEffect(() => {
@@ -54,7 +76,7 @@ export function FeedContainer({ items }: Props) {
               <div className="mx-auto w-12 h-px bg-white/[0.04]" />
             )}
 
-            <FeedCard item={item} index={i} />
+            <FeedCard item={item} index={i} initialStats={statsMap.get(item.id)} />
           </Fragment>
         ))}
       </div>

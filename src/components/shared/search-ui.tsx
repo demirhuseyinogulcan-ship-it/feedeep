@@ -1,29 +1,42 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Search UI (Client Component)
-// Fuse.js ile fuzzy, relevance-based arama
+// Fuse.js ile fuzzy, relevance-based arama.
+// İndeks onFocus'ta lazy-fetch edilir (bir kez, useRef ile korunur).
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
 import { formatDate } from "@/lib/utils";
+import type { SearchIndexItem } from "@/app/api/search-index/route";
 
-export interface SearchItem {
-  title: string;
-  description: string;
-  href: string;
-  type: string;
-  date: string;
-}
+export type SearchItem = SearchIndexItem;
 
-interface SearchUIProps {
-  items: SearchItem[];
-}
-
-export function SearchUI({ items }: SearchUIProps) {
+export function SearchUI() {
   const [query, setQuery] = useState("");
+  const [items, setItems] = useState<SearchItem[]>([]);
+  const [indexLoading, setIndexLoading] = useState(false);
+  const indexFetchedRef = useRef(false);
+
+  const ensureIndex = useCallback(async () => {
+    if (indexFetchedRef.current) return;
+    indexFetchedRef.current = true;
+    setIndexLoading(true);
+    try {
+      const res = await fetch("/api/search-index");
+      if (res.ok) {
+        const data: SearchItem[] = await res.json();
+        setItems(data);
+      }
+    } catch {
+      // Sessiz fail — indeks yoksa arama sonuç vermez
+      indexFetchedRef.current = false;
+    } finally {
+      setIndexLoading(false);
+    }
+  }, []);
 
   const fuse = useMemo(
     () =>
@@ -52,11 +65,16 @@ export function SearchUI({ items }: SearchUIProps) {
         placeholder="Aramak istediğiniz kelimeyi yazın..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onFocus={ensureIndex}
         className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-white/[0.04] text-sm text-gray-200 placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-primary-500/50 mb-8"
         autoFocus
       />
 
-      {query.length >= 2 && (
+      {indexLoading && (
+        <p className="text-[11px] text-gray-700 mb-6">İçerikler yükleniyor...</p>
+      )}
+
+      {!indexLoading && query.length >= 2 && (
         <p className="text-[11px] text-gray-600 mb-6">
           {results.length} sonuç bulundu
         </p>
@@ -87,7 +105,7 @@ export function SearchUI({ items }: SearchUIProps) {
         ))}
       </div>
 
-      {query.length >= 2 && results.length === 0 && (
+      {!indexLoading && query.length >= 2 && results.length === 0 && (
         <p className="text-gray-600 text-sm">
           &ldquo;{query}&rdquo; için sonuç bulunamadı.
         </p>

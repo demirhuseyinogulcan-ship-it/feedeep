@@ -5,6 +5,8 @@
 // Optimistic localStorage + Supabase sync.
 // Giriş yapmamış: localStorage only.
 // Giriş yapmış: localStorage + Supabase arka plan sync.
+// initialStats: FeedContainer tarafından batch olarak önceden
+//   çekilen istatistikler geçilebilir — ayrıca fetch yapılmaz.
 // ─────────────────────────────────────────────────────────────
 
 import { useState, useEffect, useCallback } from "react";
@@ -14,11 +16,12 @@ import {
   toggleVote,
   syncSignalToSupabase,
   fetchUserSignal,
-  fetchArticleStats,
+  writeSignal,
   type Signal,
   type VoteType,
   type ArticleStats,
 } from "@/lib/signals";
+import { fetchStats } from "@/lib/signal-batch";
 import { useAuth } from "@/components/auth/auth-provider";
 
 const EMPTY_STATS: ArticleStats = {
@@ -28,47 +31,59 @@ const EMPTY_STATS: ArticleStats = {
   totalComments: 0,
 };
 
-export function useSignal(articleId: string) {
+export function useSignal(articleId: string, initialStats?: ArticleStats) {
   const { user } = useAuth();
   const [signal, setSignal] = useState<Signal>(() => getSignal(articleId));
-  const [stats, setStats] = useState<ArticleStats>(EMPTY_STATS);
-  const [statsLoaded, setStatsLoaded] = useState(false);
+  const [stats, setStats] = useState<ArticleStats>(initialStats ?? EMPTY_STATS);
+  const [statsLoaded, setStatsLoaded] = useState(Boolean(initialStats));
 
   // articleId değişince localStorage'dan sinyali güncelle (render-time)
   const [prevArticleId, setPrevArticleId] = useState(articleId);
   if (articleId !== prevArticleId) {
     setPrevArticleId(articleId);
     setSignal(getSignal(articleId));
-    setStats(EMPTY_STATS);
-    setStatsLoaded(false);
+    setStats(initialStats ?? EMPTY_STATS);
+    setStatsLoaded(Boolean(initialStats));
+  }
+
+  // initialStats prop değişince (FeedContainer'dan yeni batch gelince) güncelle
+  const [prevInitialStats, setPrevInitialStats] = useState(initialStats);
+  if (initialStats !== prevInitialStats) {
+    setPrevInitialStats(initialStats);
+    if (initialStats) {
+      setStats(initialStats);
+      setStatsLoaded(true);
+    }
   }
 
   // Sayfa yüklenince: Supabase'den kullanıcı sinyali + istatistikleri al
+  // initialStats sağlanmışsa stats fetch atlanır (FeedContainer zaten yaptı).
   useEffect(() => {
-
-    // Supabase'den istatistikleri al (herkes için)
-    fetchArticleStats(articleId).then((s) => {
-      setStats(s);
-      setStatsLoaded(true);
-    }).catch((err) => {
-      console.error("[useSignal] Stats fetch hatası:", err);
-      setStatsLoaded(true);
-    });
+    if (!initialStats) {
+      // Detay sayfaları veya batch dışı kullanım — tek-article fetch
+      fetchStats(articleId).then((s) => {
+        setStats(s);
+        setStatsLoaded(true);
+      }).catch((_err: unknown) => {
+        console.error("[useSignal]", _err);
+        setStatsLoaded(true);
+      });
+    }
 
     // Giriş yapmışsa kendi sinyalini de Supabase'den al
     if (user) {
       fetchUserSignal(articleId).then((remote) => {
         if (remote) {
           setSignal(remote);
-          // localStorage'ı da güncelle
-          const store = JSON.parse(localStorage.getItem("feedeep_signals") ?? "{}");
-          store[articleId] = remote;
-          localStorage.setItem("feedeep_signals", JSON.stringify(store));
+          writeSignal(articleId, remote);
         }
-      }).catch((err) => {
-        console.error("[useSignal] User signal fetch hatası:", err);
+      }).catch((_err: unknown) => {
+        console.error("[useSignal]", _err);
       });
     }
+   
+  // initialStats değişimi render-time'da prevInitialStats pattern ile yakalanır
+  // — effect'e eklenmesi user signal fetch'in gereksiz tekrarına neden olur.
   }, [articleId, user]);
 
   const handleToggleOwn = useCallback(() => {
@@ -83,8 +98,8 @@ export function useSignal(articleId: string) {
 
     // Arka planda Supabase'e sync
     if (user) {
-      syncSignalToSupabase(articleId, result).catch((err) => {
-        console.error("[useSignal] Own sync hatası:", err);
+      syncSignalToSupabase(articleId, result).catch((_err: unknown) => {
+        console.error("[useSignal]", _err);
       });
     }
   }, [articleId, user]);
@@ -112,8 +127,8 @@ export function useSignal(articleId: string) {
 
       // Arka planda Supabase'e sync
       if (user) {
-        syncSignalToSupabase(articleId, result).catch((err) => {
-          console.error("[useSignal] Vote sync hatası:", err);
+        syncSignalToSupabase(articleId, result).catch((_err: unknown) => {
+          console.error("[useSignal]", _err);
         });
       }
     },

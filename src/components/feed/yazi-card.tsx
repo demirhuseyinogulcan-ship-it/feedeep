@@ -6,14 +6,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { YaziFeedItem } from "@/lib/feed";
+import type { ArticleStats } from "@/lib/signals";
 import { timeAgo } from "@/lib/utils";
 import { TiltCard } from "@/components/shared/tilt-card";
 import { SignalBar } from "@/components/signals/signal-bar";
 import { CommentSection } from "@/components/signals/comment-section";
 
-type Props = { item: YaziFeedItem; index: number };
+type Props = { item: YaziFeedItem; index: number; initialStats?: ArticleStats };
 
-export function YaziCard({ item, index }: Props) {
+export function YaziCard({ item, index, initialStats }: Props) {
   return (
     <TiltCard
       className="rounded-xl overflow-hidden animate-fade-up"
@@ -73,7 +74,7 @@ export function YaziCard({ item, index }: Props) {
 
       {/* Sinyal Çubuğu */}
       <div className="px-4 pb-3 sm:px-5 sm:pb-3">
-        <SignalBar articleId={item.id} />
+        <SignalBar articleId={item.id} initialStats={initialStats} />
       </div>
 
       {/* Yorum Önizleme + Inline Form */}

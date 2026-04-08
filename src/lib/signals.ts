@@ -109,6 +109,13 @@ export function getAllSignals(): SignalStore {
   return readStore();
 }
 
+/** Tek makale sinyalini localStorage'a yaz (Supabase'den gelen remote signal'i sync eder) */
+export function writeSignal(articleId: string, signal: Signal): void {
+  const store = readStore();
+  store[articleId] = signal;
+  writeStore(store);
+}
+
 // ─── Supabase API ───
 
 /** Kullanıcının bu makale için sinyalini Supabase'den al */
@@ -130,24 +137,6 @@ export async function fetchUserSignal(articleId: string): Promise<Signal | null>
     vote: data.vote as VoteType | null,
     ownedAt: data.owned_at ?? undefined,
     votedAt: data.voted_at ?? undefined,
-  };
-}
-
-/** Makale toplam istatistiklerini Supabase'den al */
-export async function fetchArticleStats(articleId: string): Promise<ArticleStats> {
-  const empty: ArticleStats = { totalOwners: 0, totalUpvotes: 0, totalDownvotes: 0, totalComments: 0 };
-  if (!isSupabaseConfigured()) return empty;
-  const sb = getSupabase();
-
-  const { data } = await sb.rpc("get_article_stats", { p_article_id: articleId });
-  if (!data || !Array.isArray(data) || data.length === 0) return empty;
-
-  const row = data[0];
-  return {
-    totalOwners: row.total_owners ?? 0,
-    totalUpvotes: row.total_upvotes ?? 0,
-    totalDownvotes: row.total_downvotes ?? 0,
-    totalComments: row.total_comments ?? 0,
   };
 }
 
