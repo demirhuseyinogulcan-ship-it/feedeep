@@ -51,27 +51,30 @@ export function AuthModal() {
     setSubmitting(true);
     setError(null);
 
-    // Üretilen isim alınmışsa 3'e kadar otomatik yeni isim dene
-    let currentName = generatedName;
+    // Collision'da otomatik olarak 3 kez yeni isim üretip dene
+    let attemptName = generatedName;
+    let lastError: string | null = null;
     for (let attempt = 0; attempt < 3; attempt++) {
-      const { user: u, error: err } = await signUp(password, currentName);
-      if (!err && u) {
-        // Başarılı — onAuthChange → closeAuth otomatik tetiklenir
+      const { error: err } = await signUp(password, attemptName);
+      if (!err) {
         setSubmitting(false);
-        return;
+        return; // Başarılıysa onAuthChange → closeAuth otomatik tetiklenir
       }
+      lastError = err;
       if (err === "Bu kullanıcı adı zaten alınmış." && attempt < 2) {
-        currentName = generateUsername();
-        setGeneratedName(currentName);
-        continue;
+        attemptName = generateUsername();
+        setGeneratedName(attemptName);
+      } else {
+        break;
       }
-      setSubmitting(false);
-      setError(err ?? "Hesap oluşturulamadı.");
-      return;
     }
 
     setSubmitting(false);
-    setError("Bu isim de alındı. Değiştir'e basıp tekrar dene.");
+    if (lastError === "Bu kullanıcı adı zaten alınmış.") {
+      setError("Bu isim de alındı. Değiştir'e basıp tekrar dene.");
+    } else {
+      setError(lastError);
+    }
   }
 
   async function handleLogin(e: React.FormEvent) {
