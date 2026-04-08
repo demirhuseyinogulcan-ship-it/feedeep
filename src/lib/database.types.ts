@@ -93,27 +93,27 @@ export type Database = {
           vote?: "up" | "down";
         };
       };
-      /** Makale bazlı toplam sayılar — materialized cache */
-      article_stats: {
+      push_subscriptions: {
         Row: {
-          article_id: string;
-          total_owners: number;
-          total_upvotes: number;
-          total_downvotes: number;
-          total_comments: number;
+          id: string;
+          endpoint: string;
+          p256dh: string;
+          auth: string;
+          user_agent: string | null;
+          created_at: string;
         };
         Insert: {
-          article_id: string;
-          total_owners?: number;
-          total_upvotes?: number;
-          total_downvotes?: number;
-          total_comments?: number;
+          id?: string;
+          endpoint: string;
+          p256dh: string;
+          auth: string;
+          user_agent?: string | null;
+          created_at?: string;
         };
         Update: {
-          total_owners?: number;
-          total_upvotes?: number;
-          total_downvotes?: number;
-          total_comments?: number;
+          p256dh?: string;
+          auth?: string;
+          user_agent?: string | null;
         };
       };
     };
