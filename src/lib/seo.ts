@@ -4,6 +4,7 @@
 
 import type { Metadata } from "next";
 import { SITE } from "./constants";
+import type { JsonLdObject } from "./schemas/json-ld.types";
 
 type SEOParams = {
   title: string;
@@ -83,7 +84,7 @@ export function generateMeta({
 }
 
 /** WebSite JSON-LD — ana sayfa */
-export function websiteJsonLd() {
+export function websiteJsonLd(): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -101,7 +102,7 @@ export function websiteJsonLd() {
 }
 
 /** Organization JSON-LD */
-export function organizationJsonLd() {
+export function organizationJsonLd(): JsonLdObject {
   return {
     "@type": "Organization",
     "@id": `${SITE.url}/#organization`,
@@ -110,7 +111,7 @@ export function organizationJsonLd() {
     email: SITE.author.email,
     description:
       "Yapay zeka, yazilim ve web gelistirme dunyasindan guncel haberler, derinlemesine analizler ve arac incelemeleri.",
-    foundingDate: "2025-01-01",
+    foundingDate: SITE.foundingDate,
     logo: {
       "@type": "ImageObject",
       url: `${SITE.url}${SITE.organization.logo}`,
@@ -161,7 +162,7 @@ export function articleJsonLd(params: {
   readingTime?: number;
   /** Varsayılan /yazilar/{slug} yerine özel URL path */
   urlPath?: string;
-}) {
+}): JsonLdObject {
   const articleUrl = params.urlPath
     ? `${SITE.url}${params.urlPath}`
     : `${SITE.url}/yazilar/${params.slug}`;
@@ -213,7 +214,7 @@ export function newsArticleJsonLd(params: {
   articleSection?: string;
   wordCount?: number;
   readingTime?: number;
-}) {
+}): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -245,7 +246,7 @@ export function newsArticleJsonLd(params: {
       citation: {
         "@type": "WebPage",
         url: params.sourceUrl,
-        name: params.sourceName,
+        name: params.sourceName ?? params.sourceUrl,
       },
     }),
     speakable: {
@@ -258,7 +259,7 @@ export function newsArticleJsonLd(params: {
 /** BreadcrumbList JSON-LD */
 export function breadcrumbJsonLd(
   items: Array<{ name: string; href: string }>
-) {
+): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -274,7 +275,7 @@ export function breadcrumbJsonLd(
 /** FAQ JSON-LD */
 export function faqJsonLd(
   questions: Array<{ question: string; answer: string }>
-) {
+): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -294,7 +295,7 @@ export function itemListJsonLd(params: {
   name: string;
   description: string;
   items: Array<{ name: string; url: string; position?: number }>;
-}) {
+}): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -317,7 +318,7 @@ export function collectionPageJsonLd(params: {
   url: string;
   items: Array<{ name: string; url: string; description: string }>;
   itemType?: string;
-}) {
+}): JsonLdObject {
   const resolvedType = params.itemType ?? "HowTo";
   return {
     "@context": "https://schema.org",
@@ -352,7 +353,7 @@ export function personJsonLd(params: {
   sameAs: string[];
   worksFor: string;
   image?: string;
-}) {
+}): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -397,7 +398,7 @@ export function profilePageJsonLd(params: {
   dateCreated: string;
   dateModified: string;
   mainEntity: ReturnType<typeof personJsonLd>;
-}) {
+}): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",

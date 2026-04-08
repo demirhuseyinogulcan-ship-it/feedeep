@@ -134,26 +134,7 @@ CREATE POLICY "Kendi oyunu sil"
   USING (auth.uid() = user_id);
 
 -- ═══════════════════════════════════════════════════════════
--- 5. ARTICLE_STATS — Makale istatistikleri (toplam sayılar)
--- ═══════════════════════════════════════════════════════════
-
-CREATE TABLE IF NOT EXISTS public.article_stats (
-  article_id TEXT PRIMARY KEY,
-  total_owners INTEGER DEFAULT 0,
-  total_upvotes INTEGER DEFAULT 0,
-  total_downvotes INTEGER DEFAULT 0,
-  total_comments INTEGER DEFAULT 0
-);
-
--- RLS
-ALTER TABLE public.article_stats ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "İstatistikler herkese açık"
-  ON public.article_stats FOR SELECT
-  USING (true);
-
--- ═══════════════════════════════════════════════════════════
--- 6. FUNCTION: Makale istatistiklerini hesapla
+-- 6. FUNCTION: Tekil makale istatistiği (slug sayfaları için)
 -- ═══════════════════════════════════════════════════════════
 
 CREATE OR REPLACE FUNCTION public.get_article_stats(p_article_id TEXT)
@@ -174,6 +155,48 @@ BEGIN
     COALESCE((SELECT COUNT(*)::INTEGER FROM public.signals WHERE article_id = p_article_id AND vote = 'downvote'), 0),
     COALESCE((SELECT COUNT(*)::INTEGER FROM public.comments WHERE article_id = p_article_id), 0);
 END;
+$$;
+
+-- ═══════════════════════════════════════════════════════════
+-- 6b. FUNCTION: Toplu makale istatistikleri (feed için)
+-- Feed'deki N kart → tek RPC çağrısı. Server-side GROUP BY ile
+-- client'a satır bazında veri gönderilmez; sadece toplamlar döner.
+-- ═══════════════════════════════════════════════════════════
+
+CREATE OR REPLACE FUNCTION public.get_batch_article_stats(article_ids TEXT[])
+RETURNS TABLE (
+  article_id TEXT,
+  total_owners INTEGER,
+  total_upvotes INTEGER,
+  total_downvotes INTEGER,
+  total_comments INTEGER
+)
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT
+    a.id                                                          AS article_id,
+    COALESCE(s.owners,    0)::INTEGER                             AS total_owners,
+    COALESCE(s.upvotes,   0)::INTEGER                             AS total_upvotes,
+    COALESCE(s.downvotes, 0)::INTEGER                             AS total_downvotes,
+    COALESCE(c.cnt,       0)::INTEGER                             AS total_comments
+  FROM unnest(article_ids) AS a(id)
+  LEFT JOIN (
+    SELECT
+      sig.article_id,
+      COUNT(*) FILTER (WHERE sig.owned = true)    AS owners,
+      COUNT(*) FILTER (WHERE sig.vote = 'upvote') AS upvotes,
+      COUNT(*) FILTER (WHERE sig.vote = 'downvote') AS downvotes
+    FROM public.signals AS sig
+    WHERE sig.article_id = ANY(article_ids)
+    GROUP BY sig.article_id
+  ) s ON s.article_id = a.id
+  LEFT JOIN (
+    SELECT co.article_id, COUNT(*) AS cnt
+    FROM public.comments AS co
+    WHERE co.article_id = ANY(article_ids)
+    GROUP BY co.article_id
+  ) c ON c.article_id = a.id;
 $$;
 
 -- ═══════════════════════════════════════════════════════════

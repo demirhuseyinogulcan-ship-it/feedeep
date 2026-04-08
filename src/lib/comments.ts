@@ -5,8 +5,15 @@
 // Supabase: authenticated kullanıcılar için kalıcı depo.
 // ─────────────────────────────────────────────────────────────
 
-import { toggleOwnership, getSignal } from "./signals";
 import { getSupabase, isSupabaseConfigured, getSessionUserId } from "./supabase";
+import {
+  supabaseCommentRowSchema,
+  supabaseProfileRowSchema,
+  supabaseVoteRowSchema,
+  commentInputSchema,
+  type SupabaseCommentRow,
+} from "./schemas/comment.schema";
+import { sanitizeText } from "./sanitize";
 
 const STORAGE_KEY = "feedeep_comments";
 
@@ -54,15 +61,19 @@ function generateId(): string {
 
 // ─── Local API (optimistic, anonymous fallback) ───
 
-/** Makaleye yorum veya reply ekle — otomatik sahiplenme tetikler */
-export function addComment(
+/** Makaleye yorum veya reply ekle */
+export async function addComment(
   articleId: string,
   text: string,
   image?: string,
   parentId?: string,
-): Comment {
-  const trimmed = text.trim();
-  if (!trimmed && !image) throw new Error("Yorum bos olamaz.");
+): Promise<Comment> {
+  // Katman 1: Zod girdi validasyonu (yapı + uzunluk)
+  const input = commentInputSchema.parse({ text, imageUrl: image, parentId });
+  // Katman 2: DOMPurify sanitizasyonu (tüm HTML/JS strip edilir)
+  const cleanText = await sanitizeText(input.text);
+
+  if (!cleanText && !image) throw new Error("Yorum boş olamaz.");
 
   const store = readStore();
   if (!store[articleId]) store[articleId] = [];
@@ -70,7 +81,7 @@ export function addComment(
   const comment: Comment = {
     id: generateId(),
     ...(parentId ? { parentId } : {}),
-    text: trimmed,
+    text: cleanText,
     ...(image ? { image } : {}),
     vote: null,
     createdAt: new Date().toISOString(),
@@ -78,12 +89,6 @@ export function addComment(
 
   store[articleId].push(comment);
   writeStore(store);
-
-  // Yorum yazan otomatik sahiplenir
-  const signal = getSignal(articleId);
-  if (!signal.owned) {
-    toggleOwnership(articleId);
-  }
 
   return comment;
 }
@@ -181,35 +186,49 @@ export async function fetchCommentsFromSupabase(articleId: string): Promise<Comm
 
   if (error || !data || data.length === 0) return [];
 
+  // Zod ile DB satırlarını doğrula — geçersiz satırlar sessizce atlanır
+  const rows: SupabaseCommentRow[] = [];
+  for (const raw of data as unknown[]) {
+    const parsed = supabaseCommentRowSchema.safeParse(raw);
+    if (parsed.success) rows.push(parsed.data);
+  }
+
+  if (rows.length === 0) return [];
+
   // Benzersiz user_id'leri topla → profiles tablosundan username'leri al
-  const userIds = [...new Set(data.map((r: { user_id: string }) => r.user_id))];
-  const { data: profiles } = await sb.from("profiles")
+  const userIds = [...new Set(rows.map((r) => r.user_id))];
+  const { data: profilesRaw } = await sb.from("profiles")
     .select("id, username")
     .in("id", userIds);
 
   const usernameMap: Record<string, string> = {};
-  if (profiles) {
-    for (const p of profiles as { id: string; username: string }[]) {
-      usernameMap[p.id] = p.username;
+  if (profilesRaw) {
+    for (const raw of profilesRaw as unknown[]) {
+      const parsed = supabaseProfileRowSchema.safeParse(raw);
+      if (parsed.success) {
+        usernameMap[parsed.data.id] = parsed.data.username;
+      }
     }
   }
 
   // Kullanıcının kendi oylarını al
   const userId = await getSessionUserId();
-  let myVotes: Record<string, "up" | "down"> = {};
+  const myVotes: Record<string, "up" | "down"> = {};
   if (userId) {
     const { data: voteData } = await sb.from("comment_votes")
       .select("comment_id, vote")
       .eq("user_id", userId);
     if (voteData) {
-      myVotes = Object.fromEntries(
-        voteData.map((v: { comment_id: string; vote: string }) => [v.comment_id, v.vote as "up" | "down"])
-      );
+      for (const raw of voteData as unknown[]) {
+        const parsed = supabaseVoteRowSchema.safeParse(raw);
+        if (parsed.success) {
+          myVotes[parsed.data.comment_id] = parsed.data.vote;
+        }
+      }
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return data.map((row: any) => ({
+  return rows.map((row) => ({
     id: row.id,
     userId: row.user_id,
     parentId: row.parent_id ?? undefined,
@@ -231,6 +250,14 @@ export async function addCommentToSupabase(
   if (!isSupabaseConfigured()) return null;
   const userId = await getSessionUserId();
   if (!userId) return null;
+
+  // Katman 1: Zod girdi validasyonu
+  const input = commentInputSchema.parse({ text, imageUrl, parentId });
+  // Katman 2: DOMPurify sanitizasyonu
+  const cleanText = await sanitizeText(input.text);
+
+  if (!cleanText) return null;
+
   const sb = getSupabase();
 
   // Username için session'dan al
@@ -240,7 +267,7 @@ export async function addCommentToSupabase(
   const { data, error } = await sb.from("comments").insert({
     user_id: userId,
     article_id: articleId,
-    text,
+    text: cleanText,
     image_url: imageUrl ?? null,
     parent_id: parentId ?? null,
   }).select("id, created_at").single();
@@ -251,7 +278,7 @@ export async function addCommentToSupabase(
     id: data.id,
     userId: userId,
     parentId: parentId ?? undefined,
-    text,
+    text: cleanText,
     image: imageUrl ?? undefined,
     vote: null,
     createdAt: data.created_at,
@@ -260,9 +287,7 @@ export async function addCommentToSupabase(
 }
 
 /** Supabase'den yorum sil */
-export async function deleteCommentFromSupabase(commentId: string): Promise<boolean> {
-  if (!isSupabaseConfigured()) return false;
-  const sb = getSupabase();
+export async function deleteCommentFromSupabase(commentId: string): Promise<boolean> {  const sb = getSupabase();
 
   const { error } = await sb.from("comments").delete().eq("id", commentId);
   return !error;
@@ -293,20 +318,31 @@ export async function voteCommentOnSupabase(
   }
 }
 
-/** Bir yorumun toplam skorunu al */
-export async function fetchCommentScore(commentId: string): Promise<number> {
-  if (!isSupabaseConfigured()) return 0;
+export type UserCommentRow = {
+  id: string;
+  articleId: string;
+  text: string;
+  createdAt: string;
+};
+
+/** Kullanıcının tüm yorumlarını Supabase'den al — ProfilPage için */
+export async function fetchUserComments(userId: string): Promise<UserCommentRow[]> {
+  if (!isSupabaseConfigured()) return [];
   const sb = getSupabase();
 
-  const { data: ups } = await sb.from("comment_votes")
-    .select("id", { count: "exact" })
-    .eq("comment_id", commentId)
-    .eq("vote", "up");
+  const { data, error } = await sb
+    .from("comments")
+    .select("id, article_id, text, created_at")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(10);
 
-  const { data: downs } = await sb.from("comment_votes")
-    .select("id", { count: "exact" })
-    .eq("comment_id", commentId)
-    .eq("vote", "down");
+  if (error || !data) return [];
 
-  return (ups?.length ?? 0) - (downs?.length ?? 0);
+  return (data as Array<Record<string, unknown>>).map((row) => ({
+    id: String(row.id),
+    articleId: String(row.article_id),
+    text: String(row.text),
+    createdAt: String(row.created_at),
+  }));
 }

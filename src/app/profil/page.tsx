@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useAuth } from "@/components/auth/auth-provider";
 import { signOut } from "@/lib/auth";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase";
-import { deleteCommentFromSupabase } from "@/lib/comments";
+import { deleteCommentFromSupabase, fetchUserComments } from "@/lib/comments";
 import { getOwnedIds } from "@/lib/signals";
 import { timeAgo } from "@/lib/utils";
 
@@ -49,7 +49,7 @@ export default function ProfilPage() {
     if (loading) return;
 
     if (user && isSupabaseConfigured()) {
-      // Supabase'den kullanıcı verilerini al
+      // Servis katmanı üçerinden kullanıcı verilerini al
       const sb = getSupabase();
 
       Promise.all([
@@ -65,16 +65,11 @@ export default function ProfilPage() {
           .select("vote")
           .eq("user_id", user.id)
           .not("vote", "is", null),
-        // Yorumlar
-        sb.from("comments")
-          .select("id, article_id, text, created_at")
-          .eq("user_id", user.id)
-          .order("created_at", { ascending: false })
-          .limit(10),
-      ]).then(([ownedRes, votesRes, commentsRes]) => {
+        // Yorumlar — servis katmanı
+        fetchUserComments(user.id),
+      ]).then(([ownedRes, votesRes, comments]) => {
         const owned = ownedRes.data ?? [];
         const votes = votesRes.data ?? [];
-        const comments = commentsRes.data ?? [];
 
         setOwnedArticles(owned.map((r: { article_id: string; owned_at: string | null }) => ({
           articleId: r.article_id,
@@ -88,12 +83,7 @@ export default function ProfilPage() {
           totalComments: comments.length,
         });
 
-        setRecentComments(comments.map((c: { id: string; article_id: string; text: string; created_at: string }) => ({
-          id: c.id,
-          articleId: c.article_id,
-          text: c.text,
-          createdAt: c.created_at,
-        })));
+        setRecentComments(comments);
 
         setDataLoaded(true);
       }).catch(() => setDataLoaded(true));

@@ -2,6 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 // feedeep — useSignal Hook
+// DataLoader batching: 50 kart → 3 Supabase isteği (sabit).
 // Optimistic localStorage + Supabase sync.
 // Giriş yapmamış: localStorage only.
 // Giriş yapmış: localStorage + Supabase arka plan sync.
@@ -12,13 +13,13 @@ import {
   getSignal,
   toggleOwnership,
   toggleVote,
+  writeSignal,
   syncSignalToSupabase,
-  fetchUserSignal,
-  fetchArticleStats,
   type Signal,
   type VoteType,
   type ArticleStats,
 } from "@/lib/signals";
+import { signalBatcher } from "@/lib/signal-batch";
 import { useAuth } from "@/components/auth/auth-provider";
 
 const EMPTY_STATS: ArticleStats = {
@@ -43,32 +44,36 @@ export function useSignal(articleId: string) {
     setStatsLoaded(false);
   }
 
-  // Sayfa yüklenince: Supabase'den kullanıcı sinyali + istatistikleri al
+  // Sayfa yüklenince: DataLoader üzerinden toplu istek
   useEffect(() => {
+    let cancelled = false;
 
-    // Supabase'den istatistikleri al (herkes için)
-    fetchArticleStats(articleId).then((s) => {
-      setStats(s);
-      setStatsLoaded(true);
+    // İstatistikler — batcher aynı tick'teki tüm istekleri tek sorguda birleştirir
+    signalBatcher.requestStats(articleId).then((s) => {
+      if (!cancelled) {
+        setStats(s);
+        setStatsLoaded(true);
+      }
     }).catch((err) => {
       console.error("[useSignal] Stats fetch hatası:", err);
-      setStatsLoaded(true);
+      if (!cancelled) setStatsLoaded(true);
     });
 
-    // Giriş yapmışsa kendi sinyalini de Supabase'den al
+    // Giriş yapmışsa kendi sinyalini de batch ile al
     if (user) {
-      fetchUserSignal(articleId).then((remote) => {
+      signalBatcher.requestUserSignal(articleId).then((remote) => {
+        if (cancelled) return;
         if (remote) {
           setSignal(remote);
-          // localStorage'ı da güncelle
-          const store = JSON.parse(localStorage.getItem("feedeep_signals") ?? "{}");
-          store[articleId] = remote;
-          localStorage.setItem("feedeep_signals", JSON.stringify(store));
+          // servis katmanı üzerinden localStorage'ı güncelle
+          writeSignal(articleId, remote);
         }
       }).catch((err) => {
         console.error("[useSignal] User signal fetch hatası:", err);
       });
     }
+
+    return () => { cancelled = true; };
   }, [articleId, user]);
 
   const handleToggleOwn = useCallback(() => {
@@ -80,6 +85,10 @@ export function useSignal(articleId: string) {
       ...prev,
       totalOwners: prev.totalOwners + (result.owned ? 1 : -1),
     }));
+
+    // Cache invalidate — sonraki sayfa gezintisinde taze veri gelsin
+    signalBatcher.invalidateStats(articleId);
+    signalBatcher.invalidateUserSignal(articleId);
 
     // Arka planda Supabase'e sync
     if (user) {
@@ -109,6 +118,10 @@ export function useSignal(articleId: string) {
 
         return { ...s, totalUpvotes, totalDownvotes };
       });
+
+      // Cache invalidate — sonraki sayfa gezintisinde taze veri gelsin
+      signalBatcher.invalidateStats(articleId);
+      signalBatcher.invalidateUserSignal(articleId);
 
       // Arka planda Supabase'e sync
       if (user) {

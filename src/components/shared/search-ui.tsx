@@ -1,11 +1,15 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Search UI (Client Component)
-// Fuse.js ile fuzzy, relevance-based arama
+// Fuse.js ile fuzzy, relevance-based arama.
+//
+// İndeks lazy-fetch: kullanıcı input'a odaklandığında
+// /api/search-index'den bir kez çekilir.
+// Bu sayede initial HTML'ye items dizisi seri­alize edilmez.
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
 import { formatDate } from "@/lib/utils";
@@ -18,31 +22,38 @@ export interface SearchItem {
   date: string;
 }
 
-interface SearchUIProps {
-  items: SearchItem[];
-}
-
-export function SearchUI({ items }: SearchUIProps) {
+export function SearchUI() {
   const [query, setQuery] = useState("");
+  const [items, setItems] = useState<SearchItem[] | null>(null);
+  const fetchedRef = useRef(false);
 
-  const fuse = useMemo(
-    () =>
-      new Fuse(items, {
-        keys: [
-          { name: "title", weight: 0.5 },
-          { name: "description", weight: 0.3 },
-          { name: "type", weight: 0.2 },
-        ],
-        threshold: 0.4,
-        includeScore: true,
-        minMatchCharLength: 2,
-      }),
-    [items]
-  );
+  // İlk odaklanmada indeksi bir kez çek
+  const ensureIndex = useCallback(() => {
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
+    fetch("/api/search-index")
+      .then((r) => r.json() as Promise<SearchItem[]>)
+      .then((data) => setItems(data))
+      .catch(() => setItems([]));
+  }, []);
+
+  const fuse = useMemo(() => {
+    if (!items) return null;
+    return new Fuse(items, {
+      keys: [
+        { name: "title", weight: 0.5 },
+        { name: "description", weight: 0.3 },
+        { name: "type", weight: 0.2 },
+      ],
+      threshold: 0.4,
+      includeScore: true,
+      minMatchCharLength: 2,
+    });
+  }, [items]);
 
   const results = useMemo(() => {
-    if (query.length < 2) return [];
-    return fuse.search(query).map((result) => result.item);
+    if (!fuse || query.length < 2) return [];
+    return fuse.search(query).map((r) => r.item);
   }, [fuse, query]);
 
   return (
@@ -52,6 +63,7 @@ export function SearchUI({ items }: SearchUIProps) {
         placeholder="Aramak istediğiniz kelimeyi yazın..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onFocus={ensureIndex}
         className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-white/[0.04] text-sm text-gray-200 placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-primary-500/50 mb-8"
         autoFocus
       />

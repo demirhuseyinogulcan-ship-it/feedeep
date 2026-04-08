@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Newsletter Form (Client Component)
-// E-posta abonelik formu — API route ile çalışır
+// Honeypot + zamanlama kontrolü ile bot korumalı abonelik formu.
 // ─────────────────────────────────────────────────────────────
 
 "use client";
@@ -9,10 +9,15 @@ import { useState, type FormEvent } from "react";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+
+  // Form yükleme zamanı — bot zamanlama tespiti için.
+  // useState lazy initializer: sadece bir kez çalışır, render'da tekrar çağırılmaz.
+  const [renderTime] = useState(() => Date.now());
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -22,7 +27,11 @@ export function NewsletterForm() {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          _hp: honeypot,
+          _t: renderTime,
+        }),
       });
 
       const data = await res.json();
@@ -56,6 +65,16 @@ export function NewsletterForm() {
           className="flex-1 px-4 py-2.5 rounded-lg bg-surface-2 border border-white/[0.04] text-sm text-gray-200 placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-primary-500/50 transition-all"
           required
           disabled={status === "loading"}
+        />
+        {/* Honeypot: bot görür doldurur, gerçek kullanıcı göremez */}
+        <input
+          type="text"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] w-0 h-0 opacity-0 pointer-events-none"
         />
         <button
           type="submit"

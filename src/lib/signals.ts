@@ -85,6 +85,13 @@ export function toggleVote(articleId: string, type: VoteType): Signal {
   return signal;
 }
 
+/** Tek makale sinyalini localStorage'a yaz (remote sync sonrası kullan) */
+export function writeSignal(articleId: string, signal: Signal): void {
+  const store = readStore();
+  store[articleId] = signal;
+  writeStore(store);
+}
+
 /** Tüm sahiplenilen makale ID'lerini getir (localStorage) */
 export function getOwnedIds(): string[] {
   const store = readStore();
@@ -133,24 +140,6 @@ export async function fetchUserSignal(articleId: string): Promise<Signal | null>
   };
 }
 
-/** Makale toplam istatistiklerini Supabase'den al */
-export async function fetchArticleStats(articleId: string): Promise<ArticleStats> {
-  const empty: ArticleStats = { totalOwners: 0, totalUpvotes: 0, totalDownvotes: 0, totalComments: 0 };
-  if (!isSupabaseConfigured()) return empty;
-  const sb = getSupabase();
-
-  const { data } = await sb.rpc("get_article_stats", { p_article_id: articleId });
-  if (!data || !Array.isArray(data) || data.length === 0) return empty;
-
-  const row = data[0];
-  return {
-    totalOwners: row.total_owners ?? 0,
-    totalUpvotes: row.total_upvotes ?? 0,
-    totalDownvotes: row.total_downvotes ?? 0,
-    totalComments: row.total_comments ?? 0,
-  };
-}
-
 /** Kullanıcının sinyalini Supabase'e yaz (upsert) */
 export async function syncSignalToSupabase(articleId: string, signal: Signal): Promise<void> {
   if (!isSupabaseConfigured()) return;
@@ -171,18 +160,19 @@ export async function syncSignalToSupabase(articleId: string, signal: Signal): P
   );
 }
 
-/** Giriş yapan kullanıcının sahiplendiği makale ID'lerini Supabase'den al */
-export async function fetchOwnedIdsFromSupabase(): Promise<string[]> {
+/** Kullanıcının sahiplendiği article ID'lerini Supabase'den al — KoleksiyonPage için */
+export async function fetchOwnedIds(userId: string): Promise<string[]> {
   if (!isSupabaseConfigured()) return [];
-  const userId = await getSessionUserId();
-  if (!userId) return [];
   const sb = getSupabase();
 
-  const { data } = await sb.from("signals")
-    .select("article_id, owned_at")
+  const { data, error } = await sb
+    .from("signals")
+    .select("article_id")
     .eq("user_id", userId)
     .eq("owned", true)
-    .order("owned_at", { ascending: false });
+    .order("owned_at", { ascending: false })
+    .limit(100);
 
-  return data?.map((r: { article_id: string }) => r.article_id) ?? [];
+  if (error || !data) return [];
+  return (data as Array<{ article_id: string }>).map((r) => r.article_id);
 }

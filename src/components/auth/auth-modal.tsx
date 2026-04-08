@@ -51,13 +51,27 @@ export function AuthModal() {
     setSubmitting(true);
     setError(null);
 
-    const { error: err } = await signUp(password, generatedName);
-    setSubmitting(false);
-
-    if (err) {
-      setError(err);
+    // Üretilen isim alınmışsa 3'e kadar otomatik yeni isim dene
+    let currentName = generatedName;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const { user: u, error: err } = await signUp(password, currentName);
+      if (!err && u) {
+        // Başarılı — onAuthChange → closeAuth otomatik tetiklenir
+        setSubmitting(false);
+        return;
+      }
+      if (err === "Bu kullanıcı adı zaten alınmış." && attempt < 2) {
+        currentName = generateUsername();
+        setGeneratedName(currentName);
+        continue;
+      }
+      setSubmitting(false);
+      setError(err ?? "Hesap oluşturulamadı.");
+      return;
     }
-    // Başarılıysa onAuthChange → closeAuth otomatik tetiklenir
+
+    setSubmitting(false);
+    setError("Bu isim de alındı. Değiştir'e basıp tekrar dene.");
   }
 
   async function handleLogin(e: React.FormEvent) {
@@ -152,9 +166,16 @@ export function AuthModal() {
                   autoFocus
                   className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
                 />
-                <p className="text-xs text-yellow-500/80 leading-relaxed">
-                  Şifreni asla unutma. Şifre sıfırlama seçeneği yok —
-                  bu hesabı bir kere oluşturabilirsin.
+              </div>
+
+              {/* ── Tek Hayat Uyarısı ── */}
+              <div className="rounded-lg border border-yellow-500/40 bg-yellow-500/[0.06] px-3 py-2.5 space-y-1">
+                <p className="text-[10px] font-semibold text-yellow-400 uppercase tracking-widest">
+                  Dikkat — Şifreni Asla Unutma
+                </p>
+                <p className="text-xs text-yellow-300/70 leading-relaxed">
+                  Şifre sıfırlama seçeneği yoktur. Şifreni unutursan
+                  hesabına bir daha giremezsin, yeni hesap açman gerekir.
                 </p>
               </div>
 

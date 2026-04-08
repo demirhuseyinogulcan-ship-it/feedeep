@@ -74,6 +74,14 @@ export async function signUp(
     if (error.message.includes("already registered")) {
       return { user: null, error: "Bu kullanıcı adı zaten alınmış." };
     }
+    // profiles.username UNIQUE trigger ihlali (PostgreSQL 23505)
+    if (
+      error.message.toLowerCase().includes("duplicate key") ||
+      error.message.includes("23505") ||
+      error.message.toLowerCase().includes("unique constraint")
+    ) {
+      return { user: null, error: "Bu kullanıcı adı zaten alınmış." };
+    }
     return { user: null, error: error.message };
   }
 

@@ -122,8 +122,6 @@ export default async function YaziDetayPage({ params }: Props) {
           date={post.date}
           updated={post.updated}
           readingTime={post.metadata.readingTime}
-          slug={post.slug}
-          contentType="yazi"
         />
 
         {post.image && (

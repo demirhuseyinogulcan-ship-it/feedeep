@@ -1,50 +1,113 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Newsletter API Route
-// Resend entegrasyonu ile e-posta abonelik endpoint'i
-// RESEND_API_KEY yoksa graceful fallback (loglama)
+// 4 katmanlı güvenlik mimarisi:
+//   1. Upstash rate limiting (IP-based sliding window)
+//   2. Honeypot bot tespiti (gizli alan)
+//   3. Zamanlama kontrolü (< 2s = bot)
+//   4. Zod şema validasyonu (yapı + format)
+// Resend entegrasyonu ile e-posta abonelik endpoint'i.
 // ─────────────────────────────────────────────────────────────
 
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { newsletterInputSchema, isSubmissionTooFast } from "@/lib/schemas/newsletter.schema";
+import { newsletterLimiter } from "@/lib/rate-limit";
+import { ZodError } from "zod";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID;
 const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
+/** İstemci IP adresini al (Vercel headers → fallback) */
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    request.headers.get("x-real-ip") ??
+    "unknown"
+  );
+}
+
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+
+  // ─── Katman 1: Rate Limiting (Upstash) ───
+  if (newsletterLimiter) {
+    const { success, limit, remaining, reset } = await newsletterLimiter.limit(ip);
+    if (!success) {
+      return NextResponse.json(
+        { error: "Çok fazla istek gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin." },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": limit.toString(),
+            "X-RateLimit-Remaining": remaining.toString(),
+            "X-RateLimit-Reset": reset.toString(),
+            "Retry-After": Math.ceil((reset - Date.now()) / 1000).toString(),
+          },
+        },
+      );
+    }
+  }
+
+  // ─── Body Parse (boyut kontrolü: JSON.parse DoS önlemi) ───
+  let body: unknown;
   try {
-    const { email } = await request.json();
-
-    if (!email || typeof email !== "string" || !email.includes("@")) {
+    const text = await request.text();
+    if (text.length > 1024) {
       return NextResponse.json(
-        { error: "Geçerli bir e-posta adresi giriniz." },
-        { status: 400 }
+        { error: "İstek boyutu çok büyük." },
+        { status: 413 },
       );
     }
+    body = JSON.parse(text);
+  } catch {
+    return NextResponse.json(
+      { error: "Geçersiz istek formatı." },
+      { status: 400 },
+    );
+  }
 
-    // Basit email format doğrulama
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Geçerli bir e-posta adresi giriniz." },
-        { status: 400 }
-      );
+  // ─── Katman 2 & 3 & 4: Honeypot + Zamanlama + Zod Validasyon ───
+  let input;
+  try {
+    input = newsletterInputSchema.parse(body);
+  } catch (err) {
+    if (err instanceof ZodError) {
+      // Honeypot tetiklendi → bot gibi davran: 200 döndür (bot başarılı sandı)
+      const isBot = err.issues.some((i) => i.path.includes("_hp"));
+      if (isBot) {
+        return NextResponse.json(
+          { message: "İç Çember'e hoş geldin! İlk brifing Pazartesi e-posta kutunda olacak." },
+          { status: 200 },
+        );
+      }
+      const firstError = err.issues[0]?.message ?? "Geçersiz girdi.";
+      return NextResponse.json({ error: firstError }, { status: 400 });
     }
+    return NextResponse.json({ error: "Geçersiz girdi." }, { status: 400 });
+  }
 
-    // Resend API Key varsa → gerçek abonelik
+  // Zamanlama kontrolü: çok hızlı = bot → sessiz başarı (bot fark etmez)
+  if (isSubmissionTooFast(input._t)) {
+    return NextResponse.json(
+      { message: "İç Çember'e hoş geldin! İlk brifing Pazartesi e-posta kutunda olacak." },
+      { status: 200 },
+    );
+  }
+
+  // ─── Resend Entegrasyonu ───
+  try {
     if (resend && RESEND_AUDIENCE_ID) {
       try {
-        // Audience'a contact ekle
         await resend.contacts.create({
-          email,
+          email: input.email,
           audienceId: RESEND_AUDIENCE_ID,
           unsubscribed: false,
         });
 
-        // Welcome email gönder
         await resend.emails.send({
           from: "feedeep <hey@feedeep.com>",
-          to: email,
+          to: input.email,
           subject: "İç Çember'e Hoş Geldin — feedeep",
           html: `
             <div style="font-family: Inter, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px; color: #d1d5db; background: #050505;">
@@ -69,37 +132,35 @@ export async function POST(request: NextRequest) {
           `,
         });
       } catch (resendError: unknown) {
-        const errorMessage = resendError instanceof Error ? resendError.message : "Resend API hatası";
+        const errorMessage =
+          resendError instanceof Error ? resendError.message : "Resend API hatası";
 
-        // Duplicate contact hatası → başarılı say
         if (errorMessage.includes("already exists")) {
           return NextResponse.json(
             { message: "Zaten abonemizsiniz! Haftalık brifing e-posta adresinize gelmeye devam edecek." },
-            { status: 200 }
+            { status: 200 },
           );
         }
 
-        // Rate limit veya diğer hatalar
         return NextResponse.json(
           { error: "Servis geçici olarak kullanılamıyor. Lütfen birkaç dakika sonra tekrar deneyin." },
-          { status: 503 }
+          { status: 503 },
         );
       }
     } else {
-      // Geliştirme ortamı — Resend API Key yok
       if (process.env.NODE_ENV === "development") {
-          console.log(`[Newsletter] Yeni abone (dev): ${email}`);
+        console.log(`[Newsletter] Yeni abone (dev): ${input.email}`);
       }
     }
 
     return NextResponse.json(
       { message: "İç Çember'e hoş geldin! İlk brifing Pazartesi e-posta kutunda olacak." },
-      { status: 200 }
+      { status: 200 },
     );
   } catch {
     return NextResponse.json(
       { error: "İşlem sırasında bir hata oluştu. Lütfen tekrar deneyin." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

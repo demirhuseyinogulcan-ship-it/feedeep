@@ -142,6 +142,49 @@ describe("signUp()", () => {
     expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
   });
 
+  it("profiles UNIQUE ihlali (duplicate key) Türkçe hata döner", async () => {
+    // profiles.username UNIQUE trigger başarısız olunca Supabase bu hataları döner
+    const duplicateErrors = [
+      "duplicate key value violates unique constraint",
+      "ERROR: 23505: duplicate key value",
+      'unique constraint "profiles_username_key"',
+    ];
+
+    for (const msg of duplicateErrors) {
+      const mockAuth = {
+        signUp: vi.fn(async () => ({
+          data: { user: null },
+          error: { message: msg },
+        })),
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
+
+      const { signUp } = await import("@/lib/auth");
+      const result = await signUp("password123", "HerhangiKullanici");
+      expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
+    }
+  });
+
+  it("aynı ASCII slug'a düşen iki farklı username çakışır", async () => {
+    // "KernelKasifi" ve "KernelKaşifi" → aynı fake email: kernelkasifi@kullanici.invalid
+    // İkincisi "already registered" alır
+    const mockAuth = {
+      signUp: vi.fn(async () => ({
+        data: { user: null },
+        error: { message: "User already registered" },
+      })),
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
+
+    const { signUp } = await import("@/lib/auth");
+    // Türkçe karaktersiz versiyon kayıtta başarısız olursa
+    // aynı "Bu kullanıcı adı zaten alınmış." mesajını almalı
+    const result = await signUp("password123", "KernelKasifi");
+    expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
+  });
+
   it("kullanıcı adı belirtilmezse otomatik üretir", async () => {
     const mockAuth = {
       signUp: vi.fn(async ({ options }: { options: { data: { username: string } } }) => ({

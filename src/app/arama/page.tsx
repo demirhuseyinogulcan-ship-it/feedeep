@@ -4,12 +4,11 @@
 // ─────────────────────────────────────────────────────────────
 
 import type { Metadata } from "next";
-import { yazilar, haberler } from "#site/content";
 import { generateMeta, breadcrumbJsonLd } from "@/lib/seo";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { JsonLd } from "@/components/seo/json-ld";
-import { SearchUI, type SearchItem } from "@/components/shared/search-ui";
+import { SearchUI } from "@/components/shared/search-ui";
 
 export const metadata: Metadata = generateMeta({
   title: "Ara",
@@ -19,27 +18,6 @@ export const metadata: Metadata = generateMeta({
 });
 
 export default function AramaPage() {
-  const items: SearchItem[] = [
-    ...yazilar
-      .filter((y) => y.published)
-      .map((y) => ({
-        title: y.title,
-        description: y.description,
-        href: `/yazilar/${y.slug}`,
-        type: "Yazı",
-        date: y.date,
-      })),
-    ...haberler
-      .filter((h) => h.published)
-      .map((h) => ({
-        title: h.title,
-        description: h.description,
-        href: `/haberler/${h.slug}`,
-        type: "Haber",
-        date: h.date,
-      })),
-  ];
-
   return (
     <>
       <JsonLd
@@ -57,9 +35,9 @@ export default function AramaPage() {
         />
         <PageHeader
           title="Ara"
-          description="Yazılar, haberler ve programlama derslerinde arayın."
+          description="Yazılar ve haberlerde arayın."
       />
-        <SearchUI items={items} />
+        <SearchUI />
       </section>
     </>
   );

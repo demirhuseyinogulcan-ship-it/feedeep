@@ -3,11 +3,14 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Koleksiyon Sayfası
 // Sahiplenilen içeriklerin dikey mini kart grid'i.
+// Giriş yapmış kullanıcı: Supabase (cross-device).
+// Anonim kullanıcı: localStorage fallback.
 // ─────────────────────────────────────────────────────────────
 
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getOwnedIds, getOwnedCount } from "@/lib/signals";
+import { getOwnedIds, fetchOwnedIds } from "@/lib/signals";
+import { useAuth } from "@/components/auth/auth-provider";
 
 type OwnedItem = {
   id: string;
@@ -32,11 +35,24 @@ function slugToTitle(slug: string): string {
 }
 
 export default function KoleksiyonPage() {
-  const items = useMemo(() => {
-    const ids = getOwnedIds();
-    return ids.map(parseOwnedId).filter(Boolean) as OwnedItem[];
-  }, []);
-  const count = useMemo(() => getOwnedCount(), []);
+  const { user } = useAuth();
+  // Lazy init: localStorage'dan başlatılır (anonim kullanıcı).
+  // Giriş yapmış kullanıcı için useEffect Supabase'den üzerini yazar.
+  const [items, setItems] = useState<OwnedItem[]>(() =>
+    getOwnedIds().map(parseOwnedId).filter(Boolean) as OwnedItem[]
+  );
+
+  useEffect(() => {
+    if (!user) return;
+    // Giriş yapmış: Supabase'den al (cross-device)
+    fetchOwnedIds(user.id).then((ids) => {
+      setItems(ids.map(parseOwnedId).filter(Boolean) as OwnedItem[]);
+    }).catch(() => {
+      // Supabase başarısız: localStorage zaten useState lazy init ile yüklendi
+    });
+  }, [user]);
+
+  const count = items.length;
 
   return (
     <section className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">

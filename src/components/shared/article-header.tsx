@@ -5,7 +5,6 @@
 
 import { formatDate } from "@/lib/utils";
 import { SITE } from "@/lib/constants";
-import { ViewCounter } from "@/components/shared/view-counter";
 
 interface ArticleHeaderProps {
   title: string;
@@ -16,8 +15,6 @@ interface ArticleHeaderProps {
   readingTime?: number;
   author?: string;
   sourceName?: string;
-  slug?: string;
-  contentType?: "yazi" | "haber" | "prompt";
 }
 
 export function ArticleHeader({
@@ -29,8 +26,6 @@ export function ArticleHeader({
   readingTime,
   author = SITE.author.name,
   sourceName,
-  slug,
-  contentType = "yazi",
 }: ArticleHeaderProps) {
   return (
     <header className="mb-12 animate-fade-up">
@@ -44,12 +39,6 @@ export function ArticleHeader({
             <span className="text-[10px] font-sans tracking-wider text-gray-600">
               {sourceName}
             </span>
-          </>
-        )}
-        {slug && (
-          <>
-            <span className="text-[10px] text-gray-800">/</span>
-            <ViewCounter slug={slug} publishDate={date} type={contentType} />
           </>
         )}
       </div>

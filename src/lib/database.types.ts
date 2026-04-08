@@ -127,6 +127,16 @@ export type Database = {
           total_comments: number;
         }[];
       };
+      get_batch_article_stats: {
+        Args: { article_ids: string[] };
+        Returns: {
+          article_id: string;
+          total_owners: number;
+          total_upvotes: number;
+          total_downvotes: number;
+          total_comments: number;
+        }[];
+      };
     };
   };
 };

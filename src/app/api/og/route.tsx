@@ -1,21 +1,46 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — OG Image API Route (next/og + Satori)
 // Otomatik yazı kartı üretimi
+// Katmanlı savunma: Zod → truncate → Cache-Control → render
 // ─────────────────────────────────────────────────────────────
 
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { SITE } from "@/lib/constants";
+import { ogInputSchema } from "@/lib/schemas/og.schema";
 
 export const runtime = "edge";
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = request.nextUrl;
-  const title = searchParams.get("title") ?? "feedeep";
-  const category = searchParams.get("category") ?? "";
-  const date = searchParams.get("date") ?? "";
+/**
+ * Cache-Control: Vercel/CDN 1 gün cache, 7 gün stale serve.
+ * Aynı OG görseli her seferinde yeniden render edilmez.
+ */
+const CACHE_HEADERS = {
+  "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=604800",
+  "Content-Type": "image/png",
+} as const;
 
-  return new ImageResponse(
+/**
+ * URL toplam boyutu sınırı (byte).
+ * 2 KB üstü URL = kötü niyetli veya hatalı — direkt 400.
+ */
+const MAX_URL_LENGTH = 2048;
+
+export async function GET(request: NextRequest) {
+  // ── Guard: URL uzunluğu (bellek koruması) ────────────────
+  if (request.nextUrl.toString().length > MAX_URL_LENGTH) {
+    return new Response("Bad Request", { status: 400 });
+  }
+
+  // ── Zod parse + otomatik truncate ────────────────────────
+  const raw = {
+    title: request.nextUrl.searchParams.get("title") ?? undefined,
+    category: request.nextUrl.searchParams.get("category") ?? undefined,
+    date: request.nextUrl.searchParams.get("date") ?? undefined,
+  };
+  const { title, category, date } = ogInputSchema.parse(raw);
+
+  const response = new ImageResponse(
     (
       <div
         style={{
@@ -174,6 +199,9 @@ export async function GET(request: NextRequest) {
     {
       width: 1200,
       height: 630,
+      headers: CACHE_HEADERS,
     }
   );
+
+  return response;
 }

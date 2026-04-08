@@ -13,6 +13,17 @@ import {
   faqJsonLd,
 } from "@/lib/seo";
 import { SITE } from "@/lib/constants";
+import type { JsonLdObject } from "@/lib/schemas/json-ld.types";
+
+/** Test helper: iç içe JSON-LD objesine güvenli erişim */
+function nested(obj: JsonLdObject, key: string): JsonLdObject {
+  return obj[key] as JsonLdObject;
+}
+
+/** Test helper: iç içe JSON-LD dizisine güvenli erişim */
+function nestedArr(obj: JsonLdObject, key: string): JsonLdObject[] {
+  return obj[key] as JsonLdObject[];
+}
 
 // ─── generateMeta() ───
 
@@ -120,15 +131,17 @@ describe("websiteJsonLd()", () => {
 
   it("includes SearchAction", () => {
     const ld = websiteJsonLd();
+    const action = nested(ld, "potentialAction");
 
-    expect(ld.potentialAction["@type"]).toBe("SearchAction");
-    expect(ld.potentialAction.target).toContain("/arama?q=");
+    expect(action["@type"]).toBe("SearchAction");
+    expect(action.target).toContain("/arama?q=");
   });
 
   it("includes publisher as Organization", () => {
     const ld = websiteJsonLd();
+    const publisher = nested(ld, "publisher");
 
-    expect(ld.publisher["@type"]).toBe("Organization");
+    expect(publisher["@type"]).toBe("Organization");
   });
 });
 
@@ -146,25 +159,28 @@ describe("organizationJsonLd()", () => {
 
   it("includes logo with correct dimensions", () => {
     const org = organizationJsonLd();
+    const logo = nested(org, "logo");
 
-    expect(org.logo["@type"]).toBe("ImageObject");
-    expect(org.logo.width).toBe(512);
-    expect(org.logo.height).toBe(512);
+    expect(logo["@type"]).toBe("ImageObject");
+    expect(logo.width).toBe(512);
+    expect(logo.height).toBe(512);
   });
 
   it("includes knowsAbout topics", () => {
     const org = organizationJsonLd();
+    const topics = org.knowsAbout as string[];
 
-    expect(org.knowsAbout).toBeInstanceOf(Array);
-    expect(org.knowsAbout.length).toBeGreaterThan(0);
-    expect(org.knowsAbout).toContain("Yapay Zeka");
+    expect(topics).toBeInstanceOf(Array);
+    expect(topics.length).toBeGreaterThan(0);
+    expect(topics).toContain("Yapay Zeka");
   });
 
   it("includes contact point", () => {
     const org = organizationJsonLd();
+    const contact = nested(org, "contactPoint");
 
-    expect(org.contactPoint["@type"]).toBe("ContactPoint");
-    expect(org.contactPoint.contactType).toBe("editorial");
+    expect(contact["@type"]).toBe("ContactPoint");
+    expect(contact.contactType).toBe("editorial");
   });
 });
 
@@ -195,9 +211,10 @@ describe("articleJsonLd()", () => {
 
   it("includes author as Person", () => {
     const ld = articleJsonLd(params);
+    const author = nested(ld, "author");
 
-    expect(ld.author["@type"]).toBe("Person");
-    expect(ld.author.name).toBe(SITE.author.name);
+    expect(author["@type"]).toBe("Person");
+    expect(author.name).toBe(SITE.author.name);
   });
 
   it("includes word count and reading time when provided", () => {
@@ -218,7 +235,8 @@ describe("articleJsonLd()", () => {
 
   it("includes speakable specification", () => {
     const ld = articleJsonLd(params);
-    expect(ld.speakable["@type"]).toBe("SpeakableSpecification");
+    const speakable = nested(ld, "speakable");
+    expect(speakable["@type"]).toBe("SpeakableSpecification");
   });
 });
 
@@ -249,18 +267,20 @@ describe("breadcrumbJsonLd()", () => {
     ];
 
     const ld = breadcrumbJsonLd(items);
+    const elements = nestedArr(ld, "itemListElement");
 
     expect(ld["@type"]).toBe("BreadcrumbList");
-    expect(ld.itemListElement).toHaveLength(3);
-    expect(ld.itemListElement[0].position).toBe(1);
-    expect(ld.itemListElement[2].position).toBe(3);
+    expect(elements).toHaveLength(3);
+    expect(elements[0].position).toBe(1);
+    expect(elements[2].position).toBe(3);
   });
 
   it("sets correct item types", () => {
     const items = [{ name: "Test", href: "/test" }];
     const ld = breadcrumbJsonLd(items);
+    const elements = nestedArr(ld, "itemListElement");
 
-    expect(ld.itemListElement[0]["@type"]).toBe("ListItem");
+    expect(elements[0]["@type"]).toBe("ListItem");
   });
 });
 
@@ -281,11 +301,13 @@ describe("faqJsonLd()", () => {
 
   it("generates correct mainEntity array", () => {
     const ld = faqJsonLd(faqs);
+    const entities = nestedArr(ld, "mainEntity");
 
-    expect(ld.mainEntity).toHaveLength(2);
-    expect(ld.mainEntity[0]["@type"]).toBe("Question");
-    expect(ld.mainEntity[0].name).toBe("Soru 1?");
-    expect(ld.mainEntity[0].acceptedAnswer["@type"]).toBe("Answer");
-    expect(ld.mainEntity[0].acceptedAnswer.text).toBe("Cevap 1");
+    expect(entities).toHaveLength(2);
+    expect(entities[0]["@type"]).toBe("Question");
+    expect(entities[0].name).toBe("Soru 1?");
+    const answer = nested(entities[0], "acceptedAnswer");
+    expect(answer["@type"]).toBe("Answer");
+    expect(answer.text).toBe("Cevap 1");
   });
 });

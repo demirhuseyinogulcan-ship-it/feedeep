@@ -117,7 +117,7 @@ export function useComments(articleId: string) {
       }
 
       // Fallback: localStorage
-      addLocal(articleId, text, undefined, parentId);
+      await addLocal(articleId, text, undefined, parentId);
       refresh();
     },
     [articleId, user, refresh],

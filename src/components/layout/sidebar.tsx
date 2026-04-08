@@ -3,14 +3,14 @@
 // Sabit sol panel: logo, navigasyon, iletisim.
 // Sadece lg: ve ustunde gorunur. Mobilde Header + MobileNav kullanilir.
 // Props: isOpen + onToggle — state LayoutShell'de yonetilir.
+// usePathname ActiveLink'e taşındı — sidebar navigasyonda re-render olmaz.
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { NAV_ITEMS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { ActiveLink } from "./active-link";
 
 type Props = {
   isOpen: boolean;
@@ -18,8 +18,6 @@ type Props = {
 };
 
 export function Sidebar({ isOpen, onToggle }: Props) {
-  const pathname = usePathname();
-
   return (
     <>
       {/* Toggle butonu — sidebar sağ kenarında kayar, logo yanında değil */}
@@ -61,27 +59,17 @@ export function Sidebar({ isOpen, onToggle }: Props) {
         {/* Navigasyon */}
         <nav className="flex-1 px-3">
           <ul className="space-y-1">
-            {NAV_ITEMS.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                pathname.startsWith(`${item.href}/`);
-
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                      isActive
-                        ? "bg-primary-900/30 text-primary-400"
-                        : "text-gray-400 hover:text-gray-100 hover:bg-surface-2",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
+                <ActiveLink
+                  href={item.href}
+                  label={item.label}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                  activeClassName="bg-primary-900/30 text-primary-400"
+                  inactiveClassName="text-gray-400 hover:text-gray-100 hover:bg-surface-2"
+                />
+              </li>
+            ))}
           </ul>
         </nav>
 

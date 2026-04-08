@@ -12,7 +12,7 @@ import { NewsTicker } from "@/components/shared/the-signal";
 import { PwaInstallBanner } from "@/components/shared/pwa-install-banner";
 import { NotificationPrompt } from "@/components/shared/notification-prompt";
 import { PrefetchManager } from "@/components/shared/prefetch-manager";
-import { WebVitalsReporter } from "@/components/shared/web-vitals-reporter";
+import { LazyWebVitals } from "@/components/shared/lazy-web-vitals";
 import { CookieConsent } from "@/components/shared/cookie-consent";
 import { AuthProvider } from "@/components/auth/auth-provider";
 import "./globals.css";
@@ -120,14 +120,16 @@ export default function RootLayout({
       <body
         className={`${fontHeading.variable} ${fontSans.variable} font-sans antialiased`}
       >
-        {/* Google Analytics — GA4 */}
+        {/* Google Analytics — GA4
+             lazyOnload: tarayici bos kaldiginda yukle — ilk render'i bloke etmez.
+             Tradeoff: 1-3s gecikme kabul edilebilir, TTI ve TBT iyilesir.  */}
         {GA_ID && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -183,8 +185,8 @@ export default function RootLayout({
         {/* Navigation Prefetch */}
         <PrefetchManager />
 
-        {/* Web Vitals → GA4 */}
-        <WebVitalsReporter />
+        {/* Web Vitals → GA4 — Client wrapper ile lazy yuklenir */}
+        <LazyWebVitals />
 
         {/* Vercel Web Analytics */}
         <Analytics />

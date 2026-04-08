@@ -140,21 +140,6 @@ function validateHaber(file, data) {
   checkEnum(file, data, "confidence", ["high", "medium", "speculative"]);
 }
 
-function _validateKart(file, data) {
-  checkRequired(file, data, "title");
-  checkRequired(file, data, "slug");
-  checkRequired(file, data, "description");
-  checkRequired(file, data, "date");
-  checkRequired(file, data, "type");
-  checkRequired(file, data, "company");
-
-  checkMaxLength(file, data, "description", 160);
-  checkSlug(file, data);
-  checkDate(file, data, "date");
-  checkEnum(file, data, "type", ["model", "arac"]);
-  checkEnum(file, data, "status", ["active", "beta", "deprecated"]);
-}
-
 // ─── Scanner ────────────────────────────────────────────────
 
 const VALIDATORS = {

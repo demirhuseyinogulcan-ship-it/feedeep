@@ -1,26 +1,16 @@
-// feedeep — View Counter (Social Proof)
-// İçerik sayfalarında görüntülenme sayısı gösterir.
-// localStorage tabanlı: her benzersiz ziyaret +1 artırır.
-// Başlangıç sayısı yayın tarihine göre hesaplanır.
-"use client";
-
-import { useState } from "react";
+// feedeep — View Counter
+// Gercek sayfa goruntulenme sayisini gosterir.
+// count prop disaridan (Supabase veya analitik servisi) beslenmeli.
+// count yoksa hicbir sey render edilmez — sahte sayi GOSTERILMEZ.
+//
+// Gelecek entegrasyon:
+//   1. Supabase'de "page_views" tablosu olustur (slug, count)
+//   2. /api/views/[slug] route'u ekle (increment + fetch)
+//   3. Detay sayfasinda count'u server-side fetch et, bu component'a gecir
 
 interface ViewCounterProps {
-  slug: string;
-  publishDate: string;
-  type?: "yazi" | "haber" | "prompt";
-}
-
-function getBaseViews(publishDate: string): number {
-  const pub = new Date(publishDate).getTime();
-  const now = Date.now();
-  const daysSince = Math.floor((now - pub) / (1000 * 60 * 60 * 24));
-
-  // Günlük ortalama 12-38 arası rastgele (ama deterministik) artış
-  // slug bazlı seed yerine tarih bazlı tutarlı rakam
-  const dailyRate = 12 + (pub % 27);
-  return Math.max(47, Math.floor(daysSince * dailyRate + (pub % 200)));
+  /** Gercek goruntulenme sayisi. Yoksa component render edilmez. */
+  count?: number;
 }
 
 function formatCount(n: number): string {
@@ -31,31 +21,12 @@ function formatCount(n: number): string {
   return n.toLocaleString("tr-TR");
 }
 
-export function ViewCounter({ slug, publishDate, type = "yazi" }: ViewCounterProps) {
-  const [views] = useState<number | null>(() => {
-    if (typeof window === "undefined") return null;
-
-    const storageKey = `views:${type}:${slug}`;
-    const visitedKey = `visited:${type}:${slug}`;
-
-    const stored = localStorage.getItem(storageKey);
-    let current = stored ? parseInt(stored, 10) : getBaseViews(publishDate);
-
-    const visited = sessionStorage.getItem(visitedKey);
-    if (!visited) {
-      current += 1;
-      sessionStorage.setItem(visitedKey, "1");
-    }
-
-    localStorage.setItem(storageKey, String(current));
-    return current;
-  });
-
-  if (views === null) return null;
+export function ViewCounter({ count }: ViewCounterProps) {
+  if (count === undefined || count === null) return null;
 
   return (
     <span className="text-[10px] font-sans tracking-wider text-gray-600">
-      {formatCount(views)} görüntülenme
+      {formatCount(count)} goruntülenme
     </span>
   );
 }

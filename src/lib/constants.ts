@@ -18,6 +18,8 @@ export const SITE = {
     linkedin: "https://linkedin.com",
     instagram: "https://instagram.com/feedeepcom",
   },
+  /** ISO 8601 — Proje ilk yayın tarihi (Organization schema) */
+  foundingDate: "2025-01-01",
   organization: {
     name: "feedeep",
     logo: "/logo.png",

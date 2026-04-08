@@ -24,13 +24,6 @@ export type HeroItem = {
   blurDataURL?: string;
 };
 
-export type ExploreSection = {
-  readonly title: string;
-  readonly description: string;
-  readonly href: string;
-  readonly count: string;
-};
-
 // ─── Filtered & Sorted Data ───
 
 export const publishedYazilar = yazilar
@@ -111,10 +104,6 @@ export function getLatestNews(heroItem: HeroItem | null) {
       (news) => !(heroItem?.type === "haber" && news.slug === heroItem.slug)
     )
     .slice(0, 8);
-}
-
-export function getExploreSections(): readonly ExploreSection[] {
-  return [] as const;
 }
 
 // ─── FAQ Data ───
