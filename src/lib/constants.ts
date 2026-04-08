@@ -28,7 +28,6 @@ export const SITE = {
 export const NAV_ITEMS = [
   { label: "Yazılar", href: "/yazilar" },
   { label: "Haberler", href: "/haberler" },
-  { label: "Hakkımızda", href: "/hakkimizda" },
 ] as const;
 
 

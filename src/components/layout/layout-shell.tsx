@@ -14,11 +14,11 @@ import { cn } from "@/lib/utils";
 const STORAGE_KEY = "feedeep-sidebar";
 
 function getSnapshot(): boolean {
-  return localStorage.getItem(STORAGE_KEY) !== "closed";
+  return localStorage.getItem(STORAGE_KEY) === "open";
 }
 
 function getServerSnapshot(): boolean {
-  return true;
+  return false;
 }
 
 function subscribe(callback: () => void): () => void {

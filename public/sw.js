@@ -3,8 +3,8 @@
 // Offline cache, push notification, navigation preload
 // ─────────────────────────────────────────────────────────────
 
-const STATIC_CACHE = "feedeep-static-v2";
-const CONTENT_CACHE = "feedeep-content-v2";
+const STATIC_CACHE = "feedeep-static-v3";
+const CONTENT_CACHE = "feedeep-content-v3";
 
 // Statik dosyalar — her zaman cache'le
 const STATIC_ASSETS = [
