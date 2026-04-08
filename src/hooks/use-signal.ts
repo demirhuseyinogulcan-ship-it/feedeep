@@ -48,7 +48,7 @@ export function useSignal(articleId: string) {
   useEffect(() => {
     let cancelled = false;
 
-    // İstatistikler — batcher aynı tick'teki tüm istekleri tek sorguda birleştirir
+    // İstatistikler her zaman fetch edilir — anonim kullanıcı da sayıları görür
     signalBatcher.requestStats(articleId).then((s) => {
       if (!cancelled) {
         setStats(s);
@@ -59,13 +59,12 @@ export function useSignal(articleId: string) {
       if (!cancelled) setStatsLoaded(true);
     });
 
-    // Giriş yapmışsa kendi sinyalini de batch ile al
     if (user) {
+      // Giriş yapmışsa kendi sinyalini de batch ile al
       signalBatcher.requestUserSignal(articleId).then((remote) => {
         if (cancelled) return;
         if (remote) {
           setSignal(remote);
-          // servis katmanı üzerinden localStorage'ı güncelle
           writeSignal(articleId, remote);
         }
       }).catch((err) => {
@@ -75,6 +74,10 @@ export function useSignal(articleId: string) {
 
     return () => { cancelled = true; };
   }, [articleId, user]);
+
+  // Anonim / çıkış yapmış kullanıcı: localStorage'dan gelen owned/vote gösterilmemeli.
+  // Derive edilmiş değer — setState çağrılmaz, yeniden render tetiklenmez.
+  const displaySignal = user ? signal : { ...signal, owned: false, vote: null as typeof signal.vote };
 
   const handleToggleOwn = useCallback(() => {
     const result = toggleOwnership(articleId);
@@ -134,7 +137,7 @@ export function useSignal(articleId: string) {
   );
 
   return {
-    signal,
+    signal: displaySignal,
     stats,
     statsLoaded,
     toggleOwn: handleToggleOwn,
