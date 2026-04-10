@@ -1,0 +1,55 @@
+---
+title: "FBI Silinen Signal Mesajlarını Okudu: iPhone Bildirimi Açığı"
+slug: fbi-signal-mesaj-iphone-bildirim-veritabani
+description: "FBI, bir iOS bildirimleri veritabanından silinen Signal mesajlarına erişti. Uçtan uca şifreleme, bildirim önizlemesi etkinse içeriği koruyamaz."
+date: 2026-04-10
+published: false
+sourceUrl: "https://9to5mac.com/2026/04/09/fbi-used-iphone-notification-data-to-retrieve-deleted-signal-messages/"
+sourceName: "9to5Mac"
+category: sektor
+keywords:
+  - signal gizlilik acigi
+  - fbi iphone bildirim
+  - ios bildirim veritabani
+  - signal mesaj silinme
+  - end to end encryption sinir
+  - yazilim haberleri
+sources:
+  - url: "https://9to5mac.com/2026/04/09/fbi-used-iphone-notification-data-to-retrieve-deleted-signal-messages/"
+    name: "9to5Mac"
+    label: "FBI used iPhone notification data to retrieve deleted Signal messages"
+    tier: 2
+---
+
+Federal Soruşturma Bürosu (FBI), bir sanığın iPhone'unda saklanan iOS bildirim veritabanından daha önce silinmiş Signal mesajlarına erişebildi. Bu gelişme, uçtan uca şifrelemenin pratik sınırlarını bir kez daha gündeme taşıdı.
+
+## Nasıl Çalıştı?
+
+iOS, alınan bildirimleri cihazda dahili bir SQLite veritabanında saklıyor. Signal, mesajları şifreli olarak iletir; ancak bildirim önizlemesi etkinse mesaj içeriği bu veritabanına şifresiz biçimde yazılıyor. Kullanıcı mesajları Signal üzerinden silmiş olsa da iOS bildirim kaydı ayrı bir yerde, ayrı bir tabloda yaşamaya devam ediyor.
+
+Bu davada söz konusu kişinin Signal'da bildirim içerik önizleme ayarını kapamamış olduğu belirtildi. FBI, iPhone'a fiziksel erişimle bu veritabanını çıkardı ve silinmiş mesajlara ulaştı.
+
+## Bu Signal'ın Açığı Mı?
+
+Teknik olarak hayır. Signal'ın şifrelemesi, mesajların iletim sırasında korunmasını sağlıyor. Sorun şifrelemede değil, *şifre çözüldükten sonra* işletim sisteminin bildirimi nereye yazdığında.
+
+iOS, bildirim önizlemesi göstermek için içeriği geçici olarak şifresiz alana alıyor ve bu içerik silinmedikçe orada kalıyor. Bu iOS'un tasarımından kaynaklanan bir davranış; Signal bu depolamayı doğrudan kontrol edemiyor.
+
+Signal geliştiricileri kullanıcıları uzun süredir bu ayarı kapatmaları konusunda uyarıyor. Android'de durum benzer: FCM (Google'ın bildirim altyapısı) ve yerel bildirim geçmişi benzer riskleri taşıyor.
+
+## Pratik Koruma Adımları
+
+Bu saldırı vektörüne karşı yapılabilecekler:
+
+**iOS'ta:**  
+Ayarlar → Bildirimler → Önizlemeleri Göster → **Asla**  
+Ya da yalnızca Signal için: Signal Ayarları → Bildirimler → İçerik Göster → **Devre Dışı**
+
+**Android'de:**  
+Signal Ayarları → Bildirimler → Mesajlar → Göster → **Ad Yok, İçerik Yok**
+
+## Daha Büyük Tablo
+
+Bu olay uçtan uca şifrelemenin neyi koruyup neyi koruyamadığına dair önemli bir örnek. Şifreleme veriyi *aktarılırken* korur. Mesaj alıcının cihazına ulaştıktan sonra, çözüldükten sonra ne olduğu artık işletim sisteminin ve uygulamanın yapılandırmasına bağlı.
+
+"Signal kullanıyorum, her şeyim güvende" düşüncesi bu davranışı gözden kaçırıyor. Güvenlik varsayılan ayarlara değil, konfigürasyona bağlı.

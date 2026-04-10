@@ -1,0 +1,97 @@
+---
+title: "Mythos: 27 Yıllık Açıkları Bulan Yapay Zeka Kimseye Verilmiyor"
+slug: anthropic-claude-mythos-project-glasswing-siber-guvenlik
+description: "Anthropic'in Claude Mythos Preview modeli, her büyük işletim sisteminde ve tarayıcıda binlerce kritik güvenlik açığı buldu. Şirket modeli halka açmıyor — ama neden?"
+date: 2026-04-10
+image: "/images/haberler/anthropic-claude-mythos-project-glasswing-siber-guvenlik.webp"
+imageAlt: "Claude Mythos logosu — Anthropic'in yeni nesil yapay zeka modeli, antik heykel figürünü piksel dokusuyla birleştiren turuncu arka planlı marka görseli"
+imageCredit: "Anthropic"
+sourceUrl: "https://www.anthropic.com/glasswing"
+sourceName: "Anthropic"
+category: arastirma
+keywords:
+  - claude mythos preview
+  - project glasswing anthropic
+  - yapay zeka siber guvenlik
+  - openssl openbsd zero-day
+  - ai guvenlik acigi
+  - yapay zeka haberleri
+sources:
+  - url: "https://www.anthropic.com/glasswing"
+    label: "Anthropic — Project Glasswing"
+    tier: 1
+  - url: "https://red.anthropic.com/2026/mythos-preview"
+    label: "Anthropic Frontier Red Team Blog"
+    tier: 1
+confidence: high
+socialSnippet: "OpenBSD 27 yıl boyunca herkesin gözü önünde duruyordu. Anthropic'in Claude Mythos Preview modeli o açığı buldu. Şimdi Anthropic modeli halka açmıyor — ve bu karar çok daha büyük bir şeyin habercisi."
+published: true
+---
+
+Şöyle bir düşünce deneyi yapalım. Bir kilit var önünüzde — dünyanın en seçkin güvenlik mühendisleri tarafından tasarlanmış, 27 yılda milyonlarca test geçirmiş, "açılmaz" unvanını kazanmış bir kilit. Sonra bir sabah, birisi o kilidi saniyeler içinde açıyor. Ve yanınıza gelip şunu söylüyor: "Aslında anahtarı hep buraya koyuyordunuz."
+
+Bu tam olarak OpenBSD'ye olanın metaforu. Ve bunu yapan bir insan değil.
+
+## Mythos nedir, neden şimdi konuşuyoruz?
+
+7 Nisan 2026'da Anthropic, **Project Glasswing** adıyla bir güvenlik girişimi duyurdu. İsim listesi dikkat çekiciydi: Amazon Web Services, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorganChase, Linux Foundation, Microsoft, NVIDIA ve Palo Alto Networks. Teknoloji sektörünün neredeyse tamamı tek bir çatı altında.
+
+Bu kadar büyük bir ittifak neden kuruldu? Cevap, girişimin merkezindeki modelde saklı: **Claude Mythos Preview**.
+
+Mythos Preview, Anthropic'in henüz kamuoyuyla paylaşmadığı yeni nesil bir yapay zeka modeli. Şirketin resmi açıklamasına göre model, yazılım kodunu okuma ve analiz etme konusunda bugüne kadar geliştirilen modellerin çok ötesine geçti. O kadar ötesine geçti ki Anthropic, modeli halka açmanın toplumsal riski çok yüksek olduğuna karar verdi.
+
+Peki ne buldu bu model?
+
+## Her bilgisayarda, her tarayıcıda — binlerce açık
+
+Güvenlik araştırmacılarının dilinde **zero-day** denen bir kavram var. Türkçeye "sıfır gün açığı" diye çevirebilirsiniz ama özü şu: yazılımın geliştiricileri dahil kimsenin haberi olmayan, o ana kadar hiç keşfedilmemiş güvenlik deliği. Bulunduğu gün "sıfır gün" olduğu için bu isim.
+
+Mythos Preview, her büyük işletim sisteminde ve her büyük web tarayıcısında binlerce zero-day buldu. Otomatik testlerin ve insan uzmanların onlarca yıl boyunca gözden kaçırdığı açıklar.
+
+Bunların üçü özellikle anlatmaya değer.
+
+**OpenBSD, 27 yıl.** İnternetin kritik parçalarını — güvenlik duvarlarını, ağ altyapısını — ayakta tutan bir işletim sistemi hayal edin. OpenBSD tam olarak bu. Ve güvenlik konusundaki takıntılı titizliğiyle bu sektörde efsane. Mythos o sistemde 27 yıldır kimsenin göremediği bir açık buldu. Bulunan açık önemsiz de değil: saldırgan, o sisteme sadece bağlanarak — hiçbir ek işlem yapmadan — makineyi uzaktan çökertebiliyordu.
+
+**FFmpeg, 16 yıl, 5 milyon test.** Bu açığı daha da ilginç yapan şey şu: otomatik test araçları o kod satırına 5 milyon kez çarpmış. Her seferinde geçip gitmiş. Mythos o satıra bakıp açığı gördü. FFmpeg, izlediğiniz videonun, dinlediğiniz müziğin, katıldığınız video konferansın arka planında çalışan bir kütüphane. Binlerce uygulamanın temeli.
+
+**Linux kernel, zincirleme.** Bu üçüncüsü belki en teknik ama en çarpıcı olanı. Mythos, Linux çekirdeğinde birden fazla ayrı açığı buldu ve bunları bir zincir gibi birbirine bağladı. Söyle daha anlaşılır hale getireyim: tek bir açık bir sisteme sızmaya yetmeyebilir. Ama üç küçük açığı doğru sırayla kullanırsan, sıradan bir kullanıcı hesabından o makinenin tam kontrolüne ulaşabiliyorsun. Mythos tam olarak bunu yaptı — ve tamamen özerk biçimde, herhangi bir insan yönlendirmesi olmadan.
+
+## "Zaten aramıyorlar mıydı bu açıkları?"
+
+Haklı bir soru. Güvenlik araştırması on yıllardır yapılıyor. Şirketler büyük para ödüyor "bug bounty" programlarına, bağımsız araştırmacılar hataları buluyor, yamalar yayınlanıyor. Sistem işliyor.
+
+Ama Mythos, bu döngünün hızını ve kapsamını tanımlanamaz biçimde değiştiriyor. Şöyle düşünün: bir güvenlik uzmanının karmaşık bir kodu anlaması günler, bazen haftalar alabiliyor. Mythos aynı kodu saatler içinde analiz edip bir insan uzmanının muhtemelen hiçbir zaman bakmayacağı köşeleri inceleyebiliyor. Ve bunu tek bir sistemde değil, aynı anda pek çok sistemde yapabiliyor.
+
+Anthropic'in CyberGym benchmarkındaki veriler bu farkı sayıya döküyor: Mythos Preview %83.1, şirketin bugün mevcut en güçlü modeli Opus 4.6 ise %66.6. Bu 16.5 puanlık fark benchmark rakamı olarak küçük göründü mü? Aynı farkı şöyle ifade edelim: Mythos'un bulduğu açıkların bir kısmı Opus 4.6 tarafından **hiç bulunamamış**.
+
+## Neden halka açılmıyor?
+
+Anthropic'in bu soruya cevabı oldukça doğrudan: "Henüz bu modeli güvenli biçimde herkese vermek için gerekli korumaları geliştirmedik."
+
+Burada şeffaf olmak gerekiyor — bu karar aynı zamanda tartışmalı. "Fener tutmak" denen bir problem var güvenlik dünyasında: savunucular açıkları bulsa da, aynı model veya benzer yetenekler er ya da geç saldırganlara da ulaşacak. O güne kadar kaç sistem savunmasız kalacak?
+
+Anthropic'in tercih ettiği yol şu: modeli sadece savunma amaçlı kullanan ve etkin güvenlik altyapısına sahip ortaklara açacak. Yazılım üreticileri, açık kaynak toplulukları ve kritik altyapı operatörleri önce kendi sistemlerini tarayacak. Açıklar kapatılacak. Ondan sonra toplam risk azalmış olacak.
+
+Bu yaklaşımın bir problemi var tabii: seçilen ortakların büyük çoğunluğu Amerikalı şirketler. Avrupa'daki, Asya'daki, Türkiye'deki sistemler ne olacak? O sistemlerde çalışan yazılımlar da aynı açıkları barındırıyor, ama tarama yapacak modele erişim yok.
+
+Anthropic bu sorunun farkında. Linux Foundation ve Apache Software Foundation'a $4 milyon bağış yapıyor; açık kaynak yazılım bakımcıları için model erişimi uygulaması açıyor. Ama geniş coğrafyayı kapsayan yapısal bir çözüm henüz yok.
+
+## Sistem yöneticileri ve geliştiriciler için ne değişti?
+
+Uzun süredir "güvenlik araştırması insan emeği gerektiriyor" varsayımı üzerine kurulu bir sektör var. Bu varsayım değişiyor.
+
+Pratikte şu anlama geliyor: Anthropic'in açıkladığı üç somut açık (OpenBSD, FFmpeg, Linux kernel) zaten yamalandı. Ama duyuruda şu cümle de var: *"Diğer pek çok açık için henüz yama yayınlanmadığından detayları paylaşamıyoruz."* Yani şu an kullandığınız yazılımlarda bilinen ama kapatılmamış açıklar var.
+
+Bu noktada iki pratik sonuç çıkıyor.
+
+Birincisi, **güncelleme geciktirmek artık daha riskli**. Aylarca ertelenmiş bir "kritik güvenlik yamalaması" muhtemelen Mythos'un önceki bir nesil tarafından bulunan bir açığı kapatıyordur. Beklediğiniz süre boyunca o açık açık kalıyor.
+
+İkincisi, **"benim kodum kapalı kaynak, kimse göremez" mantığı işlemiyor**. Mythos, kapalı kaynak yazılımları da analiz edebildiğini gösterdi — binary'den yeniden yapılandırma yoluyla. Bu yetenek açık kaynak ve kapalı kaynak ayrımını güvenlik açısından anlamsız kılıyor.
+
+## Mythos'tan sonra ne geliyor?
+
+Anthropic, Mythos Preview'ı genel kullanıma açmayacak. Ama şunu da söylüyor: Mythos seviyesindeki modelleri güvenli biçimde herkesin kullanımına sunmak en büyük hedefleri. Bunun için önce bir sonraki Opus modeline yeni güvenlik koruyucuları ekleyecekler, orada test edecekler, sonra az biraz daha güçlü bir modele geçecekler.
+
+Bu da şunu gösteriyor: Mythos bir an değil, bir yönün başlangıcı. Bugün 40 seçilmiş şirkette çalışan bu yetenek, birkaç yıl içinde standart bir güvenlik aracına dönüşmüş olacak.
+
+Cam kelebekten adını alan Project Glasswing, şeffaf kanatlarıyla hem saklanır hem de zararsız kalır — en azından bu metafora göre. Gerçekte ise bu girişim, yazılım güvenliğinin insan kapasitesiyle yönetilebildiği çağın kapanmakta olduğunu ilan ediyor. Savunucuların bu geçişi saldırganlardan önce tamamlayıp tamamlayamayacağı, önümüzdeki birkaç yılın en kritik sorusu olacak.
