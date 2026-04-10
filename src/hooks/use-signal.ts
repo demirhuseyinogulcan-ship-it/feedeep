@@ -29,19 +29,19 @@ const EMPTY_STATS: ArticleStats = {
   totalComments: 0,
 };
 
-export function useSignal(articleId: string) {
+export function useSignal(articleId: string, initialStats?: ArticleStats) {
   const { user } = useAuth();
   const [signal, setSignal] = useState<Signal>(() => getSignal(articleId));
-  const [stats, setStats] = useState<ArticleStats>(EMPTY_STATS);
-  const [statsLoaded, setStatsLoaded] = useState(false);
+  const [stats, setStats] = useState<ArticleStats>(initialStats ?? EMPTY_STATS);
+  const [statsLoaded, setStatsLoaded] = useState(!!initialStats);
 
   // articleId değişince localStorage'dan sinyali güncelle (render-time)
   const [prevArticleId, setPrevArticleId] = useState(articleId);
   if (articleId !== prevArticleId) {
     setPrevArticleId(articleId);
     setSignal(getSignal(articleId));
-    setStats(EMPTY_STATS);
-    setStatsLoaded(false);
+    setStats(initialStats ?? EMPTY_STATS);
+    setStatsLoaded(!!initialStats);
   }
 
   // Sayfa yüklenince: DataLoader üzerinden toplu istek
