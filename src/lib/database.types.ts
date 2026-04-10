@@ -32,6 +32,7 @@ export type Database = {
           owned_at: string | null;
           voted_at: string | null;
           created_at: string;
+          updated_at: string;
         };
         Insert: {
           id?: string;
@@ -42,12 +43,14 @@ export type Database = {
           owned_at?: string | null;
           voted_at?: string | null;
           created_at?: string;
+          updated_at?: string;
         };
         Update: {
           owned?: boolean;
           vote?: "upvote" | "downvote" | null;
           owned_at?: string | null;
           voted_at?: string | null;
+          updated_at?: string;
         };
       };
       comments: {

@@ -8,7 +8,7 @@
 
 import { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { signUp, signIn } from "@/lib/auth";
+import { claimAccount, signIn } from "@/lib/auth";
 import { generateUsername } from "@/lib/username-generator";
 import { useAuth } from "./auth-provider";
 import { cn } from "@/lib/utils";
@@ -55,7 +55,7 @@ export function AuthModal() {
     let attemptName = generatedName;
     let lastError: string | null = null;
     for (let attempt = 0; attempt < 3; attempt++) {
-      const { error: err } = await signUp(password, attemptName);
+      const { error: err } = await claimAccount(password, attemptName);
       if (!err) {
         setSubmitting(false);
         return; // Başarılıysa onAuthChange → closeAuth otomatik tetiklenir
@@ -100,17 +100,18 @@ export function AuthModal() {
   return (
     <>
       {/* Header butonları */}
-      {user ? (
+      {user && !user.isAnonymous ? (
         <Link
           href="/profil"
-          className="text-xs text-gray-400 hover:text-primary-400 transition-colors truncate max-w-[120px]"
+          className="btn-liquid group relative px-4 py-1.5 text-xs font-heading font-medium text-white transition-transform hover:-translate-y-px"
         >
-          {user.username}
+          <span className="btn-liquid-glow" />
+          <span className="relative z-10 truncate max-w-[140px]">{user.username}</span>
         </Link>
       ) : null}
 
       {/* ── Full-screen Modal — portal to body ── */}
-      {showAuth && !user && typeof document !== "undefined" && createPortal(
+      {showAuth && (!user || user.isAnonymous) && typeof document !== "undefined" && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
           onClick={(e) => {
@@ -125,10 +126,10 @@ export function AuthModal() {
             >
               <div className="space-y-2">
                 <h2 className="text-lg font-heading font-bold text-gray-100">
-                  Hesap Oluştur
+                  Hesabını Kalıcı Yap
                 </h2>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  Fikirlerin bizim için önemli — ancak kimliğinin gizli kalmasını istiyoruz.
+                  Şu an anonim olarak geziniyorsun. Şifre belirleyerek verilerini kalıcı hale getirebilirsin.
                 </p>
               </div>
 
@@ -174,11 +175,11 @@ export function AuthModal() {
               {/* ── Tek Hayat Uyarısı ── */}
               <div className="rounded-lg border border-yellow-500/40 bg-yellow-500/[0.06] px-3 py-2.5 space-y-1">
                 <p className="text-[10px] font-semibold text-yellow-400 uppercase tracking-widest">
-                  Dikkat — Şifreni Asla Unutma
+                  Dikkat — Şifreni Unutma
                 </p>
                 <p className="text-xs text-yellow-300/70 leading-relaxed">
-                  Şifre sıfırlama seçeneği yoktur. Şifreni unutursan
-                  hesabına bir daha giremezsin, yeni hesap açman gerekir.
+                  Şifre sıfırlama seçeneği henüz yoktur. Şifreni unutursan
+                  yeni bir anonim hesapla devam etmen gerekir.
                 </p>
               </div>
 
@@ -196,7 +197,7 @@ export function AuthModal() {
                     "disabled:opacity-30 disabled:cursor-not-allowed",
                   )}
                 >
-                  {submitting ? "Oluşturuluyor..." : "Oluştur"}
+                  {submitting ? "Yükseltiliyor..." : "Hesabı Kalıcı Yap"}
                 </button>
                 <button
                   type="button"

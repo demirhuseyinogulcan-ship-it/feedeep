@@ -445,3 +445,89 @@ h1, h2, h3, h4, h5, h6 {
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* ─── Liquid Glow Button — lusion.co inspired ────────────── */
+
+@keyframes liquid-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; filter: blur(8px); }
+  50%      { opacity: 0.8; filter: blur(12px); }
+}
+
+.btn-liquid {
+  position: relative;
+  isolation: isolate;
+  border-radius: 0.5rem;
+  overflow: visible;
+}
+
+/* Animated gradient border — liquid light */
+.btn-liquid::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    270deg,
+    #7c3aed,
+    #a855f7,
+    #c084fc,
+    #818cf8,
+    #7c3aed
+  );
+  background-size: 300% 300%;
+  animation: liquid-flow 4s ease infinite;
+  z-index: -2;
+}
+
+/* Inner fill — dark core */
+.btn-liquid::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(0.5rem - 1px);
+  background: linear-gradient(135deg, #0e0515 0%, #150a20 50%, #0e0515 100%);
+  z-index: -1;
+}
+
+/* Outer glow — depth illusion */
+.btn-liquid-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(
+    270deg,
+    #7c3aed,
+    #a855f7,
+    #c084fc,
+    #818cf8,
+    #7c3aed
+  );
+  background-size: 300% 300%;
+  animation: liquid-flow 4s ease infinite, glow-pulse 3s ease-in-out infinite;
+  z-index: -3;
+  pointer-events: none;
+}
+
+/* Hover: intensify glow */
+.btn-liquid:hover .btn-liquid-glow {
+  opacity: 1;
+  filter: blur(14px);
+}
+
+.btn-liquid:hover::before {
+  animation-duration: 2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-liquid::before,
+  .btn-liquid-glow {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}

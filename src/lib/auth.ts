@@ -1,7 +1,8 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Auth Layer
-// "Tek hayat hesap" — kullanıcı adı + şifre, e-posta yok.
-// Supabase Auth üzerinden, username metadata olarak saklanır.
+// Supabase Anonymous Auth + opsiyonel username.
+// Akış: anonim oturum → profil oluştur → (opsiyonel) email ekle.
+// Fake email hack kaldırıldı — Supabase'in resmi anonim auth'u kullanılıyor.
 // ─────────────────────────────────────────────────────────────
 
 import { getSupabase, isSupabaseConfigured } from "./supabase";
@@ -10,24 +11,8 @@ import { generateUsername } from "./username-generator";
 export type AuthUser = {
   id: string;
   username: string;
+  isAnonymous: boolean;
 };
-
-/** Username → deterministic fake e-posta. Supabase Auth e-posta zorunlu kılıyor,
- *  biz kullanıcıdan e-posta istemiyoruz. Aynı username her zaman aynı e-postayı üretir.
- *  .invalid TLD — IANA reserved, asla gerçek domain olmayacak.
- *  Sadece ASCII — Supabase/SMTP Türkçe karakterleri kabul etmiyor. */
-function usernameToEmail(username: string): string {
-  const slug = username
-    .toLowerCase()
-    .replace(/ğ/g, "g")
-    .replace(/ü/g, "u")
-    .replace(/ş/g, "s")
-    .replace(/ı/g, "i")
-    .replace(/ö/g, "o")
-    .replace(/ç/g, "c")
-    .replace(/[^a-z0-9]/g, "");
-  return `${slug}@kullanici.invalid`;
-}
 
 /** Mevcut oturumu kontrol et */
 export async function getCurrentUser(): Promise<AuthUser | null> {
@@ -41,11 +26,61 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
   return {
     id: user.id,
     username: user.user_metadata?.username ?? "Anonim",
+    isAnonymous: user.is_anonymous ?? false,
   };
 }
 
-/** Yeni hesap oluştur — kullanıcı adı otomatik atanır */
-export async function signUp(
+/** Anonim oturum başlat — kullanıcıdan hiçbir şey istenmez.
+ *  Zaten anonim oturumu varsa yeni oturum açmaz. */
+export async function signInAnonymously(): Promise<{
+  user: AuthUser | null;
+  error: string | null;
+}> {
+  if (!isSupabaseConfigured()) {
+    return { user: null, error: "Supabase yapılandırılmamış." };
+  }
+
+  const supabase = getSupabase();
+
+  // Mevcut oturum var mı kontrol et
+  const { data: { user: existing } } = await supabase.auth.getUser();
+  if (existing) {
+    return {
+      user: {
+        id: existing.id,
+        username: existing.user_metadata?.username ?? "Anonim",
+        isAnonymous: existing.is_anonymous ?? false,
+      },
+      error: null,
+    };
+  }
+
+  const username = generateUsername();
+  const { data, error } = await supabase.auth.signInAnonymously({
+    options: { data: { username } },
+  });
+
+  if (error) {
+    return { user: null, error: error.message };
+  }
+
+  if (!data.user) {
+    return { user: null, error: "Anonim oturum açılamadı." };
+  }
+
+  return {
+    user: {
+      id: data.user.id,
+      username,
+      isAnonymous: true,
+    },
+    error: null,
+  };
+}
+
+/** Anonim hesabı kalıcı hesaba yükselt — username + şifre ile.
+ *  Supabase "linking" kullanır: aynı UUID korunur, tüm veriler kalır. */
+export async function claimAccount(
   password: string,
   customUsername?: string,
 ): Promise<{ user: AuthUser | null; error: string | null }> {
@@ -56,34 +91,22 @@ export async function signUp(
   const supabase = getSupabase();
   const username = customUsername ?? generateUsername();
 
-  // Supabase Auth e-posta zorunlu kılıyor.
-  // Deterministic fake e-posta: username → e-posta dönüşümü.
-  // Giriş sırasında aynı formül ile e-postayı tekrar üretebiliriz.
-  const fakeEmail = usernameToEmail(username);
+  // Anonim hesabı kalıcıya dönüştür: email + password ekle
+  // Fake email hala gerekli çünkü Supabase updateUser email istiyor,
+  // ama artık auth flow'un kendisi anonim tabanlı — email sadece internal.
+  const fakeEmail = usernameToFakeEmail(username);
 
-  const { data, error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.updateUser({
     email: fakeEmail,
     password,
-    options: {
-      data: { username },
-      emailRedirectTo: undefined,
-    },
+    data: { username },
   });
 
   if (error) {
     if (
       error.message.includes("already registered") ||
       error.message.includes("duplicate key") ||
-      error.message.includes("unique constraint") ||
-      error.code === "23505"
-    ) {
-      return { user: null, error: "Bu kullanıcı adı zaten alınmış." };
-    }
-    // profiles.username UNIQUE trigger ihlali (PostgreSQL 23505)
-    if (
-      error.message.toLowerCase().includes("duplicate key") ||
-      error.message.includes("23505") ||
-      error.message.toLowerCase().includes("unique constraint")
+      error.message.includes("unique constraint")
     ) {
       return { user: null, error: "Bu kullanıcı adı zaten alınmış." };
     }
@@ -91,16 +114,20 @@ export async function signUp(
   }
 
   if (!data.user) {
-    return { user: null, error: "Hesap oluşturulamadı." };
+    return { user: null, error: "Hesap yükseltilemedi." };
   }
 
   return {
-    user: { id: data.user.id, username },
+    user: {
+      id: data.user.id,
+      username,
+      isAnonymous: false,
+    },
     error: null,
   };
 }
 
-/** Kullanıcı adı ile giriş yap */
+/** Kullanıcı adı ile giriş yap (kalıcı hesaplar için) */
 export async function signIn(
   username: string,
   password: string,
@@ -110,9 +137,7 @@ export async function signIn(
   }
 
   const supabase = getSupabase();
-
-  // Username → deterministic e-posta
-  const email = usernameToEmail(username);
+  const email = usernameToFakeEmail(username);
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -134,6 +159,7 @@ export async function signIn(
     user: {
       id: data.user.id,
       username: data.user.user_metadata?.username ?? username,
+      isAnonymous: false,
     },
     error: null,
   };
@@ -156,6 +182,7 @@ export function onAuthChange(callback: (user: AuthUser | null) => void) {
       callback({
         id: session.user.id,
         username: session.user.user_metadata?.username ?? "Anonim",
+        isAnonymous: session.user.is_anonymous ?? false,
       });
     } else {
       callback(null);
@@ -163,4 +190,21 @@ export function onAuthChange(callback: (user: AuthUser | null) => void) {
   });
 
   return { unsubscribe: () => subscription.unsubscribe() };
+}
+
+// ─── Internal Helpers ───
+
+/** Username → deterministic fake e-posta (internal, kullanıcıya gösterilmez).
+ *  .invalid TLD — IANA reserved, asla gerçek domain olmayacak. */
+function usernameToFakeEmail(username: string): string {
+  const slug = username
+    .toLowerCase()
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ı/g, "i")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
+    .replace(/[^a-z0-9]/g, "");
+  return `${slug}@kullanici.invalid`;
 }

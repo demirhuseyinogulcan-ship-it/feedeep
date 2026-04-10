@@ -4,7 +4,12 @@
 //
 // İndeks lazy-fetch: kullanıcı input'a odaklandığında
 // /api/search-index'den bir kez çekilir.
-// Bu sayede initial HTML'ye items dizisi seri­alize edilmez.
+//
+// Optimizasyon (Aşama 1):
+// - description 100 karakterle kesilmiş gelir (payload düşük)
+// - category + keywords aranabilir (arama kalitesi yüksek)
+// - Sonuçlar max 20 ile sınırlı (render performansı)
+// - threshold 0.35 (yanlış pozitif azaltma)
 // ─────────────────────────────────────────────────────────────
 
 "use client";
@@ -20,6 +25,8 @@ export interface SearchItem {
   href: string;
   type: string;
   date: string;
+  category: string;
+  keywords: string[];
 }
 
 export function SearchUI() {
@@ -41,11 +48,12 @@ export function SearchUI() {
     if (!items) return null;
     return new Fuse(items, {
       keys: [
-        { name: "title", weight: 0.5 },
-        { name: "description", weight: 0.3 },
-        { name: "type", weight: 0.2 },
+        { name: "title", weight: 0.4 },
+        { name: "keywords", weight: 0.3 },
+        { name: "description", weight: 0.2 },
+        { name: "category", weight: 0.1 },
       ],
-      threshold: 0.4,
+      threshold: 0.35,
       includeScore: true,
       minMatchCharLength: 2,
     });
@@ -53,7 +61,9 @@ export function SearchUI() {
 
   const results = useMemo(() => {
     if (!fuse || query.length < 2) return [];
-    return fuse.search(query).map((r) => r.item);
+    return fuse
+      .search(query, { limit: 20 })
+      .map((r) => r.item);
   }, [fuse, query]);
 
   return (

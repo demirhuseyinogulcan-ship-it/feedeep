@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Auth Layer Tests
-// "Tek Hayat Hesap" iş mantığı testi.
+// Supabase Anonymous Auth + claimAccount iş mantığı testi.
 // Supabase çağrıları mock'lanır — saf iş mantığı test edilir.
 // ─────────────────────────────────────────────────────────────
 
@@ -14,25 +14,34 @@ vi.mock("@/lib/supabase", () => ({
 
 import { isSupabaseConfigured, getSupabase } from "@/lib/supabase";
 
-// ─── usernameToEmail — deterministic email dönüşümü ───
-// Bu private fonksiyon doğrudan test edilemez, ama davranışı signUp/signIn üzerinden test edilebilir.
-// Onun yerine formatı doğrulayan entegrasyon testi yazıyoruz.
+// ─── usernameToFakeEmail — deterministic email dönüşümü ───
+// Bu private fonksiyon doğrudan test edilemez, ama davranışı claimAccount/signIn üzerinden test edilebilir.
 
-describe("Auth — usernameToEmail davranışı", () => {
-   
+describe("Auth — usernameToFakeEmail davranışı", () => {
+
   let capturedEmail: string | null = null;
 
   beforeEach(() => {
     capturedEmail = null;
 
     const mockAuth = {
-      signUp: vi.fn(async ({ email }: { email: string }) => {
+      getUser: vi.fn(async () => ({
+        data: {
+          user: {
+            id: "anon-uuid",
+            user_metadata: { username: "AnonUser" },
+            is_anonymous: true,
+          },
+        },
+      })),
+      updateUser: vi.fn(async ({ email }: { email: string }) => {
         capturedEmail = email;
         return {
           data: {
             user: {
-              id: "test-uuid",
+              id: "anon-uuid",
               user_metadata: { username: "TestKullanici" },
+              is_anonymous: false,
             },
           },
           error: null,
@@ -45,14 +54,12 @@ describe("Auth — usernameToEmail davranışı", () => {
             user: {
               id: "test-uuid",
               user_metadata: { username: "TestKullanici" },
+              is_anonymous: false,
             },
           },
           error: null,
         };
       }),
-      getUser: vi.fn(async () => ({
-        data: { user: null },
-      })),
     };
 
     vi.mocked(getSupabase).mockReturnValue({
@@ -61,16 +68,15 @@ describe("Auth — usernameToEmail davranışı", () => {
     } as any);
   });
 
-  it("signUp .invalid TLD kullanır", async () => {
-    // Modülü her testte yeniden import et (mock'un taze olması için)
-    const { signUp } = await import("@/lib/auth");
-    await signUp("password123", "PixelIblisi");
+  it("claimAccount .invalid TLD kullanır", async () => {
+    const { claimAccount } = await import("@/lib/auth");
+    await claimAccount("password123", "PixelIblisi");
     expect(capturedEmail).toMatch(/@kullanici\.invalid$/);
   });
 
-  it("signUp username'i lowercase ASCII slug yapar (Turkce karakterler donusturulur)", async () => {
-    const { signUp } = await import("@/lib/auth");
-    await signUp("password123", "BulutMühendisi");
+  it("claimAccount username'i lowercase ASCII slug yapar (Turkce karakterler donusturulur)", async () => {
+    const { claimAccount } = await import("@/lib/auth");
+    await claimAccount("password123", "BulutMühendisi");
     expect(capturedEmail).toMatch(/^bulutmuhendisi@/);
   });
 
@@ -80,30 +86,57 @@ describe("Auth — usernameToEmail davranışı", () => {
     expect(capturedEmail).toMatch(/@kullanici\.invalid$/);
   });
 
-  it("deterministic: aynı username her zaman aynı email", async () => {
-    const { signUp, signIn } = await import("@/lib/auth");
-    await signUp("password123", "TestKullanici");
-    const signUpEmail = capturedEmail;
+  it("deterministic: claimAccount ve signIn aynı email üretir", async () => {
+    const { claimAccount, signIn } = await import("@/lib/auth");
+    await claimAccount("password123", "TestKullanici");
+    const claimEmail = capturedEmail;
     await signIn("TestKullanici", "password123");
     const signInEmail = capturedEmail;
-    expect(signUpEmail).toBe(signInEmail);
+    expect(claimEmail).toBe(signInEmail);
   });
 });
 
-// ─── signUp — hesap oluşturma ───
+// ─── signInAnonymously — anonim oturum ───
 
-describe("signUp()", () => {
+describe("signInAnonymously()", () => {
   beforeEach(() => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(true);
   });
 
-  it("başarılı kayıtta user döner", async () => {
+  it("mevcut oturum varsa yeni oturum açmaz", async () => {
     const mockAuth = {
-      signUp: vi.fn(async () => ({
+      getUser: vi.fn(async () => ({
         data: {
           user: {
-            id: "uuid-1",
-            user_metadata: { username: "TestUser" },
+            id: "existing-uuid",
+            user_metadata: { username: "MevcutKullanici" },
+            is_anonymous: false,
+          },
+        },
+      })),
+      signInAnonymously: vi.fn(),
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
+
+    const { signInAnonymously } = await import("@/lib/auth");
+    const result = await signInAnonymously();
+    expect(result.user).toBeDefined();
+    expect(result.user!.id).toBe("existing-uuid");
+    expect(mockAuth.signInAnonymously).not.toHaveBeenCalled();
+  });
+
+  it("oturum yoksa anonim oturum açar", async () => {
+    const mockAuth = {
+      getUser: vi.fn(async () => ({
+        data: { user: null },
+      })),
+      signInAnonymously: vi.fn(async () => ({
+        data: {
+          user: {
+            id: "anon-uuid",
+            user_metadata: { username: "OtomatikIsim" },
+            is_anonymous: true,
           },
         },
         error: null,
@@ -112,24 +145,63 @@ describe("signUp()", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
 
-    const { signUp } = await import("@/lib/auth");
-    const result = await signUp("password123", "TestUser");
+    const { signInAnonymously } = await import("@/lib/auth");
+    const result = await signInAnonymously();
     expect(result.user).toBeDefined();
-    expect(result.user!.username).toBe("TestUser");
+    expect(result.user!.isAnonymous).toBe(true);
     expect(result.error).toBeNull();
   });
 
   it("Supabase yapılandırılmamışsa hata döner", async () => {
     vi.mocked(isSupabaseConfigured).mockReturnValue(false);
-    const { signUp } = await import("@/lib/auth");
-    const result = await signUp("password123");
+    const { signInAnonymously } = await import("@/lib/auth");
+    const result = await signInAnonymously();
+    expect(result.error).toBe("Supabase yapılandırılmamış.");
+  });
+});
+
+// ─── claimAccount — anonim hesabı kalıcıya yükselt ───
+
+describe("claimAccount()", () => {
+  beforeEach(() => {
+    vi.mocked(isSupabaseConfigured).mockReturnValue(true);
+  });
+
+  it("başarılı yükseltmede user döner ve isAnonymous false olur", async () => {
+    const mockAuth = {
+      updateUser: vi.fn(async () => ({
+        data: {
+          user: {
+            id: "uuid-1",
+            user_metadata: { username: "TestUser" },
+            is_anonymous: false,
+          },
+        },
+        error: null,
+      })),
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
+
+    const { claimAccount } = await import("@/lib/auth");
+    const result = await claimAccount("password123", "TestUser");
+    expect(result.user).toBeDefined();
+    expect(result.user!.username).toBe("TestUser");
+    expect(result.user!.isAnonymous).toBe(false);
+    expect(result.error).toBeNull();
+  });
+
+  it("Supabase yapılandırılmamışsa hata döner", async () => {
+    vi.mocked(isSupabaseConfigured).mockReturnValue(false);
+    const { claimAccount } = await import("@/lib/auth");
+    const result = await claimAccount("password123");
     expect(result.error).toBe("Supabase yapılandırılmamış.");
     expect(result.user).toBeNull();
   });
 
   it("zaten varolan kullanıcı Türkçe hata döner", async () => {
     const mockAuth = {
-      signUp: vi.fn(async () => ({
+      updateUser: vi.fn(async () => ({
         data: { user: null },
         error: { message: "User already registered" },
       })),
@@ -137,74 +209,9 @@ describe("signUp()", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
 
-    const { signUp } = await import("@/lib/auth");
-    const result = await signUp("password123", "VarOlan");
+    const { claimAccount } = await import("@/lib/auth");
+    const result = await claimAccount("password123", "VarOlan");
     expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
-  });
-
-  it("profiles UNIQUE ihlali (duplicate key) Türkçe hata döner", async () => {
-    // profiles.username UNIQUE trigger başarısız olunca Supabase bu hataları döner
-    const duplicateErrors = [
-      "duplicate key value violates unique constraint",
-      "ERROR: 23505: duplicate key value",
-      'unique constraint "profiles_username_key"',
-    ];
-
-    for (const msg of duplicateErrors) {
-      const mockAuth = {
-        signUp: vi.fn(async () => ({
-          data: { user: null },
-          error: { message: msg },
-        })),
-      };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
-
-      const { signUp } = await import("@/lib/auth");
-      const result = await signUp("password123", "HerhangiKullanici");
-      expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
-    }
-  });
-
-  it("aynı ASCII slug'a düşen iki farklı username çakışır", async () => {
-    // "KernelKasifi" ve "KernelKaşifi" → aynı fake email: kernelkasifi@kullanici.invalid
-    // İkincisi "already registered" alır
-    const mockAuth = {
-      signUp: vi.fn(async () => ({
-        data: { user: null },
-        error: { message: "User already registered" },
-      })),
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
-
-    const { signUp } = await import("@/lib/auth");
-    // Türkçe karaktersiz versiyon kayıtta başarısız olursa
-    // aynı "Bu kullanıcı adı zaten alınmış." mesajını almalı
-    const result = await signUp("password123", "KernelKasifi");
-    expect(result.error).toBe("Bu kullanıcı adı zaten alınmış.");
-  });
-
-  it("kullanıcı adı belirtilmezse otomatik üretir", async () => {
-    const mockAuth = {
-      signUp: vi.fn(async ({ options }: { options: { data: { username: string } } }) => ({
-        data: {
-          user: {
-            id: "uuid-auto",
-            user_metadata: { username: options.data.username },
-          },
-        },
-        error: null,
-      })),
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    vi.mocked(getSupabase).mockReturnValue({ auth: mockAuth } as any);
-
-    const { signUp } = await import("@/lib/auth");
-    const result = await signUp("password123");
-    expect(result.user).toBeDefined();
-    expect(result.user!.username).toBeTruthy();
-    expect(result.user!.username.length).toBeGreaterThan(0);
   });
 });
 
@@ -222,6 +229,7 @@ describe("signIn()", () => {
           user: {
             id: "uuid-1",
             user_metadata: { username: "TestUser" },
+            is_anonymous: false,
           },
         },
         error: null,

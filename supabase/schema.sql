@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS public.signals (
   owned_at TIMESTAMPTZ DEFAULT NULL,
   voted_at TIMESTAMPTZ DEFAULT NULL,
   created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now(),
   UNIQUE(user_id, article_id)
 );
 
@@ -246,3 +247,12 @@ CREATE POLICY "Giriş yapanlar görsel yükleyebilir"
 CREATE POLICY "Kendi görselini sil"
   ON storage.objects FOR DELETE
   USING (bucket_id = 'comment-images' AND auth.uid() = owner);
+
+-- ═══════════════════════════════════════════════════════════
+-- 9. MIGRATION: signals tablosuna updated_at kolonu ekle
+-- Mevcut tablo varsa ALTER ile ekle, yoksa CREATE'deki default kullanılır.
+-- Supabase Dashboard → SQL Editor'de çalıştır.
+-- ═══════════════════════════════════════════════════════════
+
+ALTER TABLE public.signals
+  ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ DEFAULT now();

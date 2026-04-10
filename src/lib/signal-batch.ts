@@ -232,7 +232,7 @@ async function batchFetchUserSignals(
 
   const { data } = await sb
     .from("signals")
-    .select("article_id, owned, vote, owned_at, voted_at")
+    .select("article_id, owned, vote, owned_at, voted_at, updated_at")
     .eq("user_id", userId)
     .in("article_id", articleIds);
 
@@ -243,6 +243,7 @@ async function batchFetchUserSignals(
         vote: row.vote as VoteType | null,
         ownedAt: (row.owned_at as string) ?? undefined,
         votedAt: (row.voted_at as string) ?? undefined,
+        updatedAt: (row.updated_at as string) ?? new Date().toISOString(),
       });
     }
   }

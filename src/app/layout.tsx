@@ -14,6 +14,7 @@ import { NotificationPrompt } from "@/components/shared/notification-prompt";
 import { PrefetchManager } from "@/components/shared/prefetch-manager";
 import { LazyWebVitals } from "@/components/shared/lazy-web-vitals";
 import { CookieConsent } from "@/components/shared/cookie-consent";
+import { PopupQueueProvider } from "@/components/shared/popup-queue";
 import { AuthProvider } from "@/components/auth/auth-provider";
 import "./globals.css";
 
@@ -173,14 +174,12 @@ export default function RootLayout({
         {/* Mobil nav için alt boşluk */}
         <div className="h-14 md:hidden" aria-hidden="true" />
 
-        {/* KVKK Çerez Bildirimi */}
-        <CookieConsent />
-
-        {/* PWA Install Banner */}
-        <PwaInstallBanner />
-
-        {/* Bildirim İzni */}
-        <NotificationPrompt />
+        {/* Popup Kuyruğu: Çerez → PWA → Bildirim sırasıyla */}
+        <PopupQueueProvider>
+          <CookieConsent />
+          <PwaInstallBanner />
+          <NotificationPrompt />
+        </PopupQueueProvider>
 
         {/* Navigation Prefetch */}
         <PrefetchManager />

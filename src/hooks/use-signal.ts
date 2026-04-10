@@ -60,12 +60,24 @@ export function useSignal(articleId: string, initialStats?: ArticleStats) {
     });
 
     if (user) {
-      // Giriş yapmışsa kendi sinyalini de batch ile al
+      // Giriş yapmışsa kendi sinyalini de batch ile al — LWW karşılaştırması
       signalBatcher.requestUserSignal(articleId).then((remote) => {
         if (cancelled) return;
         if (remote) {
-          setSignal(remote);
-          writeSignal(articleId, remote);
+          const local = getSignal(articleId);
+          const localTime = local.updatedAt ? new Date(local.updatedAt).getTime() : 0;
+          const remoteTime = remote.updatedAt ? new Date(remote.updatedAt).getTime() : 0;
+
+          if (remoteTime >= localTime) {
+            // Remote daha yeni veya eşit — local'i güncelle
+            setSignal(remote);
+            writeSignal(articleId, remote);
+          } else {
+            // Local daha yeni — remote'u güncelle
+            syncSignalToSupabase(articleId, local).catch((err) => {
+              console.error("[useSignal] LWW push hatası:", err);
+            });
+          }
         }
       }).catch((err) => {
         console.error("[useSignal] User signal fetch hatası:", err);

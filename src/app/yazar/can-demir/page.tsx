@@ -225,8 +225,6 @@ export default function YazarCanDemirPage() {
           </div>
         </div>
 
-        {/* ─── Son Haftalık Brifing — KALDIRILDI ─── */}
-
         {/* ─── Çizgi ─── */}
         <div className="line-void my-12 animate-line-reveal delay-500" />
 

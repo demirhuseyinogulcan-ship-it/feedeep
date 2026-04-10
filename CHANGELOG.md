@@ -16,7 +16,7 @@
 - `src/app/page.tsx` — Anasayfa için metadata override eklendi (`noindex`, canonical path)
 - `src/app/robots.ts` — Crawler dostu kural seti sadeleştirildi (`/_next/` disallow kaldırıldı, `/api/` disallow korundu)
 - `src/lib/seo.ts` — `generateMeta()` canonical override desteği (`canonicalPath`, `canonicalUrl`) ve Organization JSON-LD `email` alanı eklendi
-- `scripts/update-llms.mjs` — Public e-posta `info@airehber.com`, operasyonel e-posta `can@airehber.com` olarak netleştirildi
+- `scripts/update-llms.mjs` — Public e-posta `info@feedeep.com`, operasyonel e-posta `can@feedeep.com` olarak netleştirildi
 - `.env.example`, `.env.local.example` — Index pipeline için gerekli environment değişkenleri eklendi
 - `package.json` — `submit-indexing` scripti ve `googleapis` bağımlılığı eklendi
 - `public/llms-full.txt`, `public/llms.txt` — E-posta standardı ve içerik listesi güncellendi
@@ -121,7 +121,7 @@
 ### Kaynak Tarama
 - TechCrunch AI kategorisi tarandı (22 Şubat)
 - Anthropic resmi blog (`anthropic.com/news`) kontrol edildi
-- Referans yazı analizi: `airehber.com/yazilar/yoneticiniz-geri-bildirim-egosuz-yapay-zeka` (yazı tonu kılavuzu için)
+- Referans yazı analizi: `feedeep.com/yazilar/yoneticiniz-geri-bildirim-egosuz-yapay-zeka` (yazı tonu kılavuzu için)
 
 ### Build Durumu
 - `npm run validate` → 57 dosya, 0 hata ✅
@@ -164,7 +164,7 @@
 - AI anahtar kelime filtresi (`--filter-ai` flag): Genel teknoloji kaynaklarından gelen haberleri otomatik filtreler
 - `AI_ANAHTAR_KELIMELER` dizisi: 40+ Türkçe/İngilizce AI terimi
 - `haberler_2026-02-15.json` — İlk otomatik JSON çıktısı (36 haber → 27 filtrelenmiş)
-- `CONTENT_SYSTEM.md` §11 — Email bülten stratejisi (can@airehber.com, Outlook tabanlı)
+- `CONTENT_SYSTEM.md` §11 — Email bülten stratejisi (can@feedeep.com, Outlook tabanlı)
 - `CONTENT_SYSTEM.md` §12 — Mobil strateji (PWA → Native karar ağacı)
 - `CONTENT_SYSTEM.md` §13 — Commit & arşiv sistemi
 
@@ -196,7 +196,7 @@
 
 ### Değiştirilen
 - `package.json` — 7 yeni npm script eklendi (new:yazi/haber/prompt/kart/haftalik, validate, prebuild)
-- `public/llms.txt` — Email `can@` → `info@airehber.com` standardizasyonu
+- `public/llms.txt` — Email `can@` → `info@feedeep.com` standardizasyonu
 - `src/app/zaman-cizelgesi/page.tsx` — Hardcoded EDITORIAL_TIMELINE → import from lib
 
 ### Düzeltilen

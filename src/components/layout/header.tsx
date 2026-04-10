@@ -1,17 +1,20 @@
 // feedeep — Header
-// Logo (sol) + Arama (orta, sadece desktop) + Giriş Yap (sağ)
-// Mobilde: logo + Giriş Yap — arama alttaki MobileNav'da var
+// Logo (sol) + Arama (orta, sadece desktop) + İndir & Giriş Yap (sağ)
+// Mobilde: logo + İndir + Giriş Yap — arama alttaki MobileNav'da var
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, Download } from "lucide-react";
+import { createPortal } from "react-dom";
 import { AuthModal } from "@/components/auth/auth-modal";
 import { useAuth } from "@/components/auth/auth-provider";
+import { usePwaInstall } from "@/hooks/use-pwa-install";
 
 export function Header() {
   const { user, loading, requestAuth } = useAuth();
+  const { visible: showInstall, install, showGuide, closeGuide } = usePwaInstall();
 
   return (
     <header className="sticky top-0 z-30 w-full bg-surface-0/80 backdrop-blur-xl border-b border-white/[0.04]">
@@ -29,26 +32,67 @@ export function Header() {
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
           <Link
             href="/arama"
-            className="flex items-center gap-2 h-9 w-[280px] px-4 rounded-full bg-surface-2 border border-white/[0.06] text-sm text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
+            className="flex items-center justify-center h-9 w-9 rounded-full bg-surface-2 border border-white/[0.06] text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
+            aria-label="Ara"
           >
-            <Search className="h-4 w-4 shrink-0" />
-            <span className="truncate">daha derine dal...</span>
+            <Search className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* Auth — sağ kenarda sabit */}
+        {/* Sağ taraf: İndir → Profil/Giriş Yap */}
         <div className="ml-auto flex items-center gap-2 shrink-0">
+          {showInstall && (
+            <button
+              onClick={install}
+              className="text-xs font-heading font-medium px-4 py-1.5 rounded-lg bg-white text-surface-0 hover:bg-gray-100 hover:-translate-y-px transition-all"
+            >
+              <span className="flex items-center gap-1.5">
+                <Download className="h-3.5 w-3.5" />
+                İndir
+              </span>
+            </button>
+          )}
+
           <AuthModal />
 
-          {!loading && !user && (
+          {!loading && (!user || user.isAnonymous) && (
             <button
               onClick={requestAuth}
-              className="text-xs font-heading font-bold px-4 py-1.5 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#a855f7] text-white hover:shadow-[0_4px_20px_rgba(124,58,237,0.35)] hover:-translate-y-px transition-all"
+              className="text-xs font-heading font-medium px-4 py-1.5 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#a855f7] text-white hover:shadow-[0_4px_20px_rgba(124,58,237,0.35)] hover:-translate-y-px transition-all"
             >
               Giriş Yap
             </button>
           )}
         </div>
+
+        {/* PWA yükleme talimatı — native prompt yoksa gösterilir */}
+        {showGuide && createPortal(
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={closeGuide}>
+            <div
+              className="mx-4 max-w-sm rounded-2xl border border-white/[0.08] bg-surface-2 p-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-sm font-semibold text-gray-100">
+                Uygulamayı Yükle
+              </h3>
+              <p className="mt-2 text-xs text-gray-400 leading-relaxed">
+                Tarayıcının menüsünden &quot;Ana Ekrana Ekle&quot; veya &quot;Uygulamayı Yükle&quot; seçeneğini kullan.
+              </p>
+              <p className="mt-1.5 text-xs text-gray-500 leading-relaxed">
+                Chrome / Edge: adres çubuğundaki yükle simgesine tıkla.
+                <br />
+                Safari (iOS): Paylaş &rarr; Ana Ekrana Ekle.
+              </p>
+              <button
+                onClick={closeGuide}
+                className="mt-4 w-full text-xs font-medium py-2 rounded-lg bg-surface-3 text-gray-300 hover:bg-surface-4 transition-colors"
+              >
+                Anladım
+              </button>
+            </div>
+          </div>,
+          document.body,
+        )}
       </div>
     </header>
   );

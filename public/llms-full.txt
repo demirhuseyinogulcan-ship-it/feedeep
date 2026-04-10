@@ -35,12 +35,16 @@ Her haberde kaynak URL ve kaynak adı zorunlu.
 
 ## İstatistikler
 
-- Toplam haber: 91
-- Toplam yazı: 11
+- Toplam haber: 103
+- Toplam yazı: 12
 
 ## Tüm İçerik Listesi
 
 ### Yazılar
+- [Şirketler Yapay Zeka Bahanesiyle mi İşten Çıkarıyor?](https://feedeep.com/yazilar/sirketler-yapay-zeka-bahanesiyle-iscikariyor-ai-washing)
+  Kategori: analiz | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Klarna '700 kişinin işini AI yapıyor' dedi, sonra yeniden insan işe aldı. Şirketler ekonomik işten çıkarmalarını neden yapay zekayla açıklıyor?
+
 - [Bilgi Saklayan Yönetici Gerçekten Kazanıyor mu?](https://feedeep.com/yazilar/bilgi-saklayan-yonetici-gercekten-kazaniyor-mu)
   Kategori: analiz | Tarih: Mon Mar 23 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Yöneticiler bilgiyi güç aracı olarak saklıyor. Araştırmalar bunun yaratıcılığı, performansı ve güveni yıktığını gösteriyor. AI bu denklemi kökten değiştiriyor.
@@ -86,6 +90,54 @@ Her haberde kaynak URL ve kaynak adı zorunlu.
   2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?
 
 ### Haberler
+- [AfterQuery 30 Milyon Dolar Aldı: Uzmanlığı AI'a Aktarıyor](https://feedeep.com/haberler/afterquery-30-milyon-dolar-uzman-veri-ai-egitimi)
+  Kaynak: AfterQuery | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  A serisi turuna Altos Ventures liderlik etti; değlerleme 300 milyon dolar. AfterQuery uzman bilgisini AI eğitim verisine dönüştürüyor.
+
+- [ROI Kanıtlanamıyor Ama AI Harcaması Durmuyor: KPMG](https://feedeep.com/haberler/ai-roi-kanitlanamadi-kurumsal-harcama-kpmg-2026)
+  Kaynak: The Register | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  UK iş liderlerinin %65'i ölçülebilir getiri olmasa da AI yatırımını sürdürecek. Gartner: AI kullanım senaryolarının yalnızca %28'i tam ROI sağlıyor.
+
+- [Claude Cowork: Bir Sabahta Wrapper Girişim Çağını Kapattı](https://feedeep.com/haberler/anthropic-claude-cowork-ajansal-calisma-otomasyon)
+  Kaynak: Anthropic | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Claude Cowork, AI ekip çalışması araçları satan yüzlerce girişimi tek hamlede geçersiz kıldı. Aylık 17 dolarla asistan değil, tam iş yürütücü.
+
+- [Mythos: 27 Yıllık Açıkları Bulan Yapay Zeka Kimseye Verilmiyor](https://feedeep.com/haberler/anthropic-claude-mythos-project-glasswing-siber-guvenlik)
+  Kaynak: Anthropic | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Claude Mythos Preview, her işletim sisteminde ve tarayıcıda binlerce kritik güvenlik açığı buldu. Anthropic modeli halka açmıyor — ama neden?
+
+- [ChatGPT'ye 100 Dolarlık Yeni Pro Katmanı: Codex Odağı](https://feedeep.com/haberler/chatgpt-100-dolar-yeni-pro-plani-codex)
+  Kaynak: OpenAI Community | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI, aylık 20 dolarlık Plus ile 200 dolarlık Pro arasına yeni bir $100 katmanı ekledi. Plan, Plus'a kıyasla 5 kat daha fazla Codex kullanımı sunuyor.
+
+- [FBI Silinen Signal Mesajlarını Okudu: iPhone Bildirimi Açığı](https://feedeep.com/haberler/fbi-signal-mesaj-iphone-bildirim-veritabani)
+  Kaynak: 9to5Mac | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  FBI, bir iOS bildirimleri veritabanından silinen Signal mesajlarına erişti. Uçtan uca şifreleme, bildirim önizlemesi etkinse içeriği koruyamaz.
+
+- [Gallup: Z Kuşağı AI'dan Hayal Kırıklığında, Vazgeçemiyor](https://feedeep.com/haberler/gen-z-yapay-zeka-hayal-kirikligi-gallup-2026)
+  Kaynak: The Verge | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  1.600 kişilik Gallup araştırması: ABD'li 14-29 yaş gençliği yapay zekaya giderek daha az güveniyor ancak kullanımı bırakmıyor.
+
+- [Sağlık AI Girişimi Luminai, 38 Milyon Dolar B Serisi Aldı](https://feedeep.com/haberler/luminai-38-milyon-dolar-b-serisi-saglik-ai)
+  Kaynak: Luminai | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Peak XV Partners liderliğinde tamamlanan B serisi turuyla Luminai'ın toplam finansmanı 60 milyon dolara ulaştı. Şirket hastanelerde idari otomasyon yapıyor.
+
+- [Microsoft Copilot Düğmelerini Kaldırıyor: İki Yıllık Geri Adım](https://feedeep.com/haberler/microsoft-copilot-butonlari-windows-11-kaldiriliyor)
+  Kaynak: The Verge | Tarih: Fri Apr 10 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Notepad, Fotoğraflar ve Widget'lardan Copilot butonları siliniyor. Microsoft AI özelliklerini değil, zorla yerleştirilen marka görünürlüğünü azaltıyor.
+
+- [Gemini Artık 3B Model ve İnteraktif Simülasyon Üretiyor](https://feedeep.com/haberler/google-gemini-interaktif-simulasyon-3d-model)
+  Kaynak: Google Blog | Tarih: Thu Apr 09 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Google'ın Gemini uygulaması, sorularınızı statik diyagramlar yerine oynanabilir fizik simülasyonlarına ve döndürülebilir molekül modellerine dönüştürüyor.
+
+- [Meta Muse Spark: Kişisel Süper Zeka Yolunda İlk Adım](https://feedeep.com/haberler/meta-muse-spark-kisisel-superintelligence-cok-modal)
+  Kaynak: Meta AI Blog | Tarih: Wed Apr 08 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Meta'nın yeni Muse Spark modeli, çok-modal akıl yürütme, sağlık uygulamaları ve çoklu ajan orkestrasyon sunuyor. Llama 4'ten 10 kat daha verimli eğitimle geldi.
+
+- [OpenAI: Kurumsal AI Artık Deneme Değil, Altyapı](https://feedeep.com/haberler/openai-frontier-kurumsal-ai-codex-superapp)
+  Kaynak: OpenAI | Tarih: Wed Apr 08 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  OpenAI'ın kurumsal geliri toplam gelirin yüzde 40'ına ulaştı. Codex 3 milyon haftalık kullanıcıya erişti. Şirket, tek bir AI superapp vizyonuna geçiyor.
+
 - [Anthropic Siyasi Lobiye Ağırlığını Koyuyor: AnthroPAC Kuruldu](https://feedeep.com/haberler/anthropic-anthropac-siyasi-lobi-pac-kuruldu)
   Kaynak: TechCrunch | Tarih: Sun Apr 05 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   Anthropic, AnthroPAC adlı siyasi eylem komitesi kurdu. AI şirketleri 2026 ara seçimlerine toplam 185 milyon dolar akıttı.

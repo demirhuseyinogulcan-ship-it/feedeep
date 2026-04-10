@@ -90,7 +90,7 @@ scripts/                 # Otomasyon (validate, indexing, llms.txt, favicon)
 
 ```bash
 git clone https://github.com/demirhuseyinogulcan-ship-it/airehber.git
-cd airehber
+cd feedeep
 npm install
 ```
 

@@ -4,6 +4,7 @@
 // feedeep — Auth Context Provider
 // Kullanıcı oturumunu tüm bileşenlerde erişilebilir kılar.
 // + requestAuth() ile herhangi bileşenden modal açılabilir.
+// + Anonim auth: ilk yüklemede oturum yoksa otomatik anonim oturum açar.
 // ─────────────────────────────────────────────────────────────
 
 import {
@@ -14,7 +15,13 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
-import { getCurrentUser, onAuthChange, type AuthUser } from "@/lib/auth";
+import {
+  getCurrentUser,
+  onAuthChange,
+  signInAnonymously,
+  type AuthUser,
+} from "@/lib/auth";
+import { syncAllSignals } from "@/lib/signals";
 
 type AuthContextType = {
   user: AuthUser | null;
@@ -38,18 +45,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [showAuth, setShowAuth] = useState(false);
 
   useEffect(() => {
-    // İlk yükleme
+    // İlk yükleme: mevcut oturum var mı kontrol et, yoksa anonim oturum aç
     getCurrentUser().then((u) => {
-      setUser(u);
-      setLoading(false);
+      if (u) {
+        setUser(u);
+        setLoading(false);
+        // Mevcut oturum varsa localStorage ↔ Supabase sync
+        syncAllSignals().catch(() => {});
+      } else {
+        // Anonim oturum aç
+        signInAnonymously().then(({ user: anonUser }) => {
+          setUser(anonUser);
+          setLoading(false);
+          // Anonim oturum sonrası localStorage ↔ Supabase sync
+          syncAllSignals().catch(() => {});
+        });
+      }
     });
 
     // Değişiklikleri dinle
     const { unsubscribe } = onAuthChange((u) => {
       setUser(u);
       setLoading(false);
-      // Giriş yapıldıysa modalı kapat
-      if (u) setShowAuth(false);
+      // Kalıcı hesap oluşturulduysa modalı kapat + sinyalleri sync et
+      if (u && !u.isAnonymous) {
+        setShowAuth(false);
+        syncAllSignals().catch(() => {});
+      }
     });
 
     return () => unsubscribe();

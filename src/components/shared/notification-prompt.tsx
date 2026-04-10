@@ -4,11 +4,13 @@
 //   1. Notification.requestPermission()
 //   2. PushManager.subscribe() — VAPID public key ile
 //   3. POST /api/push/subscribe — Supabase'e kaydet
+// Popup Queue entegrasyonu: sıra gelince gösterilir
 // ─────────────────────────────────────────────────────────────
 
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePopupQueue } from "./popup-queue";
 
 /** base64url → Uint8Array (VAPID applicationServerKey için) */
 function urlBase64ToUint8Array(base64String: string): Uint8Array<ArrayBuffer> {
@@ -19,7 +21,7 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array<ArrayBuffer> {
 }
 
 export function NotificationPrompt() {
-  const [show, setShow] = useState(false);
+  const { current, enqueue, dismiss } = usePopupQueue();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -35,13 +37,10 @@ export function NotificationPrompt() {
       return;
     }
 
-    // Standalone (PWA olarak yüklü) ise daha erken göster
-    const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
-    const delay = isStandalone ? 3000 : 10000;
-    const timer = setTimeout(() => setShow(true), delay);
-
+    // 3s sonra kuyruğa ekle
+    const timer = setTimeout(() => enqueue("notification"), 3000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [enqueue]);
 
   const requestPermission = useCallback(async () => {
     setLoading(true);
@@ -50,7 +49,7 @@ export function NotificationPrompt() {
       const permission = await Notification.requestPermission();
 
       if (permission !== "granted") {
-        setShow(false);
+        dismiss();
         setLoading(false);
         return;
       }
@@ -61,7 +60,7 @@ export function NotificationPrompt() {
 
       if (!vapidPublicKey) {
         console.warn("[push] NEXT_PUBLIC_VAPID_PUBLIC_KEY tanımlı değil.");
-        setShow(false);
+        dismiss();
         setLoading(false);
         return;
       }
@@ -89,24 +88,24 @@ export function NotificationPrompt() {
       console.warn("[push] İzin akışı başarısız:", err);
     }
 
-    setShow(false);
+    dismiss();
     setLoading(false);
-  }, []);
+  }, [dismiss]);
 
   const handleDismiss = () => {
-    setShow(false);
     localStorage.setItem("notif-dismissed", Date.now().toString());
+    dismiss();
   };
 
-  if (!show) return null;
+  if (current !== "notification") return null;
 
   return (
-    <div className="fixed bottom-20 left-4 right-4 sm:bottom-4 sm:left-auto sm:right-4 sm:max-w-sm z-50 animate-fade-up">
-      <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl p-5 shadow-2xl">
-        <p className="text-sm text-gray-300 mb-2">
+    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-up">
+      <div className="w-full max-w-xs rounded-2xl border border-white/[0.08] bg-surface-2/95 backdrop-blur-xl p-6 shadow-2xl">
+        <p className="text-sm font-heading font-semibold text-gray-100 mb-2">
           Yeni İçeriklerden Haberdar Ol
         </p>
-        <p className="text-xs text-gray-500 leading-relaxed mb-4">
+        <p className="text-xs text-gray-500 leading-relaxed mb-5">
           Yeni yazı ve haberler yayınlandığında bildirim al.
         </p>
         <div className="flex items-center gap-3">
@@ -114,7 +113,7 @@ export function NotificationPrompt() {
             type="button"
             onClick={handleDismiss}
             disabled={loading}
-            className="text-xs text-gray-500 hover:text-gray-300 bg-transparent border border-white/[0.06] px-3 py-1.5 rounded-md transition-colors disabled:opacity-50"
+            className="flex-1 text-xs text-gray-400 hover:text-gray-200 border border-white/[0.06] hover:border-white/[0.12] px-3 py-2 rounded-lg transition-colors disabled:opacity-50"
           >
             Şimdi Değil
           </button>
@@ -122,7 +121,7 @@ export function NotificationPrompt() {
             type="button"
             onClick={requestPermission}
             disabled={loading}
-            className="text-xs text-gray-200 bg-white/[0.06] hover:bg-white/[0.1] px-3 py-1.5 rounded-md transition-colors disabled:opacity-50"
+            className="flex-1 text-xs font-medium text-white bg-gradient-to-br from-[#7c3aed] to-[#a855f7] hover:shadow-[0_4px_20px_rgba(124,58,237,0.35)] px-3 py-2 rounded-lg transition-all disabled:opacity-50"
           >
             {loading ? "Kaydediliyor..." : "İzin Ver"}
           </button>
