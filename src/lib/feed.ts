@@ -8,6 +8,7 @@ import {
   YAZI_CATEGORIES,
   HABER_CATEGORIES,
 } from "@/lib/constants";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 // ─── Feed Item Types (Discriminated Union) ───
 
@@ -17,6 +18,7 @@ type BaseItem = {
   description: string;
   href: string;
   date: string;
+  publishedAt: string;
   category: string;
   categoryLabel: string;
   readingTime: number;
@@ -64,6 +66,7 @@ export function buildFeed(): FeedItem[] {
       description: h.description,
       href: `/haberler/${h.slug}`,
       date: h.date,
+      publishedAt: getPublicationDate(h),
       category: h.category,
       categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
       readingTime: h.metadata.readingTime,
@@ -84,6 +87,7 @@ export function buildFeed(): FeedItem[] {
       description: y.description,
       href: `/yazilar/${y.slug}`,
       date: y.date,
+      publishedAt: getPublicationDate(y),
       category: y.category,
       categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
       readingTime: y.metadata.readingTime,
@@ -96,19 +100,15 @@ export function buildFeed(): FeedItem[] {
   }
 
   // Tarihe göre sırala (en yeni en üstte)
-  items.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
-
-  return items;
+  return sortContent(items);
 }
 
 // ─── Type-Specific Builders (listing sayfalari icin) ───
 
 export function buildHaberFeed(): HaberFeedItem[] {
-  return haberler
-    .filter((x) => x.published)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return sortContent(
+    haberler.filter((x) => x.published),
+  )
     .map((h) => ({
       id: `haber-${h.slug}`,
       type: "haber" as const,
@@ -116,6 +116,7 @@ export function buildHaberFeed(): HaberFeedItem[] {
       description: h.description,
       href: `/haberler/${h.slug}`,
       date: h.date,
+      publishedAt: getPublicationDate(h),
       category: h.category,
       categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
       readingTime: h.metadata.readingTime,
@@ -129,9 +130,9 @@ export function buildHaberFeed(): HaberFeedItem[] {
 }
 
 export function buildYaziFeed(): YaziFeedItem[] {
-  return yazilar
-    .filter((x) => x.published)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return sortContent(
+    yazilar.filter((x) => x.published),
+  )
     .map((y) => ({
       id: `yazi-${y.slug}`,
       type: "yazi" as const,
@@ -139,6 +140,7 @@ export function buildYaziFeed(): YaziFeedItem[] {
       description: y.description,
       href: `/yazilar/${y.slug}`,
       date: y.date,
+      publishedAt: getPublicationDate(y),
       category: y.category,
       categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
       readingTime: y.metadata.readingTime,

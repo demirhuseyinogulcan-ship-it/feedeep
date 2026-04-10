@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────────────────────────
 
 import { yazilar, haberler } from "#site/content";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 // ─── Types ───
 
@@ -12,6 +13,7 @@ export type HeroItem = {
   description: string;
   slug: string;
   date: string;
+  publishedAt: string;
   category: string;
   href: string;
   type: "yazi" | "haber";
@@ -26,13 +28,9 @@ export type HeroItem = {
 
 // ─── Filtered & Sorted Data ───
 
-export const publishedYazilar = yazilar
-  .filter((y) => y.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export const publishedYazilar = sortContent(yazilar.filter((y) => y.published));
 
-export const publishedHaberler = haberler
-  .filter((h) => h.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export const publishedHaberler = sortContent(haberler.filter((h) => h.published));
 
 // ─── Hero Item Selection ───
 
@@ -45,6 +43,7 @@ export function getHeroItem(): HeroItem | null {
       description: y.description,
       slug: y.slug,
       date: y.date,
+      publishedAt: getPublicationDate(y),
       category: y.category,
       href: `/yazilar/${y.slug}`,
       type: "yazi",
@@ -64,6 +63,7 @@ export function getHeroItem(): HeroItem | null {
       description: h.description,
       slug: h.slug,
       date: h.date,
+      publishedAt: getPublicationDate(h),
       category: h.category,
       href: `/haberler/${h.slug}`,
       type: "haber",
@@ -82,10 +82,7 @@ export function getHeroItem(): HeroItem | null {
   const editorPick = candidates.find((c) => c.editorPick);
   if (editorPick) return editorPick;
 
-  candidates.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-  return candidates[0];
+  return sortContent(candidates)[0];
 }
 
 // ─── Section Data Builders ───

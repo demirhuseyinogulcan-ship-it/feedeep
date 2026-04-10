@@ -15,10 +15,9 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { FilterableContentList } from "@/components/shared/filterable-content-list";
 import { buildHaberFeed } from "@/lib/feed";
+import { sortContent } from "@/lib/content-order";
 
-const publishedNews = haberler
-  .filter((h) => h.published)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const publishedNews = sortContent(haberler.filter((h) => h.published));
 
 export const metadata: Metadata = generateMeta({
   title: "Yazılım ve AI Haberleri: Güncel Gelişmeler [2026]",

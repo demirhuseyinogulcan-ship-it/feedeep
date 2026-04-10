@@ -4,6 +4,7 @@
 
 import { SITE } from "@/lib/constants";
 import { yazilar, haberler } from "#site/content";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 function escapeXml(str: string): string {
   return str
@@ -21,10 +22,11 @@ export async function GET() {
     url: string;
     description: string;
     date: string;
+    publishedAt: string;
     category?: string;
   };
 
-  const entries: FeedEntry[] = [
+  const entries = sortContent<FeedEntry>([
     ...yazilar
       .filter((y) => y.published)
       .map((y) => ({
@@ -32,6 +34,7 @@ export async function GET() {
         url: `${SITE.url}/yazilar/${y.slug}`,
         description: y.description,
         date: y.date,
+        publishedAt: getPublicationDate(y),
         category: y.category,
       })),
     ...haberler
@@ -41,9 +44,10 @@ export async function GET() {
         url: `${SITE.url}/haberler/${h.slug}`,
         description: h.description,
         date: h.date,
+        publishedAt: getPublicationDate(h),
         category: h.category,
       })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  ])
     .slice(0, 50);
 
   const feedItems = entries
@@ -53,7 +57,7 @@ export async function GET() {
       <title>${escapeXml(entry.title)}</title>
       <link>${entry.url}</link>
       <description>${escapeXml(entry.description)}</description>
-      <pubDate>${new Date(entry.date).toUTCString()}</pubDate>
+      <pubDate>${new Date(entry.publishedAt).toUTCString()}</pubDate>
       <guid isPermaLink="true">${entry.url}</guid>${entry.category ? `\n      <category>${escapeXml(entry.category)}</category>` : ""}
       <content:encoded><![CDATA[<p>${escapeXml(entry.description)}</p><p><a href="${entry.url}">Devamini oku</a></p>]]></content:encoded>
     </item>`

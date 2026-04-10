@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { yazilar, haberler } from "#site/content";
+import { sortContent } from "@/lib/content-order";
 
 export const metadata: Metadata = generateMeta({
   title: `${SITE.author.name} — Kurucu & Editör`,
@@ -43,13 +44,9 @@ const UZMANLIKLAR = [
 
 export default function YazarCanDemirPage() {
   // Son 5 yazı ve 5 haber
-  const sonYazilar = [...yazilar]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
+  const sonYazilar = sortContent(yazilar).slice(0, 5);
 
-  const sonHaberler = [...haberler]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
+  const sonHaberler = sortContent(haberler).slice(0, 5);
 
   const toplamIcerik = yazilar.length + haberler.length;
 

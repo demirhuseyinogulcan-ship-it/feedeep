@@ -3,21 +3,24 @@
 
 import Link from "next/link";
 import { haberler, yazilar } from "#site/content";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 interface TickerItem {
   title: string;
   href: string;
   date: string;
+  publishedAt: string;
 }
 
 function getTickerItems(): TickerItem[] {
-  return [
+  return sortContent([
     ...haberler
       .filter((h) => h.published)
       .map((h) => ({
         title: h.title,
         href: `/haberler/${h.slug}`,
         date: h.date,
+        publishedAt: getPublicationDate(h),
       })),
     ...yazilar
       .filter((y) => y.published)
@@ -25,9 +28,9 @@ function getTickerItems(): TickerItem[] {
         title: y.title,
         href: `/yazilar/${y.slug}`,
         date: y.date,
+        publishedAt: getPublicationDate(y),
       })),
-  ]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  ])
     .slice(0, 15);
 }
 

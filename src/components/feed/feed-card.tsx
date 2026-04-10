@@ -53,7 +53,7 @@ export function FeedCard({ item, index }: Props) {
           </div>
           <div className="min-w-0">
             <p className="text-xs font-semibold text-gray-300">{headerLabel}</p>
-            <p className="text-[10px] text-gray-500">{timeAgo(item.date)}</p>
+            <p className="text-[10px] text-gray-500">{timeAgo(item.publishedAt)}</p>
           </div>
           <span className="ml-auto text-[9px] font-sans tracking-widest uppercase text-primary-400/50 border border-primary-400/20 rounded-full px-2 py-0.5">
             {badge}

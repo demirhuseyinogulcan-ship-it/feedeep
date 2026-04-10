@@ -31,6 +31,7 @@ const yazilar = defineCollection({
     slug: s.slug("yazilar"),
     description: s.string().max(160),
     date: s.isodate(),
+    publishedAt: s.isodate().optional(),
     updated: s.isodate().optional(),
     published: s.boolean().default(true),
 
@@ -82,6 +83,7 @@ const haberler = defineCollection({
     slug: s.slug("haberler"),
     description: s.string().max(160),
     date: s.isodate(),
+    publishedAt: s.isodate().optional(),
     updated: s.isodate().optional(),
     published: s.boolean().default(true),
 

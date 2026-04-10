@@ -6,14 +6,17 @@
 
 import { haberler } from "#site/content";
 import { SITE } from "@/lib/constants";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 export async function GET() {
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-  const recentNews = haberler
-    .filter((h) => h.published && new Date(h.date) >= thirtyDaysAgo)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const recentNews = sortContent(
+    haberler.filter(
+      (h) => h.published && new Date(getPublicationDate(h)) >= thirtyDaysAgo,
+    ),
+  );
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -32,7 +35,7 @@ ${recentNews.length === 0
         <news:name>${SITE.organization.name}</news:name>
         <news:language>${SITE.language}</news:language>
       </news:publication>
-      <news:publication_date>${new Date(h.date).toISOString()}</news:publication_date>
+      <news:publication_date>${new Date(getPublicationDate(h)).toISOString()}</news:publication_date>
       <news:title>${escapeXml(h.title)}</news:title>
     </news:news>
     <image:image>

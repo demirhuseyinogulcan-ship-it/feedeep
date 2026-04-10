@@ -19,6 +19,7 @@ import { ShareButtons } from "@/components/shared/share-buttons";
 import { SignalBar } from "@/components/signals/signal-bar";
 import { CommentSection } from "@/components/signals/comment-section";
 import { SITE } from "@/lib/constants";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: news.description,
     path: `/haberler/${news.slug}`,
     type: "article",
-    publishedTime: news.date,
+    publishedTime: getPublicationDate(news),
     modifiedTime: news.updated,
     keywords: news.keywords,
     image: news.image,
@@ -57,15 +58,15 @@ export default async function HaberDetayPage({ params }: Props) {
   const categoryLabel = HABER_CATEGORIES[news.category] ?? news.category;
 
   // İlgili haberler: aynı kategori veya ortak keyword
-  const related = haberler
-    .filter(
+  const related = sortContent(
+    haberler.filter(
       (h) =>
         h.published &&
         h.slug !== news.slug &&
         (h.category === news.category ||
           h.keywords?.some((k) => news.keywords?.includes(k)))
-    )
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    ),
+  )
     .slice(0, 3)
     .map((h) => ({
       slug: h.slug,
@@ -89,7 +90,7 @@ export default async function HaberDetayPage({ params }: Props) {
             title: news.title,
             description: news.description,
             slug: news.slug,
-            publishedTime: news.date,
+            publishedTime: getPublicationDate(news),
             modifiedTime: news.updated,
             sourceUrl: news.sourceUrl,
             sourceName: news.sourceName,

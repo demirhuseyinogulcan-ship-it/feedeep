@@ -37,6 +37,10 @@ function today() {
   return new Date().toISOString().split("T")[0];
 }
 
+function now() {
+  return new Date().toISOString();
+}
+
 function ask(rl, question, defaultValue) {
   return new Promise((resolve) => {
     const prompt = defaultValue ? `${question} [${defaultValue}]: ` : `${question}: `;
@@ -102,6 +106,7 @@ title: "${title}"
 slug: ${slug}
 description: "${description}"
 date: ${today()}
+publishedAt: ${now()}
 category: ${category}
 keywords:
 ${keywordList.map((k) => `  - "${k}"`).join("\n")}
@@ -173,6 +178,7 @@ title: "${title}"
 slug: ${slug}
 description: "${description}"
 date: ${today()}
+publishedAt: ${now()}
 sourceUrl: "${sourceUrl}"
 sourceName: "${sourceName}"
 category: ${category}

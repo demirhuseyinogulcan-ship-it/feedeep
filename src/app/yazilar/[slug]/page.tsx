@@ -19,6 +19,7 @@ import { ShareButtons } from "@/components/shared/share-buttons";
 import { SignalBar } from "@/components/signals/signal-bar";
 import { CommentSection } from "@/components/signals/comment-section";
 import { SITE } from "@/lib/constants";
+import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     path: `/yazilar/${post.slug}`,
     type: "article",
-    publishedTime: post.date,
+    publishedTime: getPublicationDate(post),
     modifiedTime: post.updated,
     keywords: post.keywords,
     image: post.image,
@@ -57,15 +58,15 @@ export default async function YaziDetayPage({ params }: Props) {
   const categoryLabel = YAZI_CATEGORIES[post.category] ?? post.category;
 
   // İlgili yazılar: aynı kategori veya ortak keyword
-  const related = yazilar
-    .filter(
+  const related = sortContent(
+    yazilar.filter(
       (y) =>
         y.published &&
         y.slug !== post.slug &&
         (y.category === post.category ||
           y.keywords?.some((k) => post.keywords?.includes(k)))
-    )
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    ),
+  )
     .slice(0, 3)
     .map((y) => ({
       slug: y.slug,
@@ -89,7 +90,7 @@ export default async function YaziDetayPage({ params }: Props) {
             title: post.title,
             description: post.description,
             slug: post.slug,
-            publishedTime: post.date,
+            publishedTime: getPublicationDate(post),
             modifiedTime: post.updated,
             keywords: post.keywords,
             section: categoryLabel,

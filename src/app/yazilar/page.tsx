@@ -11,6 +11,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { FilterableContentList } from "@/components/shared/filterable-content-list";
 import { buildYaziFeed } from "@/lib/feed";
+import { sortContent } from "@/lib/content-order";
 
 export const metadata: Metadata = generateMeta({
   title: "Yazılım ve AI Yazıları: Analizler ve İncelemeler [2026]",
@@ -28,9 +29,7 @@ export const metadata: Metadata = generateMeta({
 });
 
 export default function YazilarPage() {
-  const posts = yazilar
-    .filter((y) => y.published)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const posts = sortContent(yazilar.filter((y) => y.published));
 
   const items = buildYaziFeed();
 
