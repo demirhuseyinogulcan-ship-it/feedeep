@@ -10,11 +10,15 @@ import { OwnButton } from "@/components/signals/own-button";
 import { VoteButtons } from "@/components/signals/vote-buttons";
 import { useSignal } from "@/hooks/use-signal";
 import { cn } from "@/lib/utils";
+import type { ArticleStats } from "@/lib/signals";
 
 type Props = {
   articleId: string;
   size?: "sm" | "lg";
   className?: string;
+  /** FeedContainer'dan batch olarak önceden çekilen istatistikler.
+   *  Sağlanırsa useSignal hook'u ayrıca fetch yapmaz. */
+  initialStats?: ArticleStats;
 };
 
 function SignalBarSkeleton({ size = "sm" }: { size?: "sm" | "lg" }) {
@@ -33,8 +37,8 @@ function SignalBarSkeleton({ size = "sm" }: { size?: "sm" | "lg" }) {
   );
 }
 
-export function SignalBar({ articleId, size = "sm", className }: Props) {
-  const { signal, stats, statsLoaded, toggleOwn, toggleVote } = useSignal(articleId);
+export function SignalBar({ articleId, size = "sm", className, initialStats }: Props) {
+  const { signal, stats, statsLoaded, toggleOwn, toggleVote } = useSignal(articleId, initialStats);
 
   if (!statsLoaded) {
     return (
