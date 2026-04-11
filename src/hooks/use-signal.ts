@@ -8,7 +8,8 @@
 // Giriş yapmış: localStorage + Supabase arka plan sync.
 // ─────────────────────────────────────────────────────────────
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { logger } from "@/lib/logger";
 import {
   getSignal,
   toggleOwnership,
@@ -27,6 +28,7 @@ const EMPTY_STATS: ArticleStats = {
   totalUpvotes: 0,
   totalDownvotes: 0,
   totalComments: 0,
+  totalViews: 0,
 };
 
 export function useSignal(articleId: string, initialStats?: ArticleStats) {
@@ -34,6 +36,19 @@ export function useSignal(articleId: string, initialStats?: ArticleStats) {
   const [signal, setSignal] = useState<Signal>(() => getSignal(articleId));
   const [stats, setStats] = useState<ArticleStats>(initialStats ?? EMPTY_STATS);
   const [statsLoaded, setStatsLoaded] = useState(!!initialStats);
+  const [syncError, setSyncError] = useState<string | null>(null);
+  const syncErrorTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // syncError otomatik temizle ref cleanup
+  useEffect(() => () => {
+    if (syncErrorTimerRef.current) clearTimeout(syncErrorTimerRef.current);
+  }, []);
+
+  const raiseSyncError = useCallback(() => {
+    setSyncError("Değişiklik kaydedilemedi. İnternet bağlantını kontrol et.");
+    if (syncErrorTimerRef.current) clearTimeout(syncErrorTimerRef.current);
+    syncErrorTimerRef.current = setTimeout(() => setSyncError(null), 3000);
+  }, []);
 
   // articleId değişince localStorage'dan sinyali güncelle (render-time)
   const [prevArticleId, setPrevArticleId] = useState(articleId);
@@ -55,7 +70,7 @@ export function useSignal(articleId: string, initialStats?: ArticleStats) {
         setStatsLoaded(true);
       }
     }).catch((err) => {
-      console.error("[useSignal] Stats fetch hatası:", err);
+      logger.error("useSignal/statsFetch", err, { articleId });
       if (!cancelled) setStatsLoaded(true);
     });
 
@@ -75,12 +90,12 @@ export function useSignal(articleId: string, initialStats?: ArticleStats) {
           } else {
             // Local daha yeni — remote'u güncelle
             syncSignalToSupabase(articleId, local).catch((err) => {
-              console.error("[useSignal] LWW push hatası:", err);
+              logger.error("useSignal/lwwPush", err, { articleId });
             });
           }
         }
       }).catch((err) => {
-        console.error("[useSignal] User signal fetch hatası:", err);
+        logger.error("useSignal/userSignalFetch", err, { articleId });
       });
     }
 
@@ -108,10 +123,11 @@ export function useSignal(articleId: string, initialStats?: ArticleStats) {
     // Arka planda Supabase'e sync
     if (user) {
       syncSignalToSupabase(articleId, result).catch((err) => {
-        console.error("[useSignal] Own sync hatası:", err);
+        logger.error("useSignal/ownSync", err, { articleId });
+        raiseSyncError();
       });
     }
-  }, [articleId, user]);
+  }, [articleId, user, raiseSyncError]);
 
   const handleToggleVote = useCallback(
     (type: VoteType) => {
@@ -141,17 +157,19 @@ export function useSignal(articleId: string, initialStats?: ArticleStats) {
       // Arka planda Supabase'e sync
       if (user) {
         syncSignalToSupabase(articleId, result).catch((err) => {
-          console.error("[useSignal] Vote sync hatası:", err);
+          logger.error("useSignal/voteSync", err, { articleId });
+          raiseSyncError();
         });
       }
     },
-    [articleId, user],
+    [articleId, user, raiseSyncError],
   );
 
   return {
     signal: displaySignal,
     stats,
     statsLoaded,
+    syncError,
     toggleOwn: handleToggleOwn,
     toggleVote: handleToggleVote,
   };

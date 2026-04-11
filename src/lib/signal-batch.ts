@@ -39,6 +39,7 @@ const EMPTY_STATS: ArticleStats = {
   totalUpvotes: 0,
   totalDownvotes: 0,
   totalComments: 0,
+  totalViews: 0,
 };
 
 // ─── DataLoader Singleton ──────────────────────────────────
@@ -210,6 +211,7 @@ async function batchFetchStats(
       totalUpvotes: row.total_upvotes ?? 0,
       totalDownvotes: row.total_downvotes ?? 0,
       totalComments: row.total_comments ?? 0,
+      totalViews: row.total_views ?? 0,
     });
   }
 

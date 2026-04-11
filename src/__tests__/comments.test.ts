@@ -39,8 +39,8 @@ describe("addComment()", () => {
   });
 
   it("reply oluşturur (parentId ile)", async () => {
-    const root = await addComment("article-1", "Ana yorum");
-    const reply = await addComment("article-1", "Yanıt", undefined, root.id);
+    const root = await addComment("article-1", "Ana yorum mesajı");
+    const reply = await addComment("article-1", "Yanıt mesajı bu", undefined, root.id);
     expect(reply.parentId).toBe(root.id);
   });
 
@@ -78,16 +78,16 @@ describe("addComment()", () => {
     };
     localStorage.setItem(SIGNAL_KEY, JSON.stringify(signalStore));
 
-    await addComment("article-1", "Yorum");
+    await addComment("article-1", "Yorum mesajı bu");
     const signals = JSON.parse(localStorage.getItem(SIGNAL_KEY)!);
     // Hala sahipli — toggle ile false olmamış olmalı
     expect(signals["article-1"].owned).toBe(true);
   });
 
   it("her yorum benzersiz ID alır", async () => {
-    const c1 = await addComment("article-1", "Yorum 1");
-    const c2 = await addComment("article-1", "Yorum 2");
-    const c3 = await addComment("article-1", "Yorum 3");
+    const c1 = await addComment("article-1", "Yorum mesajı birinci");
+    const c2 = await addComment("article-1", "Yorum mesajı ikinci");
+    const c3 = await addComment("article-1", "Yorum mesajı üçüncü");
     const ids = new Set([c1.id, c2.id, c3.id]);
     expect(ids.size).toBe(3);
   });
@@ -112,18 +112,18 @@ describe("getComments()", () => {
   it("en yeni yorum önce gelir (sıralama)", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2025-01-01T10:00:00Z"));
-    await addComment("article-1", "Eski");
+    await addComment("article-1", "Eski yorum mesajı");
     vi.setSystemTime(new Date("2025-01-01T10:01:00Z"));
-    await addComment("article-1", "Yeni");
+    await addComment("article-1", "Yeni yorum mesajı");
     vi.useRealTimers();
     const comments = getComments("article-1");
-    expect(comments[0].text).toBe("Yeni");
-    expect(comments[1].text).toBe("Eski");
+    expect(comments[0].text).toBe("Yeni yorum mesajı");
+    expect(comments[1].text).toBe("Eski yorum mesajı");
   });
 
   it("reply dahil tüm yorumları döner", async () => {
-    const root = await addComment("article-1", "Ana");
-    await addComment("article-1", "Yanıt", undefined, root.id);
+    const root = await addComment("article-1", "Ana yorum mesajı");
+    await addComment("article-1", "Yanıt mesajı bu", undefined, root.id);
     expect(getComments("article-1").length).toBe(2);
   });
 });
@@ -132,17 +132,17 @@ describe("getComments()", () => {
 
 describe("getRootComments()", () => {
   it("sadece root yorumları döner", async () => {
-    const root = await addComment("article-1", "Root");
-    await addComment("article-1", "Reply", undefined, root.id);
+    const root = await addComment("article-1", "Root yorumu bu");
+    await addComment("article-1", "Reply mesajı bu", undefined, root.id);
     const roots = getRootComments("article-1");
     expect(roots.length).toBe(1);
-    expect(roots[0].text).toBe("Root");
+    expect(roots[0].text).toBe("Root yorumu bu");
   });
 
   it("birden fazla root yorumu döner", async () => {
-    await addComment("article-1", "Root 1");
-    await addComment("article-1", "Root 2");
-    await addComment("article-1", "Root 3");
+    await addComment("article-1", "Root yorum birinci");
+    await addComment("article-1", "Root yorum ikinci");
+    await addComment("article-1", "Root yorum üçüncü");
     expect(getRootComments("article-1").length).toBe(3);
   });
 });
@@ -151,36 +151,36 @@ describe("getRootComments()", () => {
 
 describe("getReplies()", () => {
   it("doğru parent'ın yanıtlarını döner", async () => {
-    const root = await addComment("article-1", "Ana");
-    await addComment("article-1", "Yanıt 1", undefined, root.id);
-    await addComment("article-1", "Yanıt 2", undefined, root.id);
+    const root = await addComment("article-1", "Ana yorum mesajı");
+    await addComment("article-1", "Yanıt mesajı birinci", undefined, root.id);
+    await addComment("article-1", "Yanıt mesajı ikinci", undefined, root.id);
     const replies = getReplies("article-1", root.id);
     expect(replies.length).toBe(2);
   });
 
   it("en eski yanıt önce gelir (konuşma sırası)", async () => {
-    const root = await addComment("article-1", "Ana");
-    await addComment("article-1", "İlk yanıt", undefined, root.id);
-    await addComment("article-1", "Son yanıt", undefined, root.id);
+    const root = await addComment("article-1", "Ana yorum mesajı");
+    await addComment("article-1", "İlk yanıt mesajı", undefined, root.id);
+    await addComment("article-1", "Son yanıt mesajı", undefined, root.id);
     const replies = getReplies("article-1", root.id);
-    expect(replies[0].text).toBe("İlk yanıt");
-    expect(replies[1].text).toBe("Son yanıt");
+    expect(replies[0].text).toBe("İlk yanıt mesajı");
+    expect(replies[1].text).toBe("Son yanıt mesajı");
   });
 
   it("yanıt yokken boş dizi döner", async () => {
-    const root = await addComment("article-1", "Ana");
+    const root = await addComment("article-1", "Ana yorum mesajı");
     expect(getReplies("article-1", root.id)).toEqual([]);
   });
 
   it("iç içe yanıtlar (nested threading)", async () => {
-    const root = await addComment("article-1", "Seviye 0");
-    const reply1 = await addComment("article-1", "Seviye 1", undefined, root.id);
-    await addComment("article-1", "Seviye 2", undefined, reply1.id);
+    const root = await addComment("article-1", "Seviye sıfır mesaj");
+    const reply1 = await addComment("article-1", "Seviye bir mesaj", undefined, root.id);
+    await addComment("article-1", "Seviye iki mesaj", undefined, reply1.id);
     const level1 = getReplies("article-1", root.id);
     expect(level1.length).toBe(1);
     const level2 = getReplies("article-1", reply1.id);
     expect(level2.length).toBe(1);
-    expect(level2[0].text).toBe("Seviye 2");
+    expect(level2[0].text).toBe("Seviye iki mesaj");
   });
 });
 
@@ -188,14 +188,14 @@ describe("getReplies()", () => {
 
 describe("deleteComment()", () => {
   it("yorumu siler", async () => {
-    const comment = await addComment("article-1", "Silinecek");
+    const comment = await addComment("article-1", "Silinecek yorum");
     deleteComment("article-1", comment.id);
     expect(getComments("article-1").length).toBe(0);
   });
 
   it("yanıtları da cascade siler", async () => {
-    const root = await addComment("article-1", "Ana");
-    await addComment("article-1", "Yanıt", undefined, root.id);
+    const root = await addComment("article-1", "Ana yorum mesajı");
+    await addComment("article-1", "Yanıt mesajı bu", undefined, root.id);
     deleteComment("article-1", root.id);
     expect(getComments("article-1").length).toBe(0);
   });
@@ -205,14 +205,14 @@ describe("deleteComment()", () => {
   });
 
   it("başka makale yorumlarını etkilemez", async () => {
-    await addComment("article-1", "A makale");
-    const b = await addComment("article-2", "B makale");
+    await addComment("article-1", "A makale yorumu");
+    const b = await addComment("article-2", "B makale yorumu");
     deleteComment("article-2", b.id);
     expect(getComments("article-1").length).toBe(1);
   });
 
   it("tüm yorumlar silinirse store temizlenir", async () => {
-    const c = await addComment("article-1", "Tek yorum");
+    const c = await addComment("article-1", "Tek yorum mesajı");
     deleteComment("article-1", c.id);
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
     expect(raw["article-1"]).toBeUndefined();
@@ -223,14 +223,14 @@ describe("deleteComment()", () => {
 
 describe("voteComment()", () => {
   it("up oy verir", async () => {
-    const c = await addComment("article-1", "Test");
+    const c = await addComment("article-1", "Test yorumu bu");
     voteComment("article-1", c.id, "up");
     const comments = getComments("article-1");
     expect(comments[0].vote).toBe("up");
   });
 
   it("aynı oy tipine tekrar tıklamak kaldırır", async () => {
-    const c = await addComment("article-1", "Test");
+    const c = await addComment("article-1", "Test yorumu bu");
     voteComment("article-1", c.id, "up");
     voteComment("article-1", c.id, "up");
     const comments = getComments("article-1");
@@ -238,7 +238,7 @@ describe("voteComment()", () => {
   });
 
   it("up'tan down'a geçer", async () => {
-    const c = await addComment("article-1", "Test");
+    const c = await addComment("article-1", "Test yorumu bu");
     voteComment("article-1", c.id, "up");
     voteComment("article-1", c.id, "down");
     const comments = getComments("article-1");
@@ -258,15 +258,15 @@ describe("getCommentCount()", () => {
   });
 
   it("reply dahil toplam sayıyı döner", async () => {
-    const root = await addComment("article-1", "Root");
-    await addComment("article-1", "Reply", undefined, root.id);
+    const root = await addComment("article-1", "Root yorumu bu");
+    await addComment("article-1", "Reply mesajı bu", undefined, root.id);
     expect(getCommentCount("article-1")).toBe(2);
   });
 
   it("farklı makaleler bağımsız sayılır", async () => {
-    await addComment("article-1", "A");
-    await addComment("article-2", "B");
-    await addComment("article-2", "C");
+    await addComment("article-1", "Birinci makale yorumu");
+    await addComment("article-2", "İkinci makale yorumu");
+    await addComment("article-2", "Üçüncü makale yorumu");
     expect(getCommentCount("article-1")).toBe(1);
     expect(getCommentCount("article-2")).toBe(2);
   });

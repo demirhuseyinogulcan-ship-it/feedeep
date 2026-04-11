@@ -18,6 +18,7 @@ import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { SignalBar } from "@/components/signals/signal-bar";
 import { CommentSection } from "@/components/signals/comment-section";
+import { ViewTracker } from "@/components/content/view-tracker";
 import { SITE } from "@/lib/constants";
 import { getPublicationDate, sortContent } from "@/lib/content-order";
 
@@ -107,6 +108,7 @@ export default async function YaziDetayPage({ params }: Props) {
       />
 
       <ReadingTracker title={post.title} />
+      <ViewTracker articleId={`yazi-${post.slug}`} />
       <article className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
         <Breadcrumb
           items={[

@@ -8,6 +8,7 @@
 
 import { useState, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { Eye, EyeOff } from "lucide-react";
 import { claimAccount, signIn } from "@/lib/auth";
 import { generateUsername } from "@/lib/username-generator";
 import { useAuth } from "./auth-provider";
@@ -15,6 +16,26 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 type Mode = "register" | "login";
+
+// Her dilde feedeep kimliği — kayan tagline için
+const TAGLINE_WORDS = [
+  "yazılımın sesi",
+  "voice of software",
+  "stimme der software",
+  "la voce del software",
+  "软件之声",
+  "ソフトウェアの声",
+  "صوت البرمجيات",
+  "голос ПО",
+  "yazılımın sesi",
+  "voice of software",
+  "stimme der software",
+  "la voce del software",
+  "软件之声",
+  "ソフトウェアの声",
+  "صوت البرمجيات",
+  "голос ПО",
+];
 
 export function AuthModal() {
   const { user, loading, showAuth, closeAuth } = useAuth();
@@ -24,6 +45,7 @@ export function AuthModal() {
   const [generatedName, setGeneratedName] = useState(() => generateUsername());
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Modal açıldığında formu sıfırla (render-time state adjustment)
   const [prevShowAuth, setPrevShowAuth] = useState(false);
@@ -32,6 +54,8 @@ export function AuthModal() {
     setUsername("");
     setPassword("");
     setError(null);
+    setMode("register");
+    setShowPassword(false);
     setGeneratedName(generateUsername());
   }
   if (!showAuth && prevShowAuth) {
@@ -42,7 +66,13 @@ export function AuthModal() {
     setGeneratedName(generateUsername());
   }, []);
 
-  async function handleRegister(e: React.FormEvent) {
+  function switchMode(next: Mode) {
+    setMode(next);
+    setError(null);
+    setShowPassword(false);
+  }
+
+  async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (password.length < 6) {
       setError("Şifre en az 6 karakter olmalı.");
@@ -77,7 +107,7 @@ export function AuthModal() {
     }
   }
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!username.trim() || !password) {
       setError("Kullanıcı adı ve şifre gerekli.");
@@ -99,7 +129,7 @@ export function AuthModal() {
 
   return (
     <>
-      {/* Header butonları */}
+      {/* Header — giriş yapmış kullanıcı profil butonu */}
       {user && !user.isAnonymous ? (
         <Link
           href="/profil"
@@ -113,190 +143,225 @@ export function AuthModal() {
       {/* ── Full-screen Modal — portal to body ── */}
       {showAuth && (!user || user.isAnonymous) && typeof document !== "undefined" && createPortal(
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4"
           onClick={(e) => {
             if (e.target === e.currentTarget) closeAuth();
           }}
         >
-          {mode === "register" ? (
-            <form
-              onSubmit={handleRegister}
-              className="w-full max-w-sm rounded-xl border border-white/[0.08] bg-[#0a0a0a] p-6 space-y-5 shadow-2xl overflow-y-auto max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="space-y-2">
-                <h2 className="text-lg font-heading font-bold text-gray-100">
-                  Hesabını Kalıcı Yap
-                </h2>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  Şu an anonim olarak geziniyorsun. Şifre belirleyerek verilerini kalıcı hale getirebilirsin.
-                </p>
-              </div>
+          <div
+            className="w-full max-w-md rounded-2xl border border-white/[0.08] bg-[#0a0a0a] shadow-2xl overflow-hidden overflow-y-auto max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
 
-              {/* Otomatik kullanıcı adı */}
-              <div className="space-y-2">
-                <label className="text-[11px] text-gray-500 block">
-                  Kullanıcı adın
-                </label>
-                <div className="flex items-center gap-2">
-                  <span className="flex-1 rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2 text-sm text-primary-400 font-semibold truncate">
-                    {generatedName}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={regenerateName}
-                    className="text-xs text-gray-400 hover:text-gray-200 shrink-0 transition-colors px-2 py-1 rounded border border-white/[0.06] hover:border-white/[0.12]"
-                  >
-                    Değiştir
-                  </button>
+            {/* ── Marka başlığı ── */}
+            <div className="px-8 pt-8 pb-5 text-center border-b border-white/[0.06]">
+              <span className="logo-gradient text-[26px] leading-none">feedeep</span>
+              {/* Her dilde kayan tagline */}
+              <div className="ticker-wrapper overflow-hidden mt-3">
+                <div
+                  className="ticker-track flex gap-6 text-xs text-gray-500 whitespace-nowrap"
+                  style={{ animationDuration: "22s" }}
+                >
+                  {TAGLINE_WORDS.map((word, i) => (
+                    <span key={i}>{word}</span>
+                  ))}
                 </div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  Bu isim sana özel atandı. Beğenmediysen Değiştir&apos;e bas.
-                  Bu nicki sadece bir kere alabilirsin — iyi seç.
-                </p>
               </div>
+            </div>
 
-              {/* Şifre */}
-              <div className="space-y-2">
-                <label className="text-[11px] text-gray-500 block">
-                  Şifre (en az 6 karakter)
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Şifreni belirle..."
-                  minLength={6}
-                  autoFocus
-                  className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
-                />
-              </div>
+            {/* ── Mod sekmeleri ── */}
+            <div className="flex border-b border-white/[0.06]">
+              <button
+                type="button"
+                onClick={() => switchMode("register")}
+                className={cn(
+                  "flex-1 py-3 text-[11px] font-heading font-semibold tracking-widest uppercase transition-colors",
+                  mode === "register"
+                    ? "text-primary-400 border-b-2 border-primary-500 -mb-px"
+                    : "text-gray-600 hover:text-gray-400",
+                )}
+              >
+                Hesap Oluştur
+              </button>
+              <button
+                type="button"
+                onClick={() => switchMode("login")}
+                className={cn(
+                  "flex-1 py-3 text-[11px] font-heading font-semibold tracking-widest uppercase transition-colors",
+                  mode === "login"
+                    ? "text-primary-400 border-b-2 border-primary-500 -mb-px"
+                    : "text-gray-600 hover:text-gray-400",
+                )}
+              >
+                Giriş Yap
+              </button>
+            </div>
 
-              {/* ── Tek Hayat Uyarısı ── */}
-              <div className="rounded-lg border border-yellow-500/40 bg-yellow-500/[0.06] px-3 py-2.5 space-y-1">
-                <p className="text-[10px] font-semibold text-yellow-400 uppercase tracking-widest">
-                  Dikkat — Şifreni Unutma
-                </p>
-                <p className="text-xs text-yellow-300/70 leading-relaxed">
-                  Şifre sıfırlama seçeneği henüz yoktur. Şifreni unutursan
-                  yeni bir anonim hesapla devam etmen gerekir.
-                </p>
-              </div>
+            {/* ── Form içeriği ── */}
+            <div className="px-8 py-7">
+              {mode === "register" ? (
+                <form onSubmit={handleRegister} className="space-y-5">
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    Anonim kimliğini kalıcı yap. Sinyallerin ve koleksiyonun seninle kalır.
+                  </p>
 
-              {error && (
-                <p className="text-xs text-red-400">{error}</p>
-              )}
+                  {/* Otomatik kullanıcı adı */}
+                  <div className="space-y-2">
+                    <label className="text-xs text-gray-400 block">
+                      Kullanıcı adın
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="flex-1 rounded-lg border border-primary-500/20 bg-primary-500/[0.04] px-3 py-2.5 text-sm text-primary-400 font-semibold truncate">
+                        {generatedName}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={regenerateName}
+                        className="text-xs text-gray-500 hover:text-gray-200 shrink-0 transition-colors px-3 py-2.5 rounded-lg border border-white/[0.06] hover:border-white/[0.12]"
+                      >
+                        Değiştir
+                      </button>
+                    </div>
+                    <p className="text-[11px] text-gray-600 leading-relaxed">
+                      Nick sana özel üretildi. Sonradan değiştiremezsin — iyi seç.
+                    </p>
+                  </div>
 
-              <div className="flex items-center gap-3 pt-1">
-                <button
-                  type="submit"
-                  disabled={submitting || password.length < 6}
-                  className={cn(
-                    "flex-1 text-[11px] font-heading font-semibold tracking-widest uppercase py-2.5 rounded-md border transition-colors",
-                    "border-primary-500/40 text-primary-400 hover:bg-primary-500/10",
-                    "disabled:opacity-30 disabled:cursor-not-allowed",
+                  {/* Şifre */}
+                  <div className="space-y-2">
+                    <label className="text-xs text-gray-400 block">
+                      Şifre
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="En az 6 karakter"
+                        minLength={6}
+                        autoFocus
+                        autoComplete="new-password"
+                        className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2.5 pr-16 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((p) => !p)}
+                        aria-label={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Şifre uyarısı — sarı değil, void kimliğine uygun */}
+                  <p className="text-[11px] text-gray-600 leading-relaxed border-l-2 border-primary-500/25 pl-3">
+                    Şifreni güvenli bir yere kaydet. Sıfırlama henüz aktif değil.
+                  </p>
+
+                  {error && (
+                    <p className="text-xs text-red-400">{error}</p>
                   )}
-                >
-                  {submitting ? "Yükseltiliyor..." : "Hesabı Kalıcı Yap"}
-                </button>
-                <button
-                  type="button"
-                  onClick={closeAuth}
-                  className="text-[11px] text-gray-600 hover:text-gray-300 transition-colors"
-                >
-                  İptal
-                </button>
-              </div>
 
-              <p className="text-[10px] text-gray-700 text-center">
-                Zaten hesabın var mı?{" "}
-                <button
-                  type="button"
-                  onClick={() => { setMode("login"); setError(null); }}
-                  className="text-primary-400/60 hover:text-primary-400"
-                >
-                  Giriş yap
-                </button>
-              </p>
-            </form>
-          ) : (
-            <form
-              onSubmit={handleLogin}
-              className="w-full max-w-sm rounded-xl border border-white/[0.08] bg-[#0a0a0a] p-6 space-y-5 shadow-2xl overflow-y-auto max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div>
-                <h2 className="text-lg font-heading font-bold text-gray-100">
-                  Giriş Yap
-                </h2>
-              </div>
+                  <div className="space-y-3 pt-1">
+                    <button
+                      type="submit"
+                      disabled={submitting || password.length < 6}
+                      className={cn(
+                        "btn-liquid relative w-full py-3 text-[11px] font-heading font-semibold tracking-widest uppercase text-white",
+                        "transition-transform hover:-translate-y-px",
+                        "disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none",
+                      )}
+                    >
+                      <span className="btn-liquid-glow" />
+                      <span className="relative z-10">
+                        {submitting ? "Yükseltiliyor..." : "Topluluğa Katıl"}
+                      </span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={closeAuth}
+                      className="w-full text-sm text-gray-500 hover:text-gray-300 transition-colors py-1"
+                    >
+                      Şimdilik geç
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form onSubmit={handleLogin} className="space-y-5">
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    Daha önce hesap oluşturduysan buradan giriş yap.
+                  </p>
 
-              <div className="space-y-1.5">
-                <label className="text-[11px] text-gray-500 block">
-                  Kullanıcı adın
-                </label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="PromptBüyücüsü"
-                  autoFocus
-                  className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <label className="text-xs text-gray-400 block">
+                      Kullanıcı adın
+                    </label>
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="PromptBüyücüsü"
+                      autoFocus
+                      className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2.5 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
+                    />
+                  </div>
 
-              <div className="space-y-1.5">
-                <label className="text-[11px] text-gray-500 block">
-                  Şifre
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Şifreni gir..."
-                  className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
-                />
-              </div>
+                  <div className="space-y-2">
+                    <label className="text-xs text-gray-400 block">
+                      Şifre
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Şifreni gir"
+                        autoComplete="current-password"
+                        className="w-full rounded-lg border border-white/[0.06] bg-surface-1 px-3 py-2.5 pr-16 text-sm text-gray-300 placeholder:text-gray-600 focus:border-primary-500/30 focus:outline-none transition-colors"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((p) => !p)}
+                        aria-label={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
 
-              {error && (
-                <p className="text-xs text-red-400">{error}</p>
-              )}
-
-              <div className="flex items-center gap-3 pt-1">
-                <button
-                  type="submit"
-                  disabled={submitting || !username.trim() || !password}
-                  className={cn(
-                    "flex-1 text-[11px] font-heading font-semibold tracking-widest uppercase py-2.5 rounded-md border transition-colors",
-                    "border-white/[0.08] text-gray-300 hover:text-gray-100 hover:border-primary-500/30",
-                    "disabled:opacity-30 disabled:cursor-not-allowed",
+                  {error && (
+                    <p className="text-xs text-red-400">{error}</p>
                   )}
-                >
-                  {submitting ? "Giriş yapılıyor..." : "Giriş Yap"}
-                </button>
-                <button
-                  type="button"
-                  onClick={closeAuth}
-                  className="text-[11px] text-gray-600 hover:text-gray-300 transition-colors"
-                >
-                  İptal
-                </button>
-              </div>
 
-              <p className="text-[10px] text-gray-700 text-center">
-                Hesabın yok mu?{" "}
-                <button
-                  type="button"
-                  onClick={() => { setMode("register"); setError(null); }}
-                  className="text-primary-400/60 hover:text-primary-400"
-                >
-                  Hesap oluştur
-                </button>
-              </p>
-            </form>
-          )}
+                  <div className="space-y-3 pt-1">
+                    <button
+                      type="submit"
+                      disabled={submitting || !username.trim() || !password}
+                      className={cn(
+                        "w-full py-3 text-[11px] font-heading font-semibold tracking-widest uppercase rounded-lg",
+                        "bg-primary-600 text-white hover:bg-primary-500 transition-colors",
+                        "disabled:opacity-40 disabled:cursor-not-allowed",
+                      )}
+                    >
+                      {submitting ? "Giriş yapılıyor..." : "Giriş Yap"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={closeAuth}
+                      className="w-full text-sm text-gray-500 hover:text-gray-300 transition-colors py-1"
+                    >
+                      Vazgeç
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+
+          </div>
         </div>,
-        document.body
+        document.body,
       )}
     </>
   );

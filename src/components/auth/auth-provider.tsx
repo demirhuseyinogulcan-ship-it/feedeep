@@ -22,6 +22,7 @@ import {
   type AuthUser,
 } from "@/lib/auth";
 import { syncAllSignals } from "@/lib/signals";
+import { logger } from "@/lib/logger";
 
 type AuthContextType = {
   user: AuthUser | null;
@@ -51,14 +52,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(u);
         setLoading(false);
         // Mevcut oturum varsa localStorage ↔ Supabase sync
-        syncAllSignals().catch(() => {});
+        syncAllSignals().catch((err) => { logger.warn("auth/syncAllSignals", "Sync başarısız", { userId: u?.id, err: String(err) }); });
       } else {
         // Anonim oturum aç
         signInAnonymously().then(({ user: anonUser }) => {
           setUser(anonUser);
           setLoading(false);
           // Anonim oturum sonrası localStorage ↔ Supabase sync
-          syncAllSignals().catch(() => {});
+          syncAllSignals().catch((err) => { logger.warn("auth/syncAllSignals", "Sync başarısız", { userId: anonUser?.id, err: String(err) }); });
         });
       }
     });
@@ -70,7 +71,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Kalıcı hesap oluşturulduysa modalı kapat + sinyalleri sync et
       if (u && !u.isAnonymous) {
         setShowAuth(false);
-        syncAllSignals().catch(() => {});
+        syncAllSignals().catch((err) => { logger.warn("auth/syncAllSignals", "Sync başarısız", { userId: u?.id, err: String(err) }); });
       }
     });
 

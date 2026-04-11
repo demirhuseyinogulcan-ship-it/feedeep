@@ -9,7 +9,8 @@
 import { OwnButton } from "@/components/signals/own-button";
 import { VoteButtons } from "@/components/signals/vote-buttons";
 import { useSignal } from "@/hooks/use-signal";
-import { cn } from "@/lib/utils";
+import { cn, formatViews } from "@/lib/utils";
+import { Eye } from "lucide-react";
 import type { ArticleStats } from "@/lib/signals";
 
 type Props = {
@@ -50,7 +51,18 @@ export function SignalBar({ articleId, size = "sm", className, initialStats }: P
 
   return (
     <div className={cn("flex items-center justify-between", className)}>
-      <VoteButtons signal={signal} stats={stats} toggleVote={toggleVote} size={size} />
+      <div className="flex items-center gap-2">
+        <VoteButtons signal={signal} stats={stats} toggleVote={toggleVote} size={size} />
+        {stats.totalViews >= 100 && (
+          <span className={cn(
+            "flex items-center gap-1 text-gray-600 tabular-nums",
+            size === "lg" ? "text-xs" : "text-[10px]",
+          )}>
+            <Eye className={size === "lg" ? "h-3.5 w-3.5" : "h-3 w-3"} />
+            {formatViews(stats.totalViews)}
+          </span>
+        )}
+      </div>
       <OwnButton signal={signal} stats={stats} toggleOwn={toggleOwn} size={size} />
     </div>
   );

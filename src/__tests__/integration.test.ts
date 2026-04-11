@@ -20,7 +20,7 @@ beforeEach(() => {
 
 describe("Yorum → Otomatik sahiplenme", () => {
   it("yorum sonrası manuel sahiplenme çalışır", async () => {
-    await addComment("article-1", "İlk yorum");
+    await addComment("article-1", "İlk yorum mesajı");
     // Otomatik sahiplenme artık hook katmanında; data layer dokunmaz
     expect(getSignal("article-1").owned).toBe(false);
     toggleOwnership("article-1");
@@ -29,14 +29,14 @@ describe("Yorum → Otomatik sahiplenme", () => {
 
   it("zaten sahiplenilmiş makaleye yorum toggle etmez", async () => {
     toggleOwnership("article-1"); // owned = true
-    await addComment("article-1", "Yorum");
+    await addComment("article-1", "Yorum mesajı bu");
     // Data layer sahiplenmeye dokunmaz
     expect(getSignal("article-1").owned).toBe(true);
   });
 
   it("farklı makalelere yorum bağımsız (sinyal ayrı)", async () => {
-    await addComment("article-a", "A yorumu");
-    await addComment("article-b", "B yorumu");
+    await addComment("article-a", "A makale yorumu");
+    await addComment("article-b", "B makale yorumu");
     // Data layer sinyal store'a yazmaz
     expect(getSignal("article-a").owned).toBe(false);
     expect(getSignal("article-b").owned).toBe(false);
@@ -68,15 +68,15 @@ describe("Signal + Comment birlikte çalışma", () => {
 
   it("sahiplenme geri alınsa da yorum kalır", async () => {
     toggleOwnership("article-1");
-    await addComment("article-1", "Yorum");
+    await addComment("article-1", "Yorum mesajı bu");
     toggleOwnership("article-1"); // geri al (false)
     expect(getSignal("article-1").owned).toBe(false);
     expect(getCommentCount("article-1")).toBe(1);
   });
 
   it("sahiplenilen makaleler listesi sadece sinyal store'dan gelir", async () => {
-    await addComment("article-1", "Yorum A");
-    await addComment("article-2", "Yorum B");
+    await addComment("article-1", "Yorum A mesajı");
+    await addComment("article-2", "Yorum B mesajı");
     toggleOwnership("article-3"); // sadece sahiplenme, yorum yok
     const ids = getOwnedIds();
     // Yorum yazmak sahiplenmez; sadece toggleOwnership yapan article-3 listede
@@ -112,7 +112,7 @@ describe("Veri tutarlılığı", () => {
   });
 
   it("localStorage temizlenince her şey sıfırlanır", async () => {
-    await addComment("article-1", "Yorum");
+    await addComment("article-1", "Yorum mesajı bu");
     toggleVote("article-1", "upvote");
     localStorage.clear();
     expect(getSignal("article-1").owned).toBe(false);

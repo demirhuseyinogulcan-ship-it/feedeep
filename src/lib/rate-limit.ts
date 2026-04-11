@@ -36,3 +36,6 @@ export const apiLimiter = createRateLimiter(30, "1 m");
 
 /** Push Subscription: IP başına 5 kayıt / 1 saat */
 export const pushLimiter = createRateLimiter(5, "1 h");
+
+/** Yorum: kullanıcı başına 1 yorum / 30 saniye */
+export const commentLimiter = createRateLimiter(1, "30 s");

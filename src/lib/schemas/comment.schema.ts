@@ -47,8 +47,8 @@ export const commentInputSchema = z.object({
   imageUrl: z.string().min(1).optional(),
   parentId: z.string().min(1).optional(),
 }).refine(
-  (data) => data.text.length > 0 || data.imageUrl !== undefined,
-  { message: "Yorum boş olamaz.", path: ["text"] },
+  (data) => data.imageUrl !== undefined || data.text.length >= 10,
+  { message: "Yorum en az 10 karakter olmalıdır.", path: ["text"] },
 );
 
 export type CommentInput = z.infer<typeof commentInputSchema>;

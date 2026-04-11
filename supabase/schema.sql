@@ -256,3 +256,111 @@ CREATE POLICY "Kendi görselini sil"
 
 ALTER TABLE public.signals
   ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ DEFAULT now();
+
+-- ═══════════════════════════════════════════════════════════
+-- 10. ARTICLE_VIEWS — Makale görüntülenme sayaçları
+-- API route üzerinden increment edilir (Redis dedup + IP hash).
+-- ═══════════════════════════════════════════════════════════
+
+CREATE TABLE IF NOT EXISTS public.article_views (
+  article_id TEXT PRIMARY KEY,
+  view_count BIGINT DEFAULT 0,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- RLS: Herkes okuyabilir, sadece service role / RPC artırabilir
+ALTER TABLE public.article_views ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Görüntülenme sayıları herkese açık"
+  ON public.article_views FOR SELECT
+  USING (true);
+
+-- Atomic increment — race condition olmaz
+CREATE OR REPLACE FUNCTION public.increment_view(p_article_id TEXT)
+RETURNS void
+LANGUAGE sql
+AS $$
+  INSERT INTO public.article_views (article_id, view_count, updated_at)
+  VALUES (p_article_id, 1, now())
+  ON CONFLICT (article_id)
+  DO UPDATE SET view_count = article_views.view_count + 1, updated_at = now();
+$$;
+
+-- En popüler makaleler (sidebar widget için)
+CREATE OR REPLACE FUNCTION public.get_popular_articles(p_limit INTEGER DEFAULT 5)
+RETURNS TABLE (article_id TEXT, view_count BIGINT)
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT av.article_id, av.view_count
+  FROM public.article_views av
+  WHERE av.view_count > 0
+  ORDER BY av.view_count DESC
+  LIMIT p_limit;
+$$;
+
+-- ═══════════════════════════════════════════════════════════
+-- 10b. get_batch_article_stats GÜNCELLEME — total_views eklendi
+-- ═══════════════════════════════════════════════════════════
+
+CREATE OR REPLACE FUNCTION public.get_batch_article_stats(article_ids TEXT[])
+RETURNS TABLE (
+  article_id TEXT,
+  total_owners INTEGER,
+  total_upvotes INTEGER,
+  total_downvotes INTEGER,
+  total_comments INTEGER,
+  total_views BIGINT
+)
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT
+    a.id                                                          AS article_id,
+    COALESCE(s.owners,    0)::INTEGER                             AS total_owners,
+    COALESCE(s.upvotes,   0)::INTEGER                             AS total_upvotes,
+    COALESCE(s.downvotes, 0)::INTEGER                             AS total_downvotes,
+    COALESCE(c.cnt,       0)::INTEGER                             AS total_comments,
+    COALESCE(v.view_count, 0)::BIGINT                             AS total_views
+  FROM unnest(article_ids) AS a(id)
+  LEFT JOIN (
+    SELECT
+      sig.article_id,
+      COUNT(*) FILTER (WHERE sig.owned = true)    AS owners,
+      COUNT(*) FILTER (WHERE sig.vote = 'upvote') AS upvotes,
+      COUNT(*) FILTER (WHERE sig.vote = 'downvote') AS downvotes
+    FROM public.signals AS sig
+    WHERE sig.article_id = ANY(article_ids)
+    GROUP BY sig.article_id
+  ) s ON s.article_id = a.id
+  LEFT JOIN (
+    SELECT co.article_id, COUNT(*) AS cnt
+    FROM public.comments AS co
+    WHERE co.article_id = ANY(article_ids)
+    GROUP BY co.article_id
+  ) c ON c.article_id = a.id
+  LEFT JOIN public.article_views v ON v.article_id = a.id;
+$$;
+
+-- get_article_stats de güncelle (tekil makale sayfası)
+CREATE OR REPLACE FUNCTION public.get_article_stats(p_article_id TEXT)
+RETURNS TABLE (
+  total_owners INTEGER,
+  total_upvotes INTEGER,
+  total_downvotes INTEGER,
+  total_comments INTEGER,
+  total_views BIGINT
+)
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    COALESCE((SELECT COUNT(*)::INTEGER FROM public.signals WHERE article_id = p_article_id AND owned = true), 0),
+    COALESCE((SELECT COUNT(*)::INTEGER FROM public.signals WHERE article_id = p_article_id AND vote = 'upvote'), 0),
+    COALESCE((SELECT COUNT(*)::INTEGER FROM public.signals WHERE article_id = p_article_id AND vote = 'downvote'), 0),
+    COALESCE((SELECT COUNT(*)::INTEGER FROM public.comments WHERE article_id = p_article_id), 0),
+    COALESCE((SELECT view_count FROM public.article_views WHERE article_id = p_article_id), 0)::BIGINT;
+END;
+$$;

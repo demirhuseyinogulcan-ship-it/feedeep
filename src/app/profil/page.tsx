@@ -88,8 +88,7 @@ export default function ProfilPage() {
         setDataLoaded(true);
       }).catch(() => setDataLoaded(true));
     } else {
-      // localStorage fallback — Promise.resolve ile async callback yaparak
-      // eslint set-state-in-effect kuralını geçiyoruz
+      // localStorage fallback — async callback ile ESLint set-state-in-effect kuralını geç
       Promise.resolve().then(() => {
         const ids = getOwnedIds();
         setStats({

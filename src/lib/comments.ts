@@ -14,6 +14,7 @@ import {
   type SupabaseCommentRow,
 } from "./schemas/comment.schema";
 import { sanitizeText } from "./sanitize";
+import { commentLimiter } from "./rate-limit";
 
 const STORAGE_KEY = "feedeep_comments";
 
@@ -250,6 +251,14 @@ export async function addCommentToSupabase(
   if (!isSupabaseConfigured()) return null;
   const userId = await getSessionUserId();
   if (!userId) return null;
+
+  // Rate limit: kullanıcı başına 1 yorum / 30 saniye
+  if (commentLimiter) {
+    const { success } = await commentLimiter.limit(userId);
+    if (!success) {
+      throw new Error("\u00c7ok hızlı yorum yapıyorsun. Lütfen 30 saniye bekle.");
+    }
+  }
 
   // Katman 1: Zod girdi validasyonu
   const input = commentInputSchema.parse({ text, imageUrl, parentId });

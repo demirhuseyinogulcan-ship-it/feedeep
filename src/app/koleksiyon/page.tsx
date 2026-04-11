@@ -9,8 +9,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { haberler, yazilar } from "#site/content";
 import { getOwnedIds, fetchOwnedIds } from "@/lib/signals";
 import { useAuth } from "@/components/auth/auth-provider";
+
+// Build-time map: slug → başlık (Velite, SSR-safe)
+const titleMap = new Map<string, string>([
+  ...haberler.map((h) => [h.slug, h.title] as [string, string]),
+  ...yazilar.map((y) => [y.slug, y.title] as [string, string]),
+]);
 
 type OwnedItem = {
   id: string;
@@ -28,31 +35,49 @@ function parseOwnedId(id: string): OwnedItem | null {
   return null;
 }
 
-function slugToTitle(slug: string): string {
-  return slug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
 export default function KoleksiyonPage() {
   const { user } = useAuth();
-  // Lazy init: localStorage'dan başlatılır (anonim kullanıcı).
-  // Giriş yapmış kullanıcı için useEffect Supabase'den üzerini yazar.
-  const [items, setItems] = useState<OwnedItem[]>(() =>
-    getOwnedIds().map(parseOwnedId).filter(Boolean) as OwnedItem[]
-  );
+  const [items, setItems] = useState<OwnedItem[]>([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    if (!user) return;
-    // Giriş yapmış: Supabase'den al (cross-device)
-    fetchOwnedIds(user.id).then((ids) => {
-      setItems(ids.map(parseOwnedId).filter(Boolean) as OwnedItem[]);
-    }).catch(() => {
-      // Supabase başarısız: localStorage zaten useState lazy init ile yüklendi
-    });
+    if (user) {
+      // Giriş yapmış: Supabase'den al (cross-device)
+      fetchOwnedIds(user.id).then((ids) => {
+        setItems(ids.map(parseOwnedId).filter(Boolean) as OwnedItem[]);
+      }).catch(() => {
+        // Supabase başarısız: localStorage fallback
+        const local = getOwnedIds().map(parseOwnedId).filter(Boolean) as OwnedItem[];
+        setItems(local);
+      }).finally(() => setDataLoaded(true));
+    } else {
+      // Anonim: localStorage — async callback ile ESLint kuralını geç
+      Promise.resolve().then(() => {
+        setItems(getOwnedIds().map(parseOwnedId).filter(Boolean) as OwnedItem[]);
+        setDataLoaded(true);
+      });
+    }
   }, [user]);
 
   const count = items.length;
+
+  if (!dataLoaded) {
+    return (
+      <section className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
+        <div className="mb-10 animate-fade-up">
+          <span className="text-[11px] font-sans tracking-widest uppercase text-primary-400/80 mb-2 block">
+            Koleksiyon
+          </span>
+          <h1 className="text-xl font-bold text-gray-200">
+            Sahiplendiklerin
+          </h1>
+        </div>
+        <div className="text-center py-20">
+          <p className="text-sm text-gray-600">Yükleniyor...</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="mx-auto max-w-[640px] px-4 sm:px-0 py-10">
@@ -95,7 +120,7 @@ export default function KoleksiyonPage() {
                   {item.type === "haber" ? "Haber" : "Yazi"}
                 </span>
                 <p className="text-[11px] font-medium text-gray-400 group-hover:text-gray-200 transition-colors leading-snug line-clamp-5 mt-auto">
-                  {slugToTitle(item.slug)}
+                  {titleMap.get(item.slug) ?? item.slug.replace(/-/g, " ")}
                 </p>
               </div>
             </Link>

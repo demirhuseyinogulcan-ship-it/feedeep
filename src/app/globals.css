@@ -455,8 +455,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.5; filter: blur(8px); }
-  50%      { opacity: 0.8; filter: blur(12px); }
+  0%, 100% { opacity: 0.2; filter: blur(6px); }
+  50%      { opacity: 0.35; filter: blur(9px); }
 }
 
 .btn-liquid {
@@ -516,8 +516,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hover: intensify glow */
 .btn-liquid:hover .btn-liquid-glow {
-  opacity: 1;
-  filter: blur(14px);
+  opacity: 0.6;
+  filter: blur(12px);
 }
 
 .btn-liquid:hover::before {

@@ -46,6 +46,8 @@ export function CommentSection({
     handleDelete,
     handleReply,
     handleNewComment,
+    submitError,
+    clearSubmitError,
   } = useCommentActions({ voteComment, removeComment, addComment });
 
   // ── Preview modu — feed kartlarında ──
@@ -69,7 +71,11 @@ export function CommentSection({
 
       {/* Yeni yorum formu */}
       {currentUserId ? (
-        <CommentForm onSubmit={handleNewComment} />
+        <CommentForm
+          onSubmit={handleNewComment}
+          error={submitError ?? undefined}
+          onErrorClear={clearSubmitError}
+        />
       ) : (
         <button
           onClick={requestAuth}

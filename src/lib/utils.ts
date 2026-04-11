@@ -104,3 +104,10 @@ export function truncate(text: string, maxLength: number = 160): string {
 export function wordCount(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
+
+/** Görüntülenme sayısı formatlama — 850→"850", 1240→"1.2B", 15000→"15B" */
+export function formatViews(n: number): string {
+  if (n < 1000) return String(n);
+  if (n < 10000) return `${(n / 1000).toFixed(1)}B`;
+  return `${Math.floor(n / 1000)}B`;
+}

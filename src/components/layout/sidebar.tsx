@@ -11,6 +11,7 @@
 import { NAV_ITEMS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ActiveLink } from "./active-link";
+import { PopularWidget } from "./popular-widget";
 
 type Props = {
   isOpen: boolean;
@@ -72,6 +73,11 @@ export function Sidebar({ isOpen, onToggle }: Props) {
             ))}
           </ul>
         </nav>
+
+        {/* En çok okunan — yeterli veri yoksa otomatik gizlenir */}
+        <div className="px-3 py-4 border-t border-white/[0.04]">
+          <PopularWidget />
+        </div>
 
         {/* Alt kisim: iletisim + copyright */}
         <div className="px-5 pb-5 pt-4 border-t border-white/[0.04] space-y-3">

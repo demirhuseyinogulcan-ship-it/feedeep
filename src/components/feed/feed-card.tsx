@@ -38,7 +38,7 @@ export function FeedCard({ item, index }: Props) {
 
   return (
     <TiltCard
-      className="rounded-xl overflow-hidden animate-fade-up"
+      className="rounded-xl overflow-hidden animate-fade-up border border-white/[0.06]"
       style={getDelayStyle(index)}
     >
       <Link href={item.href} className="group block">

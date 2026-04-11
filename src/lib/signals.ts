@@ -29,6 +29,7 @@ export type ArticleStats = {
   totalUpvotes: number;
   totalDownvotes: number;
   totalComments: number;
+  totalViews: number;
 };
 
 // ─── localStorage Helpers ───

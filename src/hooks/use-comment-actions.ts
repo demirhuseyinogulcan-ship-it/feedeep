@@ -6,13 +6,13 @@
 // UI sadece render eder, hook sadece veri işler.
 // ─────────────────────────────────────────────────────────────
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useAuth } from "@/components/auth/auth-provider";
 
 type UseCommentActionsParams = {
   voteComment: (commentId: string, type: "up" | "down") => void;
   removeComment: (commentId: string) => void;
-  addComment: (text: string, parentId?: string) => void;
+  addComment: (text: string, parentId?: string) => Promise<void>;
 };
 
 export function useCommentActions({
@@ -21,6 +21,7 @@ export function useCommentActions({
   addComment,
 }: UseCommentActionsParams) {
   const { user, requestAuth } = useAuth();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   /** Oy ver — giriş yoksa auth iste */
   const handleVote = useCallback(
@@ -44,20 +45,30 @@ export function useCommentActions({
 
   /** Yanıtla — giriş yoksa auth iste */
   const handleReply = useCallback(
-    (text: string, parentId: string) => {
+    async (text: string, parentId: string) => {
       if (!user) {
         requestAuth();
         return;
       }
-      addComment(text, parentId);
+      setSubmitError(null);
+      try {
+        await addComment(text, parentId);
+      } catch (err) {
+        setSubmitError(err instanceof Error ? err.message : "Bir hata oluştu.");
+      }
     },
     [user, requestAuth, addComment],
   );
 
   /** Yeni root yorum */
   const handleNewComment = useCallback(
-    (text: string) => {
-      addComment(text);
+    async (text: string) => {
+      setSubmitError(null);
+      try {
+        await addComment(text);
+      } catch (err) {
+        setSubmitError(err instanceof Error ? err.message : "Bir hata oluştu.");
+      }
     },
     [addComment],
   );
@@ -69,5 +80,7 @@ export function useCommentActions({
     handleDelete,
     handleReply,
     handleNewComment,
+    submitError,
+    clearSubmitError: () => setSubmitError(null),
   };
 }
