@@ -16,7 +16,6 @@ function escapeXml(str: string): string {
 }
 
 export async function GET() {
-  // Combine yazilar + haberler, sort by date desc
   type FeedEntry = {
     title: string;
     url: string;
@@ -24,6 +23,9 @@ export async function GET() {
     date: string;
     publishedAt: string;
     category?: string;
+    contentType: "haber" | "yazi";
+    image?: string;
+    socialSnippet?: string;
   };
 
   const entries = sortContent<FeedEntry>([
@@ -36,6 +38,9 @@ export async function GET() {
         date: y.date,
         publishedAt: getPublicationDate(y),
         category: y.category,
+        contentType: "yazi" as const,
+        image: y.image,
+        socialSnippet: y.socialSnippet,
       })),
     ...haberler
       .filter((h) => h.published)
@@ -46,22 +51,33 @@ export async function GET() {
         date: h.date,
         publishedAt: getPublicationDate(h),
         category: h.category,
+        contentType: "haber" as const,
+        image: h.image,
+        socialSnippet: h.socialSnippet,
       })),
   ])
     .slice(0, 50);
 
   const feedItems = entries
-    .map(
-      (entry) => `
+    .map((entry) => {
+      const imageUrl = entry.image
+        ? entry.image.startsWith("http") ? entry.image : `${SITE.url}${entry.image}`
+        : null;
+      const snippet = entry.socialSnippet
+        ? escapeXml(entry.socialSnippet)
+        : escapeXml(entry.description);
+
+      return `
     <item>
       <title>${escapeXml(entry.title)}</title>
       <link>${entry.url}</link>
-      <description>${escapeXml(entry.description)}</description>
+      <description>${snippet}</description>
       <pubDate>${new Date(entry.publishedAt).toUTCString()}</pubDate>
-      <guid isPermaLink="true">${entry.url}</guid>${entry.category ? `\n      <category>${escapeXml(entry.category)}</category>` : ""}
-      <content:encoded><![CDATA[<p>${escapeXml(entry.description)}</p><p><a href="${entry.url}">Devamini oku</a></p>]]></content:encoded>
-    </item>`
-    )
+      <guid isPermaLink="true">${entry.url}</guid>${entry.category ? `\n      <category domain="section">${escapeXml(entry.category)}</category>` : ""}
+      <category domain="type">${entry.contentType}</category>${imageUrl ? `\n      <enclosure url="${imageUrl}" type="image/webp" />` : ""}
+      <content:encoded><![CDATA[${imageUrl ? `<img src="${imageUrl}" alt="${escapeXml(entry.title)}" />` : ""}<p>${escapeXml(entry.description)}</p><p><a href="${entry.url}">Devamini oku</a></p>]]></content:encoded>
+    </item>`;
+    })
     .join("");
 
   const feed = `<?xml version="1.0" encoding="UTF-8"?>

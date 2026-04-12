@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
-    site: "@feedeepcom",
-    creator: "@feedeepcom",
+    site: "@feedeepofficial",
+    creator: "@feedeepofficial",
   },
   robots: {
     index: true,

@@ -38,6 +38,7 @@ const yazilar = defineCollection({
     // Kategori & Etiketler
     category: s.enum(["inceleme", "analiz", "karsilastirma"]),
     keywords: s.array(s.string()).max(6), // max 6: 1 primary + 4 secondary + 1 generic TR SEO
+    tags: s.array(s.string()).default([]), // Hub sayfalarinda kullanilacak normalize etiketler
 
     // Görsel
     image: s.string().optional(),
@@ -65,6 +66,12 @@ const yazilar = defineCollection({
 
     // Dağıtım
     socialSnippet: s.string().max(280).optional(),
+
+    // AEO — Soru-Cevap (FAQ JSON-LD + sayfa icinde gosterim)
+    faq: s.array(s.object({
+      question: s.string(),
+      answer: s.string(),
+    })).default([]),
 
     // MDX body
     body: s.mdx(),
@@ -98,6 +105,7 @@ const haberler = defineCollection({
     sourceName: s.string(),
     category: s.enum(["sirketler", "sektor", "turkiye", "arastirma"]),
     keywords: s.array(s.string()).max(6), // max 6: +1 generic TR SEO keyword
+    tags: s.array(s.string()).default([]), // Hub sayfalarinda kullanilacak normalize etiketler
 
     // Güven
     sources: s.array(sourceSchema).min(1),
@@ -109,6 +117,12 @@ const haberler = defineCollection({
 
     // Dağıtım
     socialSnippet: s.string().max(280).optional(),
+
+    // AEO — Soru-Cevap (FAQ JSON-LD + sayfa icinde gosterim)
+    faq: s.array(s.object({
+      question: s.string(),
+      answer: s.string(),
+    })).default([]),
 
     // MDX body
     body: s.mdx(),

@@ -4,8 +4,8 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { haberler } from "#site/content";
-import { generateMeta, newsArticleJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { haberler, yazilar } from "#site/content";
+import { generateMeta, newsArticleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { HABER_CATEGORIES } from "@/lib/constants";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
@@ -13,13 +13,15 @@ import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { RelatedNews } from "@/components/content/related-news";
+import { RelatedArticles } from "@/components/content/related-articles";
 import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { SignalBar } from "@/components/signals/signal-bar";
 import { CommentSection } from "@/components/signals/comment-section";
 import { ViewTracker } from "@/components/content/view-tracker";
-import { SITE } from "@/lib/constants";
+import { TagLinks } from "@/components/content/tag-links";
+import { SITE, YAZI_CATEGORIES } from "@/lib/constants";
 import { getPublicationDate, sortContent } from "@/lib/content-order";
 
 type Props = {
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: news.keywords,
     image: news.image,
     section: HABER_CATEGORIES[news.category] ?? news.category,
-    tags: news.keywords,
+    tags: [...(news.tags ?? []), ...(news.keywords ?? [])],
   });
 }
 
@@ -83,6 +85,29 @@ export default async function HaberDetayPage({ params }: Props) {
       sourceName: h.sourceName,
     }));
 
+  // Cross-type: ilgili yazilar (ortak keyword)
+  const relatedYazilar = sortContent(
+    yazilar.filter(
+      (y) =>
+        y.published &&
+        y.keywords?.some((k) => news.keywords?.includes(k))
+    ),
+  )
+    .slice(0, 2)
+    .map((y) => ({
+      slug: y.slug,
+      title: y.title,
+      description: y.description,
+      date: y.date,
+      category: y.category,
+      categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
+      readingTime: y.metadata.readingTime,
+      editorPick: y.editorPick,
+      image: y.image,
+      imageAlt: y.imageAlt,
+      blurDataURL: y.blurDataURL,
+    }));
+
   return (
     <>
       <JsonLd
@@ -106,6 +131,7 @@ export default async function HaberDetayPage({ params }: Props) {
             { name: "Haberler", href: "/haberler" },
             { name: news.title, href: `/haberler/${news.slug}` },
           ]),
+          ...(news.faq.length > 0 ? [faqJsonLd(news.faq)] : []),
         ]}
       />
 
@@ -190,8 +216,16 @@ export default async function HaberDetayPage({ params }: Props) {
           <CommentSection articleId={`haber-${news.slug}`} />
         </div>
 
+        {/* Etiket Linkleri — Hub sayfalarina ic link */}
+        <TagLinks tags={news.tags ?? []} />
+
         {/* İlgili Haberler — SEO iç link ağı */}
         <RelatedNews items={related} />
+
+        {/* Cross-type: İlgili Yazılar */}
+        {relatedYazilar.length > 0 && (
+          <RelatedArticles items={relatedYazilar} />
+        )}
       </article>
     </>
   );

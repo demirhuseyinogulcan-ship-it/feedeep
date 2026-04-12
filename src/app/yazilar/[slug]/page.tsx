@@ -4,15 +4,17 @@
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { yazilar } from "#site/content";
-import { generateMeta, articleJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { yazilar, haberler } from "#site/content";
+import { generateMeta, articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/json-ld";
-import { YAZI_CATEGORIES } from "@/lib/constants";
+import { YAZI_CATEGORIES, HABER_CATEGORIES } from "@/lib/constants";
 import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { ArticleHeader } from "@/components/shared/article-header";
 import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { RelatedArticles } from "@/components/content/related-articles";
+import { RelatedNews } from "@/components/content/related-news";
+import { TagLinks } from "@/components/content/tag-links";
 import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: post.keywords,
     image: post.image,
     section: YAZI_CATEGORIES[post.category] ?? post.category,
-    tags: post.keywords,
+    tags: [...(post.tags ?? []), ...(post.keywords ?? [])],
   });
 }
 
@@ -83,6 +85,29 @@ export default async function YaziDetayPage({ params }: Props) {
       blurDataURL: y.blurDataURL,
     }));
 
+  // Cross-type: ilgili haberler (ortak keyword)
+  const relatedHaberler = sortContent(
+    haberler.filter(
+      (h) =>
+        h.published &&
+        h.keywords?.some((k) => post.keywords?.includes(k))
+    ),
+  )
+    .slice(0, 2)
+    .map((h) => ({
+      slug: h.slug,
+      title: h.title,
+      description: h.description,
+      date: h.date,
+      category: h.category,
+      categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
+      editorPick: h.editorPick,
+      image: h.image,
+      imageAlt: h.imageAlt,
+      blurDataURL: h.blurDataURL,
+      sourceName: h.sourceName,
+    }));
+
   return (
     <>
       <JsonLd
@@ -104,6 +129,7 @@ export default async function YaziDetayPage({ params }: Props) {
             { name: "Yazılar", href: "/yazilar" },
             { name: post.title, href: `/yazilar/${post.slug}` },
           ]),
+          ...(post.faq.length > 0 ? [faqJsonLd(post.faq)] : []),
         ]}
       />
 
@@ -173,8 +199,16 @@ export default async function YaziDetayPage({ params }: Props) {
           <CommentSection articleId={`yazi-${post.slug}`} />
         </div>
 
+        {/* Etiket Linkleri — Hub sayfalarina ic link */}
+        <TagLinks tags={post.tags ?? []} />
+
         {/* İlgili Yazılar — SEO iç link ağı */}
         <RelatedArticles items={related} />
+
+        {/* Cross-type: İlgili Haberler */}
+        {relatedHaberler.length > 0 && (
+          <RelatedNews items={relatedHaberler} />
+        )}
       </article>
     </>
   );

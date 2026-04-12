@@ -90,7 +90,7 @@ export function Sidebar({ isOpen, onToggle }: Props) {
             </a>
             <div className="flex items-center gap-3">
               <a
-                href={SITE.author.linkedin}
+                href={SITE.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
@@ -98,12 +98,28 @@ export function Sidebar({ isOpen, onToggle }: Props) {
                 LinkedIn
               </a>
               <a
-                href={SITE.author.instagram}
+                href={SITE.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
               >
                 Instagram
+              </a>
+              <a
+                href={SITE.social.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
+              >
+                X
+              </a>
+              <a
+                href={SITE.social.substack}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
+              >
+                Substack
               </a>
             </div>
           </div>

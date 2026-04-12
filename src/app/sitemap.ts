@@ -9,6 +9,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/constants";
 import { yazilar, haberler } from "#site/content";
+import { getAllTags } from "@/lib/feed";
 
 // ─── Crawl Frequency Hesaplama ──────────────────────────────
 
@@ -94,12 +95,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.4,
     },
-    {
-      url: `${SITE.url}/yazar/can-demir`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
   ];
 
   // Yazılar (analiz/inceleme) — yaşa göre dinamik frekans
@@ -128,9 +123,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       };
     });
 
+  // Etiket hub sayfalari
+  const tags = getAllTags();
+  const etiketPages: MetadataRoute.Sitemap = [
+    // Etiketler indeks sayfasi
+    ...(tags.length > 0 ? [{
+      url: `${SITE.url}/etiketler`,
+      lastModified: now,
+      changeFrequency: "weekly" as ChangeFreq,
+      priority: 0.7,
+    }] : []),
+    // Her etiket hub sayfasi
+    ...tags.map((tag) => ({
+      url: `${SITE.url}/etiketler/${tag}`,
+      lastModified: now,
+      changeFrequency: "weekly" as ChangeFreq,
+      priority: 0.6,
+    })),
+  ];
+
   return [
     ...staticPages,
     ...yazilarPages,
     ...haberlerPages,
+    ...etiketPages,
   ];
 }

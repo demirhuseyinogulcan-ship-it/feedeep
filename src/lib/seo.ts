@@ -77,8 +77,8 @@ export function generateMeta({
       title,
       description,
       images: [ogImage],
-      site: "@feedeepcom",
-      creator: "@feedeepcom",
+      site: "@feedeepofficial",
+      creator: "@feedeepofficial",
     },
   };
 }
@@ -109,8 +109,7 @@ export function organizationJsonLd(): JsonLdObject {
     name: SITE.organization.name,
     url: SITE.url,
     email: SITE.author.email,
-    description:
-      "Yapay zeka, yazilim ve web gelistirme dunyasindan guncel haberler, derinlemesine analizler ve arac incelemeleri.",
+    description: SITE.description,
     foundingDate: SITE.foundingDate,
     logo: {
       "@type": "ImageObject",
@@ -118,23 +117,28 @@ export function organizationJsonLd(): JsonLdObject {
       width: 512,
       height: 512,
     },
-    sameAs: [SITE.author.instagram].filter(Boolean),
+    sameAs: [
+      SITE.social.linkedin,
+      SITE.social.instagram,
+      SITE.social.x,
+      SITE.social.substack,
+    ],
     areaServed: {
       "@type": "Country",
       name: "Turkey",
     },
     knowsAbout: [
       "Yapay Zeka",
-      "Makine Ogrenmesi",
-      "Buyuk Dil Modelleri",
-      "Yazilim Gelistirme",
-      "Web Gelistirme",
+      "Makine Öğrenmesi",
+      "Büyük Dil Modelleri",
+      "Yazılım Geliştirme",
+      "Web Geliştirme",
       "Kodlama",
-      "Siber Guvenlik",
+      "Siber Güvenlik",
       "ChatGPT",
       "Google Gemini",
       "Claude AI",
-      "AI Ajanlari",
+      "AI Ajanları",
       "React",
       "Next.js",
     ],
@@ -178,9 +182,10 @@ export function articleJsonLd(params: {
     datePublished: params.publishedTime,
     dateModified: params.modifiedTime ?? params.publishedTime,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
       name: SITE.author.name,
-      url: SITE.author.linkedin,
+      url: SITE.url,
     },
     publisher: organizationJsonLd(),
     inLanguage: SITE.language,
@@ -227,9 +232,10 @@ export function newsArticleJsonLd(params: {
     datePublished: params.publishedTime,
     dateModified: params.modifiedTime ?? params.publishedTime,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
       name: SITE.author.name,
-      url: SITE.author.linkedin,
+      url: SITE.url,
     },
     publisher: organizationJsonLd(),
     inLanguage: SITE.language,
@@ -343,67 +349,3 @@ export function collectionPageJsonLd(params: {
   };
 }
 
-// ─── Person JSON-LD (E-E-A-T Author) ───
-
-export function personJsonLd(params: {
-  name: string;
-  url: string;
-  jobTitle: string;
-  description: string;
-  sameAs: string[];
-  worksFor: string;
-  image?: string;
-}): JsonLdObject {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `${SITE.url}/#person-can-demir`,
-    name: params.name,
-    url: params.url,
-    jobTitle: params.jobTitle,
-    description: params.description,
-    sameAs: params.sameAs,
-    worksFor: {
-      "@type": "Organization",
-      name: params.worksFor,
-      url: SITE.url,
-    },
-    knowsAbout: [
-      "Yapay Zeka",
-      "LLM Ekosistemi",
-      "Prompt Muhendisligi",
-      "Growth Hacking",
-      "Dijital Icerik Stratejisi",
-      "SEO",
-      "Next.js",
-      "TypeScript",
-    ],
-    hasOccupation: {
-      "@type": "Occupation",
-      name: "Editoryal Icerik Yoneticisi & Growth Hacking Uzmani",
-      occupationalCategory: "15-1252.00",
-      skills: "AI Content Engineering, SEO, Growth Hacking, Prompt Engineering",
-    },
-    nationality: {
-      "@type": "Country",
-      name: "Turkey",
-    },
-    ...(params.image && { image: params.image }),
-  };
-}
-
-// ─── ProfilePage JSON-LD (Google 2024+ recommended) ───
-
-export function profilePageJsonLd(params: {
-  dateCreated: string;
-  dateModified: string;
-  mainEntity: ReturnType<typeof personJsonLd>;
-}): JsonLdObject {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    dateCreated: params.dateCreated,
-    dateModified: params.dateModified,
-    mainEntity: params.mainEntity,
-  };
-}

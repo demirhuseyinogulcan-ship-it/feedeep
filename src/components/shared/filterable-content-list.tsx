@@ -18,18 +18,21 @@ interface Category {
 interface FilterableContentListProps {
   items: FeedItem[];
   categories?: Category[];
+  /** Hangi alan uzerinden filtreleme yapilacak (varsayilan: "category") */
+  filterKey?: "category" | "type";
   emptyMessage?: string;
 }
 
 export function FilterableContentList({
   items,
   categories = [],
+  filterKey = "category",
   emptyMessage = "Henüz içerik yok.",
 }: FilterableContentListProps) {
   const [active, setActive] = useState<string | null>(null);
 
   const filtered = active
-    ? items.filter((item) => item.category === active)
+    ? items.filter((item) => item[filterKey] === active)
     : items;
 
   return (

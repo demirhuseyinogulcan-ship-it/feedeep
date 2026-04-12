@@ -57,7 +57,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={SITE.author.linkedin}
+                  href={SITE.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
@@ -67,12 +67,32 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={SITE.author.instagram}
+                  href={SITE.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
                 >
                   Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SITE.social.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
+                >
+                  X
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SITE.social.substack}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-500 hover:text-primary-400 transition-colors"
+                >
+                  Substack
                 </a>
               </li>
             </ul>

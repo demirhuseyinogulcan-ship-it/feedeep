@@ -74,8 +74,8 @@ describe("generateMeta()", () => {
     // Twitter object contains card, site, creator
     const twitter = meta.twitter as Record<string, unknown>;
     expect(twitter.card).toBe("summary_large_image");
-    expect(twitter.site).toBe("@feedeepcom");
-    expect(twitter.creator).toBe("@feedeepcom");
+    expect(twitter.site).toBe("@feedeepofficial");
+    expect(twitter.creator).toBe("@feedeepofficial");
   });
 
   it("sets noIndex when specified", () => {
@@ -209,11 +209,11 @@ describe("articleJsonLd()", () => {
     expect(ld.url).toBe(`${SITE.url}/haberler/test`);
   });
 
-  it("includes author as Person", () => {
+  it("includes author as Organization", () => {
     const ld = articleJsonLd(params);
     const author = nested(ld, "author");
 
-    expect(author["@type"]).toBe("Person");
+    expect(author["@type"]).toBe("Organization");
     expect(author.name).toBe(SITE.author.name);
   });
 

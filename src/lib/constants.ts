@@ -15,8 +15,12 @@ export const SITE = {
     name: "feedeep Editöryal Ekibi",
     email: "hey@feedeep.com",
     role: "Editöryal Ekip",
-    linkedin: "https://linkedin.com",
-    instagram: "https://instagram.com/feedeepcom",
+  },
+  social: {
+    linkedin: "https://www.linkedin.com/company/feedeep/",
+    instagram: "https://www.instagram.com/feedeepofficial/",
+    x: "https://x.com/feedeepofficial",
+    substack: "https://substack.com/@feedeep",
   },
   /** ISO 8601 — Proje ilk yayın tarihi (Organization schema) */
   foundingDate: "2025-01-01",
@@ -55,5 +59,43 @@ export const HABER_CATEGORIES: Record<string, string> = {
   turkiye: "Türkiye",
   arastirma: "Araştırma",
 };
+
+// ─── Tag Etiket Haritası (hub sayfaları için doğru yazım) ───
+
+export const TAG_LABELS: Record<string, string> = {
+  // Şirketler
+  openai: "OpenAI",
+  anthropic: "Anthropic",
+  google: "Google",
+  meta: "Meta",
+  microsoft: "Microsoft",
+  alibaba: "Alibaba",
+  nvidia: "NVIDIA",
+  apple: "Apple",
+  cursor: "Cursor",
+  mistral: "Mistral AI",
+  bytedance: "ByteDance",
+  cloudflare: "Cloudflare",
+  figma: "Figma",
+  github: "GitHub",
+  perplexity: "Perplexity",
+  // Konular
+  "ai-model": "AI Modelleri",
+  "ai-agent": "AI Ajanları",
+  "ai-guvenlik": "AI Güvenlik",
+  yatirim: "Yatırım",
+  kodlama: "Kodlama",
+  "acik-kaynak": "Açık Kaynak",
+  "kurumsal-ai": "Kurumsal AI",
+  "ses-gorsel-video": "Ses, Görsel & Video",
+  arastirma: "Araştırma",
+  turkiye: "Türkiye",
+  "is-hayati": "İş Hayatı",
+};
+
+/** Tag slug'ından okunabilir etiket adı döndürür */
+export function getTagLabel(tag: string): string {
+  return TAG_LABELS[tag] ?? tag.replace(/-/g, " ");
+}
 
 

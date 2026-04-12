@@ -129,6 +129,68 @@ export function buildHaberFeed(): HaberFeedItem[] {
     }));
 }
 
+// ─── Tag Helpers (hub sayfalari icin) ───
+
+/** Tum benzersiz tag'leri dondurur (slug formatinda) */
+export function getAllTags(): string[] {
+  const tagSet = new Set<string>();
+  for (const h of haberler.filter((x) => x.published)) {
+    for (const t of h.tags ?? []) tagSet.add(t);
+  }
+  for (const y of yazilar.filter((x) => x.published)) {
+    for (const t of y.tags ?? []) tagSet.add(t);
+  }
+  return Array.from(tagSet).sort();
+}
+
+/** Belirli bir tag'e sahip tum icerikleri feed olarak dondurur */
+export function buildTagFeed(tag: string): FeedItem[] {
+  const items: FeedItem[] = [];
+
+  for (const h of haberler.filter((x) => x.published && x.tags?.includes(tag))) {
+    items.push({
+      id: `haber-${h.slug}`,
+      type: "haber",
+      title: h.title,
+      description: h.description,
+      href: `/haberler/${h.slug}`,
+      date: h.date,
+      publishedAt: getPublicationDate(h),
+      category: h.category,
+      categoryLabel: HABER_CATEGORIES[h.category] ?? h.category,
+      readingTime: h.metadata.readingTime,
+      editorPick: h.editorPick,
+      image: h.image,
+      imageAlt: h.imageAlt,
+      blurDataURL: h.blurDataURL,
+      sourceName: h.sourceName,
+      confidence: h.confidence,
+    });
+  }
+
+  for (const y of yazilar.filter((x) => x.published && x.tags?.includes(tag))) {
+    items.push({
+      id: `yazi-${y.slug}`,
+      type: "yazi",
+      title: y.title,
+      description: y.description,
+      href: `/yazilar/${y.slug}`,
+      date: y.date,
+      publishedAt: getPublicationDate(y),
+      category: y.category,
+      categoryLabel: YAZI_CATEGORIES[y.category] ?? y.category,
+      readingTime: y.metadata.readingTime,
+      editorPick: y.editorPick,
+      image: y.image,
+      imageAlt: y.imageAlt,
+      blurDataURL: y.blurDataURL,
+      confidence: y.confidence,
+    });
+  }
+
+  return sortContent(items);
+}
+
 export function buildYaziFeed(): YaziFeedItem[] {
   return sortContent(
     yazilar.filter((x) => x.published),
