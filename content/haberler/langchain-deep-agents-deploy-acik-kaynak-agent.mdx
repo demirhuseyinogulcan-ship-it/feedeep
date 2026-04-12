@@ -1,0 +1,49 @@
+---
+title: "LangChain'in Agent Altyapısı Artık Açık Kaynak"
+slug: "langchain-deep-agents-deploy-acik-kaynak-agent"
+description: "LangChain'in Deep Agents Deploy sistemi açık kaynak oldu. Developer'lar agent iş akışlarını kendi sunucularında çalıştırabiliyor, veri dışarı çıkmıyor."
+date: 2026-04-12
+image: "/images/haberler/langchain-deep-agents-deploy-acik-kaynak-agent.webp"
+imageAlt: "LangChain Deep Agents Deploy açık kaynak agent altyapısı, kendi sunucusunda LLM çalıştırma mimarisi"
+sourceUrl: "https://blog.langchain.dev/deep-agents-deploy"
+sourceName: "LangChain Blog"
+category: "sektor"
+keywords:
+  - "langchain deep agents deploy"
+  - "acik kaynak agent altyapisi"
+  - "claude managed agents alternatif"
+  - "llm agent deployment"
+  - "langchain 2026 guncel"
+  - "yapay zeka haberleri"
+sources:
+  - tier: 1
+    name: "LangChain Blog"
+    url: "https://blog.langchain.dev/deep-agents-deploy"
+confidence: high
+socialSnippet: "Agent altyapınızı kendi sunucunuzda çalıştırmak istiyorsanız LangChain'in yeni sistemi bunun için tasarlandı."
+published: true
+---
+
+Agent çalıştırmak ile agent kontrol etmek arasında büyük bir fark var. Çoğu managed servis ilkini çözüyor, ikincisini değil.
+
+LangChain bu haftaki Deep Agents Deploy duyurusuyla tam burada konumlanıyor. Sistem, developer'ların agent iş akışlarını kendi altyapılarında barındırmasını sağlıyor. Kod açık kaynak, bağımlılık yok.
+
+## Neden şimdi?
+
+Managed agent servisleri hızla büyüdü. Anthropic'in Claude Managed Agents'ı, OpenAI'ın Assistants API'si, Google'ın Agent Space'i bunların en bilinenler. Hepsi aynı mantıkla çalışıyor: altyapıyı siz yönetmiyorsunuz, şirket yönetiyor.
+
+Bu modelin bedeli var. Hangi verinin nerede işlendiğini bilmiyorsunuz. GDPR veya KVKK kapsamındaki iş yüklerini bu servislere vermenin hukuki riski kesin değil. Büyük finans ve sağlık şirketleri için bu kâfi.
+
+LangChain, Deep Agents Deploy ile tam burada bir kapı açıyor. Çalıştırma ortamı sizin. Kayıt tutma sizin. Hata ayıklama sizin.
+
+## Ne yapıyor, ne yapmıyor?
+
+Sistem agent döngüsünü yönetiyor. Tool calling, hafıza yönetimi, hata geri dönüşü ve paralel adım koordinasyonu bunların hepsi dahil. Hangi LLM'i kullanacağınızı siz seçiyorsunuz; GPT-5, Claude, Gemini ya da yerel model fark etmez.
+
+Tek başına UI'ı yok. Gözlem ve izleme için LangSmith ya da başka bir araçla entegre etmeniz gerekiyor. Sıfırdan başlayanlar için bu bir setup maliyeti.
+
+## Interrupt 2026 bağlantısı
+
+LangChain bu duyuruyu Interrupt 2026 konferansıyla aynı dönemde yaptı. Konferans agent orkestrasyonu ve production deployment üzerine; katılımcılar büyük ölçüde kurumsal developer ve AI mühendisleri. Zamanlama tesadüf değil.
+
+Açık kaynak agent altyapısında rekabetin şiddetlendiği bir dönemde bu duyuru önemli bir yer tutacak.

@@ -1,0 +1,52 @@
+---
+title: "Kendini Geliştiren Agent: MiniMax M2.7"
+slug: "minimax-m2-7-self-evolving-agent-swe-bench"
+description: "MiniMax M2.7 bu hafta SWE-Bench Pro'da yüzde 56.22 aldı. Model kendi kodlama hatalarından öğrenerek döngüsel iterasyon yapan self-evolving bir mimariye sahip."
+date: 2026-04-12
+image: "/images/haberler/minimax-m2-7-self-evolving-agent-swe-bench.webp"
+imageAlt: "MiniMax M2.7 self-evolving agent modeli, SWE-Bench Pro yüzde 56.22 benchmark sonucu grafiği"
+sourceUrl: "https://www.minimaxi.com/news/m2-7"
+sourceName: "MiniMax Blog"
+category: "arastirma"
+keywords:
+  - "minimax m2.7 model"
+  - "self-evolving agent yapay zeka"
+  - "swe-bench pro benchmark"
+  - "otonom yazilim gelistirme ai"
+  - "minimax acik kaynak model 2026"
+  - "yapay zeka haberleri"
+sources:
+  - tier: 1
+    name: "MiniMax Blog"
+    url: "https://www.minimaxi.com/news/m2-7"
+  - tier: 2
+    name: "HuggingFace"
+    url: "https://huggingface.co/MiniMaxAI"
+confidence: high
+socialSnippet: "MiniMax'in yeni modeli kendi hatalarından öğrenerek gelişiyor. SWE-Bench Pro'da yüzde 56.22, bu hafta benchmark tablosunu altüst etti."
+published: true
+---
+
+Bir modelin kendi hatalarından öğrenmesi fikri yeni değil. Ama bunu gerçekten çalışır hale getirmek başka bir şey.
+
+MiniMax bu hafta M2.7 modelini duyurdu. İddianın özü şu: model, çözemediği kodlama sorularını tekrar deniyor. Başarısız adımları analiz ederek iterasyon yapıyor. Buna self-evolving agent mimarisi diyorlar.
+
+## SWE-Bench Pro sonuçları
+
+SWE-Bench, gerçek GitHub sorunlarını çözme testleri üzerine kurulu; skor ne kadar yüksekse model o kadar kullanılabilir anlamına geliyor.
+
+M2.7, SWE-Bench Pro'da **%56.22** aldı. Karşılaştırma için: GLM-5.1 bu hafta %53.1 ile öne çıkmıştı. MiniMax M2.7, birkaç gün arayla onu geçti.
+
+Bu, aynı haftanın iki farklı açık kaynak modelinin birbirini kovaladığı anlamına geliyor. Rekabet daralmış durumda.
+
+## Self-evolving ne demek?
+
+Modelin çalışma mantığı şöyle: bir soruyu çözmeye çalışır, başarısız olursa hata mesajını okur, neyi yanlış yaptığını analiz eder ve farklı bir yol dener. Bu döngü tek bir inference içinde gerçekleşiyor.
+
+Geleneksel modeller tek seferlik tahmin yapar. M2.7 ise bir kod editörünün terminal çıktısına bakıp düzeltme olasılığını değerlendiriyor.
+
+## Açık kaynak, ama kısmi
+
+Model ağırlıkları HuggingFace'te mevcut. Ancak eğitim kodu ve self-evolution pipeline'ının tamamı yayınlanmadı. Bu noktada kamuya açık olan, modelin davranışı; mimarinin tamamı değil.
+
+Açık kaynak tartışması bu ayrımla her geçen gün daha karmaşık bir hal alıyor.

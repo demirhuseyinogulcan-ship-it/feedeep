@@ -1,0 +1,61 @@
+---
+title: "Açık Kaynak, Kapalı Kaynağı Geçti"
+slug: z-ai-glm-5-1-acik-kaynak-754b-otonom-kodlama
+description: "Z.AI'ın GLM-5.1 modeli SWE-Bench Pro'da Claude Opus 4.6 ve GPT-5.4'ü geçiyor. 754B parametreli, MIT lisanslı, 8 saat otonom çalışabilen açık kaynak model."
+date: 2026-04-12
+image: "/images/haberler/z-ai-glm-5-1-acik-kaynak-754b-otonom-kodlama.webp"
+imageAlt: "GLM-5.1 açık kaynak büyük dil modeli, SWE-Bench Pro benchmark karşılaştırması ve MIT lisans logosu"
+sourceUrl: "https://z.ai/blog/glm-5.1"
+sourceName: "Z.AI Blog"
+category: arastirma
+keywords:
+  - glm-5.1 acik kaynak model
+  - z.ai yapay zeka modeli
+  - swe-bench pro karsilastirma
+  - otonom kodlama yapay zeka
+  - mit lisansli llm modeli
+  - yapay zeka haberleri
+sources:
+  - url: "https://z.ai/blog/glm-5.1"
+    label: "Z.AI: GLM-5.1 Tanıtım Blogu"
+    tier: 1
+  - url: "https://huggingface.co/zai-org/GLM-5.1"
+    label: "Hugging Face: GLM-5.1 Model Kartı"
+    tier: 1
+  - url: "https://venturebeat.com/ai/glm-5-1-open-source-llm-by-z-ai/"
+    label: "VentureBeat: GLM-5.1 Analizi"
+    tier: 2
+confidence: high
+socialSnippet: "754 milyar parametre, MIT lisanslı, SWE-Bench Pro'da Claude Opus 4.6 ve GPT-5.4'ü geçiyor. Z.AI'ın GLM-5.1 modeli açık kaynak tarihinin en dikkat çekici çıkışlarından biri."
+published: true
+---
+
+Üç gün üst üste aynı benchmark tablosunu gördünüz diyelim. Kapalı kaynak modeller sayfanın üst kısmındaydı, açık kaynak modeller alt sıralarda. Sonra 7 Nisan 2026'da o tablo değişti.
+
+Çin merkezli yapay zeka laboratuvarı Z.AI'ın GLM-5.1 modeli, yazılım mühendisliği görevlerini ölçen SWE-Bench Pro kıyaslamasında Claude Opus 4.6 ve GPT-5.4'ü geçti. Model MIT lisanslıydı. Ticari kullanıma tamamen açık, Hugging Face'ten indirilebilir, 1.51 terabayt ağırlık dosyasıyla şu an herkese sunuluyor.
+
+## 754 milyar parametre ne demek?
+
+Parametreler, modelin ne kadar bilgi öğrendiğinin kaba ölçüsüdür. 754 milyar bu ölçekte ciddi bir yer. Ama sayıdan daha önemli olan şu: telif kısıtlı, API duvarlı kapalı kaynak modellerle aynı sırada yarışıyor ve onu geçiyor. Hugging Face'ten indirebilir, kendi altyapında çalıştırabilir, ticari projelerde kullanabilirsin, sormana gerek yok.
+
+OpenRouter üzerinden API erişimi de mevcut; yani 1.51 terabaytlık bir sunucu kurman gerekmiyor.
+
+## Sekiz saat boyunca tek başına
+
+GLM-5.1'i sıradan bir açık kaynak modelden ayıran asıl fark, otonom çalışma kapasitesi. TerminalBench 2 adlı değerlendirmede model, sekiz saatlik otonom görev yürütme testinden yüzde 57 başarıyla çıktı. Modele bir yazılım görevi tanımlıyorsun, araçlara erişim veriyorsun ve model saatlerce insan müdahalesine ihtiyaç duymadan çalışıyor. Bu düzeyde otonom kapasiteye sahip açık ağırlıklı bir model literatürde daha önce bu kadar net belgelenmemişti.
+
+SWE-Bench Pro ise gerçek GitHub sorunlarını, hata ayıklama görevlerini ve kod yazımını ölçüyor. Gerçek mühendislik iş yüküne en yakın kıyaslama sayılır. Buradaki yüzde 56.22 puanı bu bağlamda okunmalı.
+
+## Açık kaynak mı, gerçekten mi?
+
+Bir modeli "açık kaynak" ilan etmek artık çok katmanlı bir kavram. Google'ın bazı modelleri "açık erişim" sunuyor ancak ağırlık dosyalarını lisans kısıtlamalarıyla koruyor. Meta'nın Llama ailesi ticari kullanımı belirli koşullara bağlıyor. MIT lisansı bu açıdan en şeffaf ve serbest seçeneklerden biri: değiştir, dağıt, sat, kaynak gösterme zorunluluğu asgari.
+
+Bu kararın neden önemli olduğunu anlamak için şunu düşün: bir startup bu modeli kendi altyapısında çalıştırıp aylık API maliyeti ödemeden kullanabilir. Büyük bir şirket bu modeli kendi sistemine entegre edip tam kontrol sahibi olabilir.
+
+## Simon Willison da test etti
+
+Yapay zeka dünyasının en takip edilen bağımsız araştırmacılarından Simon Willison, modeli kendi "pelikan testi" üzerinde denedi. Willison'ın metodolojisi basit: modelden bisiklette pelikan SVG'si oluşturmasını iste ve çıktıyı değerlendir. GLM-5.1, yalnızca SVG üretmekle kalmadı, kendiliğinden CSS animasyonu da ekledi. Willison yorum yazdı: bugüne kadar açık ağırlıklı bir modelden aldığı en iyi görsel çıktıydı.
+
+---
+
+Frontier performansa ulaşmak için kapalı kaynak modellere mecbur kaldığımız dönem yavaş yavaş kapanıyor. GLM-5.1 bu dönüşümün belki de en güçlü ispat noktası.

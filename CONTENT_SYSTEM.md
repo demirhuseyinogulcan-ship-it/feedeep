@@ -159,7 +159,9 @@ npm run new:yazi     # Yeni yazı oluştur
 - Profesyonel ama samimi
 - Spekülatif bilgiyi açıkça belirt: *"Doğrulanmamış bilgilere göre..."*
 - Kaynak göster, her zaman
-- Türkçe önce, teknik terim parantezde: "büyük dil modeli (LLM)"
+- Türkçe önce, teknik terimi parantezle değil cümle içinde doğal açıkla
+  - Kötü: "sosyal mühendislik (social engineering) saldırısı"
+  - İyi: "Bu yönteme sosyal mühendislik deniyor. Teknik açık aramak yerine insanların güvenini hedef alıyor."
 
 ### Adım 5: Kalite Kontrolü (Yayın Öncesi Checklist)
 
@@ -315,6 +317,15 @@ Vurgu! Her yerde! Ünlem!               → Ünlem neredeyse hiç kullanma
 **Her** **üçüncü** **kelime** bold     → Sadece rakamlar ve şirket adları bold
 ```
 
+> **MUTLAK KURAL: "—" (em-dash) karakteri HİÇ KULLANILMAZ.** Hem başlıklarda hem de body'de yasak. İki düşünceyi birleştirmek istiyorsan iki ayrı cümle yaz ya da virgül kullan.
+
+**Cümle Yapısı Kuralları:**
+- Özne + yüklem yakın durur, araya çok cümle sıkıştırılmaz
+- Devrik cümle yasak (yüklem en sona kalır)
+- Yüklemsiz cümle yasak: "Saldırganın kurduğu oyunu fark edemeden." → geçersiz
+- Noktalı virgül neredeyse hiç; iki ayrı cümle yaz
+- Parantez içine teknik terim koyma; cümle yapısına entegre et
+
 ### 8.3 Paragraf Asimetrisi
 
 AI her paragrafı aynı uzunlukta yazar. İnsan yazmaz. Bazı paragraflar tek cümle, bazıları beş cümle olmalı.
@@ -327,6 +338,26 @@ AI her paragrafı aynı uzunlukta yazar. İnsan yazmaz. Bazı paragraflar tek c�
 - Sabit başlık kalıpları ("Ne Oldu? / Neden Önemli?")
 - Listeye sıralı olmayan maddelerin başına aynı yapıyı koymak
 - Emoji kullanmak (site genelinde yasak)
+
+### 8.5 Başlık Stratejisi
+
+> **Temel İlke:** Display title kısa ve temiz olur. SEO zenginliği `description` ve `keywords` alanlarında taşınır.
+> "Yasaklı Model: Claude Mythos" > "YANLIŞLIKLA SIZDIRILDI: Anthropic'in Sakladığı Kapalı Model"
+
+**Her 3 başlıktan 1'i kanca olabilir. Hepsi dramatik olursa marka tonu kayar.**
+
+| Haber türü | Format | Örnek |
+|---|---|---|
+| Olay / Saldırı / Skandal | Soru | Axios Nasıl Hacklendi? |
+| Ürün / Duyuru | İsim + özet | ElevenLabs Artık Şirket İçinde Çalışıyor |
+| Karar / Anlaşma | Özne + fiil | Meta ve Anthropic Aynı Şirkete Yöneldi |
+| Araştırma / Bulgu | Sonuç önce | Açık Kaynak, Kapalı Kaynağı Geçti |
+
+**Başlık Yazım Kuralları:**
+- Max 70 karakter (frontmatter kuralı)
+- "—" em-dash başlıkta da yasak
+- Büyük harf: Sadece ilk kelime + özel isimler (Türkçe standart)
+- Clickbait kalıpları yasak: "ŞOK!", "İNANILMAZ!", "KAÇIRMA!"
 
 ---
 

@@ -1,0 +1,59 @@
+---
+title: "Axios Nasıl Hacklendi?"
+slug: axios-tedarik-zinciri-saldirisi-openai-guvenlik-acigi
+description: "JavaScript kütüphanesi Axios'a sosyal mühendislik yöntemiyle gerçekleştirilen tedarik zinciri saldırısı OpenAI araçlarını da etkiledi."
+date: 2026-04-12
+image: "/images/haberler/axios-tedarik-zinciri-saldirisi-openai-guvenlik-acigi.webp"
+imageAlt: "Axios JavaScript kütüphane logosu, npm tedarik zinciri saldırısı ve yazılım güvenlik açığı görseli"
+sourceUrl: "https://github.com/axios/axios/issues/10636"
+sourceName: "Axios GitHub Postmortem"
+category: sektor
+keywords:
+  - axios tedarik zinciri saldirisi
+  - openai guvenlik acigi ucuncu taraf
+  - javascript kutuphanesi guvenlik
+  - sosyal muhendislik saldirisi
+  - npm paket guvenligi
+  - yapay zeka haberleri
+sources:
+  - url: "https://github.com/axios/axios/issues/10636"
+    label: "Axios GitHub: Resmi Olay Postmortem"
+    tier: 1
+  - url: "https://simonwillison.net/2026/Apr/3/supply-chain-social-engineering/"
+    label: "Simon Willison: Sosyal Mühendislik Analizi"
+    tier: 2
+  - url: "https://www.reuters.com/technology/artificial-intelligence/"
+    label: "Reuters: OpenAI Güvenlik Açıklaması"
+    tier: 2
+confidence: high
+socialSnippet: "Haftada 83 milyon kez indirilen Axios kütüphanesine sosyal mühendislikle saldırıldı. Saldırgan teknik değil, insan güvenini hedef aldı. OpenAI araçları da etkilendi."
+published: true
+---
+
+31 Mart 2026'da Axios JavaScript kütüphanesinin yeni bir sürümü yayınlandı. Kötü amaçlı bir bağımlılık içeriyordu. Haftada 83 milyon kereden fazla indirilen bu kütüphanenin geliştiricilerinden biri, farkında bile olmadan saldırganın kurduğu oyuna düşmüştü.
+
+Axios, web geliştirmede neredeyse standart haline gelmiş bir HTTP istemcisi. Sunucularla veri alışverişini kolaylaştıran bir kütüphane. OpenAI dahil pek çok şirketin geliştirici araçları bu kütüphaneyi kullanıyor. Bu yüzden saldırıyı fark etmek uzun sürmedi ve OpenAI 10 Nisan'da bir güvenlik açıklaması yaptı.
+
+## Saldırı nasıl işledi?
+
+Bu bir tedarik zinciri saldırısı (supply chain attack). Hedef, yazılımın kendisi değil; yazılımı yapan insanların güven ağı.
+
+Saldırgan Axios projesine ay öncesinden yaklaşmaya başladı. Gerçek bir katkıcı gibi davrandı. Pull request'leri gözden geçirdi, topluluğa yardımcı oldu, güvenilir bir profil inşa etti. Bu ilişki kurma süreci kasıtlıydı. Güven yeterince oluştuktan sonra kötü amaçlı bağımlılığı içeren bir değişikliyi merge ettirmeyi başardı.
+
+Bu yönteme sosyal mühendislik (social engineering) deniyor: teknik açıktan değil, insan psikolojisinden yararlanma. Ve açık kaynak toplulukları için bu özellikle hassas bir alan. Gönüllü, dağıtık ve birbirine güvenen bir ekosistemde birinin kötü niyetle hareket ettiğini önceden anlamanın yolu yok.
+
+## OpenAI ne açıkladı?
+
+OpenAI, etkilenen geliştirici aracı üzerinden kullanıcı verilerine erişilmediğini 10 Nisan'da kamuoyuyla paylaştı. Güvenlik açıklaması Reuters tarafından da doğrulandı. ABD Hazine Bakanlığı ve diğer kurumların olay detaylarını incelediği belirtildi.
+
+Açıklama hızlıydı ve etki sınırlı tutuldu. Ama "kullanıcı verisi erişilmedi" ile "hiçbir şey olmadı" aynı şey değil. Saldırı vektörü çalıştı, yalnızca zamanında fark edildi.
+
+## Asıl mesele büyüyor
+
+Simon Willison bu olayı analiz ederken önemli bir bağlam koydu: aynı hafta içinde Anthropic'in Mythos modeli güvenlik araştırmacılarına açıldı ve o model OpenBSD'de 27 yıldır kimsenin göremediği açıkları buldu. Bir yanda yapay zeka açıkları buluyor, öte yanda insanlar yazılım açıklarını kötü niyetle kullanıyor.
+
+Yapay zeka araçlarına bağımlılık arttıkça, bu araçların dayandığı açık kaynak kütüphaneler de daha kritik hedefler haline geliyor. Bir modele yapılan saldırı manşet olur; modelin kullandığı npm paketine yapılan saldırı genellikle sessizce geçer.
+
+## Geliştiriciler için pratik adımlar
+
+`npm audit` düzenli çalıştırın. Kritik bağımlılıklar için lockfile kullanın ve version pin'leyin. Yeni kütüphane contributor'larını gözden geçirin, özellikle büyük değişiklikler için kıdemli maintainer onayı zorunlu tutun. Tedarik zinciri güvenliği artık backend ya da frontend değil, tüm mühendislik ekibinin meselesi.
