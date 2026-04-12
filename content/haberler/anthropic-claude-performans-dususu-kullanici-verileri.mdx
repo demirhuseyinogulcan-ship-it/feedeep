@@ -1,0 +1,85 @@
+---
+title: "Claude Nerf Yedi"
+slug: anthropic-claude-performans-dususu-kullanici-verileri
+description: "Bağımsız izleme verileri ve 170 bin kişilik topluluk Claude'un performans düşüşünü belgeledi. Anthropic bir hatayı doğruladı ama şikayetler devam ediyor."
+date: 2026-04-12
+image: "/images/haberler/anthropic-claude-performans-dususu-kullanici-verileri.webp"
+imageAlt: "Anthropic Claude performans grafiği, kullanıcı şikayetleri ve kalite düşüşü izleme verileri görseli"
+sourceUrl: "https://old.reddit.com/r/ClaudeAI/comments/1nfe62z/the_ai_nerf_anthropics_incident_matches_our_data/"
+sourceName: "r/ClaudeAI: IsItNerfed Analiz Raporu"
+category: sirketler
+keywords:
+  - claude performans dususu
+  - anthropic model kalite sorunu
+  - isitnerfed bagimsiz izleme
+  - claude code kullanici sikayetleri
+  - claude opus sonnet nerf
+  - yapay zeka haberleri
+sources:
+  - url: "https://old.reddit.com/r/ClaudeAI/comments/1nfe62z/the_ai_nerf_anthropics_incident_matches_our_data/"
+    label: "r/ClaudeAI: IsItNerfed Bağımsız İzleme Verileri"
+    tier: 2
+  - url: "https://old.reddit.com/r/ClaudeAI/comments/1ph5ttz/claude_performance_and_workarounds_report/"
+    label: "r/ClaudeAI Moderatör Performans Raporu (Aralık 2025)"
+    tier: 3
+  - url: "https://old.reddit.com/r/ClaudeAI/comments/1s2wvzt/psa_cowork_is_hardcoding_medium_effort_on_opus/"
+    label: "Reddit: Cowork Opus Effort Seviyesi Araştırması"
+    tier: 3
+  - url: "https://techcrunch.com/2026/03/31/anthropic-is-having-a-month/"
+    label: "TechCrunch: Anthropic is Having a Month"
+    tier: 2
+  - url: "https://isitnerfed.org"
+    label: "IsItNerfed.org: Gerçek Zamanlı LLM İzleme Platformu"
+    tier: 2
+confidence: medium
+socialSnippet: "Bağımsız izleme verileri Claude'un kalitesinin dalgalandığını doğruladı. Anthropic bir hatayı kabul etti ama topluluk hala tatmin olmadı. Veriler ne diyor?"
+published: true
+---
+
+Ağustos 2025'te bir grup geliştirici, Claude'un yanıt kalitesini sistematik olarak ölçmeye başladı. IsItNerfed.org adını verdikleri platformda Claude Code ve API üzerinden düzenli testler çalıştırdılar. 29 Ağustos'ta hata oranı bir günde iki katına çıktı.
+
+Bu bir his değildi. Grafiklerde açıkça görünüyordu.
+
+## Kullanıcılar uzun süredir aynı şeyi söylüyordu
+
+Reddit'in r/ClaudeAI topluluğu 170 binden fazla üyeye sahip. Performans şikayetleri için açılan "megathread" dizileri yüzlerce yorum topluyor ve moderatörler bunları haftalık raporlara dönüştürüyor. Raporların ortak bulgusu şu: Pro ve Max kullanıcıları birkaç mesajdan sonra limitlara takılıyor, modelin bağlamı kaybettiğini hissediyor ve daha önce sorunsuz çalışan görevlerde hata alıyor.
+
+267 oy alan bir gönderide bir kullanıcı durumu şöyle özetledi: "Opus 4'ü almak için 200 dolar ödedim. İlk birkaç gün etkileyiciydi. Sonra bir şey değişti. Aynı görevler daha fazla hata veriyor, muhakeme sığ hissettiriyor."
+
+Bu tür gönderiler tek bir dönemle sınırlı değil. Nisan 2025'ten bu yana her birkaç haftada benzer şikayetler yoğunlaşıyor, ardından kısmen düzeliyor, sonra yeniden başlıyor.
+
+## IsItNerfed ne ölçtü?
+
+IsItNerfed ekibi Claude Code ve OpenAI API üzerinden standart test setleri çalıştırıyor. GPT-4.1'i referans noktası olarak kullanıyorlar. Verileri halka açık.
+
+Ölçümlere göre Ağustos sonunda Claude'un hata oranı yüzde 70'e kadar çıktı ve yaklaşık bir hafta boyunca yüksek dalgalanma gösterdi. 4 Eylül'den itibaren kararlı hale geldi. Aynı dönemde GPT-4.1 testlerinde tutarlı sonuçlar alındı.
+
+Ekim ayında Sonnet 4.5 testlerinde de benzer bir tablo ortaya çıktı. Sonnet 4'ün ortalama hata oranı yüzde 37 iken Sonnet 4.5'te bu oran yüzde 46'ya çıkıyordu. 12 saat sonra iyileşme başladı ama ilk izlenim olumsuz kaldı.
+
+## Anthropic bir hatayı doğruladı
+
+Anthropic, durum sayfasında Ağustos-Eylül dönemine ait bir itirafta bulundu. Claude Sonnet 4 isteklerinin 5 Ağustos ile 4 Eylül arasında bir hata nedeniyle düşük kaliteli yanıtlar ürettiğini açıkladı. Etki 29 Ağustos'tan 4 Eylül'e kadar arttı. IsItNerfed'in grafikleri bu tarihlerle birebir örtüşüyor.
+
+Ancak Anthropic'in açıklaması "model ağırlıkları değiştirilmedi, altyapı hatası" yönündeydi. Kullanıcılar için bu ayrım anlamlı değil. Altyapı da model de aynı arayüzden geçiyor. Sonuç bozuksa bozuk.
+
+## Gizli bir ayar sorunu daha var
+
+Nisan 2026'da bir kullanıcı, Claude'un masaüstü uygulamasındaki Cowork özelliğini inceledi. Log dosyalarını analiz ettiğinde Max planı için ödeme yapmasına rağmen Opus 4.6'nın her seferinde orta (medium) düşünme seviyesinde çalıştırıldığını buldu.
+
+Kullanıcı üç farklı yöntemle yüksek (high) seviyeye geçmeye çalıştı: ortam değişkeni, ayar dosyası ve model adı değişikliği. Hiçbiri işe yaramadı. Cowork, oturum başlatırken parametreleri uygulama katmanında sabit kodluyordu. Aynı kullanıcı, 1 milyon token bağlam penceresi seçeneğinin de arayüzde sunulmadığını ve ayar dosyasından zorlanmasının görmezden gelindiğini belgeledi.
+
+Bu, model ağırlıklarıyla ilgili bir sorun değil. Ödenen özelliğin sessizce kısıtlanması.
+
+## Topluluk ikiye bölündü
+
+300 bin satırlık bir projeyi Claude Code ile tek başına yeniden yazan bir geliştirici, sorunun büyük ölçüde kullanım biçiminden kaynaklandığını savunuyor. Kendi oluşturduğu hook sistemi, otomatik beceri aktivasyonu ve belgeleme iş akışı sayesinde tutarlı sonuçlar aldığını anlatıyor. "Claude'un çıktısı aslında son birkaç ayda önemli ölçüde iyileşti" diyor. "Bunun büyük ölçüde sürekli geliştirdiğim iş akışından kaynaklandığına inanıyorum."
+
+Karşı tarafta ise "bait and switch" ifadesini kullanan bir kitle var. Bu kullanıcılara göre model her yeni sürümde güçlü başlıyor, birkaç hafta sonra kademeli olarak zayıflıyor. "Kullan, nerflemeden önce kullan!" mesajları r/ClaudeAI'ın yarı ironik bir ritüeli haline geldi.
+
+## Genel tablo
+
+Mart 2026'da TechCrunch "Anthropic is Having a Month" başlıklı bir haberle Anthropic'in kaynak kod sızıntısını ve güvenlik olaylarını aktardı. Aynı dönemde Anthropic, Claude Code aboneliklerinin üçüncü taraf araçlarla kullanımını ücretli hale getirdi ve OpenClaw ile uyumluluğu kısıtladı. Şirket bir yandan Pentagon ile hukuki süreç yürütürken diğer yandan Mythos adlı yeni bir modeli siber güvenlik alanında duyurdu.
+
+Performans şikayetlerinin resmi bir "model zayıflatıldı" yanıtı hiçbir zaman gelmedi. Anthropic'in temel savunması tutarlı: model ağırlıkları değişmedi, altyapı hataları yaşandı ve düzeltildi. Ama altyapı hataları bu kadar sık tekrar ediyorsa kullanıcılar için sonuç aynı.
+
+Bağımsız izleme verileri en azından bir şeyi netleştirdi: kalite dalgalanmaları ölçülebilir ve gerçek. Bunun bir maliyet optimizasyonu mu, altyapı kırılganlığı mı yoksa hızlı büyümenin kaçınılmaz sancısı mı olduğu yanıtsız kalıyor.
