@@ -46,6 +46,8 @@
 | `date` | ISO format, yayın tarihi | `2026-02-15` |
 | `category` | `inceleme` \| `analiz` \| `karsilastirma` | `karsilastirma` |
 | `keywords` | Max 5, en spesifik olanı ilk sıraya | `["chatgpt vs claude", ...]` |
+| `tags` | Hub sayfaları için normalize etiketler, `TAG_LABELS` haritasından seç | `["openai", "ai-model"]` |
+| `faq` | Soru-cevap çiftleri, FAQ JSON-LD üretir | Aşağıya bak |
 | `sources` | Min 1, her biri `url`, `label`, `tier(1-3)` | Aşağıya bak |
 | `confidence` | `high` \| `medium` \| `speculative` | `high` |
 | `lastFactChecked` | Son doğrulama tarihi | `2026-02-15` |
@@ -79,6 +81,8 @@
 | `sourceUrl` | Orijinal haberin URL'si (zorunlu) |
 | `sourceName` | Kaynak adı: `"OpenAI Blog"`, `"TechCrunch"` |
 | `category` | `sirketler` \| `sektor` \| `turkiye` \| `arastirma` |
+| `tags` | Hub etiketleri, `TAG_LABELS` haritasından seç |
+| `faq` | Opsiyonel soru-cevap çiftleri (FAQ JSON-LD) |
 | `sources` | Min 1 kaynak, haberin kaynağı |
 | `confidence` | Haber ne kadar doğrulanmış |
 
@@ -200,6 +204,8 @@ npm run dev      # Lokal test
 □ sourceName: Kaynak adı
 □ category: sirketler | sektor | turkiye | arastirma
 □ keywords (6 adet): Long-tail Türkçe, son sıra "yapay zeka haberleri"
+□ tags: TAG_LABELS haritasından 1-4 etiket (bkz. Bölüm 13)
+□ faq: Opsiyonel soru-cevap çiftleri (bkz. Bölüm 14)
 □ sources: Min 1 (tier 1/2/3)
 □ confidence: high | medium | speculative
 □ socialSnippet: Max 280 karakter
@@ -258,6 +264,8 @@ git push origin main
 - `/` → Anasayfa (akış: son yazı + haberler)
 - `/yazilar` → Tüm yazılar listesi
 - `/haberler` → Tüm haberler listesi
+- `/etiketler` → Tag indeks sayfası (tüm etiketler)
+- `/etiketler/[tag]` → Tag hub sayfası (o etiketteki içerikler)
 - `/arama` → Site içi arama
 - `/hakkimizda` → Hakkımızda
 - `/koleksiyon` → Kullanıcı koleksiyonu
@@ -408,8 +416,107 @@ Her oturum sonunda `CHANGELOG.md` dosyası güncellenir.
 | slug | ≤ 60 karakter | Türkçe karakter YOK |
 | description | 120-160 karakter | Google 155-160'ta keser |
 | keywords | 6 adet | Son sıra: "yapay zeka haberleri" |
+| tags | 1-4 adet | TAG_LABELS haritasından seç |
+| faq | opsiyonel | question + answer çiftleri |
 | sources | min 1 | URL çalışıyor mu? |
 | socialSnippet | ≤ 280 karakter | Twitter/X formatı |
 | body (haber) | 300-800 kelime | İlk cümle hook |
 | body (yazı) | 800-3000 kelime | İlk paragraf keyword |
 | published | true | false = sayfada görünmez |
+
+---
+
+## 13. Tag (Etiket) Sistemi
+
+> Tag'ler hub sayfalarını (`/etiketler/[tag]`) besler, cross-type internal linking sağlar ve topical authority oluşturur.
+
+### 13.1 Tag Nasıl Seçilir?
+
+Tag'ler `constants.ts` dosyasındaki `TAG_LABELS` haritasından seçilir. Geçerli tag'ler:
+
+**Şirketler:** `openai`, `anthropic`, `google`, `meta`, `microsoft`, `alibaba`, `nvidia`, `apple`, `cursor`, `mistral`, `bytedance`, `cloudflare`, `figma`, `github`, `perplexity`
+
+**Konular:** `ai-model`, `ai-agent`, `ai-guvenlik`, `yatirim`, `kodlama`, `acik-kaynak`, `kurumsal-ai`, `ses-gorsel-video`, `arastirma`, `turkiye`, `is-hayati`
+
+### 13.2 Tag Kuralları
+
+- Her içeriğe **1-4 tag** ekle. Fazlası spam, azı yetersiz.
+- Haritada olmayan tag kullanma. Yeni tag gerekiyorsa önce `TAG_LABELS`'a ekle.
+- Tag slug'ları **küçük harf ve tire** ile yazılır: `ai-model`, `acik-kaynak`
+- Bir haberde şirket adı geçiyorsa o şirketin tag'ini ekle.
+- Konu tag'i şirketten daha önemli: bir haber OpenAI hakkında ama asıl konu güvenlikse, `ai-guvenlik` tag'i `openai`'dan önce gelsin.
+
+### 13.3 Frontmatter Örneği
+
+```yaml
+tags:
+  - openai
+  - ai-model
+  - kodlama
+```
+
+### 13.4 Tag Eklenmezse Ne Olur?
+
+- `tags: []` (default) ile build hata vermez.
+- Ama o içerik hiçbir hub sayfasında görünmez.
+- Internal linking zayıflar, topical authority oluşmaz.
+- Her yeni içeriğe mutlaka en az 1 tag ekle.
+
+---
+
+## 14. FAQ (Sıkça Sorulan Sorular) Sistemi
+
+> FAQ alanı, içerik sayfasında FAQ JSON-LD structured data üretir. Google'da "People Also Ask" (PAA) kutucuğunda çıkma şansı verir.
+
+### 14.1 Ne Zaman FAQ Eklemeli?
+
+- Yazılarda: hemen hemen her zaman ekle (2-5 soru).
+- Haberlerde: opsiyonel. Sadece okuyucunun aklına doğal olarak gelecek sorular varsa.
+- Genel kural: yazının/haberin cevapladığı soruları düşün ve FAQ'a taşı.
+
+### 14.2 Frontmatter Örneği
+
+```yaml
+faq:
+  - question: "ChatGPT ve Claude arasındaki en büyük fark nedir?"
+    answer: "ChatGPT genel amaçlı görevlerde daha geniş bir eklenti ekosistemine sahipken, Claude uzun metin anlama ve kod üretiminde daha tutarlı sonuçlar veriyor."
+  - question: "Hangi model kodlama için daha iyi?"
+    answer: "Claude Opus kod üretiminde daha az hata yaparken, GPT-4o hız avantajı sunuyor. Proje tipine göre seçim değişir."
+```
+
+### 14.3 FAQ Kuralları
+
+- Soruları doğal dilde, insanların gerçekten aratacağı şekilde yaz.
+- Cevaplar 1-3 cümle, net ve bilgi yoğun.
+- Google snippet'ine sığacak uzunlukta: cevap max 300 karakter ideal.
+- Yazının body'sinde zaten cevaplanan bir şeyi tekrar etme, tamamlayıcı ol.
+- Clickbait soru yazma: "Hangi AI en iyisi?" yerine "ChatGPT ve Claude arasındaki en büyük fark nedir?"
+
+---
+
+## 15. Etiketler Sayfası ve Hub Yapısı
+
+### 15.1 Otomatik Sayfalar
+
+- `/etiketler` — Tüm tag'lerin listesi (sayılarıyla birlikte)
+- `/etiketler/[tag]` — Belirli bir tag'e sahip tüm içerikler (haber + yazı karışık, filtrelenebilir)
+
+Bu sayfalar MDX dosyalarındaki `tags` alanından otomatik oluşur. Yeni tag eklendiğinde sayfa otomatik generate edilir.
+
+### 15.2 Internal Linking Akışı
+
+```
+Haber/Yazı sayfası
+  └─ TagLinks bileşeni → /etiketler/[tag] hub sayfasına link
+       └─ Hub sayfası → aynı tag'li diğer içeriklere link
+            └─ Topical authority döngüsü tamamlanır
+```
+
+### 15.3 Cross-Type Linking
+
+Detay sayfalarında (haberler/[slug] ve yazilar/[slug]):
+- Aynı tip ilgili içerikler (RelatedNews / RelatedArticles)
+- Farklı tip ilgili içerikler (keyword eşleşmesi ile, max 2)
+- TagLinks bileşeni (hub sayfalarına köprü)
+
+Bu üçlü yapı Google'ın internal link graph'ını güçlendirir.
