@@ -1,55 +1,123 @@
 ---
-title: "ChatGPT vs Claude vs Gemini: 2026 Karşılaştırması"
+title: "ChatGPT vs Claude vs Gemini: 2026 Nisan Güncellemesi"
 slug: chatgpt-vs-claude-vs-gemini-2026
-description: "2026'nın en popüler üç yapay zeka modelini 7 kriterde karşılaştırdık. Hangisi sizin için doğru?"
+description: "GPT-5.4, Claude Sonnet ve Opus 4.6, Gemini 3.1 Pro ve GLM-5.1 ile tablo değişti. 2026'da hangi model hangi iş için daha doğru?"
 date: 2026-02-10
 category: karsilastirma
 keywords:
   - chatgpt vs claude
-  - yapay zeka karşılaştırma
-  - en iyi ai model
-  - gemini vs chatgpt
-  - claude opus
+  - gpt 5.4 vs claude opus 4.6
+  - gemini 3.1 pro karşılaştırma
+  - en iyi ai model 2026
+  - glm 5.1
 tags:
+  - ai-model
   - anthropic
   - google
   - openai
 sources:
-  - url: https://openai.com/blog
-    label: OpenAI Blog
+  - url: https://openai.com/index/introducing-gpt-5-4/
+    label: OpenAI, GPT-5.4 Tanıtımı
     tier: 1
-  - url: https://www.anthropic.com/news
-    label: Anthropic News
+  - url: https://www.anthropic.com/news/claude-sonnet-4-6
+    label: Anthropic, Claude Sonnet 4.6
     tier: 1
-  - url: https://blog.google/technology/ai/
-    label: Google AI Blog
+  - url: https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro
+    label: Google AI Blog, Gemini 3.1 Pro
     tier: 1
+  - url: https://z.ai/blog/glm-5.1
+    label: Z.AI, GLM-5.1 Tanıtımı
+    tier: 1
+  - url: https://www.anthropic.com/glasswing
+    label: Anthropic, Project Glasswing ve Mythos Preview
+    tier: 1
+  - url: https://isitnerfed.org
+    label: IsItNerfed, bağımsız LLM izleme verileri
+    tier: 2
 confidence: high
-lastFactChecked: 2026-02-10
+lastFactChecked: 2026-04-13
 corrections: []
 actionItems:
-  - "Üç modeli de aynı prompt ile test edin"
-  - "Kendi kullanım senaryonuza göre en uygun modeli seçin"
-  - "Fiyat/performans oranını hesaplayın"
-socialSnippet: "2026'da ChatGPT, Claude ve Gemini'yi 7 kriterde karşılaştırdık. Kazanan size göre değişiyor."
+  - "Aynı görevi GPT-5.4, Claude Sonnet 4.6 ve Gemini 3.1 Pro ile ayrı ayrı test edin"
+  - "Büyük kod tabanı, ofis işi ve araştırma için tek model yerine ayrı varsayılan model seçin"
+  - "Kendi altyapınız gerekiyorsa GLM-5.1, Qwen 3.5 ve Kimi K2.5 gibi açık seçenekleri ayrıca benchmark edin"
+socialSnippet: "GPT-5.4 geldi, Claude Sonnet ve Opus 4.6 ayrıştı, Gemini 3.1 Pro sıçradı, GLM-5.1 kapalı modelleri zorladı. 2026 model tablosu yeniden yazıldı."
+published: true
 ---
 
-## Neden Bu Karşılaştırmaya İhtiyacınız Var?
+Bu yazı ilk yayınlandığında tablo daha sakindi. Şimdi değil.
 
-2026 itibarıyla yapay zeka modelleri arasındaki farklar her zamankinden daha belirgin hale geldi. Her bir model farklı alanlarda öne çıkıyor ve doğru seçim yapmak, hem zaman hem maliyet açısından kritik.
+[GPT-5.4](/haberler/openai-gpt-5-4-bilgisayar-kullanimi-finansal-eklentiler) çıktı. Anthropic tarafında [Claude Sonnet 4.6](/haberler/anthropic-claude-sonnet-4-6-1m-context-kodlama) ve Opus 4.6 çizgisi ayrıştı. Google [Gemini 3.1 Pro](/haberler/google-gemini-3-1-pro-guncelleme) ile muhakeme yarışında sıçradı. Bir yandan da [Z.AI'ın GLM-5.1 modeli](/haberler/z-ai-glm-5-1-acik-kaynak-754b-otonom-kodlama), kapalı modellerin üst sırasına açık kaynak bir alternatif olarak girdi.
 
-## Karşılaştırma Kriterleri
+Bu yüzden eski 1'den 5'e puan tablosu artık yetmiyor. 2026 Nisan itibarıyla doğru soru şu: hangi model daha iyi değil, hangi model hangi işte daha doğru?
 
-| Kriter | ChatGPT (GPT-5) | Claude (Opus 4) | Gemini 3 Pro |
-|--------|-----------------|-----------------|--------------|
-| Türkçe | 4/5 | 5/5 | 3/5 |
-| Kod | 5/5 | 5/5 | 4/5 |
-| Analiz | 4/5 | 5/5 | 4/5 |
-| Hız | 4/5 | 3/5 | 5/5 |
-| Fiyat | 3/5 | 3/5 | 4/5 |
-| Multimodal | 5/5 | 4/5 | 5/5 |
-| Context | 4/5 | 5/5 | 5/5 |
+## Kısa karar tablosu
 
-## Sonuç
+| Senaryo | İlk tercih | Neden |
+|--------|------------|-------|
+| Tek abonelikle en geniş iş akışı | ChatGPT, GPT-5.4 Thinking | Bilgisayar kullanımı, Excel ve Google Sheets entegrasyonu, daha düşük halüsinasyon oranı |
+| Büyük kod tabanı ve uzun bağlam | Claude Sonnet 4.6 | 1 milyon token bağlam, güçlü SWE-bench performansı, büyük repo ve doküman işlerinde avantaj |
+| Ağır muhakeme ve karmaşık problem çözme | Gemini 3.1 Pro | ARC-AGI-2'de çok güçlü sıçrama, Google ekosistemiyle geniş dağıtım |
+| Güvenlik araştırması | Claude Opus 4.6 | Firefox'ta iki haftada 22 açık bulması, güvenlik tarafında pratik üstünlük sinyali |
+| Kendi altyapında çalıştırma | GLM-5.1 | MIT lisansı, açık ağırlıklar, SWE-Bench Pro'da frontier kapalı modellere yaklaşan hatta bazı testlerde geçen performans |
 
-Tek bir "en iyi model" yok. Kullanım senaryonuza göre seçin. Türkçe içerik üretimi için Claude, hız gerektiren görevler için Gemini, multimodal projeler için ChatGPT öne çıkıyor.
+Bu tabloda özellikle bir şeyi bilerek dışarıda bırakıyorum: [Claude Mythos Preview](/haberler/anthropic-claude-mythos-project-glasswing-siber-guvenlik). Çünkü model etkileyici olsa da halka açık değil. Satın alınamayan, indirilemeyen ve günlük iş akışına koyulamayan bir modeli normal kullanıcı karşılaştırmasına dahil etmek adil değil.
+
+## ChatGPT tarafında ne değişti?
+
+OpenAI'ın 2026 başındaki en önemli hamlesi GPT-5.4 oldu. Buradaki fark yalnızca biraz daha iyi cevap vermesi değil. Model artık bilgisayar kullanımı, araç erişimi ve profesyonel iş akışları tarafında daha anlamlı bir pakete dönüştü.
+
+[GPT-5.4](/haberler/openai-gpt-5-4-bilgisayar-kullanimi-finansal-eklentiler) OSWorld-Verified testinde yüzde 75 başarıya ulaşıyor. Bu önemli, çünkü mesele artık yalnızca "iyi yazıyor mu" değil, tarayıcıyı, araçları ve görev akışını ne kadar iyi işletebildiği. Excel ve Google Sheets entegrasyonu gibi kurumsal pratikler de bu yüzden kritik. OpenAI doğrudan beyaz yakalı iş akışına oynuyor.
+
+Halüsinasyon tarafında da iyileşme var. Şirket, GPT-5.4'ün hata bildirilen sorgularda önceki sürümlere göre daha az yanlış iddia ürettiğini söylüyor. Bu, özellikle rapor, analiz, tablo, araştırma özeti gibi işlerde önemli. Bir model biraz daha yaratıcı ama daha az güvenilir olabilir. GPT-5.4 burada biraz daha sıkı bir işletme modeli gibi davranıyor.
+
+Bu yüzden bugün tek abonelik seçilecekse ChatGPT tarafı en güvenli genel tercih gibi duruyor. "Her gün farklı tür iş yapıyorum, tek modelim olsun" diyen kullanıcı için en dengeli paket hala burada.
+
+## Claude neden hala çok güçlü, ama artık daha karışık bir tercih?
+
+Anthropic tarafında iş ikiye ayrılmış durumda.
+
+Birinci katman, halka açık ve pratik olarak kullanılabilir katman. Burada [Claude Sonnet 4.6](/haberler/anthropic-claude-sonnet-4-6-1m-context-kodlama) öne çıkıyor. 1 milyon token bağlam penceresi, güçlü kodlama performansı ve uzun bağlamlı işler için gerçekten anlamlı bir avantaj sunuyor. Büyük bir repo, uzun sözleşme, çok parçalı araştırma, ürün dokümantasyonu gibi işlerde Sonnet 4.6 hala çok güçlü bir aday.
+
+İkinci katman, frontier güvenlik ve ajan performansı. Burada ise Opus 4.6'nın sinyalleri çok güçlü. Anthropic'in Mozilla ile yürüttüğü çalışmada [Claude Opus 4.6'nın Firefox'ta 22 güvenlik açığı bulması](/haberler/claude-opus-firefox-22-guvenlik-acigi), modelin güvenlik araştırması ve derin teknik tarama işlerinde ne kadar iddialı hale geldiğini gösteriyor.
+
+Ama tam bu noktada kullanıcı deneyimi tarafındaki gerilim başlıyor. [Claude Nerf Yedi](/haberler/anthropic-claude-performans-dususu-kullanici-verileri) başlıklı veri tabanlı haberde görüldüğü gibi, topluluk tarafında kalite dalgalanması şikayetleri büyüdü. IsItNerfed verileri, topluluk raporları ve Anthropic'in kabul ettiği kalite sorunu aynı döneme denk geliyor. Buna ek olarak masaüstü Cowork kullanımında Opus 4.6'nın beklenenden düşük düşünme seviyesinde çalıştırıldığına dair raporlar da çıktı.
+
+Bu yüzden Claude için bugün en dürüst cümle şu: en güçlü işlerden bazılarını hala Claude yapıyor, ama günlük kullanım kalitesinin ne kadar istikrarlı olduğu artık ayrı bir soru.
+
+Bir de Mythos katmanı var. [Claude Mythos Preview](/haberler/anthropic-claude-mythos-project-glasswing-siber-guvenlik), CyberGym'de Opus 4.6'nın üstüne çıkıyor ve yıllardır bulunmayan güvenlik açıklarını tespit ediyor. Ama Anthropic modeli bilerek halka açmıyor. Bu, teknoloji olarak çok önemli. Kullanıcı kararı açısından ise henüz satın alınabilir bir seçenek değil.
+
+## Gemini neden bu kadar hafife alınıyor?
+
+Google tarafında sorun uzun süre şuydu: model kötü değildi, ama ürün algısı dağınıktı. 2026'da bu tablo toparlanmaya başladı.
+
+[Gemini 3.1 Pro](/haberler/google-gemini-3-1-pro-guncelleme), ARC-AGI-2 benchmark'ında yüzde 77.1 ile ciddi bir sıçrama gösterdi. Bu tip testler günlük kullanımın birebir kopyası değildir, ama modelin yeni mantık kalıplarına ne kadar iyi uyum sağladığına dair iyi bir sinyal verir. Google bu modeli AI Studio, Gemini CLI, Vertex AI, Android Studio, Gemini uygulaması ve NotebookLM üzerinden yaygın biçimde dağıtıyor. Yani model gücüyle dağıtım gücü birleşmeye başladı.
+
+Gemini'nin asıl avantajı burada. Eğer zaten Google Workspace, Android, Google Cloud ve NotebookLM tarafında yaşıyorsanız modelin size ulaşma şekli çok daha sürtünmesiz. ChatGPT kadar geniş bir genel marka üstünlüğü yok. Claude kadar kült bir geliştirici kitlesi de yok. Ama karmaşık muhakeme ve Google ürünleriyle sıkı entegrasyon kombinasyonu onu çok daha ciddi bir aday haline getirdi.
+
+## Başlık üç modeli söylüyor, ama piyasa artık üç modelden ibaret değil
+
+Bu yazının SEO başlığı hala ChatGPT, Claude ve Gemini etrafında dönüyor. Arama niyeti de burada. Ama 2026 Nisan itibarıyla modeli gerçekten takip eden biriyseniz radarı biraz genişletmeniz gerekiyor.
+
+[GLM-5.1](/haberler/z-ai-glm-5-1-acik-kaynak-754b-otonom-kodlama) bu yüzden önemli. Açık ağırlıklı, MIT lisanslı ve SWE-Bench Pro gibi gerçek yazılım görevlerine yakın testlerde Claude Opus 4.6 ve GPT-5.4'ü geçen bir modelden söz ediyoruz. Açık kaynak dünyasında "iyi ama kapalı modellere göre geride" dönemi ciddi biçimde aşınmaya başladı.
+
+[Qwen 3.5](/haberler/alibaba-qwen-3-5-hibrit-dikkat-moe-model) geniş dil desteği, 1 milyon token bağlam ve dengeli benchmark profiliyle izlenmesi gereken bir açık model ailesi olmaya devam ediyor. [Kimi K2.5](/haberler/moonshot-ai-kimi-k2-5-agent-swarm) ise özellikle ajan orkestrasyonu ve paralel görev yürütme tarafında önemli bir deney alanı açıyor.
+
+Bu modellerin hiçbiri bugün genel tüketicide ChatGPT kadar tanınmıyor. Ama geliştirici, startup ve kendi altyapısını kurmak isteyen ekipler için karar matrisi artık kesinlikle sadece üç büyük kapalı modelden oluşmuyor.
+
+## 2026 Nisan itibarıyla en dürüst sonuç
+
+Tek bir "en iyi model" yok. Hatta artık tek model stratejisi de zayıflıyor.
+
+Gündelik profesyonel iş akışı için en güvenli genel tercih GPT-5.4. Uzun bağlam ve büyük kod tabanı işleri için Claude Sonnet 4.6 hala çok güçlü. Güçlü muhakeme ve Google tarafındaki dağıtım avantajı için Gemini 3.1 Pro hafife alınmamalı. Kendi sunucunuz, lisans esnekliği ve maliyet kontrolü önemliyse GLM-5.1, Qwen 3.5 ve Kimi K2.5 gibi açık modeller artık ciddi seçenekler.
+
+Claude Mythos ise ayrı bir kategori. O model karşılaştırma tablosunun değil, geleceğin güvenlik ve frontier model tartışmasının konusu.
+
+Bugün bir cümleyle seçim yapmak gerekirse karar ağacı şöyle:
+
+- Tek model, en geniş kullanım: ChatGPT GPT-5.4
+- Uzun bağlam ve ağır kod işi: Claude Sonnet 4.6
+- Karmaşık muhakeme ve Google ekosistemi: Gemini 3.1 Pro
+- Açık kaynak ve self-host: GLM-5.1
+
+Eğer üç modeli de aynı sepete koyup "hangisi daha zeki" diye bakarsanız yanlış soru sorarsınız. 2026'da doğru soru şu: yarın sabah benim işimi hangisi daha az sürtünmeyle çözecek?
