@@ -1,0 +1,88 @@
+---
+title: "Toplantı Sonrası 3 Satır Kuralı: Flow'u Hızlı Geri Kazan"
+slug: toplanti-sonrasi-3-satir-kurali
+description: "Toplantı biter, ekrana dönersiniz ama zihin hala toplantıda. 3 satır not almak beyninizi temizler ve flow moduna geçişi hızlandırır."
+date: 2026-04-13
+category: analiz
+keywords:
+  - toplantı sonrası not alma
+  - context switching yazılımcı
+  - geliştirici verimliliği
+  - toplantı verimliliği
+  - flow modu programcı
+  - toplantı 3 satır kuralı
+image: "/images/yazilar/toplanti-sonrasi-3-satir-kurali.jpg"
+imageAlt: "Toplantı sonrası 3 satır not alma kuralı — geliştiriciler için context switching azaltma yöntemi"
+tags:
+  - is-hayati
+  - verimlilik
+sources:
+  - url: "http://www.paulgraham.com/makersschedule.html"
+    label: "Paul Graham — Maker's Schedule, Manager's Schedule"
+    tier: 2
+confidence: high
+lastFactChecked: 2026-04-13
+corrections: []
+actionItems:
+  - "Bir sonraki toplantıdan hemen sonra yerinizden kalkmadan 3 soruyu yazın"
+  - "Bir hafta boyunca her toplantıdan sonra uygulayın, farkı gözlemleyin"
+socialSnippet: "Toplantıdan sonra monitöre dönersiniz ama zihin hala toplantıda. Bunun için 3 satır yeterli: Ne karar verdik? Benim aksiyonum ne? Tarih ne zaman?"
+published: true
+---
+
+Toplantı bitti. Monitöre döndünüz. Ama zihin hala toplantıda.
+
+Yazılım geliştiriciler olarak en büyük düşmanımızın **context switching** olduğunu hepimiz biliyoruz. Derin odaklanma modundayken bir Slack bildirimi veya toplantı isteği geliyor ve saatlerce kurduğumuz mantık çatısı anında yıkılıyor. Asıl sorun ise toplantıdan sonra başlıyor: monitöre dönersiniz ama bir türlü o flow haline geri dönemezsiniz. Zihin hala toplantıda tartışılan yan konularda, alınan kararlarda, sonraki adımlardadır.
+
+## Toplantının Görünmeyen Maliyeti
+
+Paul Graham'ın "Maker's Schedule, Manager's Schedule" yazısında ortaya koyduğu çerçeve hala geçerli: yaratıcı iş yapanlar (yazılımcılar, tasarımcılar, yazarlar) zamana bölünmez birimler halinde çalışır. Bir toplantı, sadece kendi süresini değil, öncesindeki ve sonrasındaki akış pencerelerini de yakıyor.
+
+Sorun toplantının kendisi değil. Sorun toplantıdan çıkınca zihninizin "kapat" tuşuna basamaması. Alınan kararlar, tartışılan yan konular, yarım kalan muhabbetler — hepsi RAM'de açık sekme olarak kalıyor.
+
+![Toplantı sonrası 3 satır kuralı — context switching maliyetini azaltma adımları](/images/yazilar/toplanti-sonrasi-3-satir-kurali-1.png)
+
+## 3 Satır Kuralı Nedir
+
+Kural basit: toplantı biter bitmez, yerinizden kalkmadan veya kameranızı kapatmadan önce şu üç soruyu bir yere yazın.
+
+**1. Ne karar verdik?**
+Net bir cümleyle alınan sonuç. Yorum yok, özet yok, tek cümle.
+
+**2. Benim aksiyonum ne?**
+Yapmam gereken tek iş. "Toplantıda konuştuk" değil, "Ben X'i yapacağım."
+
+**3. Tarih ne zaman?**
+Deadline veya kontrol tarihi.
+
+Üç satır. Başka bir şey değil.
+
+## Neden İşe Yarıyor
+
+Beyin bir hard disk değil, bir işlemci. Toplantıdaki detayları hafızada tutmaya çalışmak RAM'i gereksiz yere işgal eder.
+
+Bu 3 satırı yazdığınızda beyin o işlemin kaydedildiğini ve güvenli bir yerde olduğunu anlar. Açık sekmeler kapanır. Dikkati sürdürmek için gereken bilişsel yük düşer. Koda geri dönmek daha hızlı olur.
+
+Bu, [5 Dakika Protokolü](/yazilar/excele-bakarken-hayatini-sorguladinmi-5-dakika-protokolu)'nün temelindeki mantıkla aynı: karmaşık rutinleri değiştirmeye gerek yok, küçük ama tutarlı alışkanlıklar asıl farkı yaratıyor.
+
+## Pratikte Nasıl Görünür
+
+Bir sprint planlama toplantısı düşünün. Saatlerce konuşulmuş, onlarca konu açılmış.
+
+Toplantı biter, şu 3 satır yazılır:
+
+> **Karar:** Yeni özellik Cuma'ya ertelendi.
+> **Aksiyonum:** API dokümantasyonunu güncelleyeceğim.
+> **Tarih:** Perşembe akşamı.
+
+Bu kadar. Toplantının geri kalan her detayı bu 3 satır sayesinde zihni meşgul etmek zorunda kalmıyor.
+
+![Toplantı sonrası 3 adım — sprint planlama örneği üzerinden uygulama](/images/yazilar/toplanti-sonrasi-3-satir-kurali-2.png)
+
+## Sonraki Toplantıda Dene
+
+Bir haftalık taahhüt yeterli. Her toplantıdan hemen sonra 3 soruyu yazın. Bir hafta sonunda hangi toplantıların gerçekten net bir karar üretip üretmediğini de görmüş olacaksınız — bu ikincil fayda, çoğu zaman birincil faydadan büyük çıkıyor.
+
+Aynı prensip, [toplantıya çağrılmadığınız durumlarda](/yazilar/toplantiya-cagrilmadin-mi-ai-ile-hazirlikli-gel) da işe yarıyor. Orada da çıktıyı kontrol altına almak, süreci kontrol etmekten daha güçlü bir konum sağlıyor.
+
+En iyi kodlar, en az zihinsel yükle yazılanlardır.

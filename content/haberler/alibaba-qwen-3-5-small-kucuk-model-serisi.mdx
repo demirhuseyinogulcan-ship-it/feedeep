@@ -37,7 +37,7 @@ Qwen ekibi bugün dört modelden oluşan Qwen 3.5 Small serisini tanıttı: 0.8B
 
 Serinin yıldızı 9B modeli. GPQA Diamond karşılaştırmasında 81,7 puan alarak OpenAI'ın açık kaynaklı gpt-oss-120B modelinin 80,1 puanını geride bırakıyor. Parametre sayısı 13,5 kat daha küçük bir modelin bu sonucu elde etmesi, mimari tasarımın ham büyüklükten daha belirleyici olduğunu kanıtlıyor.
 
-Bu performansın arkasında Verimli Hibrit Mimari var. Alibaba, standart Transformer yerine Gated Delta Networks adlı bir doğrusal dikkat mekanizmasını seyrek Mixture-of-Experts ile birleştiriyor. Bu kombinasyon, küçük modelleri genellikle sınırlayan bellek darboğazını ortadan kaldırarak daha yüksek verim ve daha düşük gecikme sağlıyor.
+Bu performansın arkasında Verimli Hibrit Mimari var. Alibaba, standart Transformer yerine [Gated Delta Networks](/haberler/alibaba-qwen-3-5-hibrit-dikkat-moe-model) adlı bir doğrusal dikkat mekanizmasını seyrek Mixture-of-Experts ile birleştiriyor. Bu kombinasyon, küçük modelleri genellikle sınırlayan bellek darboğazını ortadan kaldırarak daha yüksek verim ve daha düşük gecikme sağlıyor.
 
 4B modeli de kendi sınıfında etkili. 262.144 token bağlam penceresi ile hafif agent uygulamaları için güçlü bir multimodal taban sunuyor. Video-MME ölçütünde 83,5 puan alan 4B ve 84,5 puan alan 9B, Gemini 2.5 Flash-Lite'ın 74,6 puanını ciddi farkla geçiyor. HMMT Şubat 2025 matematik turnuvasında 9B modeli 83,2 puanla rakiplerinin önünde yer alıyor.
 
