@@ -37,11 +37,11 @@ ${recentNews.length === 0
       </news:publication>
       <news:publication_date>${new Date(getPublicationDate(h)).toISOString()}</news:publication_date>
       <news:title>${escapeXml(h.title)}</news:title>
-    </news:news>
+    </news:news>${h.image ? `
     <image:image>
-      <image:loc>${SITE.url}/api/og?title=${encodeURIComponent(h.title)}</image:loc>
+      <image:loc>${SITE.url}${h.image}</image:loc>
       <image:title>${escapeXml(h.title)}</image:title>
-    </image:image>
+    </image:image>` : ""}
   </url>`
   )
   .join("\n")}
