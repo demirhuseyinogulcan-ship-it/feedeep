@@ -1,0 +1,67 @@
+---
+title: "Netflix Videodan Fiziği Bile Siliyor"
+slug: netflix-void-ai-video-nesne-silme-acik-kaynak
+description: "Netflix'in açık kaynak VOID modeli videolardan nesne silmekle kalmıyor, silinen nesnenin fiziksel etkilerini (duman, enkaz, yansımalar) da kaldırıyor."
+date: 2026-04-14
+sourceUrl: "https://www.marktechpost.com/2026/04/04/netflix-ai-team-just-open-sourced-void-an-ai-model-that-erases-objects-from-videos-physics-and-all/"
+sourceName: "MarkTechPost"
+category: sirketler
+keywords:
+  - netflix void ai model
+  - video nesne silme ai
+  - acik kaynak video editleme
+  - ai video inpainting
+  - netflix yapay zeka araci
+  - yapay zeka haberleri
+tags:
+  - ai-model
+  - acik-kaynak
+  - ses-gorsel-video
+sources:
+  - url: "https://www.marktechpost.com/2026/04/04/netflix-ai-team-just-open-sourced-void-an-ai-model-that-erases-objects-from-videos-physics-and-all/"
+    label: "MarkTechPost"
+    tier: 2
+  - url: "https://www.theregister.com/2026/04/03/netflix_video_ai/"
+    label: "The Register"
+    tier: 2
+  - url: "https://www.techspot.com/news/111966-netflix-void-ai-model-removes-objects-videos-predicts.html"
+    label: "TechSpot"
+    tier: 2
+  - url: "https://github.com/Netflix/void-model"
+    label: "Netflix VOID GitHub"
+    tier: 1
+  - url: "https://huggingface.co/netflix/void-model"
+    label: "Hugging Face"
+    tier: 1
+confidence: high
+socialSnippet: "Netflix, videodan nesne silerken silinen nesnenin fiziksel etkilerini de kaldıran VOID modelini Apache 2.0 ile açık kaynakladı. Bir aracı silince duman, alev ve enkaz da gidiyor."
+published: true
+image: "/images/haberler/netflix-void-ai-video-nesne-silme-acik-kaynak.jpg"
+imageAlt: "Netflix VOID modeli — videodan nesne ve fiziksel etkilerini silen açık kaynak AI aracı"
+---
+
+Bir trafik kazası videosu düşünün. Netflix'in yeni AI modeli çarpışan araçlardan birini siliyor; ardından dumanı, alevleri, yoldaki enkazı da kaldırıp kazanın hiç yaşanmadığı bir sahne üretiyor.
+
+Bu VOID (Video Object and Interaction Deletion) — Netflix ve Sofia Üniversitesi araştırmacılarının geliştirdiği ve bu hafta Apache 2.0 lisansıyla açık kaynak yayımlanan video düzenleme modeli.
+
+## Sıradan Video Inpainting Değil
+
+VOID'in farkı kelime anlamında değil, fiziğinde.
+
+Klasik video inpainting araçları silmek istediğiniz nesneyi kaldırır ve arka plandaki boşluğu statik görüntülerle doldurur. Bir sahneden sandalyeyi kaldırırsanız sandalye gider, ama sandalyenin gölgesi, ışığı, çarptığı duvarda bıraktığı iz hala orada kalır. Sahne "yanlış" hisseder.
+
+VOID bu etkileri de kaldırıyor. Nesnenin sahneyle fiziksel etkileşimini simülasyonla hesaplayıp, o nesnenin hiç var olmadığı bir evrendeki gerçek görüntüyü üretiyor. Netflix'in paylaştığı örnek vakada iki aracın çarpıştığı videoda bir aracı sildiğinizde, kalan araç kazasız yoluna devam ediyor — post-impact enkaz, duman ve alev de sahneden çıkıyor.
+
+## Donanım ve Erişim
+
+Model ağırlıkları Hugging Face ve GitHub'da yayında. Apache 2.0 lisansı ticari kullanımı da kapsıyor, yani stüdyolar ve bağımsız geliştiriciler ücretsiz deneyebilir.
+
+Tek ciddi ön koşul donanım: yaklaşık 40 GB VRAM gerekiyor. Bu, tüketici ekran kartlarının çoğunu saf dışı bırakan bir eşik — şimdilik model öncelikle profesyonel stüdyolar ve bulut GPU altyapısı olan geliştiriciler için pratik.
+
+Netflix'in iç değerlendirmesinde VOID'in çıktıları 25 kişilik bir katılımcı grubunda %64.8 oranında tercih edildi; en yakın takipçi Runway %18.4'te kaldı. Örneklem küçük, ama kalite atılımı iddiası için bir başlangıç noktası.
+
+## Hollywood'un AI Sorunu ve Deepfake Riski
+
+Netflix bu hamleyi izleyiciyi değil, stüdyo iş akışlarını düşünerek yaptı. Bir sahnede istenmeyen reklam panosu olması, oyuncu sözleşmesi bittiğinde karakter silmek zorunda kalınması ya da dijital logo değişiklikleri — bugüne kadar çözüm ya yeniden çekim ya pahalı manuel rotoscoping oluyordu. VOID bu süreçleri ciddi biçimde ucuzlatacak.
+
+Ama aynı teknoloji deepfake ve dezenformasyon tarafında da kapıyı aralıyor. Fiziksel tutarlılık koruyarak nesneler silip ekleyebilmek, bu tür videoları klasik araçlarla tespit etmeyi zorlaştırıyor. Modelin açık kaynak olması tesadüf değil — güvenlik araştırmacıları artık tespit modellerini aynı kod tabanı üzerinden geliştirebilecek.
