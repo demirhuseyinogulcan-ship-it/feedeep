@@ -10,8 +10,11 @@ import { SITE } from "@/lib/constants";
 import { FeedContainer } from "@/components/feed/feed-container";
 import { buildFeed } from "@/lib/feed";
 
+const HOME_TITLE = "Yapay Zeka Haberleri ve AI Araç İncelemeleri | feedeep";
+const HOME_H1 = "Güncel yapay zeka haberleri, AI araç incelemeleri ve yazılım rehberleri";
+
 export const metadata: Metadata = generateMeta({
-  title: SITE.title,
+  title: HOME_TITLE,
   description: SITE.description,
   path: "/",
   canonicalPath: "/",
@@ -27,6 +30,7 @@ export default function HomePage() {
 
       {/* Feed: Sonsuz Akış */}
       <main className="pt-6 pb-20">
+        <h1 className="sr-only">{HOME_H1}</h1>
         <FeedContainer items={feedItems} />
       </main>
     </>

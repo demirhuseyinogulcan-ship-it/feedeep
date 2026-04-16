@@ -20,10 +20,13 @@ export default function robots(): MetadataRoute.Robots {
           "ChatGPT-User",
           "Anthropic-AI",
           "ClaudeBot",
-          "PerplexityBot",
           "CCBot",
           "cohere-ai",
         ],
+        disallow: ["/"],
+      },
+      {
+        userAgent: "PerplexityBot",
         allow: "/",
         disallow: ["/api/"],
       },
@@ -32,6 +35,5 @@ export default function robots(): MetadataRoute.Robots {
       `${SITE.url}/sitemap.xml`,
       `${SITE.url}/news-sitemap.xml`,
     ],
-    host: SITE.url,
   };
 }

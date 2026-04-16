@@ -23,6 +23,7 @@ import { ViewTracker } from "@/components/content/view-tracker";
 import { TagLinks } from "@/components/content/tag-links";
 import { SITE, YAZI_CATEGORIES } from "@/lib/constants";
 import { getPublicationDate, sortContent } from "@/lib/content-order";
+import { pickRelatedContent } from "@/lib/related-content";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -61,16 +62,7 @@ export default async function HaberDetayPage({ params }: Props) {
   const categoryLabel = HABER_CATEGORIES[news.category] ?? news.category;
 
   // İlgili haberler: aynı kategori veya ortak keyword
-  const related = sortContent(
-    haberler.filter(
-      (h) =>
-        h.published &&
-        h.slug !== news.slug &&
-        (h.category === news.category ||
-          h.keywords?.some((k) => news.keywords?.includes(k)))
-    ),
-  )
-    .slice(0, 3)
+  const related = pickRelatedContent(news, haberler, { maxItems: 4 })
     .map((h) => ({
       slug: h.slug,
       title: h.title,
@@ -86,14 +78,10 @@ export default async function HaberDetayPage({ params }: Props) {
     }));
 
   // Cross-type: ilgili yazilar (ortak keyword)
-  const relatedYazilar = sortContent(
-    yazilar.filter(
-      (y) =>
-        y.published &&
-        y.keywords?.some((k) => news.keywords?.includes(k))
-    ),
-  )
-    .slice(0, 2)
+  const relatedYazilar = pickRelatedContent(news, yazilar, {
+    maxItems: 2,
+    includeCategory: false,
+  })
     .map((y) => ({
       slug: y.slug,
       title: y.title,

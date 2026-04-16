@@ -27,10 +27,7 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: {
-    default: SITE.title,
-    template: `%s — ${SITE.name}`,
-  },
+  title: SITE.title,
   description: SITE.description,
   keywords: [
     "yapay zeka haberleri",
