@@ -1,0 +1,76 @@
+---
+title: "Opus 4.7 Çıktı — Eski Promptlarınız Bozulabilir"
+slug: claude-opus-4-7-cikti-gelistirici
+description: "Claude Opus 4.7 yayında. Vision 3x daha iyi, tokenizer değişti, instruction following sıkılaştı. Eski promptlarını test etmeden migrate etme."
+date: 2026-04-16
+sourceUrl: "https://www.anthropic.com/news/claude-opus-4-7"
+sourceName: "Anthropic"
+category: sirketler
+keywords:
+  - claude opus 4.7
+  - anthropic yeni model
+  - claude api guncelleme
+  - xhigh effort level
+  - claude code ultrareview
+  - yapay zeka haberleri
+tags:
+  - ai-model
+  - anthropic
+  - kodlama
+sources:
+  - url: "https://www.anthropic.com/news/claude-opus-4-7"
+    label: "Anthropic — Claude Opus 4.7"
+    tier: 1
+  - url: "https://x.com/claudeai/status/1912574000000000000"
+    label: "Anthropic X Duyurusu"
+    tier: 2
+confidence: high
+image: "/images/haberler/claude-opus-4-7-cikti-gelistirici.png"
+imageAlt: "Claude Opus 4.7 duyuru görseli — Anthropic'in yeni amiral gemisi modeli"
+socialSnippet: "Claude Opus 4.7 çıktı. Görüntü çözünürlüğü 3x arttı, kodlama benchmarkı %13 iyileşti — ama tokenizer değişti ve eski promptlarınız beklenmedik davranabilir. Migrate etmeden önce test edin."
+published: true
+---
+
+X'teki ilk tepkilerden biri Welcome back Opus 4.6 oldu. Bir diğeri: auto mode is dope. İkisi de doğru — Opus 4.7 gerçek bir adım, ama eğer API'de Opus kullanıyorsanız bugün yapmanız gereken bir test var.
+
+Anthropic, 16 Nisan'da Claude Opus 4.7'yi genel kullanıma açtı. API model ID'si claude-opus-4-7, fiyat değişmedi: 1M input token $5, 1M output token $25. Asıl değişiklikler altında.
+
+## Vision Artık Gerçekten Kullanışlı
+
+Önceki Opus modellerinde görüntü analizi teoride vardı, pratikte sınırlıydı: yoğun kod ekranlarını, Figma mockuplarını veya teknik diyagramları yeterince okuyamıyordu.
+
+Opus 4.7 ile uzun kenardaki çözünürlük 2.576 piksele çıktı — önceki modellere kıyasla 3.75 kat daha fazla piksel. XBOW görsel keskinlik benchmarkında sonuç: %98.5, önceki Opus 4.6 ise %54.5'te kalmıştı. Biraz daha iyi değil, kategorik farklılık.
+
+Pratikte ne demek: PR diff ekranı, UI mockup, üretim hata logu screenshot'u, Figma frame — bunları Claude'a verip ne görüyorsun yerine şu kısmı düzelt diyebilirsiniz.
+
+## Tokenizer Değişti — Bütçenizi Kontrol Edin
+
+Sessiz ama kritik bir değişiklik. Aynı prompt Opus 4.7'de %0-35 daha fazla token üretiyor. Anthropic bunu resmi dökümanda açıkça belirtiyor.
+
+Production'da Opus kullanan bir sistem varsa ve maliyeti sabit bir bütçeye bağladıysanız, önce test ortamında mevcut promptlarınızı çalıştırın, token farkını ölçün. Sonra migrate edin.
+
+## Instruction Following Sıkılaştı — Eski Promptları Test Edin
+
+Anthropic'in resmi notuna göre daha önceki modeller için yazılmış promptlar bazen beklenmedik sonuçlar üretebilir.
+
+Opus 4.7 talimatları daha literal yorumluyor. Bu genelde iyi — ama özellikle system prompt'larınızda bunu yapma yerine şunu yap şeklinde yazmadıysanız veya belirsiz direktifler bıraktıysanız, davranış değişebilir. Migrate etmeden önce mevcut prompt setinizi yeni modelde koşturun.
+
+## Geliştiriciler için 3 Yeni Şey
+
+API'de yeni bir effort tier geldi: xhigh. Mevcut high ile max arasında bir ara kademe. Daha fazla akıl yürütme, ama max'ın tam maliyeti olmadan. X'te bununla ilgili soru zaten var: ne zaman high, ne zaman xhigh, ne zaman max seçmek gerekiyor? Henüz net bir kural yok, kendi görev tipinize göre test etmeniz gerekiyor.
+
+Task budgets şu an beta. Uzun ajansal görevlerde Claude'un token harcamasına öncelik vermesini sağlıyor — çok adımlı bir görevde modelin kendiliğinden bu kısmı şimdi yapayım mı yoksa atlayayım mı kararını yönetmesine izin veriyor.
+
+Claude Code'a /ultrareview komutu eklendi. Staged değişikliklerinizi dikkatli bir reviewer'ın gözünden geçiren ayrı bir review session başlatıyor — sadece syntax değil, mimari ve mantık sorunlarını da yakalıyor. Pro ve Max kullanıcılar için aylık 3 ücretsiz kullanım hakkı var.
+
+## Auto Mode Artık Max Kullanıcılarında da Var
+
+Claude Code'daki auto mode, daha önce yalnızca belirli planlarda aktifti. Opus 4.7 ile birlikte Max kullanıcılara da açıldı. Uzun görevler daha az izin onayı isteyerek akıyor.
+
+## Kodlama Tarafı
+
+Anthropic'in 93 görevlik coding benchmarkında %13 iyileşme var. Rakuten'in gerçek production taskları üzerinde 3 kat daha fazla çözüm üretmiş. Tüm bunlar [Sonnet 4.6 ile gelen 1M token context penceresinin](/haberler/anthropic-claude-sonnet-4-6-1m-context-kodlama) üstünde çalışıyor.
+
+Yüksek effort seviyelerinde çıktı token sayısı artıyor. X'te spending way more time thinking diyen kullanıcı da bunu gözlemlemiş. Daha derin akıl yürütme anlamına geliyor ama her çağrıda otomatik max effort açık bırakmak maliyeti hızlı tırmandırabilir.
+
+Görüntü kalitesi 3x arttı, kullanışlı hale geldi. Kodlama %13 daha iyi. API'de xhigh effort ve task budget yeni araçlar. Tokenizer değişti ve instruction following sıkılaştı — bu ikisi dikkat gerektiriyor. Mevcut Opus entegrasyonu olan herkesin test ortamında bir tur geçirmesini öneririm.
