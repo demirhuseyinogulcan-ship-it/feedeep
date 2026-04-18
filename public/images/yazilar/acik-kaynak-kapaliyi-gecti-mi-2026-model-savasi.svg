@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" data-feedeep-cover="true">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&amp;display=swap');
+    </style>
+
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#0f0818"/>
+    </linearGradient>
+
+    <!-- Brand gradient (purple → magenta) — absolute coords so it scales with text -->
+    <linearGradient id="brand" x1="72" y1="0" x2="920" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#7c3aed"/>
+      <stop offset="38%"  stop-color="#a855f7"/>
+      <stop offset="70%"  stop-color="#d946ef"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+
+    <!-- Same gradient anchored to wordmark at the top -->
+    <linearGradient id="brandTop" x1="72" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#7c3aed"/>
+      <stop offset="50%"  stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+
+    <!-- Accent line gradient -->
+    <linearGradient id="accentLine" x1="72" y1="0" x2="192" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+
+    <!-- Left ambient glow -->
+    <radialGradient id="glowLeft" cx="0" cy="315" r="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#7c3aed" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Right ambient glow -->
+    <radialGradient id="glowRight" cx="1200" cy="315" r="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#ec4899" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Dot grid fade mask -->
+    <mask id="gridMask">
+      <radialGradient id="gridFade" cx="600" cy="315" r="500" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"   stop-color="white" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="white" stop-opacity="0"/>
+      </radialGradient>
+      <rect width="1200" height="630" fill="url(#gridFade)"/>
+    </mask>
+
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1.2" fill="#ffffff"/>
+    </pattern>
+  </defs>
+
+  <!-- ── Background ─────────────────────────────────────── -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowLeft)"/>
+  <rect width="1200" height="630" fill="url(#glowRight)"/>
+  <g mask="url(#gridMask)">
+    <rect width="1200" height="630" fill="url(#dots)" opacity="1"/>
+  </g>
+
+  <!-- ── Top accent bar ─────────────────────────────────── -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#brand)"/>
+
+  <!-- ── feedeep wordmark — TOP LEFT (safe zone) ───────── -->
+  <text
+    x="72" y="58"
+    font-family="Montserrat, system-ui, -apple-system, sans-serif"
+    font-weight="900"
+    font-size="26"
+    letter-spacing="-0.5"
+    fill="url(#brandTop)">feedeep</text>
+
+  <!-- ── Category tag ───────────────────────────────────── -->
+  <text
+    x="72" y="130"
+    font-family="Montserrat, system-ui, -apple-system, sans-serif"
+    font-weight="700"
+    font-size="12"
+    letter-spacing="4"
+    fill="#a78bfa">KARŞILAŞTIRMA</text>
+
+  <!-- ── Separator line ─────────────────────────────────── -->
+  <rect x="72" y="146" width="120" height="1.5" fill="url(#accentLine)"/>
+
+  <!-- ── Title line 1 — brand gradient ─────────────────── -->
+  <text
+    x="72" y="278"
+    font-family="Montserrat, system-ui, -apple-system, sans-serif"
+    font-weight="900"
+    font-size="80"
+    letter-spacing="-2"
+    fill="url(#brand)">Açık Kaynak</text>
+
+  <!-- ── Title line 2 — white ──────────────────────────── -->
+  <text
+    x="72" y="370"
+    font-family="Montserrat, system-ui, -apple-system, sans-serif"
+    font-weight="900"
+    font-size="80"
+    letter-spacing="-2"
+    fill="#f3f4f6">Kapalıyı Geçti mi?</text>
+
+  <!-- ── Subtitle ───────────────────────────────────────── -->
+  <text
+    x="72" y="436"
+    font-family="Montserrat, system-ui, -apple-system, sans-serif"
+    font-weight="500"
+    font-size="20"
+    fill="#6b7280">2026 — DeepSeek V3, Llama 4, Gemma 4 vs GPT-5, Claude, Gemini</text>
+
+  <!-- ── Bottom separator ───────────────────────────────── -->
+  <rect x="0" y="570" width="1200" height="1" fill="#1a1a1a"/>
+
+  <!-- ── Date — bottom right (secondary info, safe zone) ── -->
+  <text
+    x="1128" y="604"
+    font-family="Montserrat, system-ui, -apple-system, sans-serif"
+    font-weight="500"
+    font-size="13"
+    text-anchor="end"
+    fill="#374151">Nisan 2026</text>
+
+  <!-- ── Right edge accent lines ───────────────────────── -->
+  <rect x="1152" y="0" width="1" height="630" fill="url(#brand)" opacity="0.18"/>
+  <rect x="1163" y="0" width="1" height="630" fill="url(#brand)" opacity="0.09"/>
+  <rect x="1174" y="0" width="1" height="630" fill="url(#brand)" opacity="0.04"/>
+</svg>
