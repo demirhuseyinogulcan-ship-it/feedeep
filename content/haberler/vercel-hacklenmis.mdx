@@ -1,0 +1,51 @@
+---
+title: "Vercel Hacklenmiş"
+slug: vercel-hacklenmis
+description: "Vercel, 19 Nisan 2026'da bazı dahili sistemlerine yetkisiz erişim olduğunu doğruladı. Şirket, sınırlı sayıda müşterinin etkilendiğini söylüyor."
+date: 2026-04-19
+image: "/images/haberler/vercel-hacklenmis.jpg"
+imageAlt: "Vercel güvenlik olayı haberi için hazırlanan görsel"
+imageCredit: "Vercel"
+sourceUrl: "https://vercel.com/kb/bulletin/vercel-april-2026-security-incident"
+sourceName: "Vercel"
+category: sirketler
+keywords:
+  - vercel hacklenmis
+  - vercel guvenlik olayi
+  - vercel environment variable riski
+  - vercel yetkisiz erisim
+  - vercel security incident 2026
+  - yapay zeka haberleri
+tags:
+  - ai-guvenlik
+  - kodlama
+sources:
+  - url: "https://vercel.com/kb/bulletin/vercel-april-2026-security-incident"
+    label: "Vercel Security Bulletin"
+    tier: 1
+  - url: "https://www.vercel-status.com/"
+    label: "Vercel Status"
+    tier: 1
+confidence: high
+socialSnippet: "Vercel, 19 Nisan 2026'da bazı dahili sistemlerine yetkisiz erişim yaşandığını doğruladı. Şirket sadece sınırlı sayıda müşterinin etkilendiğini söylüyor, ama geliştiriciler için asıl soru aynı: hangi sırlar risk altında?"
+faq:
+  - question: "Vercel hacklendi mi?"
+    answer: "Vercel'in 19 Nisan 2026 tarihli resmi bültenine göre bazı dahili sistemlerine yetkisiz erişim içeren bir güvenlik olayı tespit edildi."
+  - question: "Environment variable'lar sızdı mı?"
+    answer: "Vercel'in mevcut resmi açıklamasında tüm müşterilerin environment variable'larının sızdığı söylenmiyor. Şirket sınırlı bir müşteri alt kümesinin etkilendiğini belirtiyor."
+  - question: "Vercel kullanan ekipler şimdi ne yapmalı?"
+    answer: "En doğru ilk adım kritik secret ve token'ları gözden geçirmek, gerekiyorsa döndürmek ve Vercel'in resmi bildirimlerini takip etmektir."
+published: true
+---
+
+Vercel tarafında pazar keyfini bozan açıklama doğrudan şirketten geldi. **19 Nisan 2026** tarihinde yayımlanan resmi güvenlik bültenine göre Vercel, bazı dahili sistemlerine yetkisiz erişim içeren bir olay tespit etti. Şirketin ilk mesajı dikkatli kurulmuş: etkilenme alanının "sınırlı bir müşteri alt kümesi" ile sınırlı olduğu söyleniyor, ancak geliştiricilerin refleks olarak sorduğu soru çok daha net: deploy edilen projelerdeki sırlar, anahtarlar ve environment variable'lar güvende mi?
+
+Şu an itibarıyla Vercel'in kamuya açık bülteninde tüm müşterileri kapsayan bir secret sızıntısı doğrulanmış değil. Bu ayrım önemli. "Güvenlik olayı" ile "her şey sızdı" aynı şey değil. Ama bulut tabanlı dağıtım platformlarında risk tam da bu noktada başlıyor: bir olayın teknik kapsamı ilk saatlerde dar görünür, gerçek etki ise genelde erişim logları, etkilenen tenant'lar ve sır yönetimi katmanı incelendikçe ortaya çıkar.
+
+Bu yüzden sosyal medyada görülen sert tepkilerin arkasında yalnızca panik yok, operasyonel gerçeklik de var. Vercel kullanan ekipler için environment variable demek çoğu zaman veritabanı bağlantı bilgisi, e-posta servis anahtarı, ödeme altyapısı sırları, kimlik doğrulama token'ları ve üçüncü parti servis erişimi demek. Tek bir platform ihlali, doğrudan uygulamanın tamamına yayılabilecek zincirleme bir risk üretebilir. Özellikle preview deploy, ekip bazlı erişim ve merkezi secret yönetimi kullanan takımlar için bu tarz bir olay "sunucu kapandı mı?" sorusundan daha ciddi. Benzer bir kurumsal veri riski kısa süre önce [Microsoft Copilot'ın gizli e-postaları işlemesi vakasında](/haberler/microsoft-copilot-gizli-eposta-guvenlik-acigi) da gündeme gelmişti.
+
+Vercel'in mevcut açıklamasındaki en kritik ifade, etkilenen müşterilerle doğrudan iletişime geçildiğini söylemesi. Bu cümleden çıkarılabilecek makul sonuç şu: olay gerçek, kapsam henüz kamuya açık detay seviyesinde değil ve şirket içeride sınırlandırma ile bildirim sürecini birlikte yürütüyor. Aynı anda status sayfasında geniş çaplı bir servis kesintisi görünmemesi de ilginç; mesele erişilebilirlikten çok güven ve erişim kontrolü katmanında yaşanıyor olabilir.
+
+Peki Vercel üzerinde projesi olan ekipler bugün ne yapmalı? En mantıklı refleks, panikle tüm altyapıyı sökmek değil, sıralı bir secret rotasyonu başlatmak. Öncelik verilmesi gerekenler açık: veritabanı parolaları, `SUPABASE_SERVICE_ROLE_KEY` gibi yüksek yetkili anahtarlar, e-posta ve bildirim servis token'ları, ödeme sistemleri, GitHub veya diğer CI bağlantıları. Eğer bir secret başka yerde de yeniden kullanıldıysa risk büyür. O yüzden bu olayın asıl dersi Vercel özelinde değil; "tek panelde tuttuğun sırlar gerçekten ayrıştırılmış mı?" sorusunda yatıyor.
+
+Kısacası başlık sert ama çekirdek gerçek şu: Vercel resmi olarak bir güvenlik olayı yaşadığını kabul etti. Henüz elimizde "tüm environment variable'lar sızdı" diyebileceğimiz kamuya açık kanıt yok. Buna rağmen, Vercel üzerinde canlı sistem işleten herkes için bugün en doğru tavır beklemek değil, kritik sırları gözden geçirmek ve gerekiyorsa döndürmek. Çünkü güvenlik olaylarında en pahalı hata, ilk resmi açıklamayı nihai tablo sanmak oluyor.
