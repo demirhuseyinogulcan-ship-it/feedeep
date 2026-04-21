@@ -18,11 +18,6 @@ import { PopupQueueProvider } from "@/components/shared/popup-queue";
 import { AuthProvider } from "@/components/auth/auth-provider";
 import "./globals.css";
 
-// ─── Analytics ID'leri (.env veya constants'tan) ────────────
-// Vercel'e deploy ettikten sonra:
-//   1. Google Analytics → GA4 Measurement ID'yi al (G-XXXXXXXXXX)
-//   2. Vercel Dashboard → Settings → Environment Variables →
-//      NEXT_PUBLIC_GA_ID = G-XXXXXXXXXX
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
@@ -140,6 +135,7 @@ export default function RootLayout({
                 gtag('js', new Date());
                 gtag('config', '${GA_ID}', {
                   page_path: window.location.pathname,
+                  debug_mode: true,
                 });
               `}
             </Script>
