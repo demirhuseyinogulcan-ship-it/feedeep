@@ -119,15 +119,15 @@ export default function RootLayout({
         className={`${fontHeading.variable} ${fontSans.variable} font-sans antialiased`}
       >
         {/* Google Analytics — GA4
-             lazyOnload: tarayici bos kaldiginda yukle — ilk render'i bloke etmez.
-             Tradeoff: 1-3s gecikme kabul edilebilir, TTI ve TBT iyilesir.  */}
+             afterInteractive: sayfa interaktif olur olmaz yukle.
+             page_view'in bounce'lardan once tetiklenmesini garantiler.  */}
         {GA_ID && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="lazyOnload"
+              strategy="afterInteractive"
             />
-            <Script id="google-analytics" strategy="lazyOnload">
+            <Script id="google-analytics" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
