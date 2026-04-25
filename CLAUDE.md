@@ -83,14 +83,30 @@ Bundan sonraki tüm mesajlarında bu 3 şapkayı takarak kod yazacak, kodu eleş
 - Şema tanımı: `velite.config.ts` — tek kaynak (Single Source of Truth)
 - Editoryal kılavuz: `CONTENT_SYSTEM.md` — detaylı kurallar burada
 - MDX şablonları: `content/_templates/` — yeni içerik oluştururken bunları baz al
-- **Haber yazım stili:** Doğal, akıcı, EVRİMAĞACI anlatıcısının konuşma tonunda, eğitici ama çaktırmadan anlatan gazetecilik dili. Sabit başlık şablonu KULLANMA. Başlıklarda kanca içerik tipi kullanılabilir.
+- **Haber yazım stili:** Doğal, akıcı, EVRİMAĞACI anlatıcısının konuşma tonunda, eğitici ama çaktırmadan anlatan gazetecilik dili. Eski kutulu haber formatlarını KULLANMA. Başlıklarda kanca içerik tipi kullanılabilir.
+- **İnsan dili kuralı:** Yazılar mekanik AI çıktısı gibi görünmemeli. Aynı paragraf ritmi, aynı geçiş kalıpları ve meta cümleler yasak.
+- **Karakter kuralı:** Şapkalı sesli harf, em dash ve mojibake karakter kalıntısı kullanma. Düz Türkçe yaz.
+- **Açık kaynak iş yazılımları:** ERP, CRM, müşteri takip ve benzeri GitHub projeleri SEO odaklı tanıtım yazısı olabilir. `acik-kaynak`, `github`, `crm`, `erp`, `is-yazilimi` taglerinden uygun olanları kullan.
 - Frontmatter doğrulama: `npm run validate`
 - **Slug'da ASLA Türkçe karakter kullanma** (ş→s, ç→c, ğ→g, ı→i, ö→o, ü→u)
 - **title max 70 karakter, description max 160 karakter** — SEO zorunluluğu
+- H2 ve H3 başlıkları da arama niyeti taşımalı; sadece yaratıcı görünen başlık yazma
 
 ### Güven Katmanı
 - Her yazıda en az 1 kaynak (`sources`) zorunlu
 - Kaynak tier sistemi: Tier 1 (birincil), Tier 2 (güvenilir medya), Tier 3 (ikincil)
+
+### Internal Linking
+- Her yeni haber ve yazıda en az 2 doğal iç link kullan
+- İlk iç link doğrudan ilgili eski haber/yazıya gitsin
+- Anchor text konuyu anlatsın; "buraya tıklayın" gibi zayıf anchor kullanma
+- İç link eklemeden önce `content/` içinde benzer şirket, model, konu veya seri yazısı ara
+
+### Tırnak Kullanımı
+- Yayınlanan yazı gövdesinde tırnak işareti kullanma
+- Vurgu, mesafe veya ironi için tırnak açma
+- Gerçek alıntı gerekiyorsa doğrudan alıntı vermek yerine anlamı özetle
+- Frontmatter içinde YAML gereği tırnak kalabilir; kural okurun gördüğü body metni içindir
 
 ## Dosya Yapısı — Değiştirme
 

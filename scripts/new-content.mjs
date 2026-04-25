@@ -86,7 +86,7 @@ async function newYazi(rl) {
     "analiz",
     "karsilastirma",
   ]);
-  const keywords = await ask(rl, "Keywords (virgülle ayır, max 5)");
+  const keywords = await ask(rl, "Keywords (virgülle ayır, max 6)");
   const confidence = await choose(rl, "Güven seviyesi:", [
     "high",
     "medium",
@@ -99,7 +99,7 @@ async function newYazi(rl) {
     .split(",")
     .map((k) => k.trim())
     .filter(Boolean)
-    .slice(0, 5);
+    .slice(0, 6);
 
   const content = `---
 title: "${title}"
@@ -127,11 +127,11 @@ published: true
 
 ## [Dikkat Çekici Giriş]
 
-[Hook cümlesi — okuyucu neden devam etsin?]
+[Giriş cümlesi: okuyucu neden devam etsin? İlk 3 paragraf içinde en az 1 doğal internal link kullan.]
 
 ## [Ana Konu]
 
-[Ana değer burada sunulacak.]
+[Ana değer burada sunulacak. Toplam en az 2 internal link ekle; "buraya tıklayın" gibi zayıf anchor kullanma.]
 
 ## Pratik Uygulama
 
@@ -160,7 +160,7 @@ async function newHaber(rl) {
     "turkiye",
     "arastirma",
   ]);
-  const keywords = await ask(rl, "Keywords (virgülle ayır, max 5)");
+  const keywords = await ask(rl, "Keywords (virgülle ayır, max 6)");
   const confidence = await choose(rl, "Güven seviyesi:", [
     "high",
     "medium",
@@ -171,7 +171,7 @@ async function newHaber(rl) {
     .split(",")
     .map((k) => k.trim())
     .filter(Boolean)
-    .slice(0, 5);
+    .slice(0, 6);
 
   const content = `---
 title: "${title}"
@@ -193,11 +193,11 @@ socialSnippet: ""
 published: true
 ---
 
-[HOOK: Haberin en dikkat çekici cümlesiyle başla.]
+[HOOK: Haberin en dikkat çekici cümlesiyle başla. İlk 3 paragraf içinde en az 1 doğal internal link kullan.]
 
-[BAĞLAM: Detayları ver, teknik kavramları doğal biçimde açıkla.]
+[BAĞLAM: Detayları ver, teknik kavramları doğal biçimde açıkla. Toplam en az 2 internal link ekle.]
 
-[ANALİZ: Somut değer — rakam, karşılaştırma, insider bilgi.]
+[ANALİZ: Somut değer, rakam, karşılaştırma, kaynaklı bilgi.]
 
 [KAPANIŞ: Pratik adım veya gelecek perspektifi.]
 `;

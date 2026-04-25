@@ -25,28 +25,34 @@ sources:
     tier: 1
 confidence: high
 # Seçenekler: high | medium | speculative
-socialSnippet: "Twitter/X paylaşım metni — max 280 karakter"
+socialSnippet: "Twitter/X paylaşım metni, max 280 karakter"
 published: true
 ---
 
 {/* 
-  HABER ŞABLONU — AI Rehber
+  HABER ŞABLONU, feedeep
   Uzunluk: 300-800 kelime.
-  Framework: Hook → Retention → Reward → Investment (CONTENT_SYSTEM.md §14)
+  Framework: doğal giriş, bağlam, değer, kapanış
   
   ⚠️ KURALLAR:
-  - Sabit başlık şablonu ("Ne Oldu?/Neden Önemli?") YASAK
-  - İlk cümle HOOK olmalı (Pattern Interrupt / Open Loop / Specificity)
+  - Eski kutulu haber formatı YASAK
+  - İlk cümle merak uyandırmalı ama reklam metni gibi durmamalı
+  - Gövde metinde tırnak işareti YASAK. Alıntı gerekiyorsa anlamı özetle
+  - Şapkalı harf YASAK. Düz Türkçe yaz
+  - Bozuk karakter kalıntısı YASAK. Mojibake görürsen düzelt
   - Her 3 paragrafta bir kırılma (soru, vurgu, rakam)
-  - Son paragrafta Investment (seri ipucu, soru, CTA)
+  - Son paragrafta seri ipucu, soru veya pratik adım ver
   - Teknik kavramları doğal biçimde açıkla
   - Max 3 satır paragraf, kısa+uzun+soru karıştır
+  - En az 2 doğal internal link kullan. İlk link doğrudan ilgili eski haber/yazıya gitsin
+  - "Buraya tıklayın" gibi zayıf anchor kullanma. Anchor konuyu anlatsın
+  - H2 ve H3 başlıkları aranabilir cümle olsun. Sadece yaratıcı görünen başlık yazma
 */}
 
-[HOOK: Haberin en şok edici/merak uyandıran cümlesiyle başla. Pattern interrupt, open loop veya specificity hook kullan.]
+[GİRİŞ: Haberin en merak uyandıran cümlesiyle başla. Okur ilk cümlede neden devam edeceğini anlasın.]
 
-[BAĞLAM + RETENTION: Detayları ver ama Zeigarnik etkisi ile ilerle — "asıl önemli kısım henüz gelmedi" hissi yarat. Teknik kavramları anlatımın içinde doğal biçimde açıkla.]
+[BAĞLAM: Detayları ver. Teknik kavramları anlatımın içinde doğal biçimde açıkla.]
 
-[ANALİZ + REWARD: Okuyucuya somut değer ver — rakam, karşılaştırma, insider bilgi. "Bunu okuduğuma değdi" hissi oluştur.]
+[DEĞER: Okuyucuya somut değer ver. Rakam, karşılaştırma, kaynak ve gerçek kullanım etkisi ekle.]
 
-[INVESTMENT: Seri ipucu, soru veya pratik adım ile bitir. Okuyucuyu geri getir.]
+[KAPANIŞ: Seri ipucu, soru veya pratik adım ile bitir. Okuyucuyu geri getir.]

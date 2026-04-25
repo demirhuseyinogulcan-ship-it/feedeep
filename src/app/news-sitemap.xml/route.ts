@@ -1,20 +1,22 @@
 // ─────────────────────────────────────────────────────────────
 // feedeep — Google News Sitemap
 // Google News için özel haber sitemap'i
-// Son 30 gün içindeki yayınlanmış haberler
+// Son 2 gün içindeki yayınlanmış haberler
 // ─────────────────────────────────────────────────────────────
 
 import { haberler } from "#site/content";
 import { SITE } from "@/lib/constants";
 import { getPublicationDate, sortContent } from "@/lib/content-order";
 
+const NEWS_SITEMAP_WINDOW_DAYS = 2;
+
 export async function GET() {
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - NEWS_SITEMAP_WINDOW_DAYS);
 
   const recentNews = sortContent(
     haberler.filter(
-      (h) => h.published && new Date(getPublicationDate(h)) >= thirtyDaysAgo,
+      (h) => h.published && new Date(getPublicationDate(h)) >= cutoffDate,
     ),
   );
 
@@ -22,11 +24,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${recentNews.length === 0
-  ? `  <url>
-    <loc>${SITE.url}/haberler</loc>
-  </url>`
-  : recentNews
+${recentNews
   .map(
     (h) => `  <url>
     <loc>${SITE.url}/haberler/${h.slug}</loc>

@@ -79,6 +79,8 @@ export const TAG_LABELS: Record<string, string> = {
   figma: "Figma",
   github: "GitHub",
   perplexity: "Perplexity",
+  vercel: "Vercel",
+  stripe: "Stripe",
   // Konular
   "ai-model": "AI Modelleri",
   "ai-agent": "AI Ajanları",
@@ -87,6 +89,9 @@ export const TAG_LABELS: Record<string, string> = {
   kodlama: "Kodlama",
   "acik-kaynak": "Açık Kaynak",
   "kurumsal-ai": "Kurumsal AI",
+  erp: "ERP",
+  crm: "CRM",
+  "is-yazilimi": "İş Yazılımı",
   "ses-gorsel-video": "Ses, Görsel & Video",
   arastirma: "Araştırma",
   turkiye: "Türkiye",

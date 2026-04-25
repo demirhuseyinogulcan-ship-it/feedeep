@@ -45,7 +45,7 @@
 | `description` | Max 160 karakter, Google snippet'i bu | `"İki modeli 7 kriterde test ettik."` |
 | `date` | ISO format, yayın tarihi | `2026-02-15` |
 | `category` | `inceleme` \| `analiz` \| `karsilastirma` | `karsilastirma` |
-| `keywords` | Max 5, en spesifik olanı ilk sıraya | `["chatgpt vs claude", ...]` |
+| `keywords` | Max 6, en spesifik olanı ilk sıraya | `["chatgpt vs claude", ...]` |
 | `tags` | Hub sayfaları için normalize etiketler, `TAG_LABELS` haritasından seç | `["openai", "ai-model"]` |
 | `faq` | Soru-cevap çiftleri, FAQ JSON-LD üretir | Aşağıya bak |
 | `sources` | Min 1, her biri `url`, `label`, `tier(1-3)` | Aşağıya bak |
@@ -62,7 +62,7 @@
 
 **Yazı Yapısı (Body):**
 ```
-## [Dikkat Çekici Başlık]       ← Neden önemli, hook
+## [Dikkat Çekici Başlık]       ← Merak uyandıran giriş
 ## [Ana Konu — Detay]           ← Gerçek değer burada
 ## [Tablo veya Karşılaştırma]   ← Görsel veri (varsa)
 ## [Pratik Uygulama]            ← Okuyucu ne yapmalı
@@ -88,16 +88,16 @@
 
 **Haber Yazım Stili (Body):**
 
-> **KURAL:** Sabit başlık şablonu ("Ne Oldu? / Neden Önemli? / Türkiye İçin") KULLANILMAZ.
-> Bu kalıplar AI çıktısını ele verir, okuyucu 3 saniyede fark edip çıkar.
-> Bunun yerine Hook → Retention → Reward sistemini kullan (Bölüm 7'ye bak).
+> **KURAL:** Eski üçlü açıklama şablonları KULLANILMAZ.
+> Haberi ayrı ayrı açıklama kutularına bölmek yazıyı yapay gösterir.
+> Bunun yerine tek parça, akıcı, insan editör elinden çıkmış bir anlatım kur.
 
 Haberler doğal, akıcı, gazetecilik diline uygun yazılır:
-- **Hook ile başla:** İlk cümle pattern interrupt, open loop veya specificity hook olmalı
+- **Girişle yakala:** İlk cümle merak uyandırmalı ama reklam metni gibi durmamalı
 - **Akıcı anlatım:** Paragraflar birbiriyle doğal geçişlerle bağlanır, maddeler yerine düz yazı tercih edilir
 - **Eğitici ama çaktırmadan:** Teknik kavramlar anlatımın içinde doğal biçimde açıklanır
 - **İnsan sesi:** Kısa cümleler + uzun cümleler karıştır, soru sor, gerilim yarat
-- **Zeigarnik hook:** Her paragrafın sonunda bir sonrakini okutacak mini-geçiş bırak
+- **Doğal akış:** Her paragraf bir öncekinin doğal devamı gibi ilerlesin
 
 ---
 
@@ -139,7 +139,7 @@ node haberler.mjs --limit 5
 | Soru | Evet = Yaz | Hayır = Atla |
 |------|-----------|-------------|
 | Pratik değeri var mı? | Yaz | — |
-| 48 saat içinde hâlâ geçerli olacak mı? | Yaz | (Haber ise yazılabilir) |
+| 48 saat içinde hala geçerli olacak mı? | Yaz | (Haber ise yazılabilir) |
 | Benzersiz bir bakış açısı sunabilir miyiz? | Yaz | — |
 | En az 1 birincil kaynak var mı? | Yaz | Speculative olarak yaz |
 
@@ -153,11 +153,12 @@ npm run new:yazi     # Yeni yazı oluştur
 ### Adım 4: Yazım
 
 **Temel Kurallar:**
-1. **İlk cümle hook olmalı** — okuyucu neden devam etsin?
+1. **İlk cümle güçlü olmalı** - okuyucu neden devam etsin?
 2. **Jargonsuz yaz** — "fine-tuning" yerine "ince ayar" de, sonra parantez içinde terim ver
 3. **Her H2'den sonra max 3 paragraf** — sonra yeni H2 veya liste
 4. **Aksiyon odaklı bitir** — "bu bilgiyle ne yapacağım?" sorusunu yanıtla
 5. **Karşı görüş ekle** (yazılarda) — güven artırır
+6. **H2 ve H3'leri de arama niyetine göre yaz** — alt başlıklar da gerçek kullanıcı sorusuna cevap versin
 
 **Ton ve Ses:**
 - Profesyonel ama samimi
@@ -214,11 +215,11 @@ npm run dev      # Lokal test
 
 #### Body İçerik Kuralları
 ```
-□ İlk cümle: Kim + ne yaptı + ne zaman (hook)
+□ İlk cümle: Kim + ne yaptı + ne zaman
 □ İlk paragrafta ana keyword doğal şekilde geçmeli
 □ Teknik terimler anlatım içinde açıklanmalı
 □ Min 300, ideal 500-800 kelime (haberler); 800-3000 kelime (yazılar)
-□ Sabit başlık şablonu KULLANMA
+□ Eski kutulu haber formatlarını KULLANMA
 □ Paragraflar arası doğal geçiş
 ```
 
@@ -228,7 +229,8 @@ npm run dev      # Lokal test
 □ Title'da ana keyword var
 □ Description'da ana keyword var
 □ Body ilk paragrafında ana keyword geçiyor
-□ Min 1 internal link (başka bir habere/yazıya atıf)
+□ H2 ve H3'lerde aranabilir ifade var
+□ Min 2 internal link (başka haber/yazı veya ilgili hub bağlantısı)
 □ Min 1 external link (kaynak URL)
 ```
 
@@ -319,13 +321,19 @@ YAPMA                                    YAP
 YAPMA                                    YAP
 ─────                                    ───
 Cümle — ve devamı — böyle              → Cümle, ve devamı böyle
-"kelime" (her şeyi tırnağa alma)       → Sadece alıntı ve özel terimde tırnak
+"kelime" (her şeyi tırnağa alma)       → Gövde metinde tırnak kullanma
 Vurgu! Her yerde! Ünlem!               → Ünlem neredeyse hiç kullanma
 Üç nokta ile bitir...                  → Noktayla bitir.
 **Her** **üçüncü** **kelime** bold     → Sadece rakamlar ve şirket adları bold
 ```
 
 > **MUTLAK KURAL: "—" (em-dash) karakteri HİÇ KULLANILMAZ.** Hem başlıklarda hem de body'de yasak. İki düşünceyi birleştirmek istiyorsan iki ayrı cümle yaz ya da virgül kullan.
+>
+> **MUTLAK KURAL: Yayınlanan yazı gövdesinde tırnak işareti kullanılmaz.** İronik, mesafeli veya vurgu amaçlı tırnak yapay görünür. Gerçek alıntı gerekiyorsa doğrudan alıntı vermek yerine anlamı özetle.
+>
+> **MUTLAK KURAL: Şapkalı sesli harf kullanılmaz.** Düz Türkçe yazılır: `hala`, `kar`, `hikaye`, `resmi`.
+>
+> **MUTLAK KURAL: Bozuk karakter kalıntısı bırakılmaz.** Mojibake karakterleri içerikte, başlıkta, açıklamada ve sosyal metinde görülürse yayın öncesi düzeltilir. Bunlar okur güvenini ve kalite algısını düşürür.
 
 **Cümle Yapısı Kuralları:**
 - Özne + yüklem yakın durur, araya çok cümle sıkıştırılmaz
@@ -333,6 +341,8 @@ Vurgu! Her yerde! Ünlem!               → Ünlem neredeyse hiç kullanma
 - Yüklemsiz cümle yasak: "Saldırganın kurduğu oyunu fark edemeden." → geçersiz
 - Noktalı virgül neredeyse hiç; iki ayrı cümle yaz
 - Parantez içine teknik terim koyma; cümle yapısına entegre et
+- Gövde metinde tırnak açma; gerçek alıntı gerekiyorsa anlamı özetle
+- Yazıda şapkalı harf görürsen düzelt
 
 ### 8.3 Paragraf Asimetrisi
 
@@ -343,14 +353,29 @@ AI her paragrafı aynı uzunlukta yazar. İnsan yazmaz. Bazı paragraflar tek c�
 - "Hadi başlayalım!" / "Haydi gelin birlikte keşfedelim!"
 - "Merak etmeyin, çok kolay!"
 - "Bu yazıda X, Y ve Z öğreneceksiniz"
-- Sabit başlık kalıpları ("Ne Oldu? / Neden Önemli?")
+- Eski üçlü açıklama başlıkları ve kutulu haber formatları
 - Listeye sıralı olmayan maddelerin başına aynı yapıyı koymak
 - Emoji kullanmak (site genelinde yasak)
 
-### 8.5 Başlık Stratejisi
+### 8.5 AI Gibi Görünmeme Kontrolü
+
+Yazı, AI içerik testlerinde mekanik görünmemeli. Bunun için:
+
+- Aynı uzunlukta paragraf zinciri kurma. Bir paragraf tek cümle olabilir, sonraki daha uzun olabilir.
+- Her H2 altında aynı sırayı tekrar etme. Her yazının akışı konuya göre değişmeli.
+- "Özetle", "sonuç olarak", "bu noktada", "dikkat çeken nokta" gibi geçişleri üst üste kullanma.
+- Her paragrafı bilgi cümlesiyle başlatma. Bazen soru, bazen net hüküm, bazen veriyle gir.
+- Kendi kendini açıklayan meta cümleler yazma: "Bu yazı şunu anlatıyor", "Bu bölümde şuna bakacağız" yasak.
+- Gereksiz kusursuzluk yapma. İnsan editör gibi yaz: net, canlı, ama fazla cilalı değil.
+- Cümle ritmini karıştır. Kısa cümle, orta cümle, açıklayıcı uzun cümle yan yana kullanılabilir.
+- Kaynak ve veriyi doğal anlatıma göm. Kaynak listesi var diye gövdeyi kuru rapora çevirme.
+
+### 8.6 Başlık Stratejisi
 
 > **Temel İlke:** Display title kısa ve temiz olur. SEO zenginliği `description` ve `keywords` alanlarında taşınır.
 > "Yasaklı Model: Claude Mythos" > "YANLIŞLIKLA SIZDIRILDI: Anthropic'in Sakladığı Kapalı Model"
+
+**H2 ve H3 için ek kural:** Alt başlık yaratıcı görünebilir ama aranabilir ifade taşımadan bırakılmaz. Okur başlığı tek başına görünce hangi soruya cevap verdiğini anlamalı.
 
 **Her 3 başlıktan 1'i kanca olabilir. Hepsi dramatik olursa marka tonu kayar.**
 
@@ -361,11 +386,66 @@ AI her paragrafı aynı uzunlukta yazar. İnsan yazmaz. Bazı paragraflar tek c�
 | Karar / Anlaşma | Özne + fiil | Meta ve Anthropic Aynı Şirkete Yöneldi |
 | Araştırma / Bulgu | Sonuç önce | Açık Kaynak, Kapalı Kaynağı Geçti |
 
+**İyi H2 örnekleri:**
+- `Devin AI iflas mı ediyor`
+- `Stripe Türkiye'de kullanılabiliyor mu`
+- `Vercel güvenlik olayı ne kadar büyüdü`
+- `Prompt engineering neden tek başına yetmiyor`
+
+**Zayıf H2 örnekleri:**
+- `Asıl kırılma burada`
+- `Perdenin arkası`
+- `Yeni dönemin dili`
+- `Görünenin ötesi`
+
 **Başlık Yazım Kuralları:**
 - Max 70 karakter (frontmatter kuralı)
 - "—" em-dash başlıkta da yasak
 - Büyük harf: Sadece ilk kelime + özel isimler (Türkçe standart)
 - Clickbait kalıpları yasak: "ŞOK!", "İNANILMAZ!", "KAÇIRMA!"
+
+### 8.7 Kanca İçerik: Açık Kaynak İş Yazılımları
+
+Açık kaynak ERP, CRM, muhasebe, müşteri takip ve benzeri iş yazılımları feedeep için ayrı bir SEO fırsatıdır. Bu içerikler haber gibi kısa geçilmez, fayda odaklı tanıtım yazısı olarak hazırlanır.
+
+**Başlık yaklaşımı:**
+- Arama niyeti başta olmalı: "Ücretsiz Müşteri Takip Programı: ..."
+- "Açık kaynak CRM", "açık kaynak ERP", "ücretsiz stok takip", "ücretsiz müşteri takip" gibi long-tail ifadeler doğal kullanılmalı.
+- Başlık kanca olabilir ama ürün vaadini abartmamalı.
+
+**İçerik gövdesi:**
+- İlk bölümde okuyucunun problemi tarif edilir: lisans maliyeti, müşteri takibi, teklif takibi, stok veya ekip takibi.
+- Sonra araç tanıtılır: ne işe yarıyor, kimler için uygun, nerede zayıf kalabilir.
+- GitHub yıldızı, lisans tipi, demo durumu, son commit tarihi, kurulum zorluğu ve Türkçe kullanım ihtimali mutlaka kontrol edilir.
+- Ürün tanıtımı sponsorlu gibi yazılmaz. Avantaj ve sınırlamalar aynı yazıda yer alır.
+
+**SEO ve tag kuralı:**
+- Bu yazılarda `acik-kaynak`, `github`, `crm`, `erp` veya `is-yazilimi` taglerinden uygun olanlar kullanılır.
+- `description` içinde arama niyeti açık olmalı: "Ücretsiz müşteri takip programı arayanlar için açık kaynak CRM alternatifini inceliyoruz."
+- En az 1 iç link, mümkünse ilgili AI/iş hayatı yazısına verilir.
+
+---
+
+### 8.8 Internal Linking Kuralı
+
+Her yeni haber ve yazıda internal linking ayrı bir SEO adımı olarak ele alınır. Linkler sonradan iliştirilmiş gibi durmaz; paragrafın doğal cümlesi içinde verilir.
+
+**Zorunlu minimum:**
+- Her içerikte en az 2 iç link bulunur.
+- Linklerden en az 1 tanesi doğrudan ilgili eski haber/yazıya gider.
+- Mümkünse ikinci link bir karşılaştırma, analiz, seri yazısı veya konu hub'ını besleyen içerik olur.
+- Konu çok yeni ve doğrudan ilgili içerik yoksa en az 1 iç link kullanılır, eksik kalan link not edilir.
+
+**Anchor text kuralı:**
+- "Buraya tıklayın", "detaylar burada" gibi zayıf anchor kullanılmaz.
+- Anchor doğal arama niyetini taşır: `[GPT-5.4](/haberler/...)`, `[Frontier platformu](/haberler/...)`, `[açık kaynak model savaşı](/yazilar/...)`.
+- Aynı yazıda aynı URL tekrar tekrar kullanılmaz.
+- İç link, okuyucunun bir sonraki mantıklı adımına hizmet eder; keyword doldurma için eklenmez.
+
+**Yazmadan önce kontrol:**
+- Benzer eski içerikler `rg --files content` veya içerik aramasıyla bulunur.
+- Aynı şirket, aynı model ailesi, aynı rakip veya aynı iş akışı varsa öncelik ona verilir.
+- Haberlerde eski haber bağlantısı, yazılarda ise konu analizi veya karşılaştırma bağlantısı tercih edilir.
 
 ---
 
@@ -420,7 +500,7 @@ Her oturum sonunda `CHANGELOG.md` dosyası güncellenir.
 | faq | opsiyonel | question + answer çiftleri |
 | sources | min 1 | URL çalışıyor mu? |
 | socialSnippet | ≤ 280 karakter | Twitter/X formatı |
-| body (haber) | 300-800 kelime | İlk cümle hook |
+| body (haber) | 300-800 kelime | İlk cümle güçlü |
 | body (yazı) | 800-3000 kelime | İlk paragraf keyword |
 | published | true | false = sayfada görünmez |
 
@@ -436,7 +516,7 @@ Tag'ler `constants.ts` dosyasındaki `TAG_LABELS` haritasından seçilir. Geçer
 
 **Şirketler:** `openai`, `anthropic`, `google`, `meta`, `microsoft`, `alibaba`, `nvidia`, `apple`, `cursor`, `mistral`, `bytedance`, `cloudflare`, `figma`, `github`, `perplexity`
 
-**Konular:** `ai-model`, `ai-agent`, `ai-guvenlik`, `yatirim`, `kodlama`, `acik-kaynak`, `kurumsal-ai`, `ses-gorsel-video`, `arastirma`, `turkiye`, `is-hayati`
+**Konular:** `ai-model`, `ai-agent`, `ai-guvenlik`, `yatirim`, `kodlama`, `acik-kaynak`, `kurumsal-ai`, `erp`, `crm`, `is-yazilimi`, `ses-gorsel-video`, `arastirma`, `turkiye`, `is-hayati`
 
 ### 13.2 Tag Kuralları
 

@@ -1,0 +1,108 @@
+---
+title: "Prompt Engineering Başlamadan Bitti Mi?"
+slug: prompt-engineering-baslamadan-bitti-mi
+description: "Prompt engineering bitmedi, ama 2026'da tek başına ayrı bir uzmanlık olmaktan çıkıyor. Nedenini model, eval ve ajan işi üzerinden ayırıyoruz."
+date: 2026-04-26
+publishedAt: 2026-04-26T11:20:00+03:00
+category: analiz
+keywords:
+  - prompt engineering bitti mi
+  - prompt engineering 2026
+  - ai prompting
+  - gpt 5 prompt yazma
+  - llm eval
+  - yapay zeka analizi
+tags:
+  - openai
+  - ai-agent
+  - kodlama
+sources:
+  - url: "https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt"
+    label: "OpenAI Help Center Prompt Engineering"
+    tier: 1
+  - url: "https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api"
+    label: "OpenAI API Prompt Best Practices"
+    tier: 1
+  - url: "https://platform.openai.com/docs/guides/prompt-engineering"
+    label: "OpenAI Prompt Engineering Guide"
+    tier: 1
+  - url: "https://openai.com/index/introducing-gpt-5-5/"
+    label: "OpenAI GPT-5.5 Duyurusu"
+    tier: 1
+confidence: high
+lastFactChecked: 2026-04-26
+corrections: []
+actionItems:
+  - "Tek iyi prompt aramak yerine en kritik işi küçük eval setiyle ölçmeye başla"
+  - "System prompt, tool seçimi ve çıktı kontrolünü tek paket gibi düşün"
+  - "Promptu ayrı sihir gibi değil, ürün davranışının bir parçası gibi ele al"
+socialSnippet: "Prompt engineering ölmedi. Ama 2026'da mesele iyi cümle yazmaktan çok model seçimi, eval, araç akışı ve ajan davranışı kurmak haline geliyor."
+faq:
+  - question: "Prompt engineering artık gereksiz mi?"
+    answer: "Hayır. OpenAI'ın güncel dokümanları prompt engineering rehberlerini hala aktif tutuyor. Ama 2026'da iyi sonuç sadece prompttan değil, model seçimi, eval, araç kullanımı ve görev tasarımından geliyor."
+  - question: "Neden prompt engineering etkisini kaybediyor gibi görünüyor?"
+    answer: "Çünkü yeni modeller daha steerable hale geldi ve kullanıcıya daha az sihirli kelime, daha çok açık hedef, net bağlam ve doğru iş akışı gerekiyor."
+  - question: "Şimdi ne öğrenmek daha değerli?"
+    answer: "İyi prompt yazmanın yanında eval kurmak, model davranışını ölçmek, araç entegrasyonu tasarlamak ve ajan görevlerini sınırlandırmak daha değerli hale geliyor."
+published: true
+---
+
+Prompt engineering ölmedi. Ama tek başına kariyer vaadi gibi satıldığı hali ciddi biçimde zayıfladı.
+
+Bunun sebebi insanların prompt yazmayı bırakması değil. Sebep, büyük modellerin daha iyi talimat takip etmesi ve asıl farkın artık tek cümlede değil, bütün görev tasarımında ortaya çıkması.
+
+OpenAI'ın güncel dokümanları bunu açık biçimde gösteriyor. 26 Nisan 2026 itibarıyla Help Center ve API rehberlerinde prompt engineering sayfaları hala aktif. Yani resmi olarak bitmiş bir alan yok. Ama vurgu değişmiş durumda.
+
+## Ne değişti?
+
+Eski dönemde kullanıcılar tek bir sihirli prompt arıyordu. Birkaç kelime eklersen modelin bir anda çok daha iyi çalışacağına inanılıyordu.
+
+Yeni dönemde ise model ailesi, reasoning mi GPT mi seçileceği, tool kullanımı, çıktı biçimi, eval seti, güvenlik sınırı ve görev akışı daha belirleyici hale geldi. Prompt hala önemli, ama tek başına oyunu taşımıyor.
+
+OpenAI API rehberi özellikle bunu söylüyor: production sistemleri belirli model snapshot'larına sabitle, prompt davranışını eval ile ölç, model değişince sonucu tekrar kontrol et. Bu dil bize şunu anlatıyor: prompt artık tek başına metin yazma becerisi değil, sistem davranışı tasarımı.
+
+## Prompt neden bir anda küçülmüş gibi görünüyor?
+
+Çünkü modeller büyüdü ve daha yönlendirilebilir hale geldi. [GPT-5.5](/haberler/openai-gpt-5-5-ozellikleri-codex-chatgpt-api) gibi modeller, daha açık hedef verildiğinde önceki nesillere göre daha az ince numara istiyor.
+
+Bir zamanlar çok kritik görünen rol oyunları, aşırı biçim kalıpları veya yapay vurgu cümleleri bugün daha az fark yaratıyor. Model zaten daha iyi anlıyor.
+
+Bu da dışarıdan bakınca prompt engineering gereksizmiş gibi görünüyor. Aslında olan başka: iyi prompt yazımı temel yetkinliğe dönüşüyor. Ayrı bir büyü numarası olmaktan çıkıyor.
+
+## Asıl değer nereye kaydı?
+
+Birinci alan eval. Promptun iyi olup olmadığını hisle değil, görev setiyle ölçmek gerekiyor. Aynı isteği 20 gerçek örnekte çalıştırmadan sadece güzel göründü diye karar vermek artık zayıf yaklaşım.
+
+İkinci alan araç akışı. Modelin ne zaman arama yapacağı, ne zaman dosya okuyacağı, ne zaman kod çalıştıracağı, ne zaman insana soracağı daha önemli hale geldi. [Workspace Agents](/yazilar/gpt-5-5-workspace-agents-ne-ise-yarar) bunun en net örneklerinden biri.
+
+Üçüncü alan sınır çizme. Ajanların veya uzun görevlerin başarılı olması için prompttan çok görev çerçevesi gerekiyor. Ne yapabilir, neyi yapamaz, hangi adımda onay ister, hatalıysa nasıl durur gibi kurallar belirleyici.
+
+## Yani prompt engineering bitti demek neden yanlış?
+
+Çünkü resmi dokümanlar tam tersini söylüyor. OpenAI hem ChatGPT kullanıcıları hem API geliştiricileri için prompt engineering rehberlerini güncel tutuyor.
+
+Ama bu rehberlerin dili bile değişmiş durumda. Artık sadece açık yaz, örnek ver, format iste denmiyor. Bunun yanına doğru modeli seç, promptu iteratif test et, yeni model sürümünde tekrar ölç ve sistemi snapshot bazlı yönet gibi daha operasyonel öneriler ekleniyor.
+
+Bu, alanın öldüğünü değil olgunlaştığını gösteriyor.
+
+## Kariyer tarafında ne anlama geliyor?
+
+Sadece prompt yazarı gibi konumlanmak 2026'da daha zor. Çünkü şirketler tek tek iyi prompt satırlarından çok, çalışan sistemi istiyor.
+
+Bir ekip senden şunu bekliyor: bu görevi hangi model çözer, çıktı nasıl ölçülür, araç hangi sırayla çalışır, hata oranı nasıl düşer, güvenlik nasıl korunur. Prompt bunun bir parçası, ama tamamı değil.
+
+Bu yüzden en güçlü profil prompt engineer değil, ürün akışı kuran AI operator veya uygulamalı AI builder profiline kayıyor. Prompt bilen ama eval bilmeyen kişi eksik kalıyor. Tool akışı kurmayan kişi de eksik kalıyor.
+
+## Hangi beceriler öne çıkıyor?
+
+İyi yazılmış talimat hala önemli. Netlik, bağlam, örnek, format ve hata önleme her zaman iş görüyor.
+
+Ama bunların yanına üç beceri daha ekleniyor. Birincisi küçük ama gerçek eval seti kurmak. İkincisi model ve araç seçimini görev türüne göre ayırmak. Üçüncüsü uzun görevlerde ajan davranışını sınırlandırmak.
+
+Bugün en iyi prompt çoğu zaman en yaratıcı görünen değil. En iyi prompt, sistemin geri kalanıyla birlikte en tutarlı sonucu veren prompt.
+
+## Son karar
+
+Prompt engineering başlamadan bitmedi. Sadece tek başına parlayan yıldız olmaktan çıktı.
+
+2026'da kazanan yaklaşım şu: iyi prompt yaz, ama onu model seçimi, eval, tool use ve ajan tasarımıyla birlikte düşün. Eğer sadece cümle kuruyorsan geç kalırsın. Eğer davranış sistemi kuruyorsan tam zamanındasın.

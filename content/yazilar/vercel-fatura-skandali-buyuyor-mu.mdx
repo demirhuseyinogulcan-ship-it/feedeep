@@ -1,0 +1,103 @@
+---
+title: "Vercel Fatura Skandalı Büyüyor Mu?"
+slug: vercel-fatura-skandali-buyuyor-mu
+description: "Vercel'de beklenmeyen Build Minutes faturaları neden çıktı? Resmi topluluk yanıtları ve dokümanlarla sorunun ne kadar büyük olduğunu ayırıyoruz."
+date: 2026-04-26
+publishedAt: 2026-04-26T12:25:00+03:00
+category: analiz
+keywords:
+  - vercel fatura skandali
+  - vercel build minutes faturasi
+  - vercel beklenmeyen ucret
+  - vercel turbo build default
+  - vercel spend management
+  - yazilim analizi
+tags:
+  - vercel
+  - kodlama
+sources:
+  - url: "https://community.vercel.com/t/vercel-build-minutes-billing-enabled-by-default-causing-unexpected-charges/37434"
+    label: "Vercel Community Billing Thread"
+    tier: 1
+  - url: "https://community.vercel.com/t/vercel-build-minutes-billing-enabled-by-default-causing-unexpected-charges/37434/13"
+    label: "Vercel Community Çözüm Özeti"
+    tier: 1
+  - url: "https://vercel.com/docs/builds/managing-builds"
+    label: "Vercel Managing Builds Docs"
+    tier: 1
+  - url: "https://vercel.com/docs/pricing/spend-management"
+    label: "Vercel Spend Management Docs"
+    tier: 1
+confidence: medium
+lastFactChecked: 2026-04-26
+corrections: []
+actionItems:
+  - "Pro projelerde Build Machine ayarını ve On-Demand Concurrent Builds durumunu kontrol et"
+  - "Spend Management için hem bildirim hem durdurma kuralı aç"
+  - "Vercel maliyetini aylık sabit ücret gibi değil, metered kaynak yapısı gibi yönet"
+socialSnippet: "Vercel tarafında büyüyen konu tek bir viral fatura değil. Asıl sorun, Turbo build ayarları ve metered kullanımın bazı ekipler için fazla görünmez kalması."
+faq:
+  - question: "Vercel'de gerçekten beklenmeyen fatura sorunu var mı?"
+    answer: "Evet, Vercel topluluğunda Nisan 2026'da Build Minutes için beklenmeyen yüksek ücret şikayetleri görüldü. En görünür örnekte 659.72 dolarlık bir fatura paylaşıldı."
+  - question: "Bu neden oldu?"
+    answer: "Resmi topluluk yanıtına göre yeni Pro projelerde Turbo build machines ve ilgili hızlı build ayarları varsayılan geldi. Kullanıcı bunu fark etmeyince metered kullanım maliyeti hızla büyüyebildi."
+  - question: "Sorun çözüldü mü?"
+    answer: "Paylaşılan örnekte Vercel ekibi kredi uyguladı ve kullanıcı Build ayarını Standard'a çekip Spend Management açarak tekrarını önledi. Ama konu ürün iletişimi açısından hala önemli bir uyarı işareti."
+published: true
+---
+
+Vercel tarafında gördüğümüz şey tek bir komik internet başlığı değil. Gerçek bir ürün iletişimi sorunu var.
+
+Nisan 2026'da Vercel topluluğunda yayılan en görünür örnekte, bir Pro hesap sahibi Build Minutes için 659.72 dolarlık beklenmeyen fatura aldığını yazdı. Şikayetin merkezinde şu vardı: Turbo build ayarı varsayılan gelmişti ve bunun ücret etkisi yeterince görünür değildi.
+
+Bu olayı skandal diye büyütmek kolay. Ama daha faydalı soru şu: burada tekil destek vakası mı var, yoksa ürün tasarımında maliyeti fazla görünmez bırakan bir açık mı var?
+
+[Yapay zeka is hayatina sessizce girdi 2026](/yazilar/yapay-zeka-is-hayatina-sessizce-girdi-2026) yazisindaki gibi, altyapi tercihinde asil mesele sadece fiyat degil, maliyeti onceden gorebilmek.
+
+## Vercel Build Minutes faturası neden çıktı
+
+Vercel'in resmi dokümanları yeni Pro projelerde Turbo build machines ve On-Demand Concurrent Builds gibi hızlı ayarların varsayılan olabildiğini söylüyor. Bu performans için iyi, ama maliyet tarafı takip edilmezse sürpriz yaratabiliyor.
+
+Toplulukta yayılan olayda kullanıcı Build Minutes özelliğinin açık olduğunu fark etmediğini, uyarı görmediğini ve fatura büyüyene kadar durumun anlaşılmadığını yazdı. Vercel ekibinden gelen yanıt da sorunun çözümü olarak Standard build machine'e dönmeyi ve Spend Management açmayı önerdi.
+
+Bu bize önemli bir şey söylüyor: problem kullanıcı tamamen yanlış yaptı düzeyinde değil. Varsayılan ayar, görünür maliyet sinyali ve ürün eğitimi birlikte yeterince güçlü değilse, teknik olmayan ekipler çok kolay tökezleyebilir.
+
+## Vercel resmi olarak ne diyor ve çözüm olarak ne öneriyor
+
+Vercel topluluk ekibi çözüm özetinde net iki öneri verdi. Birincisi Build & Deployment ayarından build machine tipini Turbo yerine Standard'a çekmek. İkincisi Billing altında Spend Management açmak.
+
+Resmi dokümanda Spend Management için 50, 75 ve 100 yüzde eşiklerinde bildirim gönderilebildiği, hatta istenirse production deploy'ların otomatik durdurulabildiği yazıyor. Yani Vercel maliyet kontrol aracı sunuyor.
+
+Sorun tam burada başlıyor: araç var, ama herkes ilk günden onu açacak kadar tetikte değil. Ücretli performans özelliği varsayılan geldiğinde, koruma mekanizmasının daha görünür olması bekleniyor.
+
+## Vercel fatura sorunu tek kullanıcı vakası mı
+
+Şu an elimizde resmi olarak doğrulanmış dev bir küresel fatura krizi verisi yok. O yüzden milyonlarca kişiyi etkileyen sistemik çöküş anlatısı kurmak doğru olmaz.
+
+Ama tekil olay diye küçümsemek de yanlış. Çünkü topluluk başlığındaki ayrıntılar ürün kararlarının kullanıcı tarafında nasıl algılandığını açık biçimde gösteriyor. Kullanıcı neye para ödeyeceğini zamanında fark etmiyorsa, sorun sadece destek değil deneyimdir.
+
+Üstelik aynı dönemde başka Vercel topluluk başlıklarında da faturalama, plan aktivasyonu ve beklenmeyen ücret benzeri stres başlıkları görünüyor. Bu hepsinin aynı kökten geldiğini kanıtlamaz, ama maliyet görünürlüğünün hassas alan olduğunu gösterir.
+
+## Asıl sorun Vercel pahalı mı yoksa maliyet görünürlüğü mü
+
+Bence asıl soru bu değil. Asıl soru şu: Vercel maliyeti yeterince tahmin edilebilir mi.
+
+Yüksek performanslı build altyapısı ucuz olmak zorunda değil. Büyük projeler için Turbo ayarının anlamı olabilir. Ama ekip ücretli hız artışına bilinçli olarak evet demediyse, maliyet sürprizi güven kaybına dönüşür.
+
+Bu yüzden Vercel tartışması fiyat seviyesinden çok fiyat görünürlüğü tartışması.
+
+[Herkes AI ogreniyor sen hala ayni isi elle mi yapiyorsun](/yazilar/herkes-ai-ogreniyor-sen-hala-ayni-isi-elle-mi-yapiyorsun) yazisinda da ayni ders var: kucuk urunlerde bile altyapi maliyeti sonradan degil, ilk gunden olculmeli.
+
+## Vercel kullanıyorsan Build Minutes ve Spend Management için neyi kontrol etmelisin
+
+İlk bakılacak yer Build & Deployment ayarları. Build machine tipi ne, On-Demand Concurrent Builds açık mı, yeni proje varsayılanları ne durumda.
+
+İkinci yer Billing. Spend Management açık mı, sadece bildirim mi veriyor, yoksa belirli eşikte deploy durduruyor mu.
+
+Üçüncü yer ekip alışkanlığı. Birçok ekip Vercel'i sabit abonelik gibi düşünüyor. Oysa build, kullanım ve metered kaynaklar işin içine girdikçe bu yaklaşım yetmiyor. Vercel artık kısmen bulut altyapısı mantığıyla yönetilmeli.
+
+## Son karar
+
+Vercel fatura konusu şu an dev bir finansal çöküş hikayesi değil. Ama üründe maliyet görünürlüğü tarafında ciddi uyarı veren bir başlık.
+
+En dürüst sonuç şu: olay büyüyor mu sorusunun cevabı, topluluk güveni açısından evet. Kanıtlanmış küresel kriz anlamında ise henüz değil. Yine de bu başlık küçümsenecek türden değil, çünkü geliştirici araçlarında güven çoğu zaman hızdan daha zor kazanılıyor.
