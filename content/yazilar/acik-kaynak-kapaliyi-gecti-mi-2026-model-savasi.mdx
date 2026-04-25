@@ -47,21 +47,21 @@ published: true
 
 ## 2026'da yanlış soru şu: hangisi daha zeki?
 
-Bir yıl önce açık ve kapalı model tartışması çocukça bir ikiliğe sıkışıyordu. Açık kaynak severler "özgürlük" diyordu, kapalı model savunucuları ise "ama en iyi performans bizde" diyordu. 2026'da bu çerçeve çöktü. Çünkü artık tek bir eksende yarış yok.
+Bir yıl önce açık ve kapalı model tartışması çocukça bir ikiliğe sıkışıyordu. Açık kaynak tarafı özgürlüğü savunuyordu. Kapalı model tarafı ise performans üstünlüğünü savunuyordu. 2026'da bu çerçeve çöktü. Çünkü artık tek bir eksende yarış yok.
 
 Bugünün doğru sorusu şu: **hangi katmanda kim önde?**
 
-Model kalitesi başka bir katman. Dağıtım kontrolü başka. Lisans esnekliği başka. Maliyet zemini başka. Ürün entegrasyonu ve güvenlik ise bambaşka. Bu katmanlar ayrılınca cevap daha net oluyor: açık kaynak kapalıyı tamamen geçmedi, ama kapalı modellerin "tek ciddi seçenek" olma tekelini kırdı.
+Model kalitesi başka bir katman. Dağıtım kontrolü başka. Lisans esnekliği başka. Maliyet zemini başka. Ürün entegrasyonu ve güvenlik ise bambaşka. Bu katmanlar ayrılınca cevap daha net oluyor: açık kaynak kapalıyı tamamen geçmedi, ama kapalı modellerin tek ciddi seçenek olma tekelini kırdı.
 
 ## Açık modeller neden birden bu kadar ciddi görünmeye başladı?
 
-Çünkü artık yalnızca "iyi deneme" değiller. Resmi duyuruların kendi dili bile değişti.
+Çünkü artık yalnızca iyi bir deneme değiller. Resmi duyuruların kendi dili bile değişti.
 
-DeepSeek, V3.2'yi doğrudan "GPT-5 level performance" olarak konumlandırıyor ve ajanlar için düşünme artı tool-use birleşimini öne çıkarıyor. Meta, Llama 4 Scout ve Maverick'i indirilebilir açık ağırlık olarak verip 10 milyon token bağlam ve multimodal kapasiteyi merkeze koyuyor. Google, Gemma 4'ü Apache 2.0 lisansıyla açıp ajan iş akışları, uzun bağlam ve yerel çalıştırma kabiliyetini vurguluyor.
+DeepSeek, V3.2'yi doğrudan GPT-5 seviyesinde performans iddiasıyla konumlandırıyor ve ajanlar için düşünme artı tool-use birleşimini öne çıkarıyor. Meta, Llama 4 Scout ve Maverick'i indirilebilir açık ağırlık olarak verip 10 milyon token bağlam ve multimodal kapasiteyi merkeze koyuyor. Google, Gemma 4'ü Apache 2.0 lisansıyla açıp ajan iş akışları, uzun bağlam ve yerel çalıştırma kabiliyetini vurguluyor.
 
 Bu üç örnek bile yeterli. Açık model dünyası artık yalnızca araştırma hızı üzerinden değil, **ürün değeri** üzerinden de konuşuyor.
 
-Zaten sitenin yakın dönem haber akışı da bunu gösterdi: [Gemma 4'ün Apache 2.0 hamlesi](/haberler/google-gemma-4-apache-2-0-acik-kaynak), [Arcee Trinity'nin frontier'e yaklaşan açık modeli](/haberler/arcee-trinity-large-thinking-400b-acik-kaynak-model) ve [GLM-5.1'in açık ağırlıklı kodlama iddiası](/haberler/z-ai-glm-5-1-acik-kaynak-754b-otonom-kodlama) artık "açık ama zayıf" kategorisine sığmıyor.
+Zaten sitenin yakın dönem haber akışı da bunu gösterdi: [Gemma 4'ün Apache 2.0 hamlesi](/haberler/google-gemma-4-apache-2-0-acik-kaynak), [Arcee Trinity'nin frontier'e yaklaşan açık modeli](/haberler/arcee-trinity-large-thinking-400b-acik-kaynak-model) ve [GLM-5.1'in açık ağırlıklı kodlama iddiası](/haberler/z-ai-glm-5-1-acik-kaynak-754b-otonom-kodlama) artık açık ama zayıf kategorisine sığmıyor.
 
 ## Ama kapalı modeller de boş durmadı
 
@@ -80,7 +80,7 @@ Bu da bizi şu gerçeğe getiriyor: kapalı modellerin üstünlüğü artık yal
 | Lisans ve egemenlik | Net üstünlük | Zayıf |
 | Kendi altyapında çalıştırma | Net üstünlük | Çoğu zaman mümkün değil |
 | Fiyat zemini | Güçlü | Genelde daha pahalı |
-| Ham benchmark tavanı | Yaklaştı, bazı alanlarda eşitledi | Hâlâ önde veya eşit |
+| Ham benchmark tavanı | Yaklaştı, bazı alanlarda eşitledi | Hala önde veya eşit |
 | Ürün entegrasyonu | Parçalı | Net üstünlük |
 | Güvenlik ve managed service | Geliştiriciye bırakılıyor | Sağlayıcı daha kontrollü |
 | Destek ve SLA | Dağınık ekosistem | Daha güçlü kurumsal yapı |
@@ -88,17 +88,17 @@ Bu da bizi şu gerçeğe getiriyor: kapalı modellerin üstünlüğü artık yal
 
 Bu tablo neden önemli? Çünkü tek cevap yok. Eğer banka, kamu kurumu ya da regüle bir şirket için kontrollü iş akışı kuruyorsanız kapalı modelin avantajı çok yüksek. Eğer kendi veri merkezinize koyacağınız, maliyetini yöneteceğiniz ve gerektiğinde fine-tune edeceğiniz bir sistem istiyorsanız açık modellerin avantajı dramatik.
 
-## Açık kaynak gerçekten "kazandığı" alanlar
+## Açık kaynağın net kazandığı alanlar
 
 Birincisi, dağıtım opsiyonelliği. Kapalı model size iyi servis verebilir, ama dağıtım tercihini siz yapmazsınız. Açık modelde ise bulut, on-prem, edge, hibrit, hatta ülke içi egemen kurulum gibi seçenekler sizin elinizde. 2026'da AI egemenliği konuşuluyorsa, sebebi yalnızca jeopolitik değil; açık modellerin bunu mümkün kılması.
 
-İkincisi, fiyat baskısı. Burada tek mesele resmi API fiyatları değil. Açık modeller kapalı oyuncuları doğrudan ucuzlatmasa bile pazarı fiyat açısından savunmaya zorluyor. Çünkü artık "frontier benzeri kalite için ille de tek laboratuvara bağımlı olma" dönemi zayıfladı.
+İkincisi, fiyat baskısı. Burada tek mesele resmi API fiyatları değil. Açık modeller kapalı oyuncuları doğrudan ucuzlatmasa bile pazarı fiyat açısından savunmaya zorluyor. Çünkü frontier benzeri kalite için ille de tek laboratuvara bağımlı olma dönemi zayıfladı.
 
 Üçüncüsü, inovasyon hızı. Açık modeller etrafında oluşan ince ayar, quantization, local inference, agent framework ve güvenlik araçları zinciri başlı başına bir hız motoru. Kapalı modeller şirket içi inovasyonu daha kontrollü üretirken, açık modeller dış dünyada paralel yüzlerce deneme doğuruyor.
 
-## Kapalı modellerin hâlâ net üstün olduğu yerler
+## Kapalı modellerin hala net üstün olduğu yerler
 
-Birincisi, uçtan uca ürün deneyimi. OpenAI ya da Anthropic size yalnızca model vermiyor; oturum davranışı, araç bağlamı, kullanıcı arayüzü, rate limit mantığı ve destek veriyor. Bunu aynı kalitede açık tarafta toplamak hâlâ daha zor.
+Birincisi, uçtan uca ürün deneyimi. OpenAI ya da Anthropic size yalnızca model vermiyor; oturum davranışı, araç bağlamı, kullanıcı arayüzü, rate limit mantığı ve destek veriyor. Bunu aynı kalitede açık tarafta toplamak hala daha zor.
 
 İkincisi, kurumsal sorumluluk devri. Açık modeli kendi ortamınıza koyduğunuz anda güvenlik, güncelleme, logging, denetim ve uygunsuz çıktı yönetimi size geçer. Kapalı model sağlayıcısında bunun bir kısmı hizmet olarak gelir. Herkes için daha iyi değildir, ama birçok kurum için daha kolaydır.
 
@@ -116,7 +116,7 @@ Bu yaklaşım özellikle şu üç durumda mantıklı:
 
 ## Sonuç: açık kaynak kapalıyı devirmedi, ama oyunu bozdu
 
-Bugün "açık kaynak kapalıyı geçti" demek fazla düz. Çünkü kapalı modeller hâlâ ürün yüzeyi, kurumsal güven ve managed entegrasyonlarda güçlü. Ama "kapalı modeller zaten her açıdan daha iyi" demek de artık yanlış. Açık modeller frontier kaliteye yeterince yaklaştı; lisans, maliyet ve dağıtım üstünlüğüyle oyunun temel varsayımını değiştirdi.
+Bugün açık kaynak kapalıyı geçti demek fazla düz. Çünkü kapalı modeller hala ürün yüzeyi, kurumsal güven ve managed entegrasyonlarda güçlü. Ama kapalı modeller zaten her açıdan daha iyi demek de artık yanlış. Açık modeller frontier kaliteye yeterince yaklaştı; lisans, maliyet ve dağıtım üstünlüğüyle oyunun temel varsayımını değiştirdi.
 
 Bu yüzden 2026 model savaşı bir zafer ilanı değil, parçalanmış bir liderlik tablosu üretiyor.
 
@@ -124,6 +124,6 @@ Ham zekada fark küçüldü.
 
 Dağıtımda açık modeller öne geçti.
 
-Ürün kasasında kapalı modeller hâlâ güçlü.
+Ürün kasasında kapalı modeller hala güçlü.
 
 Gerçek strateji ise artık taraf seçmek değil, katman seçmek.

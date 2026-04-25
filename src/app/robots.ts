@@ -13,20 +13,32 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/"],
       },
+      // Eğitim botları — içerik model eğitimi için kullanılamaz
       {
         userAgent: [
           "GPTBot",
           "Google-Extended",
-          "ChatGPT-User",
-          "Anthropic-AI",
           "ClaudeBot",
           "CCBot",
           "cohere-ai",
+          "Applebot-Extended",
+          "Amazonbot",
+          "Bytespider",
+          "Diffbot",
+          "AI2Bot",
         ],
         disallow: ["/"],
       },
+      // Browsing botları — gerçek zamanlı referans ve kaynak gösterimi için izinli
       {
-        userAgent: "PerplexityBot",
+        userAgent: [
+          "ChatGPT-User",
+          "Anthropic-AI",
+          "PerplexityBot",
+          "Meta-ExternalAgent",
+          "Meta-ExternalFetcher",
+          "YouBot",
+        ],
         allow: "/",
         disallow: ["/api/"],
       },

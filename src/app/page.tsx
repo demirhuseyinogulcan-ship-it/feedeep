@@ -11,7 +11,7 @@ import { FeedContainer } from "@/components/feed/feed-container";
 import { buildFeed } from "@/lib/feed";
 
 const HOME_TITLE = "Yapay Zeka Haberleri ve AI Araç İncelemeleri | feedeep";
-const HOME_H1 = "Güncel yapay zeka haberleri, AI araç incelemeleri ve yazılım rehberleri";
+const HOME_H1 = "Güncel yapay zeka haberleri ve AI araç incelemeleri";
 
 export const metadata: Metadata = generateMeta({
   title: HOME_TITLE,
