@@ -7,7 +7,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Code2, DatabaseZap, Home, Newspaper, PenLine, Search } from "lucide-react";
+import { Code2, Home, Newspaper, PenLine, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const MOBILE_NAV_ITEMS = [
@@ -15,7 +15,6 @@ const MOBILE_NAV_ITEMS = [
   { label: "Haberler", href: "/haberler", icon: Newspaper },
   { label: "Yazılar", href: "/yazilar", icon: PenLine },
   { label: "Open", href: "/open-source", icon: Code2 },
-  { label: "Scraping", href: "/web-scraping", icon: DatabaseZap },
   { label: "Arama", href: "/arama", icon: Search },
 ] as const;
 

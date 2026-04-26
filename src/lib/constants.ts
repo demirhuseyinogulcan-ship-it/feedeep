@@ -35,7 +35,6 @@ export const NAV_ITEMS = [
   { label: "Yazılar", href: "/yazilar" },
   { label: "Haberler", href: "/haberler" },
   { label: "Open Source", href: "/open-source" },
-  { label: "Web Scraping", href: "/web-scraping" },
 ] as const;
 
 
