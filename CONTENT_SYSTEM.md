@@ -66,7 +66,7 @@
 ## [Ana Konu — Detay]           ← Gerçek değer burada
 ## [Tablo veya Karşılaştırma]   ← Görsel veri (varsa)
 ## [Pratik Uygulama]            ← Okuyucu ne yapmalı
-## [Sonuç + Bakış]              ← Gelecek perspektifi
+## [Aratılabilir Kapanış Başlığı] ← Son bölüm, ama jenerik başlık değil
 ```
 
 ### 2.2 Haberler (`content/haberler/`)
@@ -159,6 +159,7 @@ npm run new:yazi     # Yeni yazı oluştur
 4. **Aksiyon odaklı bitir** — "bu bilgiyle ne yapacağım?" sorusunu yanıtla
 5. **Karşı görüş ekle** (yazılarda) — güven artırır
 6. **H2 ve H3'leri de arama niyetine göre yaz** — alt başlıklar da gerçek kullanıcı sorusuna cevap versin
+7. **Kapanış H2'si jenerik olamaz** — `Son karar`, `Sonuç`, `Kapanış` gibi tek başına zayıf başlıklar yerine konuya özgü aranabilir ifade kullan
 
 **Ton ve Ses:**
 - Profesyonel ama samimi
@@ -333,6 +334,8 @@ Vurgu! Her yerde! Ünlem!               → Ünlem neredeyse hiç kullanma
 >
 > **MUTLAK KURAL: Şapkalı sesli harf kullanılmaz.** Düz Türkçe yazılır: `hala`, `kar`, `hikaye`, `resmi`.
 >
+> **MUTLAK KURAL: Gövde metni, başlıklar, description ve sosyal metinlerde normal Türkçe karakterler kullanılır.** `ş, ç, ğ, ı, ö, ü` harfleri `s, c, g, i, o, u` biçimine çevrilmez. Bu sadeleştirme yalnızca `slug`, URL ve teknik slug alanlarında uygulanır.
+>
 > **MUTLAK KURAL: Bozuk karakter kalıntısı bırakılmaz.** Mojibake karakterleri içerikte, başlıkta, açıklamada ve sosyal metinde görülürse yayın öncesi düzeltilir. Bunlar okur güvenini ve kalite algısını düşürür.
 
 **Cümle Yapısı Kuralları:**
@@ -377,6 +380,8 @@ Yazı, AI içerik testlerinde mekanik görünmemeli. Bunun için:
 
 **H2 ve H3 için ek kural:** Alt başlık yaratıcı görünebilir ama aranabilir ifade taşımadan bırakılmaz. Okur başlığı tek başına görünce hangi soruya cevap verdiğini anlamalı.
 
+**Kapanış H2 kuralı:** Son bölüm vardır, ama başlığı jenerik yazılmaz. `Son karar`, `Sonuç`, `Kapanış`, `Son söz` gibi başlıklar yerine konuya özgü aratılabilir ifade kullanılır.
+
 **Her 3 başlıktan 1'i kanca olabilir. Hepsi dramatik olursa marka tonu kayar.**
 
 | Haber türü | Format | Örnek |
@@ -391,12 +396,16 @@ Yazı, AI içerik testlerinde mekanik görünmemeli. Bunun için:
 - `Stripe Türkiye'de kullanılabiliyor mu`
 - `Vercel güvenlik olayı ne kadar büyüdü`
 - `Prompt engineering neden tek başına yetmiyor`
+- `Junior yazılımcı için 2026'da ne değişti`
+- `Gemini 3.2 için bugün ne söylemek doğru`
 
 **Zayıf H2 örnekleri:**
 - `Asıl kırılma burada`
 - `Perdenin arkası`
 - `Yeni dönemin dili`
 - `Görünenin ötesi`
+- `Son karar`
+- `Sonuç`
 
 **Başlık Yazım Kuralları:**
 - Max 70 karakter (frontmatter kuralı)

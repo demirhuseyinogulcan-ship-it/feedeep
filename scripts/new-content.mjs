@@ -138,9 +138,9 @@ published: true
 1. **Adım 1:** ...
 2. **Adım 2:** ...
 
-## Sonuç
+## [Aratılabilir kapanış başlığı]
 
-[Özet + gelecek perspektifi.]
+[Özet + gelecek perspektifi. Sonuç, Son karar, Kapanış gibi jenerik başlık kullanma.]
 `;
 
   writeContent("yazilar", `${slug}.mdx`, content);

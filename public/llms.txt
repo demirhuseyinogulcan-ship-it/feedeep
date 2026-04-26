@@ -18,7 +18,7 @@ feedeep, Türkiye'nin yazılım ve yapay zeka odaklı bağımsız içerik platfo
 ## Son İçerikler (Nisan 2026)
 
 ### Haberler
-- [GPT-5.5 Özellikleri: Codex, ChatGPT ve API Fiyatı](https://feedeep.com/haberler/openai-gpt-5-5-ozellikleri-codex-chatgpt-api): OpenAI GPT-5.5'i ChatGPT, Codex ve API için duyurdu. Model kodlama, bilgisayar kullanımı, araştırma, fiyat ve güvenlikte ne değiştiriyor?
+- [GPT-5.5 Özellikleri: Codex, ChatGPT ve API Fiyatı](https://feedeep.com/haberler/openai-gpt-5-5-ozellikleri-codex-chatgpt-api): OpenAI GPT-5.5'i ChatGPT, Codex ve API için duyurdu. Model kodlama, bilgisayar kullanımı, araştırma, fiyat ve güvenlikte ne değiştiriyor
 - [Vercel Hacklenmiş](https://feedeep.com/haberler/vercel-hacklenmis): Vercel, 19 Nisan 2026'da bazı dahili sistemlerine yetkisiz erişim olduğunu doğruladı. Şirket, sınırlı sayıda müşterinin etkilendiğini söylüyor.
 - [Stanford AI Index 2026: Çin ile ABD Arasında 39 Puan Kaldı](https://feedeep.com/haberler/stanford-ai-index-2026-cin-ile-abd-arasinda-39-puan-kaldi): Stanford AI Index 2026 raporu, ABD ile Çin arasındaki model performans farkının fiilen kapandığını söylüyor. Arada artık sadece 39 Arena puanı var.
 - [Opus 4.7 Çıktı — Eski Promptlarınız Bozulabilir](https://feedeep.com/haberler/claude-opus-4-7-cikti-gelistirici): Claude Opus 4.7 yayında. Vision 3x daha iyi, tokenizer değişti, instruction following sıkılaştı. Eski promptlarını test etmeden migrate etme.
@@ -141,14 +141,14 @@ feedeep, Türkiye'nin yazılım ve yapay zeka odaklı bağımsız içerik platfo
 - [OpenAI GPT-5.2 ile Teorik Fizikte Çığır Açtı](https://feedeep.com/haberler/openai-gpt-5-2-fizik-kesif): OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
 ### Yazılar
-- [AB'nin Yeni Yapay Zeka Yasasi Onaylandi Mi, Ne Zaman Uygulanacak?](https://feedeep.com/yazilar/ab-yapay-zeka-yasasi-onaylandi-mi-ne-zaman-uygulanacak): AB AI Act tam olarak ne zaman onaylandi, ne zaman yururluge girdi ve hangi kurallar 2 Agustos 2026 tarihinde uygulanacak? Resmi takvimi netlestiriyoruz.
+- [AB'nin Yeni Yapay Zeka Yasasi Onaylandi Mi, Ne Zaman Uygulanacak](https://feedeep.com/yazilar/ab-yapay-zeka-yasasi-onaylandi-mi-ne-zaman-uygulanacak): AB AI Act tam olarak ne zaman onaylandi, ne zaman yururluge girdi ve hangi kurallar 2 Agustos 2026 tarihinde uygulanacak Resmi takvimi netlestiriyoruz.
 - [Claude Opus 4.7 vs GPT-5.5: Hangisi Daha İyi?](https://feedeep.com/yazilar/claude-opus-4-7-vs-gpt-5-5-karsilastirma): Claude Opus 4.7 ve GPT-5.5'i kodlama, ajan, fiyat, bağlam, güvenlik ve iş akışı açısından karşılaştırıyoruz.
 - [Devin AI İflas Mı Ediyor?](https://feedeep.com/yazilar/devin-ai-iflas-mi-ediyor): Devin AI için iflas söylentileri doğru mu? 26 Nisan 2026 itibarıyla Cognition'ın resmi sinyallerine bakıp tabloyu ayırıyoruz.
 - [Gemini 3.2 Ne Zaman Çıkacak?](https://feedeep.com/yazilar/gemini-3-2-ne-zaman-cikacak): Gemini 3.2 için resmi tarih var mı? 26 Nisan 2026 itibarıyla Google'ın açıkladıkları ve en makul çıkış penceresini ayırıyoruz.
-- [GPT-5.5 Workspace Agents Ne İşe Yarıyor?](https://feedeep.com/yazilar/gpt-5-5-workspace-agents-ne-ise-yarar): OpenAI Workspace Agents nedir, GPT-5.5 ile nasıl çalışır, hangi ekipler kullanmalı ve kurumsal riskleri neler?
-- [Junior Yazilimci Devri Kapandi Mi?](https://feedeep.com/yazilar/junior-yazilimci-devri-kapandi-mi): AI yuzunden junior yazilimci devri bitti mi? 26 Nisan 2026 itibariyla is piyasasi, GitHub verileri ve arastirmalarla daha sogukkanli cevabi veriyoruz.
-- [NVIDIA Cip Tekelini Kaybediyor Mu?](https://feedeep.com/yazilar/nvidia-cip-tekelini-kaybediyor-mu): NVIDIA hala lider ama AI cip pazarinda tek adres olma hikayesi zayifliyor mu? 26 Nisan 2026 itibariyla resmi duyurularla tabloyu ayiriyoruz.
-- [PHP Neden Halen Yasiyor?](https://feedeep.com/yazilar/php-neden-halen-yasiyor): PHP neden hala ortadan kaybolmadi? 2026 itibariyla resmi surumler, WordPress, Laravel ve Packagist verileriyle bu dilin neden yasadigini ayiriyoruz.
+- [GPT-5.5 Workspace Agents Ne İşe Yarıyor](https://feedeep.com/yazilar/gpt-5-5-workspace-agents-ne-ise-yarar): OpenAI Workspace Agents nedir, GPT-5.5 ile nasıl çalışır, hangi ekipler kullanmalı ve kurumsal riskleri neler
+- [Junior Yazılımcı Devri Kapandı Mı](https://feedeep.com/yazilar/junior-yazilimci-devri-kapandi-mi): AI yuzunden junior yazılımcı devri bitti mi 26 Nisan 2026 itibarıyla iş piyasası, GitHub verileri ve araştırmalarla daha sogukkanlı cevabı veriyoruz.
+- [NVIDIA Cip Tekelini Kaybediyor Mu](https://feedeep.com/yazilar/nvidia-cip-tekelini-kaybediyor-mu): NVIDIA hala lider ama AI cip pazarinda tek adres olma hikayesi zayifliyor mu 26 Nisan 2026 itibariyla resmi duyurularla tabloyu ayiriyoruz.
+- [PHP Neden Halen Yasiyor](https://feedeep.com/yazilar/php-neden-halen-yasiyor): PHP neden hala ortadan kaybolmadi 2026 itibariyla resmi surumler, WordPress, Laravel ve Packagist verileriyle bu dilin neden yasadigini ayiriyoruz.
 - [Prompt Engineering Başlamadan Bitti Mi?](https://feedeep.com/yazilar/prompt-engineering-baslamadan-bitti-mi): Prompt engineering bitmedi, ama 2026'da tek başına ayrı bir uzmanlık olmaktan çıkıyor. Nedenini model, eval ve ajan işi üzerinden ayırıyoruz.
 - [Stripe Türkiye'ye Geliyor Mu?](https://feedeep.com/yazilar/stripe-turkiyeye-geliyor-mu): Stripe Türkiye'de resmi olarak açıldı mı? 26 Nisan 2026 itibarıyla global availability ve dokümanlar üzerinden net tabloyu çıkarıyoruz.
 - [Vercel Fatura Skandalı Büyüyor Mu?](https://feedeep.com/yazilar/vercel-fatura-skandali-buyuyor-mu): Vercel'de beklenmeyen Build Minutes faturaları neden çıktı? Resmi topluluk yanıtları ve dokümanlarla sorunun ne kadar büyük olduğunu ayırıyoruz.

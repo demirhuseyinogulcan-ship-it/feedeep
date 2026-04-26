@@ -86,11 +86,13 @@ Bundan sonraki tüm mesajlarında bu 3 şapkayı takarak kod yazacak, kodu eleş
 - **Haber yazım stili:** Doğal, akıcı, EVRİMAĞACI anlatıcısının konuşma tonunda, eğitici ama çaktırmadan anlatan gazetecilik dili. Eski kutulu haber formatlarını KULLANMA. Başlıklarda kanca içerik tipi kullanılabilir.
 - **İnsan dili kuralı:** Yazılar mekanik AI çıktısı gibi görünmemeli. Aynı paragraf ritmi, aynı geçiş kalıpları ve meta cümleler yasak.
 - **Karakter kuralı:** Şapkalı sesli harf, em dash ve mojibake karakter kalıntısı kullanma. Düz Türkçe yaz.
+- **Türkçe karakter kuralı:** `ş, ç, ğ, ı, ö, ü` harflerini body metninde, başlıklarda, description alanında ve sosyal metinde normal biçimiyle kullan. ASCII sadeleştirme sadece `slug` ve teknik slug alanlarında yapılır.
 - **Açık kaynak iş yazılımları:** ERP, CRM, müşteri takip ve benzeri GitHub projeleri SEO odaklı tanıtım yazısı olabilir. `acik-kaynak`, `github`, `crm`, `erp`, `is-yazilimi` taglerinden uygun olanları kullan.
 - Frontmatter doğrulama: `npm run validate`
 - **Slug'da ASLA Türkçe karakter kullanma** (ş→s, ç→c, ğ→g, ı→i, ö→o, ü→u)
 - **title max 70 karakter, description max 160 karakter** — SEO zorunluluğu
 - H2 ve H3 başlıkları da arama niyeti taşımalı; sadece yaratıcı görünen başlık yazma
+- Kapanış bölümü varsa H2'si jenerik olamaz; `Son karar`, `Sonuç`, `Kapanış` gibi başlıklar yerine konuya özgü aranabilir ifade yaz
 
 ### Güven Katmanı
 - Her yazıda en az 1 kaynak (`sources`) zorunlu
