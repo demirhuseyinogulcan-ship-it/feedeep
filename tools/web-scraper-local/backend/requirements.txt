@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+pydantic-settings
+httpx
+beautifulsoup4
+googlesearch-python
+python-dotenv
+openpyxl
+python-multipart

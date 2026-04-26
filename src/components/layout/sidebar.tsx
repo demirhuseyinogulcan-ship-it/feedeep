@@ -8,6 +8,7 @@
 
 "use client";
 
+import { Instagram, Linkedin } from "lucide-react";
 import { NAV_ITEMS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ActiveLink } from "./active-link";
@@ -17,6 +18,25 @@ type Props = {
   isOpen: boolean;
   onToggle: () => void;
 };
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path
+        fill="currentColor"
+        d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.96 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"
+      />
+    </svg>
+  );
+}
+
+function SubstackIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}>
+      <path fill="currentColor" d="M4 3h16v3H4V3Zm0 5h16v3H4V8Zm0 5h16v8l-8-4-8 4v-8Z" />
+    </svg>
+  );
+}
 
 export function Sidebar({ isOpen, onToggle }: Props) {
   return (
@@ -88,38 +108,46 @@ export function Sidebar({ isOpen, onToggle }: Props) {
             >
               {SITE.author.email}
             </a>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <a
                 href={SITE.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
+                title="LinkedIn"
+                aria-label="LinkedIn"
+                className="flex h-7 w-7 items-center justify-center rounded-md text-gray-600 hover:bg-surface-2 hover:text-primary-400 transition-colors"
               >
-                LinkedIn
+                <Linkedin className="h-3.5 w-3.5" />
               </a>
               <a
                 href={SITE.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
+                title="Instagram"
+                aria-label="Instagram"
+                className="flex h-7 w-7 items-center justify-center rounded-md text-gray-600 hover:bg-surface-2 hover:text-primary-400 transition-colors"
               >
-                Instagram
+                <Instagram className="h-3.5 w-3.5" />
               </a>
               <a
                 href={SITE.social.x}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
+                title="X"
+                aria-label="X"
+                className="flex h-7 w-7 items-center justify-center rounded-md text-gray-600 hover:bg-surface-2 hover:text-primary-400 transition-colors"
               >
-                X
+                <XIcon className="h-3.5 w-3.5" />
               </a>
               <a
                 href={SITE.social.substack}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-gray-600 hover:text-primary-400 transition-colors"
+                title="Substack"
+                aria-label="Substack"
+                className="flex h-7 w-7 items-center justify-center rounded-md text-gray-600 hover:bg-surface-2 hover:text-primary-400 transition-colors"
               >
-                Substack
+                <SubstackIcon className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>

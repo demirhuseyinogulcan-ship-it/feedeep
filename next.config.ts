@@ -74,15 +74,24 @@ const nextConfig: NextConfig = {
 
 // Velite Webpack Plugin — build sırasında content derler
 class VeliteWebpackPlugin {
-  static started = false;
+  static buildPromise: Promise<void> | null = null;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   apply(compiler: any) {
     compiler.hooks.beforeCompile.tapPromise("VeliteWebpackPlugin", async () => {
-      if (VeliteWebpackPlugin.started) return;
-      VeliteWebpackPlugin.started = true;
-      const dev = compiler.options.mode === "development";
-      const { build } = await import("velite");
-      await build({ watch: dev, clean: !dev });
+      if (!VeliteWebpackPlugin.buildPromise) {
+        const dev = compiler.options.mode === "development";
+
+        VeliteWebpackPlugin.buildPromise = import("velite")
+          .then(({ build }) => build({ watch: dev, clean: !dev }))
+          .then(() => undefined)
+          .catch((error) => {
+            VeliteWebpackPlugin.buildPromise = null;
+            throw error;
+          });
+      }
+
+      await VeliteWebpackPlugin.buildPromise;
     });
   }
 }

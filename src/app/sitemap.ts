@@ -83,6 +83,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${SITE.url}/open-source`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/web-scraping`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
       url: `${SITE.url}/hakkimizda`,
       lastModified: now,
       changeFrequency: "monthly",

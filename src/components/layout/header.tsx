@@ -32,7 +32,7 @@ export function Header() {
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
           <Link
             href="/arama"
-            className="flex items-center gap-2 h-9 px-4 rounded-full bg-surface-2 border border-white/[0.06] text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
+            className="flex h-9 w-24 items-center justify-center gap-3 rounded-full bg-surface-2 border border-white/[0.06] text-gray-500 hover:text-gray-300 hover:border-white/[0.12] transition-colors"
             aria-label="Ara"
           >
             <Search className="h-4 w-4 shrink-0" />
