@@ -9,6 +9,7 @@ export const metadata: Metadata = generateMeta({
   description:
     "Feedeep Web Scraping aracıyla firma araştırması yapın, web sitelerinden iletişim verisi çıkarın ve sonuçları Excel veya CSV olarak indirin.",
   path: "/web-scraping",
+  noIndex: true,
   keywords: [
     "web scraping aracı",
     "veri kazıma",
