@@ -93,9 +93,6 @@ export default function RootLayout({
   return (
     <html lang="tr" dir="ltr" suppressHydrationWarning>
       <head>
-        {/* hreflang — uluslararası sinyal */}
-        <link rel="alternate" hrefLang="tr" href="https://feedeep.com" />
-        <link rel="alternate" hrefLang="x-default" href="https://feedeep.com" />
         <link rel="alternate" type="application/rss+xml" title="feedeep RSS" href="https://feedeep.com/feed.xml" />
 
         {/* PWA Manifest & Theme */}

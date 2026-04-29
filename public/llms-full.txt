@@ -36,11 +36,15 @@ Her haberde kaynak URL ve kaynak adı zorunlu.
 ## İstatistikler
 
 - Toplam haber: 121
-- Toplam yazı: 29
+- Toplam yazı: 30
 
 ## Tüm İçerik Listesi
 
 ### Yazılar
+- [GLM 5.1 Neden Bu Kadar İyi? Z1-Rumination Ne Yapıyor](https://feedeep.com/yazilar/glm-5-1-neden-bu-kadar-iyi)
+  Kategori: analiz | Tarih: Wed Apr 29 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: medium
+  GLM 5.1 neden bu kadar konuşuluyor? Z1-Rumination, 744B MoE mimarisi, 200K context, SWE-Bench Pro ve GLM 5.2 beklentisi.
+
 - [AB'nin Yeni Yapay Zeka Yasasi Onaylandi Mi, Ne Zaman Uygulanacak](https://feedeep.com/yazilar/ab-yapay-zeka-yasasi-onaylandi-mi-ne-zaman-uygulanacak)
   Kategori: analiz | Tarih: Sun Apr 26 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
   AB AI Act tam olarak ne zaman onaylandi, ne zaman yururluge girdi ve hangi kurallar 2 Agustos 2026 tarihinde uygulanacak Resmi takvimi netlestiriyoruz.

@@ -15,6 +15,7 @@ import { TrustBadge } from "@/components/content/trust-badge";
 import { RelatedArticles } from "@/components/content/related-articles";
 import { RelatedNews } from "@/components/content/related-news";
 import { TagLinks } from "@/components/content/tag-links";
+import { FaqSection } from "@/components/content/faq-section";
 import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
@@ -164,6 +165,8 @@ export default async function YaziDetayPage({ params }: Props) {
         <div className="animate-fade-up delay-200">
           <MDXContent code={post.body} />
         </div>
+
+        <FaqSection items={post.faq} />
 
         <div className="line-void my-12" />
 

@@ -14,6 +14,7 @@ import { MDXContent } from "@/components/content/mdx-content";
 import { TrustBadge } from "@/components/content/trust-badge";
 import { RelatedNews } from "@/components/content/related-news";
 import { RelatedArticles } from "@/components/content/related-articles";
+import { FaqSection } from "@/components/content/faq-section";
 import { CoverImage } from "@/components/content/cover-image";
 import { ReadingTracker } from "@/components/shared/reading-tracker";
 import { ShareButtons } from "@/components/shared/share-buttons";
@@ -167,6 +168,8 @@ export default async function HaberDetayPage({ params }: Props) {
         <div className="animate-fade-up delay-200">
           <MDXContent code={news.body} />
         </div>
+
+        <FaqSection items={news.faq} />
 
         <div className="line-void my-12" />
 

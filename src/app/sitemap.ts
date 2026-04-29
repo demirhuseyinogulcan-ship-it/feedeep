@@ -94,12 +94,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
-    {
-      url: `${SITE.url}/arama`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.4,
-    },
   ];
 
   // Yazılar (analiz/inceleme) — yaşa göre dinamik frekans

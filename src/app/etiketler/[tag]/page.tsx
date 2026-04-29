@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${label} Haberleri ve Yazıları`,
     description: `${label} hakkında ${items.length} içerik: güncel haberler, analizler ve incelemeler.`,
     path: `/etiketler/${tag}`,
+    canonicalPath: tag === "acik-kaynak" ? "/open-source" : undefined,
     keywords: [label, `${label} haberleri`, `${label} yazıları`, "yapay zeka"],
   });
 }
