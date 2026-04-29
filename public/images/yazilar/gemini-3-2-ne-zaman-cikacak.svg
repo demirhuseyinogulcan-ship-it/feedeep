@@ -39,8 +39,8 @@
   <text x="72" y="130" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="12" letter-spacing="4" fill="#a78bfa">ANALİZ</text>
   <rect x="72" y="146" width="120" height="1.5" fill="url(#accentLine)"/>
   <text x="72" y="278" font-family="Montserrat, system-ui, sans-serif" font-weight="900" font-size="80" letter-spacing="-2" fill="url(#brand)">Gemini 3.2</text>
-  <text x="72" y="362" font-family="Montserrat, system-ui, sans-serif" font-weight="900" font-size="72" letter-spacing="-2" fill="#f3f4f6">Ne Zaman Cikacak?</text>
-  <text x="72" y="420" font-family="Montserrat, system-ui, sans-serif" font-weight="500" font-size="20" fill="#6b7280">Beklentiler, tarihler ve olasi ozellikler</text>
+  <text x="72" y="362" font-family="Montserrat, system-ui, sans-serif" font-weight="900" font-size="72" letter-spacing="-2" fill="#f3f4f6">Ne Zaman Çıkacak?</text>
+  <text x="72" y="420" font-family="Montserrat, system-ui, sans-serif" font-weight="500" font-size="20" fill="#6b7280">Resmi tarih yok, Google I/O 2026 takipte</text>
   <rect x="0" y="570" width="1200" height="1" fill="#1a1a1a"/>
   <text x="1128" y="604" font-family="Montserrat, system-ui, sans-serif" font-weight="500" font-size="13" text-anchor="end" fill="#374151">Nisan 2026</text>
   <rect x="1152" y="0" width="1" height="630" fill="url(#brand)" opacity="0.18"/>

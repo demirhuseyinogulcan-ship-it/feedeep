@@ -53,9 +53,9 @@ Her haberde kaynak URL ve kaynak adı zorunlu.
   Kategori: analiz | Tarih: Sun Apr 26 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: medium
   Devin AI için iflas söylentileri doğru mu? 26 Nisan 2026 itibarıyla Cognition'ın resmi sinyallerine bakıp tabloyu ayırıyoruz.
 
-- [Gemini 3.2 Ne Zaman Çıkacak?](https://feedeep.com/yazilar/gemini-3-2-ne-zaman-cikacak)
+- [Gemini 3.2 Ne Zaman Çıkacak? Google I/O'da Duyurulur mu?](https://feedeep.com/yazilar/gemini-3-2-ne-zaman-cikacak)
   Kategori: analiz | Tarih: Sun Apr 26 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: speculative
-  Gemini 3.2 için resmi tarih var mı? 26 Nisan 2026 itibarıyla Google'ın açıkladıkları ve en makul çıkış penceresini ayırıyoruz.
+  Gemini 3.2 çıktı mı, ne zaman çıkacak? Google I/O 2026, Gemini 3.1 Pro ve resmi güncellemelere göre kısa cevap.
 
 - [GPT-5.5 Workspace Agents Ne İşe Yarıyor](https://feedeep.com/yazilar/gpt-5-5-workspace-agents-ne-ise-yarar)
   Kategori: analiz | Tarih: Sun Apr 26 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
