@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" data-feedeep-cover="true">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&amp;display=swap');</style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbfaf7"/>
+      <stop offset="100%" stop-color="#eef1ec"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="-720" y1="0" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="18%" stop-color="#a855f7"/>
+      <stop offset="36%" stop-color="#d946ef"/>
+      <stop offset="54%" stop-color="#ec4899"/>
+      <stop offset="72%" stop-color="#d946ef"/>
+      <stop offset="88%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+      <animate attributeName="x1" values="-720;72;-720" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="480;930;480" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="brandTop" x1="-140" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="24%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#d946ef"/>
+      <stop offset="74%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+      <animate attributeName="x1" values="-140;72;-140" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="260;420;260" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="accentLine" x1="72" y1="0" x2="230" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="50%" stop-color="#d946ef"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <mask id="gridMask">
+      <linearGradient id="gridFade" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="white" stop-opacity="0.62"/>
+        <stop offset="72%" stop-color="white" stop-opacity="0.16"/>
+        <stop offset="100%" stop-color="white" stop-opacity="0"/>
+      </linearGradient>
+      <rect width="1200" height="630" fill="url(#gridFade)"/>
+    </mask>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1.25" fill="#0f172a"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g mask="url(#gridMask)">
+    <rect width="1200" height="630" fill="url(#dots)" opacity="0.08"/>
+  </g>
+  <rect x="0" y="0" width="1200" height="3" fill="url(#brand)"/>
+  <text x="72" y="58" font-family="Montserrat, system-ui, sans-serif" font-weight="800" font-size="26" letter-spacing="0" fill="url(#brandTop)">feedeep</text>
+  <text x="72" y="130" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="12" letter-spacing="3" fill="#6d28d9">SEO / İÇERİK STRATEJİSİ</text>
+  <rect x="72" y="146" width="158" height="1.5" fill="url(#accentLine)"/>
+  <text x="72" y="255" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="74" letter-spacing="0" fill="#111827">Sayfalarımız</text>
+  <text x="72" y="335" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="74" letter-spacing="0" fill="#111827">Neden Dizine</text>
+  <text x="72" y="415" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="74" letter-spacing="0" fill="url(#brand)">Eklenmiyor?</text>
+  <text x="72" y="470" font-family="Montserrat, system-ui, sans-serif" font-weight="500" font-size="20" letter-spacing="0" fill="#4b5563">Teknik SEO sorunu mu, içerik stratejisi sorunu mu?</text>
+  <rect x="72" y="510" width="190" height="42" rx="8" fill="#111827" opacity="0.055"/>
+  <text x="92" y="538" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="14" letter-spacing="0" fill="#111827">Helpful Content</text>
+  <rect x="282" y="510" width="178" height="42" rx="8" fill="#111827" opacity="0.055"/>
+  <text x="302" y="538" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="14" letter-spacing="0" fill="#111827">AI İçerik</text>
+  <rect x="480" y="510" width="190" height="42" rx="8" fill="#111827" opacity="0.055"/>
+  <text x="500" y="538" font-family="Montserrat, system-ui, sans-serif" font-weight="700" font-size="14" letter-spacing="0" fill="#111827">Özgün Değer</text>
+  <rect x="0" y="570" width="1200" height="1" fill="#d1d5db"/>
+  <text x="1128" y="604" font-family="Montserrat, system-ui, sans-serif" font-weight="600" font-size="13" letter-spacing="0" text-anchor="end" fill="#374151">1 Mayıs 2026</text>
+  <rect x="1152" y="0" width="1" height="630" fill="url(#brand)" opacity="0.3"/>
+  <rect x="1163" y="0" width="1" height="630" fill="url(#brand)" opacity="0.16"/>
+  <rect x="1174" y="0" width="1" height="630" fill="url(#brand)" opacity="0.08"/>
+</svg>

@@ -15,7 +15,7 @@ feedeep, Türkiye'nin yazılım ve yapay zeka odaklı bağımsız içerik platfo
 - [Haberler](https://feedeep.com/haberler): Güncel AI ve yazılım haberleri
 - [Hakkımızda](https://feedeep.com/hakkimizda): Ekip ve misyon
 
-## Son İçerikler (Nisan 2026)
+## Son İçerikler (Mayıs 2026)
 
 ### Haberler
 - [GPT-5.5 Özellikleri: Codex, ChatGPT ve API Fiyatı](https://feedeep.com/haberler/openai-gpt-5-5-ozellikleri-codex-chatgpt-api): OpenAI GPT-5.5'i ChatGPT, Codex ve API için duyurdu. Model kodlama, bilgisayar kullanımı, araştırma, fiyat ve güvenlikte ne değiştiriyor
@@ -141,6 +141,7 @@ feedeep, Türkiye'nin yazılım ve yapay zeka odaklı bağımsız içerik platfo
 - [OpenAI GPT-5.2 ile Teorik Fizikte Çığır Açtı](https://feedeep.com/haberler/openai-gpt-5-2-fizik-kesif): OpenAI'ın son modeli GPT-5.2, kuantum mekaniğinde yeni bir yaklaşım sunarak bilim dünyasını şaşırttı.
 
 ### Yazılar
+- [Sayfalarımız Neden Dizine Eklenmiyor?](https://feedeep.com/yazilar/sayfalarimiz-neden-dizine-eklenmiyor): Google sayfaları neden dizine eklemiyor? Teknik SEO, içerik stratejisi, AI içerik ve özgün değer ayrımını sade şekilde anlatıyoruz.
 - [GLM 5.1 Neden Bu Kadar İyi? Z1-Rumination Ne Yapıyor](https://feedeep.com/yazilar/glm-5-1-neden-bu-kadar-iyi): GLM 5.1 neden bu kadar konuşuluyor? Z1-Rumination, 744B MoE mimarisi, 200K context, SWE-Bench Pro ve GLM 5.2 beklentisi.
 - [AB'nin Yeni Yapay Zeka Yasasi Onaylandi Mi, Ne Zaman Uygulanacak](https://feedeep.com/yazilar/ab-yapay-zeka-yasasi-onaylandi-mi-ne-zaman-uygulanacak): AB AI Act tam olarak ne zaman onaylandi, ne zaman yururluge girdi ve hangi kurallar 2 Agustos 2026 tarihinde uygulanacak Resmi takvimi netlestiriyoruz.
 - [Claude Opus 4.7 vs GPT-5.5: Hangisi Daha İyi?](https://feedeep.com/yazilar/claude-opus-4-7-vs-gpt-5-5-karsilastirma): Claude Opus 4.7 ve GPT-5.5'i kodlama, ajan, fiyat, bağlam, güvenlik ve iş akışı açısından karşılaştırıyoruz.

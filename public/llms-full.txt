@@ -36,11 +36,15 @@ Her haberde kaynak URL ve kaynak adı zorunlu.
 ## İstatistikler
 
 - Toplam haber: 121
-- Toplam yazı: 30
+- Toplam yazı: 31
 
 ## Tüm İçerik Listesi
 
 ### Yazılar
+- [Sayfalarımız Neden Dizine Eklenmiyor?](https://feedeep.com/yazilar/sayfalarimiz-neden-dizine-eklenmiyor)
+  Kategori: analiz | Tarih: Fri May 01 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: high
+  Google sayfaları neden dizine eklemiyor? Teknik SEO, içerik stratejisi, AI içerik ve özgün değer ayrımını sade şekilde anlatıyoruz.
+
 - [GLM 5.1 Neden Bu Kadar İyi? Z1-Rumination Ne Yapıyor](https://feedeep.com/yazilar/glm-5-1-neden-bu-kadar-iyi)
   Kategori: analiz | Tarih: Wed Apr 29 2026 03:00:00 GMT+0300 (GMT+03:00) | Güven: medium
   GLM 5.1 neden bu kadar konuşuluyor? Z1-Rumination, 744B MoE mimarisi, 200K context, SWE-Bench Pro ve GLM 5.2 beklentisi.
