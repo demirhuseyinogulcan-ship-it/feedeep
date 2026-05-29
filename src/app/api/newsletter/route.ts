@@ -10,13 +10,19 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { newsletterInputSchema, isSubmissionTooFast } from "@/lib/schemas/newsletter.schema";
-import { newsletterLimiter } from "@/lib/rate-limit";
+import { newsletterInputSchema, isSubmissionTimingInvalid } from "@/lib/schemas/newsletter.schema";
+import { getNewsletterLimiter, shouldFailClosed } from "@/lib/rate-limit";
 import { ZodError } from "zod";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID;
-const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
+let resend: Resend | null | undefined;
+
+function getResend() {
+  if (!RESEND_API_KEY) return null;
+  if (resend === undefined) resend = new Resend(RESEND_API_KEY);
+  return resend;
+}
 
 /** İstemci IP adresini al (Vercel headers → fallback) */
 function getClientIp(request: NextRequest): string {
@@ -31,8 +37,16 @@ export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
 
   // ─── Katman 1: Rate Limiting (Upstash) ───
-  if (newsletterLimiter) {
-    const { success, limit, remaining, reset } = await newsletterLimiter.limit(ip);
+  const limiter = getNewsletterLimiter();
+  if (!limiter && shouldFailClosed()) {
+    return NextResponse.json(
+      { error: "Servis gecici olarak kullanilamiyor." },
+      { status: 503 },
+    );
+  }
+
+  if (limiter) {
+    const { success, limit, remaining, reset } = await limiter.limit(ip);
     if (!success) {
       return NextResponse.json(
         { error: "Çok fazla istek gönderdiniz. Lütfen bir süre bekleyip tekrar deneyin." },
@@ -88,7 +102,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Zamanlama kontrolü: çok hızlı = bot → sessiz başarı (bot fark etmez)
-  if (isSubmissionTooFast(input._t)) {
+  if (isSubmissionTimingInvalid(input._t)) {
     return NextResponse.json(
       { message: "İç Çember'e hoş geldin! İlk brifing Pazartesi e-posta kutunda olacak." },
       { status: 200 },
@@ -97,15 +111,16 @@ export async function POST(request: NextRequest) {
 
   // ─── Resend Entegrasyonu ───
   try {
-    if (resend && RESEND_AUDIENCE_ID) {
+    const resendClient = getResend();
+    if (resendClient && RESEND_AUDIENCE_ID) {
       try {
-        await resend.contacts.create({
+        await resendClient.contacts.create({
           email: input.email,
           audienceId: RESEND_AUDIENCE_ID,
           unsubscribed: false,
         });
 
-        await resend.emails.send({
+        await resendClient.emails.send({
           from: "feedeep <hey@feedeep.com>",
           to: input.email,
           subject: "İç Çember'e Hoş Geldin — feedeep",

@@ -56,6 +56,7 @@ function App() {
   // ── İlk Yükleme ──────────────────────────────────────
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchQueries().then((qs) => {
       qs.forEach((q) => fetchCompanies(q.id));
 

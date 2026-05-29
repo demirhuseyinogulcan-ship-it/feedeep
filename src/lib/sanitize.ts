@@ -13,7 +13,9 @@
  * her zaman client-side çalışır, bu dal sadece güvenlik ağıdır).
  */
 export async function sanitizeText(raw: string): Promise<string> {
-  if (typeof window === "undefined") return raw;
+  if (typeof window === "undefined") {
+    return raw.replace(/<[^>]*>/g, "").replace(/[<>]/g, "");
+  }
 
   const DOMPurify = (await import("dompurify")).default;
   return DOMPurify.sanitize(raw, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });

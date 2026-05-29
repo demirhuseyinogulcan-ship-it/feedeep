@@ -1,35 +1,8 @@
-// ─────────────────────────────────────────────────────────────
-// feedeep — Push Subscription Endpoint
-// Web Push Protocol subscription'larını Supabase'e kaydeder/siler.
-//
-// Supabase tablosu (bir kez çalıştırılacak SQL):
-//
-//   create table push_subscriptions (
-//     id         uuid        primary key default gen_random_uuid(),
-//     endpoint   text        not null unique,
-//     p256dh     text        not null,
-//     auth       text        not null,
-//     user_agent text,
-//     created_at timestamptz default now()
-//   );
-//   alter table push_subscriptions enable row level security;
-//   -- Public yazma izni yok: sadece service_role erişebilir
-//
-// 4 katmanlı güvenlik:
-//   1. Rate limiting (Upstash, IP başına 5/saat)
-//   2. Body size guard (1 KB)
-//   3. Zod şema validasyonu
-//   4. Supabase service_role — public erişim kapalı
-// ─────────────────────────────────────────────────────────────
-
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
 import { ZodError } from "zod";
 import { pushSubscriptionSchema } from "@/lib/schemas/push.schema";
-import { pushLimiter } from "@/lib/rate-limit";
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+import { getPushLimiter, shouldFailClosed } from "@/lib/rate-limit";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 function getClientIp(request: NextRequest): string {
   return (
@@ -39,57 +12,70 @@ function getClientIp(request: NextRequest): string {
   );
 }
 
-function getSupabaseAdmin() {
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return null;
-  return createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-    auth: { persistSession: false },
-  });
+async function enforcePushRateLimit(request: NextRequest) {
+  const limiter = getPushLimiter();
+  if (!limiter && shouldFailClosed()) {
+    return NextResponse.json(
+      { error: "Servis gecici olarak kullanilamiyor." },
+      { status: 503 },
+    );
+  }
+
+  if (!limiter) return null;
+
+  const { success } = await limiter.limit(getClientIp(request));
+  if (!success) {
+    return NextResponse.json(
+      { error: "Cok fazla istek. Lutfen bekleyip tekrar deneyin." },
+      { status: 429 },
+    );
+  }
+
+  return null;
 }
 
-/** POST /api/push/subscribe — subscription'ı kaydet */
-export async function POST(request: NextRequest) {
-  const ip = getClientIp(request);
-
-  // ─── Katman 1: Rate Limiting ───
-  if (pushLimiter) {
-    const { success } = await pushLimiter.limit(ip);
-    if (!success) {
-      return NextResponse.json(
-        { error: "Çok fazla istek. Lütfen bekleyip tekrar deneyin." },
-        { status: 429 }
-      );
-    }
+async function readJsonBody(request: NextRequest) {
+  const text = await request.text();
+  if (text.length > 2048) {
+    return {
+      response: NextResponse.json({ error: "Istek boyutu cok buyuk." }, { status: 413 }),
+      body: null,
+    };
   }
 
-  // ─── Katman 2: Body Size Guard ───
-  let body: unknown;
   try {
-    const text = await request.text();
-    if (text.length > 2048) {
-      return NextResponse.json({ error: "İstek boyutu çok büyük." }, { status: 413 });
-    }
-    body = JSON.parse(text);
+    return { response: null, body: JSON.parse(text) as unknown };
   } catch {
-    return NextResponse.json({ error: "Geçersiz JSON." }, { status: 400 });
+    return {
+      response: NextResponse.json({ error: "Gecersiz JSON." }, { status: 400 }),
+      body: null,
+    };
   }
+}
 
-  // ─── Katman 3: Zod Validasyon ───
+export async function POST(request: NextRequest) {
+  const rateLimitResponse = await enforcePushRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
+  const { response, body } = await readJsonBody(request);
+  if (response) return response;
+
   let sub;
   try {
     sub = pushSubscriptionSchema.parse(body);
   } catch (err) {
     if (err instanceof ZodError) {
-      return NextResponse.json({ error: "Geçersiz subscription formatı." }, { status: 422 });
+      return NextResponse.json({ error: "Gecersiz subscription formati." }, { status: 422 });
     }
     throw err;
   }
 
-  // ─── Katman 4: Supabase'e Kaydet ───
   const supabase = getSupabaseAdmin();
   if (!supabase) {
-    // Supabase yapılandırılmamış — geliştirme ortamında loglayıp geç
-    console.warn("[push/subscribe] Supabase yapılandırılmamış, subscription kaydedilmedi.");
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(
+      { error: "Servis gecici olarak kullanilamiyor." },
+      { status: 503 },
+    );
   }
 
   const { error } = await supabase
@@ -101,29 +87,23 @@ export async function POST(request: NextRequest) {
         auth: sub.keys.auth,
         user_agent: request.headers.get("user-agent")?.slice(0, 256) ?? null,
       },
-      { onConflict: "endpoint", ignoreDuplicates: false }
+      { onConflict: "endpoint", ignoreDuplicates: false },
     );
 
   if (error) {
-    console.error("[push/subscribe] Supabase upsert hatası:", error.message);
-    return NextResponse.json({ error: "Kayıt başarısız." }, { status: 500 });
+    console.error("[push/subscribe] Supabase upsert failed:", error.message);
+    return NextResponse.json({ error: "Kayit basarisiz." }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }
 
-/** DELETE /api/push/subscribe — subscription'ı sil (kullanıcı izni geri aldıysa) */
 export async function DELETE(request: NextRequest) {
-  let body: unknown;
-  try {
-    const text = await request.text();
-    if (text.length > 2048) {
-      return NextResponse.json({ error: "İstek boyutu çok büyük." }, { status: 413 });
-    }
-    body = JSON.parse(text);
-  } catch {
-    return NextResponse.json({ error: "Geçersiz JSON." }, { status: 400 });
-  }
+  const rateLimitResponse = await enforcePushRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
+  const { response, body } = await readJsonBody(request);
+  if (response) return response;
 
   const endpoint =
     body !== null &&
@@ -139,7 +119,10 @@ export async function DELETE(request: NextRequest) {
 
   const supabase = getSupabaseAdmin();
   if (!supabase) {
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(
+      { error: "Servis gecici olarak kullanilamiyor." },
+      { status: 503 },
+    );
   }
 
   await supabase.from("push_subscriptions").delete().eq("endpoint", endpoint);

@@ -128,6 +128,7 @@ export type Database = {
           total_upvotes: number;
           total_downvotes: number;
           total_comments: number;
+          total_views: number;
         }[];
       };
       get_batch_article_stats: {
@@ -138,6 +139,7 @@ export type Database = {
           total_upvotes: number;
           total_downvotes: number;
           total_comments: number;
+          total_views: number;
         }[];
       };
     };

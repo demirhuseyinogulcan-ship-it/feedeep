@@ -197,13 +197,22 @@ async function batchFetchStats(
   const result = new Map<string, ArticleStats>();
   if (!isSupabaseConfigured() || articleIds.length === 0) return result;
 
-  const sb = getSupabase();
-
-  const { data, error } = await sb.rpc("get_batch_article_stats", {
-    article_ids: articleIds,
+  const response = await fetch("/api/stats", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ articleIds }),
   });
 
-  if (error || !data) return result;
+  if (!response.ok) return result;
+
+  const data = (await response.json()) as Array<{
+    article_id: string;
+    total_owners?: number;
+    total_upvotes?: number;
+    total_downvotes?: number;
+    total_comments?: number;
+    total_views?: number;
+  }>;
 
   for (const row of data) {
     result.set(row.article_id, {

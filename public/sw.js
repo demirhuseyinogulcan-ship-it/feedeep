@@ -21,8 +21,20 @@ const CONTENT_ROUTES = [
   "/hakkimizda",
 ];
 
+function safeSameOriginPath(value) {
+  try {
+    const url = new URL(value || "/", self.location.origin);
+    if (url.origin !== self.location.origin) return "/";
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return "/";
+  }
+}
+
 // ─── Install ─────────────────────────────────────────────────
 self.addEventListener("install", (event) => {
+  data.url = safeSameOriginPath(data.url);
+
   event.waitUntil(
     Promise.all([
       caches.open(STATIC_CACHE).then((cache) => cache.addAll(STATIC_ASSETS)),
@@ -184,7 +196,7 @@ self.addEventListener("notificationclick", (event) => {
 
   if (event.action === "dismiss") return;
 
-  const url = event.notification.data?.url || "/";
+  const url = safeSameOriginPath(event.notification.data?.url);
 
   event.waitUntil(
     clients

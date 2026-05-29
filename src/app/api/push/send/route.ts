@@ -17,23 +17,14 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import webpush from "web-push";
-import { createClient } from "@supabase/supabase-js";
 import { ZodError } from "zod";
 import { pushPayloadSchema } from "@/lib/schemas/push.schema";
 import { verifyWebhookSecret } from "@/lib/webhook-auth";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
 const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY;
 const PUSH_SEND_SECRET = process.env.PUSH_SEND_SECRET;
-
-function getSupabaseAdmin() {
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return null;
-  return createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-    auth: { persistSession: false },
-  });
-}
 
 type SubscriptionRow = {
   endpoint: string;

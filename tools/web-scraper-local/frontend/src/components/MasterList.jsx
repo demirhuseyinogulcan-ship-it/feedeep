@@ -175,7 +175,7 @@ export default function MasterList() {
         <p className="text-[11px] text-gray-400 mt-2">
           💡 Tüm aramalarınızdaki firmalar burada birleştirilir. Aynı domain
           veya e-posta adresine sahip firmalar otomatik olarak tekrar
-          ayıklanır. "Master Excel İndir" ile pazarlama için kullanıma hazır
+          ayıklanır. &quot;Master Excel İndir&quot; ile pazarlama için kullanıma hazır
           liste alabilirsiniz.
         </p>
       </div>
