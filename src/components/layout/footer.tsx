@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import { SITE, NAV_ITEMS } from "@/lib/constants";
+import { CommitiusCredit } from "./commitius-credit";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -105,6 +106,7 @@ export function Footer() {
             © {currentYear} {SITE.name}. Tüm hakları saklıdır.
           </p>
           <div className="flex items-center gap-4">
+            <CommitiusCredit className="text-xs text-gray-400" />
             <Link
               href="/hakkimizda"
               className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
