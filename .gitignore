@@ -47,3 +47,4 @@ feedeep-start.log
 # velite
 .velite
 next-env.d.ts
+/.api-parked/

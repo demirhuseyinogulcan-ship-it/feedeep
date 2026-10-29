@@ -1,6 +1,6 @@
 # feedeep Web Scraper Local
 
-Bu klasör, eski veri kazıma uygulamasının Feedeep için alınmış kaynak kod kopyasıdır. Orijinal `C:\Users\HP\Desktop\veri kazima app` klasörüne dokunulmadı.
+Bu klasör, Feedeep için hazırlanmış yerel veri kazıma aracının kaynak kodudur.
 
 Amaç, Feedeep sitesinde kullanıcıyı içeride tutan bir web arayüzü sunmak; ağır kazıma işini ise kullanıcının kendi bilgisayarında çalışan local worker üzerinden yürütmektir. Böylece sunucu maliyeti, IP riski ve uzun çalışan tarayıcı yükü Feedeep altyapısına binmez.
 

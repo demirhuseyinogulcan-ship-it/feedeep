@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 // ─────────────────────────────────────────────────────────────
 // feedeep — sitemap.ts (Dynamic XML Sitemap)
 // İçerik tipine ve yaşına göre dinamik crawl hiyerarşisi:

@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 // ─────────────────────────────────────────────────────────────
 // feedeep — Google News Sitemap
 // Google News için özel haber sitemap'i

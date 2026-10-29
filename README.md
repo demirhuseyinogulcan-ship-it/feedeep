@@ -1,146 +1,100 @@
 # feedeep
 
-**Yazilim ve yapay zeka dunyasini Turkce takip eden bagimsiz icerik platformu.**
+A Turkish news and analysis platform about software and AI, built as a scroll-to-read feed. Content is written in MDX, validated at build time and published as static pages. Reader features (votes, comments, saved items, push notifications) run on Supabase. The project is retired and kept as a reference.
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.1-black?logo=next.js)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
-[![Velite](https://img.shields.io/badge/CMS-Velite_0.3-orange)](https://velite.js.org)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+**Live demo:** [feedeep.pages.dev](https://feedeep.pages.dev). The demo is a static build: all articles and news work, but sign-in, votes, comments, view counts and notifications are switched off because it runs without Supabase.
 
-> [feedeep.com](https://feedeep.com) — Guncel AI haberleri, derinlemesine analizler ve arac incelemeleri.
+![feedeep home page](docs/screenshot.jpg)
 
----
+## Stack
 
-## Mimari Genel Bakis
+| Layer | Technology |
+| --- | --- |
+| Framework | Next.js 16 (App Router, static generation) |
+| UI | React 19, TypeScript (strict), Tailwind CSS 4 |
+| Content | MDX with [Velite](https://velite.js.org) and Zod schemas |
+| Reader features | Supabase (auth, votes, comments), Upstash rate limiting |
+| Email and push | Resend (newsletter), Web Push (VAPID) |
+| Search | Fuse.js, client-side |
+| SEO | JSON-LD, RSS, Google News sitemap, `llms.txt`, generated OG images |
+| Tests | Vitest (173 tests) |
+| CI | GitHub Actions: lint, type check, tests, build |
+
+## Features
+
+- Two content types, news (`content/haberler`) and long-form articles (`content/yazilar`), plus guides (`content/rehberler`).
+- Frontmatter is checked before every build by `scripts/validate-content.mjs`, so a broken date, category or image path fails the build instead of reaching readers.
+- Structured data for articles, news, FAQ and breadcrumbs (`src/lib/seo.ts`).
+- Security headers: CSP, HSTS, Permissions-Policy, X-Frame-Options.
+- Accessibility basics: skip link, ARIA labels, `prefers-reduced-motion`, semantic HTML.
+- PWA with a service worker and offline cache.
+- Everything that needs Supabase checks `isSupabaseConfigured()` first, so the site degrades to read-only instead of crashing.
+
+## Project structure
 
 ```
 src/
-├── app/                 # Next.js App Router (SSG)
-│   ├── api/             # API Routes (newsletter, indexing, OG image)
-│   ├── haberler/        # AI haber arsivi
-│   ├── yazilar/         # Analiz & inceleme yazilari
-│   ├── arama/           # Site ici arama
-│   ├── hakkimizda/      # Hakkimizda sayfasi
-│   ├── koleksiyon/      # Kullanici koleksiyonu
-│   ├── profil/          # Kullanici profili
-│   ├── feed.xml/        # RSS Feed (dinamik)
-│   ├── news-sitemap.xml/# Google News Sitemap
-│   └── sitemap.ts       # Dinamik sitemap
-├── components/
-│   ├── shared/          # Yeniden kullanilabilir UI bilesenleri
-│   ├── layout/          # Header, Footer, Navigation
-│   ├── content/         # MDX rendering bilesenleri
-│   ├── feed/            # Haber ve yazi kartlari
-│   ├── seo/             # JSON-LD, meta bilesenleri
-│   ├── signals/         # Oy, yorum, sahiplenme bilesenleri
-│   └── auth/            # Kimlik dogrulama bilesenleri
-├── lib/
-│   ├── seo.ts           # JSON-LD generators (WebSite, Article, NewsArticle, FAQ...)
-│   ├── utils.ts         # Utility fonksiyonlari (slugify, formatDate, timeAgo...)
-│   ├── constants.ts     # Site sabitleri & kategori mapleri
-│   ├── homepage.ts      # Ana sayfa veri katmani
-│   └── feed.ts          # Icerik birlestirme & siralama
-content/                 # Velite MDX icerikler
-├── haberler/            # 91+ haber makalesi
-├── yazilar/             # 11+ analiz yazisi
-└── _templates/          # Icerik sablonlari
-scripts/                 # Otomasyon (validate, indexing, llms.txt, favicon)
+  app/                 routes (App Router)
+    api/               newsletter, views, stats, push, indexing, OG image
+    haberler/          news
+    yazilar/           articles
+    arama/             search
+    koleksiyon/        saved items
+    profil/            profile
+    feed.xml/          RSS
+    news-sitemap.xml/  Google News sitemap
+    sitemap.ts, robots.ts
+  components/
+    content/           MDX rendering
+    feed/              news and article cards
+    signals/           votes, comments, saves
+    seo/               JSON-LD
+    layout/, shared/, auth/, interactive/, tools/
+  lib/
+    seo.ts             structured data builders
+    feed.ts            merges and sorts content
+    supabase.ts        client with a configured check
+    rate-limit.ts      Upstash rate limiting
+content/               MDX content and templates
+scripts/               validation, llms.txt, indexing, images, demo build
+supabase/              schema and migrations
+tools/web-scraper-local/  optional local scraping worker (FastAPI + React)
+docs/content-system.md editorial guide (Turkish)
 ```
 
-## Teknoloji Yigini
+## Run locally
 
-| Katman | Teknoloji |
-|--------|-----------|
-| Framework | Next.js 16 (App Router, Static Site Generation) |
-| UI | React 19 + TypeScript (strict mode) |
-| Styling | Tailwind CSS v4 (CSS-first config, design tokens) |
-| CMS | Velite 0.3 (MDX + Zod schema validation) |
-| Backend | Supabase (auth, signals, comments) |
-| SEO | JSON-LD semalari, OG image API, RSS, News Sitemap |
-| Analytics | Vercel Analytics + Google Analytics 4 + Web Vitals |
-| PWA | Service Worker, manifest.json, offline cache |
-| Email | Resend API (newsletter) |
-| Search | Fuse.js (client-side fuzzy search) |
-| Fonts | Montserrat (headings) + Inter (body) |
-| Testing | Vitest (172 test) |
-| CI/CD | GitHub Actions (lint, type-check, test, build) |
-| Deploy | Vercel |
-
-## Ozellikler
-
-- **Kapsamli SEO:** JSON-LD sema tipleri, dinamik OG image, hreflang, news-sitemap, RSS
-- **llms.txt:** LLM-dostu site dokumantasyonu (ChatGPT, Claude, Gemini uyumlu)
-- **Icerik dogrulama:** Pre-build frontmatter validation (70+ kural)
-- **Sinyal sistemi:** Oy verme, sahiplenme, yorum — Supabase tabanli
-- **Guvenlik:** HSTS, CSP, Permissions-Policy, X-Frame-Options, nosniff
-- **Erisebilirlik:** Skip-to-content, aria-labels, prefers-reduced-motion, semantic HTML
-- **Web Vitals:** CLS, LCP, INP, TTFB izleme → GA4 event
-- **Tasarim sistemi:** "The Void" — koyu tema, mor-pembe gradient accent, CSS design tokens
-
-## Baslangic
-
-### Gereksinimler
-
-- Node.js >= 18
-- npm >= 9
-
-### Kurulum
+Requires Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/demirhuseyinogulcan-ship-it/airehber.git
+git clone https://github.com/demirhuseyinogulcan-ship-it/feedeep.git
 cd feedeep
 npm install
-```
-
-### Ortam Degiskenleri
-
-```bash
 cp .env.example .env.local
+npm run dev
 ```
 
-Gerekli degiskenler icin `.env.example` dosyasina bakin.
+Open http://localhost:3000. With an empty `.env.local` the site runs read-only. Fill in the Supabase, Resend, Upstash and VAPID values in `.env.local` to enable reader features. The comments in `.env.example` say where each value comes from.
 
-### Gelistirme
+## Scripts
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | development server |
+| `npm run build` | full build (runs content validation and `llms.txt` first) |
+| `npm run build:demo` | static build into `out/` without API routes or Supabase |
+| `npm test` | Vitest |
+| `npm run type-check` | TypeScript |
+| `npm run new:haber`, `npm run new:yazi` | new content from a template |
+
+## Static demo
+
+`npm run build:demo` sets `FEEDEEP_STATIC_DEMO=1`, moves `src/app/api` aside for the build and restores it afterwards. The result in `out/` can go to any static host:
 
 ```bash
-npm run dev          # Gelistirme sunucusu (localhost:3000)
-npm run build        # Production build (validate + llms.txt + next build)
-npm run lint         # ESLint
-npm run type-check   # TypeScript tip kontrolu
-npm run test         # Vitest unit testleri (172 test)
-npm run validate     # Icerik frontmatter dogrulama
+npx wrangler pages deploy out --project-name feedeep
 ```
 
-### Yeni Icerik Olusturma
+## License
 
-```bash
-npm run new:haber    # Yeni haber makalesi
-npm run new:yazi     # Yeni analiz yazisi
-```
-
-## Post-Deploy Index Pipeline
-
-Deploy sonrasi otomatik Google Search Console indeksleme akisi:
-
-1. Vercel webhook → `POST /api/indexing/trigger`
-2. Endpoint → GitHub `repository_dispatch` → `post-deploy-indexing` workflow
-3. Workflow → `scripts/submit-indexing.mjs` → Search Console sitemap submit
-
-```bash
-npm run submit-indexing  # Manuel test
-```
-
-## Proje Dokumantasyonu
-
-| Dosya | Aciklama |
-|-------|----------|
-| `CLAUDE.md` | AI agent kurallari ve kod konvansiyonlari |
-| `CONTENT_SYSTEM.md` | Editoryal kilavuz — tier sistemi, yazim kurallari |
-| `CHANGELOG.md` | Oturum bazli degisiklik kaydi |
-| `public/llms.txt` | LLM-dostu site icerik haritasi |
-
-## Lisans
-
-MIT
+[MIT](LICENSE)

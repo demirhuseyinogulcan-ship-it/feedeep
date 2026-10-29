@@ -27,7 +27,11 @@ const contentSecurityPolicy = [
   "upgrade-insecure-requests",
 ].join("; ");
 
+// Static demo build (npm run build:demo): no API routes, no Supabase, no image optimizer.
+const isStaticDemo = process.env.FEEDEEP_STATIC_DEMO === "1";
+
 const nextConfig: NextConfig = {
+  ...(isStaticDemo ? { output: "export" as const, trailingSlash: true } : {}),
   // Velite content layer entegrasyonu
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin());
@@ -43,6 +47,7 @@ const nextConfig: NextConfig = {
 
   // Resim optimizasyonu
   images: {
+    unoptimized: isStaticDemo,
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "feedeep.com" },

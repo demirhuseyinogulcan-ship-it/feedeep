@@ -182,8 +182,8 @@ export default function RootLayout({
         {/* Web Vitals → GA4 — Client wrapper ile lazy yuklenir */}
         <LazyWebVitals />
 
-        {/* Vercel Web Analytics */}
-        <Analytics />
+        {/* Vercel Web Analytics, not available on the static demo */}
+        {process.env.FEEDEEP_STATIC_DEMO !== "1" && <Analytics />}
         </AuthProvider>
       </body>
     </html>
