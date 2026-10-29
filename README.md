@@ -2,7 +2,7 @@
 
 A Turkish news and analysis platform about software and AI, built as a scroll-to-read feed. Content is written in MDX, validated at build time and published as static pages. Reader features (votes, comments, saved items, push notifications) run on Supabase. The project is retired and kept as a reference.
 
-**Live demo:** [feedeep.pages.dev](https://feedeep.pages.dev). The demo is a static build: all articles and news work, but sign-in, votes, comments, view counts and notifications are switched off because it runs without Supabase.
+**Live demo:** [feedeep.demo.commitius.com](https://feedeep.demo.commitius.com). The demo is a static build: all articles and news work, but sign-in, votes, comments, view counts and notifications are switched off because it runs without Supabase.
 
 ![feedeep home page](docs/screenshot.jpg)
 
